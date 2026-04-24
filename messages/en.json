@@ -1,0 +1,27 @@
+{
+  "nav": {
+    "products": "Products"
+  },
+  "common": {
+    "download": "Download",
+    "home": "Home"
+  },
+  "product": {
+    "specs": {
+      "flowRange": "Flow range",
+      "responseTime": "Response time",
+      "accuracy": "Accuracy",
+      "repeatability": "Repeatability",
+      "ioSignal": "I/O signal",
+      "supplyPower": "Supply power",
+      "maxPressure": "Max pressure",
+      "tempRange": "Temperature range",
+      "leakRate": "Leak rate",
+      "controlRange": "Control range"
+    },
+    "downloads": {
+      "datasheet": "Datasheet",
+      "manual": "Manual"
+    }
+  }
+}

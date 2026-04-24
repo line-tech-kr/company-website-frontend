@@ -1,0 +1,27 @@
+{
+  "nav": {
+    "products": "제품"
+  },
+  "common": {
+    "download": "다운로드",
+    "home": "홈"
+  },
+  "product": {
+    "specs": {
+      "flowRange": "유량 범위",
+      "responseTime": "응답 시간",
+      "accuracy": "정확도",
+      "repeatability": "반복도",
+      "ioSignal": "입출력 신호",
+      "supplyPower": "공급 전원",
+      "maxPressure": "최대 압력",
+      "tempRange": "온도 범위",
+      "leakRate": "누설률",
+      "controlRange": "제어 범위"
+    },
+    "downloads": {
+      "datasheet": "데이터시트",
+      "manual": "매뉴얼"
+    }
+  }
+}
