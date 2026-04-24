@@ -29,7 +29,7 @@ export default async function ProductPage({ params }: Props) {
         <tbody>
           {specEntries.map(([key, spec]) => (
             <tr key={key}>
-              <th align="left">{t(key)}</th>
+              <th style={{ textAlign: "left" }}>{t(key)}</th>
               <td>{spec.display}</td>
             </tr>
           ))}

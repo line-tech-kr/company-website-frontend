@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# design handoff bundle uploads (large source PDFs — keep out of git)
+docs/handoff/uploads/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
