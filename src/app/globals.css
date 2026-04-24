@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+/* ─── Tokens (light) ───────────────────────────────────────────────── */
+:root {
+  /* brand */
+  --lt-primary-50:  #eff6fc;
+  --lt-primary-100: #dbeaf5;
+  --lt-primary-200: #b8d4ea;
+  --lt-primary-300: #8bb7d9;
+  --lt-primary-400: #5393c1;
+  --lt-primary-500: #185686; /* locked */
+  --lt-primary-600: #144770;
+  --lt-primary-700: #12395a;
+  --lt-primary-800: #122e47;
+  --lt-primary-900: #122637;
+  --lt-primary-950: #0a1623;
+
+  --lt-deep:        #172e75;
+  --lt-dark:        #1f375e;
+
+  --lt-accent-50:  #fffbea;
+  --lt-accent-100: #fff3c2;
+  --lt-accent-200: #ffe58a;
+  --lt-accent-300: #ffd24d;
+  --lt-accent-400: #fdbc04; /* locked */
+  --lt-accent-500: #e4a502;
+  --lt-accent-600: #b88004;
+  --lt-accent-700: #935f0b;
+  --lt-accent-800: #784c10;
+  --lt-accent-900: #653f11;
+
+  --lt-neutral-50:  #f8f9fb;
+  --lt-neutral-100: #eff1f5;
+  --lt-neutral-200: #e2e5ec;
+  --lt-neutral-300: #c7cdd8;
+  --lt-neutral-400: #97a0b0;
+  --lt-neutral-500: #6b7485;
+  --lt-neutral-600: #4c5566;
+  --lt-neutral-700: #353c4b;
+  --lt-neutral-800: #242a37;
+  --lt-neutral-900: #181c26;
+  --lt-neutral-950: #0c0e14;
+
+  --lt-success: #0d7a4a;
+  --lt-warning: #c07a02;
+  --lt-danger:  #a12b2b;
+  --lt-info:    #1b6cad;
+
+  /* semantic — light */
+  --pd-bg:            #f6f7f9;
+  --pd-surface:       #ffffff;
+  --pd-surface-2:     #fbfcfd;
+  --pd-muted:         #6b7485;
+  --pd-fg:            #181c26;
+  --pd-fg-strong:     #0c0e14;
+  --pd-border:        rgba(12, 14, 20, 0.10);
+  --pd-border-strong: rgba(12, 14, 20, 0.18);
+  --pd-rule:          rgba(12, 14, 20, 0.06);
+
+  --pd-primary:       var(--lt-primary-500);
+  --pd-primary-hover: var(--lt-primary-600);
+  --pd-on-primary:    #ffffff;
+  --pd-accent:        var(--lt-accent-400);
+
+  --pd-r-sm: 4px;
+  --pd-r-md: 6px;
+  --pd-r-lg: 10px;
+
+  --lt-sans: var(--font-sans), -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+             "Malgun Gothic", "PingFang SC", "Microsoft YaHei", "Segoe UI",
+             ui-sans-serif, system-ui, sans-serif;
+  --lt-mono: var(--font-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* ─── Tailwind v4 theme — exposes brand + semantic tokens as utilities ── */
+@theme inline {
+  --color-primary-50:  var(--lt-primary-50);
+  --color-primary-100: var(--lt-primary-100);
+  --color-primary-200: var(--lt-primary-200);
+  --color-primary-300: var(--lt-primary-300);
+  --color-primary-400: var(--lt-primary-400);
+  --color-primary-500: var(--lt-primary-500);
+  --color-primary-600: var(--lt-primary-600);
+  --color-primary-700: var(--lt-primary-700);
+  --color-primary-800: var(--lt-primary-800);
+  --color-primary-900: var(--lt-primary-900);
+  --color-primary-950: var(--lt-primary-950);
+
+  --color-accent-50:  var(--lt-accent-50);
+  --color-accent-100: var(--lt-accent-100);
+  --color-accent-200: var(--lt-accent-200);
+  --color-accent-300: var(--lt-accent-300);
+  --color-accent-400: var(--lt-accent-400);
+  --color-accent-500: var(--lt-accent-500);
+  --color-accent-600: var(--lt-accent-600);
+  --color-accent-700: var(--lt-accent-700);
+  --color-accent-800: var(--lt-accent-800);
+  --color-accent-900: var(--lt-accent-900);
+
+  --color-neutral-50:  var(--lt-neutral-50);
+  --color-neutral-100: var(--lt-neutral-100);
+  --color-neutral-200: var(--lt-neutral-200);
+  --color-neutral-300: var(--lt-neutral-300);
+  --color-neutral-400: var(--lt-neutral-400);
+  --color-neutral-500: var(--lt-neutral-500);
+  --color-neutral-600: var(--lt-neutral-600);
+  --color-neutral-700: var(--lt-neutral-700);
+  --color-neutral-800: var(--lt-neutral-800);
+  --color-neutral-900: var(--lt-neutral-900);
+  --color-neutral-950: var(--lt-neutral-950);
+
+  --color-success: var(--lt-success);
+  --color-warning: var(--lt-warning);
+  --color-danger:  var(--lt-danger);
+  --color-info:    var(--lt-info);
+
+  /* Semantic — these track --pd-* so adding a theme toggle later Just Works */
+  --color-background:        var(--pd-bg);
+  --color-surface:           var(--pd-surface);
+  --color-surface-2:         var(--pd-surface-2);
+  --color-foreground:        var(--pd-fg);
+  --color-foreground-strong: var(--pd-fg-strong);
+  --color-muted:             var(--pd-muted);
+  --color-border:            var(--pd-border);
+
+  --font-sans: var(--lt-sans);
+  --font-mono: var(--lt-mono);
+}
+
+/* ─── Base ─────────────────────────────────────────────────────────── */
+html, body {
+  margin: 0; padding: 0;
+  font-family: var(--lt-sans);
+  background: var(--pd-bg);
+  color: var(--pd-fg);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "ss01", "cv11";
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+::selection { background: var(--pd-primary); color: var(--pd-on-primary); }
+
+/* Page width container (stand-in for the future PageShell `.pd-main`) */
+.lt-wrap {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px 32px 80px;
+  width: 100%;
+}
+@media (max-width: 640px) {
+  .lt-wrap { padding-left: 16px; padding-right: 16px; }
+}
+
+/* Component styles live with their components:
+ *   .lt-btn*  → src/components/ui/Button/Button.css
+ *   .lt-chip* → src/components/ui/Chip/Chip.css
+ *   .ho-*     → src/components/home/<Section>/<Section>.css
+ */

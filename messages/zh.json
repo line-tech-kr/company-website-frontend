@@ -1,0 +1,27 @@
+{
+  "nav": {
+    "products": "产品"
+  },
+  "common": {
+    "download": "下载",
+    "home": "首页"
+  },
+  "product": {
+    "specs": {
+      "flowRange": "流量范围",
+      "responseTime": "响应时间",
+      "accuracy": "精度",
+      "repeatability": "重复性",
+      "ioSignal": "输入输出信号",
+      "supplyPower": "供电",
+      "maxPressure": "最大压力",
+      "tempRange": "温度范围",
+      "leakRate": "泄漏率",
+      "controlRange": "控制范围"
+    },
+    "downloads": {
+      "datasheet": "数据手册",
+      "manual": "手册"
+    }
+  }
+}

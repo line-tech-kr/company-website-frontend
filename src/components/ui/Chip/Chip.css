@@ -1,0 +1,16 @@
+/* Line Tech — Chip primitive. Tokens come from globals.css. */
+.lt-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px; border-radius: 999px;
+  font-size: 11.5px; font-weight: 500; line-height: 1.4;
+  border: 1px solid var(--pd-border);
+  background: var(--pd-surface);
+  color: var(--pd-fg);
+}
+.lt-chip--sm { font-size: 11px; padding: 2px 9px; }
+.lt-chip__dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; display: inline-block; }
+.lt-chip--success { color: var(--lt-success); background: rgba(13,122,74,0.08); border-color: rgba(13,122,74,0.2); }
+.lt-chip--info    { color: var(--lt-info);    background: rgba(27,108,173,0.08); border-color: rgba(27,108,173,0.22); }
+.lt-chip--warning { color: var(--lt-warning); background: rgba(192,122,2,0.08);  border-color: rgba(192,122,2,0.22); }
+.lt-chip--danger  { color: var(--lt-danger);  background: rgba(161,43,43,0.08);  border-color: rgba(161,43,43,0.22); }
+.lt-chip--neutral { color: var(--pd-fg); }

@@ -1,0 +1,62 @@
+/* Line Tech — Home Intro (top banner). */
+.ho-intro {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 60px; align-items: center;
+  padding: 72px 0 96px;
+}
+.ho-intro__kicker { display: inline-flex; align-items: center; gap: 8px; font: 500 11.5px var(--lt-mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--pd-primary); margin-bottom: 24px; }
+.ho-intro__title {
+  margin: 0 0 24px; font: 500 72px/1.02 var(--lt-sans); letter-spacing: -0.03em; color: var(--pd-fg-strong);
+  display: flex; flex-direction: column; gap: 4px;
+}
+.ho-intro__title--em { color: var(--pd-primary); }
+.ho-intro__lede { margin: 0 0 32px; max-width: 520px; font-size: 17px; line-height: 1.55; color: var(--pd-muted); text-wrap: pretty; }
+.ho-intro__ctas { display: flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap; }
+
+/* Intro visual (schematic diagram) */
+.ho-intro__visual {
+  position: relative; aspect-ratio: 1/1; background: var(--pd-surface);
+  border: 1px solid var(--pd-border); border-radius: var(--pd-r-lg); overflow: hidden;
+  color: var(--pd-fg);
+}
+.ho-intro__grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--pd-rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--pd-rule) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse at center, black 65%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 65%, transparent 100%);
+}
+.ho-intro__svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ho-intro__svg text { font-family: var(--lt-mono); }
+.ho-intro__svg text.ho-svg__num { font-family: var(--lt-sans); }
+.ho-svg__val { font-variant-numeric: tabular-nums; }
+.ho-intro__flow { position: absolute; top: 50%; left: 17.3%; width: 21%; height: 2px; pointer-events: none; transform: translateY(-1px); }
+.ho-intro__flow i {
+  position: absolute; top: 0; width: 14px; height: 2px; background: var(--pd-primary);
+  border-radius: 2px; animation: ho-flow 2.4s linear infinite;
+}
+.ho-intro__flow i:nth-child(2) { animation-delay: -0.8s; opacity: .6; }
+.ho-intro__flow i:nth-child(3) { animation-delay: -1.6s; opacity: .3; }
+@keyframes ho-flow { from { left: -14px; } to { left: 100%; } }
+/* second flow indicator on outlet pipe */
+.ho-intro__visual::after {
+  content: ''; position: absolute; top: 50%; left: 61.5%; width: 21%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--pd-primary), transparent);
+  opacity: .45; transform: translateY(-1px);
+  animation: ho-pipe 2.4s linear infinite;
+}
+@keyframes ho-pipe { 0%, 100% { opacity: .2; } 50% { opacity: .55; } }
+
+:lang(ko) .ho-intro__kicker,
+:lang(zh) .ho-intro__kicker {
+  font-family: var(--lt-sans);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+@media (max-width: 1000px) {
+  .ho-intro { grid-template-columns: 1fr; gap: 40px; padding: 48px 0 64px; }
+  .ho-intro__title { font-size: 52px; }
+}

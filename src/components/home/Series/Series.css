@@ -1,0 +1,30 @@
+/* Line Tech — Home series grid. */
+.ho-series { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--pd-border); border: 1px solid var(--pd-border); border-radius: var(--pd-r-lg); overflow: hidden; }
+.ho-series__card {
+  background: var(--pd-surface); padding: 28px 28px 24px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: background .15s;
+  min-height: 220px;
+}
+.ho-series__card:hover { background: var(--pd-surface-2); }
+.ho-series__card.is-highlight { background: color-mix(in oklab, var(--pd-primary) 5%, var(--pd-surface)); }
+.ho-series__top { display: flex; align-items: center; justify-content: space-between; }
+.ho-series__code { font: 600 13px var(--lt-mono); letter-spacing: 0.08em; color: var(--pd-primary); text-transform: uppercase; white-space: nowrap; }
+.ho-series__count { font: 500 11px var(--lt-mono); color: var(--pd-muted); letter-spacing: 0.06em; white-space: nowrap; }
+.ho-series__name { margin: 0; font: 500 22px/1.2 var(--lt-sans); letter-spacing: -0.015em; color: var(--pd-fg-strong); }
+.ho-series__desc { margin: 0; font-size: 14px; color: var(--pd-muted); line-height: 1.55; flex: 1; }
+.ho-series__foot { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid var(--pd-rule); font: 500 12px var(--lt-mono); }
+.ho-series__range { color: var(--pd-fg); letter-spacing: 0.02em; }
+.ho-series__feat { display: inline-flex; align-items: center; gap: 6px; color: var(--pd-primary); }
+.ho-series__feat:hover { color: var(--pd-primary-hover); }
+
+:lang(ko) .ho-series__count,
+:lang(zh) .ho-series__count {
+  font-family: var(--lt-sans);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+@media (max-width: 1000px) {
+  .ho-series { grid-template-columns: 1fr; }
+}
