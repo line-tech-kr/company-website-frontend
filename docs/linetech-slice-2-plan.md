@@ -37,7 +37,7 @@ The home page (Intro, Stats, Series, Feature, Applications, Credentials, Contact
 
 The plan originally locked **Company / Products / Data Room / Contact** (Korean B2B convention; credibility before catalog). The design uses **Products / Solutions / Support / Company** (catalog-first).
 
-🟡 **Conflict — needs decision.** Recommendation: keep the plan's IA (Company / Products / Data Room / Contact) because the rationale (Korean B2B credibility-first) is sound and the design's labels are generic placeholders. Adopt the design's *visual treatment* (mega-menu structure, hover behavior, chevron-down indicator) but with our nav labels.
+✅ **Resolved (2026-04-24):** keep the plan's IA — **Company / Products / Data Room / Contact**. Korean B2B buyers expect "Data Room" (catalogues, CAD, manuals) as a first-class destination; burying it under "Support" costs discoverability. Adopt the design's *visual treatment* (mega-menu structure, hover behavior, chevron-down indicator) but with plan's labels.
 
 ### Nav dropdown trigger — hover (revised)
 
@@ -65,11 +65,17 @@ Reason: design data is heavily nested (series items, app cells, stat tuples, etc
 
 🟡 Plan rationale for messages-based copy was "not worth a Sanity round-trip for copy that rarely changes" — that rationale still holds, just satisfied by the TS file instead of the JSON file.
 
+### Logomark — real logo, not design placeholder
+
+Design handoff uses a generic square-with-cross SVG as a placeholder. Real Line Tech logo is available at `docs/brand-reference/logo-crop.png`.
+
+✅ **Resolved (2026-04-24):** use the **real logo** from `docs/brand-reference/logo-crop.png`. Placeholders in shipped code are a smell. If the PNG is too low-res for retina header use, trace it to SVG as a prerequisite — don't ship the generic placeholder.
+
 ### Category card content — superseded by Series section
 
 Plan originally specced 5 homepage category cards (title + count + image). The design's **Series section** (4 cards: M/MS, MD, LD/LM, LTI) covers this need. Dropping the separate category-grid spec — Series IS the category grid.
 
-🟡 **Conflict — needs decision.** Plan said 5 categories, design has 4 series. Need to decide whether the catalog taxonomy is 4 (series-based) or 5 (function × type × specialty). Affects category page routing too.
+✅ **Resolved (2026-04-24):** catalog taxonomy is **5 (function × type)** — Analogue MFC, Digital MFC, MFM, Specialized, and one more per catalog audit. Buyers shop by function ("I need a digital MFC"), not by internal SKU series (M/MD/LD/LTI mean nothing to new customers). Series stays as a filter/facet *within* a category, not as the category itself. Homepage Series section keeps the design's 4-series visual as a secondary entry point; category pages route on the 5-way function taxonomy.
 
 ---
 
@@ -105,7 +111,7 @@ src/app/globals.css                              (add .pd-top, .pd-mm, .pd-searc
 # Category pages (still pending)
 src/app/[locale]/products/page.tsx               (all-products index)
 src/app/[locale]/products/[category]/page.tsx   (dynamic category page)
-src/lib/fixtures/categories.ts                   (4 or 5 category metadata — pending decision above)
+src/lib/fixtures/categories.ts                   (5 categories: Analogue MFC, Digital MFC, MFM, Specialized, +1)
 ```
 
 ## Explicit exclusions
@@ -129,6 +135,4 @@ Pretendard font (using next/font Inter + JetBrains Mono — already shipped), an
 
 ## Open questions before implementation
 
-1. **Nav labels** — keep plan's "Company / Products / Data Room / Contact" or adopt design's "Products / Solutions / Support / Company"?
-2. **Category count** — 4 series-based or 5 function × type × specialty?
-3. **Logomark** — design uses a generic square-with-cross SVG. Use the real Line Tech logo from `docs/brand-reference/logo-crop.png` instead?
+All three resolved 2026-04-24 — see **Locked decisions** above (nav labels, category taxonomy, logomark). Issue #2 closed.
