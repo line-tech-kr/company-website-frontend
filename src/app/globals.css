@@ -152,51 +152,8 @@ button { font-family: inherit; cursor: pointer; }
   .lt-wrap { padding-left: 16px; padding-right: 16px; }
 }
 
-/* ─── Buttons ─────────────────────────────────────────────────────── */
-.lt-btn {
-  --h: 40px; --px: 16px; --fs: 14px;
-  display: inline-flex; align-items: center; justify-content: center;
-  gap: 8px; height: var(--h); padding: 0 var(--px);
-  font-size: var(--fs); font-weight: 500; letter-spacing: -0.005em;
-  border-radius: var(--pd-r-md); border: 1px solid transparent;
-  transition: background .15s, border-color .15s, color .15s, transform .08s;
-  white-space: nowrap; user-select: none;
-}
-.lt-btn:active { transform: translateY(0.5px); }
-.lt-btn--sm { --h: 32px; --px: 12px; --fs: 13px; }
-.lt-btn--md { --h: 40px; --px: 16px; --fs: 14px; }
-.lt-btn--lg { --h: 48px; --px: 22px; --fs: 15px; }
-.lt-btn--block { width: 100%; }
-.lt-btn.is-disabled { opacity: .42; pointer-events: none; }
-.lt-btn__icon { display: inline-flex; }
-.lt-btn__trail { display: inline-flex; transition: transform .18s; }
-.lt-btn:hover .lt-btn__trail { transform: translateX(2px); }
-
-.lt-btn--primary { background: var(--pd-primary); color: var(--pd-on-primary); border-color: var(--pd-primary); }
-.lt-btn--primary:hover { background: var(--pd-primary-hover); border-color: var(--pd-primary-hover); }
-
-.lt-btn--accent { background: var(--lt-accent-400); color: #1a1100; border-color: var(--lt-accent-400); }
-.lt-btn--accent:hover { background: var(--lt-accent-500); border-color: var(--lt-accent-500); }
-
-.lt-btn--ghost { background: transparent; color: var(--pd-fg); border-color: var(--pd-border-strong); }
-.lt-btn--ghost:hover { background: var(--pd-surface); border-color: var(--pd-fg); }
-
-.lt-btn--subtle { background: var(--lt-neutral-100); color: var(--pd-fg); border-color: transparent; }
-.lt-btn--subtle:hover { background: var(--lt-neutral-200); }
-
-/* ─── Chips ───────────────────────────────────────────────────────── */
-.lt-chip {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 3px 10px; border-radius: 999px;
-  font-size: 11.5px; font-weight: 500; line-height: 1.4;
-  border: 1px solid var(--pd-border);
-  background: var(--pd-surface);
-  color: var(--pd-fg);
-}
-.lt-chip--sm { font-size: 11px; padding: 2px 9px; }
-.lt-chip__dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; display: inline-block; }
-.lt-chip--success { color: var(--lt-success); background: rgba(13,122,74,0.08); border-color: rgba(13,122,74,0.2); }
-.lt-chip--info    { color: var(--lt-info);    background: rgba(27,108,173,0.08); border-color: rgba(27,108,173,0.22); }
-.lt-chip--warning { color: var(--lt-warning); background: rgba(192,122,2,0.08);  border-color: rgba(192,122,2,0.22); }
-.lt-chip--danger  { color: var(--lt-danger);  background: rgba(161,43,43,0.08);  border-color: rgba(161,43,43,0.22); }
-.lt-chip--neutral { color: var(--pd-fg); }
+/* Component styles live with their components:
+ *   .lt-btn*  → src/components/ui/Button/Button.css
+ *   .lt-chip* → src/components/ui/Chip/Chip.css
+ *   .ho-*     → src/components/home/<Section>/<Section>.css
+ */

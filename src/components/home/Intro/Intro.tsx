@@ -1,31 +1,32 @@
-import { Button } from "@/components/lt/Button";
-import { Chip } from "@/components/lt/Chip";
-import { Glyph } from "@/components/lt/Glyph";
+import { Button } from "@/components/ui/Button";
+import { Chip } from "@/components/ui/Chip";
+import { Glyph } from "@/components/ui/Glyph";
 import type { HomeContent } from "@/lib/content/home";
+import "./Intro.css";
 
 type Props = { h: HomeContent };
 
-export function Hero({ h }: Props) {
+export function Intro({ h }: Props) {
   return (
-    <section className="ho-hero">
-      <div className="ho-hero__left">
-        <div className="ho-hero__kicker">
+    <section className="ho-intro">
+      <div className="ho-intro__left">
+        <div className="ho-intro__kicker">
           <Glyph name="dot" size={10} />
-          <span>{h.hero.kicker}</span>
+          <span>{h.intro.kicker}</span>
         </div>
-        <h1 className="ho-hero__title">
-          <span>{h.hero.title1}</span>
-          <span className="ho-hero__title--em">{h.hero.title2}</span>
+        <h1 className="ho-intro__title">
+          <span>{h.intro.title1}</span>
+          <span className="ho-intro__title--em">{h.intro.title2}</span>
         </h1>
-        <p className="ho-hero__lede">{h.hero.lede}</p>
-        <div className="ho-hero__ctas">
+        <p className="ho-intro__lede">{h.intro.lede}</p>
+        <div className="ho-intro__ctas">
           <Button
             variant="primary"
             size="lg"
             href="/products/analogue-mfc/m3030va"
             trailingGlyph={<Glyph name="arrow-right" size={14} />}
           >
-            {h.hero.ctaPrimary}
+            {h.intro.ctaPrimary}
           </Button>
           <Button
             variant="ghost"
@@ -34,21 +35,21 @@ export function Hero({ h }: Props) {
             plain
             icon={<Glyph name="download" size={14} />}
           >
-            {h.hero.ctaSecondary}
+            {h.intro.ctaSecondary}
           </Button>
         </div>
-        <Chip tone="neutral" dot>{h.hero.badge}</Chip>
+        <Chip tone="neutral" dot>{h.intro.badge}</Chip>
       </div>
-      <HeroVisual />
+      <IntroVisual />
     </section>
   );
 }
 
-function HeroVisual() {
+function IntroVisual() {
   return (
-    <div className="ho-hero__visual" aria-hidden>
-      <div className="ho-hero__grid" />
-      <svg viewBox="0 0 520 520" className="ho-hero__svg" preserveAspectRatio="xMidYMid meet">
+    <div className="ho-intro__visual" aria-hidden>
+      <div className="ho-intro__grid" />
+      <svg viewBox="0 0 520 520" className="ho-intro__svg" preserveAspectRatio="xMidYMid meet">
         <defs>
           <pattern id="hogrid" width="20" height="20" patternUnits="userSpaceOnUse">
             <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" strokeWidth=".3" opacity=".2" />
@@ -127,7 +128,7 @@ function HeroVisual() {
 
         <text x="502" y="508" textAnchor="end" fontSize="8" fill="currentColor" opacity=".4">LT-FLOW / 01 / A</text>
       </svg>
-      <div className="ho-hero__flow">
+      <div className="ho-intro__flow">
         <i /><i /><i />
       </div>
     </div>

@@ -12,7 +12,7 @@ Slice 2 ships the site shell so every downstream slice has a home to hang from.
 
 ## What's already shipped this slice
 
-The home page (Hero, Stats, Series, Feature, Apps, Trust, CTA) is built from the design — see `src/components/home/` and `src/app/[locale]/page.tsx`. Tokens live in `src/app/globals.css`; primitives (`Button`, `Glyph`, `Chip`) in `src/components/lt/`. Home content is typed and inline at `src/lib/content/home.ts` (NOT in `messages/*.json` — see deviation note below).
+The home page (Intro, Stats, Series, Feature, Applications, Credentials, Contact) is built from the design — see `src/components/home/` and `src/app/[locale]/page.tsx`. Tokens live in `src/app/globals.css`; primitives (`Button`, `Glyph`, `Chip`) in `src/components/ui/`. Home content is typed and inline at `src/lib/content/home.ts` (NOT in `messages/*.json` — see deviation note below).
 
 **Still missing — the rest of this plan:** header (PageShell top nav), footer, breadcrumbs, category pages.
 

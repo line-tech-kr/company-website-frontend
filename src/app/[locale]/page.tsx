@@ -1,13 +1,13 @@
 import { setRequestLocale } from "next-intl/server";
 import { LT_HOME, type Locale } from "@/lib/content/home";
-import { Hero } from "@/components/home/Hero";
+import { Intro } from "@/components/home/Intro";
 import { Stats } from "@/components/home/Stats";
 import { Series } from "@/components/home/Series";
 import { Feature } from "@/components/home/Feature";
-import { Apps } from "@/components/home/Apps";
-import { Trust } from "@/components/home/Trust";
-import { Cta } from "@/components/home/Cta";
-import "./home.css";
+import { Applications } from "@/components/home/Applications";
+import { Credentials } from "@/components/home/Credentials";
+import { Contact } from "@/components/home/Contact";
+import "@/components/home/home-shell.css";
 
 type Props = { params: Promise<{ locale: Locale }> };
 
@@ -20,13 +20,13 @@ export default async function HomePage({ params }: Props) {
   return (
     <main className="lt-wrap">
       <div className="ho">
-        <Hero h={h} />
+        <Intro h={h} />
         <Stats h={h} />
         <Series h={h} />
         <Feature h={h} />
-        <Apps h={h} />
-        <Trust h={h} />
-        <Cta h={h} />
+        <Applications h={h} />
+        <Credentials h={h} />
+        <Contact h={h} />
       </div>
     </main>
   );

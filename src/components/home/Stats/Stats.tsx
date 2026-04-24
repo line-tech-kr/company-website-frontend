@@ -1,4 +1,5 @@
 import type { HomeContent } from "@/lib/content/home";
+import "./Stats.css";
 
 type Props = { h: HomeContent };
 

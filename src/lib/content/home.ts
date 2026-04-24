@@ -12,12 +12,12 @@ type SeriesItem = {
   feat?: string;
 };
 
-type AppItem = { n: string; k: string };
+type ApplicationItem = { n: string; k: string };
 type Stat = { k: string; l: string; sub: string };
 type Bullet = { k: string; v: string };
 
 export type HomeContent = {
-  hero: {
+  intro: {
     kicker: string;
     title1: string;
     title2: string;
@@ -28,15 +28,15 @@ export type HomeContent = {
   };
   stats: Stat[];
   series: { kicker: string; title: string; sub: string; items: SeriesItem[] };
-  apps: { kicker: string; title: string; items: AppItem[] };
+  applications: { kicker: string; title: string; items: ApplicationItem[] };
   feature: { kicker: string; title: string; sub: string; bullets: Bullet[]; cta: string };
-  trust: { kicker: string; title: string; items: string[] };
-  cta: { title: string; sub: string; primary: string; secondary: string };
+  credentials: { kicker: string; title: string; items: string[] };
+  contact: { title: string; sub: string; primary: string; secondary: string };
 };
 
 export const LT_HOME: Record<Locale, HomeContent> = {
   ko: {
-    hero: {
+    intro: {
       kicker: "1997년부터 · 질량유량 측정 솔루션",
       title1: "신뢰할 수 있는 기술과",
       title2: "확실한 애프터서비스.",
@@ -62,7 +62,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
         { code: "LTI",   name: "리드아웃·부속",    desc: "LTI-200/1000 표시기, FC-050S 유량계, PR-030 압력계.",         count: "5 모델",  range: "전 모델 공통" },
       ],
     },
-    apps: {
+    applications: {
       kicker: "02 — 적용 분야",
       title: "정밀을 요구하는 모든 공정에",
       items: [
@@ -88,12 +88,12 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       ],
       cta: "제품 상세 보기",
     },
-    trust: {
+    credentials: {
       kicker: "04 — 인증",
       title: "국제 표준을 충족합니다",
       items: ["ISO 9001", "CE", "INNOBIZ 인증", "RoHS / REACH", "KAIST 공동 R&D"],
     },
-    cta: {
+    contact: {
       title: "도입 검토 중이십니까?",
       sub: "공정 조건과 가스 종류를 알려주시면 2영업일 내 견적과 적합 모델을 회신해 드립니다.",
       primary: "기술 문의",
@@ -102,7 +102,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
   },
 
   en: {
-    hero: {
+    intro: {
       kicker: "Since 1997 · Mass Flow Solutions",
       title1: "Reliable technology,",
       title2: "supreme service.",
@@ -128,7 +128,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
         { code: "LTI",   name: "Readouts & Parts",    desc: "LTI-200/1000 readouts, FC-050S flowmeter, PR-030 pressure.",    count: "5 models",  range: "all lines" },
       ],
     },
-    apps: {
+    applications: {
       kicker: "02 — Applications",
       title: "Wherever precision is required.",
       items: [
@@ -154,12 +154,12 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       ],
       cta: "Open product page",
     },
-    trust: {
+    credentials: {
       kicker: "04 — Certifications",
       title: "Tested against international standards.",
       items: ["ISO 9001", "CE", "INNOBIZ", "RoHS / REACH", "KAIST joint R&D"],
     },
-    cta: {
+    contact: {
       title: "Evaluating a line?",
       sub: "Send us your process conditions and gas types. We'll return a quote and a model recommendation within two business days.",
       primary: "Technical inquiry",
@@ -168,7 +168,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
   },
 
   zh: {
-    hero: {
+    intro: {
       kicker: "自 1997 年以来 · 质量流量解决方案",
       title1: "可靠的技术,",
       title2: "卓越的服务。",
@@ -194,7 +194,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
         { code: "LTI",   name: "显示与配件",        desc: "LTI-200/1000 显示器、FC-050S 流量计、PR-030 压力计。",      count: "5 款",  range: "全系列兼容" },
       ],
     },
-    apps: {
+    applications: {
       kicker: "02 — 应用领域",
       title: "任何需要精度的工艺。",
       items: [
@@ -220,12 +220,12 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       ],
       cta: "打开产品页",
     },
-    trust: {
+    credentials: {
       kicker: "04 — 认证",
       title: "符合国际标准。",
       items: ["ISO 9001", "CE", "INNOBIZ", "RoHS / REACH", "KAIST 联合研发"],
     },
-    cta: {
+    contact: {
       title: "正在评估方案?",
       sub: "请告知工艺条件与气体种类,我们将在两个工作日内回复适用型号与报价。",
       primary: "技术咨询",

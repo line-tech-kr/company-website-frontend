@@ -1,6 +1,7 @@
-import { Button } from "@/components/lt/Button";
-import { Glyph } from "@/components/lt/Glyph";
+import { Button } from "@/components/ui/Button";
+import { Glyph } from "@/components/ui/Glyph";
 import type { HomeContent } from "@/lib/content/home";
+import "./Feature.css";
 
 type Props = { h: HomeContent };
 

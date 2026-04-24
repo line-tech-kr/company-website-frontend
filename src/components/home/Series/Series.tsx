@@ -1,7 +1,8 @@
 import { Link } from "@/i18n/navigation";
-import { Glyph } from "@/components/lt/Glyph";
-import { SectionHead } from "./SectionHead";
+import { Glyph } from "@/components/ui/Glyph";
+import { SectionHead } from "../SectionHead";
 import type { HomeContent } from "@/lib/content/home";
+import "./Series.css";
 
 type Props = { h: HomeContent };
 

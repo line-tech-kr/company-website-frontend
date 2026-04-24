@@ -1,0 +1,23 @@
+/* Line Tech — Home contact/CTA block. */
+.ho-contact { margin-top: 40px; padding: 80px 0 0; }
+.ho-contact__inner { background: var(--pd-fg-strong); color: var(--pd-surface); border-radius: var(--pd-r-lg); padding: 72px 56px; text-align: center; position: relative; overflow: hidden; }
+.ho-contact__inner::before {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse at center, black 35%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 35%, transparent 75%);
+}
+.ho-contact__title { position: relative; margin: 0 0 16px; font: 500 44px/1.1 var(--lt-sans); letter-spacing: -0.02em; }
+.ho-contact__sub { position: relative; margin: 0 auto 32px; max-width: 540px; font-size: 16px; line-height: 1.55; color: rgba(255,255,255,.72); }
+.ho-contact__btns { position: relative; display: inline-flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+/* Invert ghost button on the dark contact surface */
+.ho-contact__inner .lt-btn--ghost { color: #fff; border-color: rgba(255,255,255,.3); }
+.ho-contact__inner .lt-btn--ghost:hover { background: rgba(255,255,255,.1); border-color: #fff; }
+
+@media (max-width: 1000px) {
+  .ho-contact__inner { padding: 48px 24px; }
+  .ho-contact__title { font-size: 32px; }
+}
