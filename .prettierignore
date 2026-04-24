@@ -1,0 +1,24 @@
+# Build output
+.next/
+out/
+build/
+coverage/
+
+# Dependencies
+node_modules/
+
+# Lockfiles
+pnpm-lock.yaml
+
+# Generated
+next-env.d.ts
+*.tsbuildinfo
+
+# Design-handoff artifacts — not shipped code
+docs/handoff/
+
+# Long-form docs — preserve author formatting
+docs/*.md
+
+# Agent instructions — keep byte-identical
+AGENTS.md

@@ -29,7 +29,13 @@ export type HomeContent = {
   stats: Stat[];
   series: { kicker: string; title: string; sub: string; items: SeriesItem[] };
   applications: { kicker: string; title: string; items: ApplicationItem[] };
-  feature: { kicker: string; title: string; sub: string; bullets: Bullet[]; cta: string };
+  feature: {
+    kicker: string;
+    title: string;
+    sub: string;
+    bullets: Bullet[];
+    cta: string;
+  };
   credentials: { kicker: string; title: string; items: string[] };
   contact: { title: string; sub: string; primary: string; secondary: string };
 };
@@ -56,10 +62,36 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       title: "네 가지 계열, 하나의 기준",
       sub: "공정 조건, 예산, 가스 종류에 따라 선택 가능한 풀 라인업.",
       items: [
-        { code: "M / MS", name: "아날로그 시리즈", desc: "가장 오래 검증된 기본 라인업. 0~5 VDC / 4~20 mA 신호.", count: "18 모델", range: "0.01 – 5,000 SLPM", highlight: true, feat: "★ M3030VA" },
-        { code: "MD",     name: "디지털 시리즈",   desc: "8-포인트 보정, ±0.25 % 정확도. 응답 0.5–1 초.",                count: "14 모델", range: "0.01 – 5,000 SLPM" },
-        { code: "LD / LM", name: "전문 시리즈",    desc: "내장 디스플레이(LD) · MEMS 저비용(LM) · 방폭(EX).",            count: "8 모델",  range: "0.01 – 1,000 SLPM" },
-        { code: "LTI",   name: "리드아웃·부속",    desc: "LTI-200/1000 표시기, FC-050S 유량계, PR-030 압력계.",         count: "5 모델",  range: "전 모델 공통" },
+        {
+          code: "M / MS",
+          name: "아날로그 시리즈",
+          desc: "가장 오래 검증된 기본 라인업. 0~5 VDC / 4~20 mA 신호.",
+          count: "18 모델",
+          range: "0.01 – 5,000 SLPM",
+          highlight: true,
+          feat: "★ M3030VA",
+        },
+        {
+          code: "MD",
+          name: "디지털 시리즈",
+          desc: "8-포인트 보정, ±0.25 % 정확도. 응답 0.5–1 초.",
+          count: "14 모델",
+          range: "0.01 – 5,000 SLPM",
+        },
+        {
+          code: "LD / LM",
+          name: "전문 시리즈",
+          desc: "내장 디스플레이(LD) · MEMS 저비용(LM) · 방폭(EX).",
+          count: "8 모델",
+          range: "0.01 – 1,000 SLPM",
+        },
+        {
+          code: "LTI",
+          name: "리드아웃·부속",
+          desc: "LTI-200/1000 표시기, FC-050S 유량계, PR-030 압력계.",
+          count: "5 모델",
+          range: "전 모델 공통",
+        },
       ],
     },
     applications: {
@@ -67,13 +99,13 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       title: "정밀을 요구하는 모든 공정에",
       items: [
         { n: "반도체 · 디스플레이", k: "Semiconductor" },
-        { n: "연료전지",           k: "Fuel Cells" },
-        { n: "LED · 광섬유",       k: "LED · Fiber Optics" },
-        { n: "바이오 · 제약",      k: "Biotech · Pharma" },
-        { n: "화학 · 석유화학",    k: "Chemical" },
-        { n: "태양광 · PV",        k: "Photovoltaic" },
-        { n: "금속 가공",          k: "Metals" },
-        { n: "R&D · 연구소",       k: "R&D · Labs" },
+        { n: "연료전지", k: "Fuel Cells" },
+        { n: "LED · 광섬유", k: "LED · Fiber Optics" },
+        { n: "바이오 · 제약", k: "Biotech · Pharma" },
+        { n: "화학 · 석유화학", k: "Chemical" },
+        { n: "태양광 · PV", k: "Photovoltaic" },
+        { n: "금속 가공", k: "Metals" },
+        { n: "R&D · 연구소", k: "R&D · Labs" },
       ],
     },
     feature: {
@@ -81,17 +113,23 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       title: "M3030VA",
       sub: "반도체·디스플레이 공정용 디지털 압전식 질량유량제어기.",
       bullets: [
-        { k: "유량",   v: "10 SCCM – 20 SLM" },
+        { k: "유량", v: "10 SCCM – 20 SLM" },
         { k: "정확도", v: "± 1.0 % S.P." },
-        { k: "응답",   v: "≤ 1.0 s" },
-        { k: "통신",   v: "0–5 VDC / Modbus RTU" },
+        { k: "응답", v: "≤ 1.0 s" },
+        { k: "통신", v: "0–5 VDC / Modbus RTU" },
       ],
       cta: "제품 상세 보기",
     },
     credentials: {
       kicker: "04 — 인증",
       title: "국제 표준을 충족합니다",
-      items: ["ISO 9001", "CE", "INNOBIZ 인증", "RoHS / REACH", "KAIST 공동 R&D"],
+      items: [
+        "ISO 9001",
+        "CE",
+        "INNOBIZ 인증",
+        "RoHS / REACH",
+        "KAIST 공동 R&D",
+      ],
     },
     contact: {
       title: "도입 검토 중이십니까?",
@@ -112,34 +150,60 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       badge: "Founded on KAIST collaboration · First in Korea",
     },
     stats: [
-      { k: "1997", l: "Founded",                   sub: "Hwaseong, Gyeonggi" },
+      { k: "1997", l: "Founded", sub: "Hwaseong, Gyeonggi" },
       { k: "2003", l: "First Korean MFC produced", sub: "M-Series" },
-      { k: "0.01–5000", l: "SLPM flow range",      sub: "across all series" },
-      { k: "±0.25 %", l: "Repeatability",          sub: "every product" },
+      { k: "0.01–5000", l: "SLPM flow range", sub: "across all series" },
+      { k: "±0.25 %", l: "Repeatability", sub: "every product" },
     ],
     series: {
       kicker: "01 — Product series",
       title: "Four series, one standard.",
       sub: "A full catalog spanning analog, digital, and specialized variants.",
       items: [
-        { code: "M / MS", name: "Analogue Series",    desc: "The longest-running line. 0–5 VDC / 4–20 mA signal.",           count: "18 models", range: "0.01 – 5,000 SLPM", highlight: true, feat: "★ M3030VA" },
-        { code: "MD",     name: "Digital Series",     desc: "8-point calibration, ±0.25 % accuracy, 0.5–1 s response.",       count: "14 models", range: "0.01 – 5,000 SLPM" },
-        { code: "LD / LM", name: "Specialized Series", desc: "Built-in display (LD) · MEMS low-cost (LM) · Explosion-proof (EX).", count: "8 models",  range: "0.01 – 1,000 SLPM" },
-        { code: "LTI",   name: "Readouts & Parts",    desc: "LTI-200/1000 readouts, FC-050S flowmeter, PR-030 pressure.",    count: "5 models",  range: "all lines" },
+        {
+          code: "M / MS",
+          name: "Analogue Series",
+          desc: "The longest-running line. 0–5 VDC / 4–20 mA signal.",
+          count: "18 models",
+          range: "0.01 – 5,000 SLPM",
+          highlight: true,
+          feat: "★ M3030VA",
+        },
+        {
+          code: "MD",
+          name: "Digital Series",
+          desc: "8-point calibration, ±0.25 % accuracy, 0.5–1 s response.",
+          count: "14 models",
+          range: "0.01 – 5,000 SLPM",
+        },
+        {
+          code: "LD / LM",
+          name: "Specialized Series",
+          desc: "Built-in display (LD) · MEMS low-cost (LM) · Explosion-proof (EX).",
+          count: "8 models",
+          range: "0.01 – 1,000 SLPM",
+        },
+        {
+          code: "LTI",
+          name: "Readouts & Parts",
+          desc: "LTI-200/1000 readouts, FC-050S flowmeter, PR-030 pressure.",
+          count: "5 models",
+          range: "all lines",
+        },
       ],
     },
     applications: {
       kicker: "02 — Applications",
       title: "Wherever precision is required.",
       items: [
-        { n: "Semiconductor",        k: "반도체 · 디스플레이" },
-        { n: "Fuel Cells",            k: "연료전지" },
-        { n: "LED · Fiber Optics",    k: "LED · 광섬유" },
-        { n: "Biotech · Pharma",      k: "바이오 · 제약" },
-        { n: "Chemical",              k: "화학 · 석유화학" },
-        { n: "Photovoltaic",          k: "태양광" },
-        { n: "Metals",                k: "금속 가공" },
-        { n: "R&D · Labs",            k: "R&D · 연구소" },
+        { n: "Semiconductor", k: "반도체 · 디스플레이" },
+        { n: "Fuel Cells", k: "연료전지" },
+        { n: "LED · Fiber Optics", k: "LED · 광섬유" },
+        { n: "Biotech · Pharma", k: "바이오 · 제약" },
+        { n: "Chemical", k: "화학 · 석유화학" },
+        { n: "Photovoltaic", k: "태양광" },
+        { n: "Metals", k: "금속 가공" },
+        { n: "R&D · Labs", k: "R&D · 연구소" },
       ],
     },
     feature: {
@@ -147,10 +211,10 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       title: "M3030VA",
       sub: "Digital piezo-actuated mass flow controller for semiconductor and display process lines.",
       bullets: [
-        { k: "Flow",     v: "10 SCCM – 20 SLM" },
+        { k: "Flow", v: "10 SCCM – 20 SLM" },
         { k: "Accuracy", v: "± 1.0 % S.P." },
         { k: "Response", v: "≤ 1.0 s" },
-        { k: "I/O",      v: "0–5 VDC / Modbus RTU" },
+        { k: "I/O", v: "0–5 VDC / Modbus RTU" },
       ],
       cta: "Open product page",
     },
@@ -178,34 +242,60 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       badge: "基于 KAIST 合作研究 · 韩国首家",
     },
     stats: [
-      { k: "1997", l: "成立年份",                 sub: "京畿道华城市" },
-      { k: "2003", l: "韩国首款自产 MFC",         sub: "M 系列" },
-      { k: "0.01–5000", l: "SLPM 流量范围",       sub: "全系列合计" },
-      { k: "±0.25 %", l: "重复精度",              sub: "全系一致" },
+      { k: "1997", l: "成立年份", sub: "京畿道华城市" },
+      { k: "2003", l: "韩国首款自产 MFC", sub: "M 系列" },
+      { k: "0.01–5000", l: "SLPM 流量范围", sub: "全系列合计" },
+      { k: "±0.25 %", l: "重复精度", sub: "全系一致" },
     ],
     series: {
       kicker: "01 — 产品系列",
       title: "四个系列,一个标准。",
       sub: "覆盖模拟、数字、特种三大类型的完整型谱。",
       items: [
-        { code: "M / MS", name: "模拟系列",         desc: "历史最悠久的基础型谱。0–5 VDC / 4–20 mA 信号。",             count: "18 款", range: "0.01 – 5,000 SLPM", highlight: true, feat: "★ M3030VA" },
-        { code: "MD",     name: "数字系列",         desc: "8 点校准,±0.25 % 精度,0.5–1 秒响应。",                      count: "14 款", range: "0.01 – 5,000 SLPM" },
-        { code: "LD / LM", name: "特种系列",        desc: "内置显示 (LD) · MEMS 低成本 (LM) · 防爆 (EX)。",            count: "8 款",  range: "0.01 – 1,000 SLPM" },
-        { code: "LTI",   name: "显示与配件",        desc: "LTI-200/1000 显示器、FC-050S 流量计、PR-030 压力计。",      count: "5 款",  range: "全系列兼容" },
+        {
+          code: "M / MS",
+          name: "模拟系列",
+          desc: "历史最悠久的基础型谱。0–5 VDC / 4–20 mA 信号。",
+          count: "18 款",
+          range: "0.01 – 5,000 SLPM",
+          highlight: true,
+          feat: "★ M3030VA",
+        },
+        {
+          code: "MD",
+          name: "数字系列",
+          desc: "8 点校准,±0.25 % 精度,0.5–1 秒响应。",
+          count: "14 款",
+          range: "0.01 – 5,000 SLPM",
+        },
+        {
+          code: "LD / LM",
+          name: "特种系列",
+          desc: "内置显示 (LD) · MEMS 低成本 (LM) · 防爆 (EX)。",
+          count: "8 款",
+          range: "0.01 – 1,000 SLPM",
+        },
+        {
+          code: "LTI",
+          name: "显示与配件",
+          desc: "LTI-200/1000 显示器、FC-050S 流量计、PR-030 压力计。",
+          count: "5 款",
+          range: "全系列兼容",
+        },
       ],
     },
     applications: {
       kicker: "02 — 应用领域",
       title: "任何需要精度的工艺。",
       items: [
-        { n: "半导体 · 显示",      k: "Semiconductor" },
-        { n: "燃料电池",           k: "Fuel Cells" },
-        { n: "LED · 光纤",         k: "LED · Fiber" },
-        { n: "生物制药",           k: "Biotech" },
-        { n: "化学 · 石化",        k: "Chemical" },
-        { n: "光伏",               k: "Photovoltaic" },
-        { n: "金属加工",           k: "Metals" },
-        { n: "研发实验室",         k: "R&D" },
+        { n: "半导体 · 显示", k: "Semiconductor" },
+        { n: "燃料电池", k: "Fuel Cells" },
+        { n: "LED · 光纤", k: "LED · Fiber" },
+        { n: "生物制药", k: "Biotech" },
+        { n: "化学 · 石化", k: "Chemical" },
+        { n: "光伏", k: "Photovoltaic" },
+        { n: "金属加工", k: "Metals" },
+        { n: "研发实验室", k: "R&D" },
       ],
     },
     feature: {

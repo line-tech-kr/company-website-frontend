@@ -1,11 +1,37 @@
 /* Line Tech — Home shell: section frame + section header. */
-.ho { display: flex; flex-direction: column; }
-.ho-sec { padding: 88px 0; border-top: 1px solid var(--pd-rule); }
+.ho {
+  display: flex;
+  flex-direction: column;
+}
+.ho-sec {
+  padding: 88px 0;
+  border-top: 1px solid var(--pd-rule);
+}
 
-.ho-sechd { margin-bottom: 40px; }
-.ho-sechd__kicker { font: 500 11px var(--lt-mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--pd-primary); margin-bottom: 14px; }
-.ho-sechd__title { margin: 0 0 10px; font: 500 40px/1.08 var(--lt-sans); letter-spacing: -0.02em; color: var(--pd-fg-strong); max-width: 800px; }
-.ho-sechd__sub { margin: 0; max-width: 620px; font-size: 16px; color: var(--pd-muted); line-height: 1.5; }
+.ho-sechd {
+  margin-bottom: 40px;
+}
+.ho-sechd__kicker {
+  font: 500 11px var(--lt-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pd-primary);
+  margin-bottom: 14px;
+}
+.ho-sechd__title {
+  margin: 0 0 10px;
+  font: 500 40px/1.08 var(--lt-sans);
+  letter-spacing: -0.02em;
+  color: var(--pd-fg-strong);
+  max-width: 800px;
+}
+.ho-sechd__sub {
+  margin: 0;
+  max-width: 620px;
+  font-size: 16px;
+  color: var(--pd-muted);
+  line-height: 1.5;
+}
 
 /* CJK-safe kickers: Hangul/Han fall back per-glyph in JetBrains Mono and gap out. */
 :lang(ko) .ho-sechd__kicker,
@@ -16,6 +42,10 @@
 }
 
 @media (max-width: 1000px) {
-  .ho-sec { padding: 64px 0; }
-  .ho-sechd__title { font-size: 32px; }
+  .ho-sec {
+    padding: 64px 0;
+  }
+  .ho-sechd__title {
+    font-size: 32px;
+  }
 }

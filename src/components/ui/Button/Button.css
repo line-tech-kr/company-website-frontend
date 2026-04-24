@@ -1,31 +1,98 @@
 /* Line Tech — Button primitive. Tokens come from globals.css. */
 .lt-btn {
-  --h: 40px; --px: 16px; --fs: 14px;
-  display: inline-flex; align-items: center; justify-content: center;
-  gap: 8px; height: var(--h); padding: 0 var(--px);
-  font-size: var(--fs); font-weight: 500; letter-spacing: -0.005em;
-  border-radius: var(--pd-r-md); border: 1px solid transparent;
-  transition: background .15s, border-color .15s, color .15s, transform .08s;
-  white-space: nowrap; user-select: none;
+  --h: 40px;
+  --px: 16px;
+  --fs: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: var(--h);
+  padding: 0 var(--px);
+  font-size: var(--fs);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  border-radius: var(--pd-r-md);
+  border: 1px solid transparent;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    color 0.15s,
+    transform 0.08s;
+  white-space: nowrap;
+  user-select: none;
 }
-.lt-btn:active { transform: translateY(0.5px); }
-.lt-btn--sm { --h: 32px; --px: 12px; --fs: 13px; }
-.lt-btn--md { --h: 40px; --px: 16px; --fs: 14px; }
-.lt-btn--lg { --h: 48px; --px: 22px; --fs: 15px; }
-.lt-btn--block { width: 100%; }
-.lt-btn.is-disabled { opacity: .42; pointer-events: none; }
-.lt-btn__icon { display: inline-flex; }
-.lt-btn__trail { display: inline-flex; transition: transform .18s; }
-.lt-btn:hover .lt-btn__trail { transform: translateX(2px); }
+.lt-btn:active {
+  transform: translateY(0.5px);
+}
+.lt-btn--sm {
+  --h: 32px;
+  --px: 12px;
+  --fs: 13px;
+}
+.lt-btn--md {
+  --h: 40px;
+  --px: 16px;
+  --fs: 14px;
+}
+.lt-btn--lg {
+  --h: 48px;
+  --px: 22px;
+  --fs: 15px;
+}
+.lt-btn--block {
+  width: 100%;
+}
+.lt-btn.is-disabled {
+  opacity: 0.42;
+  pointer-events: none;
+}
+.lt-btn__icon {
+  display: inline-flex;
+}
+.lt-btn__trail {
+  display: inline-flex;
+  transition: transform 0.18s;
+}
+.lt-btn:hover .lt-btn__trail {
+  transform: translateX(2px);
+}
 
-.lt-btn--primary { background: var(--pd-primary); color: var(--pd-on-primary); border-color: var(--pd-primary); }
-.lt-btn--primary:hover { background: var(--pd-primary-hover); border-color: var(--pd-primary-hover); }
+.lt-btn--primary {
+  background: var(--pd-primary);
+  color: var(--pd-on-primary);
+  border-color: var(--pd-primary);
+}
+.lt-btn--primary:hover {
+  background: var(--pd-primary-hover);
+  border-color: var(--pd-primary-hover);
+}
 
-.lt-btn--accent { background: var(--lt-accent-400); color: #1a1100; border-color: var(--lt-accent-400); }
-.lt-btn--accent:hover { background: var(--lt-accent-500); border-color: var(--lt-accent-500); }
+.lt-btn--accent {
+  background: var(--lt-accent-400);
+  color: #1a1100;
+  border-color: var(--lt-accent-400);
+}
+.lt-btn--accent:hover {
+  background: var(--lt-accent-500);
+  border-color: var(--lt-accent-500);
+}
 
-.lt-btn--ghost { background: transparent; color: var(--pd-fg); border-color: var(--pd-border-strong); }
-.lt-btn--ghost:hover { background: var(--pd-surface); border-color: var(--pd-fg); }
+.lt-btn--ghost {
+  background: transparent;
+  color: var(--pd-fg);
+  border-color: var(--pd-border-strong);
+}
+.lt-btn--ghost:hover {
+  background: var(--pd-surface);
+  border-color: var(--pd-fg);
+}
 
-.lt-btn--subtle { background: var(--lt-neutral-100); color: var(--pd-fg); border-color: transparent; }
-.lt-btn--subtle:hover { background: var(--lt-neutral-200); }
+.lt-btn--subtle {
+  background: var(--lt-neutral-100);
+  color: var(--pd-fg);
+  border-color: transparent;
+}
+.lt-btn--subtle:hover {
+  background: var(--lt-neutral-200);
+}

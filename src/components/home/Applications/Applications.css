@@ -1,10 +1,40 @@
 /* Line Tech — Home applications grid. */
-.ho-applications { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--pd-border); border: 1px solid var(--pd-border); border-radius: var(--pd-r-lg); overflow: hidden; }
-.ho-applications__cell { background: var(--pd-surface); padding: 24px 20px; display: flex; flex-direction: column; gap: 6px; min-height: 120px; transition: background .15s; }
-.ho-applications__cell:hover { background: var(--pd-surface-2); }
-.ho-applications__num { font: 500 10.5px var(--lt-mono); color: var(--pd-primary); letter-spacing: 0.1em; margin-bottom: 18px; }
-.ho-applications__n { font: 500 16px/1.25 var(--lt-sans); color: var(--pd-fg-strong); letter-spacing: -0.005em; }
-.ho-applications__k { font: 400 12px var(--lt-mono); color: var(--pd-muted); }
+.ho-applications {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--pd-border);
+  border: 1px solid var(--pd-border);
+  border-radius: var(--pd-r-lg);
+  overflow: hidden;
+}
+.ho-applications__cell {
+  background: var(--pd-surface);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 120px;
+  transition: background 0.15s;
+}
+.ho-applications__cell:hover {
+  background: var(--pd-surface-2);
+}
+.ho-applications__num {
+  font: 500 10.5px var(--lt-mono);
+  color: var(--pd-primary);
+  letter-spacing: 0.1em;
+  margin-bottom: 18px;
+}
+.ho-applications__n {
+  font: 500 16px/1.25 var(--lt-sans);
+  color: var(--pd-fg-strong);
+  letter-spacing: -0.005em;
+}
+.ho-applications__k {
+  font: 400 12px var(--lt-mono);
+  color: var(--pd-muted);
+}
 
 :lang(ko) .ho-applications__k,
 :lang(zh) .ho-applications__k {
@@ -14,5 +44,7 @@
 }
 
 @media (max-width: 1000px) {
-  .ho-applications { grid-template-columns: repeat(2, 1fr); }
+  .ho-applications {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

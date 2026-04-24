@@ -47,10 +47,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   setRequestLocale(locale);
 
   return (
-    <html
-      lang={locale}
-      className={`${fontSans.variable} ${fontMono.variable}`}
-    >
+    <html lang={locale} className={`${fontSans.variable} ${fontMono.variable}`}>
       <body>
         <NextIntlClientProvider>
           <LocaleSwitcher />
