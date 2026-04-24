@@ -39,6 +39,9 @@ yarn-error.log*
 # design handoff bundle uploads (large source PDFs — keep out of git)
 docs/handoff/uploads/
 
+# extracted catalogue page renders — regenerate from docs/handoff/uploads/catalog.pdf
+docs/catalog-extract/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
