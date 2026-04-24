@@ -2,7 +2,7 @@ import type { routing } from "@/i18n/routing";
 
 export type Locale = (typeof routing.locales)[number];
 
-export type SeriesItem = {
+type SeriesItem = {
   code: string;
   name: string;
   desc: string;
@@ -12,9 +12,9 @@ export type SeriesItem = {
   feat?: string;
 };
 
-export type AppItem = { n: string; k: string };
-export type Stat = { k: string; l: string; sub: string };
-export type Bullet = { k: string; v: string };
+type AppItem = { n: string; k: string };
+type Stat = { k: string; l: string; sub: string };
+type Bullet = { k: string; v: string };
 
 export type HomeContent = {
   hero: {
