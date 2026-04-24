@@ -22,7 +22,12 @@ export function Contact({ h }: Props) {
           >
             {contact.primary}
           </Button>
-          <Button variant="ghost" size="lg" href="mailto:linetech@line-tech.co.kr" plain>
+          <Button
+            variant="ghost"
+            size="lg"
+            href="mailto:linetech@line-tech.co.kr"
+            plain
+          >
             {contact.secondary}
           </Button>
         </div>

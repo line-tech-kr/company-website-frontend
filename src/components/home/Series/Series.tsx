@@ -10,10 +10,17 @@ export function Series({ h }: Props) {
   const { series } = h;
   return (
     <section className="ho-sec">
-      <SectionHead kicker={series.kicker} title={series.title} sub={series.sub} />
+      <SectionHead
+        kicker={series.kicker}
+        title={series.title}
+        sub={series.sub}
+      />
       <div className="ho-series">
         {series.items.map((s) => (
-          <div key={s.code} className={`ho-series__card${s.highlight ? " is-highlight" : ""}`}>
+          <div
+            key={s.code}
+            className={`ho-series__card${s.highlight ? " is-highlight" : ""}`}
+          >
             <div className="ho-series__top">
               <span className="ho-series__code">{s.code}</span>
               <span className="ho-series__count">{s.count}</span>
@@ -23,7 +30,10 @@ export function Series({ h }: Props) {
             <div className="ho-series__foot">
               <span className="ho-series__range">{s.range}</span>
               {s.feat && (
-                <Link className="ho-series__feat" href="/products/analogue-mfc/m3030va">
+                <Link
+                  className="ho-series__feat"
+                  href="/products/analogue-mfc/m3030va"
+                >
                   {s.feat} <Glyph name="arrow-right" size={11} />
                 </Link>
               )}

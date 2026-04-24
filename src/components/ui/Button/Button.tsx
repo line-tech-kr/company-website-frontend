@@ -45,21 +45,41 @@ export function Button(props: Props) {
   const cls = classes(props);
   const inner = (
     <>
-      {props.icon && <span className="lt-btn__icon" aria-hidden>{props.icon}</span>}
+      {props.icon && (
+        <span className="lt-btn__icon" aria-hidden>
+          {props.icon}
+        </span>
+      )}
       <span className="lt-btn__label">{props.children}</span>
-      {props.trailingGlyph && <span className="lt-btn__trail" aria-hidden>{props.trailingGlyph}</span>}
+      {props.trailingGlyph && (
+        <span className="lt-btn__trail" aria-hidden>
+          {props.trailingGlyph}
+        </span>
+      )}
     </>
   );
 
   if (isLink(props)) {
     if (props.plain) {
-      return <a className={cls} href={props.href}>{inner}</a>;
+      return (
+        <a className={cls} href={props.href}>
+          {inner}
+        </a>
+      );
     }
-    return <Link className={cls} href={props.href}>{inner}</Link>;
+    return (
+      <Link className={cls} href={props.href}>
+        {inner}
+      </Link>
+    );
   }
 
   return (
-    <button type={props.type ?? "button"} className={cls} onClick={props.onClick}>
+    <button
+      type={props.type ?? "button"}
+      className={cls}
+      onClick={props.onClick}
+    >
       {inner}
     </button>
   );

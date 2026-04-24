@@ -8,11 +8,9 @@ const displayField = defineField({
   validation: (r) => r.required(),
 });
 
-const numberField = (name: string) =>
-  defineField({ name, type: "number" });
+const numberField = (name: string) => defineField({ name, type: "number" });
 
-const stringField = (name: string) =>
-  defineField({ name, type: "string" });
+const stringField = (name: string) => defineField({ name, type: "string" });
 
 const comparatorField = defineField({
   name: "comparator",
