@@ -11,10 +11,26 @@ const OUT_DIR = "public/products";
 const MANIFEST_PATH = "public/products/_manifest.json";
 
 const BOARDS = [
-  { boTable: "02_01_e", category: "analogue-mfc", label: "Analogue Mass Flow Controller" },
-  { boTable: "02_02_e", category: "analogue-mfm", label: "Analogue Mass Flow Meter" },
-  { boTable: "02_03_e", category: "digital-mfc", label: "Digital Mass Flow Controller" },
-  { boTable: "02_04_e", category: "digital-mfm", label: "Digital Mass Flow Meter" },
+  {
+    boTable: "02_01_e",
+    category: "analogue-mfc",
+    label: "Analogue Mass Flow Controller",
+  },
+  {
+    boTable: "02_02_e",
+    category: "analogue-mfm",
+    label: "Analogue Mass Flow Meter",
+  },
+  {
+    boTable: "02_03_e",
+    category: "digital-mfc",
+    label: "Digital Mass Flow Controller",
+  },
+  {
+    boTable: "02_04_e",
+    category: "digital-mfm",
+    label: "Digital Mass Flow Meter",
+  },
   { boTable: "02_05_e", category: "readoutbox", label: "ReadOutBox" },
   { boTable: "02_06_e", category: "component", label: "Component" },
   { boTable: "02_07_e", category: "display-mfc", label: "Display MFC" },
@@ -38,7 +54,12 @@ async function fetchBytes(url) {
 }
 
 function decodeHtmlEntities(s) {
-  return s.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+  return s
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
 }
 
 function slugify(name) {
@@ -82,7 +103,8 @@ function extractImages(html) {
   let m;
   while ((m = re.exec(html)) !== null) {
     const raw = decodeHtmlEntities(m[1]);
-    if (!raw.includes("/data/file/") && !raw.includes("/data/editor/")) continue;
+    if (!raw.includes("/data/file/") && !raw.includes("/data/editor/"))
+      continue;
     const abs = raw.startsWith("http") ? raw : BASE + raw;
     if (seen.has(abs)) continue;
     seen.add(abs);
@@ -99,7 +121,9 @@ async function main() {
     console.log(`\n== ${board.label} (${board.boTable}) ==`);
     let listHtml;
     try {
-      listHtml = await fetchText(`${BASE}/bbs/board.php?bo_table=${board.boTable}`);
+      listHtml = await fetchText(
+        `${BASE}/bbs/board.php?bo_table=${board.boTable}`,
+      );
     } catch (e) {
       console.log(`  listing failed: ${e.message}`);
       continue;
@@ -114,7 +138,9 @@ async function main() {
     for (const wrId of wrIds) {
       let detailHtml;
       try {
-        detailHtml = await fetchText(`${BASE}/bbs/board.php?bo_table=${board.boTable}&wr_id=${wrId}`);
+        detailHtml = await fetchText(
+          `${BASE}/bbs/board.php?bo_table=${board.boTable}&wr_id=${wrId}`,
+        );
       } catch (e) {
         console.log(`  wr_id=${wrId}: detail failed ${e.message}`);
         continue;
@@ -161,7 +187,9 @@ async function main() {
 
   await mkdir(dirname(MANIFEST_PATH), { recursive: true });
   await writeFile(MANIFEST_PATH, JSON.stringify(manifest, null, 2));
-  console.log(`\nManifest: ${MANIFEST_PATH}  (${manifest.products.length} products)`);
+  console.log(
+    `\nManifest: ${MANIFEST_PATH}  (${manifest.products.length} products)`,
+  );
 }
 
 main().catch((err) => {
