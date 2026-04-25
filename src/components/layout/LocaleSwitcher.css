@@ -1,0 +1,48 @@
+/* Line Tech — segmented locale pill. KO / EN / ZH. */
+
+.lt-locale {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0;
+  padding: 2px;
+  border: 1px solid var(--pd-border);
+  border-radius: 999px;
+  background: var(--pd-surface);
+  line-height: 1;
+}
+
+.lt-locale__seg {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: 0;
+  color: var(--pd-muted);
+  font: 500 12px/1 var(--lt-sans);
+  letter-spacing: 0.04em;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.lt-locale__seg:hover {
+  color: var(--pd-fg-strong);
+  background: var(--lt-neutral-100);
+}
+
+.lt-locale__seg:focus-visible {
+  outline: 2px solid var(--pd-primary);
+  outline-offset: 2px;
+}
+
+.lt-locale__seg[aria-current="true"] {
+  background: var(--pd-primary);
+  color: var(--pd-on-primary);
+  cursor: default;
+}
+
+.lt-locale__seg[aria-current="true"]:hover {
+  background: var(--pd-primary-hover);
+  color: var(--pd-on-primary);
+}
