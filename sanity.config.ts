@@ -8,7 +8,7 @@ import { dataset, projectId } from "./src/sanity/env";
 export default defineConfig({
   name: "default",
   title: "Line Tech",
-  projectId: projectId || "placeholder",
+  projectId,
   dataset,
   basePath: "/studio",
   plugins: [structureTool()],
