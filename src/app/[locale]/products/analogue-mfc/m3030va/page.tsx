@@ -9,11 +9,13 @@ export default async function ProductPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations("product.specs");
-  const tDownloads = await getTranslations("product.downloads");
-  const tCommon = await getTranslations("common");
-  const tNav = await getTranslations("nav");
-  const tCategories = await getTranslations("breadcrumbs.categories");
+  const [t, tDownloads, tCommon, tNav, tCategories] = await Promise.all([
+    getTranslations("product.specs"),
+    getTranslations("product.downloads"),
+    getTranslations("common"),
+    getTranslations("nav"),
+    getTranslations("breadcrumbs.categories"),
+  ]);
 
   const product = M3030VA;
   const specEntries = Object.entries(product.massFlowSpecs) as Array<

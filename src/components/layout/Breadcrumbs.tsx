@@ -37,24 +37,22 @@ export async function Breadcrumbs({ items }: Props) {
             const className = `lt-breadcrumbs__item${
               isLast ? " lt-breadcrumbs__item--current" : ""
             }`;
-
-            if (isLast || !item.href) {
-              return (
-                <li
-                  key={index}
-                  className={className}
-                  aria-current={isLast ? "page" : undefined}
-                >
-                  {item.label}
-                </li>
-              );
-            }
-
-            return (
-              <li key={index} className={className}>
+            const content =
+              item.href && !isLast ? (
                 <Link className="lt-breadcrumbs__link" href={item.href}>
                   {item.label}
                 </Link>
+              ) : (
+                item.label
+              );
+
+            return (
+              <li
+                key={index}
+                className={className}
+                aria-current={isLast ? "page" : undefined}
+              >
+                {content}
               </li>
             );
           })}
