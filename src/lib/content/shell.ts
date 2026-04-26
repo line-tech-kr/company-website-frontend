@@ -75,6 +75,8 @@ export type ShellFooter = {
 
 export type ShellContent = {
   nav: ShellNavItem[];
+  /** Top-right "Quote" button label in the header. Mailto target is shared. */
+  quoteLabel: string;
   footer: ShellFooter;
 };
 
@@ -178,6 +180,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         },
       },
     ],
+    quoteLabel: "견적 요청",
     footer: {
       signoff: "1997년부터 정밀 질량유량 제어를 만들어 온 라인텍입니다.",
       address: "(34055) 대전광역시 유성구 대덕대로 806 · TEL 042-624-0700",
@@ -259,6 +262,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         },
       },
     ],
+    quoteLabel: "Quote",
     footer: {
       signoff: "Building precision mass-flow control since 1997.",
       address: "806 Daedeok-daero, Yuseong-gu, Daejeon 34055, Korea · TEL +82 42-624-0700",
@@ -340,6 +344,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         },
       },
     ],
+    quoteLabel: "申请报价",
     footer: {
       signoff: "自 1997 年起专注于精密质量流量控制。",
       address: "韩国大田广域市儒城区大德大路 806 号 (34055) · TEL +82 42-624-0700",

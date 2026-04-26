@@ -4,7 +4,8 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import { LocaleSwitcher } from "@/components/layout/LocaleSwitcher";
+import { PageShell } from "@/components/layout/PageShell";
+import type { Locale } from "@/lib/content/home";
 import "../globals.css";
 
 const fontSans = Inter({
@@ -50,8 +51,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html lang={locale} className={`${fontSans.variable} ${fontMono.variable}`}>
       <body>
         <NextIntlClientProvider>
-          <LocaleSwitcher />
-          {children}
+          <PageShell locale={locale as Locale}>{children}</PageShell>
         </NextIntlClientProvider>
       </body>
     </html>
