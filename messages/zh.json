@@ -6,6 +6,11 @@
     "download": "下载",
     "home": "首页"
   },
+  "breadcrumbs": {
+    "categories": {
+      "analogue-mfc": "模拟 MFC"
+    }
+  },
   "product": {
     "specs": {
       "flowRange": "流量范围",
