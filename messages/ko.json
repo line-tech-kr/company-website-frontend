@@ -6,6 +6,12 @@
     "download": "다운로드",
     "home": "홈"
   },
+  "breadcrumbs": {
+    "label": "현재 위치",
+    "categories": {
+      "analogueMfc": "아날로그 MFC"
+    }
+  },
   "product": {
     "specs": {
       "flowRange": "유량 범위",

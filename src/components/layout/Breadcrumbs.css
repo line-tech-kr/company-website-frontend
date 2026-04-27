@@ -1,0 +1,51 @@
+/* Line Tech — breadcrumb trail. Renders on product/category pages. */
+
+.lt-breadcrumbs {
+  font: 400 15px/1.4 var(--lt-sans);
+  color: var(--pd-muted);
+}
+
+.lt-breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lt-breadcrumbs__item {
+  display: inline-flex;
+  align-items: center;
+  color: var(--pd-muted);
+}
+
+.lt-breadcrumbs__item:not(:first-child)::before {
+  content: "›";
+  margin: 0 0.5rem;
+  color: var(--pd-muted);
+  user-select: none;
+}
+
+.lt-breadcrumbs__link {
+  color: var(--pd-muted);
+  text-decoration: none;
+  border-radius: var(--pd-r-sm);
+  transition: color 120ms ease;
+}
+
+.lt-breadcrumbs__link:hover {
+  color: var(--pd-fg-strong);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.lt-breadcrumbs__link:focus-visible {
+  outline: 2px solid var(--pd-primary);
+  outline-offset: 2px;
+}
+
+.lt-breadcrumbs__item--current {
+  color: var(--pd-primary);
+  font-weight: 500;
+}

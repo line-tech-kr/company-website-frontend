@@ -6,6 +6,12 @@
     "download": "Download",
     "home": "Home"
   },
+  "breadcrumbs": {
+    "label": "Breadcrumb",
+    "categories": {
+      "analogueMfc": "Analogue MFC"
+    }
+  },
   "product": {
     "specs": {
       "flowRange": "Flow range",

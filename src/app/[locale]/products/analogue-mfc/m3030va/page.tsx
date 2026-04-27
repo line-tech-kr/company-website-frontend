@@ -1,4 +1,5 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { M3030VA } from "@/lib/fixtures/products";
 import type { MassFlowSpecs } from "@/lib/types/product";
 
@@ -8,16 +9,29 @@ export default async function ProductPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations("product.specs");
-  const tDownloads = await getTranslations("product.downloads");
+  const [t, tDownloads, tCommon, tNav, tCategories] = await Promise.all([
+    getTranslations("product.specs"),
+    getTranslations("product.downloads"),
+    getTranslations("common"),
+    getTranslations("nav"),
+    getTranslations("breadcrumbs.categories"),
+  ]);
 
   const product = M3030VA;
   const specEntries = Object.entries(product.massFlowSpecs) as Array<
     [keyof MassFlowSpecs, { display: string }]
   >;
 
+  const breadcrumbs = [
+    { label: tCommon("home"), href: "/" },
+    { label: tNav("products"), href: "/products" },
+    { label: tCategories("analogueMfc"), href: "/products/analogue-mfc" },
+    { label: product.model },
+  ];
+
   return (
     <main>
+      <Breadcrumbs items={breadcrumbs} />
       <h1>{product.model}</h1>
       <p>
         Series: {product.series} · Function: {product.function} · Form factor:{" "}
