@@ -22,7 +22,12 @@ export function LocaleSwitcher() {
             aria-current={isActive ? "true" : undefined}
             onClick={() => {
               if (isActive) return;
-              router.replace(pathname, { locale });
+              // Read search params from window in the handler to avoid
+              // useSearchParams' static-generation bailout.
+              const query = Object.fromEntries(
+                new URLSearchParams(window.location.search),
+              );
+              router.replace({ pathname, query }, { locale });
             }}
           >
             {locale.toUpperCase()}
