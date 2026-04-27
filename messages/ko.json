@@ -7,8 +7,9 @@
     "home": "홈"
   },
   "breadcrumbs": {
+    "label": "현재 위치",
     "categories": {
-      "analogue-mfc": "아날로그 MFC"
+      "analogueMfc": "아날로그 MFC"
     }
   },
   "product": {

@@ -7,8 +7,9 @@
     "home": "Home"
   },
   "breadcrumbs": {
+    "label": "Breadcrumb",
     "categories": {
-      "analogue-mfc": "Analogue MFC"
+      "analogueMfc": "Analogue MFC"
     }
   },
   "product": {

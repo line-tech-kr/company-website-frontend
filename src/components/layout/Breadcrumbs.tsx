@@ -1,5 +1,6 @@
-import { getLocale } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
+import { getLocale, getTranslations } from "next-intl/server";
+import { Link, getPathname } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
 import "./Breadcrumbs.css";
 
 export type BreadcrumbItem = {
@@ -11,9 +12,25 @@ type Props = {
   items: BreadcrumbItem[];
 };
 
+function resolveSiteUrl(): string {
+  const fromEnv = process.env.SITE_URL;
+  if (fromEnv) return fromEnv.replace(/\/$/, "");
+  if (process.env.VERCEL_ENV === "production") {
+    throw new Error(
+      "SITE_URL is required on Vercel production deploys for breadcrumb JSON-LD absolute URLs.",
+    );
+  }
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return "http://localhost:3000";
+}
+
 export async function Breadcrumbs({ items }: Props) {
-  const locale = await getLocale();
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const [locale, t] = await Promise.all([
+    getLocale(),
+    getTranslations("breadcrumbs"),
+  ]);
+  const siteUrl = resolveSiteUrl();
+  const typedLocale = locale as (typeof routing.locales)[number];
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -23,14 +40,14 @@ export async function Breadcrumbs({ items }: Props) {
       position: index + 1,
       name: item.label,
       ...(item.href !== undefined && {
-        item: `${siteUrl}/${locale}${item.href === "/" ? "" : item.href}`,
+        item: `${siteUrl}${getPathname({ locale: typedLocale, href: item.href })}`,
       }),
     })),
   };
 
   return (
     <>
-      <nav className="lt-breadcrumbs" aria-label="Breadcrumb">
+      <nav className="lt-breadcrumbs" aria-label={t("label")}>
         <ol className="lt-breadcrumbs__list">
           {items.map((item, index) => {
             const isLast = index === items.length - 1;

@@ -7,8 +7,9 @@
     "home": "首页"
   },
   "breadcrumbs": {
+    "label": "当前位置",
     "categories": {
-      "analogue-mfc": "模拟 MFC"
+      "analogueMfc": "模拟 MFC"
     }
   },
   "product": {

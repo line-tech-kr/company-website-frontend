@@ -25,7 +25,7 @@ export default async function ProductPage({ params }: Props) {
   const breadcrumbs = [
     { label: tCommon("home"), href: "/" },
     { label: tNav("products"), href: "/products" },
-    { label: tCategories("analogue-mfc"), href: "/products/analogue-mfc" },
+    { label: tCategories("analogueMfc"), href: "/products/analogue-mfc" },
     { label: product.model },
   ];
 
