@@ -48,24 +48,6 @@
   border-radius: 2px;
 }
 
-.pd-top__navitem.is-open {
-  color: var(--pd-primary);
-}
-.pd-top__navitem.is-open::after {
-  transform: scaleX(1);
-}
-
-.pd-top__navitem svg {
-  opacity: 0.55;
-  transition:
-    transform 0.2s ease,
-    opacity 0.2s ease;
-}
-.pd-top__navitem.is-open svg {
-  transform: rotate(180deg);
-  opacity: 1;
-}
-
 @media (max-width: 1000px) {
   .pd-top__nav {
     display: none;
