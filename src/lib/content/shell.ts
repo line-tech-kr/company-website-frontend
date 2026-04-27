@@ -67,9 +67,27 @@ export type ShellFeaturedCard = {
 
 export type ShellFooter = {
   signoff: string;
-  address: string;
+  contact: {
+    heading: string;
+    address: string;
+    phone: string;
+    email: string;
+    fax?: string;
+  };
+  /** Korean regulatory block — required on KO, omitted elsewhere. */
+  legal?: {
+    heading: string;
+    ceo: string;
+    registration: string;
+  };
+  /** Wuxi subsidiary callout — surfaced on ZH per legacy site. */
+  subsidiary?: {
+    heading: string;
+    name: string;
+    address: string;
+  };
   rights: string;
-  /** Version stamp rendered small in the footer margin. */
+  /** Version stamp; held on the type but not rendered today. */
   version: string;
 };
 
@@ -222,8 +240,19 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
     ],
     quoteLabel: "견적 요청",
     footer: {
-      signoff: "1997년부터 정밀 질량유량 제어를 만들어 온 라인텍입니다.",
-      address: "(34055) 대전광역시 유성구 대덕대로 806 · TEL 042-624-0700",
+      signoff: "정밀 질량유량 솔루션",
+      contact: {
+        heading: "문의",
+        address: "대전광역시 유성구 대덕대로 806 (34055)",
+        phone: "042-624-0700",
+        fax: "042-638-2211",
+        email: "linetech@line-tech.co.kr",
+      },
+      legal: {
+        heading: "법인 정보",
+        ceo: "대표자 배정이",
+        registration: "사업자등록번호 314-86-55562",
+      },
       rights: "© 2026 주식회사 라인텍. All rights reserved.",
       version: SHELL_VERSION,
     },
@@ -354,9 +383,14 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
     ],
     quoteLabel: "Quote",
     footer: {
-      signoff: "Building precision mass-flow control since 1997.",
-      address:
-        "806 Daedeok-daero, Yuseong-gu, Daejeon 34055, Korea · TEL +82 42-624-0700",
+      signoff: "Mass Flow Solutions",
+      contact: {
+        heading: "Contact",
+        address: "806 Daedeok-daero, Yuseong-gu, Daejeon 34055, Korea",
+        phone: "+82 42-624-0700",
+        fax: "+82 42-638-2211",
+        email: "linetech@line-tech.co.kr",
+      },
       rights: "© 2026 Line Tech Inc. All rights reserved.",
       version: SHELL_VERSION,
     },
@@ -473,9 +507,19 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
     ],
     quoteLabel: "申请报价",
     footer: {
-      signoff: "自 1997 年起专注于精密质量流量控制。",
-      address:
-        "韩国大田广域市儒城区大德大路 806 号 (34055) · TEL +82 42-624-0700",
+      signoff: "精密质量流量解决方案",
+      contact: {
+        heading: "联系方式",
+        address: "韩国大田广域市儒城区大德大路 806 号 (34055)",
+        phone: "+82 42-624-0700",
+        fax: "+82 42-638-2211",
+        email: "linetech@line-tech.co.kr",
+      },
+      subsidiary: {
+        heading: "中国子公司",
+        name: "莱因精密技术（无锡）有限公司",
+        address: "江苏省无锡市锡山区锡沪东荟智企业中心 6 号楼 117 号",
+      },
       rights: "© 2026 株式会社莱因。保留所有权利。",
       version: SHELL_VERSION,
     },
