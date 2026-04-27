@@ -1,10 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import {
-  HeaderNavProvider,
-  type HeaderNavCtx,
-} from "./HeaderNavContext";
+import { HeaderNavProvider, type HeaderNavCtx } from "./HeaderNavContext";
 
 const OPEN_DELAY = 120;
 const CLOSE_DELAY = 120;
@@ -88,11 +85,7 @@ export function HeaderShell({ children }: Props) {
     };
   }, [openId]);
 
-  const cls = [
-    "pd-top",
-    scrolled && "is-scrolled",
-    openId && "is-menuopen",
-  ]
+  const cls = ["pd-top", scrolled && "is-scrolled", openId && "is-menuopen"]
     .filter(Boolean)
     .join(" ");
 

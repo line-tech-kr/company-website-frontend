@@ -33,11 +33,7 @@ export function Header({ locale }: Props) {
 
         <div className="pd-top__right">
           {/* TODO(#8): wire to SearchPanel via HeaderNavContext */}
-          <button
-            type="button"
-            className="pd-top__iconbtn"
-            aria-label="Search"
-          >
+          <button type="button" className="pd-top__iconbtn" aria-label="Search">
             <svg
               width="16"
               height="16"
