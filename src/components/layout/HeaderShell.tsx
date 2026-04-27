@@ -1,18 +1,26 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { SearchPanel } from "./SearchPanel";
+import { SearchProvider, type SearchCtx } from "./SearchContext";
 import { HeaderNavProvider, type HeaderNavCtx } from "./HeaderNavContext";
+import type { ShellSearch } from "@/lib/content/shell";
 
-const OPEN_DELAY = 120;
-const CLOSE_DELAY = 120;
 const SCROLL_ON = 40;
 const SCROLL_OFF = 30;
+const OPEN_DELAY = 120;
+const CLOSE_DELAY = 120;
 
-type Props = { children: React.ReactNode };
+type Props = {
+  children: React.ReactNode;
+  search: ShellSearch;
+};
 
-export function HeaderShell({ children }: Props) {
+export function HeaderShell({ children, search }: Props) {
   const [scrolled, setScrolled] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [openId, setOpenId] = useState<string | null>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
   const openTimer = useRef<number | null>(null);
   const closeTimer = useRef<number | null>(null);
 
@@ -42,7 +50,16 @@ export function HeaderShell({ children }: Props) {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  const ctx = useMemo<HeaderNavCtx>(() => {
+  const registerSearchTrigger = useCallback((el: HTMLButtonElement | null) => {
+    triggerRef.current = el;
+  }, []);
+
+  const searchCtx = useMemo<SearchCtx>(
+    () => ({ searchOpen, setSearchOpen, registerSearchTrigger }),
+    [searchOpen, registerSearchTrigger],
+  );
+
+  const navCtx = useMemo<HeaderNavCtx>(() => {
     const clearTimers = () => {
       if (openTimer.current) {
         window.clearTimeout(openTimer.current);
@@ -85,13 +102,28 @@ export function HeaderShell({ children }: Props) {
     };
   }, [openId]);
 
-  const cls = ["pd-top", scrolled && "is-scrolled", openId && "is-menuopen"]
+  const cls = [
+    "pd-top",
+    scrolled && "is-scrolled",
+    searchOpen && "is-searchopen",
+    openId && "is-menuopen",
+  ]
     .filter(Boolean)
     .join(" ");
 
   return (
-    <HeaderNavProvider value={ctx}>
-      <header className={cls}>{children}</header>
-    </HeaderNavProvider>
+    <SearchProvider value={searchCtx}>
+      <HeaderNavProvider value={navCtx}>
+        <header className={cls}>
+          {children}
+          <SearchPanel
+            content={search}
+            open={searchOpen}
+            onClose={() => setSearchOpen(false)}
+            triggerRef={triggerRef}
+          />
+        </header>
+      </HeaderNavProvider>
+    </SearchProvider>
   );
 }

@@ -15,12 +15,14 @@ type Props = {
 function resolveSiteUrl(): string {
   const fromEnv = process.env.SITE_URL;
   if (fromEnv) return fromEnv.replace(/\/$/, "");
-  if (process.env.VERCEL_ENV === "production") {
-    throw new Error(
-      "SITE_URL is required on Vercel production deploys for breadcrumb JSON-LD absolute URLs.",
-    );
+  if (process.env.VERCEL_URL) {
+    if (process.env.VERCEL_ENV === "production") {
+      console.warn(
+        "SITE_URL is not set on a Vercel production deploy; falling back to VERCEL_URL for breadcrumb JSON-LD. Set SITE_URL to the canonical domain.",
+      );
+    }
+    return `https://${process.env.VERCEL_URL}`;
   }
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
   return "http://localhost:3000";
 }
 
