@@ -61,10 +61,6 @@ function renderPanelBody(
       return <ProductsBody menu={menu} locale={locale} />;
     case "resources":
       return <ResourcesBody menu={menu} />;
-    case "simple":
-      // TODO(future): no current consumer — re-add a renderer when a nav item
-      // needs a simple link-list panel again.
-      return null;
   }
 }
 

@@ -27,14 +27,6 @@ export type ShellNavItem = {
   menu?: ShellMegaMenu;
 };
 
-/** A 2-column simple link list, e.g. Company / Contact. */
-export type ShellMegaMenuSimple = {
-  kind: "simple";
-  /** Section heading inside the panel. */
-  heading: string;
-  links: { href: string; label: string; desc?: string }[];
-};
-
 /** Products panel: rendered from LT_HOME series + our href map + optional featured card. */
 export type ShellMegaMenuProducts = {
   kind: "products";
@@ -54,10 +46,7 @@ export type ShellMegaMenuResources = {
   featured: ShellFeaturedCard;
 };
 
-export type ShellMegaMenu =
-  | ShellMegaMenuSimple
-  | ShellMegaMenuProducts
-  | ShellMegaMenuResources;
+export type ShellMegaMenu = ShellMegaMenuProducts | ShellMegaMenuResources;
 
 export type ShellFeaturedCard = {
   eyebrow: string;
@@ -211,7 +200,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             eyebrow: "대표 모델",
             title: "M3030VA",
             blurb: "반도체·디스플레이 공정을 위한 디지털 압전식 MFC.",
-            href: "/products/m3030va",
+            href: "/products/analogue-mfc/m3030va",
             cta: "상세 보기",
           },
         },
@@ -249,7 +238,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             eyebrow: "주목할 자료",
             title: "M3030VA 매뉴얼 · 카탈로그",
             blurb: "대표 모델의 전체 규격과 통신 프로토콜을 한 문서로.",
-            href: "/products/m3030va",
+            href: "/products/analogue-mfc/m3030va",
             cta: "M3030VA 자료",
           },
         },
@@ -374,7 +363,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             title: "M3030VA",
             blurb:
               "Digital piezo-actuated MFC for semiconductor and display process lines.",
-            href: "/products/m3030va",
+            href: "/products/analogue-mfc/m3030va",
             cta: "View product",
           },
         },
@@ -413,7 +402,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             title: "M3030VA manual + catalogue",
             blurb:
               "Full specs and Modbus protocol for our flagship digital MFC.",
-            href: "/products/m3030va",
+            href: "/products/analogue-mfc/m3030va",
             cta: "Open M3030VA",
           },
         },
@@ -527,7 +516,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             eyebrow: "重点型号",
             title: "M3030VA",
             blurb: "用于半导体与显示工艺的数字压电式质量流量控制器。",
-            href: "/products/m3030va",
+            href: "/products/analogue-mfc/m3030va",
             cta: "查看详情",
           },
         },
@@ -565,7 +554,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             eyebrow: "推荐资料",
             title: "M3030VA 手册 · 样册",
             blurb: "旗舰数字 MFC 的完整规格与 Modbus 协议说明。",
-            href: "/products/m3030va",
+            href: "/products/analogue-mfc/m3030va",
             cta: "打开 M3030VA",
           },
         },
