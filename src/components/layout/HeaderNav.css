@@ -1,0 +1,73 @@
+/* Line Tech — header nav row + items.
+ * Ported from docs/handoff/styles.css `.pd-top__nav` / `.pd-top__navitem` rules. */
+
+.pd-top__nav {
+  display: flex;
+  align-items: stretch;
+  gap: 2px;
+  margin-left: 16px;
+  height: 100%;
+}
+
+.pd-top__navitem {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font: 500 14px var(--lt-sans);
+  color: var(--pd-fg);
+  padding: 0 14px;
+  height: 100%;
+  position: relative;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.pd-top__navitem::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: -1px;
+  height: 2px;
+  background: var(--pd-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.pd-top__navitem:hover {
+  color: var(--pd-primary);
+}
+
+.pd-top__navitem:focus-visible {
+  outline: 2px solid var(--pd-primary);
+  outline-offset: -4px;
+  border-radius: 2px;
+}
+
+.pd-top__navitem.is-open {
+  color: var(--pd-primary);
+}
+.pd-top__navitem.is-open::after {
+  transform: scaleX(1);
+}
+
+.pd-top__navitem svg {
+  opacity: 0.55;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+.pd-top__navitem.is-open svg {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+@media (max-width: 1000px) {
+  .pd-top__nav {
+    display: none;
+  }
+}

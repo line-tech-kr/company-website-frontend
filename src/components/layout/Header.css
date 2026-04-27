@@ -1,0 +1,104 @@
+/* Line Tech — top bar shell.
+ * Ported from docs/handoff/styles.css `.pd-top` rules. */
+
+.pd-top {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--pd-bg);
+  border-bottom: 1px solid var(--pd-border);
+}
+.pd-top.is-menuopen {
+  z-index: 60;
+}
+
+.pd-top__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  transition: height 0.2s ease;
+}
+.pd-top.is-scrolled .pd-top__inner {
+  height: 60px;
+}
+
+.pd-top__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--pd-primary);
+  text-decoration: none;
+  flex: 0 0 auto;
+}
+.pd-top__brand:focus-visible {
+  outline: 2px solid var(--pd-primary);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.pd-top__logomark {
+  display: inline-flex;
+}
+.pd-top__logomark svg {
+  display: block;
+}
+
+.pd-top__wordmark {
+  font: 700 16px/1 var(--lt-sans);
+  letter-spacing: 0.01em;
+  color: var(--pd-fg-strong);
+}
+.pd-top__wordmark-dot {
+  color: var(--pd-primary);
+  padding: 0 2px;
+}
+
+.pd-top__right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+
+.pd-top__iconbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--pd-border);
+  background: var(--pd-surface);
+  color: var(--pd-fg);
+  border-radius: var(--pd-r-md);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+.pd-top__iconbtn:hover {
+  border-color: var(--pd-primary);
+  color: var(--pd-primary);
+}
+.pd-top__iconbtn:focus-visible {
+  outline: 2px solid var(--pd-primary);
+  outline-offset: 2px;
+}
+
+.pd-top__divider {
+  width: 1px;
+  height: 20px;
+  background: var(--pd-border);
+  display: inline-block;
+}
+
+@media (max-width: 1000px) {
+  .pd-top__inner {
+    padding: 0 16px;
+    gap: 12px;
+  }
+}

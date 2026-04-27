@@ -75,6 +75,8 @@ export type ShellFooter = {
 
 export type ShellContent = {
   nav: ShellNavItem[];
+  /** Top-right "Quote" button label in the header. Mailto target is shared. */
+  quoteLabel: string;
   footer: ShellFooter;
 };
 
@@ -116,9 +118,21 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           heading: "회사 안내",
           links: [
             { href: "/company", label: "인사말", desc: "CEO 메시지" },
-            { href: "/company/history", label: "연혁", desc: "1997년부터 현재까지" },
-            { href: "/company/certifications", label: "인증", desc: "ISO · CE · INNOBIZ 외" },
-            { href: "/company/location", label: "오시는 길", desc: "대전 본사 위치" },
+            {
+              href: "/company/history",
+              label: "연혁",
+              desc: "1997년부터 현재까지",
+            },
+            {
+              href: "/company/certifications",
+              label: "인증",
+              desc: "ISO · CE · INNOBIZ 외",
+            },
+            {
+              href: "/company/location",
+              label: "오시는 길",
+              desc: "대전 본사 위치",
+            },
           ],
         },
       },
@@ -148,10 +162,26 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           kind: "resources",
           heading: "자료실",
           links: [
-            { href: "/resources/catalogues", label: "카탈로그", desc: "제품군 별 PDF 카탈로그" },
-            { href: "/resources/drawings", label: "도면", desc: "AutoCAD (.dwg · .stp)" },
-            { href: "/resources/manuals", label: "매뉴얼", desc: "모델별 사용 설명서" },
-            { href: "/resources/certifications", label: "인증서", desc: "13종 인증 문서" },
+            {
+              href: "/resources/catalogues",
+              label: "카탈로그",
+              desc: "제품군 별 PDF 카탈로그",
+            },
+            {
+              href: "/resources/drawings",
+              label: "도면",
+              desc: "AutoCAD (.dwg · .stp)",
+            },
+            {
+              href: "/resources/manuals",
+              label: "매뉴얼",
+              desc: "모델별 사용 설명서",
+            },
+            {
+              href: "/resources/certifications",
+              label: "인증서",
+              desc: "13종 인증 문서",
+            },
           ],
           featured: {
             eyebrow: "주목할 자료",
@@ -170,14 +200,27 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           kind: "simple",
           heading: "문의 방법",
           links: [
-            { href: "/contact", label: "견적 요청", desc: "공정 조건을 알려주세요" },
-            { href: "/contact#support", label: "기술 문의", desc: "적합 모델 추천" },
-            { href: "mailto:linetech@line-tech.co.kr", label: "이메일", desc: "linetech@line-tech.co.kr" },
+            {
+              href: "/contact",
+              label: "견적 요청",
+              desc: "공정 조건을 알려주세요",
+            },
+            {
+              href: "/contact#support",
+              label: "기술 문의",
+              desc: "적합 모델 추천",
+            },
+            {
+              href: "mailto:linetech@line-tech.co.kr",
+              label: "이메일",
+              desc: "linetech@line-tech.co.kr",
+            },
             { href: "tel:+82426240700", label: "전화", desc: "042-624-0700" },
           ],
         },
       },
     ],
+    quoteLabel: "견적 요청",
     footer: {
       signoff: "1997년부터 정밀 질량유량 제어를 만들어 온 라인텍입니다.",
       address: "(34055) 대전광역시 유성구 대덕대로 806 · TEL 042-624-0700",
@@ -196,10 +239,26 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           kind: "simple",
           heading: "About Line Tech",
           links: [
-            { href: "/company", label: "Greeting", desc: "Message from the CEO" },
-            { href: "/company/history", label: "History", desc: "From 1997 to today" },
-            { href: "/company/certifications", label: "Certifications", desc: "ISO · CE · INNOBIZ and more" },
-            { href: "/company/location", label: "Location", desc: "Daejeon headquarters" },
+            {
+              href: "/company",
+              label: "Greeting",
+              desc: "Message from the CEO",
+            },
+            {
+              href: "/company/history",
+              label: "History",
+              desc: "From 1997 to today",
+            },
+            {
+              href: "/company/certifications",
+              label: "Certifications",
+              desc: "ISO · CE · INNOBIZ and more",
+            },
+            {
+              href: "/company/location",
+              label: "Location",
+              desc: "Daejeon headquarters",
+            },
           ],
         },
       },
@@ -215,7 +274,8 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           featured: {
             eyebrow: "Featured model",
             title: "M3030VA",
-            blurb: "Digital piezo-actuated MFC for semiconductor and display process lines.",
+            blurb:
+              "Digital piezo-actuated MFC for semiconductor and display process lines.",
             href: "/products/m3030va",
             cta: "View product",
           },
@@ -229,15 +289,32 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           kind: "resources",
           heading: "Resources",
           links: [
-            { href: "/resources/catalogues", label: "Catalogues", desc: "Series-level PDF catalogues" },
-            { href: "/resources/drawings", label: "CAD drawings", desc: "AutoCAD (.dwg · .stp)" },
-            { href: "/resources/manuals", label: "Manuals", desc: "Per-model user guides" },
-            { href: "/resources/certifications", label: "Certifications", desc: "13 certification documents" },
+            {
+              href: "/resources/catalogues",
+              label: "Catalogues",
+              desc: "Series-level PDF catalogues",
+            },
+            {
+              href: "/resources/drawings",
+              label: "CAD drawings",
+              desc: "AutoCAD (.dwg · .stp)",
+            },
+            {
+              href: "/resources/manuals",
+              label: "Manuals",
+              desc: "Per-model user guides",
+            },
+            {
+              href: "/resources/certifications",
+              label: "Certifications",
+              desc: "13 certification documents",
+            },
           ],
           featured: {
             eyebrow: "Spotlight",
             title: "M3030VA manual + catalogue",
-            blurb: "Full specs and Modbus protocol for our flagship digital MFC.",
+            blurb:
+              "Full specs and Modbus protocol for our flagship digital MFC.",
             href: "/products/m3030va",
             cta: "Open M3030VA",
           },
@@ -251,17 +328,35 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           kind: "simple",
           heading: "Get in touch",
           links: [
-            { href: "/contact", label: "Request quote", desc: "Share your process conditions" },
-            { href: "/contact#support", label: "Technical inquiry", desc: "Model recommendations" },
-            { href: "mailto:linetech@line-tech.co.kr", label: "Email", desc: "linetech@line-tech.co.kr" },
-            { href: "tel:+82426240700", label: "Phone", desc: "+82 42-624-0700" },
+            {
+              href: "/contact",
+              label: "Request quote",
+              desc: "Share your process conditions",
+            },
+            {
+              href: "/contact#support",
+              label: "Technical inquiry",
+              desc: "Model recommendations",
+            },
+            {
+              href: "mailto:linetech@line-tech.co.kr",
+              label: "Email",
+              desc: "linetech@line-tech.co.kr",
+            },
+            {
+              href: "tel:+82426240700",
+              label: "Phone",
+              desc: "+82 42-624-0700",
+            },
           ],
         },
       },
     ],
+    quoteLabel: "Quote",
     footer: {
       signoff: "Building precision mass-flow control since 1997.",
-      address: "806 Daedeok-daero, Yuseong-gu, Daejeon 34055, Korea · TEL +82 42-624-0700",
+      address:
+        "806 Daedeok-daero, Yuseong-gu, Daejeon 34055, Korea · TEL +82 42-624-0700",
       rights: "© 2026 Line Tech Inc. All rights reserved.",
       version: SHELL_VERSION,
     },
@@ -278,9 +373,21 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           heading: "关于莱因",
           links: [
             { href: "/company", label: "问候语", desc: "CEO 致辞" },
-            { href: "/company/history", label: "发展历程", desc: "自 1997 年至今" },
-            { href: "/company/certifications", label: "资质认证", desc: "ISO · CE · INNOBIZ 等" },
-            { href: "/company/location", label: "联系地址", desc: "大田总部位置" },
+            {
+              href: "/company/history",
+              label: "发展历程",
+              desc: "自 1997 年至今",
+            },
+            {
+              href: "/company/certifications",
+              label: "资质认证",
+              desc: "ISO · CE · INNOBIZ 等",
+            },
+            {
+              href: "/company/location",
+              label: "联系地址",
+              desc: "大田总部位置",
+            },
           ],
         },
       },
@@ -310,10 +417,26 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           kind: "resources",
           heading: "技术资料",
           links: [
-            { href: "/resources/catalogues", label: "产品样册", desc: "系列 PDF 样册" },
-            { href: "/resources/drawings", label: "CAD 图纸", desc: "AutoCAD (.dwg · .stp)" },
-            { href: "/resources/manuals", label: "使用手册", desc: "按型号分类的说明书" },
-            { href: "/resources/certifications", label: "认证文件", desc: "13 份认证文件" },
+            {
+              href: "/resources/catalogues",
+              label: "产品样册",
+              desc: "系列 PDF 样册",
+            },
+            {
+              href: "/resources/drawings",
+              label: "CAD 图纸",
+              desc: "AutoCAD (.dwg · .stp)",
+            },
+            {
+              href: "/resources/manuals",
+              label: "使用手册",
+              desc: "按型号分类的说明书",
+            },
+            {
+              href: "/resources/certifications",
+              label: "认证文件",
+              desc: "13 份认证文件",
+            },
           ],
           featured: {
             eyebrow: "推荐资料",
@@ -334,15 +457,25 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           links: [
             { href: "/contact", label: "申请报价", desc: "告知您的工艺条件" },
             { href: "/contact#support", label: "技术咨询", desc: "型号推荐" },
-            { href: "mailto:linetech@line-tech.co.kr", label: "邮箱", desc: "linetech@line-tech.co.kr" },
-            { href: "tel:+82426240700", label: "电话", desc: "+82 42-624-0700" },
+            {
+              href: "mailto:linetech@line-tech.co.kr",
+              label: "邮箱",
+              desc: "linetech@line-tech.co.kr",
+            },
+            {
+              href: "tel:+82426240700",
+              label: "电话",
+              desc: "+82 42-624-0700",
+            },
           ],
         },
       },
     ],
+    quoteLabel: "申请报价",
     footer: {
       signoff: "自 1997 年起专注于精密质量流量控制。",
-      address: "韩国大田广域市儒城区大德大路 806 号 (34055) · TEL +82 42-624-0700",
+      address:
+        "韩国大田广域市儒城区大德大路 806 号 (34055) · TEL +82 42-624-0700",
       rights: "© 2026 株式会社莱因。保留所有权利。",
       version: SHELL_VERSION,
     },
