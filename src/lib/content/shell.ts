@@ -106,12 +106,36 @@ export type ProductsCategory = {
   href: string;
 };
 
+/**
+ * Header search panel copy. Visual-shell only today (#8) — wiring lands
+ * in phase 2. Quick chips are inert buttons and currently route nowhere;
+ * they exist to telegraph that this is a real search surface.
+ */
+export type ShellSearch = {
+  /** aria-label for the header search trigger icon button. */
+  openLabel: string;
+  /** Visible heading rendered at the top of the panel. */
+  heading: string;
+  /** aria-label for the search input (visually-hidden label). */
+  inputLabel: string;
+  /** Placeholder text shown inside the empty input. */
+  inputPlaceholder: string;
+  /** aria-label for the panel's close button. */
+  closeLabel: string;
+  /** Small label rendered above the quick-chip row, e.g. "Popular". */
+  quickChipsHeading: string;
+  /** 4–6 inert chips. `id` is locale-independent for tracking later. */
+  quickChips: { id: string; label: string }[];
+};
+
 export type ShellContent = {
   nav: ShellNavItem[];
   /** Top-right "Quote" button label in the header. Mailto target is shared. */
   quoteLabel: string;
   /** Function-based product categories — 4 entries, locked taxonomy. */
   productsCategories: ProductsCategory[];
+  /** Header search panel copy (#8). */
+  search: ShellSearch;
   footer: ShellFooter;
 };
 
@@ -282,6 +306,21 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         href: "/products/specialized",
       },
     ],
+    search: {
+      openLabel: "검색 열기",
+      heading: "사이트 검색",
+      inputLabel: "제품, 자료, 모델명을 검색",
+      inputPlaceholder: "예: M3030VA, 카탈로그, 디지털 MFC",
+      closeLabel: "검색 닫기",
+      quickChipsHeading: "자주 찾는 항목",
+      quickChips: [
+        { id: "m3030va", label: "M3030VA" },
+        { id: "digital-mfc", label: "디지털 MFC" },
+        { id: "catalogue", label: "카탈로그 PDF" },
+        { id: "calibration", label: "교정" },
+        { id: "certifications", label: "인증서" },
+      ],
+    },
     footer: {
       signoff: "정밀 질량유량 솔루션",
       contact: {
@@ -451,6 +490,21 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         href: "/products/specialized",
       },
     ],
+    search: {
+      openLabel: "Open search",
+      heading: "Search the site",
+      inputLabel: "Search products, resources, models",
+      inputPlaceholder: "Try M3030VA, catalogue, digital MFC",
+      closeLabel: "Close search",
+      quickChipsHeading: "Popular",
+      quickChips: [
+        { id: "m3030va", label: "M3030VA" },
+        { id: "digital-mfc", label: "Digital MFC" },
+        { id: "catalogue", label: "Catalogue PDF" },
+        { id: "calibration", label: "Calibration" },
+        { id: "certifications", label: "Certifications" },
+      ],
+    },
     footer: {
       signoff: "Mass Flow Solutions",
       contact: {
@@ -601,6 +655,21 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         href: "/products/specialized",
       },
     ],
+    search: {
+      openLabel: "打开搜索",
+      heading: "站内搜索",
+      inputLabel: "搜索产品、资料、型号",
+      inputPlaceholder: "如：M3030VA、产品样册、数字 MFC",
+      closeLabel: "关闭搜索",
+      quickChipsHeading: "热门搜索",
+      quickChips: [
+        { id: "m3030va", label: "M3030VA" },
+        { id: "digital-mfc", label: "数字 MFC" },
+        { id: "catalogue", label: "产品样册 PDF" },
+        { id: "calibration", label: "校准" },
+        { id: "certifications", label: "认证文件" },
+      ],
+    },
     footer: {
       signoff: "精密质量流量解决方案",
       contact: {
