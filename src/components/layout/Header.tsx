@@ -6,6 +6,7 @@ import { HeaderShell } from "./HeaderShell";
 import { HeaderNav } from "./HeaderNav";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { Logomark } from "./Logomark";
+import { SearchTriggerButton } from "./SearchTriggerButton";
 import "./Header.css";
 
 type Props = { locale: Locale };
@@ -14,7 +15,7 @@ export function Header({ locale }: Props) {
   const shell = LT_SHELL[locale];
 
   return (
-    <HeaderShell>
+    <HeaderShell search={shell.search}>
       <div className="pd-top__inner">
         <Link href="/" className="pd-top__brand" aria-label="Line Tech">
           <span className="pd-top__logomark">
@@ -32,30 +33,7 @@ export function Header({ locale }: Props) {
         <HeaderNav items={shell.nav} />
 
         <div className="pd-top__right">
-          {/* TODO(#8): wire to SearchPanel */}
-          <button type="button" className="pd-top__iconbtn" aria-label="Search">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              aria-hidden="true"
-            >
-              <circle
-                cx="7"
-                cy="7"
-                r="4.5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-              />
-              <path
-                d="M11 11l3 3"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-            </svg>
-          </button>
+          <SearchTriggerButton label={shell.search.openLabel} />
           <span className="pd-top__divider" aria-hidden="true" />
           <LocaleSwitcher />
           <Button
