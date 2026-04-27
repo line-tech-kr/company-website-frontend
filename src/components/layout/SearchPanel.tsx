@@ -119,32 +119,23 @@ export function SearchPanel({ content, open, onClose, triggerRef }: Props) {
         onKeyDown={handleKeyDown}
       >
         <div className="pd-search__inner">
-          <div className="pd-search__row">
-            <h2 id={headingId} className="pd-search__heading">
-              {content.heading}
-            </h2>
-            <button
-              type="button"
-              className="pd-search__close"
-              aria-label={content.closeLabel}
-              onClick={onClose}
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                aria-hidden="true"
-              >
-                <path
-                  d="M4 4l8 8M12 4l-8 8"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </button>
-          </div>
+          <h2 id={headingId} className="pd-search__sr">
+            {content.heading}
+          </h2>
+
+          <ul className="pd-search__chip-list">
+            {content.quickChips.map((chip) => (
+              <li key={chip.id}>
+                <button
+                  type="button"
+                  className="pd-search__chip"
+                  data-chip-id={chip.id}
+                >
+                  {chip.label}
+                </button>
+              </li>
+            ))}
+          </ul>
 
           <form
             className="pd-search__form"
@@ -155,7 +146,7 @@ export function SearchPanel({ content, open, onClose, triggerRef }: Props) {
               {content.inputLabel}
             </label>
             <span className="pd-search__icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
                 <circle
                   cx="8"
                   cy="8"
@@ -182,25 +173,6 @@ export function SearchPanel({ content, open, onClose, triggerRef }: Props) {
               onChange={(e) => setValue(e.target.value)}
             />
           </form>
-
-          <div className="pd-search__chips">
-            <p className="pd-search__chips-heading">
-              {content.quickChipsHeading}
-            </p>
-            <ul className="pd-search__chip-list">
-              {content.quickChips.map((chip) => (
-                <li key={chip.id}>
-                  <button
-                    type="button"
-                    className="pd-search__chip"
-                    data-chip-id={chip.id}
-                  >
-                    {chip.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
       </div>
     </div>

@@ -114,16 +114,12 @@ export type ProductsCategory = {
 export type ShellSearch = {
   /** aria-label for the header search trigger icon button. */
   openLabel: string;
-  /** Visible heading rendered at the top of the panel. */
+  /** Dialog accessible name (visually-hidden, exposed via aria-labelledby). */
   heading: string;
   /** aria-label for the search input (visually-hidden label). */
   inputLabel: string;
   /** Placeholder text shown inside the empty input. */
   inputPlaceholder: string;
-  /** aria-label for the panel's close button. */
-  closeLabel: string;
-  /** Small label rendered above the quick-chip row, e.g. "Popular". */
-  quickChipsHeading: string;
   /** 4–6 inert chips. `id` is locale-independent for tracking later. */
   quickChips: { id: string; label: string }[];
 };
@@ -311,8 +307,6 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
       heading: "사이트 검색",
       inputLabel: "제품, 자료, 모델명을 검색",
       inputPlaceholder: "예: M3030VA, 카탈로그, 디지털 MFC",
-      closeLabel: "검색 닫기",
-      quickChipsHeading: "자주 찾는 항목",
       quickChips: [
         { id: "m3030va", label: "M3030VA" },
         { id: "digital-mfc", label: "디지털 MFC" },
@@ -495,8 +489,6 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
       heading: "Search the site",
       inputLabel: "Search products, resources, models",
       inputPlaceholder: "Try M3030VA, catalogue, digital MFC",
-      closeLabel: "Close search",
-      quickChipsHeading: "Popular",
       quickChips: [
         { id: "m3030va", label: "M3030VA" },
         { id: "digital-mfc", label: "Digital MFC" },
@@ -660,8 +652,6 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
       heading: "站内搜索",
       inputLabel: "搜索产品、资料、型号",
       inputPlaceholder: "如：M3030VA、产品样册、数字 MFC",
-      closeLabel: "关闭搜索",
-      quickChipsHeading: "热门搜索",
       quickChips: [
         { id: "m3030va", label: "M3030VA" },
         { id: "digital-mfc", label: "数字 MFC" },
