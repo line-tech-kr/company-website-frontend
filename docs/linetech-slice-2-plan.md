@@ -75,7 +75,7 @@ Design handoff uses a generic square-with-cross SVG as a placeholder. Real Line 
 
 Plan originally specced 5 homepage category cards (title + count + image). The design's **Series section** (4 cards: M/MS, MD, LD/LM, LTI) covers this need. Dropping the separate category-grid spec — Series IS the category grid.
 
-✅ **Resolved (2026-04-24):** catalog taxonomy is **5 (function × type)** — Analogue MFC, Digital MFC, MFM, Specialized, and one more per catalog audit. Buyers shop by function ("I need a digital MFC"), not by internal SKU series (M/MD/LD/LTI mean nothing to new customers). Series stays as a filter/facet *within* a category, not as the category itself. Homepage Series section keeps the design's 4-series visual as a secondary entry point; category pages route on the 5-way function taxonomy.
+✅ **Resolved (2026-04-24, refined 2026-04-26):** catalog taxonomy is **4 (function × type)** — Analogue MFC, Digital MFC, MFM, Specialized. Buyers shop by function ("I need a digital MFC"), not by internal SKU series (M/MD/LD/LTI mean nothing to new customers). Series stays as a filter/facet *within* a category, not as the category itself. Homepage Series section keeps the design's 4-series visual as a secondary entry point; mega-menu and category pages route on the 4-way function taxonomy. Accessories (LTI readouts, FC-050S, PR-030) surface as a callout block on the `/products` index page rather than as a top-level category — too few SKUs to earn nav real-estate, and they're system support rather than peer to MFC/MFM.
 
 ---
 

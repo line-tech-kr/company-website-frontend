@@ -3,9 +3,11 @@
  *
  * Conventions:
  *  - One typed object per locale, same shape as `LT_HOME` in `./home.ts`.
- *  - Products mega-menu is **derived** from `LT_HOME[locale].series.items` — we
- *    don't duplicate series copy here. We only supply per-series `href`s keyed
- *    by series `code` (see `PRODUCTS_SERIES_HREFS` below).
+ *  - Products mega-menu reads `productsCategories` (4 function-based buckets
+ *    per the locked taxonomy in `docs/linetech-slice-2-plan.md`), NOT the
+ *    homepage's 4-series SKU visual. The two are intentionally decoupled.
+ *  - `PRODUCTS_SERIES_HREFS` / `getProductsSeriesEntries()` exist solely to
+ *    drive the homepage Series section as a secondary entry point.
  *  - Consumed by: Header (#6), Footer (#4), MegaMenu (#7). Keep labels here,
  *    layout decisions in the components.
  */
@@ -91,10 +93,25 @@ export type ShellFooter = {
   version: string;
 };
 
+/**
+ * One of the 4 function-based product categories (Analogue MFC / Digital MFC /
+ * MFM / Specialized). Drives the Products mega-menu and `/products/[category]`
+ * routes. Slug is locale-independent; label/desc are localized.
+ */
+export type ProductsCategory = {
+  /** Stable slug: "analogue-mfc" | "digital-mfc" | "mfm" | "specialized". */
+  code: string;
+  label: string;
+  desc: string;
+  href: string;
+};
+
 export type ShellContent = {
   nav: ShellNavItem[];
   /** Top-right "Quote" button label in the header. Mailto target is shared. */
   quoteLabel: string;
+  /** Function-based product categories — 4 entries, locked taxonomy. */
+  productsCategories: ProductsCategory[];
   footer: ShellFooter;
 };
 
@@ -239,6 +256,32 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
       },
     ],
     quoteLabel: "견적 요청",
+    productsCategories: [
+      {
+        code: "analogue-mfc",
+        label: "아날로그 MFC",
+        desc: "M · MS 시리즈 아날로그 질량유량 제어기",
+        href: "/products/analogue-mfc",
+      },
+      {
+        code: "digital-mfc",
+        label: "디지털 MFC",
+        desc: "RS-485 통신 기반 MD 시리즈",
+        href: "/products/digital-mfc",
+      },
+      {
+        code: "mfm",
+        label: "MFM (질량유량계)",
+        desc: "전 시리즈 질량유량계 라인업",
+        href: "/products/mfm",
+      },
+      {
+        code: "specialized",
+        label: "특수 사양",
+        desc: "방폭 · 디스플레이 일체형 · 저가형 MEMS",
+        href: "/products/specialized",
+      },
+    ],
     footer: {
       signoff: "정밀 질량유량 솔루션",
       contact: {
@@ -382,6 +425,32 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
       },
     ],
     quoteLabel: "Quote",
+    productsCategories: [
+      {
+        code: "analogue-mfc",
+        label: "Analogue MFC",
+        desc: "M / MS series — proven analogue controllers",
+        href: "/products/analogue-mfc",
+      },
+      {
+        code: "digital-mfc",
+        label: "Digital MFC",
+        desc: "MD series with RS-485 communications",
+        href: "/products/digital-mfc",
+      },
+      {
+        code: "mfm",
+        label: "MFM (Mass Flow Meters)",
+        desc: "Flow meters across every series",
+        href: "/products/mfm",
+      },
+      {
+        code: "specialized",
+        label: "Specialized",
+        desc: "Explosion-proof, integrated display, low-cost MEMS",
+        href: "/products/specialized",
+      },
+    ],
     footer: {
       signoff: "Mass Flow Solutions",
       contact: {
@@ -506,6 +575,32 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
       },
     ],
     quoteLabel: "申请报价",
+    productsCategories: [
+      {
+        code: "analogue-mfc",
+        label: "模拟 MFC",
+        desc: "M · MS 系列模拟质量流量控制器",
+        href: "/products/analogue-mfc",
+      },
+      {
+        code: "digital-mfc",
+        label: "数字 MFC",
+        desc: "MD 系列，RS-485 通讯",
+        href: "/products/digital-mfc",
+      },
+      {
+        code: "mfm",
+        label: "MFM (质量流量计)",
+        desc: "全系列质量流量计产品",
+        href: "/products/mfm",
+      },
+      {
+        code: "specialized",
+        label: "特殊型号",
+        desc: "防爆 · 集成显示 · 低成本 MEMS",
+        href: "/products/specialized",
+      },
+    ],
     footer: {
       signoff: "精密质量流量解决方案",
       contact: {
@@ -527,11 +622,18 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
 };
 
 /**
- * Helper: resolve the Products mega-menu series list for a locale by joining
- * `LT_HOME[locale].series.items` (copy) with `PRODUCTS_SERIES_HREFS` (routes).
- *
- * Keeps series copy single-sourced in `home.ts`. Header/MegaMenu components
- * should call this rather than duplicating the series list.
+ * Helper: products mega-menu category list for a locale. The 4-way function
+ * taxonomy (Analogue MFC / Digital MFC / MFM / Specialized) — primary entry
+ * point used by Header (#6) / MegaMenu (#7) / category pages (#9).
+ */
+export function getProductsCategories(locale: Locale): ProductsCategory[] {
+  return LT_SHELL[locale].productsCategories;
+}
+
+/**
+ * Helper: homepage Series section entries (4 SKU-coded cards). Secondary
+ * entry point — kept for the design's homepage visual only. Mega-menu and
+ * category routing use `getProductsCategories()` instead.
  */
 export function getProductsSeriesEntries(locale: Locale) {
   return LT_HOME[locale].series.items.map((item) => ({
