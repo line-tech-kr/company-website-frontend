@@ -124,9 +124,7 @@ describe("MegaMenu", () => {
     expect(panel).toHaveClass("is-open");
 
     ["Greeting", "History", "Certifications", "Location"].forEach((label) => {
-      expect(
-        within(panel as HTMLElement).getByText(label),
-      ).toBeInTheDocument();
+      expect(within(panel as HTMLElement).getByText(label)).toBeInTheDocument();
     });
     expect(
       within(panel as HTMLElement).getByText(/13 certifications/i),
