@@ -169,7 +169,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         href: "/company",
         label: "회사소개",
         menu: {
-          kind: "simple",
+          kind: "resources",
           heading: "회사 안내",
           links: [
             { href: "/company", label: "인사말", desc: "CEO 메시지" },
@@ -189,6 +189,13 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               desc: "대전 본사 위치",
             },
           ],
+          featured: {
+            eyebrow: "신뢰",
+            title: "13종 인증",
+            blurb: "ISO 9001 · CE · INNOBIZ · RoHS / REACH 외 9종.",
+            href: "/company/certifications",
+            cta: "전체 인증 보기",
+          },
         },
       },
       {
@@ -251,28 +258,6 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         id: "contact",
         href: "/contact",
         label: "문의",
-        menu: {
-          kind: "simple",
-          heading: "문의 방법",
-          links: [
-            {
-              href: "/contact",
-              label: "견적 요청",
-              desc: "공정 조건을 알려주세요",
-            },
-            {
-              href: "/contact#support",
-              label: "기술 문의",
-              desc: "적합 모델 추천",
-            },
-            {
-              href: "mailto:linetech@line-tech.co.kr",
-              label: "이메일",
-              desc: "linetech@line-tech.co.kr",
-            },
-            { href: "tel:+82426240700", label: "전화", desc: "042-624-0700" },
-          ],
-        },
       },
     ],
     quoteLabel: "견적 요청",
@@ -341,7 +326,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         href: "/company",
         label: "Company",
         menu: {
-          kind: "simple",
+          kind: "resources",
           heading: "About Line Tech",
           links: [
             {
@@ -365,6 +350,14 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               desc: "Daejeon headquarters",
             },
           ],
+          featured: {
+            eyebrow: "Trust",
+            title: "13 certifications",
+            blurb:
+              "ISO 9001, CE, INNOBIZ, RoHS / REACH and 9 more — the full set procurement teams ask for.",
+            href: "/company/certifications",
+            cta: "View all certifications",
+          },
         },
       },
       {
@@ -429,32 +422,6 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         id: "contact",
         href: "/contact",
         label: "Contact",
-        menu: {
-          kind: "simple",
-          heading: "Get in touch",
-          links: [
-            {
-              href: "/contact",
-              label: "Request quote",
-              desc: "Share your process conditions",
-            },
-            {
-              href: "/contact#support",
-              label: "Technical inquiry",
-              desc: "Model recommendations",
-            },
-            {
-              href: "mailto:linetech@line-tech.co.kr",
-              label: "Email",
-              desc: "linetech@line-tech.co.kr",
-            },
-            {
-              href: "tel:+82426240700",
-              label: "Phone",
-              desc: "+82 42-624-0700",
-            },
-          ],
-        },
       },
     ],
     quoteLabel: "Quote",
@@ -518,7 +485,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         href: "/company",
         label: "公司介绍",
         menu: {
-          kind: "simple",
+          kind: "resources",
           heading: "关于莱因",
           links: [
             { href: "/company", label: "问候语", desc: "CEO 致辞" },
@@ -538,6 +505,13 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               desc: "大田总部位置",
             },
           ],
+          featured: {
+            eyebrow: "信赖",
+            title: "13 项资质认证",
+            blurb: "ISO 9001 · CE · INNOBIZ · RoHS / REACH 等 13 项认证文件。",
+            href: "/company/certifications",
+            cta: "查看全部认证",
+          },
         },
       },
       {
@@ -600,24 +574,6 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         id: "contact",
         href: "/contact",
         label: "联系",
-        menu: {
-          kind: "simple",
-          heading: "联系我们",
-          links: [
-            { href: "/contact", label: "申请报价", desc: "告知您的工艺条件" },
-            { href: "/contact#support", label: "技术咨询", desc: "型号推荐" },
-            {
-              href: "mailto:linetech@line-tech.co.kr",
-              label: "邮箱",
-              desc: "linetech@line-tech.co.kr",
-            },
-            {
-              href: "tel:+82426240700",
-              label: "电话",
-              desc: "+82 42-624-0700",
-            },
-          ],
-        },
       },
     ],
     quoteLabel: "申请报价",

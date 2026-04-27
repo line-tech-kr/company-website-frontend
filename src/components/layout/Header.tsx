@@ -6,6 +6,7 @@ import { HeaderShell } from "./HeaderShell";
 import { HeaderNav } from "./HeaderNav";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { Logomark } from "./Logomark";
+import { MegaMenu, MegaMenuScrim } from "./MegaMenu";
 import { SearchTriggerButton } from "./SearchTriggerButton";
 import "./Header.css";
 
@@ -46,6 +47,8 @@ export function Header({ locale }: Props) {
           </Button>
         </div>
       </div>
+      <MegaMenu items={shell.nav} locale={locale} />
+      <MegaMenuScrim />
     </HeaderShell>
   );
 }
