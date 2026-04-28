@@ -16,14 +16,14 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 32px;
-  height: 72px;
+  height: 56px;
   display: flex;
   align-items: center;
   gap: 28px;
   transition: height 0.2s ease;
 }
 .pd-top.is-scrolled .pd-top__inner {
-  height: 60px;
+  height: 48px;
 }
 
 .pd-top__brand {
@@ -50,10 +50,10 @@
 .pd-top__wordmark {
   font: 700 16px/1 var(--lt-sans);
   letter-spacing: 0.01em;
-  color: var(--pd-fg-strong);
+  color: var(--pd-primary);
 }
 .pd-top__wordmark-dot {
-  color: var(--pd-primary);
+  color: var(--pd-accent);
   padding: 0 2px;
 }
 
