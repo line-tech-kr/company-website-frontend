@@ -40,7 +40,9 @@ function renderNav(ctx: HeaderNavCtx) {
 describe("HeaderNav", () => {
   it("renders menu items as buttons and non-menu items as links", () => {
     const { container } = renderNav(stubCtx());
-    const products = container.querySelector('[aria-controls="pd-mega-products"]');
+    const products = container.querySelector(
+      '[aria-controls="pd-mega-products"]',
+    );
     expect(products?.tagName).toBe("BUTTON");
     expect(products).toHaveAttribute("aria-haspopup", "true");
     expect(products).toHaveAttribute("aria-expanded", "false");
@@ -64,9 +66,7 @@ describe("HeaderNav", () => {
 
   it("clicking an open menu button closes it", () => {
     const setOpenId = vi.fn();
-    const { container } = renderNav(
-      stubCtx({ openId: "products", setOpenId }),
-    );
+    const { container } = renderNav(stubCtx({ openId: "products", setOpenId }));
     const btn = container.querySelector(
       '[aria-controls="pd-mega-products"]',
     ) as HTMLButtonElement;
