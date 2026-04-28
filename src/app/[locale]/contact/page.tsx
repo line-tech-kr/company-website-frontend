@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Button } from "@/components/ui/Button";
@@ -19,6 +20,15 @@ const MAP_EMBED_URLS: Record<Locale, string> = {
 
 type Props = { params: Promise<{ locale: Locale }> };
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const c = LT_CONTACT[locale];
+  return {
+    title: `${c.title} — Line Tech`,
+    description: c.lede,
+  };
+}
+
 export default async function ContactPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -37,13 +47,17 @@ export default async function ContactPage({ params }: Props) {
   // localized so the map's labels match the locale. Deep link follows the
   // visitor's natural map preference: Naver for KR, Google for EN/ZH.
   const mapEmbedUrl = MAP_EMBED_URLS[locale];
+  // Naver search rejects the parenthetical postal-code suffix LT_SHELL keeps
+  // on the KO address ("… 806 (34055)") — strip it before encoding.
+  const naverQuery = LT_SHELL.ko.footer.contact.address.replace(
+    /\s*\(\d+\)\s*$/,
+    "",
+  );
   const mapOpenUrl =
     locale === "ko"
-      ? `https://map.naver.com/p/search/${encodeURIComponent(
-          "대전광역시 유성구 대덕대로 806",
-        )}`
+      ? `https://map.naver.com/p/search/${encodeURIComponent(naverQuery)}`
       : `https://maps.google.com/maps?q=${encodeURIComponent(
-          "806 Daedeok-daero, Yuseong-gu, Daejeon 34055, Korea",
+          LT_SHELL.en.footer.contact.address,
         )}`;
 
   return (
@@ -61,9 +75,7 @@ export default async function ContactPage({ params }: Props) {
             <h2 id="ct-form-heading" className="ct-form__heading">
               {form.heading}
             </h2>
-            <p className="ct-form__notice" role="status">
-              {form.notice}
-            </p>
+            <p className="ct-form__notice">{form.notice}</p>
 
             <ContactForm form={form} privacyNotice={c.privacyNotice} />
           </section>
@@ -83,7 +95,7 @@ export default async function ContactPage({ params }: Props) {
               <li className="ct-info__row">
                 <span className="ct-info__label">{c.phoneLabel}</span>
                 <span className="ct-info__value">
-                  <a href={`tel:${info.phone.replace(/\s+/g, "")}`}>
+                  <a href={`tel:${info.phone.replace(/[^\d+]/g, "")}`}>
                     {info.phone}
                   </a>
                 </span>
@@ -152,6 +164,7 @@ export default async function ContactPage({ params }: Props) {
               src={mapEmbedUrl}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
             />
           </div>
           <a
