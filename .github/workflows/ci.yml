@@ -40,4 +40,7 @@ jobs:
         run: pnpm test:run
 
       - name: Build
+        env:
+          NEXT_PUBLIC_SANITY_PROJECT_ID: 9ped5k0o
+          NEXT_PUBLIC_SANITY_DATASET: production
         run: pnpm build
