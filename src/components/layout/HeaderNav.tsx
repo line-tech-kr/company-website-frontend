@@ -20,24 +20,21 @@ export function HeaderNav({ items }: Props) {
         const isOpen = openId === item.id;
         const hasMenu = !!item.menu;
         const cls = `pd-top__navitem${isOpen ? " is-open" : ""}`;
-        const handleEnter = () => {
-          if (hasMenu) onItemEnter(item.id);
-        };
-        const handleFocus = () => {
-          if (hasMenu) setOpenId(item.id);
-        };
-        return (
-          <Link
-            key={item.id}
-            href={item.href}
-            className={cls}
-            aria-haspopup={hasMenu ? "true" : undefined}
-            aria-expanded={hasMenu ? isOpen : undefined}
-            onMouseEnter={handleEnter}
-            onFocus={handleFocus}
-          >
-            {item.label}
-            {hasMenu && (
+
+        if (hasMenu) {
+          return (
+            <button
+              key={item.id}
+              type="button"
+              className={cls}
+              aria-haspopup="true"
+              aria-expanded={isOpen}
+              aria-controls={`pd-mega-${item.id}`}
+              onMouseEnter={() => onItemEnter(item.id)}
+              onFocus={() => setOpenId(item.id)}
+              onClick={() => setOpenId(isOpen ? null : item.id)}
+            >
+              {item.label}
               <svg
                 width="10"
                 height="10"
@@ -52,7 +49,21 @@ export function HeaderNav({ items }: Props) {
                   strokeLinecap="round"
                 />
               </svg>
-            )}
+            </button>
+          );
+        }
+
+        // Cursor moving from a menu trigger to a no-menu sibling never fires
+        // the nav's onMouseLeave; trigger close-grace here so the open panel
+        // doesn't linger.
+        return (
+          <Link
+            key={item.id}
+            href={item.href}
+            className={cls}
+            onMouseEnter={onItemLeave}
+          >
+            {item.label}
           </Link>
         );
       })}
