@@ -16,7 +16,8 @@
     "format:check": "prettier --check .",
     "test": "vitest",
     "test:run": "vitest run",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "seed:products": "tsx scripts/seed-products.ts"
   },
   "dependencies": {
     "@sanity/client": "^7.22.0",
