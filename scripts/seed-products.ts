@@ -9,7 +9,7 @@ import type {
 function loadEnv(path: string) {
   for (const line of readFileSync(path, "utf-8").split("\n")) {
     const m = line.match(/^([A-Z_][A-Z0-9_]*)=(.*)$/);
-    if (m) process.env[m[1]] ??= m[2];
+    if (m) process.env[m[1]] ??= m[2].trimEnd();
   }
 }
 
@@ -44,10 +44,8 @@ function localizedToArray(loc: LocalizedString) {
   ];
 }
 
-function productToDoc(p: Product) {
-  const doc: Record<string, unknown> = {
-    _id: `product-${p.slug.current}`,
-    _type: "product",
+function productToSeedFields(p: Product) {
+  const fields: Record<string, unknown> = {
     model: p.model,
     slug: p.slug,
     series: p.series,
@@ -58,9 +56,9 @@ function productToDoc(p: Product) {
     massFlowSpecs: p.massFlowSpecs,
   };
   if (p.digitalCommunication) {
-    doc.digitalCommunication = p.digitalCommunication;
+    fields.digitalCommunication = p.digitalCommunication;
   }
-  return doc;
+  return fields;
 }
 
 async function main() {
@@ -69,13 +67,18 @@ async function main() {
   );
 
   for (const product of ALL_PRODUCTS) {
-    const doc = productToDoc(product);
+    const _id = `product-${product.slug.current}`;
+    const fields = productToSeedFields(product);
     try {
+      await client.createIfNotExists({
+        _id,
+        _type: "product",
+        ...fields,
+      } as Parameters<typeof client.createIfNotExists>[0]);
       if (force) {
-        await client.createOrReplace(doc as Parameters<typeof client.createOrReplace>[0]);
-        console.log(`  replaced ${product.model}`);
+        await client.patch(_id).set(fields).commit();
+        console.log(`  patched  ${product.model}`);
       } else {
-        await client.createIfNotExists(doc as Parameters<typeof client.createIfNotExists>[0]);
         console.log(`  ensured  ${product.model}`);
       }
     } catch (err) {

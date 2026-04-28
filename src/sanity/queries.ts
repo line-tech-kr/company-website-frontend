@@ -7,9 +7,9 @@ export const productBySlugQuery = defineQuery(`
     series,
     "function": function,
     "productLabel": {
-      "ko": productLabel[language == "ko"][0].value,
-      "en": productLabel[language == "en"][0].value,
-      "zh": productLabel[language == "zh"][0].value
+      "ko": coalesce(productLabel[language == "ko"][0].value, productLabel[language == "en"][0].value),
+      "en": coalesce(productLabel[language == "en"][0].value, productLabel[language == "ko"][0].value),
+      "zh": coalesce(productLabel[language == "zh"][0].value, productLabel[language == "en"][0].value)
     },
     features,
     connections,
