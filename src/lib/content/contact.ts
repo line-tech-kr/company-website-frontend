@@ -121,7 +121,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
         name: "홍길동",
         email: "name@company.com",
         company: "(주)회사명",
-        phone: "010-0000-0000",
+        phone: "+82 10-0000-0000",
         subject: "예: 견적 요청, 기술 문의, 협력 제안",
         message:
           "어떤 도움이 필요하신지 자세히 적어주세요. 제품 문의라면 가스 종류·유량 범위 등 공정 조건을 함께 알려주시면 더 빠르게 안내드릴 수 있습니다.",
