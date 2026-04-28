@@ -1,13 +1,21 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
-import { M3030VA } from "@/lib/fixtures/products";
-import type { MassFlowSpecs } from "@/lib/types/product";
+import { sanityClient } from "@/sanity/client";
+import { productBySlugQuery } from "@/sanity/queries";
+import type { MassFlowSpecs, Product } from "@/lib/types/product";
 
 type Props = { params: Promise<{ locale: string }> };
 
 export default async function ProductPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+
+  const product = (await sanityClient.fetch(productBySlugQuery, {
+    slug: "m3030va",
+  })) as Product | null;
+
+  if (!product) notFound();
 
   const [t, tDownloads, tCommon, tNav, tCategories] = await Promise.all([
     getTranslations("product.specs"),
@@ -17,7 +25,6 @@ export default async function ProductPage({ params }: Props) {
     getTranslations("breadcrumbs.categories"),
   ]);
 
-  const product = M3030VA;
   const specEntries = Object.entries(product.massFlowSpecs) as Array<
     [keyof MassFlowSpecs, { display: string }]
   >;
@@ -34,8 +41,8 @@ export default async function ProductPage({ params }: Props) {
       <Breadcrumbs items={breadcrumbs} />
       <h1>{product.model}</h1>
       <p>
-        Series: {product.series} · Function: {product.function} · Form factor:{" "}
-        {product.formFactor}
+        {product.productLabel[locale as "ko" | "en" | "zh"]} · {product.series}{" "}
+        · {product.function}
       </p>
 
       <h2>Specifications</h2>

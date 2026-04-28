@@ -2,6 +2,7 @@
 
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
+import { internationalizedArray } from "sanity-plugin-internationalized-array";
 import { schemaTypes } from "./sanity/schemaTypes";
 import { dataset, projectId } from "./src/sanity/env";
 
@@ -11,6 +12,17 @@ export default defineConfig({
   projectId,
   dataset,
   basePath: "/studio",
-  plugins: [structureTool()],
+  plugins: [
+    structureTool(),
+    internationalizedArray({
+      languages: [
+        { id: "ko", title: "한국어" },
+        { id: "en", title: "English" },
+        { id: "zh", title: "中文" },
+      ],
+      defaultLanguages: ["ko", "en", "zh"],
+      fieldTypes: ["string"],
+    }),
+  ],
   schema: { types: schemaTypes },
 });

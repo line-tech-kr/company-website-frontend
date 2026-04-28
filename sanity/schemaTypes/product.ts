@@ -45,9 +45,36 @@ export const product = defineType({
       options: { list: ["MFC", "MFM"] },
     }),
     defineField({
-      name: "formFactor",
-      type: "string",
-      options: { list: ["M", "MS"] },
+      name: "productLabel",
+      title: "Product label",
+      type: "internationalizedArrayString",
+    }),
+    defineField({
+      name: "features",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({
+              name: "ko",
+              type: "string",
+              validation: (r) => r.required(),
+            }),
+            defineField({
+              name: "en",
+              type: "string",
+              validation: (r) => r.required(),
+            }),
+            defineField({
+              name: "zh",
+              type: "string",
+              validation: (r) => r.required(),
+            }),
+          ],
+          preview: { select: { title: "en" } },
+        },
+      ],
     }),
     defineField({
       name: "connections",
@@ -153,6 +180,21 @@ export const product = defineType({
             numberField("max"),
             stringField("unit"),
           ],
+        }),
+      ],
+    }),
+    defineField({
+      name: "digitalCommunication",
+      type: "object",
+      fields: [
+        stringField("protocol"),
+        numberField("baudRate"),
+        numberField("dataBits"),
+        numberField("stopBits"),
+        defineField({
+          name: "parity",
+          type: "string",
+          options: { list: ["None", "Even", "Odd"] },
         }),
       ],
     }),

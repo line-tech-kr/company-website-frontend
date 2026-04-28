@@ -1,3 +1,5 @@
+export type LocalizedString = { ko: string; en: string; zh: string };
+
 export type Connection = { type: string; length: string };
 
 type DisplayOnly = { display: string };
@@ -47,7 +49,7 @@ export type ControlRange = DisplayOnly & {
 
 export type MassFlowSpecs = {
   flowRange: FlowRange;
-  responseTime: ResponseTime;
+  responseTime?: ResponseTime;
   accuracy: Accuracy;
   repeatability: Repeatability;
   ioSignal: IoSignal;
@@ -58,11 +60,31 @@ export type MassFlowSpecs = {
   controlRange: ControlRange;
 };
 
+export type DigitalCommunication = {
+  protocol: string;
+  baudRate: number;
+  dataBits: number;
+  stopBits: number;
+  parity: "None" | "Even" | "Odd";
+};
+
+export type SanityImage = {
+  _type: "image";
+  asset: { _ref: string; _type: "reference" };
+  hotspot?: { x: number; y: number; height: number; width: number };
+  crop?: { top: number; bottom: number; left: number; right: number };
+};
+
 export type Product = {
   model: string;
+  slug: { current: string };
   series: "analogue" | "digital" | "specialized";
   function: "MFC" | "MFM";
-  formFactor: "M" | "MS";
+  productLabel: LocalizedString;
+  features: LocalizedString[];
   connections: Connection[];
   massFlowSpecs: MassFlowSpecs;
+  digitalCommunication?: DigitalCommunication;
+  images?: SanityImage[];
+  dimensionDrawing?: SanityImage;
 };
