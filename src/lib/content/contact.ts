@@ -7,11 +7,7 @@
  */
 import type { Locale } from "./home";
 
-export type InquiryTypeId =
-  | "sales"
-  | "support"
-  | "partnership"
-  | "general";
+export type InquiryTypeId = "sales" | "support" | "partnership" | "general";
 
 export type ContactFormCopy = {
   heading: string;
@@ -268,7 +264,11 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       heading: "Global network",
       lede: "Headquartered in Korea, supporting key markets directly or through our subsidiary and partners.",
       regions: [
-        { id: "kr", name: "Korea (HQ)", status: "Direct sales from Daejeon HQ" },
+        {
+          id: "kr",
+          name: "Korea (HQ)",
+          status: "Direct sales from Daejeon HQ",
+        },
         {
           id: "cn",
           name: "China",
@@ -307,7 +307,8 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
     emailDirectCta: "直接发送邮件",
     form: {
       heading: "在线咨询",
-      notice: "在线提交系统正在升级。如需即时回复，请使用上方邮箱直接联系我们。",
+      notice:
+        "在线提交系统正在升级。如需即时回复，请使用上方邮箱直接联系我们。",
       fields: {
         inquiryType: "咨询类型",
         name: "姓名",
@@ -362,8 +363,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       submitDisabledHelp:
         "提交后端正在开发中。请使用上方邮箱直接联系我们以获得即时回复。",
     },
-    privacyNotice:
-      "您的信息将依据我们的隐私政策处理，不会与第三方共享。",
+    privacyNotice: "您的信息将依据我们的隐私政策处理，不会与第三方共享。",
     distributors: {
       heading: "全球网络",
       lede: "以韩国总部为核心，直接或通过子公司与合作伙伴覆盖主要市场。",

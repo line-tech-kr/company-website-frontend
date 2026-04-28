@@ -80,10 +80,7 @@ export default async function ContactPage({ params }: Props) {
             <ContactForm form={form} privacyNotice={c.privacyNotice} />
           </section>
 
-          <aside
-            className="ct-info"
-            aria-labelledby="ct-info-heading"
-          >
+          <aside className="ct-info" aria-labelledby="ct-info-heading">
             <h2 id="ct-info-heading" className="ct-info__heading">
               {c.infoHeading}
             </h2>
@@ -131,10 +128,7 @@ export default async function ContactPage({ params }: Props) {
           </aside>
         </div>
 
-        <section
-          className="ct-dist"
-          aria-labelledby="ct-dist-heading"
-        >
+        <section className="ct-dist" aria-labelledby="ct-dist-heading">
           <header className="ct-dist__header">
             <h2 id="ct-dist-heading" className="ct-dist__heading">
               {c.distributors.heading}
