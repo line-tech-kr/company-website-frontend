@@ -37,6 +37,7 @@ export function MegaMenu({ items, locale }: Props) {
         return (
           <section
             key={item.id}
+            id={`pd-mega-${item.id}`}
             className={cls}
             aria-hidden={!isOpen}
             inert={!isOpen}

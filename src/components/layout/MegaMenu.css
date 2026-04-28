@@ -14,14 +14,15 @@
 .pd-mega__panel {
   position: absolute;
   top: 8px;
-  left: 50%;
+  inset-inline: 0;
+  margin-inline: auto;
   width: min(880px, calc(100% - 32px));
   background: var(--pd-surface);
   border: 1px solid var(--pd-border);
   border-radius: 12px;
   box-shadow: 0 16px 40px rgba(12, 14, 20, 0.12);
   opacity: 0;
-  transform: translate(-50%, -4px);
+  transform: translateY(-4px);
   transition:
     opacity 160ms ease-out,
     transform 160ms ease-out;
@@ -29,12 +30,12 @@
 }
 .pd-mega__panel.is-open {
   opacity: 1;
-  transform: translate(-50%, 0);
+  transform: translateY(0);
   pointer-events: auto;
 }
 
 .pd-mega__inner {
-  padding: 14px 20px 18px;
+  padding: 14px 20px;
 }
 
 .pd-mega__heading {

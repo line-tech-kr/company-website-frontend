@@ -29,6 +29,7 @@ export function HeaderNav({ items }: Props) {
               className={cls}
               aria-haspopup="true"
               aria-expanded={isOpen}
+              aria-controls={`pd-mega-${item.id}`}
               onMouseEnter={() => onItemEnter(item.id)}
               onFocus={() => setOpenId(item.id)}
               onClick={() => setOpenId(isOpen ? null : item.id)}
@@ -52,6 +53,9 @@ export function HeaderNav({ items }: Props) {
           );
         }
 
+        // Cursor moving from a menu trigger to a no-menu sibling never fires
+        // the nav's onMouseLeave; trigger close-grace here so the open panel
+        // doesn't linger.
         return (
           <Link
             key={item.id}
