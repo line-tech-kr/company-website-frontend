@@ -7,6 +7,16 @@ import type { Locale } from "@/lib/content/home";
 import { ContactForm } from "./ContactForm";
 import "./contact-page.css";
 
+// Per-locale Google Maps Embed URLs (`pb=…`) generated from
+// "Share → Embed map" in each language's session. The labels on the map
+// (street names, place name) render in the locale's language. Same place
+// ID across all three (0x35654a04e7c961ab:0xe91272f47a8f5e5).
+const MAP_EMBED_URLS: Record<Locale, string> = {
+  en: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24056.780848582704!2d127.36912219355615!3d36.38991365710943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35654a04e7c961ab%3A0xe91272f47a8f5e5!2sLine%20Tech!5e0!3m2!1sen!2sus!4v1777338643281!5m2!1sen!2sus",
+  ko: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3211.3139884913467!2d127.37273477657999!3d36.4015978723635!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35654a04e7c961ab%3A0xe91272f47a8f5e5!2zKOyjvCnrnbzsnbjthY0!5e0!3m2!1sko!2sus!4v1777338879348!5m2!1sko!2sus",
+  zh: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3211.3139873492805!2d127.3753097!3d36.4015979!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35654a04e7c961ab%3A0xe91272f47a8f5e5!2sLine%20Tech!5e0!3m2!1szh-CN!2sus!4v1777338907476!5m2!1szh-CN!2sus",
+};
+
 type Props = { params: Promise<{ locale: Locale }> };
 
 export default async function ContactPage({ params }: Props) {
@@ -23,20 +33,18 @@ export default async function ContactPage({ params }: Props) {
     { label: c.breadcrumbLabel },
   ];
 
-  // Iframe stays Google (Naver doesn't allow keyless embeds). Using the
-  // official Google Maps Embed URL (`pb=…`) generated via "Share → Embed
-  // map" — stable across Google's UI changes, unlike the older `output=embed`
-  // pattern. The deep link follows the visitor's natural map preference:
-  // Naver for KR, Google for EN/ZH.
-  const mapEmbedAddress = "806 Daedeok-daero, Yuseong-gu, Daejeon 34055, Korea";
-  const mapEmbedUrl =
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24056.780848582704!2d127.36912219355615!3d36.38991365710943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35654a04e7c961ab%3A0xe91272f47a8f5e5!2sLine%20Tech!5e0!3m2!1sen!2sus!4v1777338643281!5m2!1sen!2sus";
+  // Iframe stays Google (Naver doesn't allow keyless embeds). Embed URL is
+  // localized so the map's labels match the locale. Deep link follows the
+  // visitor's natural map preference: Naver for KR, Google for EN/ZH.
+  const mapEmbedUrl = MAP_EMBED_URLS[locale];
   const mapOpenUrl =
     locale === "ko"
       ? `https://map.naver.com/p/search/${encodeURIComponent(
           "대전광역시 유성구 대덕대로 806",
         )}`
-      : `https://maps.google.com/maps?q=${encodeURIComponent(mapEmbedAddress)}`;
+      : `https://maps.google.com/maps?q=${encodeURIComponent(
+          "806 Daedeok-daero, Yuseong-gu, Daejeon 34055, Korea",
+        )}`;
 
   return (
     <main className="lt-wrap">
