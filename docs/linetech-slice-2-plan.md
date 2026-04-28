@@ -77,6 +77,20 @@ Plan originally specced 5 homepage category cards (title + count + image). The d
 
 ✅ **Resolved (2026-04-24, refined 2026-04-26):** catalog taxonomy is **4 (function × type)** — Analogue MFC, Digital MFC, MFM, Specialized. Buyers shop by function ("I need a digital MFC"), not by internal SKU series (M/MD/LD/LTI mean nothing to new customers). Series stays as a filter/facet *within* a category, not as the category itself. Homepage Series section keeps the design's 4-series visual as a secondary entry point; mega-menu and category pages route on the 4-way function taxonomy. Accessories (LTI readouts, FC-050S, PR-030) surface as a callout block on the `/products` index page rather than as a top-level category — too few SKUs to earn nav real-estate, and they're system support rather than peer to MFC/MFM.
 
+### Company section IA — single scroller with anchored sections (closes #29)
+
+Issue #29 asked three questions: single scroller vs page-per-topic; whether Certifications should get a nav spotlight; and whether Company needs a dropdown at all.
+
+✅ **Resolved (2026-04-27):** **single scroller** at `/company` with four anchored sections (`#greeting`, `#history`, `#certifications`, `#location`); a sticky side-nav drives scroll-spy active state; mega-menu links and the spotlight card all point to the matching anchor.
+
+- **Route:** `/company` only. The four sections render top-to-bottom on one page; deep links use anchor URLs (`/company#certifications` etc.) and stay shareable.
+- **Why not page-per-topic:** four standalone routes for what is effectively one institutional narrative bloated the IA — Greeting and Location especially are filler pages by themselves. A single scroller reads as a continuous "About Line Tech" story, mobile-friendly, and the four-section structure is preserved visually via section dividers and the side-nav. Anchored URLs preserve the deep-link case for RFQs (`/company#certifications` works the same as `/company/certifications` for sharing).
+- **Side-nav scroll-spy:** sticky `CompanySideNav` is a client component running an `IntersectionObserver` (rootMargin `-88px / -60%`) so the active item tracks scroll position. Hidden behind `prefers-reduced-motion` for the smooth-scroll behavior.
+- **Certifications spotlight:** kept inside the Company mega-menu featured card (`shell.ts`) pointing at `/company#certifications` — credibility surface without inflating global nav.
+- **Dropdown stays:** mega-menu still useful as a discovery surface for the four sections (vs forcing users to scroll to find them).
+- **"Greeting" voice:** institutional copy without CEO photo or signature — no portrait or signed-letter assets needed from the client.
+- **Certifications content gap:** the legacy site has 13 unlabeled cert JPGs but only 3 have recovered text labels (ISO 9001, CE, INNOBIZ). Initial build ships those 3 as full cards plus a footnote acknowledging 10 additional conformity documents available on request. A Sanity-driven expansion is a phase-2 task (filed below).
+
 ---
 
 ## Deferred / follow-ups
@@ -85,6 +99,7 @@ Plan originally specced 5 homepage category cards (title + count + image). The d
 - **Header search wiring** — visual shell ships now, actual search → phase 2 (depends on Sanity index).
 - **Theme/accent toggles** — design has `[data-theme="dark"]` and `[data-accent-mode="yellow"]` hooks but no UI trigger. Hardcoded to `light` / `blue` for now.
 - **Utility bar** — design CSS supports a top utility strip (`.pd-top__util` with hours/contacts) but design's `PageShell.jsx` doesn't render it. Skipping unless requested.
+- **Certifications detail (10 unnamed)** — legacy site has 13 cert JPGs; only 3 have recovered text. `/company/certifications` ships with the 3 named + footnote. Phase 2: collect names/issuers/dates for the remaining 10 from the client and surface them, ideally Sanity-managed.
 
 ---
 

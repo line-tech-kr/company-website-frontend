@@ -161,19 +161,19 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           kind: "resources",
           heading: "회사 안내",
           links: [
-            { href: "/company", label: "인사말", desc: "CEO 메시지" },
+            { href: "/company#greeting", label: "인사말", desc: "CEO 메시지" },
             {
-              href: "/company/history",
-              label: "연혁",
+              href: "/company#history",
+              label: "발자취",
               desc: "1997년부터 현재까지",
             },
             {
-              href: "/company/certifications",
+              href: "/company#certifications",
               label: "인증",
               desc: "ISO · CE · INNOBIZ 외",
             },
             {
-              href: "/company/location",
+              href: "/company#location",
               label: "오시는 길",
               desc: "대전 본사 위치",
             },
@@ -182,7 +182,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             eyebrow: "신뢰",
             title: "13종 인증",
             blurb: "ISO 9001 · CE · INNOBIZ · RoHS / REACH 외 9종.",
-            href: "/company/certifications",
+            href: "/company#certifications",
             cta: "전체 인증 보기",
           },
         },
@@ -319,22 +319,22 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           heading: "About Line Tech",
           links: [
             {
-              href: "/company",
+              href: "/company#greeting",
               label: "Greeting",
               desc: "Message from the CEO",
             },
             {
-              href: "/company/history",
+              href: "/company#history",
               label: "History",
               desc: "From 1997 to today",
             },
             {
-              href: "/company/certifications",
+              href: "/company#certifications",
               label: "Certifications",
               desc: "ISO · CE · INNOBIZ and more",
             },
             {
-              href: "/company/location",
+              href: "/company#location",
               label: "Location",
               desc: "Daejeon headquarters",
             },
@@ -344,7 +344,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             title: "13 certifications",
             blurb:
               "ISO 9001, CE, INNOBIZ, RoHS / REACH and 9 more — the full set procurement teams ask for.",
-            href: "/company/certifications",
+            href: "/company#certifications",
             cta: "View all certifications",
           },
         },
@@ -477,19 +477,19 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           kind: "resources",
           heading: "关于莱因",
           links: [
-            { href: "/company", label: "问候语", desc: "CEO 致辞" },
+            { href: "/company#greeting", label: "问候语", desc: "CEO 致辞" },
             {
-              href: "/company/history",
+              href: "/company#history",
               label: "发展历程",
               desc: "自 1997 年至今",
             },
             {
-              href: "/company/certifications",
+              href: "/company#certifications",
               label: "资质认证",
               desc: "ISO · CE · INNOBIZ 等",
             },
             {
-              href: "/company/location",
+              href: "/company#location",
               label: "联系地址",
               desc: "大田总部位置",
             },
@@ -498,7 +498,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             eyebrow: "信赖",
             title: "13 项资质认证",
             blurb: "ISO 9001 · CE · INNOBIZ · RoHS / REACH 等 13 项认证文件。",
-            href: "/company/certifications",
+            href: "/company#certifications",
             cta: "查看全部认证",
           },
         },
