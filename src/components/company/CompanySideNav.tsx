@@ -58,9 +58,7 @@ export function CompanySideNav({ heading, items }: Props) {
               <li key={item.id} className="co-nav__item">
                 <a
                   href={item.href}
-                  className={
-                    "co-nav__link" + (isCurrent ? " is-current" : "")
-                  }
+                  className={"co-nav__link" + (isCurrent ? " is-current" : "")}
                   aria-current={isCurrent ? "true" : undefined}
                 >
                   {item.label}

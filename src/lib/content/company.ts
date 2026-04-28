@@ -319,8 +319,7 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
         },
         {
           date: HISTORY_DATES[6],
-          event:
-            "Capacity extended — 150 · 500 · 1,000 · 2,500 SLPM",
+          event: "Capacity extended — 150 · 500 · 1,000 · 2,500 SLPM",
         },
         {
           date: HISTORY_DATES[7],
@@ -475,8 +474,7 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
           name: "CE",
           issuer: "欧盟符合性声明",
           date: "2017.08",
-          blurb:
-            "声明产品符合在欧洲经济区销售所需的安全与电磁兼容要求。",
+          blurb: "声明产品符合在欧洲经济区销售所需的安全与电磁兼容要求。",
         },
         {
           id: "innobiz",
