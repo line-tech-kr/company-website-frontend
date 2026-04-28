@@ -23,13 +23,14 @@ export default async function ContactPage({ params }: Props) {
     { label: c.breadcrumbLabel },
   ];
 
-  // Iframe stays Google (Naver doesn't allow keyless embeds). The deep link,
-  // however, follows the visitor's natural map preference — Naver for KR,
-  // Google for EN/ZH.
+  // Iframe stays Google (Naver doesn't allow keyless embeds). Using the
+  // official Google Maps Embed URL (`pb=…`) generated via "Share → Embed
+  // map" — stable across Google's UI changes, unlike the older `output=embed`
+  // pattern. The deep link follows the visitor's natural map preference:
+  // Naver for KR, Google for EN/ZH.
   const mapEmbedAddress = "806 Daedeok-daero, Yuseong-gu, Daejeon 34055, Korea";
-  const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(
-    mapEmbedAddress,
-  )}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+  const mapEmbedUrl =
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24056.780848582704!2d127.36912219355615!3d36.38991365710943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35654a04e7c961ab%3A0xe91272f47a8f5e5!2sLine%20Tech!5e0!3m2!1sen!2sus!4v1777338643281!5m2!1sen!2sus";
   const mapOpenUrl =
     locale === "ko"
       ? `https://map.naver.com/p/search/${encodeURIComponent(
