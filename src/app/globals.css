@@ -130,6 +130,16 @@
 }
 
 /* ─── Base ─────────────────────────────────────────────────────────── */
+html {
+  /* Smooth in-page anchor scroll for any page using `#section` links
+   * (e.g. /company side-nav). Reduced-motion override below. */
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
 html,
 body {
   margin: 0;

@@ -1,6 +1,7 @@
 {
   "nav": {
-    "products": "Products"
+    "products": "Products",
+    "company": "Company"
   },
   "common": {
     "download": "Download",
