@@ -46,6 +46,9 @@ docs/handoff/uploads/
 # extracted catalogue page renders — regenerate from docs/handoff/uploads/catalog.pdf
 docs/catalog-extract/
 
+# internal-only drafts and planning docs (lives in ~/Dev/linetech/company-docs-private/)
+docs/internal/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
