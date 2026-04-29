@@ -190,7 +190,7 @@ export default async function ProductPage({ params }: Props) {
         heading={tPdp("overview.heading")}
         sub={tPdp("overview.sub")}
         rows={overviewRows}
-        tone="muted"
+        tone="primary"
       />
 
       <SpecTable

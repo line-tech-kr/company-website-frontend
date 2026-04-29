@@ -11,7 +11,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font: 500 var(--lt-fs-xs) var(--lt-mono);
+  font: 500 var(--lt-fs-sm) var(--lt-mono);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--pd-primary);
@@ -19,13 +19,13 @@
 }
 .lt-pdp-hero__eyebrow-dot {
   display: inline-block;
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: currentColor;
-  /* Nudge down a hair so it sits on the optical baseline of mono caps. */
+  /* Mono caps sit in upper half of line; nudge down to optical center. */
   position: relative;
-  top: 1px;
+  top: 2px;
   flex-shrink: 0;
 }
 :lang(ko) .lt-pdp-hero__eyebrow,
