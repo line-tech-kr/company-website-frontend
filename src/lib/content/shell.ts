@@ -177,7 +177,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             {
               href: "/company#history",
               label: "발자취",
-              desc: "1997년부터 현재까지",
+              desc: "1997년 설립 이후",
             },
             {
               href: "/company#certifications",
