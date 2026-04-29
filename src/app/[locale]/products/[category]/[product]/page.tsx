@@ -1,5 +1,6 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { permanentRedirect } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { ProductHero } from "@/components/products/ProductHero";
 import { TabNav } from "@/components/products/TabNav";
@@ -83,7 +84,18 @@ export default async function ProductPage({ params }: Props) {
   })) as Product | null;
 
   if (!product) notFound();
-  if (product.series !== CATEGORIES[category].series) notFound();
+  if (product.series !== CATEGORIES[category].series) {
+    const canonicalCategory = (Object.keys(CATEGORIES) as CategorySlug[]).find(
+      (slug) => CATEGORIES[slug].series === product.series,
+    );
+    if (canonicalCategory) {
+      permanentRedirect({
+        href: `/products/${canonicalCategory}/${product.slug.current}`,
+        locale,
+      });
+    }
+    notFound();
+  }
 
   const [tCommon, tNav, tBreadcrumb, tSpecs, tPdp] = await Promise.all([
     getTranslations("common"),

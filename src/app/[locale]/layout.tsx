@@ -22,8 +22,6 @@ const fontMono = JetBrains_Mono({
   display: "swap",
 });
 
-export const dynamicParams = false;
-
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }

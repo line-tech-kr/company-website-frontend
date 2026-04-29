@@ -29,3 +29,14 @@ export const productsBySeriesQuery = defineQuery(`
     ${PRODUCT_PROJECTION}
   }
 `);
+
+export const allProductsQuery = defineQuery(`
+  *[_type == "product"]
+  | order(
+    select(series == "analogue" => 0, series == "digital" => 1, 2),
+    function asc,
+    model asc
+  ){
+    ${PRODUCT_PROJECTION}
+  }
+`);
