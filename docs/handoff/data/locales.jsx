@@ -111,7 +111,7 @@ const LT_LOCALES = {
     },
     footer: {
       sig: '라인테크 주식회사 · Line Tech Co., Ltd.',
-      addr: '경기도 화성시 동탄산단 6-3길',
+      addr: '대전광역시 유성구 대덕대로 806 (34055)',
       rights: '© 2026 Line Tech. 모든 권리 보유.',
     },
   },
@@ -223,7 +223,7 @@ const LT_LOCALES = {
     },
     footer: {
       sig: 'Line Tech Co., Ltd.',
-      addr: 'Dongtan Industrial Complex 6-3, Hwaseong, Gyeonggi',
+      addr: '806 Daedeok-daero, Yuseong-gu, Daejeon 34055, Korea',
       rights: '© 2026 Line Tech. All rights reserved.',
     },
   },
@@ -335,7 +335,7 @@ const LT_LOCALES = {
     },
     footer: {
       sig: 'Line Tech 株式会社',
-      addr: '京畿道华城市东滩产业园 6-3',
+      addr: '韩国大田广域市儒城区大德大路 806 号 (34055)',
       rights: '© 2026 Line Tech. 版权所有。',
     },
   },

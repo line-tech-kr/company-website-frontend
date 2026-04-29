@@ -52,7 +52,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       badge: "KAIST 공동연구 기반 · 국내 최초",
     },
     stats: [
-      { k: "1997", l: "설립 연도", sub: "경기도 화성시" },
+      { k: "1997", l: "설립 연도", sub: "대전광역시 유성구" },
       { k: "2003", l: "국내 최초 자체 MFC 양산", sub: "M-Series" },
       { k: "0.01–5000", l: "SLPM 측정 범위", sub: "전 시리즈 합산" },
       { k: "±0.25%", l: "반복 정밀도", sub: "전 제품 공통" },
@@ -150,7 +150,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       badge: "Founded on KAIST collaboration · First in Korea",
     },
     stats: [
-      { k: "1997", l: "Founded", sub: "Hwaseong, Gyeonggi" },
+      { k: "1997", l: "Founded", sub: "Daejeon, Korea" },
       { k: "2003", l: "First Korean MFC produced", sub: "M-Series" },
       { k: "0.01–5000", l: "SLPM flow range", sub: "across all series" },
       { k: "±0.25 %", l: "Repeatability", sub: "every product" },
@@ -242,7 +242,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       badge: "基于 KAIST 合作研究 · 韩国首家",
     },
     stats: [
-      { k: "1997", l: "成立年份", sub: "京畿道华城市" },
+      { k: "1997", l: "成立年份", sub: "韩国大田" },
       { k: "2003", l: "韩国首款自产 MFC", sub: "M 系列" },
       { k: "0.01–5000", l: "SLPM 流量范围", sub: "全系列合计" },
       { k: "±0.25 %", l: "重复精度", sub: "全系一致" },
