@@ -40,7 +40,7 @@ export function ProductHero({
           <Button
             variant="primary"
             size="lg"
-            href="/contact"
+            href={`/contact?product=${encodeURIComponent(product.model)}`}
             trailingGlyph={<Glyph name="arrow-right" size={14} />}
           >
             {quoteLabel}

@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/Button";
 import { LT_CONTACT } from "@/lib/content/contact";
 import { LT_SHELL } from "@/lib/content/shell";
 import type { Locale } from "@/lib/content/home";
+import type { Product } from "@/lib/types/product";
+import { sanityClient } from "@/sanity/client";
+import { productByModelQuery } from "@/sanity/queries";
 import { ContactForm } from "./ContactForm";
 import "./contact-page.css";
 
@@ -18,7 +21,10 @@ const MAP_EMBED_URLS: Record<Locale, string> = {
   zh: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3211.3139873492805!2d127.3753097!3d36.4015979!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35654a04e7c961ab%3A0xe91272f47a8f5e5!2sLine%20Tech!5e0!3m2!1szh-CN!2sus!4v1777338907476!5m2!1szh-CN!2sus",
 };
 
-type Props = { params: Promise<{ locale: Locale }> };
+type Props = {
+  params: Promise<{ locale: Locale }>;
+  searchParams: Promise<{ product?: string | string[] }>;
+};
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -29,14 +35,39 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function ContactPage({ params }: Props) {
+export default async function ContactPage({ params, searchParams }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+
+  const { product: rawProductParam } = await searchParams;
+  const productParam = Array.isArray(rawProductParam)
+    ? rawProductParam[0]
+    : rawProductParam;
+  const product = productParam
+    ? ((await sanityClient.fetch(productByModelQuery, {
+        model: productParam,
+      })) as Product | null)
+    : null;
 
   const tCommon = await getTranslations("common");
   const c = LT_CONTACT[locale];
   const info = LT_SHELL[locale].footer.contact;
   const { form } = c;
+
+  const defaults = product
+    ? {
+        inquiryType: "sales" as const,
+        extraField: product.model,
+        subject: form.productInquiry.subject.replaceAll(
+          "{model}",
+          product.model,
+        ),
+        message: form.productInquiry.message.replaceAll(
+          "{model}",
+          product.model,
+        ),
+      }
+    : undefined;
 
   const breadcrumbs = [
     { label: tCommon("home"), href: "/" },
@@ -77,7 +108,11 @@ export default async function ContactPage({ params }: Props) {
             </h2>
             <p className="ct-form__notice">{form.notice}</p>
 
-            <ContactForm form={form} privacyNotice={c.privacyNotice} />
+            <ContactForm
+              form={form}
+              privacyNotice={c.privacyNotice}
+              defaults={defaults}
+            />
           </section>
 
           <aside className="ct-info" aria-labelledby="ct-info-heading">
