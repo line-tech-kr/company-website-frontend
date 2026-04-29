@@ -30,6 +30,12 @@ export const productsBySeriesQuery = defineQuery(`
   }
 `);
 
+export const productByModelQuery = defineQuery(`
+  *[_type == "product" && lower(model) == lower($model)][0]{
+    ${PRODUCT_PROJECTION}
+  }
+`);
+
 export const allProductsQuery = defineQuery(`
   *[_type == "product"]
   | order(

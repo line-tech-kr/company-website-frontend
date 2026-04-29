@@ -177,7 +177,7 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
     },
     history: {
       kicker: "02 — 발자취",
-      title: "1997년부터, 한 분야에 집중해 왔습니다.",
+      title: "1997년 설립 이래, 한 분야에 집중해 왔습니다.",
       sub: "설립 이후 주요 성과를 시간순으로 정리했습니다.",
       rows: [
         { date: HISTORY_DATES[0], event: "라인테크 설립" },

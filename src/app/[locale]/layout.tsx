@@ -3,6 +3,8 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { routing } from "@/i18n/routing";
 import { PageShell } from "@/components/layout/PageShell";
 import type { Locale } from "@/lib/content/home";
@@ -51,6 +53,8 @@ export default async function LocaleLayout({ children, params }: Props) {
         <NextIntlClientProvider>
           <PageShell locale={locale as Locale}>{children}</PageShell>
         </NextIntlClientProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

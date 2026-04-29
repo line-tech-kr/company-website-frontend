@@ -23,8 +23,8 @@ export default async function HomePage({ params }: Props) {
         <Intro h={h} />
         <Stats h={h} />
         <Series h={h} />
-        <Feature h={h} />
         <Applications h={h} />
+        <Feature h={h} />
         <Credentials h={h} />
         <Contact h={h} />
       </div>
