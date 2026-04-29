@@ -4,7 +4,14 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { SearchPanel } from "./SearchPanel";
 import { SearchProvider, type SearchCtx } from "./SearchContext";
 import { HeaderNavProvider, type HeaderNavCtx } from "./HeaderNavContext";
-import type { ShellSearch } from "@/lib/content/shell";
+import { MobileNavProvider, type MobileNavCtx } from "./MobileNavContext";
+import { MobileNav } from "./MobileNav";
+import type {
+  ShellSearch,
+  ShellMobileNav,
+  ShellNavItem,
+} from "@/lib/content/shell";
+import type { Locale } from "@/lib/content/home";
 
 const SCROLL_ON = 40;
 const SCROLL_OFF = 30;
@@ -14,13 +21,26 @@ const CLOSE_DELAY = 120;
 type Props = {
   children: React.ReactNode;
   search: ShellSearch;
+  mobileNav: ShellMobileNav;
+  navItems: ShellNavItem[];
+  quoteLabel: string;
+  locale: Locale;
 };
 
-export function HeaderShell({ children, search }: Props) {
+export function HeaderShell({
+  children,
+  search,
+  mobileNav,
+  navItems,
+  quoteLabel,
+  locale,
+}: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [openId, setOpenId] = useState<string | null>(null);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const mobileNavTriggerRef = useRef<HTMLButtonElement | null>(null);
   const openTimer = useRef<number | null>(null);
   const closeTimer = useRef<number | null>(null);
 
@@ -54,9 +74,25 @@ export function HeaderShell({ children, search }: Props) {
     triggerRef.current = el;
   }, []);
 
+  const registerMobileNavTrigger = useCallback(
+    (el: HTMLButtonElement | null) => {
+      mobileNavTriggerRef.current = el;
+    },
+    [],
+  );
+
   const searchCtx = useMemo<SearchCtx>(
     () => ({ searchOpen, setSearchOpen, registerSearchTrigger }),
     [searchOpen, registerSearchTrigger],
+  );
+
+  const mobileNavCtx = useMemo<MobileNavCtx>(
+    () => ({
+      mobileNavOpen,
+      setMobileNavOpen,
+      registerMobileNavTrigger,
+    }),
+    [mobileNavOpen, registerMobileNavTrigger],
   );
 
   const navCtx = useMemo<HeaderNavCtx>(() => {
@@ -107,6 +143,7 @@ export function HeaderShell({ children, search }: Props) {
     scrolled && "is-scrolled",
     searchOpen && "is-searchopen",
     openId && "is-menuopen",
+    mobileNavOpen && "is-mnavopen",
   ]
     .filter(Boolean)
     .join(" ");
@@ -114,15 +151,26 @@ export function HeaderShell({ children, search }: Props) {
   return (
     <SearchProvider value={searchCtx}>
       <HeaderNavProvider value={navCtx}>
-        <header className={cls}>
-          {children}
-          <SearchPanel
-            content={search}
-            open={searchOpen}
-            onClose={() => setSearchOpen(false)}
-            triggerRef={triggerRef}
-          />
-        </header>
+        <MobileNavProvider value={mobileNavCtx}>
+          <header className={cls}>
+            {children}
+            <SearchPanel
+              content={search}
+              open={searchOpen}
+              onClose={() => setSearchOpen(false)}
+              triggerRef={triggerRef}
+            />
+            <MobileNav
+              items={navItems}
+              locale={locale}
+              heading={mobileNav.heading}
+              quoteLabel={quoteLabel}
+              open={mobileNavOpen}
+              onClose={() => setMobileNavOpen(false)}
+              triggerRef={mobileNavTriggerRef}
+            />
+          </header>
+        </MobileNavProvider>
       </HeaderNavProvider>
     </SearchProvider>
   );

@@ -54,7 +54,7 @@ export type MassFlowSpecs = {
   repeatability: Repeatability;
   ioSignal: IoSignal;
   supplyPower: SupplyPower;
-  maxPressure: MaxPressure;
+  maxPressure?: MaxPressure;
   tempRange: TempRange;
   leakRate: LeakRate;
   controlRange: ControlRange;

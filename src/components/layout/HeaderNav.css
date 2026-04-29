@@ -16,9 +16,9 @@
   border: 0;
   background: transparent;
   cursor: pointer;
-  font: 500 14px var(--lt-sans);
+  font: 600 var(--lt-fs-sm) var(--lt-sans);
   color: var(--pd-fg);
-  padding: 0 14px;
+  padding: 0 16px;
   height: 100%;
   position: relative;
   text-decoration: none;
@@ -28,8 +28,8 @@
 .pd-top__navitem::after {
   content: "";
   position: absolute;
-  left: 14px;
-  right: 14px;
+  left: 16px;
+  right: 16px;
   bottom: -1px;
   height: 2px;
   background: var(--pd-primary);
