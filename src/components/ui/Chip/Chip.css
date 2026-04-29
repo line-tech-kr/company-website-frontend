@@ -3,9 +3,9 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 3px 10px;
+  padding: 4px 11px;
   border-radius: 999px;
-  font-size: 11.5px;
+  font-size: var(--lt-fs-xs);
   font-weight: 500;
   line-height: 1.4;
   border: 1px solid var(--pd-border);
@@ -13,7 +13,7 @@
   color: var(--pd-fg);
 }
 .lt-chip--sm {
-  font-size: 11px;
+  font-size: var(--lt-fs-xs);
   padding: 2px 9px;
 }
 .lt-chip__dot {

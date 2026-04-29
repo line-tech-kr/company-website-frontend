@@ -16,18 +16,18 @@
   border-right: 0;
 }
 .ho-stats__k {
-  font: 500 34px/1 var(--lt-sans);
+  font: 500 var(--lt-fs-xl)/1 var(--lt-sans);
   letter-spacing: -0.02em;
   color: var(--pd-fg-strong);
   font-variant-numeric: tabular-nums;
   margin-bottom: 10px;
 }
 .ho-stats__l {
-  font: 500 13px var(--lt-sans);
+  font: 500 var(--lt-fs-sm) var(--lt-sans);
   color: var(--pd-fg);
 }
 .ho-stats__s {
-  font: 400 12px var(--lt-mono);
+  font: 400 var(--lt-fs-xs) var(--lt-mono);
   color: var(--pd-muted);
 }
 

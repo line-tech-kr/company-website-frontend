@@ -52,7 +52,7 @@
 }
 
 .pd-top__wordmark {
-  font: 700 18px/1 var(--lt-sans);
+  font: 700 var(--lt-fs-md)/1 var(--lt-sans);
   letter-spacing: 0.01em;
   color: var(--pd-primary);
 }

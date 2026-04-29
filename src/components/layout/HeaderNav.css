@@ -16,7 +16,7 @@
   border: 0;
   background: transparent;
   cursor: pointer;
-  font: 600 16px var(--lt-sans);
+  font: 600 var(--lt-fs-sm) var(--lt-sans);
   color: var(--pd-fg);
   padding: 0 16px;
   height: 100%;

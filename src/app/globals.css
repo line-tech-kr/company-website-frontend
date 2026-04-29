@@ -66,6 +66,18 @@
   --pd-r-md: 6px;
   --pd-r-lg: 10px;
 
+  /* Type scale — use these instead of literal px values.
+   * Body tier (xs–xl) = reusable buckets. Title tier = named by role. */
+  --lt-fs-xs: 13px; /* captions, footnotes, mono labels, locale switcher */
+  --lt-fs-sm: 15px; /* eyebrow, item desc, secondary body, nav links */
+  --lt-fs-md: 17px; /* primary body, hero lede, section sub */
+  --lt-fs-lg: 22px; /* hero eyebrow, item titles, sub-section headings */
+  --lt-fs-xl: 34px; /* stat number */
+  --lt-fs-h2-dense: 40px; /* /company sections (denser two-col layout) */
+  --lt-fs-h2: 48px; /* default section h2 (home, contact) */
+  --lt-fs-feature: 56px; /* feature spotlight (M3030VA) */
+  --lt-fs-hero: 72px; /* hero h1 */
+
   --lt-sans:
     var(--font-sans), -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
     "Malgun Gothic", "PingFang SC", "Microsoft YaHei", "Segoe UI",
@@ -127,6 +139,17 @@
 
   --font-sans: var(--lt-sans);
   --font-mono: var(--lt-mono);
+
+  /* Type scale — exposed as Tailwind text-* utilities */
+  --text-xs: var(--lt-fs-xs);
+  --text-sm: var(--lt-fs-sm);
+  --text-md: var(--lt-fs-md);
+  --text-lg: var(--lt-fs-lg);
+  --text-xl: var(--lt-fs-xl);
+  --text-h2-dense: var(--lt-fs-h2-dense);
+  --text-h2: var(--lt-fs-h2);
+  --text-feature: var(--lt-fs-feature);
+  --text-hero: var(--lt-fs-hero);
 }
 
 /* ─── Base ─────────────────────────────────────────────────────────── */

@@ -10,7 +10,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font: 500 11.5px var(--lt-mono);
+  font: 600 var(--lt-fs-lg) var(--lt-mono);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--pd-primary);
@@ -18,7 +18,7 @@
 }
 .ho-intro__title {
   margin: 0 0 24px;
-  font: 500 72px/1.02 var(--lt-sans);
+  font: 500 var(--lt-fs-hero)/1.02 var(--lt-sans);
   letter-spacing: -0.03em;
   color: var(--pd-fg-strong);
   display: flex;
@@ -31,7 +31,7 @@
 .ho-intro__lede {
   margin: 0 0 32px;
   max-width: 520px;
-  font-size: 17px;
+  font-size: var(--lt-fs-md);
   line-height: 1.55;
   color: var(--pd-muted);
   text-wrap: pretty;
@@ -158,6 +158,6 @@
     padding: 48px 0 64px;
   }
   .ho-intro__title {
-    font-size: 52px;
+    font-size: var(--lt-fs-feature);
   }
 }
