@@ -13,7 +13,6 @@ loadEnv(".env.local");
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
-const token = process.env.SANITY_WRITE_TOKEN;
 
 if (!projectId || !dataset) {
   console.error(
@@ -25,7 +24,6 @@ if (!projectId || !dataset) {
 const client = createClient({
   projectId,
   dataset,
-  token,
   apiVersion: "2026-01-01",
   useCdn: false,
 });

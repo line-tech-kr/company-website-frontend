@@ -19,6 +19,7 @@ import { productBySlugQuery } from "@/sanity/queries";
 import { ALL_PRODUCTS } from "@/lib/fixtures/products";
 import {
   CATEGORIES,
+  categoryForSeries,
   isCategorySlug,
   type CategorySlug,
 } from "@/lib/categories";
@@ -56,9 +57,7 @@ const SPEC_GROUPS: Array<{
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
     ALL_PRODUCTS.flatMap((p) => {
-      const category = (Object.keys(CATEGORIES) as CategorySlug[]).find(
-        (slug) => CATEGORIES[slug].series === p.series,
-      );
+      const category = categoryForSeries(p.series);
       if (!category) return [];
       return [{ locale, category, product: p.slug.current }];
     }),
@@ -85,9 +84,7 @@ export default async function ProductPage({ params }: Props) {
 
   if (!product) notFound();
   if (product.series !== CATEGORIES[category].series) {
-    const canonicalCategory = (Object.keys(CATEGORIES) as CategorySlug[]).find(
-      (slug) => CATEGORIES[slug].series === product.series,
-    );
+    const canonicalCategory = categoryForSeries(product.series);
     if (canonicalCategory) {
       permanentRedirect({
         href: `/products/${canonicalCategory}/${product.slug.current}`,

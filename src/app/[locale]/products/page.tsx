@@ -7,6 +7,7 @@ import { allProductsQuery } from "@/sanity/queries";
 import {
   CATEGORIES,
   CATEGORY_SLUGS,
+  categoryForSeries,
   type CategorySlug,
 } from "@/lib/categories";
 import type { Product } from "@/lib/types/product";
@@ -18,11 +19,10 @@ export default async function ProductsListPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [tCommon, tNav, tProducts, tList] = await Promise.all([
+  const [tCommon, tNav, tProducts] = await Promise.all([
     getTranslations("common"),
     getTranslations("nav"),
     getTranslations("products"),
-    getTranslations("products.list"),
   ]);
 
   const products = (await sanityClient.fetch(allProductsQuery)) as Product[];
@@ -32,10 +32,8 @@ export default async function ProductsListPage({ params }: Props) {
     CATEGORY_SLUGS.map((slug) => [slug, []]),
   );
   for (const p of products) {
-    const slug = (Object.keys(CATEGORIES) as CategorySlug[]).find(
-      (s) => CATEGORIES[s].series === p.series,
-    );
-    if (slug) grouped.get(slug)?.push(p);
+    const slug = categoryForSeries(p.series);
+    if (slug) grouped.get(slug)!.push(p);
   }
 
   const breadcrumbs = [
@@ -59,13 +57,15 @@ export default async function ProductsListPage({ params }: Props) {
       <Breadcrumbs items={breadcrumbs} />
 
       <header className="lt-products-list__intro">
-        <h1 className="lt-products-list__title">{tList("title")}</h1>
-        <p className="lt-products-list__lede">{tList("intro")}</p>
+        <h1 className="lt-products-list__title">{tProducts("list.title")}</h1>
+        <p className="lt-products-list__lede">
+          {tProducts("list.intro", { count: products.length })}
+        </p>
       </header>
 
       {CATEGORY_SLUGS.map((slug) => {
         const cat = CATEGORIES[slug];
-        const items = grouped.get(slug) ?? [];
+        const items = grouped.get(slug)!;
         if (items.length === 0) return null;
         const controllers = items.filter((p) => p.function === "MFC");
         const meters = items.filter((p) => p.function === "MFM");
