@@ -68,6 +68,7 @@
 
   /* Type scale — use these instead of literal px values.
    * Body tier (xs–xl) = reusable buckets. Title tier = named by role. */
+  --lt-fs-micro: 11px; /* instrument micro-text only — table indices, group nums, mono kickers, stamp metadata. NEVER for Korean body text. */
   --lt-fs-xs: 13px; /* captions, footnotes, mono labels, locale switcher */
   --lt-fs-sm: 15px; /* eyebrow, item desc, secondary body, nav links */
   --lt-fs-md: 17px; /* primary body, hero lede, section sub */
@@ -141,6 +142,7 @@
   --font-mono: var(--lt-mono);
 
   /* Type scale — exposed as Tailwind text-* utilities */
+  --text-micro: var(--lt-fs-micro);
   --text-xs: var(--lt-fs-xs);
   --text-sm: var(--lt-fs-sm);
   --text-md: var(--lt-fs-md);

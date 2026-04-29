@@ -26,7 +26,7 @@
   height: fit-content;
 }
 .lt-pdp-spec__groupnum {
-  font: 500 var(--lt-fs-xs) var(--lt-mono);
+  font: 500 var(--lt-fs-micro) var(--lt-mono);
   color: var(--pd-primary);
   letter-spacing: 0.1em;
 }
@@ -51,7 +51,7 @@
   background: var(--lt-neutral-100);
 }
 .lt-pdp-spec__idx {
-  font: 500 var(--lt-fs-xs) var(--lt-mono);
+  font: 500 var(--lt-fs-micro) var(--lt-mono);
   color: var(--pd-muted);
   letter-spacing: 0.08em;
 }

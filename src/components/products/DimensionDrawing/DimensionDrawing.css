@@ -39,15 +39,15 @@
 .lt-pdp-dim__titleblock > div:last-child {
   border-right: 0;
 }
-/* DWG-stamp metadata — small fixed sizes preserved (not body text). */
+/* DWG-stamp metadata — instrument micro tier. */
 .lt-pdp-dim__titleblock span {
-  font-size: 8.5px;
+  font-size: var(--lt-fs-micro);
   color: var(--pd-muted);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 .lt-pdp-dim__titleblock b {
-  font-size: 10.5px;
+  font-size: var(--lt-fs-micro);
   color: var(--pd-fg-strong);
   font-weight: 500;
   white-space: nowrap;

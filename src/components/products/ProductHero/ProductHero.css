@@ -11,7 +11,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font: 500 var(--lt-fs-xs) var(--lt-mono);
+  font: 500 var(--lt-fs-micro) var(--lt-mono);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--pd-primary);
@@ -19,7 +19,7 @@
 }
 .lt-pdp-hero__model {
   margin: 0 0 6px;
-  font: 500 var(--lt-fs-feature) / 1 var(--lt-sans);
+  font: 500 var(--lt-fs-hero) / 1 var(--lt-sans);
   letter-spacing: -0.03em;
   color: var(--pd-fg-strong);
   font-feature-settings: "tnum";
@@ -107,7 +107,7 @@
 }
 .lt-pdp-hero__label {
   font-family: var(--lt-mono);
-  font-size: var(--lt-fs-xs);
+  font-size: var(--lt-fs-micro);
   color: var(--pd-muted);
   display: flex;
   flex-direction: column;
