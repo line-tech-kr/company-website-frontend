@@ -43,7 +43,7 @@ export type HomeContent = {
 export const LT_HOME: Record<Locale, HomeContent> = {
   ko: {
     intro: {
-      kicker: "1997년부터 · 질량유량 측정 솔루션",
+      kicker: "1997년 설립 · 질량유량 측정 솔루션",
       title1: "신뢰할 수 있는 기술과",
       title2: "확실한 애프터서비스.",
       lede: "한국 최초의 자체 생산 MFC·MFM 제조사. 반도체, 디스플레이, 바이오, 연료전지 공정 현장에서 25년 이상 검증된 정밀 질량유량 제어.",
