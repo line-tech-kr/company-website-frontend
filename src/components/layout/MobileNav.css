@@ -1,0 +1,169 @@
+/* Line Tech — full-screen mobile nav panel (#34).
+ * Renders only below 1000px; covers the viewport beneath the sticky header. */
+
+.pd-mnav {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .pd-mnav {
+    display: block;
+  }
+}
+
+.pd-mnav.is-open {
+  pointer-events: auto;
+}
+
+.pd-mnav__panel {
+  position: absolute;
+  top: var(--pd-top-h);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--pd-bg);
+  transform: translateY(-8px);
+  opacity: 0;
+  transition:
+    transform 0.18s ease,
+    opacity 0.14s ease;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pd-top.is-scrolled .pd-mnav__panel {
+  top: var(--pd-top-h-scrolled);
+}
+
+.pd-mnav.is-open .pd-mnav__panel {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.pd-mnav__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 16px 16px 32px;
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+.pd-mnav__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.pd-mnav__nav {
+  flex: 0 0 auto;
+}
+
+.pd-mnav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pd-mnav__item {
+  border-bottom: 1px solid var(--pd-border);
+}
+
+.pd-mnav__link {
+  display: block;
+  padding: 16px 4px;
+  color: var(--pd-fg-strong);
+  font: 600 16px/1.3 var(--lt-sans);
+  text-decoration: none;
+}
+.pd-mnav__link:focus-visible {
+  outline: 2px solid var(--pd-primary);
+  outline-offset: 2px;
+}
+
+.pd-mnav__group-trigger {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 16px 4px;
+  border: 0;
+  background: transparent;
+  color: var(--pd-fg-strong);
+  font: 600 16px/1.3 var(--lt-sans);
+  cursor: pointer;
+  text-align: left;
+}
+.pd-mnav__group-trigger:focus-visible {
+  outline: 2px solid var(--pd-primary);
+  outline-offset: 2px;
+}
+
+.pd-mnav__chev {
+  flex: 0 0 auto;
+  color: var(--pd-muted);
+  transition: transform 0.18s ease;
+}
+
+.pd-mnav__group-trigger[aria-expanded="true"] .pd-mnav__chev {
+  transform: rotate(180deg);
+}
+
+.pd-mnav__group-body {
+  padding-bottom: 8px;
+}
+
+.pd-mnav__sublist {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 4px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pd-mnav__sublink {
+  display: block;
+  padding: 10px 4px;
+  color: var(--pd-fg);
+  font: 500 14px/1.3 var(--lt-sans);
+  text-decoration: none;
+}
+.pd-mnav__sublink:focus-visible {
+  outline: 2px solid var(--pd-primary);
+  outline-offset: 2px;
+}
+
+.pd-mnav__sublink--all {
+  color: var(--pd-primary);
+  font-weight: 600;
+}
+
+.pd-mnav__footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--pd-border);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pd-mnav__panel,
+  .pd-mnav__chev {
+    transition: none;
+  }
+}

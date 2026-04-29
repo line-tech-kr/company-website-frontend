@@ -113,6 +113,16 @@ export type ShellSearch = {
   quickChips: { id: string; label: string }[];
 };
 
+/** Mobile nav panel copy (#34). Renders below 1000px. */
+export type ShellMobileNav = {
+  /** aria-label on the hamburger trigger when the panel is closed. */
+  openLabel: string;
+  /** aria-label on the hamburger trigger when the panel is open. */
+  closeLabel: string;
+  /** Dialog accessible name (visually-hidden, exposed via aria-labelledby). */
+  heading: string;
+};
+
 export type ShellContent = {
   nav: ShellNavItem[];
   /** Top-right "Quote" button label in the header. Mailto target is shared. */
@@ -121,6 +131,8 @@ export type ShellContent = {
   productsCategories: ProductsCategory[];
   /** Header search panel copy (#8). */
   search: ShellSearch;
+  /** Mobile nav panel copy (#34). */
+  mobileNav: ShellMobileNav;
   footer: ShellFooter;
 };
 
@@ -289,6 +301,11 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         { id: "certifications", label: "인증서" },
       ],
     },
+    mobileNav: {
+      openLabel: "메뉴 열기",
+      closeLabel: "메뉴 닫기",
+      heading: "사이트 메뉴",
+    },
     footer: {
       signoff: "정밀 질량유량 솔루션",
       contact: {
@@ -453,6 +470,11 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         { id: "certifications", label: "Certifications" },
       ],
     },
+    mobileNav: {
+      openLabel: "Open menu",
+      closeLabel: "Close menu",
+      heading: "Site menu",
+    },
     footer: {
       signoff: "Mass Flow Solutions",
       contact: {
@@ -604,6 +626,11 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         { id: "calibration", label: "校准" },
         { id: "certifications", label: "认证文件" },
       ],
+    },
+    mobileNav: {
+      openLabel: "打开菜单",
+      closeLabel: "关闭菜单",
+      heading: "站点菜单",
     },
     footer: {
       signoff: "精密质量流量解决方案",
