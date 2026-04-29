@@ -11,7 +11,6 @@ export function Intro({ h }: Props) {
     <section className="ho-intro">
       <div className="ho-intro__left">
         <div className="ho-intro__kicker">
-          <Glyph name="dot" size={10} />
           <span>{h.intro.kicker}</span>
         </div>
         <h1 className="ho-intro__title">

@@ -30,14 +30,14 @@
 .ho-contact__title {
   position: relative;
   margin: 0 0 16px;
-  font: 500 44px/1.1 var(--lt-sans);
+  font: 500 var(--lt-fs-h2)/1.1 var(--lt-sans);
   letter-spacing: -0.02em;
 }
 .ho-contact__sub {
   position: relative;
   margin: 0 auto 32px;
   max-width: 540px;
-  font-size: 16px;
+  font-size: var(--lt-fs-md);
   line-height: 1.55;
   color: rgba(255, 255, 255, 0.72);
 }
@@ -63,6 +63,6 @@
     padding: 48px 24px;
   }
   .ho-contact__title {
-    font-size: 32px;
+    font-size: 36px;
   }
 }

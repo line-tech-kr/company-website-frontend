@@ -1,7 +1,7 @@
 /* Line Tech — breadcrumb trail. Renders on product/category pages. */
 
 .lt-breadcrumbs {
-  font: 400 15px/1.4 var(--lt-sans);
+  font: 400 var(--lt-fs-sm)/1.4 var(--lt-sans);
   color: var(--pd-muted);
 }
 

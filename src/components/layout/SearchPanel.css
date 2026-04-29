@@ -74,7 +74,7 @@
   border-radius: var(--pd-r-lg);
   background: transparent;
   color: var(--pd-fg-strong);
-  font: 500 14px/1.4 var(--lt-sans);
+  font: 500 var(--lt-fs-sm)/1.4 var(--lt-sans);
   outline: 0;
   transition:
     border-color 0.15s ease,
@@ -109,7 +109,7 @@
   border-radius: 999px;
   background: var(--pd-surface);
   color: var(--pd-fg);
-  font: 500 12px/1 var(--lt-sans);
+  font: 500 var(--lt-fs-xs)/1 var(--lt-sans);
   cursor: pointer;
   transition:
     border-color 0.15s ease,
@@ -147,7 +147,7 @@
 
   .pd-search__input {
     height: 40px;
-    font-size: 14px;
+    font-size: var(--lt-fs-sm);
   }
 }
 
