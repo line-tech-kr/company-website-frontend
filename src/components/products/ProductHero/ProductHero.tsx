@@ -28,7 +28,7 @@ export function ProductHero({
     <section className="lt-pdp-hero">
       <div className="lt-pdp-hero__text">
         <div className="lt-pdp-hero__eyebrow">
-          <Glyph name="dot" size={10} />
+          <span className="lt-pdp-hero__eyebrow-dot" aria-hidden />
           <span>
             {categoryLabel} · {product.function}
           </span>
