@@ -10,7 +10,9 @@
   "breadcrumbs": {
     "label": "현재 위치",
     "categories": {
-      "analogueMfc": "아날로그 MFC"
+      "analogue": "아날로그 시리즈",
+      "digital": "디지털 시리즈",
+      "specialized": "특수 시리즈"
     }
   },
   "product": {
@@ -29,6 +31,96 @@
     "downloads": {
       "datasheet": "데이터시트",
       "manual": "매뉴얼"
+    }
+  },
+  "products": {
+    "kicker": "제품 시리즈",
+    "categories": {
+      "analogue": {
+        "title": "아날로그 시리즈",
+        "lede": "검증된 아날로그 질량유량 제어기 및 측정기. 20년간 공정 라인을 지켜온 M · MS 시리즈."
+      },
+      "digital": {
+        "title": "디지털 시리즈",
+        "lede": "8점 선형화. ±0.25 % F.S. 정확도. 1초 미만 응답. RS-485 · Modbus RTU."
+      },
+      "specialized": {
+        "title": "특수 시리즈",
+        "lede": "디스플레이 일체형, 방폭, MEMS 등 까다로운 환경을 위한 특수 사양 라인업."
+      }
+    },
+    "stack": {
+      "controllers": {
+        "title": "Controllers",
+        "subtitle": "질량유량 제어기 · MFC"
+      },
+      "meters": {
+        "title": "Meters",
+        "subtitle": "질량유량 측정기 · MFM"
+      }
+    },
+    "table": {
+      "model": "모델",
+      "description": "설명",
+      "range": "유량 범위",
+      "accuracy": "정확도",
+      "response": "응답",
+      "fitting": "연결",
+      "view": "보기"
+    },
+    "emptyStack": "이 카테고리에는 아직 등록된 제품이 없습니다."
+  },
+  "pdp": {
+    "tabs": {
+      "overview": "개요",
+      "specs": "사양",
+      "dimensions": "외형도",
+      "downloads": "자료실"
+    },
+    "ctas": {
+      "quote": "견적 요청",
+      "viewSpecs": "사양 보기"
+    },
+    "overview": {
+      "heading": "개요",
+      "sub": "장기 안정성과 빠른 응답을 동시에 요구하는 정밀 공정용으로 설계되었습니다."
+    },
+    "specs": {
+      "heading": "기술 사양",
+      "sub": "25°C · N₂ 환산 기준값. 별도 표기가 없는 한 동일 조건에서 측정.",
+      "copy": "전체 복사",
+      "copied": "복사됨"
+    },
+    "specGroups": {
+      "performance": "성능",
+      "signal": "신호 · 전원",
+      "environment": "환경"
+    },
+    "dimensions": {
+      "heading": "외형 치수",
+      "sub": "단위: mm · 1/4\" VCR 피팅 기준",
+      "caption": "유량 방향은 좌→우, 상단 면에 모델명 각인.",
+      "note": "도면은 참고용입니다. 정식 도면은 데이터시트를 참조하십시오.",
+      "callouts": {
+        "A": "W · 전폭",
+        "B": "H · 전고",
+        "C": "L · 전장",
+        "D": "피팅 중심 간",
+        "E": "고정 홀"
+      }
+    },
+    "downloads": {
+      "heading": "다운로드",
+      "sub": "최신본만 게시됩니다. 이력 자료는 문의 폼으로 요청해 주십시오.",
+      "download": "다운로드",
+      "done": "완료",
+      "placeholders": {
+        "datasheet": "{model} 데이터시트",
+        "manual": "{model} 사용자 매뉴얼",
+        "cad": "{model} 외형 도면",
+        "rev": "Rev. —",
+        "tbd": "준비 중"
+      }
     }
   }
 }

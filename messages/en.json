@@ -10,7 +10,9 @@
   "breadcrumbs": {
     "label": "Breadcrumb",
     "categories": {
-      "analogueMfc": "Analogue MFC"
+      "analogue": "Analogue series",
+      "digital": "Digital series",
+      "specialized": "Specialized series"
     }
   },
   "product": {
@@ -29,6 +31,96 @@
     "downloads": {
       "datasheet": "Datasheet",
       "manual": "Manual"
+    }
+  },
+  "products": {
+    "kicker": "Product series",
+    "categories": {
+      "analogue": {
+        "title": "Analogue series",
+        "lede": "Proven analogue mass flow controllers and meters. M and MS series — the workhorses behind two decades of process lines."
+      },
+      "digital": {
+        "title": "Digital series",
+        "lede": "8-point linearization. ±0.25% F.S. accuracy. Sub-second response. RS-485 / Modbus RTU."
+      },
+      "specialized": {
+        "title": "Specialized series",
+        "lede": "Display-integrated, explosion-proof, and MEMS variants for demanding environments."
+      }
+    },
+    "stack": {
+      "controllers": {
+        "title": "Controllers",
+        "subtitle": "Mass Flow Controllers · MFC"
+      },
+      "meters": {
+        "title": "Meters",
+        "subtitle": "Mass Flow Meters · MFM"
+      }
+    },
+    "table": {
+      "model": "Model",
+      "description": "Description",
+      "range": "Flow range",
+      "accuracy": "Accuracy",
+      "response": "Response",
+      "fitting": "Fitting",
+      "view": "View"
+    },
+    "emptyStack": "No products in this category yet."
+  },
+  "pdp": {
+    "tabs": {
+      "overview": "Overview",
+      "specs": "Specifications",
+      "dimensions": "Dimensions",
+      "downloads": "Downloads"
+    },
+    "ctas": {
+      "quote": "Get a quote",
+      "viewSpecs": "View specs"
+    },
+    "overview": {
+      "heading": "Overview",
+      "sub": "Engineered for precision processes that need long-term stability and fast response."
+    },
+    "specs": {
+      "heading": "Technical specifications",
+      "sub": "Reference values measured at 25°C, N₂ basis, unless otherwise noted.",
+      "copy": "Copy all",
+      "copied": "Copied"
+    },
+    "specGroups": {
+      "performance": "Performance",
+      "signal": "Signal & power",
+      "environment": "Environment"
+    },
+    "dimensions": {
+      "heading": "Outline dimensions",
+      "sub": "Units in mm. Reference dimensions for 1/4\" VCR fittings.",
+      "caption": "Flow direction left → right. Model name engraved on the top face.",
+      "note": "Drawing is for reference only. Refer to the datasheet for the official outline.",
+      "callouts": {
+        "A": "W · overall width",
+        "B": "H · overall height",
+        "C": "L · overall length",
+        "D": "Fitting centre-to-centre",
+        "E": "Mounting holes"
+      }
+    },
+    "downloads": {
+      "heading": "Downloads",
+      "sub": "Latest revisions only. Request historical files via the contact form.",
+      "download": "Download",
+      "done": "Done",
+      "placeholders": {
+        "datasheet": "{model} datasheet",
+        "manual": "{model} user manual",
+        "cad": "{model} outline drawing",
+        "rev": "Rev. —",
+        "tbd": "TBD"
+      }
     }
   }
 }
