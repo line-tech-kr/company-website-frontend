@@ -24,7 +24,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const CATALOG_PATH =
   process.env.CATALOG_PATH ??
-  resolve(homedir(), "Dev/linetech/company-docs-private/docs/product-catalog-2020-en.md");
+  resolve(
+    homedir(),
+    "Dev/linetech/company-docs-private/docs/product-catalog-2020-en.md",
+  );
 const OUTPUT_PATH = resolve(__dirname, "../src/lib/fixtures/products.json");
 
 const SKIP_MODELS = new Set(["LTI-200", "LTI-1000", "FC-050S", "PR-030"]);
@@ -397,7 +400,10 @@ const STANDARD_DIGITAL_COMM: DigitalCommunication = {
 
 type TableRow = Record<string, string>;
 
-function parseMarkdownTable(lines: string[], startIdx: number): { rows: TableRow[]; endIdx: number } {
+function parseMarkdownTable(
+  lines: string[],
+  startIdx: number,
+): { rows: TableRow[]; endIdx: number } {
   // first line: header, second: separator (---), then rows
   const headerLine = lines[startIdx];
   const sepLine = lines[startIdx + 1];
@@ -445,7 +451,11 @@ function parseAtAGlance(catalog: string): Map<string, AtAGlanceRow> {
   // find each "At-a-Glance" subsection table
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
-    if (/^####\s+(Analogue|Digital|Specialized)\s+Mass Flow (Controller|Meter) Specifications/.test(line)) {
+    if (
+      /^####\s+(Analogue|Digital|Specialized)\s+Mass Flow (Controller|Meter) Specifications/.test(
+        line,
+      )
+    ) {
       // find next table start
       let j = i + 1;
       while (j < lines.length && !/^\s*\|/.test(lines[j])) j++;
@@ -497,7 +507,9 @@ function extractProductSections(catalog: string): ProductSection[] {
 
     if (!inMassFlowSection) continue;
 
-    const headingMatch = line.match(/^###\s+([\w-]+)\s+—\s+(.+?)\s+\(page\s+(\d+)\)/);
+    const headingMatch = line.match(
+      /^###\s+([\w-]+)\s+—\s+(.+?)\s+\(page\s+(\d+)\)/,
+    );
     if (headingMatch) {
       if (current) sections.push(current);
       const model = headingMatch[1];
@@ -595,13 +607,15 @@ function buildMassFlowSpecs(
   const accuracy = parseAccuracy(accuracyRaw);
 
   // Repeatability: prefer mini > glance > default ±0.25
-  const repeatabilityRaw = mini.repeatability ?? glance?.repeatability ?? "±0.25 %";
+  const repeatabilityRaw =
+    mini.repeatability ?? glance?.repeatability ?? "±0.25 %";
   const repeatability = parseRepeatability(repeatabilityRaw);
 
   // Response time: only for MFC
   let responseTime: ResponseTime | undefined;
   if (function_ === "MFC") {
-    const responseRaw = mini.responseTime ?? glance?.response ?? defaultResponse(series);
+    const responseRaw =
+      mini.responseTime ?? glance?.response ?? defaultResponse(series);
     responseTime = parseResponseTime(responseRaw);
   }
 
@@ -615,7 +629,9 @@ function buildMassFlowSpecs(
 
   // Max pressure
   const maxPressureRaw = mini.maxPressure ?? glance?.maxPressure;
-  const maxPressure = maxPressureRaw ? parseMaxPressure(maxPressureRaw) : undefined;
+  const maxPressure = maxPressureRaw
+    ? parseMaxPressure(maxPressureRaw)
+    : undefined;
 
   // Temp range
   const tempRaw = mini.maxTemp ?? glance?.maxTemp ?? "0 ~ 50";
@@ -641,15 +657,25 @@ function defaultResponse(series: Product["series"]): string {
   return "<2 sec";
 }
 
-function buildProduct(section: ProductSection, glance: Map<string, AtAGlanceRow>): Product {
+function buildProduct(
+  section: ProductSection,
+  glance: Map<string, AtAGlanceRow>,
+): Product {
   const series = determineSeries(section.model);
   const function_ = determineFunction(section.headingTitle);
   const mini = parseMiniSpecTable(section.body);
   const connections = parseConnectionTable(section.body);
   const glanceRow = glance.get(section.model);
-  const massFlowSpecs = buildMassFlowSpecs(section.model, function_, series, mini, glanceRow);
+  const massFlowSpecs = buildMassFlowSpecs(
+    section.model,
+    function_,
+    series,
+    mini,
+    glanceRow,
+  );
 
-  const labelKey = PRODUCT_LABEL_OVERRIDES[section.model] ?? section.headingTitle;
+  const labelKey =
+    PRODUCT_LABEL_OVERRIDES[section.model] ?? section.headingTitle;
 
   const product: Product = {
     model: section.model,
@@ -691,9 +717,7 @@ function validate(p: Product): void {
   // Localization sanity: every translated field must have ko/zh distinct from en.
   // (English fallback would mean we forgot to translate a string.)
   assertTranslated(p.model, "productLabel", p.productLabel);
-  p.features.forEach((f, i) =>
-    assertTranslated(p.model, `features[${i}]`, f),
-  );
+  p.features.forEach((f, i) => assertTranslated(p.model, `features[${i}]`, f));
 
   // Connection lengths should look like "<number> mm"
   for (const c of p.connections) {
@@ -731,7 +755,9 @@ function main() {
       const product = buildProduct(section, glance);
       validate(product);
       products.push(product);
-      console.log(`  ✓ ${product.model.padEnd(10)} ${product.series}/${product.function}`);
+      console.log(
+        `  ✓ ${product.model.padEnd(10)} ${product.series}/${product.function}`,
+      );
     } catch (err) {
       console.error(`  ✗ ${section.model}: ${(err as Error).message}`);
       throw err;
