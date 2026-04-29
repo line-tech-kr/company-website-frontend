@@ -47,6 +47,14 @@ export type ContactFormCopy = {
   required: string;
   submit: string;
   submitDisabledHelp: string;
+  /**
+   * Templates used when the contact form is reached from a product page via
+   * `?product=<model>`. `{model}` is replaced at render time.
+   */
+  productInquiry: {
+    subject: string;
+    message: string;
+  };
 };
 
 export type DistributorRegion = {
@@ -156,6 +164,10 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       submit: "문의 보내기",
       submitDisabledHelp:
         "제출 백엔드는 현재 작업 중입니다. 위 이메일 주소로 보내주시면 즉시 회신드리겠습니다.",
+      productInquiry: {
+        subject: "견적 문의: {model}",
+        message: "{model}에 대한 견적 및 자세한 정보를 받고 싶습니다.",
+      },
     },
     privacyNotice:
       "문의 내용은 개인정보처리방침에 따라 처리되며 제3자에 공유되지 않습니다.",
@@ -257,6 +269,11 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       submit: "Send inquiry",
       submitDisabledHelp:
         "Submission backend is in progress. Please email the address above for an immediate reply.",
+      productInquiry: {
+        subject: "Inquiry: {model}",
+        message:
+          "I'd like to request a quote and more information about the {model}.",
+      },
     },
     privacyNotice:
       "We'll handle your message per our privacy policy and won't share your details with third parties.",
@@ -362,6 +379,10 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       submit: "发送咨询",
       submitDisabledHelp:
         "提交后端正在开发中。请使用上方邮箱直接联系我们以获得即时回复。",
+      productInquiry: {
+        subject: "询价：{model}",
+        message: "我想了解关于 {model} 的报价和更多信息。",
+      },
     },
     privacyNotice: "您的信息将依据我们的隐私政策处理，不会与第三方共享。",
     distributors: {

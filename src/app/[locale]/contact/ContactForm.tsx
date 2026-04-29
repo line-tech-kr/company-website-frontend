@@ -2,12 +2,23 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
-import type { ContactFormCopy } from "@/lib/content/contact";
+import type { ContactFormCopy, InquiryTypeId } from "@/lib/content/contact";
 
-type Props = { form: ContactFormCopy; privacyNotice: string };
+type ContactFormDefaults = {
+  inquiryType: InquiryTypeId;
+  extraField: string;
+  subject: string;
+  message: string;
+};
 
-export function ContactForm({ form, privacyNotice }: Props) {
-  const [type, setType] = useState<string>("");
+type Props = {
+  form: ContactFormCopy;
+  privacyNotice: string;
+  defaults?: ContactFormDefaults;
+};
+
+export function ContactForm({ form, privacyNotice, defaults }: Props) {
+  const [type, setType] = useState<string>(defaults?.inquiryType ?? "");
   const selected = form.inquiryTypeOptions.find((o) => o.id === type);
   const extra = selected?.extraField;
 
@@ -60,6 +71,9 @@ export function ContactForm({ form, privacyNotice }: Props) {
               type="text"
               required={extra.required}
               placeholder={extra.placeholder}
+              defaultValue={
+                type === defaults?.inquiryType ? defaults.extraField : undefined
+              }
               className="ct-form__input"
             />
           </div>
@@ -138,6 +152,7 @@ export function ContactForm({ form, privacyNotice }: Props) {
             name="subject"
             type="text"
             placeholder={form.placeholders.subject}
+            defaultValue={defaults?.subject}
             className="ct-form__input"
           />
         </div>
@@ -155,6 +170,7 @@ export function ContactForm({ form, privacyNotice }: Props) {
             required
             rows={6}
             placeholder={form.placeholders.message}
+            defaultValue={defaults?.message}
             className="ct-form__textarea"
           />
         </div>
