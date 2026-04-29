@@ -24,7 +24,7 @@ export function Feature({ h }: Props) {
         <Button
           variant="primary"
           size="md"
-          href="/products/analogue-mfc/m3030va"
+          href="/products/analogue/m3030va"
           trailingGlyph={<Glyph name="arrow-right" size={14} />}
         >
           {feature.cta}

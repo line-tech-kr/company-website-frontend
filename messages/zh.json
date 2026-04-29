@@ -10,7 +10,9 @@
   "breadcrumbs": {
     "label": "当前位置",
     "categories": {
-      "analogueMfc": "模拟 MFC"
+      "analogue": "模拟系列",
+      "digital": "数字系列",
+      "specialized": "特殊系列"
     }
   },
   "product": {
@@ -29,6 +31,96 @@
     "downloads": {
       "datasheet": "数据手册",
       "manual": "手册"
+    }
+  },
+  "products": {
+    "kicker": "产品系列",
+    "categories": {
+      "analogue": {
+        "title": "模拟系列",
+        "lede": "经过验证的模拟质量流量控制器和测量仪。M / MS 系列 — 二十年工艺线的中流砥柱。"
+      },
+      "digital": {
+        "title": "数字系列",
+        "lede": "8 点线性化。±0.25 % F.S. 精度。亚秒级响应。RS-485 · Modbus RTU。"
+      },
+      "specialized": {
+        "title": "特殊系列",
+        "lede": "集成显示、防爆、MEMS 等针对苛刻环境的特殊型号产品线。"
+      }
+    },
+    "stack": {
+      "controllers": {
+        "title": "Controllers",
+        "subtitle": "质量流量控制器 · MFC"
+      },
+      "meters": {
+        "title": "Meters",
+        "subtitle": "质量流量测量仪 · MFM"
+      }
+    },
+    "table": {
+      "model": "型号",
+      "description": "说明",
+      "range": "流量范围",
+      "accuracy": "精度",
+      "response": "响应",
+      "fitting": "接口",
+      "view": "查看"
+    },
+    "emptyStack": "该类别下暂无产品。"
+  },
+  "pdp": {
+    "tabs": {
+      "overview": "概述",
+      "specs": "规格",
+      "dimensions": "外形尺寸",
+      "downloads": "资料下载"
+    },
+    "ctas": {
+      "quote": "申请报价",
+      "viewSpecs": "查看规格"
+    },
+    "overview": {
+      "heading": "概述",
+      "sub": "面向需要长期稳定性与快速响应的精密工艺设计。"
+    },
+    "specs": {
+      "heading": "技术规格",
+      "sub": "参考值在 25°C、N₂ 换算条件下测得，除非另有说明。",
+      "copy": "全部复制",
+      "copied": "已复制"
+    },
+    "specGroups": {
+      "performance": "性能",
+      "signal": "信号 · 电源",
+      "environment": "环境"
+    },
+    "dimensions": {
+      "heading": "外形尺寸",
+      "sub": "单位：mm · 以 1/4\" VCR 接口为参考",
+      "caption": "流向自左至右，顶面刻有型号。",
+      "note": "图为参考。正式图样请参阅数据手册。",
+      "callouts": {
+        "A": "W · 总宽",
+        "B": "H · 总高",
+        "C": "L · 总长",
+        "D": "接口中心距",
+        "E": "安装孔"
+      }
+    },
+    "downloads": {
+      "heading": "资料下载",
+      "sub": "仅发布最新版。如需历史资料，请通过联系表单申请。",
+      "download": "下载",
+      "done": "完成",
+      "placeholders": {
+        "datasheet": "{model} 数据手册",
+        "manual": "{model} 使用手册",
+        "cad": "{model} 外形图",
+        "rev": "Rev. —",
+        "tbd": "待发布"
+      }
     }
   }
 }

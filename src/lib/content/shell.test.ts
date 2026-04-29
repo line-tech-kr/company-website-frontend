@@ -5,12 +5,7 @@ import { routing } from "@/i18n/routing";
 
 const LOCALES = routing.locales as readonly Locale[];
 
-const LOCKED_CATEGORY_CODES = [
-  "analogue-mfc",
-  "digital-mfc",
-  "mfm",
-  "specialized",
-] as const;
+const LOCKED_CATEGORY_CODES = ["analogue", "digital", "specialized"] as const;
 
 describe("LT_SHELL invariants", () => {
   it("uses the same nav ids in the same order across locales", () => {
@@ -20,7 +15,7 @@ describe("LT_SHELL invariants", () => {
     }
   });
 
-  it("locks the 4-category products taxonomy across locales", () => {
+  it("locks the 3-category products taxonomy across locales", () => {
     for (const locale of LOCALES) {
       const codes = LT_SHELL[locale].productsCategories.map((c) => c.code);
       expect(codes).toEqual([...LOCKED_CATEGORY_CODES]);

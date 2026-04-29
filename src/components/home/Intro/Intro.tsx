@@ -22,7 +22,7 @@ export function Intro({ h }: Props) {
           <Button
             variant="primary"
             size="lg"
-            href="/products/analogue-mfc/m3030va"
+            href="/products/analogue/m3030va"
             trailingGlyph={<Glyph name="arrow-right" size={14} />}
           >
             {h.intro.ctaPrimary}

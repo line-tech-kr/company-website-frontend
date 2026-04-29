@@ -3,9 +3,9 @@
  *
  * Conventions:
  *  - One typed object per locale, same shape as `LT_HOME` in `./home.ts`.
- *  - Products mega-menu reads `productsCategories` (4 function-based buckets
- *    per the locked taxonomy in `docs/linetech-slice-2-plan.md`), NOT the
- *    homepage's 4-series SKU visual. The two are intentionally decoupled.
+ *  - Products mega-menu reads `productsCategories` (3 series-based buckets:
+ *    analogue / digital / specialized). The homepage's series cards link into
+ *    the same routes via `PRODUCTS_SERIES_HREFS`.
  *  - `PRODUCTS_SERIES_HREFS` / `getProductsSeriesEntries()` exist solely to
  *    drive the homepage Series section as a secondary entry point.
  *  - Consumed by: Header (#6), Footer (#4), MegaMenu (#7). Keep labels here,
@@ -83,12 +83,12 @@ export type ShellFooter = {
 };
 
 /**
- * One of the 4 function-based product categories (Analogue MFC / Digital MFC /
- * MFM / Specialized). Drives the Products mega-menu and `/products/[category]`
+ * One of the 3 series-based product categories (Analogue / Digital /
+ * Specialized). Drives the Products mega-menu and `/products/[category]`
  * routes. Slug is locale-independent; label/desc are localized.
  */
 export type ProductsCategory = {
-  /** Stable slug: "analogue-mfc" | "digital-mfc" | "mfm" | "specialized". */
+  /** Stable slug: "analogue" | "digital" | "specialized". */
   code: string;
   label: string;
   desc: string;
@@ -127,7 +127,7 @@ export type ShellContent = {
   nav: ShellNavItem[];
   /** Top-right "Quote" button label in the header. Mailto target is shared. */
   quoteLabel: string;
-  /** Function-based product categories — 4 entries, locked taxonomy. */
+  /** Series-based product categories — 3 entries. */
   productsCategories: ProductsCategory[];
   /** Header search panel copy (#8). */
   search: ShellSearch;
@@ -146,10 +146,10 @@ export type ShellContent = {
  * lands. The Header component should tolerate 404s gracefully until then.
  */
 const PRODUCTS_SERIES_HREFS: Record<string, string> = {
-  "M / MS": "/products/analogue-mfc",
-  MD: "/products/digital-mfc",
+  "M / MS": "/products/analogue",
+  MD: "/products/digital",
   "LD / LM": "/products/specialized",
-  LTI: "/products/readouts",
+  LTI: "/products/specialized",
 };
 
 /** Resolve href for a series by its code; falls back to the category index. */
@@ -212,7 +212,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             eyebrow: "대표 모델",
             title: "M3030VA",
             blurb: "반도체·디스플레이 공정을 위한 디지털 압전식 MFC.",
-            href: "/products/analogue-mfc/m3030va",
+            href: "/products/analogue/m3030va",
             cta: "상세 보기",
           },
         },
@@ -250,7 +250,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             eyebrow: "주목할 자료",
             title: "M3030VA 매뉴얼 · 카탈로그",
             blurb: "대표 모델의 전체 규격과 통신 프로토콜을 한 문서로.",
-            href: "/products/analogue-mfc/m3030va",
+            href: "/products/analogue/m3030va",
             cta: "M3030VA 자료",
           },
         },
@@ -264,27 +264,21 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
     quoteLabel: "견적 요청",
     productsCategories: [
       {
-        code: "analogue-mfc",
-        label: "아날로그 MFC",
-        desc: "M · MS 시리즈 아날로그 질량유량 제어기",
-        href: "/products/analogue-mfc",
+        code: "analogue",
+        label: "아날로그 시리즈",
+        desc: "M · MS 시리즈 — 검증된 아날로그 MFC · MFM",
+        href: "/products/analogue",
       },
       {
-        code: "digital-mfc",
-        label: "디지털 MFC",
-        desc: "RS-485 통신 기반 MD 시리즈",
-        href: "/products/digital-mfc",
-      },
-      {
-        code: "mfm",
-        label: "MFM (질량유량계)",
-        desc: "전 시리즈 질량유량계 라인업",
-        href: "/products/mfm",
+        code: "digital",
+        label: "디지털 시리즈",
+        desc: "RS-485 · Modbus 기반 MD 시리즈 MFC · MFM",
+        href: "/products/digital",
       },
       {
         code: "specialized",
-        label: "특수 사양",
-        desc: "방폭 · 디스플레이 일체형 · 저가형 MEMS",
+        label: "특수 시리즈",
+        desc: "방폭 · 디스플레이 일체형 · MEMS 등 특수 사양",
         href: "/products/specialized",
       },
     ],
@@ -380,7 +374,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             title: "M3030VA",
             blurb:
               "Digital piezo-actuated MFC for semiconductor and display process lines.",
-            href: "/products/analogue-mfc/m3030va",
+            href: "/products/analogue/m3030va",
             cta: "View product",
           },
         },
@@ -419,7 +413,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             title: "M3030VA manual + catalogue",
             blurb:
               "Full specs and Modbus protocol for our flagship digital MFC.",
-            href: "/products/analogue-mfc/m3030va",
+            href: "/products/analogue/m3030va",
             cta: "Open M3030VA",
           },
         },
@@ -433,27 +427,21 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
     quoteLabel: "Quote",
     productsCategories: [
       {
-        code: "analogue-mfc",
-        label: "Analogue MFC",
-        desc: "M / MS series — proven analogue controllers",
-        href: "/products/analogue-mfc",
+        code: "analogue",
+        label: "Analogue series",
+        desc: "M / MS — proven analogue MFC and MFM",
+        href: "/products/analogue",
       },
       {
-        code: "digital-mfc",
-        label: "Digital MFC",
-        desc: "MD series with RS-485 communications",
-        href: "/products/digital-mfc",
-      },
-      {
-        code: "mfm",
-        label: "MFM (Mass Flow Meters)",
-        desc: "Flow meters across every series",
-        href: "/products/mfm",
+        code: "digital",
+        label: "Digital series",
+        desc: "MD series with RS-485 / Modbus communications",
+        href: "/products/digital",
       },
       {
         code: "specialized",
-        label: "Specialized",
-        desc: "Explosion-proof, integrated display, low-cost MEMS",
+        label: "Specialized series",
+        desc: "Explosion-proof, integrated display, MEMS variants",
         href: "/products/specialized",
       },
     ],
@@ -538,7 +526,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             eyebrow: "重点型号",
             title: "M3030VA",
             blurb: "用于半导体与显示工艺的数字压电式质量流量控制器。",
-            href: "/products/analogue-mfc/m3030va",
+            href: "/products/analogue/m3030va",
             cta: "查看详情",
           },
         },
@@ -576,7 +564,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             eyebrow: "推荐资料",
             title: "M3030VA 手册 · 样册",
             blurb: "旗舰数字 MFC 的完整规格与 Modbus 协议说明。",
-            href: "/products/analogue-mfc/m3030va",
+            href: "/products/analogue/m3030va",
             cta: "打开 M3030VA",
           },
         },
@@ -590,27 +578,21 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
     quoteLabel: "申请报价",
     productsCategories: [
       {
-        code: "analogue-mfc",
-        label: "模拟 MFC",
-        desc: "M · MS 系列模拟质量流量控制器",
-        href: "/products/analogue-mfc",
+        code: "analogue",
+        label: "模拟系列",
+        desc: "M · MS — 经典模拟 MFC 与 MFM",
+        href: "/products/analogue",
       },
       {
-        code: "digital-mfc",
-        label: "数字 MFC",
-        desc: "MD 系列，RS-485 通讯",
-        href: "/products/digital-mfc",
-      },
-      {
-        code: "mfm",
-        label: "MFM (质量流量计)",
-        desc: "全系列质量流量计产品",
-        href: "/products/mfm",
+        code: "digital",
+        label: "数字系列",
+        desc: "MD 系列，RS-485 / Modbus 通讯",
+        href: "/products/digital",
       },
       {
         code: "specialized",
-        label: "特殊型号",
-        desc: "防爆 · 集成显示 · 低成本 MEMS",
+        label: "特殊系列",
+        desc: "防爆、集成显示、MEMS 等特殊型号",
         href: "/products/specialized",
       },
     ],

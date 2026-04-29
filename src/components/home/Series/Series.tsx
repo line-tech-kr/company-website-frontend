@@ -32,7 +32,7 @@ export function Series({ h }: Props) {
               {s.feat && (
                 <Link
                   className="ho-series__feat"
-                  href="/products/analogue-mfc/m3030va"
+                  href="/products/analogue/m3030va"
                 >
                   {s.feat} <Glyph name="arrow-right" size={11} />
                 </Link>

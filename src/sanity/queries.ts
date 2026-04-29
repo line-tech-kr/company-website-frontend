@@ -1,21 +1,31 @@
 import { defineQuery } from "next-sanity";
 
+const PRODUCT_PROJECTION = `
+  model,
+  slug,
+  series,
+  "function": function,
+  "productLabel": {
+    "ko": coalesce(productLabel[language == "ko"][0].value, productLabel[language == "en"][0].value),
+    "en": coalesce(productLabel[language == "en"][0].value, productLabel[language == "ko"][0].value),
+    "zh": coalesce(productLabel[language == "zh"][0].value, productLabel[language == "en"][0].value)
+  },
+  features,
+  connections,
+  massFlowSpecs,
+  digitalCommunication,
+  images,
+  dimensionDrawing
+`;
+
 export const productBySlugQuery = defineQuery(`
   *[_type == "product" && slug.current == $slug][0]{
-    model,
-    slug,
-    series,
-    "function": function,
-    "productLabel": {
-      "ko": coalesce(productLabel[language == "ko"][0].value, productLabel[language == "en"][0].value),
-      "en": coalesce(productLabel[language == "en"][0].value, productLabel[language == "ko"][0].value),
-      "zh": coalesce(productLabel[language == "zh"][0].value, productLabel[language == "en"][0].value)
-    },
-    features,
-    connections,
-    massFlowSpecs,
-    digitalCommunication,
-    images,
-    dimensionDrawing
+    ${PRODUCT_PROJECTION}
+  }
+`);
+
+export const productsBySeriesQuery = defineQuery(`
+  *[_type == "product" && series == $series] | order(function asc, model asc){
+    ${PRODUCT_PROJECTION}
   }
 `);
