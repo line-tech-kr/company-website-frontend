@@ -54,7 +54,7 @@
   color: var(--pd-muted);
 }
 .lt-pdp-dl__label {
-  font: 500 15px var(--lt-sans);
+  font: 500 var(--lt-fs-md) var(--lt-sans);
   color: var(--pd-fg-strong);
   margin-bottom: 4px;
 }
@@ -62,7 +62,7 @@
   display: flex;
   gap: 8px;
   align-items: baseline;
-  font: 400 12px var(--lt-mono);
+  font: 400 var(--lt-fs-xs) var(--lt-mono);
   color: var(--pd-muted);
   letter-spacing: 0.02em;
 }

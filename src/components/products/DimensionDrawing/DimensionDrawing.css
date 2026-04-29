@@ -39,6 +39,7 @@
 .lt-pdp-dim__titleblock > div:last-child {
   border-right: 0;
 }
+/* DWG-stamp metadata — small fixed sizes preserved (not body text). */
 .lt-pdp-dim__titleblock span {
   font-size: 8.5px;
   color: var(--pd-muted);
@@ -126,7 +127,7 @@
   border-radius: 50%;
   background: var(--pd-surface);
   border: 1.2px solid currentColor;
-  font: 600 11px var(--lt-sans);
+  font: 600 var(--lt-fs-xs) var(--lt-sans);
 }
 .lt-pdp-dim__row.is-active .lt-pdp-dim__dot {
   background: var(--pd-primary);
@@ -134,14 +135,14 @@
   border-color: var(--pd-primary);
 }
 .lt-pdp-dim__rowlbl {
-  font: 400 13px var(--lt-sans);
+  font: 400 var(--lt-fs-xs) var(--lt-sans);
   color: var(--pd-fg);
 }
 .lt-pdp-dim__row.is-active .lt-pdp-dim__rowlbl {
   color: var(--pd-primary);
 }
 .lt-pdp-dim__rowval {
-  font: 500 13px var(--lt-mono);
+  font: 500 var(--lt-fs-xs) var(--lt-mono);
   color: var(--pd-fg-strong);
   font-variant-numeric: tabular-nums;
 }
@@ -150,13 +151,13 @@
 }
 .lt-pdp-dim__caption {
   margin: 18px 0 0;
-  font-size: 12.5px;
+  font-size: var(--lt-fs-xs);
   line-height: 1.5;
   color: var(--pd-fg);
 }
 .lt-pdp-dim__note {
   margin: 10px 0 0;
-  font-size: 11.5px;
+  font-size: var(--lt-fs-xs);
   line-height: 1.4;
   color: var(--pd-muted);
   padding-left: 10px;

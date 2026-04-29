@@ -19,7 +19,7 @@
   background: transparent;
   border-bottom: 2px solid transparent;
   color: var(--pd-muted);
-  font: 500 13.5px var(--lt-sans);
+  font: 500 var(--lt-fs-sm) var(--lt-sans);
   text-decoration: none;
   transition:
     color 0.15s,
@@ -32,7 +32,7 @@
   color: var(--pd-fg);
 }
 .lt-pdp-tabs__num {
-  font: 500 11px var(--lt-mono);
+  font: 500 var(--lt-fs-xs) var(--lt-mono);
   color: var(--pd-primary);
   letter-spacing: 0.1em;
 }
