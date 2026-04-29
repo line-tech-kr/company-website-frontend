@@ -6,7 +6,7 @@
   padding-bottom: 10px;
 }
 .lt-prod-stack__kicker {
-  font: 500 var(--lt-fs-micro) var(--lt-mono);
+  font: 500 var(--lt-fs-xs) var(--lt-mono);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--pd-muted);
@@ -43,7 +43,7 @@
   border-top: 1px solid var(--pd-border-strong);
   border-bottom: 1px solid var(--pd-border-strong);
   background: var(--pd-surface-2);
-  font: 500 var(--lt-fs-micro) var(--lt-mono);
+  font: 500 var(--lt-fs-xs) var(--lt-mono);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--pd-muted);

@@ -68,7 +68,7 @@
 
   /* Type scale — use these instead of literal px values.
    * Body tier (xs–xl) = reusable buckets. Title tier = named by role. */
-  --lt-fs-micro: 11px; /* instrument micro-text only — table indices, group nums, mono kickers, stamp metadata. NEVER for Korean body text. */
+  --lt-fs-micro: 11px; /* numeric-only / English-only micro: table indices, group nums, file-type tags (PDF/DWG), DWG-stamp metadata. NEVER for localized labels — Hangul/Han glyphs degrade below 13px. */
   --lt-fs-xs: 13px; /* captions, footnotes, mono labels, locale switcher */
   --lt-fs-sm: 15px; /* eyebrow, item desc, secondary body, nav links */
   --lt-fs-md: 17px; /* primary body, hero lede, section sub */
