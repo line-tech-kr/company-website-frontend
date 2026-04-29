@@ -160,7 +160,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  top: 56px;
+  top: var(--pd-top-h, 72px);
   z-index: 45;
   background: rgba(12, 14, 20, 0.18);
   opacity: 0;
@@ -173,7 +173,7 @@
 }
 .pd-top.is-scrolled ~ * .pd-mega-scrim,
 .pd-top.is-scrolled .pd-mega-scrim {
-  top: 48px;
+  top: var(--pd-top-h-scrolled, 56px);
 }
 
 @media (prefers-reduced-motion: reduce) {

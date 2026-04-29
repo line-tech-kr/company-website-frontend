@@ -20,7 +20,7 @@ export function Header({ locale }: Props) {
       <div className="pd-top__inner">
         <Link href="/" className="pd-top__brand" aria-label="Line Tech">
           <span className="pd-top__logomark">
-            <Logomark />
+            <Logomark size={28} />
           </span>
           <span className="pd-top__wordmark">
             LINE
