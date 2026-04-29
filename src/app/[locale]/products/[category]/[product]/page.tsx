@@ -134,7 +134,7 @@ export default async function ProductPage({ params }: Props) {
     },
     {
       feature: features[2] ?? "",
-      values: [specs.maxPressure.display],
+      values: specs.maxPressure ? [specs.maxPressure.display] : [],
     },
   ].filter((r) => r.feature);
 
