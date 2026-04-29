@@ -100,6 +100,10 @@
   display: inline-block;
 }
 
+.pd-top__hamburger {
+  display: none;
+}
+
 @media (max-width: 1000px) {
   .pd-top {
     --pd-top-h: 60px;
@@ -108,5 +112,13 @@
   .pd-top__inner {
     padding: 0 16px;
     gap: 12px;
+  }
+  .pd-top__divider,
+  .pd-top__right .lt-locale,
+  .pd-top__right .lt-btn {
+    display: none;
+  }
+  .pd-top__hamburger {
+    display: inline-flex;
   }
 }

@@ -8,6 +8,7 @@ import { LocaleSwitcher } from "./LocaleSwitcher";
 import { Logomark } from "./Logomark";
 import { MegaMenu, MegaMenuScrim } from "./MegaMenu";
 import { SearchTriggerButton } from "./SearchTriggerButton";
+import { MobileNavTrigger } from "./MobileNavTrigger";
 import "./Header.css";
 
 type Props = { locale: Locale };
@@ -16,7 +17,13 @@ export function Header({ locale }: Props) {
   const shell = LT_SHELL[locale];
 
   return (
-    <HeaderShell search={shell.search}>
+    <HeaderShell
+      search={shell.search}
+      mobileNav={shell.mobileNav}
+      navItems={shell.nav}
+      quoteLabel={shell.quoteLabel}
+      locale={locale}
+    >
       <div className="pd-top__inner">
         <Link href="/" className="pd-top__brand" aria-label="Line Tech">
           <span className="pd-top__logomark">
@@ -45,6 +52,10 @@ export function Header({ locale }: Props) {
           >
             {shell.quoteLabel}
           </Button>
+          <MobileNavTrigger
+            openLabel={shell.mobileNav.openLabel}
+            closeLabel={shell.mobileNav.closeLabel}
+          />
         </div>
       </div>
       <MegaMenu items={shell.nav} locale={locale} />

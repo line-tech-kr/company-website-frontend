@@ -1,14 +1,8 @@
 "use client";
 
-import {
-  useCallback,
-  useEffect,
-  useId,
-  useRef,
-  useState,
-  type RefObject,
-} from "react";
+import { useEffect, useId, useRef, useState, type RefObject } from "react";
 import type { ShellSearch } from "@/lib/content/shell";
+import { useDialogPanel } from "@/lib/hooks/useDialogPanel";
 import "./SearchPanel.css";
 
 type Props = {
@@ -32,68 +26,13 @@ export function SearchPanel({ content, open, onClose, triggerRef }: Props) {
   const panelRef = useRef<HTMLDivElement | null>(null);
   const [value, setValue] = useState("");
 
+  useDialogPanel({ open, onClose, panelRef, triggerRef });
+
   useEffect(() => {
     if (!open) return;
     const id = window.requestAnimationFrame(() => inputRef.current?.focus());
     return () => window.cancelAnimationFrame(id);
   }, [open]);
-
-  // Restore focus + clear input when closing (only if we were previously open).
-  const wasOpenRef = useRef(false);
-  useEffect(() => {
-    if (open) {
-      wasOpenRef.current = true;
-      return;
-    }
-    if (wasOpenRef.current) {
-      wasOpenRef.current = false;
-      setValue("");
-      const id = window.requestAnimationFrame(() =>
-        triggerRef.current?.focus(),
-      );
-      return () => window.cancelAnimationFrame(id);
-    }
-  }, [open, triggerRef]);
-
-  useEffect(() => {
-    if (!open) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, [open]);
-
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open, onClose]);
-
-  // Tab trap across the panel's focusable controls.
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLDivElement>) => {
-      if (e.key !== "Tab" || !panelRef.current) return;
-      const focusable = panelRef.current.querySelectorAll<HTMLElement>(
-        'input, button:not([disabled]), [tabindex]:not([tabindex="-1"])',
-      );
-      if (focusable.length === 0) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      const active = document.activeElement as HTMLElement | null;
-      if (e.shiftKey && active === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && active === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    },
-    [],
-  );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -116,7 +55,6 @@ export function SearchPanel({ content, open, onClose, triggerRef }: Props) {
         role="dialog"
         aria-modal="true"
         aria-labelledby={headingId}
-        onKeyDown={handleKeyDown}
       >
         <div className="pd-search__inner">
           <h2 id={headingId} className="pd-search__sr">
