@@ -17,6 +17,12 @@
   color: var(--pd-primary);
   margin-bottom: 20px;
 }
+:lang(ko) .lt-pdp-hero__eyebrow,
+:lang(zh) .lt-pdp-hero__eyebrow {
+  font-family: var(--lt-sans);
+  letter-spacing: 0;
+  text-transform: none;
+}
 .lt-pdp-hero__model {
   margin: 0 0 6px;
   font: 500 var(--lt-fs-hero) / 1 var(--lt-sans);
