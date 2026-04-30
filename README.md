@@ -63,3 +63,8 @@ scripts/               # catalog parser + Sanity seeder
 - `docs/linetech-slice-1.md` — first vertical slice plan (M3030VA product page)
 - `docs/handoff/` — design system handoff prototype
 - `CLAUDE.md` / `AGENTS.md` — instructions for AI assistants working in this repo
+
+## Continuous integration
+
+- `.github/workflows/ci.yml` — format / lint / typecheck / test / build on every pull request and on pushes to `main`.
+- `.github/workflows/claude-review.yml` — automated pull request review by Claude (`anthropics/claude-code-action`); runs on non-draft pull requests from this repo.
