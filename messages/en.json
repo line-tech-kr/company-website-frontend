@@ -7,6 +7,19 @@
     "download": "Download",
     "home": "Home"
   },
+  "errors": {
+    "notFound": {
+      "title": "Page not found",
+      "body": "The page you requested has moved or no longer exists.",
+      "cta": "Back to home"
+    },
+    "runtime": {
+      "title": "Something went wrong",
+      "body": "We couldn't load this page. Please try again in a moment.",
+      "retry": "Try again",
+      "home": "Back to home"
+    }
+  },
   "breadcrumbs": {
     "label": "Breadcrumb",
     "categories": {

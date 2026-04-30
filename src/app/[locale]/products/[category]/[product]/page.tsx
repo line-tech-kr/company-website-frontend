@@ -15,6 +15,7 @@ import {
   type DownloadItem,
 } from "@/components/products/DownloadsList";
 import { sanityClient } from "@/sanity/client";
+import { fetchSanity } from "@/sanity/fetch";
 import { productBySlugQuery } from "@/sanity/queries";
 import { ALL_PRODUCTS } from "@/lib/fixtures/products";
 import {
@@ -24,10 +25,11 @@ import {
   type CategorySlug,
 } from "@/lib/categories";
 import { routing } from "@/i18n/routing";
+import type { Locale } from "@/lib/content/home";
 import type { MassFlowSpecs, Product } from "@/lib/types/product";
 
 type Props = {
-  params: Promise<{ locale: string; category: string; product: string }>;
+  params: Promise<{ locale: Locale; category: string; product: string }>;
 };
 
 const SPEC_GROUPS: Array<{
@@ -78,9 +80,10 @@ export default async function ProductPage({ params }: Props) {
 
   if (!isCategorySlug(category)) notFound();
 
-  const product = (await sanityClient.fetch(productBySlugQuery, {
-    slug: productSlug,
-  })) as Product | null;
+  const product = (await fetchSanity(
+    () => sanityClient.fetch(productBySlugQuery, { slug: productSlug }),
+    { name: "productBySlug", params: { slug: productSlug } },
+  )) as Product | null;
 
   if (!product) notFound();
   if (product.series !== CATEGORIES[category].series) {
@@ -102,8 +105,7 @@ export default async function ProductPage({ params }: Props) {
     getTranslations("pdp"),
   ]);
 
-  const typedLocale = locale as "ko" | "en" | "zh";
-  const categoryLabel = tBreadcrumb(category as CategorySlug);
+  const categoryLabel = tBreadcrumb(category);
 
   const breadcrumbs = [
     { label: tCommon("home"), href: "/" },
@@ -130,7 +132,7 @@ export default async function ProductPage({ params }: Props) {
     }),
   }));
 
-  const features = product.features.map((f) => f[typedLocale]);
+  const features = product.features.map((f) => f[locale]);
   const specs = product.massFlowSpecs;
   const overviewRows = [
     {
@@ -186,7 +188,7 @@ export default async function ProductPage({ params }: Props) {
 
       <ProductHero
         product={product}
-        locale={typedLocale}
+        locale={locale}
         categoryLabel={categoryLabel}
         quoteLabel={tPdp("ctas.quote")}
         specsLabel={tPdp("ctas.viewSpecs")}
