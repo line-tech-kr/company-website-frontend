@@ -4,17 +4,14 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { CategoryHero } from "@/components/products/CategoryHero";
 import { ProductStack } from "@/components/products/ProductStack";
 import { sanityClient } from "@/sanity/client";
+import { fetchSanity } from "@/sanity/fetch";
 import { productsBySeriesQuery } from "@/sanity/queries";
-import {
-  CATEGORIES,
-  CATEGORY_SLUGS,
-  isCategorySlug,
-  type CategorySlug,
-} from "@/lib/categories";
+import { CATEGORIES, CATEGORY_SLUGS, isCategorySlug } from "@/lib/categories";
 import { routing } from "@/i18n/routing";
+import type { Locale } from "@/lib/content/home";
 import type { Product } from "@/lib/types/product";
 
-type Props = { params: Promise<{ locale: string; category: string }> };
+type Props = { params: Promise<{ locale: Locale; category: string }> };
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
@@ -29,9 +26,10 @@ export default async function CategoryPage({ params }: Props) {
   if (!isCategorySlug(category)) notFound();
 
   const cat = CATEGORIES[category];
-  const products = (await sanityClient.fetch(productsBySeriesQuery, {
-    series: cat.series,
-  })) as Product[];
+  const products = (await fetchSanity(
+    () => sanityClient.fetch(productsBySeriesQuery, { series: cat.series }),
+    { name: "productsBySeries", params: { series: cat.series } },
+  )) as Product[];
 
   const [tCommon, tNav, tBreadcrumb, tProducts] = await Promise.all([
     getTranslations("common"),
@@ -46,7 +44,7 @@ export default async function CategoryPage({ params }: Props) {
   const breadcrumbs = [
     { label: tCommon("home"), href: "/" },
     { label: tNav("products"), href: "/products" },
-    { label: tBreadcrumb(category as CategorySlug) },
+    { label: tBreadcrumb(category) },
   ];
 
   const headers = {
@@ -59,7 +57,6 @@ export default async function CategoryPage({ params }: Props) {
   };
   const viewLabel = tProducts("table.view");
   const emptyLabel = tProducts("emptyStack");
-  const typedLocale = locale as "ko" | "en" | "zh";
 
   return (
     <main className="lt-wrap">
@@ -76,7 +73,7 @@ export default async function CategoryPage({ params }: Props) {
         subtitle={tProducts("stack.controllers.subtitle")}
         products={controllers}
         category={category}
-        locale={typedLocale}
+        locale={locale}
         emptyLabel={emptyLabel}
         viewLabel={viewLabel}
         headers={headers}
@@ -86,7 +83,7 @@ export default async function CategoryPage({ params }: Props) {
         subtitle={tProducts("stack.meters.subtitle")}
         products={meters}
         category={category}
-        locale={typedLocale}
+        locale={locale}
         emptyLabel={emptyLabel}
         viewLabel={viewLabel}
         headers={headers}

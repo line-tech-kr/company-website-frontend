@@ -7,6 +7,19 @@
     "download": "下载",
     "home": "首页"
   },
+  "errors": {
+    "notFound": {
+      "title": "未找到页面",
+      "body": "您访问的页面已迁移或不存在。",
+      "cta": "返回首页"
+    },
+    "runtime": {
+      "title": "出现错误",
+      "body": "暂时无法加载此页面，请稍后重试。",
+      "retry": "重试",
+      "home": "返回首页"
+    }
+  },
   "breadcrumbs": {
     "label": "当前位置",
     "categories": {

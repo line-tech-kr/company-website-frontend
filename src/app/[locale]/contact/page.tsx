@@ -7,6 +7,7 @@ import { LT_SHELL } from "@/lib/content/shell";
 import type { Locale } from "@/lib/content/home";
 import type { Product } from "@/lib/types/product";
 import { sanityClient } from "@/sanity/client";
+import { fetchSanity } from "@/sanity/fetch";
 import { productByModelQuery } from "@/sanity/queries";
 import { ContactForm } from "./ContactForm";
 import "./contact-page.css";
@@ -44,9 +45,10 @@ export default async function ContactPage({ params, searchParams }: Props) {
     ? rawProductParam[0]
     : rawProductParam;
   const product = productParam
-    ? ((await sanityClient.fetch(productByModelQuery, {
-        model: productParam,
-      })) as Product | null)
+    ? ((await fetchSanity(
+        () => sanityClient.fetch(productByModelQuery, { model: productParam }),
+        { name: "productByModel", params: { model: productParam } },
+      )) as Product | null)
     : null;
 
   const tCommon = await getTranslations("common");
