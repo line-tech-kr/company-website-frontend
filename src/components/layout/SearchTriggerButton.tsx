@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useSearch } from "./SearchContext";
+import { useSearch } from "./HeaderShell";
 
 type Props = {
   /** Localized aria-label for the icon-only button. */
