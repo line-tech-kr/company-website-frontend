@@ -10,7 +10,9 @@ import {
   categoryForSeries,
   type CategorySlug,
 } from "@/lib/categories";
+import { SanityProductSchema } from "@/lib/types/product";
 import type { Product } from "@/lib/types/product";
+import { z } from "zod";
 import "./products-list.css";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -25,7 +27,9 @@ export default async function ProductsListPage({ params }: Props) {
     getTranslations("products"),
   ]);
 
-  const products = (await sanityClient.fetch(allProductsQuery)) as Product[];
+  const products = z
+    .array(SanityProductSchema)
+    .parse(await sanityClient.fetch(allProductsQuery));
   const typedLocale = locale as "ko" | "en" | "zh";
 
   const grouped = new Map<CategorySlug, Product[]>(
