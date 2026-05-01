@@ -185,7 +185,7 @@
 .pd-search__result:hover,
 .pd-search__result:focus-visible {
   outline: none;
-  background: #f0f2f6;
+  background: var(--pd-surface-raised);
 }
 
 .pd-search__result-title {

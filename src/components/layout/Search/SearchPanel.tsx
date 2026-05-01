@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type RefObject } from "react";
+import { useCallback, useEffect, useId, useRef, useState, type RefObject } from "react";
 import Fuse from "fuse.js";
 import { useLocale } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
@@ -19,7 +19,8 @@ type Props = {
 
 const PANEL_ID = "lt-search-panel";
 
-// Chips with a known direct URL — navigate without running a search
+// Chips with a known direct URL — navigate without running a search.
+// m3030va is hardcoded to analogue; update if the product series changes in Sanity.
 const CHIP_URLS: Record<string, string> = {
   "m3030va": "/products/analogue/m3030va",
   "digital-mfc": "/products/digital",
@@ -39,11 +40,11 @@ export function SearchPanel({ content, open, onClose, triggerRef }: Props) {
   const [results, setResults] = useState<SearchEntry[] | null>(null);
 
   // Clears local state and delegates to the prop — used everywhere we close.
-  const close = () => {
+  const close = useCallback(() => {
     setValue("");
     setResults(null);
     onClose();
-  };
+  }, [onClose]);
 
   useDialogPanel({ open, onClose: close, panelRef, triggerRef });
 
@@ -61,7 +62,9 @@ export function SearchPanel({ content, open, onClose, triggerRef }: Props) {
           threshold: 0.3,
         });
       })
-      .catch(() => {});
+      .catch(() => {
+        console.warn("[search] index not found — run pnpm build:search-index");
+      });
   }, [open, locale]);
 
   useEffect(() => {
