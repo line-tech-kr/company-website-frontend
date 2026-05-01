@@ -97,6 +97,8 @@ export function HeaderShell({
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  const closeSearch = useCallback(() => setSearchOpen(false), []);
+
   const registerSearchTrigger = useCallback((el: HTMLButtonElement | null) => {
     triggerRef.current = el;
   }, []);
@@ -184,7 +186,7 @@ export function HeaderShell({
             <SearchPanel
               content={search}
               open={searchOpen}
-              onClose={() => setSearchOpen(false)}
+              onClose={closeSearch}
               triggerRef={triggerRef}
             />
             <MobileNav

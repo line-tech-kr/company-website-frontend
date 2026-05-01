@@ -38,6 +38,7 @@ export function SearchPanel({ content, open, onClose, triggerRef }: Props) {
 
   const [value, setValue] = useState("");
   const [results, setResults] = useState<SearchEntry[] | null>(null);
+  const [indexReady, setIndexReady] = useState(false);
 
   // Clears local state and delegates to the prop — used everywhere we close.
   const close = useCallback(() => {
@@ -61,6 +62,7 @@ export function SearchPanel({ content, open, onClose, triggerRef }: Props) {
           ],
           threshold: 0.3,
         });
+        setIndexReady(true);
       })
       .catch(() => {
         console.warn("[search] index not found — run pnpm build:search-index");
@@ -93,27 +95,27 @@ export function SearchPanel({ content, open, onClose, triggerRef }: Props) {
   };
 
   const handleResultKeyDown = (
-    e: React.KeyboardEvent<HTMLLIElement>,
+    e: React.KeyboardEvent<HTMLAnchorElement>,
     index: number,
   ) => {
+    const items = () =>
+      resultsRef.current?.querySelectorAll<HTMLAnchorElement>(
+        ".pd-search__result",
+      );
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      const items =
-        resultsRef.current?.querySelectorAll<HTMLAnchorElement>(
-          ".pd-search__result",
-        );
-      items?.[index + 1]?.focus();
+      items()?.[index + 1]?.focus();
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      if (index === 0) {
-        inputRef.current?.focus();
-      } else {
-        const items =
-          resultsRef.current?.querySelectorAll<HTMLAnchorElement>(
-            ".pd-search__result",
-          );
-        items?.[index - 1]?.focus();
-      }
+      if (index === 0) inputRef.current?.focus();
+      else items()?.[index - 1]?.focus();
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      inputRef.current?.focus();
+    } else if (e.key === "End") {
+      e.preventDefault();
+      const all = items();
+      all?.[all.length - 1]?.focus();
     }
   };
 
@@ -158,6 +160,7 @@ export function SearchPanel({ content, open, onClose, triggerRef }: Props) {
                   type="button"
                   className="pd-search__chip"
                   onClick={() => handleChipClick(chip.id, chip.label)}
+                  disabled={!CHIP_URLS[chip.id] && !indexReady}
                 >
                   {chip.label}
                 </button>
@@ -215,11 +218,12 @@ export function SearchPanel({ content, open, onClose, triggerRef }: Props) {
               ) : (
                 <ul ref={resultsRef} className="pd-search__result-list">
                   {results.map((entry, i) => (
-                    <li key={entry.id} onKeyDown={(e) => handleResultKeyDown(e, i)}>
+                    <li key={entry.id}>
                       <Link
                         href={entry.url}
                         className="pd-search__result"
                         onClick={close}
+                        onKeyDown={(e) => handleResultKeyDown(e, i)}
                       >
                         <span className="pd-search__result-title">
                           {entry.title}

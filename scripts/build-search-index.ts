@@ -26,8 +26,12 @@ const CATEGORY_LABELS: Record<"analogue" | "digital" | "specialized", Record<Loc
   specialized: { ko: "특수", en: "Specialized", zh: "特殊" },
 };
 
-function productToEntries(p: Product): Record<Locale, SearchEntry> {
-  const category = categoryForSeries(p.series)!;
+function productToEntries(p: Product): Record<Locale, SearchEntry> | null {
+  const category = categoryForSeries(p.series);
+  if (!category) {
+    console.warn(`  skipping ${p.model}: unknown series "${p.series}"`);
+    return null;
+  }
   const url = `/products/${category}/${p.slug.current}`;
   const productType = p.function.toLowerCase() as "mfc" | "mfm";
   const signal = p.series;
@@ -136,7 +140,10 @@ async function main() {
   for (const locale of LOCALES) {
     const entries: SearchEntry[] = [
       ...STATIC_ENTRIES[locale],
-      ...products.map((p) => productToEntries(p)[locale]),
+      ...products.flatMap((p) => {
+        const entry = productToEntries(p);
+        return entry ? [entry[locale]] : [];
+      }),
     ];
     writeFileSync(
       `public/search/index.${locale}.json`,
