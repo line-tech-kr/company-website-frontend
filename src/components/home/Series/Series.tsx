@@ -1,5 +1,4 @@
 import { Link } from "@/i18n/navigation";
-import { Glyph } from "@/components/ui/Glyph";
 import { SectionHead } from "../SectionHead";
 import type { HomeContent } from "@/lib/content/home";
 import "./Series.css";
@@ -17,8 +16,9 @@ export function Series({ h }: Props) {
       />
       <div className="ho-series">
         {series.items.map((s) => (
-          <div
+          <Link
             key={s.code}
+            href={s.href}
             className={`ho-series__card${s.highlight ? " is-highlight" : ""}`}
           >
             <div className="ho-series__top">
@@ -29,16 +29,9 @@ export function Series({ h }: Props) {
             <p className="ho-series__desc">{s.desc}</p>
             <div className="ho-series__foot">
               <span className="ho-series__range">{s.range}</span>
-              {s.feat && (
-                <Link
-                  className="ho-series__feat"
-                  href="/products/analogue/m3030va"
-                >
-                  {s.feat} <Glyph name="arrow-right" size={11} />
-                </Link>
-              )}
+              {s.feat && <span className="ho-series__feat">{s.feat}</span>}
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

@@ -8,6 +8,7 @@ type SeriesItem = {
   desc: string;
   count: string;
   range: string;
+  href: string;
   highlight?: boolean;
   feat?: string;
 };
@@ -68,6 +69,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
           desc: "가장 오래 검증된 기본 라인업. 0~5 VDC / 4~20 mA 신호.",
           count: "18 모델",
           range: "0.01 – 5,000 SLPM",
+          href: "/products/analogue",
           highlight: true,
           feat: "★ M3030VA",
         },
@@ -77,20 +79,23 @@ export const LT_HOME: Record<Locale, HomeContent> = {
           desc: "8-포인트 보정, ±0.25 % 정확도. 응답 0.5–1 초.",
           count: "14 모델",
           range: "0.01 – 5,000 SLPM",
+          href: "/products/digital",
         },
         {
           code: "LD / LM",
-          name: "전문 시리즈",
-          desc: "내장 디스플레이(LD) · MEMS 저비용(LM) · 방폭(EX).",
+          name: "특수 시리즈",
+          desc: "방폭 · 디스플레이 일체형 · MEMS 등 특수 사양.",
           count: "8 모델",
           range: "0.01 – 1,000 SLPM",
+          href: "/products/specialized",
         },
         {
           code: "LTI",
-          name: "리드아웃·부속",
-          desc: "LTI-200/1000 표시기, FC-050S 유량계, PR-030 압력계.",
+          name: "부속품",
+          desc: "표시기 · 고압 유량 제어기 · 압력 충격 보호기.",
           count: "5 모델",
           range: "전 모델 공통",
+          href: "/products/accessories",
         },
       ],
     },
@@ -166,6 +171,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
           desc: "The longest-running line. 0–5 VDC / 4–20 mA signal.",
           count: "18 models",
           range: "0.01 – 5,000 SLPM",
+          href: "/products/analogue",
           highlight: true,
           feat: "★ M3030VA",
         },
@@ -175,20 +181,23 @@ export const LT_HOME: Record<Locale, HomeContent> = {
           desc: "8-point calibration, ±0.25 % accuracy, 0.5–1 s response.",
           count: "14 models",
           range: "0.01 – 5,000 SLPM",
+          href: "/products/digital",
         },
         {
           code: "LD / LM",
           name: "Specialized Series",
-          desc: "Built-in display (LD) · MEMS low-cost (LM) · Explosion-proof (EX).",
+          desc: "Explosion-proof, integrated display, MEMS variants.",
           count: "8 models",
           range: "0.01 – 1,000 SLPM",
+          href: "/products/specialized",
         },
         {
           code: "LTI",
-          name: "Readouts & Parts",
-          desc: "LTI-200/1000 readouts, FC-050S flowmeter, PR-030 pressure.",
+          name: "Accessories",
+          desc: "Panel readouts, high-pressure regulators, shock protectors.",
           count: "5 models",
           range: "all lines",
+          href: "/products/accessories",
         },
       ],
     },
@@ -250,7 +259,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
     series: {
       kicker: "01 — 产品系列",
       title: "四个系列,一个标准。",
-      sub: "覆盖模拟、数字、特种三大类型的完整型谱。",
+      sub: "覆盖模拟、数字、特种与配件四大类型的完整型谱。",
       items: [
         {
           code: "M / MS",
@@ -258,6 +267,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
           desc: "历史最悠久的基础型谱。0–5 VDC / 4–20 mA 信号。",
           count: "18 款",
           range: "0.01 – 5,000 SLPM",
+          href: "/products/analogue",
           highlight: true,
           feat: "★ M3030VA",
         },
@@ -267,20 +277,23 @@ export const LT_HOME: Record<Locale, HomeContent> = {
           desc: "8 点校准,±0.25 % 精度,0.5–1 秒响应。",
           count: "14 款",
           range: "0.01 – 5,000 SLPM",
+          href: "/products/digital",
         },
         {
           code: "LD / LM",
           name: "特种系列",
-          desc: "内置显示 (LD) · MEMS 低成本 (LM) · 防爆 (EX)。",
+          desc: "防爆 · 内置显示 · MEMS 低成本等特种规格。",
           count: "8 款",
           range: "0.01 – 1,000 SLPM",
+          href: "/products/specialized",
         },
         {
           code: "LTI",
-          name: "显示与配件",
-          desc: "LTI-200/1000 显示器、FC-050S 流量计、PR-030 压力计。",
+          name: "配件",
+          desc: "面板显示器 · 高压稳流控制器 · 压力冲击保护器。",
           count: "5 款",
           range: "全系列兼容",
+          href: "/products/accessories",
         },
       ],
     },

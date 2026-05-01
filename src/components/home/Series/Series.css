@@ -16,6 +16,8 @@
   gap: 12px;
   transition: background 0.15s;
   min-height: 220px;
+  text-decoration: none;
+  color: inherit;
 }
 .ho-series__card:hover {
   background: var(--pd-surface-2);
@@ -67,20 +69,21 @@
   letter-spacing: 0.02em;
 }
 .ho-series__feat {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
   color: var(--pd-primary);
-}
-.ho-series__feat:hover {
-  color: var(--pd-primary-hover);
+  font-weight: 600;
 }
 
 :lang(ko) .ho-series__count,
-:lang(zh) .ho-series__count {
+:lang(zh) .ho-series__count,
+:lang(ko) .ho-series__range,
+:lang(zh) .ho-series__range {
   font-family: var(--lt-sans);
   letter-spacing: 0;
   text-transform: none;
+}
+.ho-series__card:focus-visible {
+  outline: 2px solid var(--pd-primary);
+  outline-offset: -2px;
 }
 
 @media (max-width: 1000px) {
