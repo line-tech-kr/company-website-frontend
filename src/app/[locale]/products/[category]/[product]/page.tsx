@@ -1,7 +1,7 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { permanentRedirect } from "@/i18n/navigation";
-import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { ProductHero } from "@/components/products/ProductHero";
 import { TabNav } from "@/components/products/TabNav";
 import { Overview } from "@/components/products/Overview";

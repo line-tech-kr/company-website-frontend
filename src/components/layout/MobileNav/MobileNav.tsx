@@ -11,7 +11,7 @@ import {
 } from "@/lib/content/shell";
 import type { Locale } from "@/lib/content/home";
 import { useDialogPanel } from "@/lib/hooks/useDialogPanel";
-import { LocaleSwitcher } from "./LocaleSwitcher";
+import { LocaleSwitcher } from "../LocaleSwitcher/LocaleSwitcher";
 import "./MobileNav.css";
 
 const PANEL_ID = "lt-mobile-nav-panel";

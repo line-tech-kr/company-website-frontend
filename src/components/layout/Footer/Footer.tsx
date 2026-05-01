@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { LT_SHELL } from "@/lib/content/shell";
 import type { Locale } from "@/lib/content/home";
-import { Logomark } from "./Logomark";
+import { Logomark } from "../Logomark";
 import "./Footer.css";
 
 type Props = {

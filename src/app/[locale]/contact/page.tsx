@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { Button } from "@/components/ui/Button";
 import { LT_CONTACT } from "@/lib/content/contact";
 import { LT_SHELL } from "@/lib/content/shell";

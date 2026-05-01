@@ -1,6 +1,6 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { CategoryHero } from "@/components/products/CategoryHero";
 import { ProductStack } from "@/components/products/ProductStack";
 import { sanityClient } from "@/sanity/client";

@@ -3,12 +3,12 @@ import { Button } from "@/components/ui/Button";
 import { LT_SHELL } from "@/lib/content/shell";
 import type { Locale } from "@/lib/content/home";
 import { HeaderShell } from "./HeaderShell";
-import { HeaderNav } from "./HeaderNav";
-import { LocaleSwitcher } from "./LocaleSwitcher";
-import { Logomark } from "./Logomark";
-import { MegaMenu, MegaMenuScrim } from "./MegaMenu";
-import { SearchTriggerButton } from "./SearchTriggerButton";
-import { MobileNavTrigger } from "./MobileNavTrigger";
+import { HeaderNav } from "../HeaderNav/HeaderNav";
+import { LocaleSwitcher } from "../LocaleSwitcher/LocaleSwitcher";
+import { Logomark } from "../Logomark";
+import { MegaMenu, MegaMenuScrim } from "../MegaMenu/MegaMenu";
+import { SearchTriggerButton } from "../Search/SearchTriggerButton";
+import { MobileNavTrigger } from "../MobileNav/MobileNavTrigger";
 import "./Header.css";
 
 type Props = { locale: Locale };

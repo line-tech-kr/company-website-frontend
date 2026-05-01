@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/lib/content/home";
-import { Header } from "./Header";
-import { Footer } from "./Footer";
+import { Header } from "./Header/Header";
+import { Footer } from "./Footer/Footer";
 
 type Props = { locale: Locale; children: React.ReactNode };
 

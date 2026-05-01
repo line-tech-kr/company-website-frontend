@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import {
   Breadcrumbs,
   type BreadcrumbItem,
-} from "@/components/layout/Breadcrumbs";
+} from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { LT_COMPANY } from "@/lib/content/company";
 import type { Locale } from "@/lib/content/home";
 import { CompanySideNav } from "./CompanySideNav";
