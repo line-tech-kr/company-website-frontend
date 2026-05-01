@@ -10,7 +10,6 @@ type Props = {
   category: CategorySlug;
   locale: "ko" | "en" | "zh";
   emptyLabel: string;
-  viewLabel: string;
   headers: {
     model: string;
     description: string;
@@ -28,7 +27,6 @@ export function ProductStack({
   category,
   locale,
   emptyLabel,
-  viewLabel,
   headers,
 }: Props) {
   return (
@@ -89,12 +87,6 @@ export function ProductStack({
               >
                 {headers.fitting}
               </th>
-              <th
-                scope="col"
-                className="lt-prod-stack__head-cell lt-prod-stack__head-cell--act"
-              >
-                <span className="lt-prod-stack__sr-only">{viewLabel}</span>
-              </th>
             </tr>
           </thead>
           <tbody>
@@ -104,7 +96,6 @@ export function ProductStack({
                 product={p}
                 category={category}
                 locale={locale}
-                viewLabel={viewLabel}
               />
             ))}
           </tbody>

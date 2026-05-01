@@ -55,7 +55,6 @@ export default async function CategoryPage({ params }: Props) {
     response: tProducts("table.response"),
     fitting: tProducts("table.fitting"),
   };
-  const viewLabel = tProducts("table.view");
   const emptyLabel = tProducts("emptyStack");
 
   return (
@@ -75,7 +74,6 @@ export default async function CategoryPage({ params }: Props) {
         category={category}
         locale={locale}
         emptyLabel={emptyLabel}
-        viewLabel={viewLabel}
         headers={headers}
       />
       <ProductStack
@@ -85,7 +83,6 @@ export default async function CategoryPage({ params }: Props) {
         category={category}
         locale={locale}
         emptyLabel={emptyLabel}
-        viewLabel={viewLabel}
         headers={headers}
       />
     </main>

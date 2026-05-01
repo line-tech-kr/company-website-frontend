@@ -8,9 +8,9 @@ export const CATEGORIES: Record<
   CategorySlug,
   { kickerNum: string; code: string; series: Product["series"] }
 > = {
-  analogue: { kickerNum: "01", code: "M / MS", series: "analogue" },
+  analogue: { kickerNum: "01", code: "M·MS", series: "analogue" },
   digital: { kickerNum: "02", code: "MD", series: "digital" },
-  specialized: { kickerNum: "03", code: "LD / LM", series: "specialized" },
+  specialized: { kickerNum: "03", code: "LD·LM", series: "specialized" },
 };
 
 export function isCategorySlug(s: string): s is CategorySlug {

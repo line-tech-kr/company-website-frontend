@@ -1,15 +1,16 @@
 .lt-prod-stack {
-  margin-bottom: 40px;
+  margin-bottom: 64px;
 }
 .lt-prod-stack__hd {
-  margin-bottom: 8px;
-  padding-bottom: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--pd-rule);
 }
 .lt-prod-stack__kicker {
-  font: 500 var(--lt-fs-xs) var(--lt-mono);
-  letter-spacing: 0.14em;
+  font: 500 11px var(--lt-mono);
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--pd-muted);
+  color: var(--pd-primary);
   margin-bottom: 4px;
 }
 .lt-prod-stack__title {
@@ -27,7 +28,7 @@
   padding: 1px 7px;
   border: 1px solid var(--pd-border);
   border-radius: 999px;
-  background: var(--pd-surface-2);
+  background: var(--pd-surface);
 }
 
 /* Real <table> with grid layout. thead/tbody/tr use display:contents so the
@@ -35,7 +36,7 @@
  * table accessibility semantics with display:contents. */
 .lt-prod-stack__table {
   display: grid;
-  grid-template-columns: 56px 96px 1fr 220px 96px 72px 96px 72px;
+  grid-template-columns: 56px 96px 2fr 3fr 2fr 1.5fr 2fr;
   border-collapse: collapse;
   width: 100%;
 }
@@ -62,10 +63,9 @@
 .lt-prod-stack__head-cell {
   display: flex;
   align-items: center;
-  padding: 10px 12px;
+  padding: 14px 16px;
   border-top: 1px solid var(--pd-border-strong);
   border-bottom: 1px solid var(--pd-border-strong);
-  background: var(--pd-surface-2);
   font: 500 var(--lt-fs-xs) var(--lt-mono);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -92,17 +92,20 @@
   text-transform: none;
 }
 
-@media (max-width: 1280px) {
-  .lt-prod-stack__table {
-    grid-template-columns: 56px 88px 1fr 200px 88px 64px 80px 60px;
-  }
-}
 @media (max-width: 1024px) {
   .lt-prod-stack__table {
-    grid-template-columns: 56px 88px 1fr 1fr 88px 60px;
+    grid-template-columns: 48px 88px 2fr 3fr 2fr;
   }
   .lt-prod-stack__head-cell--resp,
   .lt-prod-stack__head-cell--fit {
+    display: none;
+  }
+}
+@media (max-width: 640px) {
+  .lt-prod-stack__table {
+    grid-template-columns: 88px 2fr 3fr 2fr;
+  }
+  .lt-prod-stack__head-cell--thumb {
     display: none;
   }
 }

@@ -4,6 +4,10 @@ import { HeaderNav } from "./HeaderNav";
 import { HeaderNavProvider, type HeaderNavCtx } from "./HeaderNavContext";
 import { LT_SHELL } from "@/lib/content/shell";
 
+vi.mock("next-intl", () => ({
+  useTranslations: () => (key: string) => key,
+}));
+
 vi.mock("@/i18n/navigation", () => ({
   Link: ({
     href,

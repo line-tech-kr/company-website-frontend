@@ -1,5 +1,4 @@
 import { Link } from "@/i18n/navigation";
-import { Glyph } from "@/components/ui/Glyph";
 import { ProductThumb } from "../ProductThumb";
 import type { Product } from "@/lib/types/product";
 import type { CategorySlug } from "@/lib/categories";
@@ -9,7 +8,6 @@ type Props = {
   product: Product;
   category: CategorySlug;
   locale: "ko" | "en" | "zh";
-  viewLabel: string;
 };
 
 function fittingSummary(connections: Product["connections"]): string {
@@ -21,7 +19,7 @@ function fittingSummary(connections: Product["connections"]): string {
   return [...types].join(" · ");
 }
 
-export function ProductRow({ product, category, locale, viewLabel }: Props) {
+export function ProductRow({ product, category, locale }: Props) {
   const href = `/products/${category}/${product.slug.current}`;
   const label = product.productLabel[locale];
   const range = product.massFlowSpecs.flowRange.display;
@@ -31,7 +29,10 @@ export function ProductRow({ product, category, locale, viewLabel }: Props) {
 
   return (
     <tr className="lt-prod-row">
-      <td className="lt-prod-row__cell lt-prod-row__cell--thumb">
+      <td
+        className="lt-prod-row__cell lt-prod-row__cell--thumb"
+        aria-hidden="true"
+      >
         <ProductThumb />
       </td>
       <th scope="row" className="lt-prod-row__cell lt-prod-row__cell--code">
@@ -46,12 +47,6 @@ export function ProductRow({ product, category, locale, viewLabel }: Props) {
       <td className="lt-prod-row__cell lt-prod-row__cell--acc">{accuracy}</td>
       <td className="lt-prod-row__cell lt-prod-row__cell--resp">{response}</td>
       <td className="lt-prod-row__cell lt-prod-row__cell--fit">{fitting}</td>
-      <td className="lt-prod-row__cell lt-prod-row__cell--act">
-        <Link href={href} className="lt-prod-row__view">
-          {viewLabel}
-          <Glyph name="arrow-right" size={11} />
-        </Link>
-      </td>
     </tr>
   );
 }
