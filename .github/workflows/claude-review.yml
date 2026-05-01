@@ -28,6 +28,8 @@ jobs:
       - uses: anthropics/claude-code-action@ef50f123a3a9be95b60040d042717517407c7256 # v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_args: "--allowedTools Bash(gh pr comment:*)"
+          use_sticky_comment: true
           prompt: |
             You are reviewing a pull request for the Line Tech Inc. company website rebuild
             (Next.js 16 App Router + TypeScript + Tailwind v4 + Sanity CMS, deployed on Vercel,
@@ -35,7 +37,13 @@ jobs:
 
             Review the diff against the base branch and post one consolidated review.
             Focus on the changed files only. Lead with the highest-severity issues.
-            If the change is clean, say so in one line — do not pad with affirmations.
+
+            You MUST always post a top-level summary comment on the pull request
+            using `gh pr comment $PR_NUMBER --body "..."` (the PR number is in the
+            $PR_NUMBER environment variable). Use this for the consolidated
+            summary regardless of whether you found inline issues. If the change
+            is clean, the summary may be a single line saying so — do not pad
+            with affirmations or restate what the diff does.
 
             Priorities, in order:
 
