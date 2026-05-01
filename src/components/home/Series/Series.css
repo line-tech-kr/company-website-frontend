@@ -74,10 +74,16 @@
 }
 
 :lang(ko) .ho-series__count,
-:lang(zh) .ho-series__count {
+:lang(zh) .ho-series__count,
+:lang(ko) .ho-series__range,
+:lang(zh) .ho-series__range {
   font-family: var(--lt-sans);
   letter-spacing: 0;
   text-transform: none;
+}
+.ho-series__card:focus-visible {
+  outline: 2px solid var(--pd-primary);
+  outline-offset: -2px;
 }
 
 @media (max-width: 1000px) {

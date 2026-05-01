@@ -134,8 +134,6 @@ export type ShellContent = {
   footer: ShellFooter;
 };
 
-// ─── Shared (locale-independent) ────────────────────────────────────────────
-
 // ─── Content ────────────────────────────────────────────────────────────────
 
 export const LT_SHELL: Record<Locale, ShellContent> = {

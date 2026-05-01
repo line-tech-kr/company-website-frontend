@@ -259,7 +259,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
     series: {
       kicker: "01 — 产品系列",
       title: "四个系列,一个标准。",
-      sub: "覆盖模拟、数字、特种三大类型的完整型谱。",
+      sub: "覆盖模拟、数字、特种与配件四大类型的完整型谱。",
       items: [
         {
           code: "M / MS",
