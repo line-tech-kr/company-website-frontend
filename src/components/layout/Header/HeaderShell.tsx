@@ -10,8 +10,14 @@ import {
   useState,
 } from "react";
 import { SearchPanel } from "../Search/SearchPanel";
-import { HeaderNavProvider, type HeaderNavCtx } from "../HeaderNav/HeaderNavContext";
-import { MobileNavProvider, type MobileNavCtx } from "../MobileNav/MobileNavContext";
+import {
+  HeaderNavProvider,
+  type HeaderNavCtx,
+} from "../HeaderNav/HeaderNavContext";
+import {
+  MobileNavProvider,
+  type MobileNavCtx,
+} from "../MobileNav/MobileNavContext";
 import { MobileNav } from "../MobileNav/MobileNav";
 import type {
   ShellSearch,
