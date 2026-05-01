@@ -2,17 +2,11 @@ import type { Metadata } from "next";
 import type { Locale } from "@/lib/content/home";
 import type { CategorySlug } from "@/lib/categories";
 import type { Product } from "@/lib/types/product";
+import { routing } from "@/i18n/routing";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://linetech.co.kr";
 
 const SITE_NAME = "Line Tech";
-
-const OG_IMAGE = {
-  url: `${siteUrl}/opengraph-image`,
-  width: 1200,
-  height: 630,
-  alt: "Line Tech — Mass Flow Controllers & Meters",
-};
 
 const LOCALE_OG_MAP: Record<Locale, string> = {
   ko: "ko_KR",
@@ -166,46 +160,37 @@ const SERIES_APPLICATION: Record<Product["series"], Record<Locale, string>> = {
   },
 };
 
-function buildAlternates(path: string) {
-  const languages: Record<string, string> = {};
-  for (const locale of ["ko", "en", "zh"] as Locale[]) {
-    languages[locale] = path
-      ? `${siteUrl}/${locale}/${path}`
-      : `${siteUrl}/${locale}`;
-  }
-  return { canonical: languages.ko, languages };
+function buildLanguages(path: string): Record<string, string> {
+  return Object.fromEntries(
+    routing.locales.map((locale) => [
+      locale,
+      path ? `${siteUrl}/${locale}/${path}` : `${siteUrl}/${locale}`,
+    ]),
+  );
 }
 
-function buildBase(
-  locale: Locale,
-  page: PageSeo,
-  path: string,
-  ogImage = OG_IMAGE,
-): Metadata {
-  const title = `${page.title}`;
+function buildBase(locale: Locale, page: PageSeo, path: string): Metadata {
   const canonical = path
     ? `${siteUrl}/${locale}/${path}`
     : `${siteUrl}/${locale}`;
   return {
-    title,
+    title: { absolute: page.title },
     description: page.description,
     alternates: {
       canonical,
-      languages: buildAlternates(path).languages,
+      languages: buildLanguages(path),
     },
     openGraph: {
       type: "website",
       locale: LOCALE_OG_MAP[locale],
-      title,
+      title: page.title,
       description: page.description,
       siteName: SITE_NAME,
-      images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: page.title,
       description: page.description,
-      images: [ogImage.url],
     },
     robots: { index: true, follow: true },
   };

@@ -72,7 +72,6 @@ export default async function LocaleLayout({ children, params }: Props) {
       contactType: "customer service",
       availableLanguage: ["Korean", "English", "Chinese"],
     },
-    sameAs: ["https://linetech.co.kr"],
   };
 
   return (

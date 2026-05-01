@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cache } from "react";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { permanentRedirect } from "@/i18n/navigation";
@@ -35,6 +36,14 @@ type Props = {
   params: Promise<{ locale: Locale; category: string; product: string }>;
 };
 
+const getProduct = cache(async (slug: string) => {
+  const raw = await fetchSanity(
+    () => sanityClient.fetch(productBySlugQuery, { slug }),
+    { name: "productBySlug", params: { slug } },
+  );
+  return raw ? SanityProductSchema.parse(raw) : null;
+});
+
 const SPEC_GROUPS: Array<{
   id: string;
   num: string;
@@ -62,10 +71,7 @@ const SPEC_GROUPS: Array<{
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, category, product: productSlug } = await params;
   if (!isCategorySlug(category)) return {};
-  const product = (await fetchSanity(
-    () => sanityClient.fetch(productBySlugQuery, { slug: productSlug }),
-    { name: "productMetadata", params: { slug: productSlug } },
-  )) as Product | null;
+  const product = await getProduct(productSlug);
   if (!product) return {};
   return buildProductMetadata(locale, product, category);
 }
@@ -94,11 +100,7 @@ export default async function ProductPage({ params }: Props) {
 
   if (!isCategorySlug(category)) notFound();
 
-  const rawProduct = await fetchSanity(
-    () => sanityClient.fetch(productBySlugQuery, { slug: productSlug }),
-    { name: "productBySlug", params: { slug: productSlug } },
-  );
-  const product = rawProduct ? SanityProductSchema.parse(rawProduct) : null;
+  const product = await getProduct(productSlug);
 
   if (!product) notFound();
   if (product.series !== CATEGORIES[category].series) {
