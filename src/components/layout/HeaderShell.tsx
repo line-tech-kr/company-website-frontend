@@ -5,6 +5,12 @@ import { SearchPanel } from "./SearchPanel";
 import { HeaderNavProvider, type HeaderNavCtx } from "./HeaderNavContext";
 import { MobileNavProvider, type MobileNavCtx } from "./MobileNavContext";
 import { MobileNav } from "./MobileNav";
+import type {
+  ShellSearch,
+  ShellMobileNav,
+  ShellNavItem,
+} from "@/lib/content/shell";
+import type { Locale } from "@/lib/content/home";
 
 type SearchCtx = {
   searchOpen: boolean;
@@ -12,19 +18,13 @@ type SearchCtx = {
   registerSearchTrigger: (el: HTMLButtonElement | null) => void;
 };
 
-const SearchCtx = createContext<SearchCtx | null>(null);
+const SearchStateCtx = createContext<SearchCtx | null>(null);
 
 export function useSearch(): SearchCtx {
-  const ctx = useContext(SearchCtx);
+  const ctx = useContext(SearchStateCtx);
   if (!ctx) throw new Error("useSearch must be used inside <HeaderShell>");
   return ctx;
 }
-import type {
-  ShellSearch,
-  ShellMobileNav,
-  ShellNavItem,
-} from "@/lib/content/shell";
-import type { Locale } from "@/lib/content/home";
 
 const SCROLL_ON = 40;
 const SCROLL_OFF = 30;
@@ -162,7 +162,7 @@ export function HeaderShell({
     .join(" ");
 
   return (
-    <SearchCtx.Provider value={searchCtx}>
+    <SearchStateCtx.Provider value={searchCtx}>
       <HeaderNavProvider value={navCtx}>
         <MobileNavProvider value={mobileNavCtx}>
           <header className={cls}>
@@ -185,6 +185,6 @@ export function HeaderShell({
           </header>
         </MobileNavProvider>
       </HeaderNavProvider>
-    </SearchCtx.Provider>
+    </SearchStateCtx.Provider>
   );
 }
