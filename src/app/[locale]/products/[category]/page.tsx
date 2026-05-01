@@ -9,7 +9,8 @@ import { productsBySeriesQuery } from "@/sanity/queries";
 import { CATEGORIES, CATEGORY_SLUGS, isCategorySlug } from "@/lib/categories";
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
-import type { Product } from "@/lib/types/product";
+import { SanityProductSchema } from "@/lib/types/product";
+import { z } from "zod";
 
 type Props = { params: Promise<{ locale: Locale; category: string }> };
 
@@ -26,10 +27,14 @@ export default async function CategoryPage({ params }: Props) {
   if (!isCategorySlug(category)) notFound();
 
   const cat = CATEGORIES[category];
-  const products = (await fetchSanity(
-    () => sanityClient.fetch(productsBySeriesQuery, { series: cat.series }),
-    { name: "productsBySeries", params: { series: cat.series } },
-  )) as Product[];
+  const products = z
+    .array(SanityProductSchema)
+    .parse(
+      await fetchSanity(
+        () => sanityClient.fetch(productsBySeriesQuery, { series: cat.series }),
+        { name: "productsBySeries", params: { series: cat.series } },
+      ),
+    );
 
   const [tCommon, tNav, tBreadcrumb, tProducts] = await Promise.all([
     getTranslations("common"),
