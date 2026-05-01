@@ -52,3 +52,6 @@ docs/internal/
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# generated search index (rebuilt by prebuild/predev)
+public/search/

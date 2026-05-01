@@ -97,11 +97,6 @@ export type ProductsCategory = {
   href: string;
 };
 
-/**
- * Header search panel copy. Visual-shell only today (#8) — wiring lands
- * in phase 2. Quick chips are inert buttons and currently route nowhere;
- * they exist to telegraph that this is a real search surface.
- */
 export type ShellSearch = {
   /** aria-label for the header search trigger icon button. */
   openLabel: string;
@@ -111,8 +106,10 @@ export type ShellSearch = {
   inputLabel: string;
   /** Placeholder text shown inside the empty input. */
   inputPlaceholder: string;
-  /** 4–6 inert chips. `id` is locale-independent for tracking later. */
+  /** 4–6 quick-access buttons. `id` is locale-independent. */
   quickChips: { id: string; label: string }[];
+  /** Shown when a query returns zero results. Use {q} as query placeholder. */
+  noResults: string;
 };
 
 /** Mobile nav panel copy (#34). Renders below 1000px. */
@@ -299,6 +296,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         { id: "calibration", label: "교정" },
         { id: "certifications", label: "인증서" },
       ],
+      noResults: '"{q}"에 대한 결과가 없습니다',
     },
     mobileNav: {
       openLabel: "메뉴 열기",
@@ -467,6 +465,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         { id: "calibration", label: "Calibration" },
         { id: "certifications", label: "Certifications" },
       ],
+      noResults: 'No results for "{q}"',
     },
     mobileNav: {
       openLabel: "Open menu",
@@ -623,6 +622,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         { id: "calibration", label: "校准" },
         { id: "certifications", label: "认证文件" },
       ],
+      noResults: '"{q}"无搜索结果',
     },
     mobileNav: {
       openLabel: "打开菜单",
