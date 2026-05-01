@@ -28,7 +28,6 @@ import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
 import { SanityProductSchema } from "@/lib/types/product";
 import type { MassFlowSpecs } from "@/lib/types/product";
-import { z } from "zod";
 
 type Props = {
   params: Promise<{ locale: Locale; category: string; product: string }>;
@@ -82,11 +81,11 @@ export default async function ProductPage({ params }: Props) {
 
   if (!isCategorySlug(category)) notFound();
 
-  const _rawProduct = await fetchSanity(
+  const rawProduct = await fetchSanity(
     () => sanityClient.fetch(productBySlugQuery, { slug: productSlug }),
     { name: "productBySlug", params: { slug: productSlug } },
   );
-  const product = _rawProduct ? SanityProductSchema.parse(_rawProduct) : null;
+  const product = rawProduct ? SanityProductSchema.parse(rawProduct) : null;
 
   if (!product) notFound();
   if (product.series !== CATEGORIES[category].series) {

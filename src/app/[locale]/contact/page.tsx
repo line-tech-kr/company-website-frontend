@@ -45,13 +45,13 @@ export default async function ContactPage({ params, searchParams }: Props) {
   const productParam = Array.isArray(rawProductParam)
     ? rawProductParam[0]
     : rawProductParam;
-  const _rawProduct = productParam
+  const rawProduct = productParam
     ? await fetchSanity(
         () => sanityClient.fetch(productByModelQuery, { model: productParam }),
         { name: "productByModel", params: { model: productParam } },
       )
     : null;
-  const product = _rawProduct ? SanityProductSchema.parse(_rawProduct) : null;
+  const product = rawProduct ? SanityProductSchema.parse(rawProduct) : null;
 
   const tCommon = await getTranslations("common");
   const c = LT_CONTACT[locale];
