@@ -12,7 +12,8 @@ import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
 import { SanityProductSchema } from "@/lib/types/product";
 import { z } from "zod";
-import { buildCategoryMetadata } from "@/lib/seo";
+import { buildCategoryMetadata, siteUrl } from "@/lib/seo";
+import { safeJsonLd } from "@/lib/seo/jsonLd";
 
 type Props = { params: Promise<{ locale: Locale; category: string }> };
 
@@ -70,8 +71,6 @@ export default async function CategoryPage({ params }: Props) {
   };
   const emptyLabel = tProducts("emptyStack");
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://linetech.co.kr";
-
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -101,7 +100,7 @@ export default async function CategoryPage({ params }: Props) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <main className="lt-wrap">
         <Breadcrumbs items={breadcrumbs} />

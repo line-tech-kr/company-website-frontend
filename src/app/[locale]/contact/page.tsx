@@ -31,8 +31,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const c = LT_CONTACT[locale];
-  return buildContactMetadata(locale, `${c.title} — Line Tech`, c.lede);
+  return buildContactMetadata(locale);
 }
 
 export default async function ContactPage({ params, searchParams }: Props) {

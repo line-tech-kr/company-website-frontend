@@ -30,7 +30,8 @@ import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
 import { SanityProductSchema } from "@/lib/types/product";
 import type { MassFlowSpecs, Product } from "@/lib/types/product";
-import { buildProductMetadata } from "@/lib/seo";
+import { buildProductMetadata, siteUrl } from "@/lib/seo";
+import { safeJsonLd } from "@/lib/seo/jsonLd";
 
 type Props = {
   params: Promise<{ locale: Locale; category: string; product: string }>;
@@ -200,7 +201,6 @@ export default async function ProductPage({ params }: Props) {
     },
   ];
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://linetech.co.kr";
   const productUrl = `${siteUrl}/${locale}/products/${category}/${product.slug.current}`;
   const productLabel = product.productLabel[locale];
 
@@ -305,7 +305,7 @@ export default async function ProductPage({ params }: Props) {
     manufacturer: {
       "@type": "Organization",
       name: "라인테크 / Line Tech Inc.",
-      url: "https://linetech.co.kr",
+      url: siteUrl,
     },
     url: productUrl,
     additionalProperty: additionalProperties,
@@ -315,11 +315,11 @@ export default async function ProductPage({ params }: Props) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(productJsonLd) }}
       />
       <main className="lt-wrap">
         <Breadcrumbs items={breadcrumbs} />

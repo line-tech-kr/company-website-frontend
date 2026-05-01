@@ -5,8 +5,7 @@ import { allProductsQuery } from "@/sanity/queries";
 import { routing } from "@/i18n/routing";
 import { categoryForSeries, CATEGORY_SLUGS } from "@/lib/categories";
 import type { Product } from "@/lib/types/product";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://linetech.co.kr";
+import { siteUrl } from "@/lib/seo";
 
 type StaticRoute = {
   path: string;
@@ -72,14 +71,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       { name: "sitemap.allProducts" },
     )) as Product[];
 
-    productEntries = products.flatMap((product) => {
-      const category = categoryForSeries(product.series);
-      if (!category) return [];
-      const path = `products/${category}/${product.slug.current}`;
-      return routing.locales.map((locale) =>
-        entry(locale, path, 1.0, "monthly", now),
-      );
-    });
+    productEntries = products
+      .filter((p) => p?.slug?.current)
+      .flatMap((product) => {
+        const category = categoryForSeries(product.series);
+        if (!category) return [];
+        const path = `products/${category}/${product.slug.current}`;
+        return routing.locales.map((locale) =>
+          entry(locale, path, 1.0, "monthly", now),
+        );
+      });
   } catch {
     // If Sanity is unreachable at build time, ship a sitemap with static + category routes only.
     productEntries = [];

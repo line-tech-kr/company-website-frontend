@@ -4,7 +4,8 @@ import type { CategorySlug } from "@/lib/categories";
 import type { Product } from "@/lib/types/product";
 import { routing } from "@/i18n/routing";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://linetech.co.kr";
+export const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://linetech.co.kr";
 
 const SITE_NAME = "Line Tech";
 
@@ -38,17 +39,17 @@ const COMPANY_SEO: Record<Locale, PageSeo> = {
   ko: {
     title: "회사 소개 — 라인테크",
     description:
-      "27년 경력의 정밀 유량 제어 전문 기업, 라인테크. 창립 연혁부터 국내외 인증, 핵심 기술까지 한눈에 확인하세요.",
+      "1997년 창립의 정밀 유량 제어 전문 기업, 라인테크. 창립 연혁부터 국내외 인증, 핵심 기술까지 한눈에 확인하세요.",
   },
   en: {
     title: "About Us — Line Tech",
     description:
-      "27 years of precision flow control expertise. Learn about Line Tech's history, certifications, and manufacturing capabilities.",
+      "Precision flow control specialists since 1997. Learn about Line Tech's history, certifications, and manufacturing capabilities.",
   },
   zh: {
     title: "关于我们 — Line Tech",
     description:
-      "27年精密流量控制专业经验。了解莱因科技的发展历程、资质认证及制造能力。",
+      "成立于1997年的精密流量控制专业企业。了解莱因科技的发展历程、资质认证及制造能力。",
   },
 };
 
@@ -261,10 +262,24 @@ export function buildProductMetadata(
   );
 }
 
-export function buildContactMetadata(
-  locale: Locale,
-  title: string,
-  description: string,
-): Metadata {
-  return buildBase(locale, { title, description }, "contact");
+const CONTACT_SEO: Record<Locale, PageSeo> = {
+  ko: {
+    title: "문의하기 — 라인테크",
+    description:
+      "제품 문의부터 기술 지원, 협력 제안까지 — 영업일 기준 2일 이내에 회신드립니다.",
+  },
+  en: {
+    title: "Get in touch — Line Tech",
+    description:
+      "Product questions, technical support, partnership ideas — whatever brings you here, we'll reply within two business days.",
+  },
+  zh: {
+    title: "联系我们 — Line Tech",
+    description:
+      "无论是产品咨询、技术支持，还是合作洽谈 — 我们都会在两个工作日内回复您。",
+  },
+};
+
+export function buildContactMetadata(locale: Locale): Metadata {
+  return buildBase(locale, CONTACT_SEO[locale], "contact");
 }

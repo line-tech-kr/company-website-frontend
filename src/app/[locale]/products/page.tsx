@@ -17,16 +17,12 @@ import { z } from "zod";
 import { buildProductsMetadata } from "@/lib/seo";
 import "./products-list.css";
 
-type MetaProps = { params: Promise<{ locale: string }> };
+type Props = { params: Promise<{ locale: string }> };
 
-export async function generateMetadata({
-  params,
-}: MetaProps): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   return buildProductsMetadata(locale as "ko" | "en" | "zh");
 }
-
-type Props = { params: Promise<{ locale: string }> };
 
 export default async function ProductsListPage({ params }: Props) {
   const { locale } = await params;

@@ -8,6 +8,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { routing } from "@/i18n/routing";
 import { PageShell } from "@/components/layout/PageShell";
 import type { Locale } from "@/lib/content/home";
+import { siteUrl } from "@/lib/seo";
+import { safeJsonLd } from "@/lib/seo/jsonLd";
 import "../globals.css";
 
 const fontSans = Inter({
@@ -29,13 +31,8 @@ export function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://linetech.co.kr",
-  ),
-  title: {
-    default: "Line Tech",
-    template: "%s — Line Tech",
-  },
+  metadataBase: new URL(siteUrl),
+  title: "Line Tech",
   description: "Mass Flow Controllers and Mass Flow Meters",
 };
 
@@ -58,7 +55,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     "@type": "Organization",
     name: "라인테크 / Line Tech Inc.",
     alternateName: ["Line Tech", "라인테크", "Linetech"],
-    url: "https://linetech.co.kr",
+    url: siteUrl,
     foundingDate: "1997",
     address: {
       "@type": "PostalAddress",
@@ -76,15 +73,11 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale} className={`${fontSans.variable} ${fontMono.variable}`}>
-      <head>
+      <body>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationJsonLd),
-          }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(organizationJsonLd) }}
         />
-      </head>
-      <body>
         <NextIntlClientProvider>
           <PageShell locale={locale as Locale}>{children}</PageShell>
         </NextIntlClientProvider>
