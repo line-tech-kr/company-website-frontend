@@ -176,6 +176,18 @@
   color: var(--pd-primary);
   text-decoration-color: var(--pd-primary);
 }
+.ap-sidebar-block__link-series {
+  display: block;
+  font: 500 var(--lt-fs-xs) var(--lt-mono);
+  color: var(--pd-muted);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+:lang(ko) .ap-sidebar-block__link-series,
+:lang(zh) .ap-sidebar-block__link-series {
+  font-family: var(--lt-sans);
+  letter-spacing: 0;
+}
 
 .ap-sidebar-block--cta {
   background: var(--pd-primary);

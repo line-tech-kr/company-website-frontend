@@ -569,7 +569,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         heading: "Quick links",
         items: [
           { href: "/applications", label: "Applications" },
-          { href: "/faq", label: "FAQ" },
+          { href: "/faq", label: "Frequently asked questions" },
           { href: "/contact", label: "Contact" },
         ],
       },

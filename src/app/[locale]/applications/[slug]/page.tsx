@@ -11,7 +11,13 @@ import "../applications-page.css";
 type Props = { params: Promise<{ locale: Locale; slug: string }> };
 
 export function generateStaticParams() {
-  const slugs = LT_APPLICATIONS.en.applications.map((a) => a.slug);
+  const slugs = [
+    ...new Set(
+      routing.locales.flatMap((l) =>
+        LT_APPLICATIONS[l].applications.map((a) => a.slug),
+      ),
+    ),
+  ];
   return routing.locales.flatMap((locale) =>
     slugs.map((slug) => ({ locale, slug })),
   );
@@ -37,9 +43,10 @@ export default async function ApplicationDetailPage({ params }: Props) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
 
-  const [tCommon, tNav] = await Promise.all([
+  const [tCommon, tNav, tCategory] = await Promise.all([
     getTranslations("common"),
     getTranslations("nav"),
+    getTranslations("breadcrumbs.categories"),
   ]);
 
   const c = LT_APPLICATIONS[locale];
@@ -79,14 +86,17 @@ export default async function ApplicationDetailPage({ params }: Props) {
                     href={CATEGORY_HREFS[cat]}
                     className="ap-sidebar-block__link"
                   >
-                    {app.recommendedSeries
-                      .filter((s) => {
-                        if (cat === "digital") return s === "MD";
-                        if (cat === "specialized")
-                          return ["LD", "LM", "EX"].includes(s);
-                        return s === "M / MS";
-                      })
-                      .join(" / ") || app.recommendedSeries[0]}
+                    {tCategory(cat)}
+                    <span className="ap-sidebar-block__link-series">
+                      {app.recommendedSeries
+                        .filter((s) => {
+                          if (cat === "digital") return s === "MD";
+                          if (cat === "specialized")
+                            return ["LD", "LM", "EX"].includes(s);
+                          return s === "M / MS";
+                        })
+                        .join(" / ") || app.recommendedSeries[0]}
+                    </span>
                   </Link>
                 </li>
               ))}

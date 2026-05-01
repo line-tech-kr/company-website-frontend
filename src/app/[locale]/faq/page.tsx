@@ -81,7 +81,7 @@ export default async function FaqPage({ params }: Props) {
 function FaqSideNav({ c }: { c: FaqContent }) {
   return (
     <aside className="fq-aside" aria-label={c.navHeading}>
-      <div className="fq-aside__heading">{c.navHeading}</div>
+      <h2 className="fq-aside__heading">{c.navHeading}</h2>
       <nav className="fq-nav">
         <ul className="fq-nav__list">
           {c.groups.map((g) => (
