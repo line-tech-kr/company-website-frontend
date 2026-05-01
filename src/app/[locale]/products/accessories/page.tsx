@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { AccessoriesShell } from "@/components/accessories/AccessoriesShell";
 import {
@@ -8,8 +9,14 @@ import {
   type AccessoryContact,
 } from "@/lib/content/accessories";
 import type { Locale } from "@/lib/content/home";
+import { buildAccessoriesMetadata } from "@/lib/seo";
 
 type Props = { params: Promise<{ locale: Locale }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  return buildAccessoriesMetadata(locale);
+}
 
 export default async function AccessoriesPage({ params }: Props) {
   const { locale } = await params;
