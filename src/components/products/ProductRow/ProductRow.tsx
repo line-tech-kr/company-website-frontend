@@ -3,6 +3,7 @@ import { Glyph } from "@/components/ui/Glyph";
 import { ProductThumb } from "../ProductThumb";
 import type { Product } from "@/lib/types/product";
 import type { CategorySlug } from "@/lib/categories";
+import "./ProductRow.css";
 
 type Props = {
   product: Product;
@@ -29,34 +30,28 @@ export function ProductRow({ product, category, locale, viewLabel }: Props) {
   const fitting = fittingSummary(product.connections);
 
   return (
-    <Link className="lt-prod-row" href={href}>
-      <span className="lt-prod-row__cell lt-prod-row__cell--thumb">
+    <tr className="lt-prod-row">
+      <td className="lt-prod-row__cell lt-prod-row__cell--thumb">
         <ProductThumb />
-      </span>
-      <span className="lt-prod-row__cell lt-prod-row__cell--code">
-        {product.model}
-      </span>
-      <span className="lt-prod-row__cell lt-prod-row__cell--label">
+      </td>
+      <th scope="row" className="lt-prod-row__cell lt-prod-row__cell--code">
+        <Link href={href} className="lt-prod-row__codelink">
+          {product.model}
+        </Link>
+      </th>
+      <td className="lt-prod-row__cell lt-prod-row__cell--label">
         <span className="lt-prod-row__label">{label}</span>
-      </span>
-      <span className="lt-prod-row__cell lt-prod-row__cell--range">
-        {range}
-      </span>
-      <span className="lt-prod-row__cell lt-prod-row__cell--acc">
-        {accuracy}
-      </span>
-      <span className="lt-prod-row__cell lt-prod-row__cell--resp">
-        {response}
-      </span>
-      <span className="lt-prod-row__cell lt-prod-row__cell--fit">
-        {fitting}
-      </span>
-      <span className="lt-prod-row__cell lt-prod-row__cell--act">
-        <span className="lt-prod-row__view">
+      </td>
+      <td className="lt-prod-row__cell lt-prod-row__cell--range">{range}</td>
+      <td className="lt-prod-row__cell lt-prod-row__cell--acc">{accuracy}</td>
+      <td className="lt-prod-row__cell lt-prod-row__cell--resp">{response}</td>
+      <td className="lt-prod-row__cell lt-prod-row__cell--fit">{fitting}</td>
+      <td className="lt-prod-row__cell lt-prod-row__cell--act">
+        <Link href={href} className="lt-prod-row__view">
           {viewLabel}
           <Glyph name="arrow-right" size={11} />
-        </span>
-      </span>
-    </Link>
+        </Link>
+      </td>
+    </tr>
   );
 }

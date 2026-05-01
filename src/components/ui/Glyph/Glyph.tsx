@@ -28,6 +28,8 @@ export function Glyph({ name, size = 14, stroke = 1.5 }: Props) {
     strokeWidth: stroke,
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
+    "aria-hidden": true as const,
+    focusable: false as const,
   };
   switch (name) {
     case "arrow-right":

@@ -1,7 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
+import { Turnstile } from "@/components/forms/Turnstile";
+import { submitContact, type ContactFormState } from "@/lib/contact/submit";
 import type { ContactFormCopy, InquiryTypeId } from "@/lib/content/contact";
 
 type ContactFormDefaults = {
@@ -17,13 +20,54 @@ type Props = {
   defaults?: ContactFormDefaults;
 };
 
+const INITIAL_STATE: ContactFormState = { status: "idle" };
+
 export function ContactForm({ form, privacyNotice, defaults }: Props) {
   const [type, setType] = useState<string>(defaults?.inquiryType ?? "");
   const selected = form.inquiryTypeOptions.find((o) => o.id === type);
   const extra = selected?.extraField;
 
+  const t = useTranslations("contactForm");
+  const [state, formAction, isPending] = useActionState(
+    submitContact,
+    INITIAL_STATE,
+  );
+
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
+
+  const errorMessage =
+    state.status === "error" && state.errorKey
+      ? t(`errors.${state.errorKey}`)
+      : null;
+
+  if (state.status === "success") {
+    return (
+      <div className="ct-form__success" role="status">
+        {t("success")}
+      </div>
+    );
+  }
+
   return (
-    <form noValidate>
+    <form action={formAction} noValidate>
+      {/* Honeypot — visually hidden, ignored by users, populated by bots.
+          The submit handler rejects any submission with a non-empty value. */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          left: "-10000px",
+          width: "1px",
+          height: "1px",
+          overflow: "hidden",
+        }}
+      >
+        <label>
+          Website (leave blank)
+          <input type="text" name="website" tabIndex={-1} autoComplete="off" />
+        </label>
+      </div>
+
       <div className="ct-form__grid">
         <div className="ct-form__row ct-form__row--full">
           <label htmlFor="ct-inquiry-type" className="ct-form__label">
@@ -62,9 +106,6 @@ export function ContactForm({ form, privacyNotice, defaults }: Props) {
               )}
             </label>
             <input
-              // Keying on `type` resets the value when the visitor switches
-              // buckets — a serial number left over from "support" makes no
-              // sense if they pivot to "partnership".
               key={type}
               id="ct-type-detail"
               name="typeDetail"
@@ -176,14 +217,28 @@ export function ContactForm({ form, privacyNotice, defaults }: Props) {
         </div>
       </div>
 
-      {/* TODO: wire submit to backend (Resend / route handler). For now the
-          button is non-functional; visitors are routed to direct email via
-          the notice + sidebar CTA. */}
+      <div className="ct-form__captcha">
+        <Turnstile siteKey={turnstileSiteKey} />
+      </div>
+
+      {errorMessage && (
+        <p className="ct-form__error" role="alert">
+          {errorMessage}
+        </p>
+      )}
+
       <div className="ct-form__actions">
-        <Button variant="primary" size="lg">
-          {form.submit}
+        <Button
+          variant="primary"
+          size="lg"
+          type="submit"
+          disabled={isPending || !turnstileSiteKey}
+        >
+          {isPending ? t("submitting") : form.submit}
         </Button>
-        <p className="ct-form__help">{form.submitDisabledHelp}</p>
+        {!turnstileSiteKey && (
+          <p className="ct-form__help">{form.submitDisabledHelp}</p>
+        )}
       </div>
       <p className="ct-form__privacy">{privacyNotice}</p>
     </form>

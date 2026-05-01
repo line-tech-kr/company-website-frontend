@@ -21,7 +21,11 @@ type Base = {
 // Use for non-route URLs: mailto:, tel:, static files, external origins.
 type AsLocalLink = Base & { href: LinkHref; plain?: false };
 type AsPlainLink = Base & { href: string; plain: true };
-type AsButton = Base & { onClick?: () => void; type?: "button" | "submit" };
+type AsButton = Base & {
+  onClick?: () => void;
+  type?: "button" | "submit";
+  disabled?: boolean;
+};
 
 type Props = AsLocalLink | AsPlainLink | AsButton;
 
@@ -79,6 +83,7 @@ export function Button(props: Props) {
       type={props.type ?? "button"}
       className={cls}
       onClick={props.onClick}
+      disabled={props.disabled}
     >
       {inner}
     </button>

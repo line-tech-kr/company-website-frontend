@@ -47,7 +47,7 @@ export function Header({ locale }: Props) {
           <Button
             variant="primary"
             size="md"
-            href="mailto:linetech@line-tech.co.kr"
+            href={`mailto:${shell.footer.contact.email}`}
             plain
           >
             {shell.quoteLabel}

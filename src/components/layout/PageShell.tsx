@@ -1,14 +1,21 @@
+import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/lib/content/home";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 
 type Props = { locale: Locale; children: React.ReactNode };
 
-export function PageShell({ locale, children }: Props) {
+export async function PageShell({ locale, children }: Props) {
+  const t = await getTranslations({ locale, namespace: "skipLink" });
   return (
     <>
+      <a className="lt-skiplink" href="#lt-main">
+        {t("main")}
+      </a>
       <Header locale={locale} />
-      {children}
+      <div id="lt-main" tabIndex={-1}>
+        {children}
+      </div>
       <Footer locale={locale} />
     </>
   );

@@ -1,6 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link, getPathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import { safeJsonLd } from "@/lib/seo/jsonLd";
 import "./Breadcrumbs.css";
 
 export type BreadcrumbItem = {
@@ -79,7 +80,7 @@ export async function Breadcrumbs({ items }: Props) {
       </nav>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
     </>
   );

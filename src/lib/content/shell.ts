@@ -79,8 +79,6 @@ export type ShellFooter = {
     address: string;
   };
   rights: string;
-  /** Version stamp; held on the type but not rendered today. */
-  version: string;
 };
 
 /**
@@ -160,9 +158,6 @@ const PRODUCTS_SERIES_HREFS: Record<string, string> = {
 export function seriesHref(code: string): string {
   return PRODUCTS_SERIES_HREFS[code] ?? "/products";
 }
-
-/** Version stamp for the footer. Bump when shell content changes materially. */
-const SHELL_VERSION = "v0.2";
 
 // ─── Content ────────────────────────────────────────────────────────────────
 
@@ -325,7 +320,6 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         registration: "사업자등록번호 314-86-55562",
       },
       rights: "© 2026 주식회사 라인텍. All rights reserved.",
-      version: SHELL_VERSION,
     },
   },
 
@@ -489,7 +483,6 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         email: "linetech@line-tech.co.kr",
       },
       rights: "© 2026 Line Tech Inc. All rights reserved.",
-      version: SHELL_VERSION,
     },
   },
 
@@ -651,7 +644,6 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         address: "江苏省无锡市锡山区锡沪东荟智企业中心 6 号楼 117 号",
       },
       rights: "© 2026 株式会社莱因。保留所有权利。",
-      version: SHELL_VERSION,
     },
   },
 };

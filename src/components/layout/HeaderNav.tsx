@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { ShellNavItem } from "@/lib/content/shell";
 import { useHeaderNav } from "./HeaderNavContext";
@@ -9,11 +10,12 @@ type Props = { items: ShellNavItem[] };
 
 export function HeaderNav({ items }: Props) {
   const { openId, onItemEnter, onItemLeave, setOpenId } = useHeaderNav();
+  const t = useTranslations("a11y");
 
   return (
     <nav
       className="pd-top__nav"
-      aria-label="Primary"
+      aria-label={t("primaryNav")}
       onMouseLeave={onItemLeave}
     >
       {items.map((item) => {

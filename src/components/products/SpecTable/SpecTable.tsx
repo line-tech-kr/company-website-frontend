@@ -42,18 +42,6 @@ export function SpecTable({
     setTimeout(() => setCopied(false), 1600);
   };
 
-  const offsets = groups.reduce<number[]>((acc, g, i) => {
-    acc.push(i === 0 ? 0 : acc[i - 1] + groups[i - 1].rows.length);
-    return acc;
-  }, []);
-  const numberedGroups = groups.map((g, gi) => ({
-    ...g,
-    rows: g.rows.map((r, ri) => ({
-      ...r,
-      idx: String(offsets[gi] + ri + 1).padStart(2, "0"),
-    })),
-  }));
-
   return (
     <section id="specs" className="lt-pdp-specs">
       <header className="lt-pdp-section-hd">
@@ -73,22 +61,27 @@ export function SpecTable({
       </header>
 
       <div className="lt-pdp-spec">
-        {numberedGroups.map((g) => (
-          <div className="lt-pdp-spec__group" key={g.id}>
-            <div className="lt-pdp-spec__grouplbl">
-              <span className="lt-pdp-spec__groupnum">{g.num}</span>
+        {groups.map((g) => (
+          <section
+            className="lt-pdp-spec__group"
+            key={g.id}
+            aria-labelledby={`spec-group-${g.id}`}
+          >
+            <h3 className="lt-pdp-spec__grouplbl" id={`spec-group-${g.id}`}>
+              <span className="lt-pdp-spec__groupnum" aria-hidden="true">
+                {g.num}
+              </span>
               <span>{g.label}</span>
-            </div>
-            <div className="lt-pdp-spec__rows">
+            </h3>
+            <dl className="lt-pdp-spec__rows">
               {g.rows.map((r) => (
                 <div className="lt-pdp-spec__row" key={r.key}>
-                  <div className="lt-pdp-spec__idx">{r.idx}</div>
-                  <div className="lt-pdp-spec__lbl">{r.label}</div>
-                  <div className="lt-pdp-spec__val">{r.value}</div>
+                  <dt className="lt-pdp-spec__lbl">{r.label}</dt>
+                  <dd className="lt-pdp-spec__val">{r.value}</dd>
                 </div>
               ))}
-            </div>
-          </div>
+            </dl>
+          </section>
         ))}
       </div>
     </section>

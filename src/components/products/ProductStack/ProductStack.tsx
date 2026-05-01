@@ -44,39 +44,71 @@ export function ProductStack({
       {products.length === 0 ? (
         <p className="lt-prod-stack__empty">{emptyLabel}</p>
       ) : (
-        <div className="lt-prod-stack__rows">
-          <div className="lt-prod-stack__head">
-            <span className="lt-prod-stack__head-cell lt-prod-stack__head-cell--thumb"></span>
-            <span className="lt-prod-stack__head-cell lt-prod-stack__head-cell--code">
-              {headers.model}
-            </span>
-            <span className="lt-prod-stack__head-cell lt-prod-stack__head-cell--label">
-              {headers.description}
-            </span>
-            <span className="lt-prod-stack__head-cell lt-prod-stack__head-cell--range">
-              {headers.range}
-            </span>
-            <span className="lt-prod-stack__head-cell lt-prod-stack__head-cell--acc">
-              {headers.accuracy}
-            </span>
-            <span className="lt-prod-stack__head-cell lt-prod-stack__head-cell--resp">
-              {headers.response}
-            </span>
-            <span className="lt-prod-stack__head-cell lt-prod-stack__head-cell--fit">
-              {headers.fitting}
-            </span>
-            <span className="lt-prod-stack__head-cell lt-prod-stack__head-cell--act"></span>
-          </div>
-          {products.map((p) => (
-            <ProductRow
-              key={p.slug.current}
-              product={p}
-              category={category}
-              locale={locale}
-              viewLabel={viewLabel}
-            />
-          ))}
-        </div>
+        <table className="lt-prod-stack__table">
+          <caption className="lt-prod-stack__sr-caption">{title}</caption>
+          <thead>
+            <tr className="lt-prod-stack__head">
+              <th
+                scope="col"
+                className="lt-prod-stack__head-cell lt-prod-stack__head-cell--thumb"
+                aria-hidden="true"
+              />
+              <th
+                scope="col"
+                className="lt-prod-stack__head-cell lt-prod-stack__head-cell--code"
+              >
+                {headers.model}
+              </th>
+              <th
+                scope="col"
+                className="lt-prod-stack__head-cell lt-prod-stack__head-cell--label"
+              >
+                {headers.description}
+              </th>
+              <th
+                scope="col"
+                className="lt-prod-stack__head-cell lt-prod-stack__head-cell--range"
+              >
+                {headers.range}
+              </th>
+              <th
+                scope="col"
+                className="lt-prod-stack__head-cell lt-prod-stack__head-cell--acc"
+              >
+                {headers.accuracy}
+              </th>
+              <th
+                scope="col"
+                className="lt-prod-stack__head-cell lt-prod-stack__head-cell--resp"
+              >
+                {headers.response}
+              </th>
+              <th
+                scope="col"
+                className="lt-prod-stack__head-cell lt-prod-stack__head-cell--fit"
+              >
+                {headers.fitting}
+              </th>
+              <th
+                scope="col"
+                className="lt-prod-stack__head-cell lt-prod-stack__head-cell--act"
+              >
+                <span className="lt-prod-stack__sr-only">{viewLabel}</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {products.map((p) => (
+              <ProductRow
+                key={p.slug.current}
+                product={p}
+                category={category}
+                locale={locale}
+                viewLabel={viewLabel}
+              />
+            ))}
+          </tbody>
+        </table>
       )}
     </section>
   );

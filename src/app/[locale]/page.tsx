@@ -26,7 +26,7 @@ export default async function HomePage({ params }: Props) {
         <Applications h={h} />
         <Feature h={h} />
         <Credentials h={h} />
-        <Contact h={h} />
+        <Contact h={h} locale={locale} />
       </div>
     </main>
   );
