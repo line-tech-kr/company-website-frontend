@@ -1,7 +1,6 @@
 "use server";
 
 import { headers } from "next/headers";
-import { getTranslations } from "next-intl/server";
 import { contactFormSchema } from "./schema";
 import { checkContactRateLimit } from "./rate-limit";
 import { verifyTurnstile } from "./captcha";
@@ -75,18 +74,4 @@ export async function submitContact(
   // Don't echo user input back to the response — minimises reflected-XSS
   // surface and avoids leaking what was submitted via shared error pages.
   return { status: "success" };
-}
-
-export async function getContactCopy() {
-  const t = await getTranslations("contactForm");
-  return {
-    errors: {
-      invalid: t("errors.invalid"),
-      rateLimited: t("errors.rateLimited"),
-      captcha: t("errors.captcha"),
-      server: t("errors.server"),
-    },
-    success: t("success"),
-    submitting: t("submitting"),
-  };
 }

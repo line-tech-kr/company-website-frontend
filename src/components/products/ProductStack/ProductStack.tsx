@@ -51,9 +51,8 @@ export function ProductStack({
               <th
                 scope="col"
                 className="lt-prod-stack__head-cell lt-prod-stack__head-cell--thumb"
-              >
-                <span className="lt-prod-stack__sr-only">{headers.model}</span>
-              </th>
+                aria-hidden="true"
+              />
               <th
                 scope="col"
                 className="lt-prod-stack__head-cell lt-prod-stack__head-cell--code"
