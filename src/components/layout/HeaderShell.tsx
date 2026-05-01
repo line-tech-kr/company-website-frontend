@@ -1,6 +1,14 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { SearchPanel } from "./SearchPanel";
 import { HeaderNavProvider, type HeaderNavCtx } from "./HeaderNavContext";
 import { MobileNavProvider, type MobileNavCtx } from "./MobileNavContext";
