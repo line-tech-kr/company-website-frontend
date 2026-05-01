@@ -3,9 +3,10 @@
  *
  * Conventions:
  *  - One typed object per locale, same shape as `LT_HOME` in `./home.ts`.
- *  - Products mega-menu reads `productsCategories` (3 series-based buckets:
- *    analogue / digital / specialized). The homepage's series cards link into
- *    the same routes via `PRODUCTS_SERIES_HREFS`.
+ *  - Products mega-menu reads `productsCategories` (3 series buckets —
+ *    analogue / digital / specialized — plus an `accessories` entry that
+ *    points at the static /products/accessories page). The homepage's
+ *    series cards link into the series routes via `PRODUCTS_SERIES_HREFS`.
  *  - `PRODUCTS_SERIES_HREFS` / `getProductsSeriesEntries()` exist solely to
  *    drive the homepage Series section as a secondary entry point.
  *  - Consumed by: Header (#6), Footer (#4), MegaMenu (#7). Keep labels here,
@@ -81,12 +82,15 @@ export type ShellFooter = {
 };
 
 /**
- * One of the 3 series-based product categories (Analogue / Digital /
- * Specialized). Drives the Products mega-menu and `/products/[category]`
- * routes. Slug is locale-independent; label/desc are localized.
+ * One of the product categories surfaced in the mega-menu. Three are
+ * series-based (Analogue / Digital / Specialized) and resolve to dynamic
+ * `/products/[category]` routes; the fourth is `accessories`, which has its
+ * own static page at `/products/accessories` (panel readouts + pressure
+ * accessories that don't fit the series taxonomy).
+ * Slug is locale-independent; label/desc are localized.
  */
 export type ProductsCategory = {
-  /** Stable slug: "analogue" | "digital" | "specialized". */
+  /** Stable slug: "analogue" | "digital" | "specialized" | "accessories". */
   code: string;
   label: string;
   desc: string;
@@ -125,7 +129,7 @@ export type ShellContent = {
   nav: ShellNavItem[];
   /** Top-right "Quote" button label in the header. Mailto target is shared. */
   quoteLabel: string;
-  /** Series-based product categories — 3 entries. */
+  /** Product mega-menu categories — 3 series + 1 accessories entry. */
   productsCategories: ProductsCategory[];
   /** Header search panel copy (#8). */
   search: ShellSearch;
@@ -147,7 +151,7 @@ const PRODUCTS_SERIES_HREFS: Record<string, string> = {
   "M / MS": "/products/analogue",
   MD: "/products/digital",
   "LD / LM": "/products/specialized",
-  LTI: "/products/specialized",
+  LTI: "/products/accessories",
 };
 
 /** Resolve href for a series by its code; falls back to the category index. */
@@ -172,7 +176,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             {
               href: "/company#history",
               label: "발자취",
-              desc: "1997년부터 현재까지",
+              desc: "1997년 설립 이후",
             },
             {
               href: "/company#certifications",
@@ -275,6 +279,12 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         label: "특수 시리즈",
         desc: "방폭 · 디스플레이 일체형 · MEMS 등 특수 사양",
         href: "/products/specialized",
+      },
+      {
+        code: "accessories",
+        label: "부속품",
+        desc: "표시기 · 고압 유량 제어기 · 압력 충격 보호기",
+        href: "/products/accessories",
       },
     ],
     search: {
@@ -438,6 +448,12 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         desc: "Explosion-proof, integrated display, MEMS variants",
         href: "/products/specialized",
       },
+      {
+        code: "accessories",
+        label: "Accessories",
+        desc: "Panel readouts, high-pressure regulators, shock protectors",
+        href: "/products/accessories",
+      },
     ],
     search: {
       openLabel: "Open search",
@@ -587,6 +603,12 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         label: "特殊系列",
         desc: "防爆、集成显示、MEMS 等特殊型号",
         href: "/products/specialized",
+      },
+      {
+        code: "accessories",
+        label: "配件",
+        desc: "显示器 · 高压流量控制器 · 压力冲击保护器",
+        href: "/products/accessories",
       },
     ],
     search: {

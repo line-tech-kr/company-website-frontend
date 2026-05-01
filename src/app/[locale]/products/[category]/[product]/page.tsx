@@ -1,5 +1,6 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { permanentRedirect } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { ProductHero } from "@/components/products/ProductHero";
 import { TabNav } from "@/components/products/TabNav";
@@ -14,18 +15,21 @@ import {
   type DownloadItem,
 } from "@/components/products/DownloadsList";
 import { sanityClient } from "@/sanity/client";
+import { fetchSanity } from "@/sanity/fetch";
 import { productBySlugQuery } from "@/sanity/queries";
 import { ALL_PRODUCTS } from "@/lib/fixtures/products";
 import {
   CATEGORIES,
+  categoryForSeries,
   isCategorySlug,
   type CategorySlug,
 } from "@/lib/categories";
 import { routing } from "@/i18n/routing";
+import type { Locale } from "@/lib/content/home";
 import type { MassFlowSpecs, Product } from "@/lib/types/product";
 
 type Props = {
-  params: Promise<{ locale: string; category: string; product: string }>;
+  params: Promise<{ locale: Locale; category: string; product: string }>;
 };
 
 const SPEC_GROUPS: Array<{
@@ -55,9 +59,7 @@ const SPEC_GROUPS: Array<{
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
     ALL_PRODUCTS.flatMap((p) => {
-      const category = (Object.keys(CATEGORIES) as CategorySlug[]).find(
-        (slug) => CATEGORIES[slug].series === p.series,
-      );
+      const category = categoryForSeries(p.series);
       if (!category) return [];
       return [{ locale, category, product: p.slug.current }];
     }),
@@ -78,12 +80,22 @@ export default async function ProductPage({ params }: Props) {
 
   if (!isCategorySlug(category)) notFound();
 
-  const product = (await sanityClient.fetch(productBySlugQuery, {
-    slug: productSlug,
-  })) as Product | null;
+  const product = (await fetchSanity(
+    () => sanityClient.fetch(productBySlugQuery, { slug: productSlug }),
+    { name: "productBySlug", params: { slug: productSlug } },
+  )) as Product | null;
 
   if (!product) notFound();
-  if (product.series !== CATEGORIES[category].series) notFound();
+  if (product.series !== CATEGORIES[category].series) {
+    const canonicalCategory = categoryForSeries(product.series);
+    if (canonicalCategory) {
+      permanentRedirect({
+        href: `/products/${canonicalCategory}/${product.slug.current}`,
+        locale,
+      });
+    }
+    notFound();
+  }
 
   const [tCommon, tNav, tBreadcrumb, tSpecs, tPdp, tA11y] = await Promise.all([
     getTranslations("common"),
@@ -94,8 +106,7 @@ export default async function ProductPage({ params }: Props) {
     getTranslations("a11y"),
   ]);
 
-  const typedLocale = locale as "ko" | "en" | "zh";
-  const categoryLabel = tBreadcrumb(category as CategorySlug);
+  const categoryLabel = tBreadcrumb(category);
 
   const breadcrumbs = [
     { label: tCommon("home"), href: "/" },
@@ -122,7 +133,7 @@ export default async function ProductPage({ params }: Props) {
     }),
   }));
 
-  const features = product.features.map((f) => f[typedLocale]);
+  const features = product.features.map((f) => f[locale]);
   const specs = product.massFlowSpecs;
   const overviewRows = [
     {
@@ -178,7 +189,7 @@ export default async function ProductPage({ params }: Props) {
 
       <ProductHero
         product={product}
-        locale={typedLocale}
+        locale={locale}
         categoryLabel={categoryLabel}
         quoteLabel={tPdp("ctas.quote")}
         specsLabel={tPdp("ctas.viewSpecs")}

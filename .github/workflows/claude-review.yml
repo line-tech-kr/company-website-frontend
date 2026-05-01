@@ -1,0 +1,97 @@
+name: Claude PR Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review]
+
+concurrency:
+  group: claude-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    name: Review
+    if: >-
+      github.event.pull_request.draft == false &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - uses: anthropics/claude-code-action@ef50f123a3a9be95b60040d042717517407c7256 # v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_args: "--allowedTools Bash(gh pr comment:*)"
+          use_sticky_comment: true
+          prompt: |
+            You are reviewing a pull request for the Line Tech Inc. company website rebuild
+            (Next.js 16 App Router + TypeScript + Tailwind v4 + Sanity CMS, deployed on Vercel,
+            internationalised in Korean / English / Chinese using Next.js native i18n routing).
+
+            Review the diff against the base branch and post one consolidated review.
+            Focus on the changed files only. Lead with the highest-severity issues.
+
+            You MUST always post a top-level summary comment on the pull request
+            using `gh pr comment $PR_NUMBER --body "..."` (the PR number is in the
+            $PR_NUMBER environment variable). Use this for the consolidated
+            summary regardless of whether you found inline issues. If the change
+            is clean, the summary may be a single line saying so — do not pad
+            with affirmations or restate what the diff does.
+
+            Priorities, in order:
+
+            1. Correctness and bugs — logic errors, missing null checks, broken types,
+               regressions in existing behaviour, race conditions, off-by-one errors.
+
+            2. Code quality and maintainability:
+               - Readability — unclear names, oversized functions or components, deeply
+                 nested logic that should be flattened or extracted.
+               - Over-engineering — premature abstractions, speculative flexibility,
+                 unnecessary configuration knobs, helpers introduced for a single caller.
+                 Three similar lines is fine; do not demand a shared abstraction.
+               - Dead code — unused exports, commented-out blocks, leftover scaffolding,
+                 placeholder TODOs without context.
+               - Useless comments — comments that restate the code, narrate the change,
+                 or reference the current task or PR. Only WHY-comments for non-obvious
+                 constraints are welcome.
+               - Inappropriate error handling — defensive checks for impossible cases,
+                 try/catch that swallows real errors, validation duplicated across layers.
+                 Validate at boundaries (user input, external APIs), trust internal code.
+               - Duplication that has actually crossed the threshold for extraction
+                 (genuine repeated logic, not coincidental similarity).
+
+            3. Next.js 16 App Router pitfalls — server vs client component boundaries,
+               async params and searchParams, metadata API usage, image optimisation,
+               caching and revalidation directives. The repo's AGENTS.md warns that
+               Next.js 16 has breaking changes from earlier versions; flag anything that
+               looks like a pre-16 pattern.
+
+            4. Internationalisation correctness — Korean, English, and Chinese must stay
+               in sync. Flag missing translations, hardcoded user-facing strings, or copy
+               left only in one language. Korean and Chinese text must not inherit the
+               monospace letter-spacing tweaks meant for Latin uppercase eyebrows
+               (lang-scoped overrides are the established pattern).
+
+            5. Brand and content discipline:
+               - Brand colours must stay exact: primary #185686, primary-dark #1f375e,
+                 primary-deep #172e75, accent #fdbc04.
+               - Headquarters is Daejeon, never Hwaseong.
+               - Avoid acronyms and jargon in user-facing copy (spell out CTA, MVP, IA, etc.).
+
+            6. Security — cross-site scripting via dangerouslySetInnerHTML, unsafe Sanity
+               GROQ queries, leaked secrets in committed files, missing validation on the
+               inquiry form, and unsafe redirects.
+
+            7. Sanity schema drift — if schema files change, verify the frontend queries
+               and TypeScript types are updated to match.
+
+            Skip nits about formatting, import ordering, or pure style — the CI format and
+            lint jobs already cover those. Do not restate findings that typecheck or lint
+            would catch.

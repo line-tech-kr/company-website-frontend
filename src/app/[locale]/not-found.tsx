@@ -1,20 +1,20 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import "./not-found.css";
+import "./error-page.css";
 
-export default async function NotFound() {
-  const t = await getTranslations("notFound");
+export default async function LocaleNotFound() {
+  const t = await getTranslations("errors.notFound");
 
   return (
-    <main className="lt-wrap lt-nf">
-      <p className="lt-nf__code" aria-hidden="true">
-        {t("code")}
-      </p>
-      <h1 className="lt-nf__title">{t("title")}</h1>
-      <p className="lt-nf__lede">{t("lede")}</p>
-      <Link className="lt-nf__back" href="/">
-        ← {t("back")}
-      </Link>
+    <main className="lt-wrap lt-error">
+      <div className="lt-error__panel">
+        <p className="lt-error__code">404</p>
+        <h1 className="lt-error__title">{t("title")}</h1>
+        <p className="lt-error__body">{t("body")}</p>
+        <Link href="/" className="lt-btn lt-btn--primary lt-btn--md">
+          {t("cta")}
+        </Link>
+      </div>
     </main>
   );
 }

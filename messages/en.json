@@ -16,11 +16,18 @@
     "tel": "TEL",
     "fax": "FAX"
   },
-  "notFound": {
-    "code": "404",
-    "title": "Page not found",
-    "lede": "The page you are looking for has moved or no longer exists.",
-    "back": "Back to home"
+  "errors": {
+    "notFound": {
+      "title": "Page not found",
+      "body": "The page you requested has moved or no longer exists.",
+      "cta": "Back to home"
+    },
+    "runtime": {
+      "title": "Something went wrong",
+      "body": "We couldn't load this page. Please try again in a moment.",
+      "retry": "Try again",
+      "home": "Back to home"
+    }
   },
   "breadcrumbs": {
     "label": "Breadcrumb",
@@ -45,6 +52,10 @@
     }
   },
   "products": {
+    "list": {
+      "title": "Product catalog",
+      "intro": "Mass Flow Controllers and Mass Flow Meters across analogue, digital, and specialized series. {count} models engineered for laboratory, industrial, and process applications."
+    },
     "kicker": "Product series",
     "categories": {
       "analogue": {

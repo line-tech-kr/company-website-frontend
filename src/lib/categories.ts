@@ -16,3 +16,9 @@ export const CATEGORIES: Record<
 export function isCategorySlug(s: string): s is CategorySlug {
   return (CATEGORY_SLUGS as readonly string[]).includes(s);
 }
+
+export function categoryForSeries(
+  series: Product["series"],
+): CategorySlug | undefined {
+  return CATEGORY_SLUGS.find((slug) => CATEGORIES[slug].series === series);
+}

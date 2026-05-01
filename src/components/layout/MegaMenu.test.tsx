@@ -51,7 +51,7 @@ describe("MegaMenu", () => {
     expect(scrim).not.toHaveClass("is-active");
   });
 
-  it("renders all 3 product categories + featured M3030VA card when products is open", () => {
+  it("renders all 4 product categories + featured M3030VA card when products is open", () => {
     const { container } = renderMega(stubCtx({ openId: "products" }));
 
     const panel = container.querySelector('[data-id="products"]');
@@ -59,7 +59,7 @@ describe("MegaMenu", () => {
     expect(panel).toHaveClass("is-open");
 
     const cats = getProductsCategories("en");
-    expect(cats).toHaveLength(3);
+    expect(cats).toHaveLength(4);
     cats.forEach((c) => {
       expect(
         within(panel as HTMLElement).getByText(c.label),
