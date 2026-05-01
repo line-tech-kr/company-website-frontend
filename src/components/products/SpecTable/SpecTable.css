@@ -2,6 +2,22 @@
   margin-bottom: 64px;
   scroll-margin-top: 72px;
 }
+
+/* Global row counter — resets at the spec wrapper, increments per row,
+ * displayed via ::before so no idx markup is needed in the dl. */
+.lt-pdp-spec {
+  counter-reset: spec-row;
+}
+.lt-pdp-spec__row {
+  counter-increment: spec-row;
+}
+.lt-pdp-spec__row::before {
+  content: counter(spec-row, decimal-leading-zero);
+  font: 500 var(--lt-fs-micro) var(--lt-mono);
+  color: var(--pd-muted);
+  letter-spacing: 0.08em;
+}
+
 .lt-pdp-spec__group {
   display: grid;
   grid-template-columns: 180px 1fr;
@@ -24,6 +40,7 @@
   font: 500 var(--lt-fs-xs) var(--lt-sans);
   color: var(--pd-fg-strong);
   height: fit-content;
+  margin: 0;
 }
 .lt-pdp-spec__groupnum {
   font: 500 var(--lt-fs-micro) var(--lt-mono);
@@ -51,11 +68,6 @@
 .lt-pdp-spec__row:hover {
   background: var(--lt-neutral-100);
 }
-.lt-pdp-spec__idx {
-  font: 500 var(--lt-fs-micro) var(--lt-mono);
-  color: var(--pd-muted);
-  letter-spacing: 0.08em;
-}
 .lt-pdp-spec__lbl {
   font: 400 var(--lt-fs-sm) / 1.3 var(--lt-sans);
   color: var(--pd-fg);
@@ -66,9 +78,6 @@
   color: var(--pd-fg-strong);
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.01em;
-  margin: 0;
-}
-.lt-pdp-spec__grouplbl {
   margin: 0;
 }
 
