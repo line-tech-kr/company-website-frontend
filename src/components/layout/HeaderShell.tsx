@@ -1,8 +1,15 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { SearchPanel } from "./SearchPanel";
-import { SearchProvider, type SearchCtx } from "./SearchContext";
 import { HeaderNavProvider, type HeaderNavCtx } from "./HeaderNavContext";
 import { MobileNavProvider, type MobileNavCtx } from "./MobileNavContext";
 import { MobileNav } from "./MobileNav";
@@ -12,6 +19,20 @@ import type {
   ShellNavItem,
 } from "@/lib/content/shell";
 import type { Locale } from "@/lib/content/home";
+
+type SearchCtx = {
+  searchOpen: boolean;
+  setSearchOpen: (open: boolean) => void;
+  registerSearchTrigger: (el: HTMLButtonElement | null) => void;
+};
+
+const SearchStateCtx = createContext<SearchCtx | null>(null);
+
+export function useSearch(): SearchCtx {
+  const ctx = useContext(SearchStateCtx);
+  if (!ctx) throw new Error("useSearch must be used inside <HeaderShell>");
+  return ctx;
+}
 
 const SCROLL_ON = 40;
 const SCROLL_OFF = 30;
@@ -81,7 +102,7 @@ export function HeaderShell({
     [],
   );
 
-  const searchCtx = useMemo<SearchCtx>(
+  const searchCtx = useMemo(
     () => ({ searchOpen, setSearchOpen, registerSearchTrigger }),
     [searchOpen, registerSearchTrigger],
   );
@@ -149,7 +170,7 @@ export function HeaderShell({
     .join(" ");
 
   return (
-    <SearchProvider value={searchCtx}>
+    <SearchStateCtx.Provider value={searchCtx}>
       <HeaderNavProvider value={navCtx}>
         <MobileNavProvider value={mobileNavCtx}>
           <header className={cls}>
@@ -172,6 +193,6 @@ export function HeaderShell({
           </header>
         </MobileNavProvider>
       </HeaderNavProvider>
-    </SearchProvider>
+    </SearchStateCtx.Provider>
   );
 }
