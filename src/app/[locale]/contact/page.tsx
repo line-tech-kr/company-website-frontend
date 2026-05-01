@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
+import { buildContactMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { Button } from "@/components/ui/Button";
 import { LT_CONTACT } from "@/lib/content/contact";
@@ -31,10 +32,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const c = LT_CONTACT[locale];
-  return {
-    title: `${c.title} — Line Tech`,
-    description: c.lede,
-  };
+  return buildContactMetadata(locale, `${c.title} — Line Tech`, c.lede);
 }
 
 export default async function ContactPage({ params, searchParams }: Props) {

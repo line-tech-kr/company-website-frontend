@@ -29,7 +29,13 @@ export function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  title: "Line Tech",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://linetech.co.kr",
+  ),
+  title: {
+    default: "Line Tech",
+    template: "%s — Line Tech",
+  },
   description: "Mass Flow Controllers and Mass Flow Meters",
 };
 
@@ -47,8 +53,38 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   setRequestLocale(locale);
 
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "라인테크 / Line Tech Inc.",
+    alternateName: ["Line Tech", "라인테크", "Linetech"],
+    url: "https://linetech.co.kr",
+    foundingDate: "1997",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "806 Daedeok-daero, Yuseong-gu",
+      addressLocality: "Daejeon",
+      postalCode: "34055",
+      addressCountry: "KR",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      availableLanguage: ["Korean", "English", "Chinese"],
+    },
+    sameAs: ["https://linetech.co.kr"],
+  };
+
   return (
     <html lang={locale} className={`${fontSans.variable} ${fontMono.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
+        />
+      </head>
       <body>
         <NextIntlClientProvider>
           <PageShell locale={locale as Locale}>{children}</PageShell>

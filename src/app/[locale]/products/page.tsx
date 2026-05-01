@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { CategoryHero } from "@/components/products/CategoryHero";
@@ -13,7 +14,17 @@ import {
 import { SanityProductSchema } from "@/lib/types/product";
 import type { Product } from "@/lib/types/product";
 import { z } from "zod";
+import { buildProductsMetadata } from "@/lib/seo";
 import "./products-list.css";
+
+type MetaProps = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({
+  params,
+}: MetaProps): Promise<Metadata> {
+  const { locale } = await params;
+  return buildProductsMetadata(locale as "ko" | "en" | "zh");
+}
 
 type Props = { params: Promise<{ locale: string }> };
 
