@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { render, fireEvent, within } from "@testing-library/react";
 import { MegaMenu, MegaMenuScrim } from "./MegaMenu";
-import { HeaderNavProvider, type HeaderNavCtx } from "./HeaderNavContext";
+import { HeaderNavProvider, type HeaderNavCtx } from "../HeaderNav/HeaderNavContext";
 import { LT_SHELL, getProductsCategories } from "@/lib/content/shell";
 
 vi.mock("@/i18n/navigation", () => ({

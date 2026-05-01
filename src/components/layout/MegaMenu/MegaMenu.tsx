@@ -9,7 +9,7 @@ import type {
   ShellNavItem,
 } from "@/lib/content/shell";
 import type { Locale } from "@/lib/content/home";
-import { useHeaderNav } from "./HeaderNavContext";
+import { useHeaderNav } from "../HeaderNav/HeaderNavContext";
 import "./MegaMenu.css";
 
 type Props = { items: ShellNavItem[]; locale: Locale };
