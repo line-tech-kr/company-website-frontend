@@ -36,8 +36,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "semiconductor",
         title: "Semiconductor",
-        lede:
-          "Precise dopant and precursor gas delivery is critical in wafer fabrication — even sub-percent flow errors affect device yield.",
+        lede: "Precise dopant and precursor gas delivery is critical in wafer fabrication — even sub-percent flow errors affect device yield.",
         body: [
           "In semiconductor manufacturing, mass flow controllers regulate the delivery of process gases — dopants, etchants, and chemical vapour deposition (CVD) precursors — into reaction chambers with tight repeatability. Any deviation in flow rate directly impacts film thickness, doping concentration, and ultimately device performance.",
           "Line Tech's MD Digital series, with ±0.25% F.S. accuracy and sub-second response, is well suited to precision deposition and etch steps. The proven M/MS Analogue series handles high-volume gas lines where wide flow ranges (up to 5,000 slpm) and long-term stability are the priority.",
@@ -49,8 +48,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "fuel-cells",
         title: "Fuel cells",
-        lede:
-          "Hydrogen and reactant gas feed rates must be metered accurately to maintain cell efficiency and prevent membrane damage.",
+        lede: "Hydrogen and reactant gas feed rates must be metered accurately to maintain cell efficiency and prevent membrane damage.",
         body: [
           "Fuel cell systems — whether PEM, solid oxide, or alkaline — depend on controlled delivery of hydrogen, oxygen, and inert purge gases across each cell stack. An MFC on each gas line ensures the stoichiometric ratios required for peak power output while protecting membranes from over-pressure or starvation conditions.",
           "The M/MS Analogue series covers the wide flow ranges typical of stack-level hydrogen feeds. For lower-pressure laboratory fuel cell testing rigs, the LM MEMS series offers a cost-efficient option with fast response and a compact footprint.",
@@ -62,8 +60,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "biotech-pharmaceutical",
         title: "Biotech & pharmaceutical",
-        lede:
-          "Bioreactor gas sparging and cleanroom inert-gas blanketing demand consistent, repeatable flow that can be validated against regulatory standards.",
+        lede: "Bioreactor gas sparging and cleanroom inert-gas blanketing demand consistent, repeatable flow that can be validated against regulatory standards.",
         body: [
           "Bioprocess applications include sparging CO₂ and O₂ into fermenters and bioreactors to support cell culture, blanketing tanks with N₂ to prevent oxidation, and supplying calibrated gas mixtures for analytical reference systems. All require instruments that maintain specification over long production campaigns.",
           "The MD Digital series' ±0.25% F.S. accuracy and RS-485 communication facilitate data logging and batch record compliance. The M/MS Analogue series is the established choice for non-critical blanketing and purge lines where a simple analogue signal is sufficient.",
@@ -75,8 +72,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "chemical-petrochemical",
         title: "Chemical & petrochemical",
-        lede:
-          "High-pressure reactor feed lines, flammable process gases, and aggressive chemicals require instruments built for demanding environments.",
+        lede: "High-pressure reactor feed lines, flammable process gases, and aggressive chemicals require instruments built for demanding environments.",
         body: [
           "Chemical and petrochemical plants use mass flow controllers to meter reactant gases, carrier gases, and catalyst regeneration streams across reactors operating at high pressure. The wide operating pressure range of Line Tech instruments (up to 90 bar for M/MS and MD series) makes them a direct fit for most reactor inlet conditions.",
           "Where the process atmosphere contains flammable or explosive gases — such as hydrogen, hydrocarbons, or solvent vapours — the EX series provides the required ATEX certification (Ex ec IIC T4 Gc) and IP 65 protection. It covers flow ranges up to 1,000 slpm.",
@@ -88,8 +84,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "precision-gas-blending",
         title: "Precision gas blending",
-        lede:
-          "Specialty gas mixtures and calibration standards require flow accuracy that is traceable and verifiable across the full blend composition.",
+        lede: "Specialty gas mixtures and calibration standards require flow accuracy that is traceable and verifiable across the full blend composition.",
         body: [
           "Gas blending systems — whether producing certified reference gas mixtures, multi-component calibration standards, or specialty process gases — rely on tightly controlled individual component flows. The final mixture composition is only as accurate as the individual MFCs or MFMs in each gas line.",
           "The MD Digital series, with ±0.25% F.S. accuracy at low ranges, is the recommended choice for high-precision blending. Its 8-point linearisation ensures accuracy across the full operating range of each component flow, not just at a single calibration point.",
@@ -101,8 +96,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "research-development",
         title: "Research & development",
-        lede:
-          "Laboratory and pilot-plant gas systems need flexibility across a wide range of gases, flow rates, and configurations.",
+        lede: "Laboratory and pilot-plant gas systems need flexibility across a wide range of gases, flow rates, and configurations.",
         body: [
           "R&D environments typically involve frequent reconfiguration — new gases, new flow ranges, and new experimental conditions. The breadth of the Line Tech product range means that a single supplier can cover flows from 0.01 sccm to 5,000 slpm across analogue, digital, and specialist configurations.",
           "The LD series is particularly useful in standalone laboratory setups: the built-in 7-segment display and front-panel setpoint adjustment eliminate the need for a separate controller or PC, making it easy to operate a single instrument independently on a bench.",
@@ -114,8 +108,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "metals-processing",
         title: "Metals processing",
-        lede:
-          "Annealing, carburising, and sintering furnaces depend on controlled protective and reactive gas atmospheres to produce consistent metallurgical results.",
+        lede: "Annealing, carburising, and sintering furnaces depend on controlled protective and reactive gas atmospheres to produce consistent metallurgical results.",
         body: [
           "Heat treatment processes in metals manufacturing use precisely controlled gas atmospheres — typically nitrogen, hydrogen, ammonia, or endothermic gas mixtures — to achieve specific surface chemistry and mechanical properties. An incorrect gas ratio can result in surface defects, decarburisation, or improper case hardening.",
           "The M/MS Analogue series, with flow ranges extending to 5,000 slpm, covers the high-volume purge and atmosphere flows typical of continuous furnace lines. The instruments' wide operating pressure tolerance (up to 90 bar) accommodates the varying supply pressures found across industrial gas distribution systems.",
@@ -127,8 +120,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "led-lighting",
         title: "LED lighting",
-        lede:
-          "Epitaxial growth of LED structures requires sub-percent flow control over MOCVD precursor and carrier gases to achieve target wavelength and efficiency.",
+        lede: "Epitaxial growth of LED structures requires sub-percent flow control over MOCVD precursor and carrier gases to achieve target wavelength and efficiency.",
         body: [
           "Metal-organic chemical vapour deposition (MOCVD) for LED production demands extremely precise delivery of metalorganic precursors (TMGa, TMAl, TMIn) and hydride sources (AsH₃, PH₃, NH₃) alongside hydrogen and nitrogen carrier gases. Any variation in precursor flow directly shifts the bandgap of the deposited layer and therefore the emission wavelength.",
           "The MD Digital series offers the ±0.25% F.S. accuracy and fast response required by MOCVD reactors, and its RS-485 interface integrates cleanly with reactor control systems for logging and recipe management.",
@@ -140,8 +132,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "solar-photovoltaic",
         title: "Solar & photovoltaic",
-        lede:
-          "Thin-film silicon and perovskite solar cell deposition processes rely on controlled precursor and dopant gas delivery to achieve target conversion efficiency.",
+        lede: "Thin-film silicon and perovskite solar cell deposition processes rely on controlled precursor and dopant gas delivery to achieve target conversion efficiency.",
         body: [
           "Silicon solar cells are produced using plasma-enhanced CVD (PECVD) or thermal CVD processes that deposit amorphous or polycrystalline silicon layers from silane (SiH₄), diborane (B₂H₆), and phosphine (PH₃) precursors. Precise flow control over these toxic and reactive gases is essential for consistent film quality across large substrates.",
           "Line Tech's MD series provides the accuracy required for process recipe control, while the M/MS series handles the larger nitrogen and hydrogen purge flows surrounding the deposition chamber. All instruments used with toxic precursor gases are ordered with appropriate Kalrez or Teflon seals.",
@@ -153,8 +144,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "fiber-optics",
         title: "Fiber optics & glass",
-        lede:
-          "Optical fibre preform manufacturing and specialty glass deposition require tightly controlled precursor and dopant gas flows to achieve target refractive index profiles.",
+        lede: "Optical fibre preform manufacturing and specialty glass deposition require tightly controlled precursor and dopant gas flows to achieve target refractive index profiles.",
         body: [
           "Modified chemical vapour deposition (MCVD) and outside vapour deposition (OVD) processes used in optical fibre production deposit silica and dopant layers from SiCl₄, GeCl₄, and POCl₃ precursors with oxygen carrier gas. The refractive index profile of the fibre — which determines its transmission characteristics — is set by the ratio of these precursor flows.",
           "Line Tech's M/MS Analogue series covers the stable, long-run flow control needed during the preform deposition phase. The MD Digital series is preferred for the dopant lines where high precision is most critical.",
@@ -166,8 +156,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "surface-treatment",
         title: "Gas injection & surface treatment",
-        lede:
-          "Plasma surface treatment, physical vapour deposition, and thermal spray processes all require controlled gas injection into the treatment zone.",
+        lede: "Plasma surface treatment, physical vapour deposition, and thermal spray processes all require controlled gas injection into the treatment zone.",
         body: [
           "Surface treatment processes use controlled gas flows to generate and sustain plasma discharges, create reactive coating atmospheres, or carry powdered materials in thermal spray systems. Applications include plasma nitriding, PVD/CVD hard coating, atmospheric plasma cleaning, and thermal spray.",
           "The M/MS Analogue series is widely used for argon, nitrogen, and oxygen flows in PVD and plasma systems. For processes in areas classified as hazardous due to flammable carrier gases or solvents, the EX series meets the ATEX requirements of the zone.",
@@ -179,8 +168,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "leak-detection",
         title: "Component leak detection",
-        lede:
-          "Accurate flow measurement at low flow rates is the basis for detecting seal failures and sub-threshold leaks in pressurised systems.",
+        lede: "Accurate flow measurement at low flow rates is the basis for detecting seal failures and sub-threshold leaks in pressurised systems.",
         body: [
           "Component leak detection systems use a calibrated flow measurement to quantify leakage through seals, valves, or joints in pressurised assemblies. By measuring the residual flow across a nominally closed component and comparing it to a known leak-rate threshold, the test system identifies non-conforming parts.",
           "The MD Digital series, with ±0.25% F.S. accuracy at low ranges (down to 0.01 slpm), provides the resolution needed to detect small leaks reliably. Its RS-485 interface allows direct data capture and pass/fail logging in automated test stations.",
@@ -204,8 +192,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "semiconductor",
         title: "반도체",
-        lede:
-          "웨이퍼 제조 공정에서 도펀트 및 전구체 가스의 정밀한 공급은 수율에 직결됩니다.",
+        lede: "웨이퍼 제조 공정에서 도펀트 및 전구체 가스의 정밀한 공급은 수율에 직결됩니다.",
         body: [
           "반도체 제조 공정에서 질량유량 제어기는 도펀트, 식각 가스, 화학기상증착(CVD) 전구체 등 공정 가스를 반응 챔버에 높은 재현성으로 공급합니다. 유량의 미세한 편차도 막 두께, 도핑 농도, 나아가 소자 성능에 직접적인 영향을 미칩니다.",
           "±0.25% F.S. 정확도와 1초 미만 응답을 갖춘 MD 디지털 시리즈는 정밀 증착 및 식각 공정에 적합합니다. 검증된 M/MS 아날로그 시리즈는 최대 5,000 slpm의 넓은 유량 범위와 장기 안정성이 우선되는 대용량 가스 라인에 적합합니다.",
@@ -217,8 +204,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "fuel-cells",
         title: "연료전지",
-        lede:
-          "수소 및 반응 가스 공급 유량을 정밀하게 계량해야 셀 효율을 유지하고 막 손상을 방지할 수 있습니다.",
+        lede: "수소 및 반응 가스 공급 유량을 정밀하게 계량해야 셀 효율을 유지하고 막 손상을 방지할 수 있습니다.",
         body: [
           "PEM, 고체산화물 또는 알칼리형 연료전지 시스템은 각 셀 스택에 수소, 산소, 불활성 퍼지 가스를 정확히 공급해야 합니다. 가스 라인마다 MFC를 적용하면 최대 출력에 필요한 화학양론적 비율을 유지하면서 막 과압 및 공급 부족 상황을 방지할 수 있습니다.",
           "M/MS 아날로그 시리즈는 스택 수준의 수소 공급에서 요구되는 넓은 유량 범위를 커버합니다. 저압 실험실용 연료전지 테스트 리그에는 빠른 응답과 컴팩트한 폼팩터를 갖춘 LM MEMS 시리즈가 비용 효율적인 선택입니다.",
@@ -230,8 +216,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "biotech-pharmaceutical",
         title: "바이오텍 · 제약",
-        lede:
-          "바이오리액터 가스 스파징과 클린룸 불활성 가스 블랭킷은 규제 기준 검증이 가능한 일관된 재현 유량을 요구합니다.",
+        lede: "바이오리액터 가스 스파징과 클린룸 불활성 가스 블랭킷은 규제 기준 검증이 가능한 일관된 재현 유량을 요구합니다.",
         body: [
           "바이오공정 응용에는 세포 배양을 위한 발효조·바이오리액터에의 CO₂·O₂ 스파징, 산화 방지를 위한 N₂ 탱크 블랭킷, 분석 기준 시스템용 교정 가스 혼합물 공급 등이 포함됩니다. 장기 생산 캠페인 전반에 걸쳐 사양을 유지하는 기기가 필요합니다.",
           "MD 디지털 시리즈의 ±0.25% F.S. 정확도와 RS-485 통신은 데이터 로깅과 배치 레코드 준수를 용이하게 합니다. M/MS 아날로그 시리즈는 간단한 아날로그 신호로 충분한 비핵심 블랭킷·퍼지 라인에 검증된 선택입니다.",
@@ -243,8 +228,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "chemical-petrochemical",
         title: "화학 · 석유화학",
-        lede:
-          "고압 반응기 공급 라인, 가연성 공정 가스, 부식성 화학물질은 까다로운 환경에 맞춰 설계된 기기를 필요로 합니다.",
+        lede: "고압 반응기 공급 라인, 가연성 공정 가스, 부식성 화학물질은 까다로운 환경에 맞춰 설계된 기기를 필요로 합니다.",
         body: [
           "화학·석유화학 플랜트에서는 고압으로 운전되는 반응기의 반응물 가스, 캐리어 가스, 촉매 재생 스트림을 계량하기 위해 질량유량 제어기가 사용됩니다. M/MS 및 MD 시리즈의 광범위한 동작 압력 범위(최대 90 bar)는 대부분의 반응기 입구 조건에 바로 적용할 수 있습니다.",
           "수소, 탄화수소, 용제 증기 등 가연성 또는 폭발성 가스가 있는 공정 환경에서는 EX 시리즈가 필요한 ATEX 인증(Ex ec IIC T4 Gc)과 IP 65 보호를 제공합니다. 최대 1,000 slpm까지 제공합니다.",
@@ -256,8 +240,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "precision-gas-blending",
         title: "정밀 가스 혼합",
-        lede:
-          "특수 가스 혼합물 및 교정 표준 가스는 전체 혼합 조성에 걸쳐 추적 가능하고 검증 가능한 유량 정확도를 요구합니다.",
+        lede: "특수 가스 혼합물 및 교정 표준 가스는 전체 혼합 조성에 걸쳐 추적 가능하고 검증 가능한 유량 정확도를 요구합니다.",
         body: [
           "인증 기준 가스 혼합물, 다성분 교정 표준, 또는 특수 공정 가스를 생산하는 가스 블렌딩 시스템은 각 가스 라인의 성분 유량을 정밀하게 제어합니다. 최종 혼합물의 조성 정확도는 개별 MFC 또는 MFM의 정확도에 의해 결정됩니다.",
           "저유량 범위에서 ±0.25% F.S. 정확도를 갖춘 MD 디지털 시리즈는 고정밀 블렌딩에 권장됩니다. 8포인트 선형화는 단일 교정 포인트만이 아닌 전체 동작 범위에서 각 성분 유량의 정확도를 보장합니다.",
@@ -269,8 +252,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "research-development",
         title: "연구 · 개발",
-        lede:
-          "실험실 및 파일럿 플랜트 가스 시스템은 다양한 가스, 유량 범위, 구성에 걸친 유연성을 필요로 합니다.",
+        lede: "실험실 및 파일럿 플랜트 가스 시스템은 다양한 가스, 유량 범위, 구성에 걸친 유연성을 필요로 합니다.",
         body: [
           "R&D 환경에서는 새로운 가스, 새로운 유량 범위, 새로운 실험 조건으로 빈번하게 재구성이 이루어집니다. 라인테크 제품 라인의 폭넓은 범위 덕분에 아날로그, 디지털, 특수 사양을 망라한 0.01 sccm부터 5,000 slpm까지의 유량을 단일 공급사에서 해결할 수 있습니다.",
           "LD 시리즈는 독립형 실험실 설비에 특히 유용합니다. 내장 7세그먼트 디스플레이와 전면 패널 설정값 조절 기능 덕분에 별도의 컨트롤러나 PC 없이 벤치 위에서 단독으로 기기를 쉽게 운용할 수 있습니다.",
@@ -282,8 +264,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "metals-processing",
         title: "금속 가공",
-        lede:
-          "소둔, 침탄 및 소결 용광로는 일관된 야금 결과를 얻기 위해 제어된 보호·반응 가스 분위기에 의존합니다.",
+        lede: "소둔, 침탄 및 소결 용광로는 일관된 야금 결과를 얻기 위해 제어된 보호·반응 가스 분위기에 의존합니다.",
         body: [
           "금속 제조의 열처리 공정은 특정 표면 화학과 기계적 특성을 달성하기 위해 정밀하게 제어된 가스 분위기(일반적으로 질소, 수소, 암모니아, 또는 흡열 가스 혼합물)를 사용합니다. 가스 비율이 잘못되면 표면 결함, 탈탄, 또는 불균일한 케이스 경화가 발생할 수 있습니다.",
           "M/MS 아날로그 시리즈는 최대 5,000 slpm의 유량 범위로 연속 용광로 라인의 대용량 퍼지 및 분위기 가스 흐름을 커버합니다. 넓은 동작 압력 허용 범위(최대 90 bar)는 산업용 가스 배관 시스템의 다양한 공급 압력에 적응합니다.",
@@ -295,8 +276,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "led-lighting",
         title: "LED 조명",
-        lede:
-          "LED 구조의 에피택셜 성장은 목표 파장과 효율을 달성하기 위해 MOCVD 전구체 및 캐리어 가스에 대한 1% 미만의 유량 제어를 요구합니다.",
+        lede: "LED 구조의 에피택셜 성장은 목표 파장과 효율을 달성하기 위해 MOCVD 전구체 및 캐리어 가스에 대한 1% 미만의 유량 제어를 요구합니다.",
         body: [
           "LED 생산을 위한 유기금속 화학기상증착(MOCVD)은 수소 및 질소 캐리어 가스와 함께 유기금속 전구체(TMGa, TMAl, TMIn) 및 수소화물 소스(AsH₃, PH₃, NH₃)를 매우 정밀하게 공급해야 합니다. 전구체 유량의 변화는 증착층의 밴드갭을 직접 변화시켜 발광 파장에 영향을 미칩니다.",
           "MD 디지털 시리즈는 MOCVD 반응기에 필요한 ±0.25% F.S. 정확도와 빠른 응답을 제공하며, RS-485 인터페이스는 로깅 및 레시피 관리를 위한 반응기 제어 시스템과 원활하게 연동됩니다.",
@@ -308,8 +288,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "solar-photovoltaic",
         title: "태양광 · 태양전지",
-        lede:
-          "박막 실리콘 및 페로브스카이트 태양전지 증착 공정은 목표 변환 효율을 달성하기 위해 전구체 및 도펀트 가스 공급을 정밀하게 제어해야 합니다.",
+        lede: "박막 실리콘 및 페로브스카이트 태양전지 증착 공정은 목표 변환 효율을 달성하기 위해 전구체 및 도펀트 가스 공급을 정밀하게 제어해야 합니다.",
         body: [
           "실리콘 태양전지는 실란(SiH₄), 디보란(B₂H₆), 포스핀(PH₃) 전구체로 비정질 또는 다결정 실리콘 층을 증착하는 PECVD 또는 열 CVD 공정으로 생산됩니다. 이러한 독성 및 반응성 가스에 대한 정밀한 유량 제어는 대면적 기판 전반에 걸친 일관된 막 품질을 위해 필수적입니다.",
           "MD 시리즈는 공정 레시피 제어에 필요한 정확도를 제공하며, M/MS 시리즈는 증착 챔버 주변의 대용량 질소·수소 퍼지 가스를 처리합니다. 독성 전구체 가스에 사용되는 모든 기기는 적절한 Kalrez 또는 Teflon 실로 주문됩니다.",
@@ -321,8 +300,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "fiber-optics",
         title: "광섬유 · 유리",
-        lede:
-          "광섬유 프리폼 제조 및 특수 유리 증착에는 목표 굴절률 프로파일을 달성하기 위해 전구체 및 도펀트 가스 유량을 정밀하게 제어해야 합니다.",
+        lede: "광섬유 프리폼 제조 및 특수 유리 증착에는 목표 굴절률 프로파일을 달성하기 위해 전구체 및 도펀트 가스 유량을 정밀하게 제어해야 합니다.",
         body: [
           "광섬유 생산에 사용되는 MCVD 및 OVD 공정은 SiCl₄, GeCl₄, POCl₃ 전구체와 산소 캐리어 가스로 실리카 및 도펀트 층을 증착합니다. 광섬유의 굴절률 프로파일(전송 특성을 결정)은 이러한 전구체 가스 유량의 비율에 의해 결정됩니다.",
           "M/MS 아날로그 시리즈는 프리폼 증착 단계에서 필요한 안정적인 장기 유량 제어를 커버합니다. 정밀도가 가장 중요한 도펀트 라인에는 MD 디지털 시리즈가 적합합니다.",
@@ -334,8 +312,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "surface-treatment",
         title: "가스 분사 · 표면 처리",
-        lede:
-          "플라즈마 표면 처리, 물리기상증착, 용사 코팅 공정은 모두 처리 구역에 제어된 가스 분사를 필요로 합니다.",
+        lede: "플라즈마 표면 처리, 물리기상증착, 용사 코팅 공정은 모두 처리 구역에 제어된 가스 분사를 필요로 합니다.",
         body: [
           "표면 처리 공정은 제어된 가스 흐름을 사용하여 플라즈마 방전을 생성 및 유지하거나, 반응성 코팅 분위기를 형성하거나, 용사 코팅 시스템에서 분말 재료를 운반합니다. 적용 분야로는 플라즈마 질화, PVD/CVD 경질 코팅, 대기압 플라즈마 세정, 용사 코팅 등이 있습니다.",
           "M/MS 아날로그 시리즈는 PVD 및 플라즈마 시스템의 아르곤, 질소, 산소 가스 흐름에 널리 사용됩니다. 가연성 캐리어 가스나 용제로 인해 위험 구역으로 분류된 공정 환경에서는 EX 시리즈가 해당 구역의 ATEX 요구 사항을 충족합니다.",
@@ -347,8 +324,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "leak-detection",
         title: "부품 누설 검사",
-        lede:
-          "저유량에서의 정확한 유량 측정은 가압 시스템의 씰 불량 및 임계값 미만 누설을 감지하는 기반입니다.",
+        lede: "저유량에서의 정확한 유량 측정은 가압 시스템의 씰 불량 및 임계값 미만 누설을 감지하는 기반입니다.",
         body: [
           "부품 누설 검사 시스템은 가압된 조립품의 씰, 밸브, 또는 이음 부위를 통한 누설량을 정량화하기 위해 교정된 유량 측정을 사용합니다. 명목상 닫혀 있는 부품을 통과하는 잔류 흐름을 측정하고 알려진 누설 허용 임계값과 비교함으로써 불량 부품을 식별합니다.",
           "저유량 범위(최소 0.01 slpm)에서 ±0.25% F.S. 정확도를 갖춘 MD 디지털 시리즈는 소량 누설을 신뢰성 있게 감지하는 데 필요한 분해능을 제공합니다. RS-485 인터페이스는 자동화 검사 스테이션에서 직접 데이터 수집 및 합격/불합격 판정 로깅을 가능하게 합니다.",

@@ -204,12 +204,36 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           kind: "resources",
           heading: "응용 분야",
           links: [
-            { href: "/applications/semiconductor", label: "반도체", desc: "CVD · 식각 · 도펀트 공정" },
-            { href: "/applications/fuel-cells", label: "연료전지", desc: "H₂ · O₂ 공급 제어" },
-            { href: "/applications/biotech-pharmaceutical", label: "바이오텍 · 제약", desc: "바이오리액터 · 분석 가스" },
-            { href: "/applications/chemical-petrochemical", label: "화학 · 석유화학", desc: "고압 반응기 · 방폭 환경" },
-            { href: "/applications/research-development", label: "연구 · 개발", desc: "실험실 · 파일럿 플랜트" },
-            { href: "/applications", label: "전체 응용 분야 보기", desc: "12개 산업 분야" },
+            {
+              href: "/applications/semiconductor",
+              label: "반도체",
+              desc: "CVD · 식각 · 도펀트 공정",
+            },
+            {
+              href: "/applications/fuel-cells",
+              label: "연료전지",
+              desc: "H₂ · O₂ 공급 제어",
+            },
+            {
+              href: "/applications/biotech-pharmaceutical",
+              label: "바이오텍 · 제약",
+              desc: "바이오리액터 · 분석 가스",
+            },
+            {
+              href: "/applications/chemical-petrochemical",
+              label: "화학 · 석유화학",
+              desc: "고압 반응기 · 방폭 환경",
+            },
+            {
+              href: "/applications/research-development",
+              label: "연구 · 개발",
+              desc: "실험실 · 파일럿 플랜트",
+            },
+            {
+              href: "/applications",
+              label: "전체 응용 분야 보기",
+              desc: "12개 산업 분야",
+            },
           ],
           featured: {
             eyebrow: "주요 응용",
@@ -403,12 +427,36 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           kind: "resources",
           heading: "Applications",
           links: [
-            { href: "/applications/semiconductor", label: "Semiconductor", desc: "CVD · etch · dopant gas delivery" },
-            { href: "/applications/fuel-cells", label: "Fuel cells", desc: "H₂ · O₂ flow control" },
-            { href: "/applications/biotech-pharmaceutical", label: "Biotech & pharma", desc: "Bioreactors · analytical gas" },
-            { href: "/applications/chemical-petrochemical", label: "Chemical & petrochemical", desc: "High-pressure reactors · ATEX" },
-            { href: "/applications/research-development", label: "Research & development", desc: "Lab · pilot plant" },
-            { href: "/applications", label: "All applications", desc: "12 industries covered" },
+            {
+              href: "/applications/semiconductor",
+              label: "Semiconductor",
+              desc: "CVD · etch · dopant gas delivery",
+            },
+            {
+              href: "/applications/fuel-cells",
+              label: "Fuel cells",
+              desc: "H₂ · O₂ flow control",
+            },
+            {
+              href: "/applications/biotech-pharmaceutical",
+              label: "Biotech & pharma",
+              desc: "Bioreactors · analytical gas",
+            },
+            {
+              href: "/applications/chemical-petrochemical",
+              label: "Chemical & petrochemical",
+              desc: "High-pressure reactors · ATEX",
+            },
+            {
+              href: "/applications/research-development",
+              label: "Research & development",
+              desc: "Lab · pilot plant",
+            },
+            {
+              href: "/applications",
+              label: "All applications",
+              desc: "12 industries covered",
+            },
           ],
           featured: {
             eyebrow: "Key application",
@@ -592,12 +640,36 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           kind: "resources",
           heading: "应用领域",
           links: [
-            { href: "/applications/semiconductor", label: "半导体", desc: "CVD · 刻蚀 · 掺杂气体输送" },
-            { href: "/applications/fuel-cells", label: "燃料电池", desc: "H₂ · O₂ 流量控制" },
-            { href: "/applications/biotech-pharmaceutical", label: "生物技术与制药", desc: "生物反应器 · 分析气体" },
-            { href: "/applications/chemical-petrochemical", label: "化工与石油化工", desc: "高压反应器 · 防爆环境" },
-            { href: "/applications/research-development", label: "研究与开发", desc: "实验室 · 中试工厂" },
-            { href: "/applications", label: "查看全部应用领域", desc: "覆盖 12 个行业" },
+            {
+              href: "/applications/semiconductor",
+              label: "半导体",
+              desc: "CVD · 刻蚀 · 掺杂气体输送",
+            },
+            {
+              href: "/applications/fuel-cells",
+              label: "燃料电池",
+              desc: "H₂ · O₂ 流量控制",
+            },
+            {
+              href: "/applications/biotech-pharmaceutical",
+              label: "生物技术与制药",
+              desc: "生物反应器 · 分析气体",
+            },
+            {
+              href: "/applications/chemical-petrochemical",
+              label: "化工与石油化工",
+              desc: "高压反应器 · 防爆环境",
+            },
+            {
+              href: "/applications/research-development",
+              label: "研究与开发",
+              desc: "实验室 · 中试工厂",
+            },
+            {
+              href: "/applications",
+              label: "查看全部应用领域",
+              desc: "覆盖 12 个行业",
+            },
           ],
           featured: {
             eyebrow: "重点应用",
