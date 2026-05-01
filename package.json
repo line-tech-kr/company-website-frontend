@@ -21,6 +21,8 @@
     "test:run": "vitest run",
     "test:ui": "vitest --ui",
     "seed:products": "tsx scripts/seed-products.ts",
+    "sanity:extract": "sanity schema extract",
+    "sanity:typegen": "sanity typegen generate",
     "prepare": "husky"
   },
   "dependencies": {

@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/Button";
 import { LT_CONTACT } from "@/lib/content/contact";
 import { LT_SHELL } from "@/lib/content/shell";
 import type { Locale } from "@/lib/content/home";
-import type { Product } from "@/lib/types/product";
+import { SanityProductSchema } from "@/lib/types/product";
+import { z } from "zod";
 import { sanityClient } from "@/sanity/client";
 import { fetchSanity } from "@/sanity/fetch";
 import { productByModelQuery } from "@/sanity/queries";
@@ -44,12 +45,13 @@ export default async function ContactPage({ params, searchParams }: Props) {
   const productParam = Array.isArray(rawProductParam)
     ? rawProductParam[0]
     : rawProductParam;
-  const product = productParam
-    ? ((await fetchSanity(
+  const rawProduct = productParam
+    ? await fetchSanity(
         () => sanityClient.fetch(productByModelQuery, { model: productParam }),
         { name: "productByModel", params: { model: productParam } },
-      )) as Product | null)
+      )
     : null;
+  const product = rawProduct ? SanityProductSchema.parse(rawProduct) : null;
 
   const tCommon = await getTranslations("common");
   const c = LT_CONTACT[locale];

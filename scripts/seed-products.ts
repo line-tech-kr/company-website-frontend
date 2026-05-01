@@ -48,8 +48,8 @@ function productToSeedFields(p: Product) {
     series: p.series,
     function: p.function,
     productLabel: localizedToArray(p.productLabel),
-    features: p.features.map((f, i) => ({ _key: `feature-${i}`, ...f })),
-    connections: p.connections.map((c, i) => ({ _key: `conn-${i}`, ...c })),
+    features: p.features.map((f, i) => ({ ...f, _key: `feature-${i}` })),
+    connections: p.connections.map((c, i) => ({ ...c, _key: `conn-${i}` })),
     massFlowSpecs: p.massFlowSpecs,
   };
   if (p.digitalCommunication) {

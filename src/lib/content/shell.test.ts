@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { LT_SHELL, seriesHref } from "./shell";
+import { LT_SHELL } from "./shell";
 import { LT_HOME, type Locale } from "./home";
 import { routing } from "@/i18n/routing";
 
@@ -46,13 +46,22 @@ describe("LT_SHELL invariants", () => {
   });
 });
 
-describe("seriesHref", () => {
-  it("resolves every series code defined on LT_HOME to a real category route", () => {
-    // Catches the silent-fallback bug: adding a series in LT_HOME without
-    // wiring its href in shell.ts would route the homepage card to /products.
-    for (const item of LT_HOME.ko.series.items) {
-      expect(seriesHref(item.code)).not.toBe("/products");
-      expect(seriesHref(item.code).startsWith("/products/")).toBe(true);
+describe("LT_HOME series invariants", () => {
+  it("every series item has a valid /products/* href across locales", () => {
+    for (const locale of LOCALES) {
+      for (const item of LT_HOME[locale].series.items) {
+        expect(item.href).toBeDefined();
+        expect(item.href.startsWith("/products/")).toBe(true);
+      }
+    }
+  });
+
+  it("series hrefs match the locked category codes", () => {
+    const validHrefs = LOCKED_CATEGORY_CODES.map((c) => `/products/${c}`);
+    for (const locale of LOCALES) {
+      for (const item of LT_HOME[locale].series.items) {
+        expect(validHrefs).toContain(item.href);
+      }
     }
   });
 });

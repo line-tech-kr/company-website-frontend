@@ -705,9 +705,9 @@ function validate(p: Product): void {
   if (p.connections.length === 0)
     throw new Error(`${p.model}: no connections parsed`);
   const s = p.massFlowSpecs;
-  if (!s.flowRange || !(s.flowRange.max > s.flowRange.min))
+  if (!s.flowRange || !(s.flowRange.max! > s.flowRange.min!))
     throw new Error(`${p.model}: bad flowRange`);
-  if (s.accuracy.value <= 0)
+  if (s.accuracy.value! <= 0)
     throw new Error(`${p.model}: bad accuracy ${s.accuracy.value}`);
   if (p.function === "MFC" && !s.responseTime)
     throw new Error(`${p.model}: MFC missing responseTime`);
@@ -717,7 +717,9 @@ function validate(p: Product): void {
   // Localization sanity: every translated field must have ko/zh distinct from en.
   // (English fallback would mean we forgot to translate a string.)
   assertTranslated(p.model, "productLabel", p.productLabel);
-  p.features.forEach((f, i) => assertTranslated(p.model, `features[${i}]`, f));
+  p.features.forEach((f, i) =>
+    assertTranslated(p.model, `features[${i}]`, f as LocalizedString),
+  );
 
   // Connection lengths should look like "<number> mm"
   for (const c of p.connections) {
