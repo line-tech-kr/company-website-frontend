@@ -3,12 +3,9 @@
  *
  * Conventions:
  *  - One typed object per locale, same shape as `LT_HOME` in `./home.ts`.
- *  - Products mega-menu reads `productsCategories` (3 series buckets —
- *    analogue / digital / specialized — plus an `accessories` entry that
- *    points at the static /products/accessories page). The homepage's
- *    series cards link into the series routes via `PRODUCTS_SERIES_HREFS`.
- *  - `PRODUCTS_SERIES_HREFS` / `getProductsSeriesEntries()` exist solely to
- *    drive the homepage Series section as a secondary entry point.
+ *  - Products mega-menu reads `productsCategories` (4 function categories:
+ *    analogue / digital / specialized / accessories). The homepage series
+ *    cards mirror these same 4 categories; hrefs live on each SeriesItem.
  *  - Consumed by: Header (#6), Footer (#4), MegaMenu (#7). Keep labels here,
  *    layout decisions in the components.
  */
@@ -139,25 +136,6 @@ export type ShellContent = {
 };
 
 // ─── Shared (locale-independent) ────────────────────────────────────────────
-
-/**
- * Per-series href map keyed by series `code` as defined in `LT_HOME.series.items`.
- *
- * NOTE: routes for category pages are TBD. These slugs are placeholders —
- * Header PR (#6) will wire them to real routes once `src/app/[locale]/products/[category]/`
- * lands. The Header component should tolerate 404s gracefully until then.
- */
-const PRODUCTS_SERIES_HREFS: Record<string, string> = {
-  "M / MS": "/products/analogue",
-  MD: "/products/digital",
-  "LD / LM": "/products/specialized",
-  LTI: "/products/accessories",
-};
-
-/** Resolve href for a series by its code; falls back to the category index. */
-export function seriesHref(code: string): string {
-  return PRODUCTS_SERIES_HREFS[code] ?? "/products";
-}
 
 // ─── Content ────────────────────────────────────────────────────────────────
 
@@ -671,6 +649,6 @@ export function getProductsSeriesEntries(locale: Locale) {
     range: item.range,
     highlight: item.highlight ?? false,
     feat: item.feat,
-    href: seriesHref(item.code),
+    href: item.href,
   }));
 }
