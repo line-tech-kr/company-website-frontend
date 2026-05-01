@@ -58,8 +58,7 @@ export function buildSpecJson(
   for (const key of SPEC_ORDER) {
     const spec = product.massFlowSpecs[key];
     if (spec) {
-      const { ...rest } = spec;
-      specifications[key] = rest as Record<string, unknown>;
+      specifications[key] = spec as Record<string, unknown>;
     }
   }
 
@@ -76,7 +75,10 @@ export function buildSpecJson(
         zh: f.zh,
       }),
     ),
-    connections: product.connections,
+    connections: product.connections.map(({ type, length }) => ({
+      type,
+      length,
+    })),
     specifications,
     digitalCommunication: product.digitalCommunication ?? undefined,
     canonicalUrl: `${siteUrl}/en/products/${category}/${slug}`,

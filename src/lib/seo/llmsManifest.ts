@@ -68,7 +68,12 @@ export async function buildLlmsManifest(siteUrl: string): Promise<string> {
     .map((p) => {
       try {
         return SanityProductSchema.parse(p);
-      } catch {
+      } catch (err) {
+        console.error(
+          "[llmsManifest] failed to parse product",
+          (p as { model?: unknown })?.model ?? "unknown",
+          err,
+        );
         return null;
       }
     })
