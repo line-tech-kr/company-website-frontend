@@ -1,7 +1,9 @@
 {
   "nav": {
     "products": "제품",
-    "company": "회사소개"
+    "company": "회사소개",
+    "applications": "응용 분야",
+    "faq": "자주 묻는 질문"
   },
   "common": {
     "home": "홈"

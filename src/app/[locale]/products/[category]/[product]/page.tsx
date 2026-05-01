@@ -1,6 +1,6 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { permanentRedirect } from "@/i18n/navigation";
+import { permanentRedirect, Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { ProductHero } from "@/components/products/ProductHero";
 import { TabNav } from "@/components/products/TabNav";
@@ -28,6 +28,8 @@ import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
 import { SanityProductSchema } from "@/lib/types/product";
 import type { MassFlowSpecs } from "@/lib/types/product";
+import { LT_APPLICATIONS } from "@/lib/content/applications";
+import "./product-detail.css";
 
 type Props = {
   params: Promise<{ locale: Locale; category: string; product: string }>;
@@ -107,6 +109,10 @@ export default async function ProductPage({ params }: Props) {
     getTranslations("pdp"),
     getTranslations("a11y"),
   ]);
+
+  const relatedApplications = LT_APPLICATIONS[locale].applications
+    .filter((a) => a.relatedCategories.includes(category as CategorySlug))
+    .slice(0, 4);
 
   const categoryLabel = tBreadcrumb(category);
 
@@ -238,6 +244,25 @@ export default async function ProductPage({ params }: Props) {
         doneLabel={tPdp("downloads.done")}
         items={downloadItems}
       />
+
+      {relatedApplications.length > 0 && (
+        <section className="pd-related-apps">
+          <h2 className="pd-related-apps__heading">{tNav("applications")}</h2>
+          <ul className="pd-related-apps__list">
+            {relatedApplications.map((app) => (
+              <li key={app.slug}>
+                <Link
+                  href={`/applications/${app.slug}`}
+                  className="pd-related-apps__link"
+                >
+                  <span className="pd-related-apps__title">{app.title}</span>
+                  <span className="pd-related-apps__lede">{app.lede}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </main>
   );
 }

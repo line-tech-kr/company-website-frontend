@@ -1,7 +1,9 @@
 {
   "nav": {
     "products": "Products",
-    "company": "Company"
+    "company": "Company",
+    "applications": "Applications",
+    "faq": "FAQ"
   },
   "common": {
     "home": "Home"
