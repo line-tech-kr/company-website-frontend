@@ -9,7 +9,6 @@
  *  - Consumed by: Header (#6), Footer (#4), MegaMenu (#7). Keep labels here,
  *    layout decisions in the components.
  */
-import { LT_HOME } from "./home";
 import type { Locale } from "./home";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
@@ -25,7 +24,7 @@ export type ShellNavItem = {
   menu?: ShellMegaMenu;
 };
 
-/** Products panel: rendered from LT_HOME series + our href map + optional featured card. */
+/** Products panel: mega-menu products dropdown with featured card. */
 export type ShellMegaMenuProducts = {
   kind: "products";
   heading: string;
@@ -633,22 +632,4 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
  */
 export function getProductsCategories(locale: Locale): ProductsCategory[] {
   return LT_SHELL[locale].productsCategories;
-}
-
-/**
- * Helper: homepage Series section entries (4 SKU-coded cards). Secondary
- * entry point — kept for the design's homepage visual only. Mega-menu and
- * category routing use `getProductsCategories()` instead.
- */
-export function getProductsSeriesEntries(locale: Locale) {
-  return LT_HOME[locale].series.items.map((item) => ({
-    code: item.code,
-    name: item.name,
-    desc: item.desc,
-    count: item.count,
-    range: item.range,
-    highlight: item.highlight ?? false,
-    feat: item.feat,
-    href: item.href,
-  }));
 }

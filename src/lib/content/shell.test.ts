@@ -58,8 +58,10 @@ describe("LT_HOME series invariants", () => {
 
   it("series hrefs match the locked category codes", () => {
     const validHrefs = LOCKED_CATEGORY_CODES.map((c) => `/products/${c}`);
-    for (const item of LT_HOME.ko.series.items) {
-      expect(validHrefs).toContain(item.href);
+    for (const locale of LOCALES) {
+      for (const item of LT_HOME[locale].series.items) {
+        expect(validHrefs).toContain(item.href);
+      }
     }
   });
 });
