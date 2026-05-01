@@ -1,6 +1,4 @@
-/* Line Tech — header search panel.
- * Slides down under the sticky header with a full-viewport scrim.
- * Visual-shell only (#8) — wiring lands in phase 2. */
+/* Line Tech — header search panel. */
 
 .pd-search {
   position: fixed;
@@ -31,8 +29,9 @@
   top: 0;
   left: 0;
   right: 0;
+  max-height: 100dvh;
+  overflow-y: auto;
   background: var(--pd-surface);
-  border-bottom: 1px solid var(--pd-border);
   box-shadow: 0 14px 40px -18px rgba(12, 14, 20, 0.28);
   transform: translateY(-100%);
   transition: transform 0.22s ease;
@@ -149,6 +148,54 @@
     height: 40px;
     font-size: var(--lt-fs-sm);
   }
+}
+
+/* ─── Results ─────────────────────────────────────────────────────────────── */
+
+.pd-search__results {
+  padding-top: 4px;
+}
+
+.pd-search__empty {
+  margin: 0;
+  padding: 12px 0;
+  color: var(--pd-muted);
+  font: var(--lt-fs-sm)/1.4 var(--lt-sans);
+}
+
+.pd-search__result-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pd-search__result {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: var(--pd-r-md);
+  text-decoration: none;
+  transition: background-color 0.12s ease;
+}
+
+.pd-search__result:hover,
+.pd-search__result:focus-visible {
+  outline: none;
+  background: var(--pd-surface-raised);
+}
+
+.pd-search__result-title {
+  color: var(--pd-fg-strong);
+  font: 500 var(--lt-fs-sm)/1.4 var(--lt-sans);
+}
+
+.pd-search__result-crumb {
+  color: var(--pd-muted);
+  font: var(--lt-fs-xs)/1.4 var(--lt-sans);
 }
 
 @media (prefers-reduced-motion: reduce) {
