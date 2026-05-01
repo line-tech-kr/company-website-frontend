@@ -1,5 +1,6 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { LT_APPLICATIONS } from "@/lib/content/applications";
@@ -14,6 +15,16 @@ export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
     slugs.map((slug) => ({ locale, slug })),
   );
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const app = LT_APPLICATIONS[locale].applications.find((a) => a.slug === slug);
+  if (!app) return {};
+  return {
+    title: `${app.title} — Line Tech`,
+    description: app.lede,
+  };
 }
 
 const CATEGORY_HREFS: Record<string, string> = {

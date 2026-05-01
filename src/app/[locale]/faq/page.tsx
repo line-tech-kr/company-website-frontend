@@ -1,4 +1,5 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { LT_FAQ, type FaqContent, type FaqGroup } from "@/lib/content/faq";
 import { safeJsonLd } from "@/lib/seo/jsonLd";
@@ -10,6 +11,15 @@ type Props = { params: Promise<{ locale: Locale }> };
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const c = LT_FAQ[locale];
+  return {
+    title: `${c.pageTitle} — Line Tech`,
+    description: c.pageSub,
+  };
 }
 
 export default async function FaqPage({ params }: Props) {

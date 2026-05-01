@@ -1,4 +1,5 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { LT_APPLICATIONS } from "@/lib/content/applications";
@@ -10,6 +11,15 @@ type Props = { params: Promise<{ locale: Locale }> };
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const c = LT_APPLICATIONS[locale];
+  return {
+    title: `${c.pageTitle} — Line Tech`,
+    description: c.pageSub,
+  };
 }
 
 export default async function ApplicationsPage({ params }: Props) {
