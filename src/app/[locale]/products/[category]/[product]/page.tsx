@@ -85,12 +85,13 @@ export default async function ProductPage({ params }: Props) {
   if (!product) notFound();
   if (product.series !== CATEGORIES[category].series) notFound();
 
-  const [tCommon, tNav, tBreadcrumb, tSpecs, tPdp] = await Promise.all([
+  const [tCommon, tNav, tBreadcrumb, tSpecs, tPdp, tA11y] = await Promise.all([
     getTranslations("common"),
     getTranslations("nav"),
     getTranslations("breadcrumbs.categories"),
     getTranslations("product.specs"),
     getTranslations("pdp"),
+    getTranslations("a11y"),
   ]);
 
   const typedLocale = locale as "ko" | "en" | "zh";
@@ -183,7 +184,7 @@ export default async function ProductPage({ params }: Props) {
         specsLabel={tPdp("ctas.viewSpecs")}
       />
 
-      <TabNav tabs={tabs} />
+      <TabNav tabs={tabs} ariaLabel={tA11y("sectionNav")} />
 
       <Overview
         kicker={`01 — ${tPdp("tabs.overview")}`}
@@ -212,6 +213,7 @@ export default async function ProductPage({ params }: Props) {
           note={tPdp("dimensions.note")}
           drawingNumber={`LT-${product.model}-OUT`}
           callouts={dimensionCallouts}
+          calloutsAriaLabel={tA11y("dimensionCallouts")}
         />
       )}
 

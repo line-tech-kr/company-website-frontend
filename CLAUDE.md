@@ -14,7 +14,7 @@ These are final — do not propose alternatives:
 - **Styling:** Tailwind CSS v4 (CSS-first `@theme`)
 - **CMS:** Sanity (hosted, free tier) — non-technical staff manage products + PDFs
 - **Deploy:** Vercel
-- **i18n:** Korean + English + Chinese, all equal priority, using Next.js native i18n routing (NOT language-per-URL duplication like the old site)
+- **i18n:** Korean + English + Chinese, all equal priority, using next-intl with `[locale]` URL segments (NOT three parallel content sites like the old PHP build)
 - **Scope:** MVP = public site + product catalog migrated + inquiry form. Product finder, comparison tool, blog, site search are phase 2.
 
 ## Brand Colors (preserve exactly)

@@ -4,8 +4,23 @@
     "company": "Company"
   },
   "common": {
-    "download": "Download",
     "home": "Home"
+  },
+  "a11y": {
+    "primaryNav": "Primary",
+    "language": "Language",
+    "sectionNav": "Section navigation",
+    "dimensionCallouts": "Dimension callouts"
+  },
+  "footer": {
+    "tel": "TEL",
+    "fax": "FAX"
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Page not found",
+    "lede": "The page you are looking for has moved or no longer exists.",
+    "back": "Back to home"
   },
   "breadcrumbs": {
     "label": "Breadcrumb",
@@ -27,10 +42,6 @@
       "tempRange": "Temperature range",
       "leakRate": "Leak rate",
       "controlRange": "Control range"
-    },
-    "downloads": {
-      "datasheet": "Datasheet",
-      "manual": "Manual"
     }
   },
   "products": {
@@ -122,5 +133,18 @@
         "tbd": "TBD"
       }
     }
+  },
+  "skipLink": {
+    "main": "Skip to main content"
+  },
+  "contactForm": {
+    "errors": {
+      "invalid": "Please check the highlighted fields and try again.",
+      "rateLimited": "Too many submissions. Please try again in a few minutes.",
+      "captcha": "Verification failed. Please complete the challenge again.",
+      "server": "We could not send your message. Please email us directly."
+    },
+    "success": "Thanks — your message has been sent. We will reply within one business day.",
+    "submitting": "Sending…"
   }
 }

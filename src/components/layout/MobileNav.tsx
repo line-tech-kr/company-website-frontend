@@ -1,9 +1,14 @@
 "use client";
 
 import { useEffect, useId, useRef, useState, type RefObject } from "react";
+import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { Button } from "@/components/ui/Button";
-import { getProductsCategories, type ShellNavItem } from "@/lib/content/shell";
+import {
+  LT_SHELL,
+  getProductsCategories,
+  type ShellNavItem,
+} from "@/lib/content/shell";
 import type { Locale } from "@/lib/content/home";
 import { useDialogPanel } from "@/lib/hooks/useDialogPanel";
 import { LocaleSwitcher } from "./LocaleSwitcher";
@@ -33,6 +38,7 @@ export function MobileNav({
   const headingId = useId();
   const panelRef = useRef<HTMLDivElement | null>(null);
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
+  const t = useTranslations("a11y");
 
   const pathname = usePathname();
   const prevPathname = useRef(pathname);
@@ -84,7 +90,7 @@ export function MobileNav({
             {heading}
           </h2>
 
-          <nav aria-label="Primary" className="pd-mnav__nav">
+          <nav aria-label={t("primaryNav")} className="pd-mnav__nav">
             <ul className="pd-mnav__list">
               {items.map((item) =>
                 item.menu ? (
@@ -111,7 +117,7 @@ export function MobileNav({
             <Button
               variant="primary"
               size="md"
-              href="mailto:linetech@line-tech.co.kr"
+              href={`mailto:${LT_SHELL[locale].footer.contact.email}`}
               plain
             >
               {quoteLabel}

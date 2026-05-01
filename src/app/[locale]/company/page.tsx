@@ -92,7 +92,12 @@ function History({ c }: { c: CompanyContent }) {
                 (isMilestone ? " co-timeline__row--milestone" : "")
               }
             >
-              <span className="co-timeline__date">{row.date}</span>
+              <time
+                className="co-timeline__date"
+                dateTime={row.date.replace(".", "-")}
+              >
+                {row.date}
+              </time>
               <span className="co-timeline__event">{row.event}</span>
             </li>
           );

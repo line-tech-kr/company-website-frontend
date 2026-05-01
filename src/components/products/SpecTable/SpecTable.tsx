@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Glyph } from "@/components/ui/Glyph";
 import "./SpecTable.css";
@@ -28,6 +28,7 @@ export function SpecTable({
   groups,
 }: Props) {
   const [copied, setCopied] = useState(false);
+  const baseId = useId();
 
   const doCopy = () => {
     const lines: string[] = [`${modelName} — ${heading}`];
@@ -73,23 +74,34 @@ export function SpecTable({
       </header>
 
       <div className="lt-pdp-spec">
-        {numberedGroups.map((g) => (
-          <div className="lt-pdp-spec__group" key={g.id}>
-            <div className="lt-pdp-spec__grouplbl">
-              <span className="lt-pdp-spec__groupnum">{g.num}</span>
-              <span>{g.label}</span>
-            </div>
-            <div className="lt-pdp-spec__rows">
-              {g.rows.map((r) => (
-                <div className="lt-pdp-spec__row" key={r.key}>
-                  <div className="lt-pdp-spec__idx">{r.idx}</div>
-                  <div className="lt-pdp-spec__lbl">{r.label}</div>
-                  <div className="lt-pdp-spec__val">{r.value}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
+        {numberedGroups.map((g) => {
+          const labelId = `${baseId}-${g.id}`;
+          return (
+            <section
+              className="lt-pdp-spec__group"
+              key={g.id}
+              aria-labelledby={labelId}
+            >
+              <h3 className="lt-pdp-spec__grouplbl" id={labelId}>
+                <span className="lt-pdp-spec__groupnum" aria-hidden="true">
+                  {g.num}
+                </span>
+                <span>{g.label}</span>
+              </h3>
+              <dl className="lt-pdp-spec__rows">
+                {g.rows.map((r) => (
+                  <div className="lt-pdp-spec__row" key={r.key}>
+                    <span className="lt-pdp-spec__idx" aria-hidden="true">
+                      {r.idx}
+                    </span>
+                    <dt className="lt-pdp-spec__lbl">{r.label}</dt>
+                    <dd className="lt-pdp-spec__val">{r.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          );
+        })}
       </div>
     </section>
   );

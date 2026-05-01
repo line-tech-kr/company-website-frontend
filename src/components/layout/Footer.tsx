@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { LT_SHELL } from "@/lib/content/shell";
 import type { Locale } from "@/lib/content/home";
 import { Logomark } from "./Logomark";
@@ -11,9 +12,10 @@ function telHref(phone: string) {
   return `tel:${phone.replace(/[\s-]/g, "")}`;
 }
 
-export function Footer({ locale }: Props) {
+export async function Footer({ locale }: Props) {
   const { signoff, contact, legal, subsidiary, rights } =
     LT_SHELL[locale].footer;
+  const t = await getTranslations({ locale, namespace: "footer" });
 
   return (
     <footer className="pd-foot">
@@ -30,12 +32,12 @@ export function Footer({ locale }: Props) {
           <address className="pd-foot__addr">{contact.address}</address>
           <ul className="pd-foot__list">
             <li>
-              <span className="pd-foot__label">TEL</span>
+              <span className="pd-foot__label">{t("tel")}</span>
               <a href={telHref(contact.phone)}>{contact.phone}</a>
             </li>
             {contact.fax ? (
               <li>
-                <span className="pd-foot__label">FAX</span>
+                <span className="pd-foot__label">{t("fax")}</span>
                 <span>{contact.fax}</span>
               </li>
             ) : null}
