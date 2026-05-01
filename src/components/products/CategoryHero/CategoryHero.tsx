@@ -19,8 +19,7 @@ export function CategoryHero({
     <header className="lt-cat-hero">
       <div className="lt-cat-hero__lead">
         <div className="lt-cat-hero__kicker">
-          <span className="lt-cat-hero__kicker-num">{kickerNum}</span>
-          <span>{kickerLabel}</span>
+          {kickerNum} — {kickerLabel}
         </div>
         <h1 className="lt-cat-hero__title">
           {title} <span className="lt-cat-hero__code">{code}</span>

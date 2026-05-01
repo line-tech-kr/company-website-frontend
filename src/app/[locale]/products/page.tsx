@@ -50,7 +50,6 @@ export default async function ProductsListPage({ params }: Props) {
     fitting: tProducts("table.fitting"),
   };
   const emptyLabel = tProducts("emptyStack");
-  const viewLabel = tProducts("table.view");
 
   return (
     <main className="lt-wrap lt-products-list">
@@ -85,7 +84,6 @@ export default async function ProductsListPage({ params }: Props) {
               category={slug}
               locale={typedLocale}
               emptyLabel={emptyLabel}
-              viewLabel={viewLabel}
               headers={headers}
             />
             <ProductStack
@@ -95,7 +93,6 @@ export default async function ProductsListPage({ params }: Props) {
               category={slug}
               locale={typedLocale}
               emptyLabel={emptyLabel}
-              viewLabel={viewLabel}
               headers={headers}
             />
           </section>

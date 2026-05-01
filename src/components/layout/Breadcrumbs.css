@@ -46,6 +46,6 @@
 }
 
 .lt-breadcrumbs__item--current {
-  color: var(--pd-primary);
+  color: var(--pd-fg-strong);
   font-weight: 500;
 }
