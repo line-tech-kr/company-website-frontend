@@ -62,18 +62,15 @@
     "categories": {
       "analogue": {
         "title": "아날로그 시리즈",
-        "lede": "검증된 아날로그 질량유량 제어기 및 측정기.",
-        "ledeAccent": ""
+        "lede": "검증된 아날로그 질량유량 제어기 및 측정기."
       },
       "digital": {
         "title": "디지털 시리즈",
-        "lede": "8점 선형화. ±0.25 % F.S. 정확도. 1초 미만 응답. RS-485 · Modbus RTU.",
-        "ledeAccent": ""
+        "lede": "8점 선형화. ±0.25 % F.S. 정확도. 1초 미만 응답. RS-485 · Modbus RTU."
       },
       "specialized": {
         "title": "특수 시리즈",
-        "lede": "디스플레이 일체형, 방폭, MEMS 등 까다로운 환경을 위한 특수 사양 라인업.",
-        "ledeAccent": ""
+        "lede": "디스플레이 일체형, 방폭, MEMS 등 까다로운 환경을 위한 특수 사양 라인업."
       }
     },
     "stack": {

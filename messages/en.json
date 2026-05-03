@@ -62,18 +62,15 @@
     "categories": {
       "analogue": {
         "title": "Analogue series",
-        "lede": "Proven analogue mass flow controllers and meters.",
-        "ledeAccent": ""
+        "lede": "Proven analogue mass flow controllers and meters."
       },
       "digital": {
         "title": "Digital series",
-        "lede": "8-point linearization. ±0.25% F.S. accuracy. Sub-second response. RS-485 / Modbus RTU.",
-        "ledeAccent": ""
+        "lede": "8-point linearization. ±0.25% F.S. accuracy. Sub-second response. RS-485 / Modbus RTU."
       },
       "specialized": {
         "title": "Specialized series",
-        "lede": "Display-integrated, explosion-proof, and MEMS variants for demanding environments.",
-        "ledeAccent": ""
+        "lede": "Display-integrated, explosion-proof, and MEMS variants for demanding environments."
       }
     },
     "stack": {

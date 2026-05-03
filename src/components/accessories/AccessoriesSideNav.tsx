@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { AccessoriesNavNode } from "@/lib/content/accessories";
 
 type Props = {
@@ -19,7 +19,7 @@ type Props = {
  * while preserving group/leaf semantics in the rendered DOM.
  */
 export function AccessoriesSideNav({ heading, items }: Props) {
-  const flat = flattenNav(items);
+  const flat = useMemo(() => flattenNav(items), [items]);
   const [active, setActive] = useState<string>(flat[0]?.id ?? "");
 
   useEffect(() => {

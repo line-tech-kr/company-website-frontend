@@ -271,11 +271,11 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
         mapLinks: [
           {
             label: "카카오맵",
-            href: "https://map.kakao.com/link/search/대전광역시 유성구 대덕대로 806",
+            href: "https://map.kakao.com/link/search/%EB%8C%80%EC%A0%84%EA%B4%91%EC%97%AD%EC%8B%9C%20%EC%9C%A0%EC%84%B1%EA%B5%AC%20%EB%8C%80%EB%8D%95%EB%8C%80%EB%A1%9C%20806",
           },
           {
             label: "네이버지도",
-            href: "https://map.naver.com/v5/search/대전광역시 유성구 대덕대로 806",
+            href: "https://map.naver.com/v5/search/%EB%8C%80%EC%A0%84%EA%B4%91%EC%97%AD%EC%8B%9C%20%EC%9C%A0%EC%84%B1%EA%B5%AC%20%EB%8C%80%EB%8D%95%EB%8C%80%EB%A1%9C%20806",
           },
           {
             label: "구글지도",
@@ -407,11 +407,11 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
         mapLinks: [
           {
             label: "Kakao Maps",
-            href: "https://map.kakao.com/link/search/대전광역시 유성구 대덕대로 806",
+            href: "https://map.kakao.com/link/search/%EB%8C%80%EC%A0%84%EA%B4%91%EC%97%AD%EC%8B%9C%20%EC%9C%A0%EC%84%B1%EA%B5%AC%20%EB%8C%80%EB%8D%95%EB%8C%80%EB%A1%9C%20806",
           },
           {
             label: "Naver Maps",
-            href: "https://map.naver.com/v5/search/대전광역시 유성구 대덕대로 806",
+            href: "https://map.naver.com/v5/search/%EB%8C%80%EC%A0%84%EA%B4%91%EC%97%AD%EC%8B%9C%20%EC%9C%A0%EC%84%B1%EA%B5%AC%20%EB%8C%80%EB%8D%95%EB%8C%80%EB%A1%9C%20806",
           },
           {
             label: "Google Maps",
@@ -542,7 +542,7 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
         mapLinks: [
           {
             label: "Kakao地图",
-            href: "https://map.kakao.com/link/search/대전광역시 유성구 대덕대로 806",
+            href: "https://map.kakao.com/link/search/%EB%8C%80%EC%A0%84%EA%B4%91%EC%97%AD%EC%8B%9C%20%EC%9C%A0%EC%84%B1%EA%B5%AC%20%EB%8C%80%EB%8D%95%EB%8C%80%EB%A1%9C%20806",
           },
           {
             label: "谷歌地图",
