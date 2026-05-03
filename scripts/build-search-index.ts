@@ -135,6 +135,22 @@ const STATIC_ENTRIES: Record<Locale, SearchEntry[]> = {
       url: "/contact",
       breadcrumb: "문의",
     },
+    {
+      id: "page-applications",
+      type: "page",
+      title: "응용 분야",
+      model: "",
+      url: "/applications",
+      breadcrumb: "응용 분야",
+    },
+    {
+      id: "page-faq",
+      type: "page",
+      title: "자주 묻는 질문",
+      model: "",
+      url: "/faq",
+      breadcrumb: "자주 묻는 질문",
+    },
   ],
   en: [
     {
@@ -196,6 +212,22 @@ const STATIC_ENTRIES: Record<Locale, SearchEntry[]> = {
       url: "/contact",
       breadcrumb: "Contact",
     },
+    {
+      id: "page-applications",
+      type: "page",
+      title: "Applications",
+      model: "",
+      url: "/applications",
+      breadcrumb: "Applications",
+    },
+    {
+      id: "page-faq",
+      type: "page",
+      title: "Frequently asked questions",
+      model: "",
+      url: "/faq",
+      breadcrumb: "FAQ",
+    },
   ],
   zh: [
     {
@@ -256,6 +288,22 @@ const STATIC_ENTRIES: Record<Locale, SearchEntry[]> = {
       model: "",
       url: "/contact",
       breadcrumb: "联系",
+    },
+    {
+      id: "page-applications",
+      type: "page",
+      title: "应用领域",
+      model: "",
+      url: "/applications",
+      breadcrumb: "应用领域",
+    },
+    {
+      id: "page-faq",
+      type: "page",
+      title: "常见问题解答",
+      model: "",
+      url: "/faq",
+      breadcrumb: "常见问题",
     },
   ],
 };
