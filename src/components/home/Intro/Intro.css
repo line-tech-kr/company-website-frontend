@@ -161,3 +161,11 @@
     font-size: var(--lt-fs-feature);
   }
 }
+@media (max-width: 500px) {
+  .ho-intro {
+    padding: 32px 0 48px;
+  }
+  .ho-intro__title {
+    font-size: clamp(28px, 8vw, 36px);
+  }
+}
