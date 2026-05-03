@@ -61,11 +61,14 @@ function Greeting({ c }: { c: CompanyContent }) {
         </div>
         <aside
           className="co-greeting__facts"
-          aria-label={c.greeting.factsHeading}
+          aria-labelledby="co-greeting-facts-heading"
         >
-          <div className="co-greeting__factsHeading">
+          <h2
+            id="co-greeting-facts-heading"
+            className="co-greeting__factsHeading"
+          >
             {c.greeting.factsHeading}
-          </div>
+          </h2>
           <dl className="co-greeting__factList">
             {c.greeting.facts.map((fact) => (
               <div key={fact.k} className="co-greeting__fact">

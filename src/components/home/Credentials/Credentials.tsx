@@ -9,14 +9,14 @@ export function Credentials({ h }: Props) {
   return (
     <section className="ho-sec">
       <SectionHead kicker={credentials.kicker} title={credentials.title} />
-      <div className="ho-credentials">
+      <ul className="ho-credentials">
         {credentials.items.map((it) => (
-          <div key={it} className="ho-credentials__item">
-            <span className="ho-credentials__dot" />
+          <li key={it} className="ho-credentials__item">
+            <span className="ho-credentials__dot" aria-hidden="true" />
             <span>{it}</span>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 }
