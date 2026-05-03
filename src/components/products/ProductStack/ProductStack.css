@@ -19,7 +19,7 @@
   letter-spacing: -0.01em;
   color: var(--pd-fg-strong);
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 10px;
 }
 .lt-prod-stack__count {

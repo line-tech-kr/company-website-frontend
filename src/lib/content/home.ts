@@ -148,7 +148,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
     intro: {
       kicker: "Since 1997 · Mass Flow Solutions",
       title1: "Reliable technology,",
-      title2: "supreme service.",
+      title2: "trusted service.",
       lede: "Korea's first domestic manufacturer of mass flow controllers and meters. Proven for over 25 years across semiconductor, display, biotech, and fuel-cell process lines.",
       ctaPrimary: "View M3030VA product",
       ctaSecondary: "Full catalog (PDF)",

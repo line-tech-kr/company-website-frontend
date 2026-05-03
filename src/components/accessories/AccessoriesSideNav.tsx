@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { AccessoriesNavNode } from "@/lib/content/accessories";
 
 type Props = {
@@ -19,7 +19,7 @@ type Props = {
  * while preserving group/leaf semantics in the rendered DOM.
  */
 export function AccessoriesSideNav({ heading, items }: Props) {
-  const flat = flattenNav(items);
+  const flat = useMemo(() => flattenNav(items), [items]);
   const [active, setActive] = useState<string>(flat[0]?.id ?? "");
 
   useEffect(() => {
@@ -27,8 +27,13 @@ export function AccessoriesSideNav({ heading, items }: Props) {
 
     const intersecting = new Set<string>();
 
+    const isNearBottom = () =>
+      window.scrollY + window.innerHeight >=
+      document.documentElement.scrollHeight - 64;
+
     const observer = new IntersectionObserver(
       (entries) => {
+        if (isNearBottom()) return;
         for (const entry of entries) {
           if (entry.isIntersecting) {
             intersecting.add(entry.target.id);
@@ -47,7 +52,17 @@ export function AccessoriesSideNav({ heading, items }: Props) {
       if (el) observer.observe(el);
     }
 
-    return () => observer.disconnect();
+    const onScroll = () => {
+      if (isNearBottom() && flat.length > 0) {
+        setActive(flat[flat.length - 1].id);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, [flat]);
 
   return (

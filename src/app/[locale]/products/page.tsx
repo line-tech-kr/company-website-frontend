@@ -82,7 +82,6 @@ export default async function ProductsListPage({ params }: Props) {
         return (
           <section key={slug} className="lt-products-list__section">
             <CategoryHero
-              kickerNum={cat.kickerNum}
               kickerLabel={tProducts("kicker")}
               title={tProducts(`categories.${slug}.title`)}
               code={cat.code}

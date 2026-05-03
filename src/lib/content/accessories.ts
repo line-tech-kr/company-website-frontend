@@ -130,7 +130,7 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           { id: "pr-030", href: "#pr-030", label: "PR-030" },
         ],
       },
-      { id: "contact", href: "#contact", label: "Get in touch" },
+      { id: "contact", href: "#contact", label: "Contact" },
     ],
     breadcrumbAccessories: "Accessories",
     hero: {
@@ -306,7 +306,7 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
     },
     readouts: {
       kicker: "01 — 표시기",
-      title: "실시간 유량 신호를 표시하는 패널 장착형 디스플레이.",
+      title: "실시간 유량 신호를 표시하는\n패널 장착형 디스플레이.",
       sub: "두 LTI 모델 모두 라인테크 MFC 또는 MFM의 0–5 V 출력을 입력으로 받아 4자리 7-세그먼트 디스플레이에 유량을 표시합니다. 형태에 따라 선택하십시오 — 소형 패널 일체형(LTI-200) 또는 PC 소프트웨어를 지원하는 랙 마운트형(LTI-1000).",
       items: [
         {

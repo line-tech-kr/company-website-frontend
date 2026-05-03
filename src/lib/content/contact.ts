@@ -202,7 +202,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
 
   en: {
     breadcrumbLabel: "Contact",
-    title: "Get in touch",
+    title: "Contact Us",
     lede: "Product questions, technical support, partnership ideas — whatever brings you here, we'll reply within two business days.",
     infoHeading: "Contact details",
     hoursLabel: "Hours",
@@ -217,7 +217,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       notice:
         "Our online submission system is being upgraded. For an immediate response, please email us directly using the address above.",
       fields: {
-        inquiryType: "What's this about?",
+        inquiryType: "Topic",
         name: "Name",
         email: "Email",
         company: "Company",
