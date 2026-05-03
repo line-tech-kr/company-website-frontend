@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { LT_SHELL } from "@/lib/content/shell";
 import type { Locale } from "@/lib/content/home";
 import { Logomark } from "../Logomark";
@@ -13,7 +14,7 @@ function telHref(phone: string) {
 }
 
 export async function Footer({ locale }: Props) {
-  const { signoff, contact, legal, subsidiary, rights } =
+  const { signoff, contact, legal, subsidiary, links, rights } =
     LT_SHELL[locale].footer;
   const t = await getTranslations({ locale, namespace: "footer" });
 
@@ -62,6 +63,21 @@ export async function Footer({ locale }: Props) {
             <h2 className="pd-foot__heading">{subsidiary.heading}</h2>
             <p className="pd-foot__sub-name">{subsidiary.name}</p>
             <address className="pd-foot__addr">{subsidiary.address}</address>
+          </div>
+        ) : null}
+
+        {links ? (
+          <div className="pd-foot__col">
+            <h2 className="pd-foot__heading">{links.heading}</h2>
+            <ul className="pd-foot__list">
+              {links.items.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="pd-foot__nav-link">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         ) : null}
       </div>
