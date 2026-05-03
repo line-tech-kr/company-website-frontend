@@ -13,9 +13,9 @@ export async function PageShell({ locale, children }: Props) {
         {t("main")}
       </a>
       <Header locale={locale} />
-      <div id="lt-main" tabIndex={-1}>
+      <main id="lt-main" tabIndex={-1}>
         {children}
-      </div>
+      </main>
       <Footer locale={locale} />
     </>
   );

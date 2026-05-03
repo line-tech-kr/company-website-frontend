@@ -91,11 +91,16 @@ export function HeaderShell({
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpenId(null);
+      if (e.key !== "Escape" || !openId) return;
+      const trigger = document.querySelector<HTMLButtonElement>(
+        `[aria-controls="pd-mega-${openId}"]`,
+      );
+      setOpenId(null);
+      trigger?.focus();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [openId]);
 
   const closeSearch = useCallback(() => setSearchOpen(false), []);
 
