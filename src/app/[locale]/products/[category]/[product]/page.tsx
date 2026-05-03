@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import { cache } from "react";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { permanentRedirect, Link } from "@/i18n/navigation";
@@ -27,13 +29,23 @@ import {
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
 import { SanityProductSchema } from "@/lib/types/product";
-import type { MassFlowSpecs } from "@/lib/types/product";
+import type { MassFlowSpecs, Product } from "@/lib/types/product";
+import { buildProductMetadata, siteUrl } from "@/lib/seo";
+import { safeJsonLd } from "@/lib/seo/jsonLd";
 import { LT_APPLICATIONS } from "@/lib/content/applications";
 import "./product-detail.css";
 
 type Props = {
   params: Promise<{ locale: Locale; category: string; product: string }>;
 };
+
+const getProduct = cache(async (slug: string) => {
+  const raw = await fetchSanity(
+    () => sanityClient.fetch(productBySlugQuery, { slug }),
+    { name: "productBySlug", params: { slug } },
+  );
+  return raw ? SanityProductSchema.parse(raw) : null;
+});
 
 const SPEC_GROUPS: Array<{
   id: string;
@@ -59,6 +71,14 @@ const SPEC_GROUPS: Array<{
   },
 ];
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale, category, product: productSlug } = await params;
+  if (!isCategorySlug(category)) return {};
+  const product = await getProduct(productSlug);
+  if (!product) return {};
+  return buildProductMetadata(locale, product, category);
+}
+
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
     ALL_PRODUCTS.flatMap((p) => {
@@ -83,11 +103,7 @@ export default async function ProductPage({ params }: Props) {
 
   if (!isCategorySlug(category)) notFound();
 
-  const rawProduct = await fetchSanity(
-    () => sanityClient.fetch(productBySlugQuery, { slug: productSlug }),
-    { name: "productBySlug", params: { slug: productSlug } },
-  );
-  const product = rawProduct ? SanityProductSchema.parse(rawProduct) : null;
+  const product = await getProduct(productSlug);
 
   if (!product) notFound();
   if (product.series !== CATEGORIES[category].series) {
@@ -191,78 +207,198 @@ export default async function ProductPage({ params }: Props) {
     },
   ];
 
+  const productUrl = `${siteUrl}/${locale}/products/${category}/${product.slug.current}`;
+  const productLabel = product.productLabel[locale];
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: tCommon("home"),
+        item: `${siteUrl}/${locale}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: tNav("products"),
+        item: `${siteUrl}/${locale}/products`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: categoryLabel,
+        item: `${siteUrl}/${locale}/products/${category}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: product.model,
+        item: productUrl,
+      },
+    ],
+  };
+
+  const additionalProperties = [
+    {
+      "@type": "PropertyValue",
+      name: "Flow Range",
+      value: product.massFlowSpecs.flowRange.display,
+    },
+    {
+      "@type": "PropertyValue",
+      name: "Accuracy",
+      value: product.massFlowSpecs.accuracy.display,
+    },
+    {
+      "@type": "PropertyValue",
+      name: "Repeatability",
+      value: product.massFlowSpecs.repeatability.display,
+    },
+    ...(product.massFlowSpecs.responseTime
+      ? [
+          {
+            "@type": "PropertyValue",
+            name: "Response Time",
+            value: product.massFlowSpecs.responseTime.display,
+          },
+        ]
+      : []),
+    ...(product.massFlowSpecs.maxPressure
+      ? [
+          {
+            "@type": "PropertyValue",
+            name: "Max Pressure",
+            value: product.massFlowSpecs.maxPressure.display,
+          },
+        ]
+      : []),
+    {
+      "@type": "PropertyValue",
+      name: "I/O Signal",
+      value: product.massFlowSpecs.ioSignal.display,
+    },
+    {
+      "@type": "PropertyValue",
+      name: "Supply Power",
+      value: product.massFlowSpecs.supplyPower.display,
+    },
+    {
+      "@type": "PropertyValue",
+      name: "Temperature Range",
+      value: product.massFlowSpecs.tempRange.display,
+    },
+    {
+      "@type": "PropertyValue",
+      name: "Leak Rate",
+      value: product.massFlowSpecs.leakRate.display,
+    },
+  ];
+
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: `Line Tech ${product.model} ${productLabel}`,
+    model: product.model,
+    sku: product.model,
+    description: `${productLabel} — ${product.massFlowSpecs.flowRange.display} flow range, ${product.massFlowSpecs.accuracy.display} accuracy`,
+    brand: {
+      "@type": "Brand",
+      name: "Line Tech",
+    },
+    manufacturer: {
+      "@type": "Organization",
+      name: "라인테크 / Line Tech Inc.",
+      url: siteUrl,
+    },
+    url: productUrl,
+    additionalProperty: additionalProperties,
+  };
+
   return (
-    <main className="lt-wrap">
-      <Breadcrumbs items={breadcrumbs} />
-
-      <ProductHero
-        product={product}
-        locale={locale}
-        categoryLabel={categoryLabel}
-        quoteLabel={tPdp("ctas.quote")}
-        specsLabel={tPdp("ctas.viewSpecs")}
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
       />
-
-      <TabNav tabs={tabs} ariaLabel={tA11y("sectionNav")} />
-
-      <Overview
-        kicker={`01 — ${tPdp("tabs.overview")}`}
-        heading={tPdp("overview.heading")}
-        sub={tPdp("overview.sub")}
-        rows={overviewRows}
-        tone="primary"
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(productJsonLd) }}
       />
+      <main className="lt-wrap">
+        <Breadcrumbs items={breadcrumbs} />
 
-      <SpecTable
-        kicker={`02 — ${tPdp("tabs.specs")}`}
-        heading={tPdp("specs.heading")}
-        sub={tPdp("specs.sub")}
-        copyLabel={tPdp("specs.copy")}
-        copiedLabel={tPdp("specs.copied")}
-        modelName={product.model}
-        groups={specGroups}
-      />
-
-      {dimensionCallouts && (
-        <DimensionDrawing
-          kicker={`03 — ${tPdp("tabs.dimensions")}`}
-          heading={tPdp("dimensions.heading")}
-          sub={tPdp("dimensions.sub")}
-          caption={tPdp("dimensions.caption")}
-          note={tPdp("dimensions.note")}
-          drawingNumber={`LT-${product.model}-OUT`}
-          callouts={dimensionCallouts}
-          calloutsAriaLabel={tA11y("dimensionCallouts")}
+        <ProductHero
+          product={product}
+          locale={locale}
+          categoryLabel={categoryLabel}
+          quoteLabel={tPdp("ctas.quote")}
+          specsLabel={tPdp("ctas.viewSpecs")}
         />
-      )}
 
-      <DownloadsList
-        kicker={`04 — ${tPdp("tabs.downloads")}`}
-        heading={tPdp("downloads.heading")}
-        sub={tPdp("downloads.sub")}
-        downloadLabel={tPdp("downloads.download")}
-        doneLabel={tPdp("downloads.done")}
-        items={downloadItems}
-      />
+        <TabNav tabs={tabs} ariaLabel={tA11y("sectionNav")} />
 
-      {relatedApplications.length > 0 && (
-        <section className="pd-related-apps">
-          <h2 className="pd-related-apps__heading">{tNav("applications")}</h2>
-          <ul className="pd-related-apps__list">
-            {relatedApplications.map((app) => (
-              <li key={app.slug}>
-                <Link
-                  href={`/applications/${app.slug}`}
-                  className="pd-related-apps__link"
-                >
-                  <span className="pd-related-apps__title">{app.title}</span>
-                  <span className="pd-related-apps__lede">{app.lede}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-    </main>
+        <Overview
+          kicker={`01 — ${tPdp("tabs.overview")}`}
+          heading={tPdp("overview.heading")}
+          sub={tPdp("overview.sub")}
+          rows={overviewRows}
+          tone="primary"
+        />
+
+        <SpecTable
+          kicker={`02 — ${tPdp("tabs.specs")}`}
+          heading={tPdp("specs.heading")}
+          sub={tPdp("specs.sub")}
+          copyLabel={tPdp("specs.copy")}
+          copiedLabel={tPdp("specs.copied")}
+          modelName={product.model}
+          groups={specGroups}
+        />
+
+        {dimensionCallouts && (
+          <DimensionDrawing
+            kicker={`03 — ${tPdp("tabs.dimensions")}`}
+            heading={tPdp("dimensions.heading")}
+            sub={tPdp("dimensions.sub")}
+            caption={tPdp("dimensions.caption")}
+            note={tPdp("dimensions.note")}
+            drawingNumber={`LT-${product.model}-OUT`}
+            callouts={dimensionCallouts}
+            calloutsAriaLabel={tA11y("dimensionCallouts")}
+          />
+        )}
+
+        <DownloadsList
+          kicker={`04 — ${tPdp("tabs.downloads")}`}
+          heading={tPdp("downloads.heading")}
+          sub={tPdp("downloads.sub")}
+          downloadLabel={tPdp("downloads.download")}
+          doneLabel={tPdp("downloads.done")}
+          items={downloadItems}
+        />
+
+        {relatedApplications.length > 0 && (
+          <section className="pd-related-apps">
+            <h2 className="pd-related-apps__heading">{tNav("applications")}</h2>
+            <ul className="pd-related-apps__list">
+              {relatedApplications.map((app) => (
+                <li key={app.slug}>
+                  <Link
+                    href={`/applications/${app.slug}`}
+                    className="pd-related-apps__link"
+                  >
+                    <span className="pd-related-apps__title">{app.title}</span>
+                    <span className="pd-related-apps__lede">{app.lede}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </main>
+    </>
   );
 }

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { CompanyShell } from "@/components/company/CompanyShell";
 import {
@@ -7,8 +8,14 @@ import {
   type CompanyLocationOffice,
 } from "@/lib/content/company";
 import type { Locale } from "@/lib/content/home";
+import { buildCompanyMetadata } from "@/lib/seo";
 
 type Props = { params: Promise<{ locale: Locale }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  return buildCompanyMetadata(locale);
+}
 
 /** Founding, first-in-Korea MFC, and the two cert milestones get a filled
  * dot on the timeline. Everything else is a hollow tick. */
