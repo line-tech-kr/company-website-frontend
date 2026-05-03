@@ -62,25 +62,28 @@
     "categories": {
       "analogue": {
         "title": "아날로그 시리즈",
-        "lede": "검증된 아날로그 질량유량 제어기 및 측정기. 20년간 공정 라인을 지켜온 M · MS 시리즈."
+        "lede": "검증된 아날로그 질량유량 제어기 및 측정기.",
+        "ledeAccent": ""
       },
       "digital": {
         "title": "디지털 시리즈",
-        "lede": "8점 선형화. ±0.25 % F.S. 정확도. 1초 미만 응답. RS-485 · Modbus RTU."
+        "lede": "8점 선형화. ±0.25 % F.S. 정확도. 1초 미만 응답. RS-485 · Modbus RTU.",
+        "ledeAccent": ""
       },
       "specialized": {
         "title": "특수 시리즈",
-        "lede": "디스플레이 일체형, 방폭, MEMS 등 까다로운 환경을 위한 특수 사양 라인업."
+        "lede": "디스플레이 일체형, 방폭, MEMS 등 까다로운 환경을 위한 특수 사양 라인업.",
+        "ledeAccent": ""
       }
     },
     "stack": {
       "controllers": {
-        "title": "Controllers",
-        "subtitle": "질량유량 제어기 · MFC"
+        "title": "질량유량 제어기 · MFC",
+        "subtitle": "Controllers"
       },
       "meters": {
-        "title": "Meters",
-        "subtitle": "질량유량 측정기 · MFM"
+        "title": "질량유량 측정기 · MFM",
+        "subtitle": "Meters"
       }
     },
     "table": {

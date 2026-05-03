@@ -1,29 +1,20 @@
 import "./CategoryHero.css";
 
 type Props = {
-  kickerNum: string;
   kickerLabel: string;
   title: string;
   code: string;
   lede: string;
 };
 
-export function CategoryHero({
-  kickerNum,
-  kickerLabel,
-  title,
-  code,
-  lede,
-}: Props) {
+export function CategoryHero({ kickerLabel, title, code, lede }: Props) {
   return (
     <header className="lt-cat-hero">
       <div className="lt-cat-hero__lead">
         <div className="lt-cat-hero__kicker">
-          {kickerNum} — {kickerLabel}
+          {code} — {kickerLabel}
         </div>
-        <h1 className="lt-cat-hero__title">
-          {title} <span className="lt-cat-hero__code">{code}</span>
-        </h1>
+        <h1 className="lt-cat-hero__title">{title}</h1>
         <p className="lt-cat-hero__lede">{lede}</p>
       </div>
     </header>

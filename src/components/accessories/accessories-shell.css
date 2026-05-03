@@ -67,7 +67,7 @@
 .acc-nav__sublink {
   padding: 5px 0 5px 12px;
   margin-left: -14px;
-  font: 400 var(--lt-fs-xs)/1.4 var(--lt-sans);
+  font: 400 14px/1.4 var(--lt-sans);
   color: var(--pd-muted);
 }
 .acc-nav__link:hover,
@@ -119,6 +119,7 @@
   letter-spacing: -0.02em;
   color: var(--pd-fg-strong);
   max-width: 760px;
+  white-space: pre-line;
 }
 .acc-sechd__sub {
   margin: 0;

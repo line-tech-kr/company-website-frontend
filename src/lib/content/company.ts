@@ -87,6 +87,11 @@ export type CompanyCertifications = {
   footnote: string;
 };
 
+export type CompanyMapLink = {
+  label: string;
+  href: string;
+};
+
 export type CompanyLocationOffice = {
   /** Heading: "Headquarters" / "Subsidiary". */
   heading: string;
@@ -96,6 +101,7 @@ export type CompanyLocationOffice = {
   phone?: string;
   fax?: string;
   email?: string;
+  mapLinks?: CompanyMapLink[];
 };
 
 export type CompanyLocationLabels = {
@@ -262,6 +268,20 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
         phone: "042-624-0700",
         fax: "042-638-2211",
         email: "linetech@line-tech.co.kr",
+        mapLinks: [
+          {
+            label: "카카오맵",
+            href: "https://map.kakao.com/link/search/대전광역시 유성구 대덕대로 806",
+          },
+          {
+            label: "네이버지도",
+            href: "https://map.naver.com/v5/search/대전광역시 유성구 대덕대로 806",
+          },
+          {
+            label: "구글지도",
+            href: "https://maps.google.com/maps?q=대전광역시+유성구+대덕대로+806",
+          },
+        ],
       },
     },
   },
@@ -384,6 +404,20 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
         phone: "+82-42-624-0700",
         fax: "+82-42-638-2211",
         email: "linetech@line-tech.co.kr",
+        mapLinks: [
+          {
+            label: "Kakao Maps",
+            href: "https://map.kakao.com/link/search/대전광역시 유성구 대덕대로 806",
+          },
+          {
+            label: "Naver Maps",
+            href: "https://map.naver.com/v5/search/대전광역시 유성구 대덕대로 806",
+          },
+          {
+            label: "Google Maps",
+            href: "https://maps.google.com/maps?q=대전광역시+유성구+대덕대로+806",
+          },
+        ],
       },
     },
   },
@@ -505,11 +539,35 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
         phone: "+82-42-624-0700",
         fax: "+82-42-638-2211",
         email: "linetech@line-tech.co.kr",
+        mapLinks: [
+          {
+            label: "Kakao地图",
+            href: "https://map.kakao.com/link/search/대전광역시 유성구 대덕대로 806",
+          },
+          {
+            label: "谷歌地图",
+            href: "https://maps.google.com/maps?q=대전광역시+유성구+대덕대로+806",
+          },
+        ],
       },
       subsidiary: {
         heading: "中国子公司",
         name: "莱因精密技术（无锡）有限公司",
         address: "江苏省无锡市锡山区锡沪东荟智企业中心 6 号楼 117 号",
+        mapLinks: [
+          {
+            label: "高德地图",
+            href: "https://uri.amap.com/search?keyword=江苏省无锡市锡山区锡沪东荟智企业中心6号楼117号",
+          },
+          {
+            label: "百度地图",
+            href: "https://map.baidu.com/search/江苏省无锡市锡山区锡沪东荟智企业中心6号楼117号",
+          },
+          {
+            label: "谷歌地图",
+            href: "https://maps.google.com/maps?q=江苏省无锡市锡山区锡沪东荟智企业中心6号楼117号",
+          },
+        ],
       },
     },
   },

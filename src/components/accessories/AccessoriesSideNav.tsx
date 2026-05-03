@@ -27,8 +27,13 @@ export function AccessoriesSideNav({ heading, items }: Props) {
 
     const intersecting = new Set<string>();
 
+    const isNearBottom = () =>
+      window.scrollY + window.innerHeight >=
+      document.documentElement.scrollHeight - 64;
+
     const observer = new IntersectionObserver(
       (entries) => {
+        if (isNearBottom()) return;
         for (const entry of entries) {
           if (entry.isIntersecting) {
             intersecting.add(entry.target.id);
@@ -47,7 +52,17 @@ export function AccessoriesSideNav({ heading, items }: Props) {
       if (el) observer.observe(el);
     }
 
-    return () => observer.disconnect();
+    const onScroll = () => {
+      if (isNearBottom() && flat.length > 0) {
+        setActive(flat[flat.length - 1].id);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, [flat]);
 
   return (

@@ -105,7 +105,6 @@ export default async function CategoryPage({ params }: Props) {
       <main className="lt-wrap">
         <Breadcrumbs items={breadcrumbs} />
         <CategoryHero
-          kickerNum={cat.kickerNum}
           kickerLabel={tProducts("kicker")}
           title={tProducts(`categories.${category}.title`)}
           code={cat.code}
