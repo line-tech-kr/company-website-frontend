@@ -130,7 +130,7 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           { id: "pr-030", href: "#pr-030", label: "PR-030" },
         ],
       },
-      { id: "contact", href: "#contact", label: "Get in touch" },
+      { id: "contact", href: "#contact", label: "Contact" },
     ],
     breadcrumbAccessories: "Accessories",
     hero: {
