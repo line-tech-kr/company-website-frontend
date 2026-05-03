@@ -11,7 +11,6 @@ export type InquiryTypeId = "sales" | "support" | "partnership" | "general";
 
 export type ContactFormCopy = {
   heading: string;
-  notice: string;
   fields: {
     inquiryType: string;
     name: string;
@@ -109,8 +108,6 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
     emailDirectCta: "이메일로 직접 문의",
     form: {
       heading: "온라인 문의",
-      notice:
-        "온라인 제출 시스템을 업그레이드 중입니다. 즉시 회신이 필요하시면 위 이메일로 직접 연락해 주세요.",
       fields: {
         inquiryType: "문의 유형",
         name: "성함",
@@ -214,8 +211,6 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
     emailDirectCta: "Email us directly",
     form: {
       heading: "Send an inquiry",
-      notice:
-        "Our online submission system is being upgraded. For an immediate response, please email us directly using the address above.",
       fields: {
         inquiryType: "What's this about?",
         name: "Name",
@@ -324,8 +319,6 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
     emailDirectCta: "直接发送邮件",
     form: {
       heading: "在线咨询",
-      notice:
-        "在线提交系统正在升级。如需即时回复，请使用上方邮箱直接联系我们。",
       fields: {
         inquiryType: "咨询类型",
         name: "姓名",
