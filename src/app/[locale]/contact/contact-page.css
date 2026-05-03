@@ -29,6 +29,9 @@
   .ct__layout {
     grid-template-columns: 1fr;
   }
+  .ct-info {
+    position: static;
+  }
 }
 
 /* ─── Info card ─────────────────────────────────────────────────────── */

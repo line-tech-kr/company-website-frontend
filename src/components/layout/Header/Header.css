@@ -121,4 +121,8 @@
   .pd-top__hamburger {
     display: inline-flex;
   }
+  .pd-top__iconbtn {
+    width: 40px;
+    height: 40px;
+  }
 }

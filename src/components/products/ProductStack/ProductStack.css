@@ -109,3 +109,11 @@
     display: none;
   }
 }
+@media (max-width: 500px) {
+  .lt-prod-stack__table {
+    grid-template-columns: 72px 1fr 2fr;
+  }
+  .lt-prod-stack__head-cell--acc {
+    display: none;
+  }
+}

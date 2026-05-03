@@ -169,3 +169,11 @@
     grid-template-columns: 1fr;
   }
 }
+@media (max-width: 600px) {
+  .lt-pdp-dim__canvas {
+    aspect-ratio: 4 / 3;
+  }
+  .lt-pdp-dim__titleblock {
+    display: none;
+  }
+}
