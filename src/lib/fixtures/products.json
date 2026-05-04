@@ -127,6 +127,11 @@
         "unit": "bar",
         "comparator": "lt"
       }
+    },
+    "description": {
+      "en": "Precision analogue MFC for ultra-low flow rates down to 0.01 slpm. Ideal for semiconductor deposition, R&D gas blending, and precision analysis where sub-1 slpm accuracy is critical.",
+      "ko": "0.01 slpm까지의 초저유량을 위한 정밀 아날로그 MFC입니다. 1 slpm 이하의 정확도가 중요한 반도체 증착, 연구개발용 가스 블렌딩 및 정밀 분석에 적합합니다.",
+      "zh": "适用于低至0.01 slpm超低流量的精密模拟质量流量控制器，适合1 slpm以下精度要求严格的半导体沉积、研发气体混合及精密分析应用。"
     }
   },
   {
@@ -267,11 +272,6 @@
     },
     "features": [
       {
-        "en": "Accurate at Low Flow",
-        "ko": "저유량에서도 정밀한 측정",
-        "zh": "低流量下精准测量"
-      },
-      {
         "en": "Fast Response",
         "ko": "빠른 응답 속도",
         "zh": "快速响应"
@@ -385,6 +385,11 @@
         "unit": "bar",
         "comparator": "lt"
       }
+    },
+    "description": {
+      "en": "Mid-range analogue MFC at 30–100 slpm with the broadest fitting selection in the lineup — five options from 1/4” to 1/2” SW and VCR. Built for integration-flexible gas control in CVD, etching, and industrial processes.",
+      "ko": "라인업 내 가장 다양한 피팅 옵션(1/4”~1/2” SW 및 VCR 5종)을 갖춘 30~100 slpm 중간 유량 아날로그 MFC입니다. CVD, 식각 및 산업 공정에서의 유연한 통합 설치에 적합합니다.",
+      "zh": "30–100 slpm中等流量模拟MFC，提供产品线中最丰富的接头选项（1/4”至1/2” SW及VCR，共五种），专为CVD、刻蚀及工业气体控制的灵活集成而设计。"
     }
   },
   {
@@ -529,11 +534,6 @@
     },
     "features": [
       {
-        "en": "Accurate at Low Flow",
-        "ko": "저유량에서도 정밀한 측정",
-        "zh": "低流量下精准测量"
-      },
-      {
         "en": "Fast Response",
         "ko": "빠른 응답 속도",
         "zh": "快速响应"
@@ -639,6 +639,11 @@
         "unit": "bar",
         "comparator": "lt"
       }
+    },
+    "description": {
+      "en": "Mid-range analogue MFC at 30–100 slpm in a flat-profile body — same performance as the M3100VA in a form factor better suited to space-constrained panel installations.",
+      "ko": "평판형 바디를 채택한 30~100 slpm 중간 유량 아날로그 MFC입니다. M3100VA와 동일한 성능을 공간 제약이 있는 패널 설치에 최적화된 폼팩터로 제공합니다.",
+      "zh": "采用扁平机身的30–100 slpm中等流量模拟MFC，性能与M3100VA相同，外形更适合空间受限的面板安装场合。"
     }
   },
   {
@@ -775,9 +780,9 @@
     },
     "features": [
       {
-        "en": "Accurate at Low Flow",
-        "ko": "저유량에서도 정밀한 측정",
-        "zh": "低流量下精准测量"
+        "en": "Compact PCB Design",
+        "ko": "소형 PCB 설계",
+        "zh": "紧凑型PCB设计"
       },
       {
         "en": "Fast Response",
@@ -808,11 +813,6 @@
         "en": "Highly Stable Removable Sensor",
         "ko": "고안정 분리형 센서",
         "zh": "高稳定可拆卸式传感器"
-      },
-      {
-        "en": "Compact Connection",
-        "ko": "컴팩트한 연결부",
-        "zh": "紧凑型连接结构"
       }
     ],
     "connections": [
@@ -885,6 +885,11 @@
         "unit": "bar",
         "comparator": "lt"
       }
+    },
+    "description": {
+      "en": "MS-Series compact evolution of the mid-range MFC. Same 30–100 slpm performance as the M3200VA with a smaller PCB footprint — for builds where enclosure space is at a premium.",
+      "ko": "MS 시리즈의 컴팩트한 중간 유량 MFC입니다. M3200VA와 동일한 30~100 slpm 성능을 더 작은 PCB 폼팩터로 제공하여 공간이 제한된 인클로저에 적합합니다.",
+      "zh": "MS系列紧凑型中等流量MFC，性能与M3200VA相同（30–100 slpm），PCB尺寸更小，适用于机箱空间紧张的应用场合。"
     }
   },
   {
@@ -1021,9 +1026,9 @@
     },
     "features": [
       {
-        "en": "Accurate at Low Flow",
-        "ko": "저유량에서도 정밀한 측정",
-        "zh": "低流量下精准测量"
+        "en": "High Flow Capacity",
+        "ko": "대용량 유량 제어",
+        "zh": "大流量控制能力"
       },
       {
         "en": "Fast Response",
@@ -1053,12 +1058,7 @@
       {
         "en": "Highly Stable Removable Sensor",
         "ko": "고안정 분리형 센서",
-        "zh": "高稳定可拆卸式传感器"
-      },
-      {
-        "en": "Compact Connection",
-        "ko": "컴팩트한 연결부",
-        "zh": "紧凑型连接结构"
+        "zh": "高稳定可拆卸式传감器"
       }
     ],
     "connections": [
@@ -1129,6 +1129,11 @@
         "unit": "s",
         "comparator": "lt"
       }
+    },
+    "description": {
+      "en": "High-volume analogue MFC for bulk gas delivery at 100–300 slpm. Large-bore fittings up to 3/4” SW, ±2% FS accuracy, and inlet pressure above 40 psig required for flows over 100 slpm. Operating pressure on request.",
+      "ko": "100~300 slpm의 대용량 가스 공급을 위한 고유량 아날로그 MFC입니다. 최대 3/4” SW 대구경 피팅, ±2% FS 정확도를 제공하며, 100 slpm 초과 유량에서는 40 psig 이상의 입구 압력이 필요합니다. 최대 운전 압력은 별도 문의 바랍니다.",
+      "zh": "适用于100–300 slpm大流量气体输送的模拟MFC。提供最大3/4” SW大口径接头，精度±2% FS，流量超过100 slpm时需40 psig以上入口压力。最大工作压力请询价。"
     }
   },
   {
