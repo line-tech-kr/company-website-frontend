@@ -10,15 +10,27 @@
 }
 .ho-applications__cell {
   background: var(--pd-surface);
-  padding: 24px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
   min-height: 120px;
   transition: background 0.15s;
 }
+.ho-applications__link {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 24px 20px;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
 .ho-applications__cell:hover {
   background: var(--pd-surface-2);
+}
+.ho-applications__cell:has(.ho-applications__link:hover) .ho-applications__n {
+  color: var(--pd-primary);
+}
+.ho-applications__link:focus-visible {
+  outline: 2px solid var(--pd-primary);
+  outline-offset: -2px;
 }
 .ho-applications__num {
   font: 600 var(--lt-fs-xs) var(--lt-mono);
