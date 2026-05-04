@@ -33,9 +33,14 @@ export function ProductRow({ product, category, locale }: Props) {
   return (
     <tr
       className="lt-prod-row"
+      tabIndex={0}
       onClick={(e) => {
         if ((e.target as HTMLElement).closest("a")) return;
+        if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
         router.push(href);
+      }}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") router.push(href);
       }}
     >
       <td

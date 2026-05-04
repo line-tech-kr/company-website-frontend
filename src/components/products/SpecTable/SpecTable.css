@@ -69,7 +69,7 @@
   background: var(--lt-neutral-100);
 }
 .lt-pdp-spec__lbl {
-  font: 400 14px / 1.3 var(--lt-sans);
+  font: 400 var(--lt-fs-xs) / 1.3 var(--lt-sans);
   color: var(--pd-fg);
   margin: 0;
 }
