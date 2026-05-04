@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
+import { Chip } from "@/components/ui/Chip";
 import { sanityClient } from "@/sanity/client";
 import { allProductsQuery } from "@/sanity/queries";
 import {
@@ -15,9 +16,28 @@ import { z } from "zod";
 import { buildProductsMetadata } from "@/lib/seo";
 import { getProductsCategories, LT_SHELL } from "@/lib/content/shell";
 import { LT_HOME, type Locale } from "@/lib/content/home";
+import { LT_APPLICATIONS } from "@/lib/content/applications";
 import "./products-list.css";
 
 type Props = { params: Promise<{ locale: string }> };
+
+const CARD_ACCENT: Record<CategorySlug | "accessories", string> = {
+  analogue: "blue",
+  digital: "steel",
+  specialized: "gold",
+  accessories: "neutral",
+};
+
+const APPLICATION_STRIP_SLUGS = [
+  "semiconductor",
+  "fuel-cells",
+  "biotech-pharmaceutical",
+  "chemical-petrochemical",
+  "research-development",
+] as const;
+
+const CERTIFICATION_COUNT = 13;
+const SERIES_COUNT = 4;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -61,6 +81,12 @@ export default async function ProductsListPage({ params }: Props) {
   const featured =
     productsNav?.menu?.kind === "products" ? productsNav.menu.featured : null;
 
+  const applicationsByLocale = LT_APPLICATIONS[typedLocale].applications;
+  const industryCount = applicationsByLocale.length;
+  const stripIndustries = APPLICATION_STRIP_SLUGS.map((slug) =>
+    applicationsByLocale.find((a) => a.slug === slug),
+  ).filter((x): x is NonNullable<typeof x> => Boolean(x));
+
   const breadcrumbs = [
     { label: tCommon("home"), href: "/" },
     { label: tNav("products") },
@@ -72,17 +98,53 @@ export default async function ProductsListPage({ params }: Props) {
 
       <header className="lt-products-list__intro">
         <h1 className="lt-products-list__title">{tProducts("list.title")}</h1>
-        <p className="lt-products-list__lede">
-          {tProducts("list.intro", { count: products.length })}
-        </p>
+        <p className="lt-products-list__lede">{tProducts("list.lede")}</p>
       </header>
+
+      <ul
+        className="lt-products-list__stats"
+        aria-label={tProducts("list.title")}
+      >
+        <li className="lt-products-list__stat">
+          <a href="#categories" className="lt-products-list__stat-link">
+            <span className="lt-products-list__stat-num">{SERIES_COUNT}</span>
+            <span className="lt-products-list__stat-label">
+              {tProducts("list.stats.series")}
+            </span>
+          </a>
+        </li>
+        <li className="lt-products-list__stat">
+          <span className="lt-products-list__stat-num">{products.length}</span>
+          <span className="lt-products-list__stat-label">
+            {tProducts("list.stats.models")}
+          </span>
+        </li>
+        <li className="lt-products-list__stat">
+          <Link href="/applications" className="lt-products-list__stat-link">
+            <span className="lt-products-list__stat-num">{industryCount}</span>
+            <span className="lt-products-list__stat-label">
+              {tProducts("list.stats.industries")}
+            </span>
+          </Link>
+        </li>
+        <li className="lt-products-list__stat">
+          <span className="lt-products-list__stat-num">
+            {CERTIFICATION_COUNT}
+          </span>
+          <span className="lt-products-list__stat-label">
+            {tProducts("list.stats.certifications")}
+          </span>
+        </li>
+      </ul>
 
       {featured && (
         <Link href={featured.href} className="lt-products-list__featured">
           {featured.image && (
             <div className="lt-products-list__featured-media">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={featured.image} alt="" />
+              <div className="lt-products-list__featured-media-plate">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={featured.image} alt="" />
+              </div>
             </div>
           )}
           <div className="lt-products-list__featured-body">
@@ -100,7 +162,34 @@ export default async function ProductsListPage({ params }: Props) {
         </Link>
       )}
 
-      <ul className="lt-products-list__cats">
+      <section
+        className="lt-products-list__helper"
+        aria-labelledby="helper-title"
+      >
+        <h2 id="helper-title" className="lt-products-list__helper-title">
+          {tProducts("list.helper.title")}
+        </h2>
+        <ul className="lt-products-list__helper-rows">
+          {(["analogue", "digital", "specialized"] as const).map((slug) => (
+            <li key={slug}>
+              <Link
+                href={`/products/${slug}`}
+                className="lt-products-list__helper-row"
+                data-accent={CARD_ACCENT[slug]}
+              >
+                <span className="lt-products-list__helper-name">
+                  {tProducts(`categories.${slug}.title`)}
+                </span>
+                <span className="lt-products-list__helper-trait">
+                  {tProducts(`list.helper.${slug}`)}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <ul className="lt-products-list__cats" id="categories">
         {CATEGORY_SLUGS.map((slug) => {
           const cat = CATEGORIES[slug];
           const count = counts.get(slug)!;
@@ -111,6 +200,7 @@ export default async function ProductsListPage({ params }: Props) {
               <Link
                 href={`/products/${slug}`}
                 className="lt-products-list__card"
+                data-accent={CARD_ACCENT[slug]}
               >
                 <span className="lt-products-list__card-code">{cat.code}</span>
                 <h2 className="lt-products-list__card-title">
@@ -142,7 +232,8 @@ export default async function ProductsListPage({ params }: Props) {
           <li key="accessories">
             <Link
               href="/products/accessories"
-              className="lt-products-list__card"
+              className="lt-products-list__card lt-products-list__card--no-foot"
+              data-accent={CARD_ACCENT.accessories}
             >
               <h2 className="lt-products-list__card-title">
                 {accessories.label}
@@ -152,6 +243,30 @@ export default async function ProductsListPage({ params }: Props) {
           </li>
         )}
       </ul>
+
+      <section
+        className="lt-products-list__apps"
+        aria-labelledby="apps-strip-label"
+      >
+        <span id="apps-strip-label" className="lt-products-list__apps-eyebrow">
+          {tProducts("list.applications.label")}
+        </span>
+        <ul className="lt-products-list__apps-chips">
+          {stripIndustries.map((ind) => (
+            <li key={ind.slug}>
+              <Link
+                href={`/applications/${ind.slug}`}
+                className="lt-products-list__apps-chip"
+              >
+                <Chip small>{ind.title}</Chip>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <Link href="/applications" className="lt-products-list__apps-all">
+          {tProducts("list.applications.viewAll", { count: industryCount })}
+        </Link>
+      </section>
     </main>
   );
 }

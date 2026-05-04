@@ -57,8 +57,24 @@
   "products": {
     "list": {
       "title": "제품 카탈로그",
-      "intro": "아날로그, 디지털, 특수 시리즈를 아우르는 질량 유량 제어기 및 질량 유량계. 실험실, 산업, 공정 응용 분야를 위해 설계된 {count}개 모델.",
-      "cardCount": "{count}개 모델"
+      "lede": "아날로그·디지털·특수 시리즈로 구성된 매스플로우 컨트롤러(MFC)와 매스플로우 미터(MFM).",
+      "cardCount": "{count}개 모델",
+      "stats": {
+        "series": "시리즈",
+        "models": "모델",
+        "industries": "적용 분야",
+        "certifications": "인증"
+      },
+      "helper": {
+        "title": "어떤 시리즈가 맞을까요?",
+        "analogue": "검증된 아날로그 신호",
+        "digital": "정밀 디지털 통신",
+        "specialized": "디스플레이 일체형·특수 환경"
+      },
+      "applications": {
+        "label": "주요 적용 분야",
+        "viewAll": "전체 {count}개 적용 분야 보기 →"
+      }
     },
     "kicker": "제품 시리즈",
     "categories": {

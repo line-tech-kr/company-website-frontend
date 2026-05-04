@@ -57,8 +57,24 @@
   "products": {
     "list": {
       "title": "产品目录",
-      "intro": "涵盖模拟、数字和专用系列的质量流量控制器与质量流量计。{count} 款型号专为实验室、工业和工艺应用设计。",
-      "cardCount": "{count} 款型号"
+      "lede": "涵盖模拟、数字和专用系列的质量流量控制器（MFC）和质量流量计（MFM）。",
+      "cardCount": "{count} 款型号",
+      "stats": {
+        "series": "系列",
+        "models": "型号",
+        "industries": "应用行业",
+        "certifications": "认证"
+      },
+      "helper": {
+        "title": "不确定选哪个系列？",
+        "analogue": "经验证的模拟信号",
+        "digital": "精密数字通信",
+        "specialized": "集成显示，应对苛刻环境"
+      },
+      "applications": {
+        "label": "常见应用",
+        "viewAll": "查看全部 {count} 项应用 →"
+      }
     },
     "kicker": "产品系列",
     "categories": {
