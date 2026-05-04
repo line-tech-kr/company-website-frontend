@@ -90,7 +90,15 @@
       "fitting": "연결",
       "view": "보기"
     },
-    "emptyStack": "이 카테고리에는 아직 등록된 제품이 없습니다."
+    "emptyStack": "이 카테고리에는 아직 등록된 제품이 없습니다.",
+    "showcase": {
+      "sectionLabel": "대표 제품",
+      "viewProduct": "제품 보기",
+      "modelLabel": "모델",
+      "functionLabel": "유형",
+      "highlightLabel": "특징",
+      "slidesLabel": "슬라이드"
+    }
   },
   "pdp": {
     "tabs": {

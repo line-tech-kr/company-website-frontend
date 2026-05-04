@@ -36,6 +36,35 @@ export const productByModelQuery = defineQuery(`
   }
 `);
 
+export const categoryShowcaseQuery = defineQuery(`
+  *[_type == "categoryShowcase" && _id == "category-showcases"][0]{
+    "analogue": analogue[]{
+      caption,
+      "model": product->model,
+      "slug": product->slug.current,
+      "function": product->function,
+      "flowRange": product->massFlowSpecs.flowRange.display,
+      "accuracy": product->massFlowSpecs.accuracy.display,
+    },
+    "digital": digital[]{
+      caption,
+      "model": product->model,
+      "slug": product->slug.current,
+      "function": product->function,
+      "flowRange": product->massFlowSpecs.flowRange.display,
+      "accuracy": product->massFlowSpecs.accuracy.display,
+    },
+    "specialized": specialized[]{
+      caption,
+      "model": product->model,
+      "slug": product->slug.current,
+      "function": product->function,
+      "flowRange": product->massFlowSpecs.flowRange.display,
+      "accuracy": product->massFlowSpecs.accuracy.display,
+    },
+  }
+`);
+
 export const allProductsQuery = defineQuery(`
   *[_type == "product"]
   | order(

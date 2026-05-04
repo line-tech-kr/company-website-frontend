@@ -13,7 +13,22 @@ export default defineConfig({
   dataset,
   basePath: "/studio",
   plugins: [
-    structureTool(),
+    structureTool({
+      structure: (S) =>
+        S.list()
+          .title("Content")
+          .items([
+            S.documentTypeListItem("product").title("Products"),
+            S.divider(),
+            S.listItem()
+              .title("Category Showcases")
+              .child(
+                S.document()
+                  .schemaType("categoryShowcase")
+                  .documentId("category-showcases"),
+              ),
+          ]),
+    }),
     internationalizedArray({
       languages: [
         { id: "ko", title: "한국어" },
