@@ -21,23 +21,20 @@ function seriesTone(series: string): ChipTone {
 
 type StatItem = { value: string; label: string; href?: string };
 
-const STATS: Record<Locale, StatItem[]> = {
-  en: [
-    { value: "12", label: "Industries", href: "#industries" },
-    { value: "40+", label: "Models", href: "/products" },
-    { value: "13", label: "Certifications" },
-  ],
-  ko: [
-    { value: "12", label: "적용 산업", href: "#industries" },
-    { value: "40+", label: "제품 모델", href: "/products" },
-    { value: "13", label: "인증" },
-  ],
-  zh: [
-    { value: "12", label: "应用行业", href: "#industries" },
-    { value: "40+", label: "产品型号", href: "/products" },
-    { value: "13", label: "认证" },
-  ],
+const STAT_LABELS: Record<Locale, [string, string, string]> = {
+  en: ["Industries", "Models", "Certifications"],
+  ko: ["적용 산업", "제품 모델", "인증"],
+  zh: ["应用行业", "产品型号", "认证"],
 };
+
+function buildStats(locale: Locale, industryCount: number): StatItem[] {
+  const [industries, models, certs] = STAT_LABELS[locale];
+  return [
+    { value: String(industryCount), label: industries, href: "#industries" },
+    { value: "40+", label: models, href: "/products" },
+    { value: "13", label: certs },
+  ];
+}
 
 type Props = { params: Promise<{ locale: Locale }> };
 
@@ -64,7 +61,7 @@ export default async function ApplicationsPage({ params }: Props) {
   ]);
 
   const c = LT_APPLICATIONS[locale];
-  const stats = STATS[locale];
+  const stats = buildStats(locale, c.applications.length);
 
   const breadcrumbs = [
     { label: tCommon("home"), href: "/" },
