@@ -3,14 +3,17 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { CategoryHero } from "@/components/products/CategoryHero";
+import { CategoryShowcase } from "@/components/products/CategoryShowcase";
 import { ProductStack } from "@/components/products/ProductStack";
 import { sanityClient } from "@/sanity/client";
 import { fetchSanity } from "@/sanity/fetch";
-import { productsBySeriesQuery } from "@/sanity/queries";
+import { productsBySeriesQuery, categoryShowcaseQuery } from "@/sanity/queries";
 import { CATEGORIES, CATEGORY_SLUGS, isCategorySlug } from "@/lib/categories";
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
 import { SanityProductSchema } from "@/lib/types/product";
+import { CategoryShowcaseSchema } from "@/lib/types/showcase";
+import { resolveProductImage } from "@/lib/productImages";
 import { z } from "zod";
 import { buildCategoryMetadata, siteUrl } from "@/lib/seo";
 import { safeJsonLd } from "@/lib/seo/jsonLd";
@@ -36,14 +39,30 @@ export default async function CategoryPage({ params }: Props) {
   if (!isCategorySlug(category)) notFound();
 
   const cat = CATEGORIES[category];
-  const products = z
-    .array(SanityProductSchema)
-    .parse(
-      await fetchSanity(
-        () => sanityClient.fetch(productsBySeriesQuery, { series: cat.series }),
-        { name: "productsBySeries", params: { series: cat.series } },
-      ),
-    );
+
+  const [productsRaw, showcaseRaw] = await Promise.all([
+    fetchSanity(
+      () => sanityClient.fetch(productsBySeriesQuery, { series: cat.series }),
+      { name: "productsBySeries", params: { series: cat.series } },
+    ),
+    fetchSanity(() => sanityClient.fetch(categoryShowcaseQuery), {
+      name: "categoryShowcase",
+    }),
+  ]);
+
+  const products = z.array(SanityProductSchema).parse(productsRaw);
+  const showcase = CategoryShowcaseSchema.nullable().parse(showcaseRaw ?? null);
+  const featuredEntries = showcase?.[category] ?? [];
+  const showcaseProducts = featuredEntries.map((e) => ({
+    slug: e.slug,
+    model: e.model,
+    caption: e.caption,
+    function: e.function,
+    flowRange: e.flowRange,
+    accuracy: e.accuracy,
+    image: resolveProductImage(e.slug),
+    href: `/${locale}/products/${category}/${e.slug}`,
+  }));
 
   const [tCommon, tNav, tBreadcrumb, tProducts] = await Promise.all([
     getTranslations("common"),
@@ -110,6 +129,23 @@ export default async function CategoryPage({ params }: Props) {
           code={cat.code}
           lede={tProducts(`categories.${category}.lede`)}
         />
+        {showcaseProducts.length > 0 && (
+          <CategoryShowcase
+            products={showcaseProducts}
+            viewLabel={tProducts("showcase.viewProduct")}
+            sectionLabel={tProducts("showcase.sectionLabel")}
+            modelLabel={tProducts("showcase.modelLabel")}
+            functionLabel={tProducts("showcase.functionLabel")}
+            flowRangeLabel={tProducts("table.range")}
+            accuracyLabel={tProducts("table.accuracy")}
+            highlightLabel={tProducts("showcase.highlightLabel")}
+            slidesLabel={tProducts("showcase.slidesLabel")}
+            slidesAriaLabel={tProducts("showcase.slidesAriaLabel")}
+            slideAriaLabels={showcaseProducts.map((_, i) =>
+              tProducts("showcase.slideAriaLabel", { n: i + 1 }),
+            )}
+          />
+        )}
         <ProductStack
           title={tProducts("stack.controllers.title")}
           subtitle={tProducts("stack.controllers.subtitle")}

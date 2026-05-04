@@ -51,6 +51,8 @@ export type ShellFeaturedCard = {
   blurb: string;
   href: string;
   cta: string;
+  /** Optional image path (currently used by the products list spotlight). */
+  image?: string;
 };
 
 export type ShellFooter = {
@@ -190,6 +192,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             blurb: "반도체·디스플레이 공정을 위한 디지털 압전식 MFC.",
             href: "/products/analogue/m3030va",
             cta: "상세 보기",
+            image: "/products/m3030va/product-1.jpg",
           },
         },
       },
@@ -268,6 +271,11 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               href: "/resources/certifications",
               label: "인증서",
               desc: "13종 인증 문서",
+            },
+            {
+              href: "/faq",
+              label: "자주 묻는 질문",
+              desc: "제품·주문·기술 관련 FAQ",
             },
           ],
           featured: {
@@ -414,6 +422,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               "Digital piezo-actuated MFC for semiconductor and display process lines.",
             href: "/products/analogue/m3030va",
             cta: "View product",
+            image: "/products/m3030va/product-1.jpg",
           },
         },
       },
@@ -492,6 +501,11 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               href: "/resources/certifications",
               label: "Certifications",
               desc: "13 certification documents",
+            },
+            {
+              href: "/faq",
+              label: "FAQ",
+              desc: "Product, ordering & technical questions",
             },
           ],
           featured: {
@@ -628,6 +642,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             blurb: "用于半导体与显示工艺的数字压电式质量流量控制器。",
             href: "/products/analogue/m3030va",
             cta: "查看详情",
+            image: "/products/m3030va/product-1.jpg",
           },
         },
       },
@@ -706,6 +721,11 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               href: "/resources/certifications",
               label: "认证文件",
               desc: "13 份认证文件",
+            },
+            {
+              href: "/faq",
+              label: "常见问题",
+              desc: "产品、订购及技术常见问题",
             },
           ],
           featured: {

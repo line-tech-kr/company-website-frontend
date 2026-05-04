@@ -47,6 +47,14 @@
   letter-spacing: -0.01em;
   color: var(--pd-fg);
 }
+.lt-pdp-hero__desc {
+  margin: 0 0 12px;
+  max-width: 480px;
+  font-size: var(--lt-fs-md);
+  line-height: 1.6;
+  color: var(--pd-fg);
+  text-wrap: pretty;
+}
 .lt-pdp-hero__tagline {
   margin: 0 0 24px;
   max-width: 520px;

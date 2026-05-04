@@ -1,4 +1,6 @@
-import { Link } from "@/i18n/navigation";
+"use client";
+
+import { Link, useRouter } from "@/i18n/navigation";
 import { ProductThumb } from "../ProductThumb";
 import { Chip } from "@/components/ui/Chip/Chip";
 import type { Product } from "@/lib/types/product";
@@ -25,7 +27,7 @@ function fittingSummary(connections: Product["connections"]): string {
 
 export function ProductRow({ product, category, locale }: Props) {
   const href = `/products/${category}/${product.slug.current}`;
-  const label = product.productLabel[locale];
+  const label = product.description?.[locale] ?? product.productLabel[locale];
   const range = product.massFlowSpecs.flowRange.display;
   const accuracy = product.massFlowSpecs.accuracy.display;
   const response = product.massFlowSpecs.responseTime?.display ?? "—";
@@ -33,9 +35,21 @@ export function ProductRow({ product, category, locale }: Props) {
   const visibleTags = product.tags
     .filter((t) => VISIBLE_TAG_KINDS.has(t.kind))
     .slice(0, MAX_VISIBLE_TAGS);
+  const router = useRouter();
 
   return (
-    <tr className="lt-prod-row">
+    <tr
+      className="lt-prod-row"
+      tabIndex={0}
+      onClick={(e) => {
+        if ((e.target as HTMLElement).closest("a")) return;
+        if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+        router.push(href);
+      }}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") router.push(href);
+      }}
+    >
       <td
         className="lt-prod-row__cell lt-prod-row__cell--thumb"
         aria-hidden="true"

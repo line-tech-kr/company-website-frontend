@@ -19,6 +19,7 @@ const PRODUCT_PROJECTION = `
       "zh": coalesce(label[language == "zh"][0].value, label[language == "en"][0].value, label[language == "ko"][0].value)
     }
   }, []),
+  description,
   features,
   connections,
   massFlowSpecs,
@@ -42,6 +43,35 @@ export const productsBySeriesQuery = defineQuery(`
 export const productByModelQuery = defineQuery(`
   *[_type == "product" && lower(model) == lower($model)][0]{
     ${PRODUCT_PROJECTION}
+  }
+`);
+
+export const categoryShowcaseQuery = defineQuery(`
+  *[_type == "categoryShowcase" && _id == "category-showcases"][0]{
+    "analogue": analogue[]{
+      caption,
+      "model": product->model,
+      "slug": product->slug.current,
+      "function": product->function,
+      "flowRange": product->massFlowSpecs.flowRange.display,
+      "accuracy": product->massFlowSpecs.accuracy.display,
+    },
+    "digital": digital[]{
+      caption,
+      "model": product->model,
+      "slug": product->slug.current,
+      "function": product->function,
+      "flowRange": product->massFlowSpecs.flowRange.display,
+      "accuracy": product->massFlowSpecs.accuracy.display,
+    },
+    "specialized": specialized[]{
+      caption,
+      "model": product->model,
+      "slug": product->slug.current,
+      "function": product->function,
+      "flowRange": product->massFlowSpecs.flowRange.display,
+      "accuracy": product->massFlowSpecs.accuracy.display,
+    },
   }
 `);
 

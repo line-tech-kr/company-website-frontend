@@ -50,6 +50,7 @@ describe("HeaderNav", () => {
     expect(products?.tagName).toBe("BUTTON");
     expect(products).toHaveAttribute("aria-haspopup", "true");
     expect(products).toHaveAttribute("aria-expanded", "false");
+    expect(container.querySelector('a[href="/products"]')).not.toBeNull();
 
     const contact = LT_SHELL.en.nav.find((i) => !i.menu);
     if (!contact) throw new Error("expected a non-menu nav item in fixture");
@@ -93,13 +94,23 @@ describe("HeaderNav", () => {
     expect(onItemLeave).toHaveBeenCalled();
   });
 
+  it("clicking the label of an open menu item closes the panel", () => {
+    const setOpenId = vi.fn();
+    const { container } = renderNav(stubCtx({ openId: "products", setOpenId }));
+    const link = container.querySelector(
+      'a[href="/products"]',
+    ) as HTMLAnchorElement;
+    fireEvent.click(link);
+    expect(setOpenId).toHaveBeenCalledWith(null);
+  });
+
   it("hovering a menu item schedules the open via onItemEnter", () => {
     const onItemEnter = vi.fn();
     const { container } = renderNav(stubCtx({ onItemEnter }));
-    const btn = container.querySelector(
-      '[aria-controls="pd-mega-products"]',
-    ) as HTMLButtonElement;
-    fireEvent.mouseEnter(btn);
+    const wrapper = container.querySelector(
+      '[data-navid="products"]',
+    ) as HTMLElement;
+    fireEvent.mouseEnter(wrapper);
     expect(onItemEnter).toHaveBeenCalledWith("products");
   });
 });
