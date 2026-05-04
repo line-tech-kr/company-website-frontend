@@ -12,6 +12,16 @@ type Props = { params: Promise<{ locale: string }> };
 type Series = "analogue" | "digital" | "specialized";
 const SERIES_ORDER: Series[] = ["analogue", "digital", "specialized"];
 
+type ManualItem = {
+  _id: string;
+  title: string;
+  model?: string | null;
+  series?: string | null;
+  rev?: string | null;
+  publishedAt?: string | null;
+  fileUrl?: string | null;
+};
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -33,7 +43,7 @@ export default async function ManualsPage({ params }: Props) {
     getTranslations("common"),
     getTranslations("nav"),
     getTranslations("resources"),
-    sanityClient.fetch(allManualsQuery),
+    sanityClient.fetch<ManualItem[]>(allManualsQuery),
   ]);
 
   const breadcrumbs = [

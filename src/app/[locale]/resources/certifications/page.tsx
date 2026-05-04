@@ -4,8 +4,22 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { sanityClient } from "@/sanity/client";
 import { allCertificationsQuery } from "@/sanity/queries";
 import { routing } from "@/i18n/routing";
-import type { Locale } from "@/lib/content/home";
 import "../resources-subpage.css";
+
+type Locale = "ko" | "en" | "zh";
+
+type CertItem = {
+  _id: string;
+  name: string;
+  issuer?: {
+    ko?: string | null;
+    en?: string | null;
+    zh?: string | null;
+  } | null;
+  scope?: { ko?: string | null; en?: string | null; zh?: string | null } | null;
+  validThrough?: string | null;
+  fileUrl?: string | null;
+};
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -30,7 +44,7 @@ export default async function CertificationsPage({ params }: Props) {
     getTranslations("common"),
     getTranslations("nav"),
     getTranslations("resources"),
-    sanityClient.fetch(allCertificationsQuery),
+    sanityClient.fetch<CertItem[]>(allCertificationsQuery),
   ]);
 
   const lang = locale as Locale;

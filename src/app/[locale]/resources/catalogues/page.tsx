@@ -8,6 +8,14 @@ import "../resources-subpage.css";
 
 type Props = { params: Promise<{ locale: string }> };
 
+type CatalogueItem = {
+  _id: string;
+  title: string;
+  series?: string | null;
+  publishedAt?: string | null;
+  fileUrl?: string | null;
+};
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -29,7 +37,7 @@ export default async function CataloguesPage({ params }: Props) {
     getTranslations("common"),
     getTranslations("nav"),
     getTranslations("resources"),
-    sanityClient.fetch(allCataloguesQuery),
+    sanityClient.fetch<CatalogueItem[]>(allCataloguesQuery),
   ]);
 
   const breadcrumbs = [

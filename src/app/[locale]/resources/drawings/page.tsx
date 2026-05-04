@@ -8,6 +8,15 @@ import "../resources-subpage.css";
 
 type Props = { params: Promise<{ locale: string }> };
 
+type DrawingItem = {
+  _id: string;
+  title: string;
+  model: string;
+  series?: string | null;
+  dwgUrl?: string | null;
+  stpUrl?: string | null;
+};
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -29,7 +38,7 @@ export default async function DrawingsPage({ params }: Props) {
     getTranslations("common"),
     getTranslations("nav"),
     getTranslations("resources"),
-    sanityClient.fetch(allDrawingsQuery),
+    sanityClient.fetch<DrawingItem[]>(allDrawingsQuery),
   ]);
 
   const breadcrumbs = [

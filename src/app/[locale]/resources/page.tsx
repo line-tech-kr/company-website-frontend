@@ -10,7 +10,6 @@ import {
   allCertificationsQuery,
 } from "@/sanity/queries";
 import { routing } from "@/i18n/routing";
-import type { Locale } from "@/lib/content/home";
 import "./resources-hub.css";
 
 type Props = { params: Promise<{ locale: string }> };
