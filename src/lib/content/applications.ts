@@ -17,6 +17,7 @@ export type ApplicationsContent = {
   gridHeading: string;
   relatedHeading: string;
   contactCta: string;
+  contactBtn: string;
   contactCtaHref: string;
   applications: ApplicationEntry[];
 };
@@ -31,6 +32,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
     gridHeading: "Industries we serve",
     relatedHeading: "Recommended products",
     contactCta: "Discuss your application",
+    contactBtn: "Get in touch",
     contactCtaHref: "/contact",
     applications: [
       {
@@ -186,7 +188,8 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       "라인테크 MFC·MFM은 정밀하고 신뢰할 수 있는\n가스 유량 측정 및 제어가 필요한\n다양한 산업 현장에서 사용되고 있습니다.",
     gridHeading: "적용 산업",
     relatedHeading: "추천 제품",
-    contactCta: "응용 분야 문의하기",
+    contactCta: "프로세스에 맞는 MFC를 찾고 계신가요?",
+    contactBtn: "문의하기",
     contactCtaHref: "/contact",
     applications: [
       {
@@ -343,6 +346,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
     gridHeading: "服务的行业",
     relatedHeading: "推荐产品",
     contactCta: "咨询您的应用",
+    contactBtn: "立即咨询",
     contactCtaHref: "/contact",
     applications: [
       {

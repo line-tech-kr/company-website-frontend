@@ -92,7 +92,7 @@
 }
 
 .ap-stats__item--link:hover .ap-stats__value {
-  color: var(--pd-primary-dark);
+  color: var(--pd-primary-hover);
 }
 
 .ap-stats__item--link:focus-visible {
@@ -125,6 +125,10 @@
 }
 
 /* ── Grid heading ────────────────────────────────────────────────────────── */
+
+#industries {
+  scroll-margin-top: calc(var(--pd-top-h, 72px) + 16px);
+}
 
 .ap-grid__heading {
   margin: 0 0 24px;
@@ -232,7 +236,7 @@
 
 .ap-cta__heading {
   margin: 0;
-  font: 600 var(--lt-fs-h3) / 1.2 var(--lt-sans);
+  font: 600 var(--lt-fs-h2-dense) / 1.2 var(--lt-sans);
   color: #fff;
   letter-spacing: -0.01em;
 }

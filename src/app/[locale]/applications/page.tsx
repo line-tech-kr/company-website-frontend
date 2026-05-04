@@ -1,5 +1,6 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { Chip } from "@/components/ui/Chip/Chip";
@@ -18,46 +19,25 @@ function seriesTone(series: string): ChipTone {
   return "neutral";
 }
 
-const STATS = {
+type StatItem = { value: string; label: string; href?: string };
+
+const STATS: Record<Locale, StatItem[]> = {
   en: [
-    {
-      value: "12",
-      label: "Industries",
-      href: "#industries" as string | undefined,
-    },
-    { value: "40+", label: "Models", href: "/products" as string | undefined },
-    { value: "13", label: "Certifications", href: undefined },
+    { value: "12", label: "Industries", href: "#industries" },
+    { value: "40+", label: "Models", href: "/products" },
+    { value: "13", label: "Certifications" },
   ],
   ko: [
-    {
-      value: "12",
-      label: "적용 산업",
-      href: "#industries" as string | undefined,
-    },
-    {
-      value: "40+",
-      label: "제품 모델",
-      href: "/products" as string | undefined,
-    },
-    { value: "13", label: "인증", href: undefined },
+    { value: "12", label: "적용 산업", href: "#industries" },
+    { value: "40+", label: "제품 모델", href: "/products" },
+    { value: "13", label: "인증" },
   ],
   zh: [
-    {
-      value: "12",
-      label: "应用行业",
-      href: "#industries" as string | undefined,
-    },
-    {
-      value: "40+",
-      label: "产品型号",
-      href: "/products" as string | undefined,
-    },
-    { value: "13", label: "认证", href: undefined },
+    { value: "12", label: "应用行业", href: "#industries" },
+    { value: "40+", label: "产品型号", href: "/products" },
+    { value: "13", label: "认证" },
   ],
-} satisfies Record<
-  Locale,
-  { value: string; label: string; href: string | undefined }[]
->;
+};
 
 type Props = { params: Promise<{ locale: Locale }> };
 
@@ -96,8 +76,14 @@ export default async function ApplicationsPage({ params }: Props) {
       <Breadcrumbs items={breadcrumbs} />
 
       <header className="ap-hero">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/applications/hero.jpg" alt="" className="ap-hero__bg" />
+        <Image
+          src="/applications/hero.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="ap-hero__bg"
+        />
         <div className="ap-hero__overlay" aria-hidden />
         <div className="ap-hero__content">
           <h1 className="ap-hero__title">{c.pageTitle}</h1>
@@ -157,12 +143,7 @@ export default async function ApplicationsPage({ params }: Props) {
       <div className="ap-cta">
         <p className="ap-cta__heading">{c.contactCta}</p>
         <Link href={c.contactCtaHref} className="ap-cta__btn">
-          {locale === "ko"
-            ? "문의하기"
-            : locale === "zh"
-              ? "立即咨询"
-              : "Get in touch"}{" "}
-          →
+          {c.contactBtn} →
         </Link>
       </div>
     </main>
