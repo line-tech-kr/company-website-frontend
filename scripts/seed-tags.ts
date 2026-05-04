@@ -104,6 +104,7 @@ function tagsForProduct(p: Product): string[] {
   if (p.model.startsWith("LD")) tags.push("integrated-display");
   const { min, max } = p.massFlowSpecs.flowRange;
   if (min !== undefined && max !== undefined) {
+    // Catalog tops out at 30 slpm for ultra-low models; >=1000 marks the high-flow band.
     if (min <= 0.01 && max <= 30) tags.push("ultra-low-flow");
     if (max >= 1000) tags.push("high-flow");
   }
@@ -155,6 +156,7 @@ async function main() {
 
   let patchedCount = 0;
   let skippedCount = 0;
+  let preservedCount = 0;
 
   for (const product of ALL_PRODUCTS) {
     const _id = `product-${product.slug.current}`;
@@ -175,6 +177,19 @@ async function main() {
       continue;
     }
     try {
+      // Preserve existing tag arrays (e.g. Studio-curated gas/application
+      // tags) unless --force is set. Mirrors the tag-document --force gate.
+      if (!force) {
+        const existing = await client.getDocument<{ tags?: unknown[] }>(_id);
+        const existingCount = existing?.tags?.length ?? 0;
+        if (existingCount > 0) {
+          console.log(
+            `  preserved  ${product.model} (has ${existingCount} existing tags; --force to overwrite)`,
+          );
+          preservedCount++;
+          continue;
+        }
+      }
       await client.patch(_id).set({ tags: refs }).commit();
       console.log(`  patched  ${product.model} ← [${slugs.join(", ")}]`);
       patchedCount++;
@@ -185,7 +200,7 @@ async function main() {
   }
 
   console.log(
-    `Done. Tags=${TAGS.length}, products patched=${patchedCount}, skipped=${skippedCount}.`,
+    `Done. Tags=${TAGS.length}, products patched=${patchedCount}, preserved=${preservedCount}, skipped=${skippedCount}.`,
   );
   console.log(
     "Note: zh strings are machine-drafted from English. Native review pending — file follow-up issue.",
