@@ -82,7 +82,7 @@ export default async function ProductsListPage({ params }: Props) {
           {featured.image && (
             <div className="lt-products-list__featured-media">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={featured.image} alt="" loading="lazy" />
+              <img src={featured.image} alt="" />
             </div>
           )}
           <div className="lt-products-list__featured-body">

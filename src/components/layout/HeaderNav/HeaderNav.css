@@ -80,6 +80,7 @@
   line-height: 0;
 }
 
+.pd-top__navlabel:focus-visible,
 .pd-top__navchevron:focus-visible {
   outline: 2px solid var(--pd-primary);
   outline-offset: 2px;
