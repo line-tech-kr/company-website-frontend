@@ -14,6 +14,9 @@
   font-weight: inherit;
   text-align: left;
 }
+.lt-prod-row {
+  cursor: pointer;
+}
 .lt-prod-row:has(.lt-prod-row__cell:hover) .lt-prod-row__cell,
 .lt-prod-row:has(.lt-prod-row__cell :focus-visible) .lt-prod-row__cell {
   background: var(--pd-surface-2);
