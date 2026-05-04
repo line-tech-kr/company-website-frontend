@@ -80,7 +80,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export async function generateStaticParams() {
   const products = await fetchSanity(
-    () => sanityBuildClient.fetch<Array<{ slug: string; series: Product["series"] }>>(productSlugsQuery),
+    () =>
+      sanityBuildClient.fetch<
+        Array<{ slug: string; series: Product["series"] }>
+      >(productSlugsQuery),
     { name: "productSlugsForStaticParams" },
   );
   return routing.locales.flatMap((locale) =>
