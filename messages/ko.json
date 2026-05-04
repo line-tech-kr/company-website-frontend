@@ -12,7 +12,8 @@
     "primaryNav": "주요 메뉴",
     "language": "언어 선택",
     "sectionNav": "섹션 이동",
-    "dimensionCallouts": "치수 표시"
+    "dimensionCallouts": "치수 표시",
+    "menuTrigger": "{label} 메뉴"
   },
   "footer": {
     "tel": "TEL",
@@ -56,7 +57,8 @@
   "products": {
     "list": {
       "title": "제품 카탈로그",
-      "intro": "아날로그, 디지털, 특수 시리즈를 아우르는 질량 유량 제어기 및 질량 유량계. 실험실, 산업, 공정 응용 분야를 위해 설계된 {count}개 모델."
+      "intro": "아날로그, 디지털, 특수 시리즈를 아우르는 질량 유량 제어기 및 질량 유량계. 실험실, 산업, 공정 응용 분야를 위해 설계된 {count}개 모델.",
+      "cardCount": "{count}개 모델"
     },
     "kicker": "제품 시리즈",
     "categories": {

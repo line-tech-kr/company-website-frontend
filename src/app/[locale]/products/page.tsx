@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
-import { CategoryHero } from "@/components/products/CategoryHero";
-import { ProductStack } from "@/components/products/ProductStack";
 import { sanityClient } from "@/sanity/client";
 import { allProductsQuery } from "@/sanity/queries";
 import {
@@ -12,9 +11,10 @@ import {
   type CategorySlug,
 } from "@/lib/categories";
 import { SanityProductSchema } from "@/lib/types/product";
-import type { Product } from "@/lib/types/product";
 import { z } from "zod";
 import { buildProductsMetadata } from "@/lib/seo";
+import { getProductsCategories, LT_SHELL } from "@/lib/content/shell";
+import { LT_HOME, type Locale } from "@/lib/content/home";
 import "./products-list.css";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -37,30 +37,34 @@ export default async function ProductsListPage({ params }: Props) {
   const products = z
     .array(SanityProductSchema)
     .parse(await sanityClient.fetch(allProductsQuery));
-  const typedLocale = locale as "ko" | "en" | "zh";
 
-  const grouped = new Map<CategorySlug, Product[]>(
-    CATEGORY_SLUGS.map((slug) => [slug, []]),
+  const counts = new Map<CategorySlug, number>(
+    CATEGORY_SLUGS.map((slug) => [slug, 0]),
   );
   for (const p of products) {
     const slug = categoryForSeries(p.series);
-    if (slug) grouped.get(slug)!.push(p);
+    if (slug) counts.set(slug, counts.get(slug)! + 1);
   }
+
+  const typedLocale = locale as Locale;
+  const accessories = getProductsCategories(typedLocale).find(
+    (c) => c.code === "accessories",
+  );
+
+  const seriesByHref = new Map(
+    LT_HOME[typedLocale].series.items.map((s) => [s.href, s]),
+  );
+
+  const productsNav = LT_SHELL[typedLocale].nav.find(
+    (n) => n.id === "products",
+  );
+  const featured =
+    productsNav?.menu?.kind === "products" ? productsNav.menu.featured : null;
 
   const breadcrumbs = [
     { label: tCommon("home"), href: "/" },
     { label: tNav("products") },
   ];
-
-  const headers = {
-    model: tProducts("table.model"),
-    description: tProducts("table.description"),
-    range: tProducts("table.range"),
-    accuracy: tProducts("table.accuracy"),
-    response: tProducts("table.response"),
-    fitting: tProducts("table.fitting"),
-  };
-  const emptyLabel = tProducts("emptyStack");
 
   return (
     <main className="lt-wrap lt-products-list">
@@ -73,41 +77,81 @@ export default async function ProductsListPage({ params }: Props) {
         </p>
       </header>
 
-      {CATEGORY_SLUGS.map((slug) => {
-        const cat = CATEGORIES[slug];
-        const items = grouped.get(slug)!;
-        if (items.length === 0) return null;
-        const controllers = items.filter((p) => p.function === "MFC");
-        const meters = items.filter((p) => p.function === "MFM");
-        return (
-          <section key={slug} className="lt-products-list__section">
-            <CategoryHero
-              kickerLabel={tProducts("kicker")}
-              title={tProducts(`categories.${slug}.title`)}
-              code={cat.code}
-              lede={tProducts(`categories.${slug}.lede`)}
-            />
-            <ProductStack
-              title={tProducts("stack.controllers.title")}
-              subtitle={tProducts("stack.controllers.subtitle")}
-              products={controllers}
-              category={slug}
-              locale={typedLocale}
-              emptyLabel={emptyLabel}
-              headers={headers}
-            />
-            <ProductStack
-              title={tProducts("stack.meters.title")}
-              subtitle={tProducts("stack.meters.subtitle")}
-              products={meters}
-              category={slug}
-              locale={typedLocale}
-              emptyLabel={emptyLabel}
-              headers={headers}
-            />
-          </section>
-        );
-      })}
+      {featured && (
+        <Link href={featured.href} className="lt-products-list__featured">
+          {featured.image && (
+            <div className="lt-products-list__featured-media">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={featured.image} alt="" />
+            </div>
+          )}
+          <div className="lt-products-list__featured-body">
+            <span className="lt-products-list__featured-eyebrow">
+              {featured.eyebrow}
+            </span>
+            <h2 className="lt-products-list__featured-title">
+              {featured.title}
+            </h2>
+            <p className="lt-products-list__featured-blurb">{featured.blurb}</p>
+            <span className="lt-products-list__featured-cta">
+              {featured.cta} →
+            </span>
+          </div>
+        </Link>
+      )}
+
+      <ul className="lt-products-list__cats">
+        {CATEGORY_SLUGS.map((slug) => {
+          const cat = CATEGORIES[slug];
+          const count = counts.get(slug)!;
+          if (count === 0) return null;
+          const series = seriesByHref.get(`/products/${slug}`);
+          return (
+            <li key={slug}>
+              <Link
+                href={`/products/${slug}`}
+                className="lt-products-list__card"
+              >
+                <span className="lt-products-list__card-code">{cat.code}</span>
+                <h2 className="lt-products-list__card-title">
+                  {tProducts(`categories.${slug}.title`)}
+                </h2>
+                <p className="lt-products-list__card-lede">
+                  {tProducts(`categories.${slug}.lede`)}
+                </p>
+                {series?.range && (
+                  <span className="lt-products-list__card-range">
+                    {series.range}
+                  </span>
+                )}
+                <div className="lt-products-list__card-foot">
+                  <span className="lt-products-list__card-count">
+                    {tProducts("list.cardCount", { count })}
+                  </span>
+                  {series?.feat && (
+                    <span className="lt-products-list__card-feat">
+                      {series.feat}
+                    </span>
+                  )}
+                </div>
+              </Link>
+            </li>
+          );
+        })}
+        {accessories && (
+          <li key="accessories">
+            <Link
+              href="/products/accessories"
+              className="lt-products-list__card"
+            >
+              <h2 className="lt-products-list__card-title">
+                {accessories.label}
+              </h2>
+              <p className="lt-products-list__card-lede">{accessories.desc}</p>
+            </Link>
+          </li>
+        )}
+      </ul>
     </main>
   );
 }

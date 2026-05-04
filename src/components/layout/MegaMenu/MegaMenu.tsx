@@ -26,7 +26,7 @@ export function MegaMenu({ items, locale }: Props) {
       items.forEach((item) => {
         if (!item.menu) return;
         const button = document.querySelector(
-          `[aria-controls="pd-mega-${item.id}"]`,
+          `[data-navid="${item.id}"]`,
         ) as HTMLElement | null;
         const panel = document.getElementById(
           `pd-mega-${item.id}`,

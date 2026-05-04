@@ -25,33 +25,45 @@ export function HeaderNav({ items }: Props) {
 
         if (hasMenu) {
           return (
-            <button
+            <div
               key={item.id}
-              type="button"
               className={cls}
-              aria-haspopup="true"
-              aria-expanded={isOpen}
-              aria-controls={`pd-mega-${item.id}`}
+              data-navid={item.id}
               onMouseEnter={() => onItemEnter(item.id)}
-              onFocus={() => setOpenId(item.id)}
-              onClick={() => setOpenId(isOpen ? null : item.id)}
             >
-              {item.label}
-              <svg
-                width="10"
-                height="10"
-                viewBox="0 0 10 10"
-                fill="none"
-                aria-hidden="true"
+              <Link
+                href={item.href}
+                className="pd-top__navlabel"
+                onClick={() => setOpenId(null)}
               >
-                <path
-                  d="M2 4l3 3 3-3"
-                  stroke="currentColor"
-                  strokeWidth="1.4"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </button>
+                {item.label}
+              </Link>
+              <button
+                type="button"
+                className="pd-top__navchevron"
+                aria-haspopup="true"
+                aria-expanded={isOpen}
+                aria-controls={`pd-mega-${item.id}`}
+                aria-label={t("menuTrigger", { label: item.label })}
+                onFocus={() => setOpenId(item.id)}
+                onClick={() => setOpenId(isOpen ? null : item.id)}
+              >
+                <svg
+                  width="10"
+                  height="10"
+                  viewBox="0 0 10 10"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2 4l3 3 3-3"
+                    stroke="currentColor"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </button>
+            </div>
           );
         }
 
