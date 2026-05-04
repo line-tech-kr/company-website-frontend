@@ -50,6 +50,16 @@ export const product = defineType({
       type: "internationalizedArrayString",
     }),
     defineField({
+      name: "description",
+      title: "Description",
+      type: "object",
+      fields: [
+        defineField({ name: "en", type: "string" }),
+        defineField({ name: "ko", type: "string" }),
+        defineField({ name: "zh", type: "string" }),
+      ],
+    }),
+    defineField({
       name: "features",
       type: "array",
       of: [

@@ -35,6 +35,11 @@ export function ProductHero({
         </div>
         <h1 className="lt-pdp-hero__model">{product.model}</h1>
         <p className="lt-pdp-hero__name">{name}</p>
+        {product.description && (
+          <p className="lt-pdp-hero__desc">
+            {product.description[locale] ?? product.description.en}
+          </p>
+        )}
         <p className="lt-pdp-hero__tagline">{tagline}</p>
         <div className="lt-pdp-hero__ctas">
           <Button

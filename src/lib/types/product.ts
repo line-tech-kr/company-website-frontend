@@ -86,6 +86,10 @@ export const SanityProductSchema = z.object({
     en: z.string(),
     zh: z.string(),
   }),
+  description: z
+    .object({ ko: z.string(), en: z.string(), zh: z.string() })
+    .nullable()
+    .optional(),
   features: z.array(
     z.object({
       ko: z.string().optional(),

@@ -21,7 +21,7 @@ function fittingSummary(connections: Product["connections"]): string {
 
 export function ProductRow({ product, category, locale }: Props) {
   const href = `/products/${category}/${product.slug.current}`;
-  const label = product.productLabel[locale];
+  const label = product.description?.[locale] ?? product.productLabel[locale];
   const range = product.massFlowSpecs.flowRange.display;
   const accuracy = product.massFlowSpecs.accuracy.display;
   const response = product.massFlowSpecs.responseTime?.display ?? "—";
