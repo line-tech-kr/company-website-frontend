@@ -85,7 +85,7 @@
     },
     "table": {
       "model": "Model",
-      "description": "Description",
+      "description": "Features",
       "range": "Flow range",
       "accuracy": "Accuracy",
       "response": "Response",

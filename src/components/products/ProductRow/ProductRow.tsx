@@ -52,7 +52,7 @@ export function ProductRow({ product, category, locale }: Props) {
           <span className="lt-prod-row__tags">
             {visibleTags.map((t) => (
               <Chip
-                key={t.slug.current}
+                key={`${t.kind}:${t.slug.current}`}
                 small
                 tone={t.kind === "gas" ? "accent" : "neutral"}
               >

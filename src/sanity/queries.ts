@@ -14,9 +14,9 @@ const PRODUCT_PROJECTION = `
     "slug": slug,
     kind,
     "label": {
-      "ko": coalesce(label[language == "ko"][0].value, label[language == "en"][0].value),
-      "en": coalesce(label[language == "en"][0].value, label[language == "ko"][0].value),
-      "zh": coalesce(label[language == "zh"][0].value, label[language == "en"][0].value)
+      "ko": coalesce(label[language == "ko"][0].value, label[language == "en"][0].value, label[language == "zh"][0].value),
+      "en": coalesce(label[language == "en"][0].value, label[language == "ko"][0].value, label[language == "zh"][0].value),
+      "zh": coalesce(label[language == "zh"][0].value, label[language == "en"][0].value, label[language == "ko"][0].value)
     }
   }, []),
   features,

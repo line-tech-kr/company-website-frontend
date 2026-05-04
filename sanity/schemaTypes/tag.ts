@@ -23,6 +23,14 @@ export const tag = defineType({
           return en ?? "";
         },
         maxLength: 64,
+        isUnique: async (slug, context) => {
+          const { getClient, document } = context;
+          const client = getClient({ apiVersion: "2026-01-01" });
+          const id = document?._id?.replace(/^drafts\./, "");
+          const params = { slug, id: id ?? "" };
+          const query = `!defined(*[_type == "tag" && slug.current == $slug && !(_id in [$id, "drafts." + $id])][0]._id)`;
+          return client.fetch<boolean>(query, params);
+        },
       },
       validation: (r) => r.required(),
     }),

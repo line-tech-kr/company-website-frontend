@@ -85,7 +85,7 @@
     },
     "table": {
       "model": "모델",
-      "description": "설명",
+      "description": "특징",
       "range": "유량 범위",
       "accuracy": "정확도",
       "response": "응답",

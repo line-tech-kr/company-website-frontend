@@ -96,7 +96,6 @@ export const SanityProductSchema = z.object({
           en: z.string(),
           zh: z.string(),
         }),
-        _key: z.string().optional(),
       }),
     )
     .default([]),

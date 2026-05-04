@@ -2,6 +2,7 @@ import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { createClient } from "@sanity/client";
 import { categoryForSeries } from "../src/lib/categories";
 import type { Product } from "../src/lib/types/product";
+import { allProductsQuery } from "../src/sanity/queries";
 import type { SearchEntry } from "../src/lib/search/types";
 
 function loadEnv(path: string) {
@@ -320,16 +321,7 @@ async function fetchProducts(): Promise<Product[]> {
       apiVersion: "2026-01-01",
       useCdn: false,
     });
-    return client.fetch<Product[]>(`
-      *[_type == "product"] | order(series asc, function asc, model asc) {
-        model, slug, series, "function": function,
-        "productLabel": {
-          "ko": coalesce(productLabel[language == "ko"][0].value, productLabel[language == "en"][0].value),
-          "en": coalesce(productLabel[language == "en"][0].value, productLabel[language == "ko"][0].value),
-          "zh": coalesce(productLabel[language == "zh"][0].value, productLabel[language == "en"][0].value)
-        }
-      }
-    `);
+    return client.fetch<Product[]>(allProductsQuery);
   }
 
   console.log("  source: fixtures (no Sanity env vars)");
