@@ -269,6 +269,11 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               label: "인증서",
               desc: "13종 인증 문서",
             },
+            {
+              href: "/faq",
+              label: "자주 묻는 질문",
+              desc: "제품·주문·기술 관련 FAQ",
+            },
           ],
           featured: {
             eyebrow: "주목할 자료",
@@ -493,6 +498,11 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               label: "Certifications",
               desc: "13 certification documents",
             },
+            {
+              href: "/faq",
+              label: "FAQ",
+              desc: "Product, ordering & technical questions",
+            },
           ],
           featured: {
             eyebrow: "Spotlight",
@@ -706,6 +716,11 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               href: "/resources/certifications",
               label: "认证文件",
               desc: "13 份认证文件",
+            },
+            {
+              href: "/faq",
+              label: "常见问题",
+              desc: "产品、订购及技术常见问题",
             },
           ],
           featured: {

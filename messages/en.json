@@ -56,7 +56,8 @@
   "products": {
     "list": {
       "title": "Product catalog",
-      "intro": "Mass Flow Controllers and Mass Flow Meters across analogue, digital, and specialized series. {count} models engineered for laboratory, industrial, and process applications."
+      "intro": "Mass Flow Controllers and Mass Flow Meters across analogue, digital, and specialized series. {count} models engineered for laboratory, industrial, and process applications.",
+      "cardCount": "{count} models"
     },
     "kicker": "Product series",
     "categories": {
