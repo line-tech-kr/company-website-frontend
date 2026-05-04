@@ -26,6 +26,8 @@ type Props = {
   accuracyLabel: string;
   highlightLabel: string;
   slidesLabel: string;
+  slidesAriaLabel: string;
+  slideAriaLabels: string[];
 };
 
 const INTERVAL_MS = 4500;
@@ -40,6 +42,8 @@ export function CategoryShowcase({
   accuracyLabel,
   highlightLabel,
   slidesLabel,
+  slidesAriaLabel,
+  slideAriaLabels,
 }: Props) {
   const [active, setActive] = useState(0);
   const isPaused = useRef(false);
@@ -58,6 +62,9 @@ export function CategoryShowcase({
   return (
     <div
       className="lt-showcase"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label={slidesAriaLabel}
       onMouseEnter={() => (isPaused.current = true)}
       onMouseLeave={() => (isPaused.current = false)}
     >
@@ -129,19 +136,15 @@ export function CategoryShowcase({
           </div>
         ))}
 
-        <div
-          className="lt-showcase__nav"
-          role="tablist"
-          aria-label="Featured product slides"
-        >
+        <div className="lt-showcase__nav">
           <span className="lt-showcase__nav-label">{slidesLabel}</span>
           <span className="lt-showcase__nav-spacer" />
           {Array.from({ length: len }, (_, i) => (
             <button
               key={i}
-              role="tab"
-              aria-selected={i === active}
-              aria-label={`Slide ${i + 1}`}
+              type="button"
+              aria-current={i === active ? "true" : undefined}
+              aria-label={slideAriaLabels[i]}
               className="lt-showcase__tick"
               data-active={String(i === active)}
               onClick={() => selectSlide(i)}

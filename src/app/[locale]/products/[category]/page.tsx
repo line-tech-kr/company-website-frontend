@@ -13,6 +13,7 @@ import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
 import { SanityProductSchema } from "@/lib/types/product";
 import { CategoryShowcaseSchema } from "@/lib/types/showcase";
+import { resolveProductImage } from "@/lib/productImages";
 import { z } from "zod";
 import { buildCategoryMetadata, siteUrl } from "@/lib/seo";
 import { safeJsonLd } from "@/lib/seo/jsonLd";
@@ -59,7 +60,7 @@ export default async function CategoryPage({ params }: Props) {
     function: e.function,
     flowRange: e.flowRange,
     accuracy: e.accuracy,
-    image: `/products/${e.slug}/product-1.jpg`,
+    image: resolveProductImage(e.slug),
     href: `/${locale}/products/${category}/${e.slug}`,
   }));
 
@@ -140,6 +141,10 @@ export default async function CategoryPage({ params }: Props) {
             accuracyLabel={tProducts("table.accuracy")}
             highlightLabel={tProducts("showcase.highlightLabel")}
             slidesLabel={tProducts("showcase.slidesLabel")}
+            slidesAriaLabel={tProducts("showcase.slidesAriaLabel")}
+            slideAriaLabels={showcaseProducts.map((_, i) =>
+              tProducts("showcase.slideAriaLabel", { n: i + 1 }),
+            )}
           />
         )}
         <ProductStack

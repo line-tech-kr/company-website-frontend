@@ -97,7 +97,9 @@
       "modelLabel": "모델",
       "functionLabel": "유형",
       "highlightLabel": "특징",
-      "slidesLabel": "슬라이드"
+      "slidesLabel": "슬라이드",
+      "slidesAriaLabel": "대표 제품 슬라이드",
+      "slideAriaLabel": "슬라이드 {n}"
     }
   },
   "pdp": {
