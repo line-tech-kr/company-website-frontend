@@ -1,0 +1,300 @@
+/* Line Tech — /resources sub-pages (.dr-* namespace) */
+
+.dr-sub {
+  padding-block: 1.5rem 4rem;
+}
+
+/* ── Hero ──────────────────────────────────────────────────────────────── */
+
+.dr-sub__hero {
+  padding: 2rem 0 2.5rem;
+  border-bottom: 1px solid var(--pd-rule);
+  margin-bottom: 2.5rem;
+}
+
+.dr-sub__title {
+  margin: 0 0 0.75rem;
+  font: 500 var(--lt-fs-h2-dense) / 1.1 var(--lt-sans);
+  letter-spacing: -0.02em;
+  color: var(--pd-fg-strong);
+}
+
+.dr-sub__intro {
+  margin: 0;
+  max-width: 60ch;
+  font-size: var(--lt-fs-md);
+  color: var(--pd-muted);
+  line-height: 1.55;
+}
+
+/* ── Download list (catalogues & manuals) ─────────────────────────────── */
+
+.dr-list {
+  list-style: none;
+  margin: 0 0 2.5rem;
+  padding: 0;
+  border-top: 1px solid var(--pd-border-strong);
+}
+
+.dr-list__group-heading {
+  margin: 2rem 0 0;
+  padding: 0.5rem 0;
+  font: 600 var(--lt-fs-sm) var(--lt-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pd-primary);
+  border-bottom: 1px solid var(--pd-rule);
+}
+
+:lang(ko) .dr-list__group-heading,
+:lang(zh) .dr-list__group-heading {
+  font-family: var(--lt-sans);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.dr-list__row {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.125rem 0.5rem;
+  border-bottom: 1px solid var(--pd-rule);
+}
+
+.dr-list__row:hover {
+  background: var(--lt-neutral-50);
+}
+
+.dr-list__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 22px;
+  padding: 0 6px;
+  font: 500 var(--lt-fs-micro) / 1 var(--lt-mono);
+  letter-spacing: 0.04em;
+  border: 1px solid var(--pd-border-strong);
+  border-radius: 3px;
+  background: var(--pd-surface);
+  color: var(--pd-fg);
+  text-transform: uppercase;
+}
+
+.dr-list__badge--pdf {
+  color: var(--lt-danger);
+  border-color: rgba(161, 43, 43, 0.3);
+}
+
+.dr-list__badge--dwg {
+  color: var(--lt-info);
+  border-color: rgba(27, 108, 173, 0.3);
+}
+
+.dr-list__badge--stp {
+  color: var(--pd-muted);
+}
+
+.dr-list__label {
+  font: 500 var(--lt-fs-md) var(--lt-sans);
+  color: var(--pd-fg-strong);
+  margin-bottom: 3px;
+}
+
+.dr-list__meta {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  font: 400 var(--lt-fs-xs) var(--lt-mono);
+  color: var(--pd-muted);
+  letter-spacing: 0.02em;
+}
+
+.dr-list__sep {
+  opacity: 0.5;
+}
+
+.dr-list__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font: 500 var(--lt-fs-sm) var(--lt-sans);
+  border: 1px solid var(--pd-border-strong);
+  border-radius: 4px;
+  background: var(--pd-surface);
+  color: var(--pd-fg-strong);
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    border-color 120ms ease,
+    background 120ms ease;
+}
+
+.dr-list__btn:hover {
+  border-color: var(--pd-primary);
+  color: var(--pd-primary);
+  background: var(--pd-surface-2);
+}
+
+.dr-list__btn--disabled {
+  color: var(--pd-muted);
+  cursor: default;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* ── Drawings table ───────────────────────────────────────────────────── */
+
+.dr-drawings {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2.5rem;
+  font-size: var(--lt-fs-sm);
+}
+
+.dr-drawings thead th {
+  padding: 0.75rem 0.75rem 0.75rem 0;
+  font: 600 var(--lt-fs-xs) var(--lt-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pd-primary);
+  text-align: left;
+  border-bottom: 2px solid var(--pd-border-strong);
+}
+
+:lang(ko) .dr-drawings thead th,
+:lang(zh) .dr-drawings thead th {
+  font-family: var(--lt-sans);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.dr-drawings tbody tr {
+  border-bottom: 1px solid var(--pd-rule);
+  transition: background 120ms ease;
+}
+
+.dr-drawings tbody tr:hover {
+  background: var(--lt-neutral-50);
+}
+
+.dr-drawings td {
+  padding: 0.875rem 0.75rem 0.875rem 0;
+  color: var(--pd-fg-strong);
+  vertical-align: middle;
+}
+
+.dr-drawings__model {
+  font: 600 var(--lt-fs-sm) var(--lt-mono);
+  letter-spacing: 0.02em;
+}
+
+.dr-drawings__series {
+  font-size: var(--lt-fs-xs);
+  color: var(--pd-muted);
+}
+
+.dr-drawings__files {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.dr-drawings__actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  .dr-drawings {
+    display: block;
+  }
+  .dr-drawings thead {
+    display: none;
+  }
+  .dr-drawings tbody,
+  .dr-drawings tr,
+  .dr-drawings td {
+    display: block;
+  }
+  .dr-drawings tr {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--pd-rule);
+  }
+  .dr-drawings td {
+    padding: 0.25rem 0;
+  }
+}
+
+/* ── Certifications grid ──────────────────────────────────────────────── */
+
+.dr-certs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  list-style: none;
+  margin: 0 0 2.5rem;
+  padding: 0;
+}
+
+.dr-cert {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem 1.75rem;
+  border: 1px solid var(--pd-rule);
+  border-top: 3px solid var(--pd-primary);
+  border-radius: 4px;
+  background: var(--pd-surface);
+}
+
+.dr-cert__name {
+  margin: 0;
+  font: 700 var(--lt-fs-md) / 1.2 var(--lt-sans);
+  letter-spacing: -0.01em;
+  color: var(--pd-fg-strong);
+}
+
+.dr-cert__dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.25rem 0.75rem;
+  margin: 0;
+  font-size: var(--lt-fs-sm);
+}
+
+.dr-cert__dt {
+  font: 600 var(--lt-fs-xs) var(--lt-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pd-muted);
+  padding-top: 1px;
+}
+
+:lang(ko) .dr-cert__dt,
+:lang(zh) .dr-cert__dt {
+  font-family: var(--lt-sans);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.dr-cert__dd {
+  margin: 0;
+  color: var(--pd-fg-strong);
+  line-height: 1.5;
+}
+
+.dr-cert__footer {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--pd-rule);
+}
+
+@media (max-width: 560px) {
+  .dr-certs {
+    grid-template-columns: 1fr;
+  }
+}

@@ -3,7 +3,8 @@
     "products": "Products",
     "company": "Company",
     "applications": "Applications",
-    "faq": "Frequently asked questions"
+    "faq": "Frequently asked questions",
+    "dataRoom": "Data Room"
   },
   "common": {
     "home": "Home"
@@ -158,6 +159,64 @@
         "tbd": "TBD"
       }
     }
+  },
+  "resources": {
+    "hub": {
+      "title": "Data Room",
+      "intro": "Download Line Tech catalogues, CAD drawings, user manuals, and certification documents."
+    },
+    "cards": {
+      "catalogues": {
+        "title": "Catalogues",
+        "desc": "Series-level PDF brochures"
+      },
+      "drawings": {
+        "title": "CAD Drawings",
+        "desc": "AutoCAD (.dwg) and STEP (.stp) files"
+      },
+      "manuals": { "title": "Manuals", "desc": "Per-model user guides" },
+      "certifications": {
+        "title": "Certifications",
+        "desc": "Quality and conformity documents"
+      }
+    },
+    "catalogues": {
+      "title": "Catalogues",
+      "intro": "Series-level product brochures in PDF format."
+    },
+    "drawings": {
+      "title": "CAD Drawings",
+      "intro": "Outline drawings for each model in AutoCAD (.dwg) and STEP (.stp) formats."
+    },
+    "manuals": {
+      "title": "Manuals",
+      "intro": "User guides and installation manuals for each product model."
+    },
+    "certifications": {
+      "title": "Certifications",
+      "intro": "Quality management and product conformity certificates held by Line Tech."
+    },
+    "download": "Download",
+    "done": "Done",
+    "comingSoon": "File coming soon",
+    "seriesLabel": {
+      "all": "All series",
+      "analogue": "Analogue",
+      "digital": "Digital",
+      "specialized": "Specialized"
+    },
+    "drawingsTable": {
+      "model": "Model",
+      "series": "Series",
+      "files": "Files"
+    },
+    "certCard": {
+      "issuer": "Issuing body",
+      "scope": "Scope",
+      "validThrough": "Valid through",
+      "ongoing": "Ongoing"
+    },
+    "empty": "No files available yet. Check back soon."
   },
   "skipLink": {
     "main": "Skip to main content"
