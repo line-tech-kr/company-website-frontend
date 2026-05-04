@@ -16,7 +16,7 @@ import {
   DownloadsList,
   type DownloadItem,
 } from "@/components/products/DownloadsList";
-import { sanityClient } from "@/sanity/client";
+import { sanityClient, sanityBuildClient } from "@/sanity/client";
 import { fetchSanity } from "@/sanity/fetch";
 import { productBySlugQuery, productSlugsQuery } from "@/sanity/queries";
 import {
@@ -80,7 +80,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export async function generateStaticParams() {
   const products = await fetchSanity(
-    () => sanityClient.fetch<Array<{ slug: string; series: Product["series"] }>>(productSlugsQuery),
+    () => sanityBuildClient.fetch<Array<{ slug: string; series: Product["series"] }>>(productSlugsQuery),
     { name: "productSlugsForStaticParams" },
   );
   return routing.locales.flatMap((locale) =>

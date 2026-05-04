@@ -1,4 +1,4 @@
-import { sanityClient } from "@/sanity/client";
+import { sanityClient, sanityBuildClient } from "@/sanity/client";
 import { fetchSanity } from "@/sanity/fetch";
 import { productBySlugQuery, productSlugsQuery } from "@/sanity/queries";
 import { SanityProductSchema } from "@/lib/types/product";
@@ -11,7 +11,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://line-tech.co";
 
 export async function generateStaticParams() {
   const products = await fetchSanity(
-    () => sanityClient.fetch<Array<{ slug: string; series: string }>>(productSlugsQuery),
+    () => sanityBuildClient.fetch<Array<{ slug: string; series: string }>>(productSlugsQuery),
     { name: "productSlugsForSpecMd" },
   );
   return products.map((p) => ({ slug: p.slug }));
