@@ -6,15 +6,12 @@ type GlyphName =
   | "copy"
   | "external"
   | "globe"
-  | "plus"
   | "chevron-down"
   | "chevron-right"
   | "phone"
   | "search"
-  | "play"
   | "file"
-  | "menu"
-  | "dot";
+  | "menu";
 
 type Props = { name: GlyphName; size?: number; stroke?: number };
 
@@ -76,12 +73,6 @@ export function Glyph({ name, size = 14, stroke = 1.5 }: Props) {
           <path d="M4 12h16M12 4c2.5 3 2.5 13 0 16M12 4c-2.5 3-2.5 13 0 16" />
         </svg>
       );
-    case "plus":
-      return (
-        <svg {...common}>
-          <path d="M12 5v14M5 12h14" />
-        </svg>
-      );
     case "chevron-down":
       return (
         <svg {...common}>
@@ -107,12 +98,6 @@ export function Glyph({ name, size = 14, stroke = 1.5 }: Props) {
           <path d="M20 20l-4-4" />
         </svg>
       );
-    case "play":
-      return (
-        <svg {...common}>
-          <path d="M6 4l14 8-14 8z" fill="currentColor" stroke="none" />
-        </svg>
-      );
     case "file":
       return (
         <svg {...common}>
@@ -124,12 +109,6 @@ export function Glyph({ name, size = 14, stroke = 1.5 }: Props) {
       return (
         <svg {...common}>
           <path d="M4 7h16M4 12h16M4 17h16" />
-        </svg>
-      );
-    case "dot":
-      return (
-        <svg {...common}>
-          <circle cx="12" cy="12" r="3" fill="currentColor" stroke="none" />
         </svg>
       );
   }
