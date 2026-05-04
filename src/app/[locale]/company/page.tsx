@@ -10,6 +10,25 @@ import {
 import type { Locale } from "@/lib/content/home";
 import { buildCompanyMetadata } from "@/lib/seo";
 
+function MapPinIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="13"
+      height="13"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
+  );
+}
+
 type Props = { params: Promise<{ locale: Locale }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -61,11 +80,14 @@ function Greeting({ c }: { c: CompanyContent }) {
         </div>
         <aside
           className="co-greeting__facts"
-          aria-label={c.greeting.factsHeading}
+          aria-labelledby="co-greeting-facts-heading"
         >
-          <div className="co-greeting__factsHeading">
+          <h2
+            id="co-greeting-facts-heading"
+            className="co-greeting__factsHeading"
+          >
             {c.greeting.factsHeading}
-          </div>
+          </h2>
           <dl className="co-greeting__factList">
             {c.greeting.facts.map((fact) => (
               <div key={fact.k} className="co-greeting__fact">
@@ -172,7 +194,25 @@ function OfficeCard({ office, labels }: OfficeCardProps) {
       <h3 className="co-office__name">{office.name}</h3>
       <dl className="co-office__rows">
         <dt className="co-office__label">{labels.address}</dt>
-        <dd className="co-office__value">{office.address}</dd>
+        <dd className="co-office__value">
+          {office.address}
+          {office.mapLinks && (
+            <div className="co-office__maplinks">
+              {office.mapLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="co-office__maplink"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <MapPinIcon />
+                  <span>{link.label}</span>
+                </a>
+              ))}
+            </div>
+          )}
+        </dd>
         {office.phone && (
           <>
             <dt className="co-office__label">{labels.phone}</dt>

@@ -38,9 +38,14 @@
   color: var(--pd-primary);
 }
 .lt-prod-row__label {
-  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   color: var(--pd-fg-strong);
-  font-weight: 500;
+  font-weight: 400;
+  font-size: var(--lt-fs-sm);
+  line-height: 1.45;
 }
 .lt-prod-row__cell--range,
 .lt-prod-row__cell--acc,
@@ -63,6 +68,11 @@
 }
 @media (max-width: 640px) {
   .lt-prod-row__cell--thumb {
+    display: none;
+  }
+}
+@media (max-width: 500px) {
+  .lt-prod-row__cell--acc {
     display: none;
   }
 }

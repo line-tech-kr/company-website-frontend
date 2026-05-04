@@ -19,7 +19,7 @@
   letter-spacing: -0.01em;
   color: var(--pd-fg-strong);
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 10px;
 }
 .lt-prod-stack__count {
@@ -106,6 +106,14 @@
     grid-template-columns: 88px 2fr 3fr 2fr;
   }
   .lt-prod-stack__head-cell--thumb {
+    display: none;
+  }
+}
+@media (max-width: 500px) {
+  .lt-prod-stack__table {
+    grid-template-columns: 72px 1fr 2fr;
+  }
+  .lt-prod-stack__head-cell--acc {
     display: none;
   }
 }

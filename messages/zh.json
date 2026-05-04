@@ -1,7 +1,9 @@
 {
   "nav": {
     "products": "产品",
-    "company": "公司介绍"
+    "company": "公司介绍",
+    "applications": "应用领域",
+    "faq": "常见问题"
   },
   "common": {
     "home": "首页"
@@ -60,7 +62,7 @@
     "categories": {
       "analogue": {
         "title": "模拟系列",
-        "lede": "经过验证的模拟质量流量控制器和测量仪。M / MS 系列 — 二十年工艺线的中流砥柱。"
+        "lede": "经过验证的模拟质量流量控制器和测量仪。"
       },
       "digital": {
         "title": "数字系列",
@@ -73,12 +75,12 @@
     },
     "stack": {
       "controllers": {
-        "title": "Controllers",
-        "subtitle": "质量流量控制器 · MFC"
+        "title": "质量流量控制器 · MFC",
+        "subtitle": "Controllers"
       },
       "meters": {
-        "title": "Meters",
-        "subtitle": "质量流量测量仪 · MFM"
+        "title": "质量流量测量仪 · MFM",
+        "subtitle": "Meters"
       }
     },
     "table": {

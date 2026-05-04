@@ -4,6 +4,8 @@ import { headers } from "next/headers";
 import { contactFormSchema } from "./schema";
 import { checkContactRateLimit } from "./rate-limit";
 import { verifyTurnstile } from "./captcha";
+import { persistContactSubmission } from "./persist";
+import { sendContactEmail } from "./email";
 
 export type ContactFormState = {
   status: "idle" | "success" | "error";
@@ -51,23 +53,18 @@ export async function submitContact(
     return { status: "error", errorKey: "captcha" };
   }
 
-  // Persisting the submission is out of scope for this scaffold — wire to
-  // Resend/SendGrid/route handler/Sanity-as-store here. We log a redacted
-  // record so submissions are auditable in Vercel logs while we don't yet
-  // have a transport.
+  // Persist to Sanity first (best-effort — a write failure doesn't block the email).
   try {
-    const { name: _name, email: _email, ...redacted } = parsed.data;
-    console.log("contact_submission", {
-      ts: Date.now(),
-      ip,
-      inquiryType: parsed.data.inquiryType,
-      hasCompany: Boolean(parsed.data.company),
-      hasPhone: Boolean(parsed.data.phone),
-      messageLength: parsed.data.message.length,
-      _redacted: Object.keys(redacted),
-    });
+    await persistContactSubmission(parsed.data, ip);
   } catch (err) {
-    console.error("contact_submission_log_failed", err);
+    console.error("contact_submission_persist_failed", err);
+  }
+
+  // Send email — primary channel. Failure surfaces an error to the user.
+  try {
+    await sendContactEmail(parsed.data);
+  } catch (err) {
+    console.error("contact_submission_email_failed", err);
     return { status: "error", errorKey: "server" };
   }
 

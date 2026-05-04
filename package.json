@@ -38,6 +38,7 @@
     "next-sanity": "^12.3.0",
     "react": "19.2.5",
     "react-dom": "19.2.5",
+    "resend": "^6.12.2",
     "sanity": "^5.23.0",
     "sanity-plugin-internationalized-array": "^5.1.0",
     "zod": "^3.23.8"

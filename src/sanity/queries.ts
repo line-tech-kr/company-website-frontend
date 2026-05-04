@@ -10,6 +10,7 @@ const PRODUCT_PROJECTION = `
     "en": coalesce(productLabel[language == "en"][0].value, productLabel[language == "ko"][0].value),
     "zh": coalesce(productLabel[language == "zh"][0].value, productLabel[language == "en"][0].value)
   },
+  description,
   features,
   connections,
   massFlowSpecs,

@@ -22,9 +22,6 @@
 .ho-series__card:hover {
   background: var(--pd-surface-2);
 }
-.ho-series__card.is-highlight {
-  background: color-mix(in oklab, var(--pd-primary) 5%, var(--pd-surface));
-}
 .ho-series__top {
   display: flex;
   align-items: center;

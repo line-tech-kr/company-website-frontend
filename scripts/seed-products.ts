@@ -48,6 +48,7 @@ function productToSeedFields(p: Product) {
     series: p.series,
     function: p.function,
     productLabel: localizedToArray(p.productLabel),
+    ...(p.description ? { description: p.description } : {}),
     features: p.features.map((f, i) => ({ ...f, _key: `feature-${i}` })),
     connections: p.connections.map((c, i) => ({ ...c, _key: `conn-${i}` })),
     massFlowSpecs: p.massFlowSpecs,

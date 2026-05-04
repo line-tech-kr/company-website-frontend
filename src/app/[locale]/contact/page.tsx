@@ -107,7 +107,6 @@ export default async function ContactPage({ params, searchParams }: Props) {
             <h2 id="ct-form-heading" className="ct-form__heading">
               {form.heading}
             </h2>
-            <p className="ct-form__notice">{form.notice}</p>
 
             <ContactForm
               form={form}

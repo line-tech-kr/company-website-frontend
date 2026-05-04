@@ -1,7 +1,9 @@
 {
   "nav": {
     "products": "Products",
-    "company": "Company"
+    "company": "Company",
+    "applications": "Applications",
+    "faq": "Frequently asked questions"
   },
   "common": {
     "home": "Home"
@@ -60,7 +62,7 @@
     "categories": {
       "analogue": {
         "title": "Analogue series",
-        "lede": "Proven analogue mass flow controllers and meters. M and MS series — the workhorses behind two decades of process lines."
+        "lede": "Proven analogue mass flow controllers and meters."
       },
       "digital": {
         "title": "Digital series",
@@ -73,12 +75,12 @@
     },
     "stack": {
       "controllers": {
-        "title": "Controllers",
-        "subtitle": "Mass Flow Controllers · MFC"
+        "title": "Mass Flow Controllers · MFC",
+        "subtitle": "Controllers"
       },
       "meters": {
-        "title": "Meters",
-        "subtitle": "Mass Flow Meters · MFM"
+        "title": "Mass Flow Meters · MFM",
+        "subtitle": "Meters"
       }
     },
     "table": {

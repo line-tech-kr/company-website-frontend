@@ -74,6 +74,11 @@ export type ShellFooter = {
     name: string;
     address: string;
   };
+  /** Optional quick-links column (FAQ, Applications, etc.) */
+  links?: {
+    heading: string;
+    items: Array<{ href: string; label: string }>;
+  };
   rights: string;
 };
 
@@ -189,6 +194,54 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         },
       },
       {
+        id: "applications",
+        href: "/applications",
+        label: "응용 분야",
+        menu: {
+          kind: "resources",
+          heading: "응용 분야",
+          links: [
+            {
+              href: "/applications/semiconductor",
+              label: "반도체",
+              desc: "CVD · 식각 · 도펀트 공정",
+            },
+            {
+              href: "/applications/fuel-cells",
+              label: "연료전지",
+              desc: "H₂ · O₂ 공급 제어",
+            },
+            {
+              href: "/applications/biotech-pharmaceutical",
+              label: "바이오텍 · 제약",
+              desc: "바이오리액터 · 분석 가스",
+            },
+            {
+              href: "/applications/chemical-petrochemical",
+              label: "화학 · 석유화학",
+              desc: "고압 반응기 · 방폭 환경",
+            },
+            {
+              href: "/applications/research-development",
+              label: "연구 · 개발",
+              desc: "실험실 · 파일럿 플랜트",
+            },
+            {
+              href: "/applications",
+              label: "전체 응용 분야 보기",
+              desc: "12개 산업 분야",
+            },
+          ],
+          featured: {
+            eyebrow: "주요 응용",
+            title: "반도체 공정",
+            blurb: "CVD·식각 가스 제어를 위한 라인테크 MFC 적용 사례.",
+            href: "/applications/semiconductor",
+            cta: "자세히 보기",
+          },
+        },
+      },
+      {
         id: "resources",
         href: "/resources",
         label: "자료실",
@@ -292,6 +345,14 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         ceo: "대표자 배정이",
         registration: "사업자등록번호 314-86-55562",
       },
+      links: {
+        heading: "빠른 링크",
+        items: [
+          { href: "/applications", label: "응용 분야" },
+          { href: "/faq", label: "자주 묻는 질문" },
+          { href: "/contact", label: "문의" },
+        ],
+      },
       rights: "© 2026 주식회사 라인텍. All rights reserved.",
     },
   },
@@ -353,6 +414,54 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               "Digital piezo-actuated MFC for semiconductor and display process lines.",
             href: "/products/analogue/m3030va",
             cta: "View product",
+          },
+        },
+      },
+      {
+        id: "applications",
+        href: "/applications",
+        label: "Applications",
+        menu: {
+          kind: "resources",
+          heading: "Applications",
+          links: [
+            {
+              href: "/applications/semiconductor",
+              label: "Semiconductor",
+              desc: "CVD · etch · dopant gas delivery",
+            },
+            {
+              href: "/applications/fuel-cells",
+              label: "Fuel cells",
+              desc: "H₂ · O₂ flow control",
+            },
+            {
+              href: "/applications/biotech-pharmaceutical",
+              label: "Biotech & pharma",
+              desc: "Bioreactors · analytical gas",
+            },
+            {
+              href: "/applications/chemical-petrochemical",
+              label: "Chemical & petrochemical",
+              desc: "High-pressure reactors · ATEX",
+            },
+            {
+              href: "/applications/research-development",
+              label: "Research & development",
+              desc: "Lab · pilot plant",
+            },
+            {
+              href: "/applications",
+              label: "All applications",
+              desc: "12 industries covered",
+            },
+          ],
+          featured: {
+            eyebrow: "Key application",
+            title: "Semiconductor processing",
+            blurb: "How Line Tech MFCs are used in CVD and etch gas delivery.",
+            href: "/applications/semiconductor",
+            cta: "Learn more",
           },
         },
       },
@@ -456,6 +565,14 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         fax: "+82 42-638-2211",
         email: "linetech@line-tech.co.kr",
       },
+      links: {
+        heading: "Quick links",
+        items: [
+          { href: "/applications", label: "Applications" },
+          { href: "/faq", label: "Frequently asked questions" },
+          { href: "/contact", label: "Contact" },
+        ],
+      },
       rights: "© 2026 Line Tech Inc. All rights reserved.",
     },
   },
@@ -511,6 +628,54 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             blurb: "用于半导体与显示工艺的数字压电式质量流量控制器。",
             href: "/products/analogue/m3030va",
             cta: "查看详情",
+          },
+        },
+      },
+      {
+        id: "applications",
+        href: "/applications",
+        label: "应用领域",
+        menu: {
+          kind: "resources",
+          heading: "应用领域",
+          links: [
+            {
+              href: "/applications/semiconductor",
+              label: "半导体",
+              desc: "CVD · 刻蚀 · 掺杂气体输送",
+            },
+            {
+              href: "/applications/fuel-cells",
+              label: "燃料电池",
+              desc: "H₂ · O₂ 流量控制",
+            },
+            {
+              href: "/applications/biotech-pharmaceutical",
+              label: "生物技术与制药",
+              desc: "生物反应器 · 分析气体",
+            },
+            {
+              href: "/applications/chemical-petrochemical",
+              label: "化工与石油化工",
+              desc: "高压反应器 · 防爆环境",
+            },
+            {
+              href: "/applications/research-development",
+              label: "研究与开发",
+              desc: "实验室 · 中试工厂",
+            },
+            {
+              href: "/applications",
+              label: "查看全部应用领域",
+              desc: "覆盖 12 个行业",
+            },
+          ],
+          featured: {
+            eyebrow: "重点应用",
+            title: "半导体工艺",
+            blurb: "莱因 MFC 在 CVD 与刻蚀气体输送中的应用。",
+            href: "/applications/semiconductor",
+            cta: "了解更多",
           },
         },
       },
@@ -617,6 +782,14 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         heading: "中国子公司",
         name: "莱因精密技术（无锡）有限公司",
         address: "江苏省无锡市锡山区锡沪东荟智企业中心 6 号楼 117 号",
+      },
+      links: {
+        heading: "快速链接",
+        items: [
+          { href: "/applications", label: "应用领域" },
+          { href: "/faq", label: "常见问题" },
+          { href: "/contact", label: "联系" },
+        ],
       },
       rights: "© 2026 株式会社莱因。保留所有权利。",
     },

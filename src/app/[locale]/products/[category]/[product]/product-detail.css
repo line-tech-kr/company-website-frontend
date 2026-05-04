@@ -1,0 +1,56 @@
+/* Line Tech — product detail page extras */
+
+.pd-related-apps {
+  padding: 40px 0 56px;
+  border-top: 1px solid var(--pd-rule);
+  margin-top: 8px;
+}
+
+.pd-related-apps__heading {
+  margin: 0 0 20px;
+  font: 600 var(--lt-fs-sm) var(--lt-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pd-primary);
+}
+:lang(ko) .pd-related-apps__heading,
+:lang(zh) .pd-related-apps__heading {
+  font-family: var(--lt-sans);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.pd-related-apps__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pd-related-apps__link {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 20px;
+  border: 1px solid var(--pd-rule);
+  border-radius: 4px;
+  background: var(--pd-surface);
+  text-decoration: none;
+  transition:
+    border-color 120ms ease,
+    background 120ms ease;
+}
+.pd-related-apps__link:hover {
+  border-color: var(--pd-primary);
+  background: var(--pd-surface-2);
+}
+.pd-related-apps__title {
+  font: 500 var(--lt-fs-sm)/1.3 var(--lt-sans);
+  color: var(--pd-fg-strong);
+}
+.pd-related-apps__lede {
+  font: 400 var(--lt-fs-xs)/1.5 var(--lt-sans);
+  color: var(--pd-muted);
+}

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { Link } from "@/i18n/navigation";
 import { getProductsCategories } from "@/lib/content/shell";
 import type {
@@ -16,16 +17,39 @@ type Props = { items: ShellNavItem[]; locale: Locale };
 
 export function MegaMenu({ items, locale }: Props) {
   const { openId, onItemEnter, onItemLeave } = useHeaderNav();
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // Cursor entering the panel cancels the close-grace timer that fired when
-  // the cursor left the nav row. `onItemEnter(openId)` is a no-op state-wise
-  // but clears the timer (see HeaderShell ctx).
+  useEffect(() => {
+    const position = () => {
+      if (!containerRef.current) return;
+      const containerRect = containerRef.current.getBoundingClientRect();
+      items.forEach((item) => {
+        if (!item.menu) return;
+        const button = document.querySelector(
+          `[aria-controls="pd-mega-${item.id}"]`,
+        ) as HTMLElement | null;
+        const panel = document.getElementById(
+          `pd-mega-${item.id}`,
+        ) as HTMLElement | null;
+        if (!button || !panel) return;
+        const buttonLeft =
+          button.getBoundingClientRect().left - containerRect.left;
+        const maxLeft = containerRect.width - panel.offsetWidth - 16;
+        panel.style.left = `${Math.min(buttonLeft, maxLeft)}px`;
+      });
+    };
+    position();
+    window.addEventListener("resize", position);
+    return () => window.removeEventListener("resize", position);
+  }, [items]);
+
   const handleEnter = () => {
     if (openId) onItemEnter(openId);
   };
 
   return (
     <div
+      ref={containerRef}
       className="pd-mega"
       onMouseEnter={handleEnter}
       onMouseLeave={onItemLeave}
