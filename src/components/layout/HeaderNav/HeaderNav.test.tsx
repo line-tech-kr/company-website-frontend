@@ -94,6 +94,16 @@ describe("HeaderNav", () => {
     expect(onItemLeave).toHaveBeenCalled();
   });
 
+  it("clicking the label of an open menu item closes the panel", () => {
+    const setOpenId = vi.fn();
+    const { container } = renderNav(stubCtx({ openId: "products", setOpenId }));
+    const link = container.querySelector(
+      'a[href="/products"]',
+    ) as HTMLAnchorElement;
+    fireEvent.click(link);
+    expect(setOpenId).toHaveBeenCalledWith(null);
+  });
+
   it("hovering a menu item schedules the open via onItemEnter", () => {
     const onItemEnter = vi.fn();
     const { container } = renderNav(stubCtx({ onItemEnter }));

@@ -51,6 +51,8 @@ export type ShellFeaturedCard = {
   blurb: string;
   href: string;
   cta: string;
+  /** Optional image path (currently used by the products list spotlight). */
+  image?: string;
 };
 
 export type ShellFooter = {
@@ -190,6 +192,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             blurb: "반도체·디스플레이 공정을 위한 디지털 압전식 MFC.",
             href: "/products/analogue/m3030va",
             cta: "상세 보기",
+            image: "/products/m3030va/product-1.jpg",
           },
         },
       },
@@ -419,6 +422,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               "Digital piezo-actuated MFC for semiconductor and display process lines.",
             href: "/products/analogue/m3030va",
             cta: "View product",
+            image: "/products/m3030va/product-1.jpg",
           },
         },
       },
@@ -638,6 +642,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             blurb: "用于半导体与显示工艺的数字压电式质量流量控制器。",
             href: "/products/analogue/m3030va",
             cta: "查看详情",
+            image: "/products/m3030va/product-1.jpg",
           },
         },
       },

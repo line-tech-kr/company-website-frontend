@@ -44,7 +44,7 @@ export function HeaderNav({ items }: Props) {
                 aria-haspopup="true"
                 aria-expanded={isOpen}
                 aria-controls={`pd-mega-${item.id}`}
-                aria-label={item.label}
+                aria-label={t("menuTrigger", { label: item.label })}
                 onFocus={() => setOpenId(item.id)}
                 onClick={() => setOpenId(isOpen ? null : item.id)}
               >

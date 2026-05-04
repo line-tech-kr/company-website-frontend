@@ -12,7 +12,8 @@
     "primaryNav": "주요 메뉴",
     "language": "언어 선택",
     "sectionNav": "섹션 이동",
-    "dimensionCallouts": "치수 표시"
+    "dimensionCallouts": "치수 표시",
+    "menuTrigger": "{label} 메뉴"
   },
   "footer": {
     "tel": "TEL",

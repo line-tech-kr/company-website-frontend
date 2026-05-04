@@ -12,7 +12,8 @@
     "primaryNav": "主导航",
     "language": "语言选择",
     "sectionNav": "章节导航",
-    "dimensionCallouts": "尺寸标注"
+    "dimensionCallouts": "尺寸标注",
+    "menuTrigger": "{label}菜单"
   },
   "footer": {
     "tel": "TEL",

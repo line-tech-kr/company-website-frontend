@@ -12,7 +12,8 @@
     "primaryNav": "Primary",
     "language": "Language",
     "sectionNav": "Section navigation",
-    "dimensionCallouts": "Dimension callouts"
+    "dimensionCallouts": "Dimension callouts",
+    "menuTrigger": "{label} menu"
   },
   "footer": {
     "tel": "TEL",
