@@ -1,8 +1,7 @@
-import { sanityClient } from "@/sanity/client";
+import { sanityClient, sanityBuildClient } from "@/sanity/client";
 import { fetchSanity } from "@/sanity/fetch";
-import { productBySlugQuery } from "@/sanity/queries";
+import { productBySlugQuery, productSlugsQuery } from "@/sanity/queries";
 import { SanityProductSchema } from "@/lib/types/product";
-import { ALL_PRODUCTS } from "@/lib/fixtures/products";
 import { buildSpecMarkdown } from "@/lib/seo/specSheet";
 
 export const dynamic = "force-static";
@@ -10,8 +9,15 @@ export const revalidate = false;
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://line-tech.co";
 
-export function generateStaticParams() {
-  return ALL_PRODUCTS.map((p) => ({ slug: p.slug.current }));
+export async function generateStaticParams() {
+  const products = await fetchSanity(
+    () =>
+      sanityBuildClient.fetch<Array<{ slug: string; series: string }>>(
+        productSlugsQuery,
+      ),
+    { name: "productSlugsForSpecMd" },
+  );
+  return products.map((p) => ({ slug: p.slug }));
 }
 
 export async function GET(

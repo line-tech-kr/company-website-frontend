@@ -7,3 +7,10 @@ export const sanityClient = createClient({
   apiVersion,
   useCdn: true,
 });
+
+export const sanityBuildClient = createClient({
+  projectId,
+  dataset,
+  apiVersion,
+  useCdn: false,
+});
