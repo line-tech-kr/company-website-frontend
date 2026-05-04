@@ -183,7 +183,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
   ko: {
     pageTitle: "응용 분야",
     pageSub:
-      "라인테크 MFC·MFM은 정밀하고 신뢰할 수 있는 가스 유량 측정 및 제어가 필요한 다양한 산업 현장에서 사용되고 있습니다.",
+      "라인테크 MFC·MFM은 정밀하고 신뢰할 수 있는\n가스 유량 측정 및 제어가 필요한\n다양한 산업 현장에서 사용되고 있습니다.",
     gridHeading: "적용 산업",
     relatedHeading: "추천 제품",
     contactCta: "응용 분야 문의하기",
