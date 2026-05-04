@@ -94,19 +94,20 @@ export default async function DrawingsPage({ params }: Props) {
                 </td>
                 <td>
                   <div className="dr-drawings__actions">
-                    {item.dwgUrl ? (
+                    {item.dwgUrl && (
                       <a href={item.dwgUrl} download className="dr-list__btn">
                         DWG
                       </a>
-                    ) : (
-                      <span className="dr-list__btn dr-list__btn--disabled">
-                        {tRes("comingSoon")}
-                      </span>
                     )}
                     {item.stpUrl && (
                       <a href={item.stpUrl} download className="dr-list__btn">
                         STP
                       </a>
+                    )}
+                    {!item.dwgUrl && !item.stpUrl && (
+                      <span className="dr-list__btn dr-list__btn--disabled">
+                        {tRes("comingSoon")}
+                      </span>
                     )}
                   </div>
                 </td>
