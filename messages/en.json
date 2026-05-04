@@ -92,7 +92,17 @@
       "fitting": "Fitting",
       "view": "View"
     },
-    "emptyStack": "No products in this category yet."
+    "emptyStack": "No products in this category yet.",
+    "showcase": {
+      "sectionLabel": "Featured products",
+      "viewProduct": "View product",
+      "modelLabel": "Model",
+      "functionLabel": "Function",
+      "highlightLabel": "Highlight",
+      "slidesLabel": "Slides",
+      "slidesAriaLabel": "Featured product slides",
+      "slideAriaLabel": "Slide {n}"
+    }
   },
   "pdp": {
     "tabs": {

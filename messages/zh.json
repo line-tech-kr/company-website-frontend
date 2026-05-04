@@ -92,7 +92,17 @@
       "fitting": "接口",
       "view": "查看"
     },
-    "emptyStack": "该类别下暂无产品。"
+    "emptyStack": "该类别下暂无产品。",
+    "showcase": {
+      "sectionLabel": "精选产品",
+      "viewProduct": "查看产品",
+      "modelLabel": "型号",
+      "functionLabel": "类型",
+      "highlightLabel": "亮点",
+      "slidesLabel": "幻灯片",
+      "slidesAriaLabel": "精选产品幻灯片",
+      "slideAriaLabel": "幻灯片 {n}"
+    }
   },
   "pdp": {
     "tabs": {
