@@ -87,7 +87,7 @@
     },
     "table": {
       "model": "型号",
-      "description": "说明",
+      "description": "特点",
       "range": "流量范围",
       "accuracy": "精度",
       "response": "响应",

@@ -683,6 +683,7 @@ function buildProduct(
     series,
     function: function_,
     productLabel: localize(labelKey),
+    tags: [],
     features: featuresFor(section.model).map(localize),
     connections,
     massFlowSpecs,

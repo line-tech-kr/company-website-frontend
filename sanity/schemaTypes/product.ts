@@ -50,6 +50,12 @@ export const product = defineType({
       type: "internationalizedArrayString",
     }),
     defineField({
+      name: "tags",
+      title: "Tags",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "tag" }] }],
+    }),
+    defineField({
       name: "description",
       title: "Description",
       type: "object",

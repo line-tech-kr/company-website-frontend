@@ -86,6 +86,19 @@ export const SanityProductSchema = z.object({
     en: z.string(),
     zh: z.string(),
   }),
+  tags: z
+    .array(
+      z.object({
+        slug: z.object({ current: z.string() }),
+        kind: z.enum(["capability", "application", "gas"]),
+        label: z.object({
+          ko: z.string(),
+          en: z.string(),
+          zh: z.string(),
+        }),
+      }),
+    )
+    .default([]),
   description: z
     .object({ ko: z.string(), en: z.string(), zh: z.string() })
     .nullable()
