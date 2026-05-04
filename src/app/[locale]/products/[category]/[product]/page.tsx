@@ -18,8 +18,7 @@ import {
 } from "@/components/products/DownloadsList";
 import { sanityClient } from "@/sanity/client";
 import { fetchSanity } from "@/sanity/fetch";
-import { productBySlugQuery } from "@/sanity/queries";
-import { ALL_PRODUCTS } from "@/lib/fixtures/products";
+import { productBySlugQuery, productSlugsQuery } from "@/sanity/queries";
 import {
   CATEGORIES,
   categoryForSeries,
@@ -79,12 +78,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildProductMetadata(locale, product, category);
 }
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const products = await fetchSanity(
+    () => sanityClient.fetch<Array<{ slug: string; series: Product["series"] }>>(productSlugsQuery),
+    { name: "productSlugsForStaticParams" },
+  );
   return routing.locales.flatMap((locale) =>
-    ALL_PRODUCTS.flatMap((p) => {
+    products.flatMap((p) => {
       const category = categoryForSeries(p.series);
       if (!category) return [];
-      return [{ locale, category, product: p.slug.current }];
+      return [{ locale, category, product: p.slug }];
     }),
   );
 }

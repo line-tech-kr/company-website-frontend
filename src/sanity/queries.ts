@@ -37,6 +37,13 @@ export const productByModelQuery = defineQuery(`
   }
 `);
 
+export const productSlugsQuery = defineQuery(`
+  *[_type == "product" && defined(slug.current)]{
+    "slug": slug.current,
+    series
+  }
+`);
+
 export const categoryShowcaseQuery = defineQuery(`
   *[_type == "categoryShowcase" && _id == "category-showcases"][0]{
     "analogue": analogue[]{
