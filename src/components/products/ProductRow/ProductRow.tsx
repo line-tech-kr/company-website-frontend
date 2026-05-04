@@ -1,4 +1,6 @@
-import { Link } from "@/i18n/navigation";
+"use client";
+
+import { Link, useRouter } from "@/i18n/navigation";
 import { ProductThumb } from "../ProductThumb";
 import type { Product } from "@/lib/types/product";
 import type { CategorySlug } from "@/lib/categories";
@@ -26,9 +28,16 @@ export function ProductRow({ product, category, locale }: Props) {
   const accuracy = product.massFlowSpecs.accuracy.display;
   const response = product.massFlowSpecs.responseTime?.display ?? "—";
   const fitting = fittingSummary(product.connections);
+  const router = useRouter();
 
   return (
-    <tr className="lt-prod-row">
+    <tr
+      className="lt-prod-row"
+      onClick={(e) => {
+        if ((e.target as HTMLElement).closest("a")) return;
+        router.push(href);
+      }}
+    >
       <td
         className="lt-prod-row__cell lt-prod-row__cell--thumb"
         aria-hidden="true"

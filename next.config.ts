@@ -5,12 +5,15 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const SANITY_CDN = "https://cdn.sanity.io";
 
+const isDev = process.env.NODE_ENV === "development";
+
 const cspDirectives = [
   "default-src 'self'",
   // Next inlines small bootstrap scripts; allow only in production via 'self'.
   // 'unsafe-inline' on script-src is required for Next's inline runtime in
   // dev. Tighten with a nonce-based CSP later if SSR-only inlines remain.
-  `script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com https://challenges.cloudflare.com`,
+  // 'unsafe-eval' is required by React dev tools (callstack reconstruction) but must never ship to prod.
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://va.vercel-scripts.com https://challenges.cloudflare.com`,
   "style-src 'self' 'unsafe-inline'",
   `img-src 'self' data: blob: ${SANITY_CDN}`,
   "font-src 'self' data:",
