@@ -99,43 +99,46 @@ export default async function ProductsListPage({ params }: Props) {
       <header className="lt-products-list__intro">
         <h1 className="lt-products-list__title">{tProducts("list.title")}</h1>
         <p className="lt-products-list__lede">{tProducts("list.lede")}</p>
+        <ul
+          className="lt-products-list__stats"
+          aria-label={tProducts("list.title")}
+        >
+          <li className="lt-products-list__stat">
+            <a href="#categories" className="lt-products-list__stat-link">
+              <span className="lt-products-list__stat-num">{SERIES_COUNT}</span>{" "}
+              <span className="lt-products-list__stat-label">
+                {tProducts("list.stats.series")}
+              </span>
+            </a>
+          </li>
+          <li className="lt-products-list__stat">
+            <span className="lt-products-list__stat-num">
+              {products.length}
+            </span>{" "}
+            <span className="lt-products-list__stat-label">
+              {tProducts("list.stats.models")}
+            </span>
+          </li>
+          <li className="lt-products-list__stat">
+            <Link href="/applications" className="lt-products-list__stat-link">
+              <span className="lt-products-list__stat-num">
+                {industryCount}
+              </span>{" "}
+              <span className="lt-products-list__stat-label">
+                {tProducts("list.stats.industries")}
+              </span>
+            </Link>
+          </li>
+          <li className="lt-products-list__stat">
+            <span className="lt-products-list__stat-num">
+              {CERTIFICATION_COUNT}
+            </span>{" "}
+            <span className="lt-products-list__stat-label">
+              {tProducts("list.stats.certifications")}
+            </span>
+          </li>
+        </ul>
       </header>
-
-      <ul
-        className="lt-products-list__stats"
-        aria-label={tProducts("list.title")}
-      >
-        <li className="lt-products-list__stat">
-          <a href="#categories" className="lt-products-list__stat-link">
-            <span className="lt-products-list__stat-num">{SERIES_COUNT}</span>
-            <span className="lt-products-list__stat-label">
-              {tProducts("list.stats.series")}
-            </span>
-          </a>
-        </li>
-        <li className="lt-products-list__stat">
-          <span className="lt-products-list__stat-num">{products.length}</span>
-          <span className="lt-products-list__stat-label">
-            {tProducts("list.stats.models")}
-          </span>
-        </li>
-        <li className="lt-products-list__stat">
-          <Link href="/applications" className="lt-products-list__stat-link">
-            <span className="lt-products-list__stat-num">{industryCount}</span>
-            <span className="lt-products-list__stat-label">
-              {tProducts("list.stats.industries")}
-            </span>
-          </Link>
-        </li>
-        <li className="lt-products-list__stat">
-          <span className="lt-products-list__stat-num">
-            {CERTIFICATION_COUNT}
-          </span>
-          <span className="lt-products-list__stat-label">
-            {tProducts("list.stats.certifications")}
-          </span>
-        </li>
-      </ul>
 
       {featured && (
         <Link href={featured.href} className="lt-products-list__featured">
