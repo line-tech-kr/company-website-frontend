@@ -168,16 +168,23 @@
     "cards": {
       "catalogues": {
         "title": "카탈로그",
-        "desc": "시리즈별 제품 브로슈어 (PDF)"
+        "desc": "시리즈별 제품 브로슈어 (PDF)",
+        "count": "{count}개 문서"
       },
       "drawings": {
         "title": "CAD 도면",
-        "desc": "AutoCAD (.dwg) 및 STEP (.stp) 파일"
+        "desc": "AutoCAD (.dwg) 및 STEP (.stp) 파일",
+        "count": "{count}개 도면"
       },
-      "manuals": { "title": "매뉴얼", "desc": "모델별 사용자 가이드" },
+      "manuals": {
+        "title": "매뉴얼",
+        "desc": "모델별 사용자 가이드",
+        "count": "{count}개 문서"
+      },
       "certifications": {
         "title": "인증서",
-        "desc": "품질 및 적합성 인증 문서"
+        "desc": "품질 및 적합성 인증 문서",
+        "count": "{count}개 인증서"
       }
     },
     "catalogues": {
@@ -197,7 +204,6 @@
       "intro": "라인테크가 보유한 품질경영 및 제품 적합성 인증서입니다."
     },
     "download": "다운로드",
-    "done": "완료",
     "comingSoon": "파일 준비 중",
     "seriesLabel": {
       "all": "전 시리즈",

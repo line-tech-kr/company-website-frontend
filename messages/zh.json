@@ -166,13 +166,26 @@
       "intro": "下载莱因技术的产品样册、CAD 图纸、使用手册及认证文件。"
     },
     "cards": {
-      "catalogues": { "title": "产品样册", "desc": "各系列产品 PDF 宣传册" },
+      "catalogues": {
+        "title": "产品样册",
+        "desc": "各系列产品 PDF 宣传册",
+        "count": "{count}个文件"
+      },
       "drawings": {
         "title": "CAD 图纸",
-        "desc": "AutoCAD (.dwg) 及 STEP (.stp) 文件"
+        "desc": "AutoCAD (.dwg) 及 STEP (.stp) 文件",
+        "count": "{count}个图纸"
       },
-      "manuals": { "title": "使用手册", "desc": "各型号用户指南" },
-      "certifications": { "title": "认证文件", "desc": "质量与合规认证文件" }
+      "manuals": {
+        "title": "使用手册",
+        "desc": "各型号用户指南",
+        "count": "{count}个文件"
+      },
+      "certifications": {
+        "title": "认证文件",
+        "desc": "质量与合规认证文件",
+        "count": "{count}个证书"
+      }
     },
     "catalogues": {
       "title": "产品样册",
@@ -191,7 +204,6 @@
       "intro": "莱因技术持有的质量管理及产品合规认证证书。"
     },
     "download": "下载",
-    "done": "完成",
     "comingSoon": "文件准备中",
     "seriesLabel": {
       "all": "全系列",

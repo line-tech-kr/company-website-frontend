@@ -168,16 +168,23 @@
     "cards": {
       "catalogues": {
         "title": "Catalogues",
-        "desc": "Series-level PDF brochures"
+        "desc": "Series-level PDF brochures",
+        "count": "{count} documents"
       },
       "drawings": {
         "title": "CAD Drawings",
-        "desc": "AutoCAD (.dwg) and STEP (.stp) files"
+        "desc": "AutoCAD (.dwg) and STEP (.stp) files",
+        "count": "{count} models"
       },
-      "manuals": { "title": "Manuals", "desc": "Per-model user guides" },
+      "manuals": {
+        "title": "Manuals",
+        "desc": "Per-model user guides",
+        "count": "{count} documents"
+      },
       "certifications": {
         "title": "Certifications",
-        "desc": "Quality and conformity documents"
+        "desc": "Quality and conformity documents",
+        "count": "{count} documents"
       }
     },
     "catalogues": {
@@ -197,7 +204,6 @@
       "intro": "Quality management and product conformity certificates held by Line Tech."
     },
     "download": "Download",
-    "done": "Done",
     "comingSoon": "File coming soon",
     "seriesLabel": {
       "all": "All series",

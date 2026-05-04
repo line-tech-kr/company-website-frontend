@@ -111,6 +111,12 @@
   letter-spacing: 0.02em;
 }
 
+:lang(ko) .dr-list__meta,
+:lang(zh) .dr-list__meta {
+  font-family: var(--lt-sans);
+  letter-spacing: 0;
+}
+
 .dr-list__sep {
   opacity: 0.5;
 }

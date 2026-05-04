@@ -122,13 +122,17 @@ export default async function ManualsPage({ params }: Props) {
               <span className="dr-list__badge dr-list__badge--pdf">PDF</span>
               <div>
                 <div className="dr-list__label">{item.title}</div>
-                {(item.model || item.rev) && (
+                {(item.model || item.rev || item.publishedAt) && (
                   <div className="dr-list__meta">
                     {item.model && <span>{item.model}</span>}
-                    {item.model && item.rev && (
+                    {item.model && (item.rev || item.publishedAt) && (
                       <span className="dr-list__sep">·</span>
                     )}
                     {item.rev && <span>{item.rev}</span>}
+                    {item.rev && item.publishedAt && (
+                      <span className="dr-list__sep">·</span>
+                    )}
+                    {item.publishedAt && <span>{item.publishedAt}</span>}
                   </div>
                 )}
               </div>

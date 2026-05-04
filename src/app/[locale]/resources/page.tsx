@@ -85,7 +85,7 @@ export default async function ResourcesHubPage({ params }: Props) {
               </span>
               {counts[key] > 0 && (
                 <span className="dr-hub__card-count">
-                  {counts[key]} {key === "drawings" ? "models" : "documents"}
+                  {tRes(`cards.${key}.count`, { count: counts[key] })}
                 </span>
               )}
             </Link>
