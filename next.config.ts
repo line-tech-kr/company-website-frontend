@@ -5,7 +5,8 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const SANITY_CDN = "https://cdn.sanity.io";
 
-const isDev = process.env.NODE_ENV === "development";
+// Evaluated at Next.js config load time (build time on Vercel), not per request.
+const isDevBuild = process.env.NODE_ENV === "development";
 
 const cspDirectives = [
   "default-src 'self'",
@@ -13,7 +14,7 @@ const cspDirectives = [
   // 'unsafe-inline' on script-src is required for Next's inline runtime in
   // dev. Tighten with a nonce-based CSP later if SSR-only inlines remain.
   // 'unsafe-eval' is required by React dev tools (callstack reconstruction) but must never ship to prod.
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://va.vercel-scripts.com https://challenges.cloudflare.com`,
+  `script-src 'self' 'unsafe-inline'${isDevBuild ? " 'unsafe-eval'" : ""} https://va.vercel-scripts.com https://challenges.cloudflare.com`,
   "style-src 'self' 'unsafe-inline'",
   `img-src 'self' data: blob: ${SANITY_CDN}`,
   "font-src 'self' data:",
