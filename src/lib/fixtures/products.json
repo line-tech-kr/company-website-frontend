@@ -11,6 +11,7 @@
       "ko": "질량 유량 제어기 (MFC)",
       "zh": "质量流量控制器 (MFC)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -141,6 +142,7 @@
       "ko": "질량 유량 측정기 (MFM)",
       "zh": "质量流量计 (MFM)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -265,6 +267,7 @@
       "ko": "질량 유량 제어기 (MFC)",
       "zh": "质量流量控制器 (MFC)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -399,6 +402,7 @@
       "ko": "질량 유량 측정기 (MFM)",
       "zh": "质量流量计 (MFM)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -527,6 +531,7 @@
       "ko": "질량 유량 제어기 (MFC)",
       "zh": "质量流量控制器 (MFC)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -653,6 +658,7 @@
       "ko": "질량 유량 측정기 (MFM)",
       "zh": "质量流量计 (MFM)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -773,6 +779,7 @@
       "ko": "질량 유량 제어기 (MFC)",
       "zh": "质量流量控制器 (MFC)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -899,6 +906,7 @@
       "ko": "질량 유량 측정기 (MFM)",
       "zh": "质量流量计 (MFM)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -1019,6 +1027,7 @@
       "ko": "질량 유량 제어기 (MFC)",
       "zh": "质量流量控制器 (MFC)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -1143,6 +1152,7 @@
       "ko": "질량 유량 측정기 (MFM)",
       "zh": "质量流量计 (MFM)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -1261,6 +1271,7 @@
       "ko": "질량 유량 제어기 (MFC)",
       "zh": "质量流量控制器 (MFC)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -1381,6 +1392,7 @@
       "ko": "질량 유량 측정기 (MFM)",
       "zh": "质量流量计 (MFM)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -1495,6 +1507,7 @@
       "ko": "질량 유량 제어기 (MFC)",
       "zh": "质量流量控制器 (MFC)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -1615,6 +1628,7 @@
       "ko": "질량 유량 측정기 (MFM)",
       "zh": "质量流量计 (MFM)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -1729,6 +1743,7 @@
       "ko": "질량 유량 제어기 (MFC)",
       "zh": "质量流量控制器 (MFC)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -1849,6 +1864,7 @@
       "ko": "질량 유량 측정기 (MFM)",
       "zh": "质量流量计 (MFM)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -1963,6 +1979,7 @@
       "ko": "질량 유량 제어기 (MFC)",
       "zh": "质量流量控制器 (MFC)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -2083,6 +2100,7 @@
       "ko": "질량 유량 측정기 (MFM)",
       "zh": "质量流量计 (MFM)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -2197,6 +2215,7 @@
       "ko": "디지털 질량 유량 제어기 (Digital MFC)",
       "zh": "数字式质量流量控制器 (Digital MFC)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -2334,6 +2353,7 @@
       "ko": "디지털 질량 유량 측정기 (Digital MFM)",
       "zh": "数字式质量流量计 (Digital MFM)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -2465,6 +2485,7 @@
       "ko": "디지털 질량 유량 제어기 (Digital MFC)",
       "zh": "数字式质量流量控制器 (Digital MFC)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -2606,6 +2627,7 @@
       "ko": "디지털 질량 유량 측정기 (Digital MFM)",
       "zh": "数字式质量流量计 (Digital MFM)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -2741,6 +2763,7 @@
       "ko": "디지털 질량 유량 제어기 (Digital MFC)",
       "zh": "数字式质量流量控制器 (Digital MFC)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -2872,6 +2895,7 @@
       "ko": "디지털 질량 유량 측정기 (Digital MFM)",
       "zh": "数字式质量流量计 (Digital MFM)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -2997,6 +3021,7 @@
       "ko": "디지털 질량 유량 제어기 (Digital MFC)",
       "zh": "数字式质量流量控制器 (Digital MFC)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -3124,6 +3149,7 @@
       "ko": "디지털 질량 유량 측정기 (Digital MFM)",
       "zh": "数字式质量流量计 (Digital MFM)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -3245,6 +3271,7 @@
       "ko": "디지털 질량 유량 제어기 (Digital MFC)",
       "zh": "数字式质量流量控制器 (Digital MFC)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -3372,6 +3399,7 @@
       "ko": "디지털 질량 유량 측정기 (Digital MFM)",
       "zh": "数字式质量流量计 (Digital MFM)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -3493,6 +3521,7 @@
       "ko": "디지털 질량 유량 제어기 (Digital MFC)",
       "zh": "数字式质量流量控制器 (Digital MFC)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -3620,6 +3649,7 @@
       "ko": "디지털 질량 유량 측정기 (Digital MFM)",
       "zh": "数字式质量流量计 (Digital MFM)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -3741,6 +3771,7 @@
       "ko": "디지털 질량 유량 제어기 (Digital MFC)",
       "zh": "数字式质量流量控制器 (Digital MFC)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -3868,6 +3899,7 @@
       "ko": "디지털 질량 유량 측정기 (Digital MFM)",
       "zh": "数字式质量流量计 (Digital MFM)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate at Low Flow",
@@ -3989,6 +4021,7 @@
       "ko": "디스플레이 일체형 질량 유량 제어기 (MFC)",
       "zh": "带显示屏质量流量控制器 (MFC)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate Real Time Flow Measurements",
@@ -4124,6 +4157,7 @@
       "ko": "디스플레이 일체형 질량 유량 측정기 (MFM)",
       "zh": "带显示屏质量流量计 (MFM)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Accurate Real Time Flow Measurements",
@@ -4253,6 +4287,7 @@
       "ko": "MEMS 기반 질량 유량 제어기 (MFC)",
       "zh": "MEMS 技术质量流量控制器 (MFC)"
     },
+    "tags": [],
     "features": [
       {
         "en": "MEMS-Tech Sensor",
@@ -4378,6 +4413,7 @@
       "ko": "MEMS 기반 질량 유량 측정기 (MFM)",
       "zh": "MEMS 技术质量流量计 (MFM)"
     },
+    "tags": [],
     "features": [
       {
         "en": "MEMS-Tech Sensor",
@@ -4497,6 +4533,7 @@
       "ko": "방폭형 질량 유량 제어기 (MFC)",
       "zh": "防爆型质量流量控制器 (MFC)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Explosion-Proof for Hazardous Environments",
@@ -4623,6 +4660,7 @@
       "ko": "방폭형 질량 유량 측정기 (MFM)",
       "zh": "防爆型质量流量计 (MFM)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Explosion-Proof for Hazardous Environments",
@@ -4743,6 +4781,7 @@
       "ko": "방폭형 질량 유량 제어기 (MFC)",
       "zh": "防爆型质量流量控制器 (MFC)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Explosion-Proof for Hazardous Environments",
@@ -4863,6 +4902,7 @@
       "ko": "방폭형 질량 유량 측정기 (MFM)",
       "zh": "防爆型质量流量计 (MFM)"
     },
+    "tags": [],
     "features": [
       {
         "en": "Explosion-Proof for Hazardous Environments",

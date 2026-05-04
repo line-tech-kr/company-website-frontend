@@ -1,6 +1,6 @@
 import "./Chip.css";
 
-type Tone = "neutral" | "success" | "info" | "warning" | "danger";
+type Tone = "neutral" | "success" | "info" | "warning" | "danger" | "accent";
 
 type Props = {
   children: React.ReactNode;

@@ -42,6 +42,11 @@
   color: var(--pd-fg-strong);
   font-weight: 500;
 }
+.lt-prod-row__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
 .lt-prod-row__cell--range,
 .lt-prod-row__cell--acc,
 .lt-prod-row__cell--resp,

@@ -46,3 +46,8 @@
 .lt-chip--neutral {
   color: var(--pd-fg);
 }
+.lt-chip--accent {
+  color: var(--lt-accent-700);
+  background: rgba(253, 188, 4, 0.14);
+  border-color: rgba(253, 188, 4, 0.4);
+}
