@@ -3,7 +3,8 @@
     "products": "产品",
     "company": "公司介绍",
     "applications": "应用领域",
-    "faq": "常见问题"
+    "faq": "常见问题",
+    "dataRoom": "资料室"
   },
   "common": {
     "home": "首页"
@@ -158,6 +159,70 @@
         "tbd": "待发布"
       }
     }
+  },
+  "resources": {
+    "hub": {
+      "title": "资料室",
+      "intro": "下载莱因技术的产品样册、CAD 图纸、使用手册及认证文件。"
+    },
+    "cards": {
+      "catalogues": {
+        "title": "产品样册",
+        "desc": "各系列产品 PDF 宣传册",
+        "count": "{count}个文件"
+      },
+      "drawings": {
+        "title": "CAD 图纸",
+        "desc": "AutoCAD (.dwg) 及 STEP (.stp) 文件",
+        "count": "{count}个图纸"
+      },
+      "manuals": {
+        "title": "使用手册",
+        "desc": "各型号用户指南",
+        "count": "{count}个文件"
+      },
+      "certifications": {
+        "title": "认证文件",
+        "desc": "质量与合规认证文件",
+        "count": "{count}个证书"
+      }
+    },
+    "catalogues": {
+      "title": "产品样册",
+      "intro": "提供各系列产品的 PDF 格式宣传册。"
+    },
+    "drawings": {
+      "title": "CAD 图纸",
+      "intro": "提供各型号外形图，支持 AutoCAD (.dwg) 和 STEP (.stp) 格式下载。"
+    },
+    "manuals": {
+      "title": "使用手册",
+      "intro": "各产品型号的用户指南与安装手册。"
+    },
+    "certifications": {
+      "title": "认证文件",
+      "intro": "莱因技术持有的质量管理及产品合规认证证书。"
+    },
+    "download": "下载",
+    "comingSoon": "文件准备中",
+    "seriesLabel": {
+      "all": "全系列",
+      "analogue": "模拟",
+      "digital": "数字",
+      "specialized": "特殊"
+    },
+    "drawingsTable": {
+      "model": "型号",
+      "series": "系列",
+      "files": "文件"
+    },
+    "certCard": {
+      "issuer": "颁发机构",
+      "scope": "认证范围",
+      "validThrough": "有效期至",
+      "ongoing": "持续有效"
+    },
+    "empty": "暂无可用文件，敬请期待。"
   },
   "skipLink": {
     "main": "跳到主要内容"

@@ -1,0 +1,91 @@
+/* Line Tech — /resources hub (.dr-* namespace = Data Room) */
+
+.dr-hub {
+  padding-block: 1.5rem 4rem;
+}
+
+.dr-hub__hero {
+  padding: 2rem 0 2.5rem;
+  border-bottom: 1px solid var(--pd-rule);
+  margin-bottom: 2.5rem;
+}
+
+.dr-hub__title {
+  margin: 0 0 0.75rem;
+  font: 500 var(--lt-fs-h2-dense) / 1.1 var(--lt-sans);
+  letter-spacing: -0.02em;
+  color: var(--pd-fg-strong);
+}
+
+.dr-hub__intro {
+  margin: 0;
+  max-width: 60ch;
+  font-size: var(--lt-fs-md);
+  color: var(--pd-muted);
+  line-height: 1.55;
+}
+
+.dr-hub__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dr-hub__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem 1.75rem;
+  height: 100%;
+  border: 1px solid var(--pd-rule);
+  border-radius: 4px;
+  background: var(--pd-surface);
+  text-decoration: none;
+  transition:
+    border-color 120ms ease,
+    background 120ms ease;
+}
+
+.dr-hub__card:hover {
+  border-color: var(--pd-primary);
+  background: var(--pd-surface-2);
+}
+
+.dr-hub__card:focus-visible {
+  outline: 2px solid var(--pd-primary);
+  outline-offset: 2px;
+}
+
+.dr-hub__card-title {
+  font: 600 var(--lt-fs-md) / 1.25 var(--lt-sans);
+  color: var(--pd-fg-strong);
+  letter-spacing: -0.01em;
+}
+
+.dr-hub__card-desc {
+  font: 400 var(--lt-fs-sm) / 1.55 var(--lt-sans);
+  color: var(--pd-muted);
+  flex: 1;
+}
+
+.dr-hub__card-count {
+  margin-top: 0.25rem;
+  font: 500 var(--lt-fs-xs) var(--lt-mono);
+  color: var(--pd-primary);
+  letter-spacing: 0.04em;
+}
+
+:lang(ko) .dr-hub__card-count,
+:lang(zh) .dr-hub__card-count {
+  font-family: var(--lt-sans);
+  letter-spacing: 0;
+}
+
+@media (max-width: 560px) {
+  .dr-hub__grid {
+    grid-template-columns: 1fr;
+  }
+}
