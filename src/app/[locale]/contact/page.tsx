@@ -7,7 +7,6 @@ import { LT_CONTACT } from "@/lib/content/contact";
 import { LT_SHELL } from "@/lib/content/shell";
 import type { Locale } from "@/lib/content/home";
 import { SanityProductSchema } from "@/lib/types/product";
-import { z } from "zod";
 import { sanityClient } from "@/sanity/client";
 import { fetchSanity } from "@/sanity/fetch";
 import { productByModelQuery } from "@/sanity/queries";
