@@ -55,7 +55,7 @@ const SanityImageRefSchema = z.object({
   _type: z.literal("reference"),
 });
 
-const SanityImageSchema = z.object({
+export const SanityImageSchema = z.object({
   _type: z.literal("image"),
   asset: SanityImageRefSchema.optional(),
   hotspot: z

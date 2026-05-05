@@ -62,6 +62,7 @@ export const categoryShowcaseQuery = defineQuery(`
       "function": product->function,
       "flowRange": product->massFlowSpecs.flowRange.display,
       "accuracy": product->massFlowSpecs.accuracy.display,
+      "image": product->images[0],
     },
     "digital": digital[]{
       caption,
@@ -70,6 +71,7 @@ export const categoryShowcaseQuery = defineQuery(`
       "function": product->function,
       "flowRange": product->massFlowSpecs.flowRange.display,
       "accuracy": product->massFlowSpecs.accuracy.display,
+      "image": product->images[0],
     },
     "specialized": specialized[]{
       caption,
@@ -78,6 +80,7 @@ export const categoryShowcaseQuery = defineQuery(`
       "function": product->function,
       "flowRange": product->massFlowSpecs.flowRange.display,
       "accuracy": product->massFlowSpecs.accuracy.display,
+      "image": product->images[0],
     },
   }
 `);
@@ -90,5 +93,65 @@ export const allProductsQuery = defineQuery(`
     model asc
   ){
     ${PRODUCT_PROJECTION}
+  }
+`);
+
+export const allCataloguesQuery = defineQuery(`
+  *[_type == "catalogue"] | order(publishedAt desc) {
+    _id,
+    title,
+    series,
+    publishedAt,
+    "fileUrl": file.asset->url
+  }
+`);
+
+export const allManualsQuery = defineQuery(`
+  *[_type == "manual"]
+  | order(
+    select(series == "analogue" => 0, series == "digital" => 1, 2),
+    model asc
+  ) {
+    _id,
+    title,
+    model,
+    series,
+    rev,
+    publishedAt,
+    "fileUrl": file.asset->url
+  }
+`);
+
+export const allDrawingsQuery = defineQuery(`
+  *[_type == "drawing"]
+  | order(
+    select(series == "analogue" => 0, series == "digital" => 1, 2),
+    model asc
+  ) {
+    _id,
+    title,
+    model,
+    series,
+    "dwgUrl": dwgFile.asset->url,
+    "stpUrl": stpFile.asset->url
+  }
+`);
+
+export const allCertificationsQuery = defineQuery(`
+  *[_type == "certification"] | order(coalesce(order, 99) asc) {
+    _id,
+    name,
+    "issuer": {
+      "ko": coalesce(issuer[language == "ko"][0].value, issuer[language == "en"][0].value),
+      "en": coalesce(issuer[language == "en"][0].value, issuer[language == "ko"][0].value),
+      "zh": coalesce(issuer[language == "zh"][0].value, issuer[language == "en"][0].value)
+    },
+    "scope": {
+      "ko": coalesce(scope[language == "ko"][0].value, scope[language == "en"][0].value),
+      "en": coalesce(scope[language == "en"][0].value, scope[language == "ko"][0].value),
+      "zh": coalesce(scope[language == "zh"][0].value, scope[language == "en"][0].value)
+    },
+    validThrough,
+    "fileUrl": file.asset->url
   }
 `);

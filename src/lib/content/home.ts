@@ -13,7 +13,7 @@ type SeriesItem = {
   feat?: string;
 };
 
-type ApplicationItem = { n: string; k: string };
+type ApplicationItem = { n: string; k: string; slug: string };
 type Stat = { k: string; l: string; sub: string };
 type Bullet = { k: string; v: string };
 
@@ -103,14 +103,18 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       kicker: "02 — 적용 분야",
       title: "정밀을 요구하는 모든 공정에",
       items: [
-        { n: "반도체 · 디스플레이", k: "Semiconductor" },
-        { n: "연료전지", k: "Fuel Cells" },
-        { n: "LED · 광섬유", k: "LED · Fiber Optics" },
-        { n: "바이오 · 제약", k: "Biotech · Pharma" },
-        { n: "화학 · 석유화학", k: "Chemical" },
-        { n: "태양광 · PV", k: "Photovoltaic" },
-        { n: "금속 가공", k: "Metals" },
-        { n: "R&D · 연구소", k: "R&D · Labs" },
+        { n: "반도체 · 디스플레이", k: "Semiconductor", slug: "semiconductor" },
+        { n: "연료전지", k: "Fuel Cells", slug: "fuel-cells" },
+        { n: "LED · 광섬유", k: "LED · Fiber Optics", slug: "led-lighting" },
+        {
+          n: "바이오 · 제약",
+          k: "Biotech · Pharma",
+          slug: "biotech-pharmaceutical",
+        },
+        { n: "화학 · 석유화학", k: "Chemical", slug: "chemical-petrochemical" },
+        { n: "태양광 · PV", k: "Photovoltaic", slug: "solar-photovoltaic" },
+        { n: "금속 가공", k: "Metals", slug: "metals-processing" },
+        { n: "R&D · 연구소", k: "R&D · Labs", slug: "research-development" },
       ],
     },
     feature: {
@@ -205,14 +209,18 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       kicker: "02 — Applications",
       title: "Wherever precision is required.",
       items: [
-        { n: "Semiconductor", k: "반도체 · 디스플레이" },
-        { n: "Fuel Cells", k: "연료전지" },
-        { n: "LED · Fiber Optics", k: "LED · 광섬유" },
-        { n: "Biotech · Pharma", k: "바이오 · 제약" },
-        { n: "Chemical", k: "화학 · 석유화학" },
-        { n: "Photovoltaic", k: "태양광" },
-        { n: "Metals", k: "금속 가공" },
-        { n: "R&D · Labs", k: "R&D · 연구소" },
+        { n: "Semiconductor", k: "반도체 · 디스플레이", slug: "semiconductor" },
+        { n: "Fuel Cells", k: "연료전지", slug: "fuel-cells" },
+        { n: "LED · Fiber Optics", k: "LED · 광섬유", slug: "led-lighting" },
+        {
+          n: "Biotech · Pharma",
+          k: "바이오 · 제약",
+          slug: "biotech-pharmaceutical",
+        },
+        { n: "Chemical", k: "화학 · 석유화학", slug: "chemical-petrochemical" },
+        { n: "Photovoltaic", k: "태양광", slug: "solar-photovoltaic" },
+        { n: "Metals", k: "금속 가공", slug: "metals-processing" },
+        { n: "R&D · Labs", k: "R&D · 연구소", slug: "research-development" },
       ],
     },
     feature: {
@@ -301,14 +309,14 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       kicker: "02 — 应用领域",
       title: "任何需要精度的工艺。",
       items: [
-        { n: "半导体 · 显示", k: "Semiconductor" },
-        { n: "燃料电池", k: "Fuel Cells" },
-        { n: "LED · 光纤", k: "LED · Fiber" },
-        { n: "生物制药", k: "Biotech" },
-        { n: "化学 · 石化", k: "Chemical" },
-        { n: "光伏", k: "Photovoltaic" },
-        { n: "金属加工", k: "Metals" },
-        { n: "研发实验室", k: "R&D" },
+        { n: "半导体 · 显示", k: "Semiconductor", slug: "semiconductor" },
+        { n: "燃料电池", k: "Fuel Cells", slug: "fuel-cells" },
+        { n: "LED · 光纤", k: "LED · Fiber", slug: "led-lighting" },
+        { n: "生物制药", k: "Biotech", slug: "biotech-pharmaceutical" },
+        { n: "化学 · 石化", k: "Chemical", slug: "chemical-petrochemical" },
+        { n: "光伏", k: "Photovoltaic", slug: "solar-photovoltaic" },
+        { n: "金属加工", k: "Metals", slug: "metals-processing" },
+        { n: "研发实验室", k: "R&D", slug: "research-development" },
       ],
     },
     feature: {

@@ -1,6 +1,7 @@
 import { ProductRow } from "../ProductRow";
 import type { Product } from "@/lib/types/product";
 import type { CategorySlug } from "@/lib/categories";
+import { urlFor } from "@/sanity/imageUrl";
 import "./ProductStack.css";
 
 type Props = {
@@ -90,14 +91,21 @@ export function ProductStack({
             </tr>
           </thead>
           <tbody>
-            {products.map((p) => (
-              <ProductRow
-                key={p.slug.current}
-                product={p}
-                category={category}
-                locale={locale}
-              />
-            ))}
+            {products.map((p) => {
+              const firstImage = p.images?.[0];
+              const imageSrc = firstImage?.asset
+                ? urlFor(firstImage).width(88).url()
+                : null;
+              return (
+                <ProductRow
+                  key={p.slug.current}
+                  product={p}
+                  imageSrc={imageSrc}
+                  category={category}
+                  locale={locale}
+                />
+              );
+            })}
           </tbody>
         </table>
       )}
