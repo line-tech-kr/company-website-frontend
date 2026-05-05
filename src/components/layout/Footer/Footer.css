@@ -27,19 +27,6 @@
   color: var(--pd-primary);
 }
 
-.pd-foot__mark {
-  display: inline-flex;
-  align-items: center;
-}
-
-.pd-foot__sig {
-  margin: 0;
-  font-weight: 600;
-  font-size: var(--lt-fs-xs);
-  color: var(--pd-fg-strong);
-  max-width: 36ch;
-}
-
 .pd-foot__col {
   flex: 1 1 200px;
   min-width: 0;
