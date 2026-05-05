@@ -32,7 +32,7 @@ function buildStats(locale: Locale, industryCount: number): StatItem[] {
   return [
     { value: String(industryCount), label: industries, href: "#industries" },
     { value: "40+", label: models, href: "/products" },
-    { value: "13", label: certs },
+    { value: "13", label: certs, href: "/resources/certifications" },
   ];
 }
 
