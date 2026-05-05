@@ -20,6 +20,7 @@
     "test": "vitest",
     "test:run": "vitest run",
     "test:ui": "vitest --ui",
+    "i18n:check": "tsx scripts/check-i18n-parity.ts",
     "seed:products": "tsx scripts/seed-products.ts",
     "sanity:extract": "sanity schema extract",
     "sanity:typegen": "sanity typegen generate",
