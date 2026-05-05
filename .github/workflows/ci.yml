@@ -33,6 +33,9 @@ jobs:
       - name: Lint
         run: pnpm lint
 
+      - name: i18n parity
+        run: pnpm i18n:check
+
       - name: Typecheck
         run: pnpm typecheck
 
