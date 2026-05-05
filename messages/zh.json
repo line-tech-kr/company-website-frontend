@@ -58,8 +58,22 @@
   "products": {
     "list": {
       "title": "产品目录",
-      "intro": "涵盖模拟、数字和专用系列的质量流量控制器与质量流量计。{count} 款型号专为实验室、工业和工艺应用设计。",
-      "cardCount": "{count} 款型号"
+      "lede": "涵盖模拟、数字和专用系列的质量流量控制器（MFC）和质量流量计（MFM）。",
+      "cardCount": "{count} 款型号",
+      "stats": {
+        "modelsLabel": "目录型号",
+        "modelsSub": "覆盖 {count} 个系列",
+        "rangeLabel": "SLPM 流量范围",
+        "rangeSub": "全系列合计",
+        "industriesLabel": "服务行业",
+        "industriesSub": "1997 年起现场验证",
+        "certificationsLabel": "认证",
+        "certificationsSub": "KGS · CE · ISO 9001"
+      },
+      "applications": {
+        "label": "常见应用",
+        "viewAll": "查看全部 {count} 项应用 →"
+      }
     },
     "kicker": "产品系列",
     "categories": {

@@ -58,8 +58,22 @@
   "products": {
     "list": {
       "title": "제품 카탈로그",
-      "intro": "아날로그, 디지털, 특수 시리즈를 아우르는 질량 유량 제어기 및 질량 유량계. 실험실, 산업, 공정 응용 분야를 위해 설계된 {count}개 모델.",
-      "cardCount": "{count}개 모델"
+      "lede": "아날로그·디지털·특수 시리즈로 구성된 매스플로우 컨트롤러(MFC)와 매스플로우 미터(MFM).",
+      "cardCount": "{count}개 모델",
+      "stats": {
+        "modelsLabel": "카탈로그 모델",
+        "modelsSub": "{count}개 시리즈 합산",
+        "rangeLabel": "SLPM 측정 범위",
+        "rangeSub": "전 시리즈 합산",
+        "industriesLabel": "적용 산업",
+        "industriesSub": "1997년부터 현장 검증",
+        "certificationsLabel": "인증",
+        "certificationsSub": "KGS · CE · ISO 9001"
+      },
+      "applications": {
+        "label": "주요 적용 분야",
+        "viewAll": "전체 {count}개 적용 분야 보기 →"
+      }
     },
     "kicker": "제품 시리즈",
     "categories": {
