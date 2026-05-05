@@ -1,12 +1,17 @@
+// Traced from docs/handoff/uploads/catalog.pdf p.1 via pdftocairo -svg.
+const VB_X = 56.45;
+const VB_Y = 101.51;
+const VB_W = 216.12;
+const VB_H = 54.79;
+
 type Props = { height?: number };
 
 export function LogoLockup({ height = 28 }: Props) {
-  const aspect = 216.12 / 54.79;
   return (
     <svg
-      width={height * aspect}
+      width={height * (VB_W / VB_H)}
       height={height}
-      viewBox="56.45 101.51 216.12 54.79"
+      viewBox={`${VB_X} ${VB_Y} ${VB_W} ${VB_H}`}
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >

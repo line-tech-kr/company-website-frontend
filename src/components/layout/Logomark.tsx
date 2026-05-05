@@ -1,3 +1,4 @@
+// Traced from docs/handoff/uploads/catalog.pdf p.1 via pdftocairo -svg.
 type Props = { size?: number };
 
 export function Logomark({ size = 22 }: Props) {
