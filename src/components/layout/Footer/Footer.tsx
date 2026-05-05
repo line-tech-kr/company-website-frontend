@@ -22,6 +22,7 @@ export async function Footer({ locale }: Props) {
       <div className="pd-foot__cols">
         <div className="pd-foot__brand">
           <LogoLockup height={28} />
+          <span className="sr-only">Line Tech</span>
         </div>
 
         <div className="pd-foot__col">

@@ -56,7 +56,6 @@ export type ShellFeaturedCard = {
 };
 
 export type ShellFooter = {
-  signoff: string;
   contact: {
     heading: string;
     address: string;
@@ -340,7 +339,6 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
       heading: "사이트 메뉴",
     },
     footer: {
-      signoff: "정밀 질량유량 솔루션",
       contact: {
         heading: "문의",
         address: "대전광역시 유성구 대덕대로 806 (34055)",
@@ -571,7 +569,6 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
       heading: "Site menu",
     },
     footer: {
-      signoff: "Mass Flow Solutions",
       contact: {
         heading: "Contact",
         address: "806 Daedeok-daero, Yuseong-gu, Daejeon 34055, Korea",
@@ -790,7 +787,6 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
       heading: "站点菜单",
     },
     footer: {
-      signoff: "精密质量流量解决方案",
       contact: {
         heading: "联系方式",
         address: "韩国大田广域市儒城区大德大路 806 号 (34055)",
