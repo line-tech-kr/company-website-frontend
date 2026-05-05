@@ -23,22 +23,27 @@ const keysByLocale = Object.fromEntries(
   }),
 ) as Record<(typeof LOCALES)[number], Set<string>>;
 
-const union = new Set(LOCALES.flatMap((l) => [...keysByLocale[l]]));
+const union = [...new Set(LOCALES.flatMap((l) => [...keysByLocale[l]]))].sort();
 
-const missing: Record<string, string[]> = {};
-for (const locale of LOCALES) {
-  const gaps = [...union].filter((k) => !keysByLocale[locale].has(k)).sort();
-  if (gaps.length > 0) missing[locale] = gaps;
-}
+const drift = union
+  .map((key) => ({
+    key,
+    presentIn: LOCALES.filter((l) => keysByLocale[l].has(key)),
+    missingFrom: LOCALES.filter((l) => !keysByLocale[l].has(key)),
+  }))
+  .filter((row) => row.missingFrom.length > 0);
 
-if (Object.keys(missing).length > 0) {
-  console.error("i18n parity check failed — missing keys:\n");
-  for (const [locale, keys] of Object.entries(missing)) {
-    console.error(`  ${locale}.json is missing ${keys.length} key(s):`);
-    for (const k of keys) console.error(`    - ${k}`);
-    console.error("");
+if (drift.length > 0) {
+  console.error(`i18n parity check failed — ${drift.length} key(s) drifted:\n`);
+  for (const { key, presentIn, missingFrom } of drift) {
+    console.error(
+      `  ${key} — missing from ${missingFrom.join(", ")} (present in ${presentIn.join(", ")})`,
+    );
   }
+  console.error("");
   process.exit(1);
 }
 
-console.log(`i18n parity OK — ${union.size} keys across ${LOCALES.join(", ")}`);
+console.log(
+  `i18n parity OK — ${union.length} keys across ${LOCALES.join(", ")}`,
+);
