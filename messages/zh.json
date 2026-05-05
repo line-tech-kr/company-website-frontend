@@ -60,10 +60,14 @@
       "lede": "涵盖模拟、数字和专用系列的质量流量控制器（MFC）和质量流量计（MFM）。",
       "cardCount": "{count} 款型号",
       "stats": {
-        "series": "系列",
-        "models": "型号",
-        "industries": "应用行业",
-        "certifications": "认证"
+        "modelsLabel": "目录型号",
+        "modelsSub": "覆盖 {count} 个系列",
+        "rangeLabel": "SLPM 流量范围",
+        "rangeSub": "全系列合计",
+        "industriesLabel": "服务行业",
+        "industriesSub": "1997 年起现场验证",
+        "certificationsLabel": "认证",
+        "certificationsSub": "KGS · CE · ISO 9001"
       },
       "helper": {
         "title": "不确定选哪个系列？",

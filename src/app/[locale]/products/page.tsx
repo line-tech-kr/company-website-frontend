@@ -11,12 +11,14 @@ import {
   categoryForSeries,
   type CategorySlug,
 } from "@/lib/categories";
-import { SanityProductSchema } from "@/lib/types/product";
+import { SanityProductSchema, type Product } from "@/lib/types/product";
 import { z } from "zod";
 import { buildProductsMetadata } from "@/lib/seo";
-import { getProductsCategories, LT_SHELL } from "@/lib/content/shell";
+import { getProductsCategories } from "@/lib/content/shell";
 import { LT_HOME, type Locale } from "@/lib/content/home";
 import { LT_APPLICATIONS } from "@/lib/content/applications";
+import { resolveProductImage } from "@/lib/productImages";
+import { RotatingFeatured, type RotatingSlide } from "./RotatingFeatured";
 import "./products-list.css";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -38,6 +40,26 @@ const APPLICATION_STRIP_SLUGS = [
 
 const CERTIFICATION_COUNT = 13;
 const SERIES_COUNT = 4;
+
+const FLAGSHIP_MODEL: Partial<Record<CategorySlug, string>> = {
+  analogue: "M3030VA",
+};
+
+function pickFlagship(
+  products: Product[],
+  slug: CategorySlug,
+): Product | undefined {
+  const preferred = FLAGSHIP_MODEL[slug];
+  if (preferred) {
+    const match = products.find(
+      (p) =>
+        categoryForSeries(p.series) === slug &&
+        p.model.toLowerCase() === preferred.toLowerCase(),
+    );
+    if (match) return match;
+  }
+  return products.find((p) => categoryForSeries(p.series) === slug);
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -75,11 +97,19 @@ export default async function ProductsListPage({ params }: Props) {
     LT_HOME[typedLocale].series.items.map((s) => [s.href, s]),
   );
 
-  const productsNav = LT_SHELL[typedLocale].nav.find(
-    (n) => n.id === "products",
-  );
-  const featured =
-    productsNav?.menu?.kind === "products" ? productsNav.menu.featured : null;
+  const slides: RotatingSlide[] = CATEGORY_SLUGS.map((slug) => {
+    const flagship = pickFlagship(products, slug);
+    if (!flagship) return null;
+    return {
+      href: `/products/${slug}/${flagship.slug.current}`,
+      accent: CARD_ACCENT[slug],
+      eyebrow: tProducts(`categories.${slug}.title`),
+      model: flagship.model,
+      blurb: tProducts(`categories.${slug}.lede`),
+      image: resolveProductImage(flagship.slug.current),
+      cta: tProducts("showcase.viewProduct"),
+    };
+  }).filter((x): x is RotatingSlide => Boolean(x));
 
   const applicationsByLocale = LT_APPLICATIONS[typedLocale].applications;
   const industryCount = applicationsByLocale.length;
@@ -102,147 +132,126 @@ export default async function ProductsListPage({ params }: Props) {
       </header>
 
       <ul
-        className="lt-products-list__stats"
+        className="lt-products-list__stats lt-products-list__stats--dark lt-products-list__stats--engineered"
         aria-label={tProducts("list.title")}
       >
         <li className="lt-products-list__stat">
-          <a href="#categories" className="lt-products-list__stat-link">
-            <span className="lt-products-list__stat-num">{SERIES_COUNT}</span>
-            <span className="lt-products-list__stat-label">
-              {tProducts("list.stats.series")}
-            </span>
-          </a>
+          <div className="lt-products-list__stat-cell">
+            <div className="lt-products-list__stat-num">{products.length}</div>
+            <div className="lt-products-list__stat-label">
+              {tProducts("list.stats.modelsLabel")}
+            </div>
+            <div className="lt-products-list__stat-sub">
+              {tProducts("list.stats.modelsSub", { count: SERIES_COUNT })}
+            </div>
+          </div>
         </li>
         <li className="lt-products-list__stat">
-          <span className="lt-products-list__stat-num">{products.length}</span>
-          <span className="lt-products-list__stat-label">
-            {tProducts("list.stats.models")}
-          </span>
+          <div className="lt-products-list__stat-cell">
+            <div className="lt-products-list__stat-num">0.01 – 5,000</div>
+            <div className="lt-products-list__stat-label">
+              {tProducts("list.stats.rangeLabel")}
+            </div>
+            <div className="lt-products-list__stat-sub">
+              {tProducts("list.stats.rangeSub")}
+            </div>
+          </div>
         </li>
         <li className="lt-products-list__stat">
-          <Link href="/applications" className="lt-products-list__stat-link">
-            <span className="lt-products-list__stat-num">{industryCount}</span>
-            <span className="lt-products-list__stat-label">
-              {tProducts("list.stats.industries")}
-            </span>
+          <Link
+            href="/applications"
+            className="lt-products-list__stat-cell lt-products-list__stat-link"
+          >
+            <div className="lt-products-list__stat-num">{industryCount}</div>
+            <div className="lt-products-list__stat-label">
+              {tProducts("list.stats.industriesLabel")}
+            </div>
+            <div className="lt-products-list__stat-sub">
+              {tProducts("list.stats.industriesSub")}
+            </div>
           </Link>
         </li>
         <li className="lt-products-list__stat">
-          <span className="lt-products-list__stat-num">
-            {CERTIFICATION_COUNT}
-          </span>
-          <span className="lt-products-list__stat-label">
-            {tProducts("list.stats.certifications")}
-          </span>
+          <div className="lt-products-list__stat-cell">
+            <div className="lt-products-list__stat-num">
+              {CERTIFICATION_COUNT}
+            </div>
+            <div className="lt-products-list__stat-label">
+              {tProducts("list.stats.certificationsLabel")}
+            </div>
+            <div className="lt-products-list__stat-sub">
+              {tProducts("list.stats.certificationsSub")}
+            </div>
+          </div>
         </li>
       </ul>
 
-      {featured && (
-        <Link href={featured.href} className="lt-products-list__featured">
-          {featured.image && (
-            <div className="lt-products-list__featured-media">
-              <div className="lt-products-list__featured-media-plate">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={featured.image} alt="" />
-              </div>
-            </div>
-          )}
-          <div className="lt-products-list__featured-body">
-            <span className="lt-products-list__featured-eyebrow">
-              {featured.eyebrow}
-            </span>
-            <h2 className="lt-products-list__featured-title">
-              {featured.title}
-            </h2>
-            <p className="lt-products-list__featured-blurb">{featured.blurb}</p>
-            <span className="lt-products-list__featured-cta">
-              {featured.cta} →
-            </span>
-          </div>
-        </Link>
-      )}
-
-      <section
-        className="lt-products-list__helper"
-        aria-labelledby="helper-title"
-      >
-        <h2 id="helper-title" className="lt-products-list__helper-title">
-          {tProducts("list.helper.title")}
-        </h2>
-        <ul className="lt-products-list__helper-rows">
-          {(["analogue", "digital", "specialized"] as const).map((slug) => (
-            <li key={slug}>
-              <Link
-                href={`/products/${slug}`}
-                className="lt-products-list__helper-row"
-                data-accent={CARD_ACCENT[slug]}
-              >
-                <span className="lt-products-list__helper-name">
-                  {tProducts(`categories.${slug}.title`)}
-                </span>
-                <span className="lt-products-list__helper-trait">
-                  {tProducts(`list.helper.${slug}`)}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <ul className="lt-products-list__cats" id="categories">
-        {CATEGORY_SLUGS.map((slug) => {
-          const cat = CATEGORIES[slug];
-          const count = counts.get(slug)!;
-          if (count === 0) return null;
-          const series = seriesByHref.get(`/products/${slug}`);
-          return (
-            <li key={slug}>
-              <Link
-                href={`/products/${slug}`}
-                className="lt-products-list__card"
-                data-accent={CARD_ACCENT[slug]}
-              >
-                <span className="lt-products-list__card-code">{cat.code}</span>
-                <h2 className="lt-products-list__card-title">
-                  {tProducts(`categories.${slug}.title`)}
-                </h2>
-                <p className="lt-products-list__card-lede">
-                  {tProducts(`categories.${slug}.lede`)}
-                </p>
-                {series?.range && (
-                  <span className="lt-products-list__card-range">
-                    {series.range}
+      <div className="lt-products-side" id="categories">
+        <ul className="lt-products-side__stack">
+          {CATEGORY_SLUGS.map((slug) => {
+            const cat = CATEGORIES[slug];
+            const count = counts.get(slug)!;
+            if (count === 0) return null;
+            const series = seriesByHref.get(`/products/${slug}`);
+            return (
+              <li key={slug}>
+                <Link
+                  href={`/products/${slug}`}
+                  className="lt-products-side__card"
+                  data-accent={CARD_ACCENT[slug]}
+                >
+                  <span className="lt-products-side__card-code">
+                    {cat.code}
                   </span>
-                )}
-                <div className="lt-products-list__card-foot">
-                  <span className="lt-products-list__card-count">
-                    {tProducts("list.cardCount", { count })}
-                  </span>
-                  {series?.feat && (
-                    <span className="lt-products-list__card-feat">
-                      {series.feat}
+                  <div className="lt-products-side__card-body">
+                    <h2 className="lt-products-side__card-title">
+                      {tProducts(`categories.${slug}.title`)}
+                    </h2>
+                    <p className="lt-products-side__card-lede">
+                      {tProducts(`categories.${slug}.lede`)}
+                    </p>
+                  </div>
+                  <div className="lt-products-side__card-meta">
+                    <span className="lt-products-side__card-count">
+                      {tProducts("list.cardCount", { count })}
                     </span>
-                  )}
+                    {series?.feat && (
+                      <span className="lt-products-side__card-feat">
+                        {series.feat}
+                      </span>
+                    )}
+                  </div>
+                </Link>
+              </li>
+            );
+          })}
+          {accessories && (
+            <li key="accessories">
+              <Link
+                href="/products/accessories"
+                className="lt-products-side__card"
+                data-accent={CARD_ACCENT.accessories}
+              >
+                <span className="lt-products-side__card-code">ACC</span>
+                <div className="lt-products-side__card-body">
+                  <h2 className="lt-products-side__card-title">
+                    {accessories.label}
+                  </h2>
+                  <p className="lt-products-side__card-lede">
+                    {accessories.desc}
+                  </p>
                 </div>
+                <div className="lt-products-side__card-meta" />
               </Link>
             </li>
-          );
-        })}
-        {accessories && (
-          <li key="accessories">
-            <Link
-              href="/products/accessories"
-              className="lt-products-list__card lt-products-list__card--no-foot"
-              data-accent={CARD_ACCENT.accessories}
-            >
-              <h2 className="lt-products-list__card-title">
-                {accessories.label}
-              </h2>
-              <p className="lt-products-list__card-lede">{accessories.desc}</p>
-            </Link>
-          </li>
-        )}
-      </ul>
+          )}
+        </ul>
+
+        <RotatingFeatured
+          slides={slides}
+          slidesLabel={tProducts("showcase.slidesAriaLabel")}
+        />
+      </div>
 
       <section
         className="lt-products-list__apps"

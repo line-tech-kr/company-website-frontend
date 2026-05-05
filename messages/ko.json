@@ -60,10 +60,14 @@
       "lede": "아날로그·디지털·특수 시리즈로 구성된 매스플로우 컨트롤러(MFC)와 매스플로우 미터(MFM).",
       "cardCount": "{count}개 모델",
       "stats": {
-        "series": "시리즈",
-        "models": "모델",
-        "industries": "적용 분야",
-        "certifications": "인증"
+        "modelsLabel": "카탈로그 모델",
+        "modelsSub": "{count}개 시리즈 합산",
+        "rangeLabel": "SLPM 측정 범위",
+        "rangeSub": "전 시리즈 합산",
+        "industriesLabel": "적용 산업",
+        "industriesSub": "1997년부터 현장 검증",
+        "certificationsLabel": "인증",
+        "certificationsSub": "KGS · CE · ISO 9001"
       },
       "helper": {
         "title": "어떤 시리즈가 맞을까요?",

@@ -60,10 +60,14 @@
       "lede": "Mass Flow Controllers and Mass Flow Meters across analogue, digital, and specialized series.",
       "cardCount": "{count} models",
       "stats": {
-        "series": "series",
-        "models": "models",
-        "industries": "industries",
-        "certifications": "certifications"
+        "modelsLabel": "Models in catalog",
+        "modelsSub": "Across {count} series",
+        "rangeLabel": "SLPM, full range",
+        "rangeSub": "Cumulative across series",
+        "industriesLabel": "Industries served",
+        "industriesSub": "Field-validated since 1997",
+        "certificationsLabel": "Certifications",
+        "certificationsSub": "KGS · CE · ISO 9001"
       },
       "helper": {
         "title": "Not sure which series?",
