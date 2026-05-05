@@ -2,7 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { LT_SHELL } from "@/lib/content/shell";
 import type { Locale } from "@/lib/content/home";
-import { Logomark } from "../Logomark";
+import { LogoLockup } from "../LogoLockup";
 import "./Footer.css";
 
 type Props = {
@@ -14,18 +14,14 @@ function telHref(phone: string) {
 }
 
 export async function Footer({ locale }: Props) {
-  const { signoff, contact, legal, subsidiary, links, rights } =
-    LT_SHELL[locale].footer;
+  const { contact, legal, subsidiary, links, rights } = LT_SHELL[locale].footer;
   const t = await getTranslations({ locale, namespace: "footer" });
 
   return (
     <footer className="pd-foot">
       <div className="pd-foot__cols">
         <div className="pd-foot__brand">
-          <span className="pd-foot__mark" aria-hidden="true">
-            <Logomark size={20} />
-          </span>
-          <p className="pd-foot__sig">{signoff}</p>
+          <LogoLockup height={28} />
         </div>
 
         <div className="pd-foot__col">
