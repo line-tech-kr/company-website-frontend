@@ -7,6 +7,8 @@ import { allManualsQuery } from "@/sanity/queries";
 import { routing } from "@/i18n/routing";
 import "../resources-subpage.css";
 
+export const revalidate = 3600;
+
 type Props = { params: Promise<{ locale: string }> };
 
 type Series = "analogue" | "digital" | "specialized";

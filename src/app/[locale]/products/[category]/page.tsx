@@ -15,8 +15,9 @@ import { SanityProductSchema } from "@/lib/types/product";
 import { CategoryShowcaseSchema } from "@/lib/types/showcase";
 import { urlFor } from "@/sanity/imageUrl";
 import { z } from "zod";
-import { buildCategoryMetadata, siteUrl } from "@/lib/seo";
-import { safeJsonLd } from "@/lib/seo/jsonLd";
+import { buildCategoryMetadata } from "@/lib/seo";
+
+export const revalidate = 3600;
 
 type Props = { params: Promise<{ locale: Locale; category: string }> };
 
@@ -92,37 +93,8 @@ export default async function CategoryPage({ params }: Props) {
   };
   const emptyLabel = tProducts("emptyStack");
 
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: tCommon("home"),
-        item: `${siteUrl}/${locale}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: tNav("products"),
-        item: `${siteUrl}/${locale}/products`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: tBreadcrumb(category),
-        item: `${siteUrl}/${locale}/products/${category}`,
-      },
-    ],
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
-      />
       <main className="lt-wrap">
         <Breadcrumbs items={breadcrumbs} />
         <CategoryHero

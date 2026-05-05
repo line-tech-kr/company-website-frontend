@@ -3,25 +3,26 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { sanityClient } from "@/sanity/client";
-import { allProductsQuery } from "@/sanity/queries";
+import { productSlugsQuery } from "@/sanity/queries";
 import {
   CATEGORIES,
   CATEGORY_SLUGS,
   categoryForSeries,
   type CategorySlug,
 } from "@/lib/categories";
-import { SanityProductSchema } from "@/lib/types/product";
-import { z } from "zod";
+import type { Product } from "@/lib/types/product";
 import { buildProductsMetadata } from "@/lib/seo";
 import { getProductsCategories, LT_SHELL } from "@/lib/content/shell";
 import { LT_HOME, type Locale } from "@/lib/content/home";
 import "./products-list.css";
 
+export const revalidate = 3600;
+
 type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return buildProductsMetadata(locale as "ko" | "en" | "zh");
+  return buildProductsMetadata(locale as Locale);
 }
 
 export default async function ProductsListPage({ params }: Props) {
@@ -34,16 +35,17 @@ export default async function ProductsListPage({ params }: Props) {
     getTranslations("products"),
   ]);
 
-  const products = z
-    .array(SanityProductSchema)
-    .parse(await sanityClient.fetch(allProductsQuery));
+  const products =
+    await sanityClient.fetch<
+      Array<{ slug: string; series: Product["series"] }>
+    >(productSlugsQuery);
 
   const counts = new Map<CategorySlug, number>(
     CATEGORY_SLUGS.map((slug) => [slug, 0]),
   );
   for (const p of products) {
     const slug = categoryForSeries(p.series);
-    if (slug) counts.set(slug, counts.get(slug)! + 1);
+    counts.set(slug, counts.get(slug)! + 1);
   }
 
   const typedLocale = locale as Locale;

@@ -6,13 +6,14 @@ import { ProductThumb } from "../ProductThumb";
 import { Chip } from "@/components/ui/Chip/Chip";
 import type { Product } from "@/lib/types/product";
 import type { CategorySlug } from "@/lib/categories";
+import type { Locale } from "@/i18n/routing";
 import "./ProductRow.css";
 
 type Props = {
   product: Product;
   imageSrc: string | null;
   category: CategorySlug;
-  locale: "ko" | "en" | "zh";
+  locale: Locale;
 };
 
 const VISIBLE_TAG_KINDS = new Set(["capability", "gas"]);

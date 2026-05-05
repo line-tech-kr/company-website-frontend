@@ -1,6 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link, getPathname } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
+import { siteUrl } from "@/lib/seo";
 import { safeJsonLd } from "@/lib/seo/jsonLd";
 import "./Breadcrumbs.css";
 
@@ -13,27 +14,12 @@ type Props = {
   items: BreadcrumbItem[];
 };
 
-function resolveSiteUrl(): string {
-  const fromEnv = process.env.SITE_URL;
-  if (fromEnv) return fromEnv.replace(/\/$/, "");
-  if (process.env.VERCEL_URL) {
-    if (process.env.VERCEL_ENV === "production") {
-      console.warn(
-        "SITE_URL is not set on a Vercel production deploy; falling back to VERCEL_URL for breadcrumb JSON-LD. Set SITE_URL to the canonical domain.",
-      );
-    }
-    return `https://${process.env.VERCEL_URL}`;
-  }
-  return "http://localhost:3000";
-}
-
 export async function Breadcrumbs({ items }: Props) {
   const [locale, t] = await Promise.all([
     getLocale(),
     getTranslations("breadcrumbs"),
   ]);
-  const siteUrl = resolveSiteUrl();
-  const typedLocale = locale as (typeof routing.locales)[number];
+  const typedLocale = locale as Locale;
 
   const jsonLd = {
     "@context": "https://schema.org",

@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
+import { useScrollSpy } from "@/lib/hooks/useScrollSpy";
 import type { AccessoriesNavNode } from "@/lib/content/accessories";
 
 type Props = {
@@ -8,62 +9,9 @@ type Props = {
   items: AccessoriesNavNode[];
 };
 
-/**
- * Sticky side-nav for /products/accessories. Two-level structure: section
- * groups (e.g., "Readouts") containing leaf items (e.g., "LTI-200"). Both
- * groups and items are anchor-linked; IntersectionObserver picks the entry
- * currently spanning a hairline scan band at 30% of viewport height.
- *
- * Mirrors the CompanySideNav scroll-spy pattern, extended to handle the
- * two-level tree by flattening nav nodes into a single observation list
- * while preserving group/leaf semantics in the rendered DOM.
- */
 export function AccessoriesSideNav({ heading, items }: Props) {
-  const flat = useMemo(() => flattenNav(items), [items]);
-  const [active, setActive] = useState<string>(flat[0]?.id ?? "");
-
-  useEffect(() => {
-    if (typeof IntersectionObserver === "undefined") return;
-
-    const intersecting = new Set<string>();
-
-    const isNearBottom = () =>
-      window.scrollY + window.innerHeight >=
-      document.documentElement.scrollHeight - 64;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (isNearBottom()) return;
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            intersecting.add(entry.target.id);
-          } else {
-            intersecting.delete(entry.target.id);
-          }
-        }
-        const next = flat.find((node) => intersecting.has(node.id));
-        if (next) setActive(next.id);
-      },
-      { rootMargin: "-30% 0px -70% 0px" },
-    );
-
-    for (const node of flat) {
-      const el = document.getElementById(node.id);
-      if (el) observer.observe(el);
-    }
-
-    const onScroll = () => {
-      if (isNearBottom() && flat.length > 0) {
-        setActive(flat[flat.length - 1].id);
-      }
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, [flat]);
+  const ids = useMemo(() => flattenNav(items).map((n) => n.id), [items]);
+  const active = useScrollSpy(ids);
 
   return (
     <aside className="acc-aside" aria-label={heading}>
