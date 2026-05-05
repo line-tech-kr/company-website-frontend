@@ -17,13 +17,21 @@ import { buildProductsMetadata } from "@/lib/seo";
 import { getProductsCategories } from "@/lib/content/shell";
 import { LT_HOME, type Locale } from "@/lib/content/home";
 import { LT_APPLICATIONS } from "@/lib/content/applications";
-import { resolveProductImage } from "@/lib/productImages";
+import { urlFor } from "@/sanity/imageUrl";
 import {
   RotatingFeatured,
   type RotatingSlide,
   type SlideAccent,
 } from "./RotatingFeatured";
 import "./products-list.css";
+
+const FLAGSHIP_IMAGE_PLACEHOLDER = "/products/lti/placeholder.svg";
+
+function flagshipImageUrl(flagship: Product): string {
+  const image = flagship.images?.[0];
+  if (!image?.asset) return FLAGSHIP_IMAGE_PLACEHOLDER;
+  return urlFor(image).width(720).url();
+}
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -110,7 +118,7 @@ export default async function ProductsListPage({ params }: Props) {
       eyebrow: tProducts(`categories.${slug}.title`),
       model: flagship.model,
       blurb: tProducts(`categories.${slug}.lede`),
-      image: resolveProductImage(flagship.slug.current),
+      image: flagshipImageUrl(flagship),
       cta: tProducts("showcase.viewProduct"),
     };
   }).filter((x): x is RotatingSlide => Boolean(x));
