@@ -1,3 +1,5 @@
+import "@/test/mocks/i18n";
+
 import { describe, expect, it, vi } from "vitest";
 import { render, fireEvent, within } from "@testing-library/react";
 import { MegaMenu, MegaMenuScrim } from "./MegaMenu";
@@ -6,21 +8,6 @@ import {
   type HeaderNavCtx,
 } from "../HeaderNav/HeaderNavContext";
 import { LT_SHELL, getProductsCategories } from "@/lib/content/shell";
-
-vi.mock("@/i18n/navigation", () => ({
-  Link: ({
-    href,
-    children,
-    ...rest
-  }: { href: unknown; children: React.ReactNode } & Record<
-    string,
-    unknown
-  >) => (
-    <a href={typeof href === "string" ? href : "#"} {...rest}>
-      {children}
-    </a>
-  ),
-}));
 
 function stubCtx(overrides: Partial<HeaderNavCtx> = {}): HeaderNavCtx {
   return {
