@@ -13,7 +13,7 @@ import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
 import { SanityProductSchema } from "@/lib/types/product";
 import { CategoryShowcaseSchema } from "@/lib/types/showcase";
-import { resolveProductImage } from "@/lib/productImages";
+import { urlFor } from "@/sanity/imageUrl";
 import { z } from "zod";
 import { buildCategoryMetadata, siteUrl } from "@/lib/seo";
 import { safeJsonLd } from "@/lib/seo/jsonLd";
@@ -60,7 +60,9 @@ export default async function CategoryPage({ params }: Props) {
     function: e.function,
     flowRange: e.flowRange,
     accuracy: e.accuracy,
-    image: resolveProductImage(e.slug),
+    image: e.image?.asset
+      ? urlFor(e.image).width(960).height(640).fit("crop").url()
+      : "/products/lti/placeholder.svg",
     href: `/${locale}/products/${category}/${e.slug}`,
   }));
 
