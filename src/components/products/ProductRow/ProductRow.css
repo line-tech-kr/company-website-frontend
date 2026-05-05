@@ -25,7 +25,21 @@
 .lt-prod-row__cell--thumb {
   color: var(--pd-muted);
   justify-content: center;
-  opacity: 0.5;
+}
+.lt-prod-row__thumb {
+  position: relative;
+  width: 44px;
+  height: 30px;
+  background: var(--pd-surface, #f8fafc);
+  border: 1px solid var(--pd-rule, #eef2f7);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lt-prod-row__thumb-img {
+  object-fit: contain;
 }
 .lt-prod-row__cell--code {
   font: 500 var(--lt-fs-sm) var(--lt-mono);

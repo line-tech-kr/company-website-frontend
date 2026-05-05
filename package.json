@@ -22,6 +22,7 @@
     "test:ui": "vitest --ui",
     "i18n:check": "tsx scripts/check-i18n-parity.ts",
     "seed:products": "tsx scripts/seed-products.ts",
+    "upload:product-images": "tsx scripts/upload-product-images.ts",
     "seed:tags": "tsx scripts/seed-tags.ts",
     "sanity:extract": "sanity schema extract",
     "sanity:typegen": "sanity typegen generate",

@@ -62,6 +62,7 @@ export const categoryShowcaseQuery = defineQuery(`
       "function": product->function,
       "flowRange": product->massFlowSpecs.flowRange.display,
       "accuracy": product->massFlowSpecs.accuracy.display,
+      "image": product->images[0],
     },
     "digital": digital[]{
       caption,
@@ -70,6 +71,7 @@ export const categoryShowcaseQuery = defineQuery(`
       "function": product->function,
       "flowRange": product->massFlowSpecs.flowRange.display,
       "accuracy": product->massFlowSpecs.accuracy.display,
+      "image": product->images[0],
     },
     "specialized": specialized[]{
       caption,
@@ -78,6 +80,7 @@ export const categoryShowcaseQuery = defineQuery(`
       "function": product->function,
       "flowRange": product->massFlowSpecs.flowRange.display,
       "accuracy": product->massFlowSpecs.accuracy.display,
+      "image": product->images[0],
     },
   }
 `);

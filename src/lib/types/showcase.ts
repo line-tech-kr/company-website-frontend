@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { SanityImageSchema } from "./product";
 
 const ShowcaseEntrySchema = z.object({
   model: z.string(),
@@ -7,6 +8,7 @@ const ShowcaseEntrySchema = z.object({
   function: z.enum(["MFC", "MFM"]).nullable(),
   flowRange: z.string().nullable(),
   accuracy: z.string().nullable(),
+  image: SanityImageSchema.nullable().optional(),
 });
 
 export const CategoryShowcaseSchema = z.object({

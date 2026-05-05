@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Link, useRouter } from "@/i18n/navigation";
 import { ProductThumb } from "../ProductThumb";
 import { Chip } from "@/components/ui/Chip/Chip";
@@ -9,6 +10,7 @@ import "./ProductRow.css";
 
 type Props = {
   product: Product;
+  imageSrc: string | null;
   category: CategorySlug;
   locale: "ko" | "en" | "zh";
 };
@@ -25,7 +27,7 @@ function fittingSummary(connections: Product["connections"]): string {
   return [...types].join(" · ");
 }
 
-export function ProductRow({ product, category, locale }: Props) {
+export function ProductRow({ product, imageSrc, category, locale }: Props) {
   const href = `/products/${category}/${product.slug.current}`;
   const label = product.description?.[locale] ?? product.productLabel[locale];
   const range = product.massFlowSpecs.flowRange.display;
@@ -54,7 +56,19 @@ export function ProductRow({ product, category, locale }: Props) {
         className="lt-prod-row__cell lt-prod-row__cell--thumb"
         aria-hidden="true"
       >
-        <ProductThumb />
+        <div className="lt-prod-row__thumb">
+          {imageSrc ? (
+            <Image
+              src={imageSrc}
+              alt=""
+              fill
+              sizes="44px"
+              className="lt-prod-row__thumb-img"
+            />
+          ) : (
+            <ProductThumb />
+          )}
+        </div>
       </td>
       <th scope="row" className="lt-prod-row__cell lt-prod-row__cell--code">
         <Link href={href} className="lt-prod-row__codelink">
