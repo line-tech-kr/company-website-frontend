@@ -1,9 +1,8 @@
 import { buildLlmsManifest } from "@/lib/seo/llmsManifest";
+import { siteUrl } from "@/lib/seo";
 
 export const dynamic = "force-static";
 export const revalidate = false;
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://line-tech.co";
 
 export async function GET() {
   const content = await buildLlmsManifest(siteUrl);

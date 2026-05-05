@@ -3,14 +3,11 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { sanityClient } from "@/sanity/client";
-import {
-  allCataloguesQuery,
-  allManualsQuery,
-  allDrawingsQuery,
-  allCertificationsQuery,
-} from "@/sanity/queries";
+import { resourceCountsQuery } from "@/sanity/queries";
 import { routing } from "@/i18n/routing";
 import "./resources-hub.css";
+
+export const revalidate = 3600;
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -38,23 +35,12 @@ export default async function ResourcesHubPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [tCommon, tNav, tRes, catalogues, manuals, drawings, certifications] =
-    await Promise.all([
-      getTranslations("common"),
-      getTranslations("nav"),
-      getTranslations("resources"),
-      sanityClient.fetch(allCataloguesQuery),
-      sanityClient.fetch(allManualsQuery),
-      sanityClient.fetch(allDrawingsQuery),
-      sanityClient.fetch(allCertificationsQuery),
-    ]);
-
-  const counts: Record<string, number> = {
-    catalogues: catalogues.length,
-    drawings: drawings.length,
-    manuals: manuals.length,
-    certifications: certifications.length,
-  };
+  const [tCommon, tNav, tRes, counts] = await Promise.all([
+    getTranslations("common"),
+    getTranslations("nav"),
+    getTranslations("resources"),
+    sanityClient.fetch(resourceCountsQuery),
+  ]);
 
   const breadcrumbs = [
     { label: tCommon("home"), href: "/" },

@@ -1,6 +1,7 @@
 import { ProductRow } from "../ProductRow";
 import type { Product } from "@/lib/types/product";
 import type { CategorySlug } from "@/lib/categories";
+import type { Locale } from "@/i18n/routing";
 import { urlFor } from "@/sanity/imageUrl";
 import "./ProductStack.css";
 
@@ -9,7 +10,7 @@ type Props = {
   subtitle: string;
   products: Product[];
   category: CategorySlug;
-  locale: "ko" | "en" | "zh";
+  locale: Locale;
   emptyLabel: string;
   headers: {
     model: string;

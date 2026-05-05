@@ -13,12 +13,16 @@ export const CATEGORIES: Record<
   specialized: { code: "LD·LM", series: "specialized" },
 };
 
+const SERIES_TO_CATEGORY: Record<Product["series"], CategorySlug> = {
+  analogue: "analogue",
+  digital: "digital",
+  specialized: "specialized",
+};
+
 export function isCategorySlug(s: string): s is CategorySlug {
   return (CATEGORY_SLUGS as readonly string[]).includes(s);
 }
 
-export function categoryForSeries(
-  series: Product["series"],
-): CategorySlug | undefined {
-  return CATEGORY_SLUGS.find((slug) => CATEGORIES[slug].series === series);
+export function categoryForSeries(series: Product["series"]): CategorySlug {
+  return SERIES_TO_CATEGORY[series];
 }

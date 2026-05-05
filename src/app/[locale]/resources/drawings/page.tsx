@@ -6,6 +6,8 @@ import { allDrawingsQuery } from "@/sanity/queries";
 import { routing } from "@/i18n/routing";
 import "../resources-subpage.css";
 
+export const revalidate = 3600;
+
 type Props = { params: Promise<{ locale: string }> };
 
 type DrawingItem = {

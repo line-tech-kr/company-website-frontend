@@ -1,11 +1,13 @@
 import type { MetadataRoute } from "next";
-import { sanityClient } from "@/sanity/client";
+import { sanityBuildClient } from "@/sanity/client";
 import { fetchSanity } from "@/sanity/fetch";
-import { allProductsQuery } from "@/sanity/queries";
+import { productSlugsQuery } from "@/sanity/queries";
 import { routing } from "@/i18n/routing";
 import { categoryForSeries, CATEGORY_SLUGS } from "@/lib/categories";
 import type { Product } from "@/lib/types/product";
 import { siteUrl } from "@/lib/seo";
+
+export const revalidate = 3600;
 
 type StaticRoute = {
   path: string;
@@ -66,23 +68,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   let productEntries: MetadataRoute.Sitemap = [];
   try {
-    const products = (await fetchSanity(
-      () => sanityClient.fetch(allProductsQuery),
-      { name: "sitemap.allProducts" },
-    )) as Product[];
+    const products = await fetchSanity(
+      () =>
+        sanityBuildClient.fetch<
+          Array<{ slug: string; series: Product["series"] }>
+        >(productSlugsQuery),
+      { name: "sitemap.productSlugs" },
+    );
 
     productEntries = products
-      .filter((p) => p?.slug?.current)
+      .filter((p) => p?.slug)
       .flatMap((product) => {
-        const category = categoryForSeries(product.series);
-        if (!category) return [];
-        const path = `products/${category}/${product.slug.current}`;
+        const path = `products/${categoryForSeries(product.series)}/${product.slug}`;
         return routing.locales.map((locale) =>
           entry(locale, path, 1.0, "monthly", now),
         );
       });
   } catch {
-    // If Sanity is unreachable at build time, ship a sitemap with static + category routes only.
     productEntries = [];
   }
 

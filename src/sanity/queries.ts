@@ -1,6 +1,6 @@
 import { defineQuery } from "next-sanity";
 
-const PRODUCT_PROJECTION = `
+const PRODUCT_BASE_PROJECTION = `
   model,
   slug,
   series,
@@ -22,7 +22,16 @@ const PRODUCT_PROJECTION = `
   description,
   features,
   connections,
-  massFlowSpecs,
+  massFlowSpecs
+`;
+
+const PRODUCT_LIST_PROJECTION = `
+  ${PRODUCT_BASE_PROJECTION},
+  "images": images[0..0]
+`;
+
+const PRODUCT_DETAIL_PROJECTION = `
+  ${PRODUCT_BASE_PROJECTION},
   digitalCommunication,
   images,
   dimensionDrawing
@@ -30,19 +39,19 @@ const PRODUCT_PROJECTION = `
 
 export const productBySlugQuery = defineQuery(`
   *[_type == "product" && slug.current == $slug][0]{
-    ${PRODUCT_PROJECTION}
+    ${PRODUCT_DETAIL_PROJECTION}
   }
 `);
 
 export const productsBySeriesQuery = defineQuery(`
   *[_type == "product" && series == $series] | order(function asc, model asc){
-    ${PRODUCT_PROJECTION}
+    ${PRODUCT_LIST_PROJECTION}
   }
 `);
 
 export const productByModelQuery = defineQuery(`
   *[_type == "product" && lower(model) == lower($model)][0]{
-    ${PRODUCT_PROJECTION}
+    ${PRODUCT_DETAIL_PROJECTION}
   }
 `);
 
@@ -92,7 +101,7 @@ export const allProductsQuery = defineQuery(`
     function asc,
     model asc
   ){
-    ${PRODUCT_PROJECTION}
+    ${PRODUCT_LIST_PROJECTION}
   }
 `);
 
@@ -134,6 +143,15 @@ export const allDrawingsQuery = defineQuery(`
     series,
     "dwgUrl": dwgFile.asset->url,
     "stpUrl": stpFile.asset->url
+  }
+`);
+
+export const resourceCountsQuery = defineQuery(`
+  {
+    "catalogues": count(*[_type == "catalogue"]),
+    "manuals": count(*[_type == "manual"]),
+    "drawings": count(*[_type == "drawing"]),
+    "certifications": count(*[_type == "certification"])
   }
 `);
 

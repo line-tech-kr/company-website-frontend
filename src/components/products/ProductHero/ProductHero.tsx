@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/Button";
 import { Glyph } from "@/components/ui/Glyph";
 import type { Product } from "@/lib/types/product";
+import type { Locale } from "@/i18n/routing";
 import "./ProductHero.css";
 
 type Props = {
   product: Product;
-  locale: "ko" | "en" | "zh";
+  locale: Locale;
   categoryLabel: string;
   quoteLabel: string;
   specsLabel: string;

@@ -1,6 +1,6 @@
-import type { routing } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
 
-export type Locale = (typeof routing.locales)[number];
+export type { Locale };
 
 type SeriesItem = {
   code: string;
