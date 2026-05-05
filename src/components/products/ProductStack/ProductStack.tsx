@@ -94,7 +94,7 @@ export function ProductStack({
             {products.map((p) => {
               const firstImage = p.images?.[0];
               const imageSrc = firstImage?.asset
-                ? urlFor(firstImage).width(88).height(60).fit("crop").url()
+                ? urlFor(firstImage).width(88).url()
                 : null;
               return (
                 <ProductRow
