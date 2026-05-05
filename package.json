@@ -71,5 +71,12 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,mjs,cjs,json,css,md,yml,yaml}": "prettier --write"
+  },
+  "pnpm": {
+    "overrides": {
+      "js-yaml@<3.14.2": ">=3.14.2",
+      "postcss@<8.5.10": ">=8.5.10",
+      "uuid@<14.0.0": ">=14.0.0"
+    }
   }
 }
