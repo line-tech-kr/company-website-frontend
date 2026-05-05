@@ -3,9 +3,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "@/i18n/navigation";
 
+export type SlideAccent = "blue" | "steel" | "gold" | "neutral";
+
 export type RotatingSlide = {
   href: string;
-  accent: string;
+  accent: SlideAccent;
   eyebrow: string;
   model: string;
   blurb: string;
@@ -25,30 +27,38 @@ export function RotatingFeatured({
   intervalMs = 5500,
 }: Props) {
   const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [mouseInside, setMouseInside] = useState(false);
+  const [focusInside, setFocusInside] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
-    if (paused || slides.length <= 1) return;
     if (typeof window === "undefined") return;
-    const reduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    if (reduced) return;
+    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mql.matches);
+    const onChange = () => setReducedMotion(mql.matches);
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
+
+  useEffect(() => {
+    if (slides.length <= 1 || reducedMotion) return;
+    if (mouseInside || focusInside) return;
+    if (typeof window === "undefined") return;
     const id = window.setInterval(() => {
       setActive((n) => (n + 1) % slides.length);
     }, intervalMs);
     return () => window.clearInterval(id);
-  }, [paused, slides.length, intervalMs]);
+  }, [mouseInside, focusInside, reducedMotion, slides.length, intervalMs]);
 
   if (slides.length === 0) return null;
 
   return (
     <div
       className="lt-products-side__rot"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
-      onBlurCapture={() => setPaused(false)}
+      onMouseEnter={() => setMouseInside(true)}
+      onMouseLeave={() => setMouseInside(false)}
+      onFocusCapture={() => setFocusInside(true)}
+      onBlurCapture={() => setFocusInside(false)}
     >
       <div className="lt-products-side__rot-stack">
         {slides.map((s, i) => {
@@ -84,16 +94,15 @@ export function RotatingFeatured({
       {slides.length > 1 && (
         <div
           className="lt-products-side__rot-dots"
-          role="tablist"
+          role="group"
           aria-label={slidesLabel}
         >
           {slides.map((s, i) => (
             <button
               key={s.href}
               type="button"
-              role="tab"
-              aria-selected={i === active}
               aria-label={`${i + 1} / ${slides.length}: ${s.model}`}
+              aria-current={i === active}
               className="lt-products-side__rot-dot"
               onClick={() => setActive(i)}
             />

@@ -69,12 +69,6 @@
         "certificationsLabel": "인증",
         "certificationsSub": "KGS · CE · ISO 9001"
       },
-      "helper": {
-        "title": "어떤 시리즈가 맞을까요?",
-        "analogue": "검증된 아날로그 신호",
-        "digital": "정밀 디지털 통신",
-        "specialized": "디스플레이 일체형·특수 환경"
-      },
       "applications": {
         "label": "주요 적용 분야",
         "viewAll": "전체 {count}개 적용 분야 보기 →"

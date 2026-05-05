@@ -69,12 +69,6 @@
         "certificationsLabel": "Certifications",
         "certificationsSub": "KGS · CE · ISO 9001"
       },
-      "helper": {
-        "title": "Not sure which series?",
-        "analogue": "Proven, simple analogue signal",
-        "digital": "Precision, digital communication",
-        "specialized": "Display-integrated, harsh environments"
-      },
       "applications": {
         "label": "Common applications",
         "viewAll": "View all {count} applications →"

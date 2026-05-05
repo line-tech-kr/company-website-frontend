@@ -69,12 +69,6 @@
         "certificationsLabel": "认证",
         "certificationsSub": "KGS · CE · ISO 9001"
       },
-      "helper": {
-        "title": "不确定选哪个系列？",
-        "analogue": "经验证的模拟信号",
-        "digital": "精密数字通信",
-        "specialized": "集成显示，应对苛刻环境"
-      },
       "applications": {
         "label": "常见应用",
         "viewAll": "查看全部 {count} 项应用 →"

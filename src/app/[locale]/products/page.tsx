@@ -18,12 +18,16 @@ import { getProductsCategories } from "@/lib/content/shell";
 import { LT_HOME, type Locale } from "@/lib/content/home";
 import { LT_APPLICATIONS } from "@/lib/content/applications";
 import { resolveProductImage } from "@/lib/productImages";
-import { RotatingFeatured, type RotatingSlide } from "./RotatingFeatured";
+import {
+  RotatingFeatured,
+  type RotatingSlide,
+  type SlideAccent,
+} from "./RotatingFeatured";
 import "./products-list.css";
 
 type Props = { params: Promise<{ locale: string }> };
 
-const CARD_ACCENT: Record<CategorySlug | "accessories", string> = {
+const CARD_ACCENT: Record<CategorySlug | "accessories", SlideAccent> = {
   analogue: "blue",
   digital: "steel",
   specialized: "gold",
@@ -186,7 +190,7 @@ export default async function ProductsListPage({ params }: Props) {
         </li>
       </ul>
 
-      <div className="lt-products-side" id="categories">
+      <div className="lt-products-side">
         <ul className="lt-products-side__stack">
           {CATEGORY_SLUGS.map((slug) => {
             const cat = CATEGORIES[slug];
@@ -229,10 +233,9 @@ export default async function ProductsListPage({ params }: Props) {
             <li key="accessories">
               <Link
                 href="/products/accessories"
-                className="lt-products-side__card"
+                className="lt-products-side__card lt-products-side__card--no-code"
                 data-accent={CARD_ACCENT.accessories}
               >
-                <span className="lt-products-side__card-code">ACC</span>
                 <div className="lt-products-side__card-body">
                   <h2 className="lt-products-side__card-title">
                     {accessories.label}
@@ -241,7 +244,6 @@ export default async function ProductsListPage({ params }: Props) {
                     {accessories.desc}
                   </p>
                 </div>
-                <div className="lt-products-side__card-meta" />
               </Link>
             </li>
           )}

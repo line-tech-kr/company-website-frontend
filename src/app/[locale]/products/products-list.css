@@ -218,6 +218,10 @@
   outline-offset: 2px;
 }
 
+.lt-products-side__card--no-code {
+  grid-template-columns: 1fr;
+}
+
 .lt-products-side__card-code {
   font: 700 var(--lt-fs-xs) / 1 var(--lt-sans);
   letter-spacing: 0.08em;
@@ -404,7 +408,7 @@
   background: var(--pd-fg);
 }
 
-.lt-products-side__rot-dot[aria-selected="true"] {
+.lt-products-side__rot-dot[aria-current="true"] {
   background: var(--pd-primary);
   transform: scale(1.3);
 }
