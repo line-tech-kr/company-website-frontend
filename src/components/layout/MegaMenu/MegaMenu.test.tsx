@@ -106,7 +106,7 @@ describe("MegaMenu", () => {
     expect(resources).toHaveAttribute("aria-hidden", "true");
   });
 
-  it("renders 4 company links + 13-certifications featured card when company is open", () => {
+  it("renders 4 company links + certifications featured card when company is open", () => {
     const { container } = renderMega(stubCtx({ openId: "company" }));
 
     const panel = container.querySelector('[data-id="company"]');
@@ -117,7 +117,7 @@ describe("MegaMenu", () => {
       expect(within(panel as HTMLElement).getByText(label)).toBeInTheDocument();
     });
     expect(
-      within(panel as HTMLElement).getByText(/certifications/i),
+      within(panel as HTMLElement).getByText("View all certifications"),
     ).toBeInTheDocument();
   });
 
