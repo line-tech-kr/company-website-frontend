@@ -68,10 +68,23 @@ describe("pickFlagship", () => {
     expect(pickFlagship(ALL_PRODUCTS, "specialized")?.model).toBe("LD030C");
   });
 
-  it("falls back to any product in the category when the pin is absent", () => {
+  it("falls back when the pinned model is not in the product list", () => {
     const products = ALL_PRODUCTS.filter((p) => p.model !== "M3030VA");
     const result = pickFlagship(products, "analogue");
     expect(result?.series).toBe("analogue");
+    expect(result?.model).not.toBe("M3030VA");
+  });
+
+  it("falls back when the slug has no entry in FLAGSHIP_MODEL", () => {
+    const saved = FLAGSHIP_MODEL.analogue;
+    try {
+      delete (FLAGSHIP_MODEL as Partial<Record<string, string>>).analogue;
+      const products = ALL_PRODUCTS.filter((p) => p.series === "analogue");
+      const result = pickFlagship(products, "analogue");
+      expect(result?.series).toBe("analogue");
+    } finally {
+      FLAGSHIP_MODEL.analogue = saved;
+    }
   });
 
   it("returns undefined when the category has no products", () => {
@@ -106,7 +119,7 @@ describe("flagshipImageUrl", () => {
 
   it("placeholder cannot silently reach the rotator — warn fires for every imageless flagship", () => {
     const imagelessFlagships = CATEGORY_SLUGS.map((slug) =>
-      makeProduct({ model: FLAGSHIP_MODEL[slug]!, series: slug === "analogue" ? "analogue" : slug === "digital" ? "digital" : "specialized" }),
+      makeProduct({ model: FLAGSHIP_MODEL[slug]!, series: slug as Product["series"] }),
     );
     for (const p of imagelessFlagships) {
       vi.mocked(console.warn).mockClear();
