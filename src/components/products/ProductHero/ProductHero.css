@@ -153,8 +153,3 @@
     grid-template-columns: 1fr;
   }
 }
-@media (max-width: 640px) {
-  .lt-pdp-hero__model {
-    font-size: 44px;
-  }
-}

@@ -68,17 +68,52 @@
   --pd-r-lg: 10px;
 
   /* Type scale — use these instead of literal px values.
-   * Body tier (xs–xl) = reusable buckets. Title tier = named by role. */
-  --lt-fs-micro: 11px; /* numeric-only / English-only micro: table indices, group nums, file-type tags (PDF/DWG), DWG-stamp metadata. NEVER for localized labels — Hangul/Han glyphs degrade below 13px. */
-  --lt-fs-xs: 13px; /* captions, footnotes, mono labels, locale switcher */
-  --lt-fs-sm: 15px; /* eyebrow, item desc, secondary body, nav links */
-  --lt-fs-md: 17px; /* primary body, hero lede, section sub */
-  --lt-fs-lg: 22px; /* hero eyebrow, item titles, sub-section headings */
-  --lt-fs-xl: 34px; /* stat number */
-  --lt-fs-h2-dense: 40px; /* /company sections (denser two-col layout) */
-  --lt-fs-h2: 48px; /* default section h2 (home, contact) */
-  --lt-fs-feature: 56px; /* feature spotlight (M3030VA) */
-  --lt-fs-hero: 72px; /* hero h1 */
+   * Body tier (xs–xl) = reusable buckets. Title tier = named by role.
+   *
+   * Title tokens are fluid: clamp(MIN, intercept + slope·100vw, MAX) where
+   * MIN is the size at 360px viewport and MAX is the size at 1920px+. The
+   * upper anchor sits at full-HD so 1280–1512px laptops land mid-ramp
+   * (visibly smaller than today) instead of pinning to MAX. Small body
+   * tokens (micro/xs/sm) stay flat — they're already at the legibility
+   * floor, especially for CJK. */
+  --lt-fs-micro: 0.6875rem; /* 11px — numeric-only / English-only micro: table indices, group nums, file-type tags (PDF/DWG), DWG-stamp metadata. NEVER for localized labels — Hangul/Han glyphs degrade below 13px. */
+  --lt-fs-xs: 0.8125rem; /* 13px — captions, footnotes, mono labels, locale switcher */
+  --lt-fs-sm: 0.9375rem; /* 15px — eyebrow, item desc, secondary body, nav links */
+  --lt-fs-md: clamp(
+    1rem,
+    0.986rem + 0.06vw,
+    1.0625rem
+  ); /* 16→17px — primary body, hero lede, section sub */
+  --lt-fs-lg: clamp(
+    1.125rem,
+    1.067rem + 0.26vw,
+    1.375rem
+  ); /* 18→22px — hero eyebrow, item titles, sub-section headings */
+  --lt-fs-xl: clamp(
+    1.625rem,
+    1.51rem + 0.51vw,
+    2.125rem
+  ); /* 26→34px — stat number */
+  --lt-fs-h2-dense: clamp(
+    1.75rem,
+    1.577rem + 0.77vw,
+    2.5rem
+  ); /* 28→40px — /company sections (denser two-col layout) */
+  --lt-fs-h2: clamp(
+    2rem,
+    1.769rem + 1.03vw,
+    3rem
+  ); /* 32→48px — default section h2 (home, contact) */
+  --lt-fs-feature: clamp(
+    2.25rem,
+    1.962rem + 1.28vw,
+    3.5rem
+  ); /* 36→56px — feature spotlight (M3030VA) */
+  --lt-fs-hero: clamp(
+    2.5rem,
+    2.038rem + 2.05vw,
+    4.5rem
+  ); /* 40→72px — hero h1 */
 
   --lt-sans:
     var(--font-sans), -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
@@ -157,6 +192,9 @@
 
 /* ─── Base ─────────────────────────────────────────────────────────── */
 html {
+  /* Prevent iOS Safari from auto-inflating text in narrow layouts. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   /* Smooth in-page anchor scroll for any page using `#section` links
    * (e.g. /company side-nav). Reduced-motion override below. */
   scroll-behavior: smooth;

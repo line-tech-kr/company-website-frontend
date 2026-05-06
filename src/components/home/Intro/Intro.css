@@ -157,15 +157,15 @@
     gap: 40px;
     padding: 48px 0 64px;
   }
-  .ho-intro__title {
-    font-size: var(--lt-fs-feature);
-  }
 }
 @media (max-width: 500px) {
   .ho-intro {
     padding: 32px 0 48px;
   }
+  /* Phone target deliberately smaller than the hero token's MIN; preserves
+   * the original mobile hierarchy where the intro h1 sits below the fluid
+   * hero floor on narrow viewports. */
   .ho-intro__title {
-    font-size: clamp(28px, 8vw, 36px);
+    font-size: clamp(1.75rem, 8vw, 2.25rem);
   }
 }

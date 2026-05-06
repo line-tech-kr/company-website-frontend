@@ -110,17 +110,10 @@
     gap: 16px;
     padding: 18px 8px;
   }
-  .lt-pdp-over__num {
-    font-size: 24px;
-  }
-  .lt-pdp-over__feat {
-    font-size: 15px;
-  }
   .lt-pdp-over__data {
     grid-column: 2;
     text-align: left;
     justify-content: flex-start;
-    font-size: 14px;
     margin-top: 4px;
   }
 }

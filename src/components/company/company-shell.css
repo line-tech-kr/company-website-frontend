@@ -382,9 +382,6 @@
   .co-section + .co-section {
     margin-top: 12px;
   }
-  .co-sechd__title {
-    font-size: 32px; /* mobile reduction */
-  }
   .co-greeting__layout {
     grid-template-columns: 1fr;
     gap: 32px;
