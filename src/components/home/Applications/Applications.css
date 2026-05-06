@@ -39,12 +39,12 @@
   margin-bottom: 18px;
 }
 .ho-applications__n {
-  font: 500 var(--lt-fs-md)/1.25 var(--lt-sans);
+  font: 500 var(--lt-fs-lg)/1.25 var(--lt-sans);
   color: var(--pd-fg-strong);
   letter-spacing: -0.005em;
 }
 .ho-applications__k {
-  font: 400 var(--lt-fs-xs) var(--lt-mono);
+  font: 400 var(--lt-fs-sm) var(--lt-mono);
   color: var(--pd-muted);
 }
 

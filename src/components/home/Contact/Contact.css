@@ -41,6 +41,10 @@
   line-height: 1.55;
   color: rgba(255, 255, 255, 0.72);
 }
+:lang(ko) .ho-contact__sub {
+  max-width: none;
+  white-space: nowrap;
+}
 .ho-contact__btns {
   position: relative;
   display: inline-flex;

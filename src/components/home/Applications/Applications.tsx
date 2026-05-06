@@ -9,7 +9,11 @@ export function Applications({ h }: Props) {
   const { applications } = h;
   return (
     <section className="ho-sec">
-      <SectionHead kicker={applications.kicker} title={applications.title} />
+      <SectionHead
+        kicker={applications.kicker}
+        title={applications.title}
+        sub={applications.sub}
+      />
       <ul className="ho-applications">
         {applications.items.map((a, i) => (
           <li className="ho-applications__cell" key={a.n}>
