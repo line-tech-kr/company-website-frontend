@@ -10,8 +10,12 @@ export const application = defineType({
       title: "Slug",
       type: "slug",
       options: {
-        source: (doc: { title?: { language: string; value?: string }[] }) =>
-          doc.title?.find((e) => e.language === "en")?.value ?? "",
+        source: (doc) => {
+          const title = doc.title as
+            | { language: string; value?: string }[]
+            | undefined;
+          return title?.find((e) => e.language === "en")?.value ?? "";
+        },
       },
       validation: (r) => r.required(),
     }),

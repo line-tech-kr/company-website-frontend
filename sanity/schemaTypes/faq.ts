@@ -11,8 +11,12 @@ export const faqGroup = defineType({
       type: "slug",
       description: "URL-safe identifier, e.g. mfc-vs-mfm-basics",
       options: {
-        source: (doc: { heading?: { language: string; value?: string }[] }) =>
-          doc.heading?.find((e) => e.language === "en")?.value ?? "",
+        source: (doc) => {
+          const heading = doc.heading as
+            | { language: string; value?: string }[]
+            | undefined;
+          return heading?.find((e) => e.language === "en")?.value ?? "";
+        },
       },
       validation: (r) => r.required(),
     }),
