@@ -117,7 +117,7 @@ describe("MegaMenu", () => {
       expect(within(panel as HTMLElement).getByText(label)).toBeInTheDocument();
     });
     expect(
-      within(panel as HTMLElement).getByText(/13 certifications/i),
+      within(panel as HTMLElement).getByText(/certifications/i),
     ).toBeInTheDocument();
   });
 

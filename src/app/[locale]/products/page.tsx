@@ -50,7 +50,6 @@ const APPLICATION_STRIP_SLUGS = [
   "research-development",
 ] as const;
 
-const CERTIFICATION_COUNT = 13;
 const SERIES_COUNT = 4;
 
 const FLAGSHIP_MODEL: Partial<Record<CategorySlug, string>> = {
@@ -88,9 +87,12 @@ export default async function ProductsListPage({ params }: Props) {
     getTranslations("products"),
   ]);
 
-  const products = z
-    .array(SanityProductSchema)
-    .parse(await sanityClient.fetch(allProductsQuery));
+  const [products, certificationCount] = await Promise.all([
+    sanityClient
+      .fetch(allProductsQuery)
+      .then((data) => z.array(SanityProductSchema).parse(data)),
+    sanityClient.fetch<number>('count(*[_type == "certification"])'),
+  ]);
 
   const counts = new Map<CategorySlug, number>(
     CATEGORY_SLUGS.map((slug) => [slug, 0]),
@@ -186,7 +188,7 @@ export default async function ProductsListPage({ params }: Props) {
         <li className="lt-products-list__stat">
           <div className="lt-products-list__stat-cell">
             <div className="lt-products-list__stat-num">
-              {CERTIFICATION_COUNT}
+              {certificationCount}
             </div>
             <div className="lt-products-list__stat-label">
               {tProducts("list.stats.certificationsLabel")}
