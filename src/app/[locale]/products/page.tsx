@@ -25,6 +25,8 @@ import {
 } from "./RotatingFeatured";
 import "./products-list.css";
 
+export const revalidate = 3600;
+
 const FLAGSHIP_IMAGE_PLACEHOLDER = "/products/lti/placeholder.svg";
 
 function flagshipImageUrl(flagship: Product): string {
@@ -75,7 +77,7 @@ function pickFlagship(
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return buildProductsMetadata(locale as "ko" | "en" | "zh");
+  return buildProductsMetadata(locale as Locale);
 }
 
 export default async function ProductsListPage({ params }: Props) {

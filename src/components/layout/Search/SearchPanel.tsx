@@ -47,7 +47,6 @@ export function SearchPanel({ content, open, onClose, triggerRef }: Props) {
   const [results, setResults] = useState<SearchEntry[] | null>(null);
   const [indexReady, setIndexReady] = useState(false);
 
-  // Clears local state and delegates to the prop — used everywhere we close.
   const close = useCallback(() => {
     setValue("");
     setResults(null);
@@ -56,7 +55,6 @@ export function SearchPanel({ content, open, onClose, triggerRef }: Props) {
 
   useDialogPanel({ open, onClose: close, panelRef, triggerRef });
 
-  // Load index once when the panel first opens
   useEffect(() => {
     if (!open || fuseRef.current) return;
     fetch(`/search/index.${locale}.json`)
@@ -78,8 +76,6 @@ export function SearchPanel({ content, open, onClose, triggerRef }: Props) {
 
   useEffect(() => {
     if (!open) return;
-    // `inert` removes the subtree from tab order + a11y tree when closed.
-    // Without this, hidden controls remain keyboard-focusable.
     const id = window.requestAnimationFrame(() => inputRef.current?.focus());
     return () => window.cancelAnimationFrame(id);
   }, [open]);

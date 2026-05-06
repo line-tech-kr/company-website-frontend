@@ -4,8 +4,14 @@ import type { CategorySlug } from "@/lib/categories";
 import type { Product } from "@/lib/types/product";
 import { routing } from "@/i18n/routing";
 
-export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://linetech.co.kr";
+function resolveSiteUrl(): string {
+  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL;
+  if (fromEnv) return fromEnv.replace(/\/$/, "");
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return "https://linetech.co.kr";
+}
+
+export const siteUrl = resolveSiteUrl();
 
 const SITE_NAME = "Line Tech";
 

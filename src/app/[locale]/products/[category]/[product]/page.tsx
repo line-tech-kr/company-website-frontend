@@ -34,6 +34,8 @@ import { safeJsonLd } from "@/lib/seo/jsonLd";
 import { LT_APPLICATIONS } from "@/lib/content/applications";
 import "./product-detail.css";
 
+export const revalidate = 3600;
+
 type Props = {
   params: Promise<{ locale: Locale; category: string; product: string }>;
 };
@@ -87,11 +89,11 @@ export async function generateStaticParams() {
     { name: "productSlugsForStaticParams" },
   );
   return routing.locales.flatMap((locale) =>
-    products.flatMap((p) => {
-      const category = categoryForSeries(p.series);
-      if (!category) return [];
-      return [{ locale, category, product: p.slug }];
-    }),
+    products.map((p) => ({
+      locale,
+      category: categoryForSeries(p.series),
+      product: p.slug,
+    })),
   );
 }
 
@@ -109,28 +111,24 @@ export default async function ProductPage({ params }: Props) {
 
   if (!isCategorySlug(category)) notFound();
 
-  const product = await getProduct(productSlug);
+  const [product, tCommon, tNav, tBreadcrumb, tSpecs, tPdp, tA11y] =
+    await Promise.all([
+      getProduct(productSlug),
+      getTranslations("common"),
+      getTranslations("nav"),
+      getTranslations("breadcrumbs.categories"),
+      getTranslations("product.specs"),
+      getTranslations("pdp"),
+      getTranslations("a11y"),
+    ]);
 
   if (!product) notFound();
   if (product.series !== CATEGORIES[category].series) {
-    const canonicalCategory = categoryForSeries(product.series);
-    if (canonicalCategory) {
-      permanentRedirect({
-        href: `/products/${canonicalCategory}/${product.slug.current}`,
-        locale,
-      });
-    }
-    notFound();
+    permanentRedirect({
+      href: `/products/${categoryForSeries(product.series)}/${product.slug.current}`,
+      locale,
+    });
   }
-
-  const [tCommon, tNav, tBreadcrumb, tSpecs, tPdp, tA11y] = await Promise.all([
-    getTranslations("common"),
-    getTranslations("nav"),
-    getTranslations("breadcrumbs.categories"),
-    getTranslations("product.specs"),
-    getTranslations("pdp"),
-    getTranslations("a11y"),
-  ]);
 
   const relatedApplications = LT_APPLICATIONS[locale].applications
     .filter((a) => a.relatedCategories.includes(category as CategorySlug))
@@ -216,37 +214,6 @@ export default async function ProductPage({ params }: Props) {
   const productUrl = `${siteUrl}/${locale}/products/${category}/${product.slug.current}`;
   const productLabel = product.productLabel[locale];
 
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: tCommon("home"),
-        item: `${siteUrl}/${locale}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: tNav("products"),
-        item: `${siteUrl}/${locale}/products`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: categoryLabel,
-        item: `${siteUrl}/${locale}/products/${category}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 4,
-        name: product.model,
-        item: productUrl,
-      },
-    ],
-  };
-
   const additionalProperties = [
     {
       "@type": "PropertyValue",
@@ -325,10 +292,6 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonLd(productJsonLd) }}

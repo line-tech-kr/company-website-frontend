@@ -3,10 +3,10 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { sanityClient } from "@/sanity/client";
 import { allCertificationsQuery } from "@/sanity/queries";
-import { routing } from "@/i18n/routing";
+import { routing, type Locale } from "@/i18n/routing";
 import "../resources-subpage.css";
 
-type Locale = "ko" | "en" | "zh";
+export const revalidate = 3600;
 
 type CertItem = {
   _id: string;

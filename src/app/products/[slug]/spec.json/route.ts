@@ -3,11 +3,10 @@ import { fetchSanity } from "@/sanity/fetch";
 import { productBySlugQuery, productSlugsQuery } from "@/sanity/queries";
 import { SanityProductSchema } from "@/lib/types/product";
 import { buildSpecJson } from "@/lib/seo/specSheet";
+import { siteUrl } from "@/lib/seo";
 
 export const dynamic = "force-static";
 export const revalidate = false;
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://line-tech.co";
 
 export async function generateStaticParams() {
   const products = await fetchSanity(
