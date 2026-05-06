@@ -16,15 +16,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildPrivacyMetadata(locale as Locale);
 }
 
-const LOCALE_TAG: Record<string, string> = {
-  ko: "ko-KR",
-  en: "en-US",
-  zh: "zh-CN",
-};
-
 function formatDate(dateStr: string, locale: string): string {
   const date = new Date(dateStr + "T00:00:00");
-  return new Intl.DateTimeFormat(LOCALE_TAG[locale] ?? "en-US", {
+  return new Intl.DateTimeFormat(locale ?? "en", {
     year: "numeric",
     month: "long",
     day: "numeric",
