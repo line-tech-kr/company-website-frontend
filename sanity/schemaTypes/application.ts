@@ -9,7 +9,10 @@ export const application = defineType({
       name: "slug",
       title: "Slug",
       type: "slug",
-      options: { source: "title" },
+      options: {
+        source: (doc: { title?: { language: string; value?: string }[] }) =>
+          doc.title?.find((e) => e.language === "en")?.value ?? "",
+      },
       validation: (r) => r.required(),
     }),
     defineField({

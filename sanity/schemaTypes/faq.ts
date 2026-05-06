@@ -10,7 +10,10 @@ export const faqGroup = defineType({
       title: "Group ID",
       type: "slug",
       description: "URL-safe identifier, e.g. mfc-vs-mfm-basics",
-      options: { source: "heading" },
+      options: {
+        source: (doc: { heading?: { language: string; value?: string }[] }) =>
+          doc.heading?.find((e) => e.language === "en")?.value ?? "",
+      },
       validation: (r) => r.required(),
     }),
     defineField({
