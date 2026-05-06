@@ -27,6 +27,9 @@ export default defineConfig({
     reuseExistingServer: !CI,
     timeout: 120_000,
     env: {
+      // Public Sanity project — no auth token required for reads.
+      NEXT_PUBLIC_SANITY_PROJECT_ID: "9ped5k0o",
+      NEXT_PUBLIC_SANITY_DATASET: "production",
       // Turnstile test site key — always passes, never prompts the user.
       // The server-side captcha.ts no-ops without TURNSTILE_SECRET_KEY in
       // dev mode, so no secret key is needed here.
