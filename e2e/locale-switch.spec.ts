@@ -7,9 +7,8 @@ test.describe("Locale switching", () => {
   });
 
   test("switches from Korean to English to Chinese", async ({ page }) => {
-    // Wait for network idle so React has hydrated and onClick is bound —
-    // without this, parallel-worker runs race the dev server and the click
-    // fires before hydration completes.
+    // Wait for network idle so React has hydrated and the locale-switcher's
+    // onClick is bound — clicking before hydration silently no-ops.
     await page.goto("/ko", { waitUntil: "networkidle" });
 
     // Locale switcher's nav aria-label is translated per locale; target buttons

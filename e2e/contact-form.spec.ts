@@ -17,16 +17,16 @@ test.describe("Contact form", () => {
   test("submit button is enabled after Turnstile site key is set", async ({
     page,
   }) => {
-    // The NEXT_PUBLIC_TURNSTILE_SITE_KEY env var is set in playwright.config.ts
-    // webServer.env. Without it, the button stays permanently disabled.
+    // NEXT_PUBLIC_TURNSTILE_SITE_KEY is supplied via .env.local locally and the
+    // "Write .env.local for E2E" step in CI. Without it, the button stays
+    // permanently disabled because webpack inlines the empty value.
     const submitBtn = page.getByRole("button", { name: /send inquiry/i });
     await expect(submitBtn).toBeEnabled();
   });
 
-  test("fills and submits the form — expects either success or server error", async ({
+  test("submits the form and resolves to the expected outcome", async ({
     page,
   }) => {
-    // Fill all required fields
     await page.locator("#ct-inquiry-type").selectOption("general");
     await page.locator("#ct-name").fill("Test User");
     await page.locator("#ct-email").fill("test@example.com");
@@ -35,13 +35,48 @@ test.describe("Contact form", () => {
       .locator("#ct-message")
       .fill("This is an automated E2E test submission — please ignore.");
 
-    await page.getByRole("button", { name: /send inquiry/i }).click();
-
-    // The form either succeeds (role="status") or returns a server error
-    // (role="alert"). Both prove the full submit path ran. Email delivery is
-    // not tested here — that's an external service.
-    await expect(page.locator('[role="status"], [role="alert"]')).toBeVisible({
+    // Wait for the Turnstile widget to populate its hidden token field.
+    // Without this the schema rejects with errorKey: "invalid" and the test
+    // can't distinguish a missing-token race from a real validation bug.
+    await expect(page.locator('input[name="cf-turnstile-response"]')).toHaveValue(/.+/, {
       timeout: 15_000,
     });
+
+    await page.getByRole("button", { name: /send inquiry/i }).click();
+
+    // Without RESEND_API_KEY (CI default), email send throws and the action
+    // returns errorKey: "server" → render the "server" copy. With a real key
+    // and SANITY_WRITE_TOKEN, the success copy renders instead. Asserting on
+    // the specific copy means a silently-broken form (no submit handler, wrong
+    // action wiring) would fail the test instead of slipping through.
+    const hasResend = !!process.env.RESEND_API_KEY;
+    if (hasResend) {
+      await expect(
+        page.getByRole("status").filter({
+          hasText:
+            /your message has been sent|we will reply within one business day/i,
+        }),
+      ).toBeVisible({ timeout: 15_000 });
+    } else {
+      await expect(
+        page.getByRole("alert").filter({
+          hasText: /could not send your message|email us directly/i,
+        }),
+      ).toBeVisible({ timeout: 15_000 });
+    }
+  });
+
+  test("rejects an invalid submission with a validation alert", async ({
+    page,
+  }) => {
+    // Empty required fields — the server action returns errorKey: "invalid"
+    // before any external call, so this works without Resend/Sanity creds.
+    await page.getByRole("button", { name: /send inquiry/i }).click();
+
+    await expect(
+      page.getByRole("alert").filter({
+        hasText: /check the highlighted fields/i,
+      }),
+    ).toBeVisible({ timeout: 10_000 });
   });
 });

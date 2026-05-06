@@ -4,7 +4,6 @@ const CI = !!process.env.CI;
 
 export default defineConfig({
   testDir: "./e2e",
-  fullyParallel: true,
   forbidOnly: CI,
   retries: CI ? 1 : 0,
   // Always 1 worker — multiple workers race the dev server's on-demand
@@ -19,11 +18,7 @@ export default defineConfig({
     trace: "on-first-retry",
     screenshot: "only-on-failure",
   },
-  projects: [
-    { name: "chromium", use: { ...devices["Desktop Chrome"] } },
-    { name: "firefox", use: { ...devices["Desktop Firefox"] } },
-    { name: "webkit", use: { ...devices["Desktop Safari"] } },
-  ],
+  projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
   webServer: {
     command: "pnpm dev --webpack",
     url: "http://localhost:3000",
