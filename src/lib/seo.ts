@@ -9,7 +9,7 @@ function resolveSiteUrl(): string {
   if (fromEnv) return fromEnv.replace(/\/$/, "");
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
   if (process.env.NODE_ENV === "development") return "http://localhost:3000";
-  return "https://linetech.co.kr";
+  return "https://line-tech.co";
 }
 
 export const siteUrl = resolveSiteUrl();
