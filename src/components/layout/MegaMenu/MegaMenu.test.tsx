@@ -113,8 +113,11 @@ describe("MegaMenu", () => {
     expect(panel).toHaveAttribute("aria-hidden", "false");
     expect(panel).toHaveClass("is-open");
 
+    const linkList = panel!.querySelector(".pd-mega__list");
     ["Greeting", "History", "Certifications", "Location"].forEach((label) => {
-      expect(within(panel as HTMLElement).getByText(label)).toBeInTheDocument();
+      expect(
+        within(linkList as HTMLElement).getByText(label),
+      ).toBeInTheDocument();
     });
     expect(
       within(panel as HTMLElement).getByText("View all certifications"),
