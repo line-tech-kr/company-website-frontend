@@ -52,6 +52,15 @@ export type ContactFormCopy = {
   submit: string;
   submitDisabledHelp: string;
   /**
+   * PIPA Art. 22 explicit-consent checkbox label. Split into three parts so
+   * the privacy-policy link can be rendered as an actual <a> in the middle.
+   */
+  consent: {
+    prefix: string;
+    linkText: string;
+    suffix: string;
+  };
+  /**
    * Templates used when the contact form is reached from a product page via
    * `?product=<model>`. `{model}` is replaced at render time.
    */
@@ -175,6 +184,11 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       submit: "문의 보내기",
       submitDisabledHelp:
         "제출 백엔드는 현재 작업 중입니다. 위 이메일 주소로 보내주시면 즉시 회신드리겠습니다.",
+      consent: {
+        prefix: "",
+        linkText: "개인정보처리방침",
+        suffix: "을 확인하였으며 개인정보 수집·이용에 동의합니다. (필수)",
+      },
       productInquiry: {
         subject: "견적 문의: {model}",
         message: "{model}에 대한 견적 및 자세한 정보를 받고 싶습니다.",
@@ -287,6 +301,12 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       submit: "Send inquiry",
       submitDisabledHelp:
         "Submission backend is in progress. Please email the address above for an immediate reply.",
+      consent: {
+        prefix: "I have read the ",
+        linkText: "Privacy Policy",
+        suffix:
+          " and consent to the collection and use of my personal information. (Required)",
+      },
       productInquiry: {
         subject: "Inquiry: {model}",
         message:
@@ -404,6 +424,11 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       submit: "发送咨询",
       submitDisabledHelp:
         "提交后端正在开发中。请使用上方邮箱直接联系我们以获得即时回复。",
+      consent: {
+        prefix: "我已阅读",
+        linkText: "隐私政策",
+        suffix: "并同意收集和使用我的个人信息。（必填）",
+      },
       productInquiry: {
         subject: "询价：{model}",
         message: "我想了解关于 {model} 的报价和更多信息。",

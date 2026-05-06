@@ -15,6 +15,9 @@ export const contactFormSchema = z.object({
   phone: z.string().max(40).optional(),
   subject: z.string().max(200).optional(),
   message: z.string().min(1).max(5000),
+  // PIPA Art. 22 — explicit consent. Checkbox sends "on" when checked,
+  // is absent otherwise.
+  consent: z.literal("on"),
   // Honeypot: a hidden field that real users never fill. Bots typically
   // populate every input. Reject submissions where this is non-empty.
   website: z.string().max(0).optional().default(""),

@@ -3,6 +3,7 @@
 import { useActionState, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
+import { Link } from "@/i18n/navigation";
 import { Turnstile } from "@/components/forms/Turnstile";
 import { submitContact, type ContactFormState } from "@/lib/contact/submit";
 import type { ContactFormCopy, InquiryTypeId } from "@/lib/content/contact";
@@ -24,6 +25,7 @@ const INITIAL_STATE: ContactFormState = { status: "idle" };
 
 export function ContactForm({ form, privacyNotice, defaults }: Props) {
   const [type, setType] = useState<string>(defaults?.inquiryType ?? "");
+  const [consent, setConsent] = useState(false);
   const selected = form.inquiryTypeOptions.find((o) => o.id === type);
   const extra = selected?.extraField;
 
@@ -217,6 +219,25 @@ export function ContactForm({ form, privacyNotice, defaults }: Props) {
         </div>
       </div>
 
+      <div className="ct-form__consent">
+        <label className="ct-form__consent-label">
+          <input
+            type="checkbox"
+            name="consent"
+            required
+            checked={consent}
+            onChange={(e) => setConsent(e.target.checked)}
+          />
+          <span>
+            {form.consent.prefix}
+            <Link href="/legal/privacy" className="ct-form__consent-link">
+              {form.consent.linkText}
+            </Link>
+            {form.consent.suffix}
+          </span>
+        </label>
+      </div>
+
       <div className="ct-form__captcha">
         <Turnstile siteKey={turnstileSiteKey} />
       </div>
@@ -232,7 +253,7 @@ export function ContactForm({ form, privacyNotice, defaults }: Props) {
           variant="primary"
           size="lg"
           type="submit"
-          disabled={isPending || !turnstileSiteKey}
+          disabled={isPending || !turnstileSiteKey || !consent}
         >
           {isPending ? t("submitting") : form.submit}
         </Button>
