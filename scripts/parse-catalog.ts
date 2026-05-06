@@ -687,6 +687,9 @@ function buildProduct(
     features: featuresFor(section.model).map(localize),
     connections,
     massFlowSpecs,
+    datasheets: [],
+    manuals: [],
+    drawings: [],
   };
   if (series === "digital") {
     product.digitalCommunication = STANDARD_DIGITAL_COMM;

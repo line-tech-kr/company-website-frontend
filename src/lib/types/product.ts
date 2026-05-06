@@ -134,6 +134,45 @@ export const SanityProductSchema = z.object({
     .nullable()
     .optional(),
   dimensionDrawing: SanityImageSchema.nullable().optional(),
+  datasheets: z
+    .array(
+      z.object({
+        _id: z.string(),
+        title: z.string(),
+        rev: z.string().nullable().optional(),
+        publishedAt: z.string().nullable().optional(),
+        fileUrl: z.string().nullable().optional(),
+        size: z.number().nullable().optional(),
+        updatedAt: z.string().nullable().optional(),
+      }),
+    )
+    .default([]),
+  manuals: z
+    .array(
+      z.object({
+        _id: z.string(),
+        title: z.string(),
+        rev: z.string().nullable().optional(),
+        publishedAt: z.string().nullable().optional(),
+        fileUrl: z.string().nullable().optional(),
+        size: z.number().nullable().optional(),
+        updatedAt: z.string().nullable().optional(),
+      }),
+    )
+    .default([]),
+  drawings: z
+    .array(
+      z.object({
+        _id: z.string(),
+        title: z.string(),
+        dwgUrl: z.string().nullable().optional(),
+        dwgSize: z.number().nullable().optional(),
+        stpUrl: z.string().nullable().optional(),
+        stpSize: z.number().nullable().optional(),
+        updatedAt: z.string().nullable().optional(),
+      }),
+    )
+    .default([]),
 });
 
 export type Product = z.infer<typeof SanityProductSchema>;

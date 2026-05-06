@@ -165,13 +165,14 @@
       "sub": "仅发布最新版。如需历史资料，请通过联系表单申请。",
       "download": "下载",
       "done": "完成",
-      "placeholders": {
-        "datasheet": "{model} 数据手册",
-        "manual": "{model} 使用手册",
-        "cad": "{model} 外形图",
-        "rev": "Rev. —",
-        "tbd": "待发布"
-      }
+      "datasheetFor": "{model} 数据手册",
+      "manualFor": "{model} 使用手册"
+    },
+    "requestDocs": {
+      "kicker": "技术资料",
+      "heading": "需要数据手册、说明书或CAD图纸？",
+      "body": "技术资料可应需求提供。请告知型号和应用场景，我们将在一个工作日内回复。",
+      "cta": "申请技术资料"
     }
   },
   "resources": {
@@ -189,6 +190,11 @@
         "title": "CAD 图纸",
         "desc": "AutoCAD (.dwg) 及 STEP (.stp) 文件",
         "count": "{count}个图纸"
+      },
+      "datasheets": {
+        "title": "数据手册",
+        "desc": "各型号规格说明书",
+        "count": "{count}份文件"
       },
       "manuals": {
         "title": "使用手册",
@@ -208,6 +214,10 @@
     "drawings": {
       "title": "CAD 图纸",
       "intro": "提供各型号外形图，支持 AutoCAD (.dwg) 和 STEP (.stp) 格式下载。"
+    },
+    "datasheets": {
+      "title": "数据手册",
+      "intro": "各型号产品的规格说明书。下载最新版本或申请特定配置。"
     },
     "manuals": {
       "title": "使用手册",
