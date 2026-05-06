@@ -87,6 +87,7 @@ export function DownloadsList({
                   size="sm"
                   href={it.href}
                   plain
+                  download
                   icon={<Glyph name="download" size={14} />}
                 >
                   {downloadLabel}

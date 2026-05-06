@@ -145,13 +145,6 @@ export default async function ProductPage({ params }: Props) {
     { label: product.model },
   ];
 
-  const tabs = [
-    { id: "overview", num: "01", label: tPdp("tabs.overview") },
-    { id: "specs", num: "02", label: tPdp("tabs.specs") },
-    { id: "dimensions", num: "03", label: tPdp("tabs.dimensions") },
-    { id: "downloads", num: "04", label: tPdp("tabs.downloads") },
-  ];
-
   type SpecRow = { key: string; label: string; value: string };
   const specGroups = SPEC_GROUPS.map((g) => ({
     id: g.id,
@@ -233,6 +226,20 @@ export default async function ProductPage({ params }: Props) {
       }
       return items;
     }),
+  ];
+
+  const tabs = [
+    { id: "overview", num: "01", label: tPdp("tabs.overview") },
+    { id: "specs", num: "02", label: tPdp("tabs.specs") },
+    { id: "dimensions", num: "03", label: tPdp("tabs.dimensions") },
+    {
+      id: "downloads",
+      num: "04",
+      label:
+        downloadItems.length > 0
+          ? tPdp("tabs.downloads")
+          : tPdp("requestDocs.kicker"),
+    },
   ];
 
   const productUrl = `${siteUrl}/${locale}/products/${category}/${product.slug.current}`;
