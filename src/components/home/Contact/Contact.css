@@ -42,6 +42,12 @@
   color: rgba(255, 255, 255, 0.72);
   white-space: pre-line;
 }
+@media (min-width: 900px) {
+  :lang(ko) .ho-contact__sub {
+    max-width: none;
+    white-space: nowrap;
+  }
+}
 .ho-contact__btns {
   position: relative;
   display: inline-flex;

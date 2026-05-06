@@ -29,7 +29,12 @@ export type HomeContent = {
   };
   stats: Stat[];
   series: { kicker: string; title: string; sub: string; items: SeriesItem[] };
-  applications: { kicker: string; title: string; items: ApplicationItem[] };
+  applications: {
+    kicker: string;
+    title: string;
+    sub: string;
+    items: ApplicationItem[];
+  };
   feature: {
     kicker: string;
     title: string;
@@ -37,7 +42,7 @@ export type HomeContent = {
     bullets: Bullet[];
     cta: string;
   };
-  credentials: { kicker: string; title: string; items: string[] };
+  credentials: { kicker: string; title: string; sub: string; items: string[] };
   contact: { title: string; sub: string; primary: string; secondary: string };
 };
 
@@ -101,7 +106,8 @@ export const LT_HOME: Record<Locale, HomeContent> = {
     },
     applications: {
       kicker: "02 — 적용 분야",
-      title: "정밀을 요구하는 모든 공정에",
+      title: "어디서나, 정확하게",
+      sub: "반도체부터 바이오까지, 정밀이 요구되는 모든 현장.",
       items: [
         { n: "반도체 · 디스플레이", k: "Semiconductor", slug: "semiconductor" },
         { n: "연료전지", k: "Fuel Cells", slug: "fuel-cells" },
@@ -131,7 +137,8 @@ export const LT_HOME: Record<Locale, HomeContent> = {
     },
     credentials: {
       kicker: "04 — 인증",
-      title: "국제 표준을 충족합니다",
+      title: "검증된 국제 인증",
+      sub: "ISO 9001, CE 인증을 포함한 국제 기준을 충족합니다.",
       items: [
         "ISO 9001",
         "CE",
@@ -207,7 +214,8 @@ export const LT_HOME: Record<Locale, HomeContent> = {
     },
     applications: {
       kicker: "02 — Applications",
-      title: "Wherever precision is required.",
+      title: "Anywhere. Precisely.",
+      sub: "From semiconductors to biotech — wherever the process demands it.",
       items: [
         { n: "Semiconductor", k: "반도체 · 디스플레이", slug: "semiconductor" },
         { n: "Fuel Cells", k: "연료전지", slug: "fuel-cells" },
@@ -237,7 +245,8 @@ export const LT_HOME: Record<Locale, HomeContent> = {
     },
     credentials: {
       kicker: "04 — Certifications",
-      title: "Tested against international standards.",
+      title: "Verified international certifications.",
+      sub: "ISO 9001, CE, and more — meeting every international benchmark.",
       items: ["ISO 9001", "CE", "INNOBIZ", "RoHS / REACH", "KAIST joint R&D"],
     },
     contact: {
@@ -307,7 +316,8 @@ export const LT_HOME: Record<Locale, HomeContent> = {
     },
     applications: {
       kicker: "02 — 应用领域",
-      title: "任何需要精度的工艺。",
+      title: "随处可用，精准可靠。",
+      sub: "从半导体到生物科技，精密工艺的每个领域。",
       items: [
         { n: "半导体 · 显示", k: "Semiconductor", slug: "semiconductor" },
         { n: "燃料电池", k: "Fuel Cells", slug: "fuel-cells" },
@@ -333,7 +343,8 @@ export const LT_HOME: Record<Locale, HomeContent> = {
     },
     credentials: {
       kicker: "04 — 认证",
-      title: "符合国际标准。",
+      title: "经验证的国际认证",
+      sub: "满足 ISO 9001、CE 等国际认证标准。",
       items: ["ISO 9001", "CE", "INNOBIZ", "RoHS / REACH", "KAIST 联合研发"],
     },
     contact: {

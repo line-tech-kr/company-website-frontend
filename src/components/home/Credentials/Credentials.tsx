@@ -8,7 +8,11 @@ export function Credentials({ h }: Props) {
   const { credentials } = h;
   return (
     <section className="ho-sec">
-      <SectionHead kicker={credentials.kicker} title={credentials.title} />
+      <SectionHead
+        kicker={credentials.kicker}
+        title={credentials.title}
+        sub={credentials.sub}
+      />
       <ul className="ho-credentials">
         {credentials.items.map((it) => (
           <li key={it} className="ho-credentials__item">
