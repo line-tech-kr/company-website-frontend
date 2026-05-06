@@ -142,7 +142,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
     },
     contact: {
       title: "도입 검토 중이십니까?",
-      sub: "공정 조건과 가스 종류를 알려주시면 2영업일 내 견적과 적합 모델을 회신해 드립니다.",
+      sub: "공정 조건과 가스 종류를 알려주시면\n2영업일 내 견적과 적합 모델을 회신해 드립니다.",
       primary: "기술 문의",
       secondary: "견적 요청",
     },
