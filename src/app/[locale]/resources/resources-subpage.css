@@ -144,13 +144,6 @@
   background: var(--pd-surface-2);
 }
 
-.dr-list__btn--disabled {
-  color: var(--pd-muted);
-  cursor: default;
-  pointer-events: none;
-  opacity: 0.6;
-}
-
 .dr-list__btn--request {
   border-color: var(--pd-border);
   color: var(--pd-primary);

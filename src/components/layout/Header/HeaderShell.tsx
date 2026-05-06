@@ -189,11 +189,8 @@ export function HeaderShell({
           <header
             className={cls}
             onBlur={(e) => {
-              if (
-                openId &&
-                !e.currentTarget.contains(e.relatedTarget as Node)
-              ) {
-                setOpenId(null);
+              if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                navCtx.setOpenId(null);
               }
             }}
           >
