@@ -5,7 +5,10 @@ import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { Chip } from "@/components/ui/Chip/Chip";
 import { INDUSTRY_ICONS } from "@/lib/content/application-icons";
-import { LT_APPLICATIONS, type ApplicationEntry } from "@/lib/content/applications";
+import {
+  LT_APPLICATIONS,
+  type ApplicationEntry,
+} from "@/lib/content/applications";
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
 import { buildApplicationsMetadata } from "@/lib/seo";
@@ -67,10 +70,9 @@ export default async function ApplicationsPage({ params }: Props) {
   const [tCommon, tNav, rawApps] = await Promise.all([
     getTranslations("common"),
     getTranslations("nav"),
-    fetchSanity(
-      () => sanityClient.fetch<SanityApp[]>(allApplicationsQuery),
-      { name: "allApplications" },
-    ).catch(() => [] as SanityApp[]),
+    fetchSanity(() => sanityClient.fetch<SanityApp[]>(allApplicationsQuery), {
+      name: "allApplications",
+    }).catch(() => [] as SanityApp[]),
   ]);
 
   const c = LT_APPLICATIONS[locale];

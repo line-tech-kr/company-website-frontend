@@ -9,7 +9,10 @@ import type { Locale } from "@/lib/content/home";
 import { buildApplicationDetailMetadata } from "@/lib/seo";
 import { sanityClient, sanityBuildClient } from "@/sanity/client";
 import { fetchSanity } from "@/sanity/fetch";
-import { applicationBySlugQuery, applicationSlugsQuery } from "@/sanity/queries";
+import {
+  applicationBySlugQuery,
+  applicationSlugsQuery,
+} from "@/sanity/queries";
 import "../applications-page.css";
 
 type Props = { params: Promise<{ locale: Locale; slug: string }> };
@@ -38,7 +41,9 @@ export async function generateStaticParams() {
     { name: "applicationSlugsForStaticParams" },
   ).catch(() => [] as Array<{ slug: string }>);
 
-  const allSlugs = [...new Set([...staticSlugs, ...sanitySlugs.map((s) => s.slug)])];
+  const allSlugs = [
+    ...new Set([...staticSlugs, ...sanitySlugs.map((s) => s.slug)]),
+  ];
 
   return routing.locales.flatMap((locale) =>
     allSlugs.map((slug) => ({ locale, slug })),

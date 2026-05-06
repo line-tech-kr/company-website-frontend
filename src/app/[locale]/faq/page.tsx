@@ -42,10 +42,9 @@ export default async function FaqPage({ params }: Props) {
   const [tCommon, tNav, rawGroups] = await Promise.all([
     getTranslations("common"),
     getTranslations("nav"),
-    fetchSanity(
-      () => sanityClient.fetch<SanityFaqGroup[]>(allFaqGroupsQuery),
-      { name: "allFaqGroups" },
-    ).catch(() => [] as SanityFaqGroup[]),
+    fetchSanity(() => sanityClient.fetch<SanityFaqGroup[]>(allFaqGroupsQuery), {
+      name: "allFaqGroups",
+    }).catch(() => [] as SanityFaqGroup[]),
   ]);
 
   const c = LT_FAQ[locale];
