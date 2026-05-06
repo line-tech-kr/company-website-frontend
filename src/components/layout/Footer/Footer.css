@@ -14,7 +14,7 @@
   margin: 0 auto;
   padding: 40px 32px 28px;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   gap: 48px;
   align-items: flex-start;
 }
