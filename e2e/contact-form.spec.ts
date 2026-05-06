@@ -38,7 +38,9 @@ test.describe("Contact form", () => {
     // Wait for the Turnstile widget to populate its hidden token field.
     // Without this the schema rejects with errorKey: "invalid" and the test
     // can't distinguish a missing-token race from a real validation bug.
-    await expect(page.locator('input[name="cf-turnstile-response"]')).toHaveValue(/.+/, {
+    await expect(
+      page.locator('input[name="cf-turnstile-response"]'),
+    ).toHaveValue(/.+/, {
       timeout: 15_000,
     });
 
