@@ -7,10 +7,11 @@ import "./DownloadsList.css";
 
 export type DownloadItem = {
   label: string;
-  type: "PDF" | "DWG" | "ZIP";
+  type: "PDF" | "DWG" | "STEP" | "ZIP";
   size: string;
-  rev: string;
+  rev?: string;
   date: string;
+  href?: string;
 };
 
 type Props = {
@@ -25,6 +26,7 @@ type Props = {
 const TYPE_TONE: Record<DownloadItem["type"], string> = {
   PDF: "lt-pdp-dl__type--danger",
   DWG: "lt-pdp-dl__type--info",
+  STEP: "lt-pdp-dl__type--info",
   ZIP: "lt-pdp-dl__type--neutral",
 };
 
@@ -57,39 +59,57 @@ export function DownloadsList({
 
       <ul className="lt-pdp-dl__list" role="list">
         {items.map((it, i) => {
-          const s = state[i] || "idle";
+          const metaParts = [it.rev, it.size, it.date].filter(Boolean);
           return (
             <li
               key={`${it.label}-${i}`}
-              className={`lt-pdp-dl__row lt-pdp-dl__row--${s}`}
+              className={`lt-pdp-dl__row lt-pdp-dl__row--${state[i] || "idle"}`}
             >
               <span className={`lt-pdp-dl__type ${TYPE_TONE[it.type]}`}>
                 {it.type}
               </span>
               <div className="lt-pdp-dl__meta">
                 <div className="lt-pdp-dl__label">{it.label}</div>
-                <div className="lt-pdp-dl__sub">
-                  <span>{it.rev}</span>
-                  <span className="lt-pdp-dl__sep">·</span>
-                  <span>{it.size}</span>
-                  <span className="lt-pdp-dl__sep">·</span>
-                  <span>{it.date}</span>
-                </div>
+                {metaParts.length > 0 && (
+                  <div className="lt-pdp-dl__sub">
+                    {metaParts.map((part, idx) => (
+                      <span key={idx}>
+                        {idx > 0 && <span className="lt-pdp-dl__sep">·</span>}
+                        <span>{part}</span>
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
-              <Button
-                variant={s === "done" ? "subtle" : "ghost"}
-                size="sm"
-                icon={
-                  <Glyph name={s === "done" ? "check" : "download"} size={14} />
-                }
-                onClick={() => start(i)}
-              >
-                {s === "loading"
-                  ? "…"
-                  : s === "done"
-                    ? doneLabel
-                    : downloadLabel}
-              </Button>
+              {it.href ? (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  href={it.href}
+                  plain
+                  icon={<Glyph name="download" size={14} />}
+                >
+                  {downloadLabel}
+                </Button>
+              ) : (
+                <Button
+                  variant={state[i] === "done" ? "subtle" : "ghost"}
+                  size="sm"
+                  icon={
+                    <Glyph
+                      name={state[i] === "done" ? "check" : "download"}
+                      size={14}
+                    />
+                  }
+                  onClick={() => start(i)}
+                >
+                  {state[i] === "loading"
+                    ? "…"
+                    : state[i] === "done"
+                      ? doneLabel
+                      : downloadLabel}
+                </Button>
+              )}
             </li>
           );
         })}

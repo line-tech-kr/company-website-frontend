@@ -262,6 +262,11 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               desc: "AutoCAD (.dwg · .stp)",
             },
             {
+              href: "/resources/datasheets",
+              label: "데이터시트",
+              desc: "모델별 사양서",
+            },
+            {
               href: "/resources/manuals",
               label: "매뉴얼",
               desc: "모델별 사용 설명서",
@@ -491,6 +496,11 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               desc: "AutoCAD (.dwg · .stp)",
             },
             {
+              href: "/resources/datasheets",
+              label: "Datasheets",
+              desc: "Per-model specification sheets",
+            },
+            {
               href: "/resources/manuals",
               label: "Manuals",
               desc: "Per-model user guides",
@@ -708,6 +718,11 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               href: "/resources/drawings",
               label: "CAD 图纸",
               desc: "AutoCAD (.dwg · .stp)",
+            },
+            {
+              href: "/resources/datasheets",
+              label: "数据手册",
+              desc: "各型号规格说明书",
             },
             {
               href: "/resources/manuals",

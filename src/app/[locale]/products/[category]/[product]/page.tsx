@@ -16,6 +16,8 @@ import {
   DownloadsList,
   type DownloadItem,
 } from "@/components/products/DownloadsList";
+import { RequestDocs } from "@/components/products/RequestDocs";
+import { formatBytes, formatDate } from "@/lib/format";
 import { sanityClient, sanityBuildClient } from "@/sanity/client";
 import { fetchSanity } from "@/sanity/fetch";
 import { productBySlugQuery, productSlugsQuery } from "@/sanity/queries";
@@ -188,27 +190,49 @@ export default async function ProductPage({ params }: Props) {
     : null;
 
   const downloadItems: DownloadItem[] = [
-    {
-      label: tPdp("downloads.placeholders.datasheet", { model: product.model }),
-      type: "PDF",
-      size: "—",
-      rev: tPdp("downloads.placeholders.rev"),
-      date: tPdp("downloads.placeholders.tbd"),
-    },
-    {
-      label: tPdp("downloads.placeholders.manual", { model: product.model }),
-      type: "PDF",
-      size: "—",
-      rev: tPdp("downloads.placeholders.rev"),
-      date: tPdp("downloads.placeholders.tbd"),
-    },
-    {
-      label: tPdp("downloads.placeholders.cad", { model: product.model }),
-      type: "DWG",
-      size: "—",
-      rev: tPdp("downloads.placeholders.rev"),
-      date: tPdp("downloads.placeholders.tbd"),
-    },
+    ...product.datasheets
+      .filter((d) => d.fileUrl)
+      .map<DownloadItem>((d) => ({
+        label:
+          d.title || tPdp("downloads.datasheetFor", { model: product.model }),
+        type: "PDF",
+        href: d.fileUrl ?? undefined,
+        size: formatBytes(d.size),
+        rev: d.rev ?? undefined,
+        date: formatDate(d.publishedAt ?? d.updatedAt, locale),
+      })),
+    ...product.manuals
+      .filter((m) => m.fileUrl)
+      .map<DownloadItem>((m) => ({
+        label: m.title || tPdp("downloads.manualFor", { model: product.model }),
+        type: "PDF",
+        href: m.fileUrl ?? undefined,
+        size: formatBytes(m.size),
+        rev: m.rev ?? undefined,
+        date: formatDate(m.publishedAt ?? m.updatedAt, locale),
+      })),
+    ...product.drawings.flatMap<DownloadItem>((d) => {
+      const items: DownloadItem[] = [];
+      if (d.dwgUrl) {
+        items.push({
+          label: `${d.title} (DWG)`,
+          type: "DWG",
+          href: d.dwgUrl,
+          size: formatBytes(d.dwgSize),
+          date: formatDate(d.updatedAt, locale),
+        });
+      }
+      if (d.stpUrl) {
+        items.push({
+          label: `${d.title} (STEP)`,
+          type: "STEP",
+          href: d.stpUrl,
+          size: formatBytes(d.stpSize),
+          date: formatDate(d.updatedAt, locale),
+        });
+      }
+      return items;
+    }),
   ];
 
   const productUrl = `${siteUrl}/${locale}/products/${category}/${product.slug.current}`;
@@ -340,14 +364,24 @@ export default async function ProductPage({ params }: Props) {
           />
         )}
 
-        <DownloadsList
-          kicker={`04 — ${tPdp("tabs.downloads")}`}
-          heading={tPdp("downloads.heading")}
-          sub={tPdp("downloads.sub")}
-          downloadLabel={tPdp("downloads.download")}
-          doneLabel={tPdp("downloads.done")}
-          items={downloadItems}
-        />
+        {downloadItems.length > 0 ? (
+          <DownloadsList
+            kicker={`04 — ${tPdp("tabs.downloads")}`}
+            heading={tPdp("downloads.heading")}
+            sub={tPdp("downloads.sub")}
+            downloadLabel={tPdp("downloads.download")}
+            doneLabel={tPdp("downloads.done")}
+            items={downloadItems}
+          />
+        ) : (
+          <RequestDocs
+            kicker={`04 — ${tPdp("requestDocs.kicker")}`}
+            heading={tPdp("requestDocs.heading")}
+            body={tPdp("requestDocs.body")}
+            ctaLabel={tPdp("requestDocs.cta")}
+            ctaHref={`/contact?product=${encodeURIComponent(product.model)}`}
+          />
+        )}
 
         {relatedApplications.length > 0 && (
           <section className="pd-related-apps">

@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const CARDS = [
   { key: "catalogues", href: "/resources/catalogues" },
   { key: "drawings", href: "/resources/drawings" },
+  { key: "datasheets", href: "/resources/datasheets" },
   { key: "manuals", href: "/resources/manuals" },
   { key: "certifications", href: "/resources/certifications" },
 ] as const;
