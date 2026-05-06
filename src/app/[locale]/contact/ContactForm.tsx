@@ -17,13 +17,12 @@ type ContactFormDefaults = {
 
 type Props = {
   form: ContactFormCopy;
-  privacyNotice: string;
   defaults?: ContactFormDefaults;
 };
 
 const INITIAL_STATE: ContactFormState = { status: "idle" };
 
-export function ContactForm({ form, privacyNotice, defaults }: Props) {
+export function ContactForm({ form, defaults }: Props) {
   const [type, setType] = useState<string>(defaults?.inquiryType ?? "");
   const [consent, setConsent] = useState(false);
   const selected = form.inquiryTypeOptions.find((o) => o.id === type);
@@ -224,7 +223,6 @@ export function ContactForm({ form, privacyNotice, defaults }: Props) {
           <input
             type="checkbox"
             name="consent"
-            required
             checked={consent}
             onChange={(e) => setConsent(e.target.checked)}
           />
@@ -262,7 +260,6 @@ export function ContactForm({ form, privacyNotice, defaults }: Props) {
         )}
       </div>
       <p className="ct-form__sla">{t("slaHint")}</p>
-      <p className="ct-form__privacy">{privacyNotice}</p>
     </form>
   );
 }

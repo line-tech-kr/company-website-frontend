@@ -89,12 +89,6 @@ export type ContactContent = {
   emailLabel: string;
   emailDirectCta: string;
   form: ContactFormCopy;
-  /**
-   * Inline fine-print under the form's submit. References "privacy policy" in
-   * each locale's natural phrasing — wrap the relevant phrase in an <a> once
-   * the policy page lands.
-   */
-  privacyNotice: string;
   distributors: {
     heading: string;
     lede: string;
@@ -194,8 +188,6 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
         message: "{model}에 대한 견적 및 자세한 정보를 받고 싶습니다.",
       },
     },
-    privacyNotice:
-      "문의 내용은 개인정보처리방침에 따라 처리되며 제3자에 공유되지 않습니다.",
     distributors: {
       heading: "글로벌 네트워크",
       lede: "한국 본사를 중심으로 주요 시장을 직간접적으로 지원하고 있습니다.",
@@ -313,8 +305,6 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
           "I'd like to request a quote and more information about the {model}.",
       },
     },
-    privacyNotice:
-      "We'll handle your message per our privacy policy and won't share your details with third parties.",
     distributors: {
       heading: "Global network",
       lede: "Headquartered in Korea, supporting key markets directly or through our subsidiary and partners.",
@@ -434,7 +424,6 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
         message: "我想了解关于 {model} 的报价和更多信息。",
       },
     },
-    privacyNotice: "您的信息将依据我们的隐私政策处理，不会与第三方共享。",
     distributors: {
       heading: "全球网络",
       lede: "以韩国总部为核心，直接或通过子公司与合作伙伴覆盖主要市场。",

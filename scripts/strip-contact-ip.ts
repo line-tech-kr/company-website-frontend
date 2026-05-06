@@ -58,13 +58,21 @@ async function main() {
     return;
   }
 
-  const tx = client.transaction();
-  for (const r of withIp) {
-    tx.patch(r._id, (p) => p.unset(["ip"]));
+  // Chunk into 200-mutation batches — well under Sanity's per-transaction
+  // ceiling and keeps memory bounded if the dataset ever grows.
+  const BATCH = 200;
+  let total = 0;
+  for (let i = 0; i < withIp.length; i += BATCH) {
+    const slice = withIp.slice(i, i + BATCH);
+    const tx = client.transaction();
+    for (const r of slice) {
+      tx.patch(r._id, (p) => p.unset(["ip"]));
+    }
+    const result = await tx.commit();
+    total += result.results.length;
   }
 
-  const result = await tx.commit();
-  console.log(`Stripped ip from ${result.results.length} records.`);
+  console.log(`Stripped ip from ${total} records.`);
 }
 
 main().catch((err) => {
