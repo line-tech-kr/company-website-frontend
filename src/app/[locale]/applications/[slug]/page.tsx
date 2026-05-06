@@ -7,28 +7,66 @@ import { LT_APPLICATIONS } from "@/lib/content/applications";
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
 import { buildApplicationDetailMetadata } from "@/lib/seo";
+import { sanityClient, sanityBuildClient } from "@/sanity/client";
+import { fetchSanity } from "@/sanity/fetch";
+import {
+  applicationBySlugQuery,
+  applicationSlugsQuery,
+} from "@/sanity/queries";
 import "../applications-page.css";
 
 type Props = { params: Promise<{ locale: Locale; slug: string }> };
 
-export function generateStaticParams() {
-  const slugs = [
+type SanityApp = {
+  slug: string;
+  title: Record<string, string>;
+  lede: Record<string, string>;
+  body: Record<string, string>;
+  recommendedSeries: string[];
+  relatedCategories: string[];
+};
+
+export async function generateStaticParams() {
+  const staticSlugs = [
     ...new Set(
       routing.locales.flatMap((l) =>
         LT_APPLICATIONS[l].applications.map((a) => a.slug),
       ),
     ),
   ];
+
+  const sanitySlugs = await fetchSanity(
+    () =>
+      sanityBuildClient.fetch<Array<{ slug: string }>>(applicationSlugsQuery),
+    { name: "applicationSlugsForStaticParams" },
+  ).catch(() => [] as Array<{ slug: string }>);
+
+  const allSlugs = [
+    ...new Set([...staticSlugs, ...sanitySlugs.map((s) => s.slug)]),
+  ];
+
   return routing.locales.flatMap((locale) =>
-    slugs.map((slug) => ({ locale, slug })),
+    allSlugs.map((slug) => ({ locale, slug })),
   );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
-  const app = LT_APPLICATIONS[locale].applications.find((a) => a.slug === slug);
-  if (!app) return {};
-  return buildApplicationDetailMetadata(locale, slug, app.title, app.lede);
+  const raw = await fetchSanity(
+    () =>
+      sanityClient.fetch<SanityApp | null>(applicationBySlugQuery, { slug }),
+    { name: "applicationBySlug", params: { slug } },
+  ).catch(() => null);
+  const title =
+    raw?.title?.[locale] ??
+    raw?.title?.en ??
+    LT_APPLICATIONS[locale].applications.find((a) => a.slug === slug)?.title;
+  const lede =
+    raw?.lede?.[locale] ??
+    raw?.lede?.en ??
+    LT_APPLICATIONS[locale].applications.find((a) => a.slug === slug)?.lede;
+  if (!title) return {};
+  return buildApplicationDetailMetadata(locale, slug, title, lede ?? "");
 }
 
 const CATEGORY_HREFS: Record<string, string> = {
@@ -48,7 +86,26 @@ export default async function ApplicationDetailPage({ params }: Props) {
   ]);
 
   const c = LT_APPLICATIONS[locale];
-  const app = c.applications.find((a) => a.slug === slug);
+
+  const rawApp = await fetchSanity(
+    () =>
+      sanityClient.fetch<SanityApp | null>(applicationBySlugQuery, { slug }),
+    { name: "applicationBySlug", params: { slug } },
+  ).catch(() => null);
+
+  const app = rawApp
+    ? {
+        slug: rawApp.slug,
+        title: rawApp.title?.[locale] ?? rawApp.title?.en ?? "",
+        lede: rawApp.lede?.[locale] ?? rawApp.lede?.en ?? "",
+        body: (rawApp.body?.[locale] ?? rawApp.body?.en ?? "")
+          .split(/\n\n+/)
+          .filter(Boolean),
+        recommendedSeries: rawApp.recommendedSeries ?? [],
+        relatedCategories: (rawApp.relatedCategories ??
+          []) as (typeof c.applications)[0]["relatedCategories"],
+      }
+    : c.applications.find((a) => a.slug === slug);
 
   if (!app) notFound();
 

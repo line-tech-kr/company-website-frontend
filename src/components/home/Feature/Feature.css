@@ -109,13 +109,22 @@
   right: 20px;
 }
 .ho-feature__chip-body {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 1;
 }
-.ho-feature__lbl {
-  font: 500 var(--lt-fs-xs) var(--lt-mono);
-  letter-spacing: 0.12em;
-  color: var(--pd-muted);
+.ho-feature__chip-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.ho-feature__chip-slide[data-active="true"] {
+  opacity: 1;
+}
+.ho-feature__chip-img {
+  object-fit: contain;
+  padding: 72px;
 }
 
 :lang(ko) .ho-feature__kicker,

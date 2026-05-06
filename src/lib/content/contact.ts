@@ -7,7 +7,12 @@
  */
 import type { Locale } from "./home";
 
-export type InquiryTypeId = "sales" | "support" | "partnership" | "general";
+export type InquiryTypeId =
+  | "sales"
+  | "support"
+  | "partnership"
+  | "general"
+  | "site-visit";
 
 export type ContactFormCopy = {
   heading: string;
@@ -156,6 +161,15 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
           },
         },
         { id: "general", label: "일반 문의" },
+        {
+          id: "site-visit",
+          label: "현장 방문 지원",
+          extraField: {
+            label: "방문 위치 또는 설비 정보",
+            placeholder: "예: 공정 가스 라인, 설치 현장 주소",
+            required: false,
+          },
+        },
       ],
       required: "필수",
       submit: "문의 보내기",
@@ -259,6 +273,15 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
           },
         },
         { id: "general", label: "General inquiry" },
+        {
+          id: "site-visit",
+          label: "On-site support visit",
+          extraField: {
+            label: "Site or equipment details",
+            placeholder: "e.g. process gas line, facility location",
+            required: false,
+          },
+        },
       ],
       required: "Required",
       submit: "Send inquiry",
@@ -367,6 +390,15 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
           },
         },
         { id: "general", label: "一般咨询" },
+        {
+          id: "site-visit",
+          label: "现场支持访问",
+          extraField: {
+            label: "现场或设备信息",
+            placeholder: "例如：工艺气体管路、设施地址",
+            required: false,
+          },
+        },
       ],
       required: "必填",
       submit: "发送咨询",

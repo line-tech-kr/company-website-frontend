@@ -27,6 +27,9 @@ export default defineConfig({
                   .schemaType("categoryShowcase")
                   .documentId("category-showcases"),
               ),
+            S.divider(),
+            S.documentTypeListItem("faqGroup").title("FAQ Groups"),
+            S.documentTypeListItem("application").title("Applications"),
           ]),
     }),
     internationalizedArray({
@@ -36,7 +39,7 @@ export default defineConfig({
         { id: "zh", title: "中文" },
       ],
       defaultLanguages: ["ko", "en", "zh"],
-      fieldTypes: ["string"],
+      fieldTypes: ["string", "text"],
     }),
   ],
   schema: { types: schemaTypes },

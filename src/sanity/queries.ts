@@ -192,6 +192,69 @@ export const allDrawingsQuery = defineQuery(`
   }
 `);
 
+export const allFaqGroupsQuery = defineQuery(`
+  *[_type == "faqGroup"] | order(coalesce(order, 99) asc) {
+    "id": id.current,
+    "heading": {
+      "ko": coalesce(heading[language == "ko"][0].value, heading[language == "en"][0].value),
+      "en": coalesce(heading[language == "en"][0].value, heading[language == "ko"][0].value),
+      "zh": coalesce(heading[language == "zh"][0].value, heading[language == "en"][0].value)
+    },
+    "questions": questions[] {
+      id,
+      "q": {
+        "ko": coalesce(q[language == "ko"][0].value, q[language == "en"][0].value),
+        "en": coalesce(q[language == "en"][0].value, q[language == "ko"][0].value),
+        "zh": coalesce(q[language == "zh"][0].value, q[language == "en"][0].value)
+      },
+      "a": {
+        "ko": coalesce(a[language == "ko"][0].value, a[language == "en"][0].value),
+        "en": coalesce(a[language == "en"][0].value, a[language == "ko"][0].value),
+        "zh": coalesce(a[language == "zh"][0].value, a[language == "en"][0].value)
+      }
+    }
+  }
+`);
+
+const APPLICATION_PROJECTION = `
+  "slug": slug.current,
+  "title": {
+    "ko": coalesce(title[language == "ko"][0].value, title[language == "en"][0].value),
+    "en": coalesce(title[language == "en"][0].value, title[language == "ko"][0].value),
+    "zh": coalesce(title[language == "zh"][0].value, title[language == "en"][0].value)
+  },
+  "lede": {
+    "ko": coalesce(lede[language == "ko"][0].value, lede[language == "en"][0].value),
+    "en": coalesce(lede[language == "en"][0].value, lede[language == "ko"][0].value),
+    "zh": coalesce(lede[language == "zh"][0].value, lede[language == "en"][0].value)
+  },
+  "body": {
+    "ko": coalesce(body[language == "ko"][0].value, body[language == "en"][0].value),
+    "en": coalesce(body[language == "en"][0].value, body[language == "ko"][0].value),
+    "zh": coalesce(body[language == "zh"][0].value, body[language == "en"][0].value)
+  },
+  recommendedSeries,
+  relatedCategories
+`;
+
+export const allApplicationsQuery = defineQuery(`
+  *[_type == "application"] | order(coalesce(order, 99) asc) {
+    ${APPLICATION_PROJECTION}
+  }
+`);
+
+export const applicationBySlugQuery = defineQuery(`
+  *[_type == "application" && slug.current == $slug][0] {
+    ${APPLICATION_PROJECTION}
+  }
+`);
+
+export const applicationSlugsQuery = defineQuery(`
+  *[_type == "application" && defined(slug.current)] {
+    "slug": slug.current
+  }
+`);
+
 export const resourceCountsQuery = defineQuery(`
   {
     "catalogues": count(*[_type == "catalogue"]),
