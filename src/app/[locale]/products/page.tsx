@@ -11,29 +11,21 @@ import {
   categoryForSeries,
   type CategorySlug,
 } from "@/lib/categories";
-import { SanityProductSchema, type Product } from "@/lib/types/product";
+import { SanityProductSchema } from "@/lib/types/product";
 import { z } from "zod";
 import { buildProductsMetadata } from "@/lib/seo";
 import { getProductsCategories } from "@/lib/content/shell";
 import { LT_HOME, type Locale } from "@/lib/content/home";
 import { LT_APPLICATIONS } from "@/lib/content/applications";
-import { urlFor } from "@/sanity/imageUrl";
 import {
   RotatingFeatured,
   type RotatingSlide,
   type SlideAccent,
 } from "./RotatingFeatured";
+import { flagshipImageUrl, pickFlagship } from "@/lib/products/flagship";
 import "./products-list.css";
 
 export const revalidate = 3600;
-
-const FLAGSHIP_IMAGE_PLACEHOLDER = "/products/lti/placeholder.svg";
-
-function flagshipImageUrl(flagship: Product): string {
-  const image = flagship.images?.[0];
-  if (!image?.asset) return FLAGSHIP_IMAGE_PLACEHOLDER;
-  return urlFor(image).width(720).url();
-}
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -53,26 +45,6 @@ const APPLICATION_STRIP_SLUGS = [
 ] as const;
 
 const SERIES_COUNT = 4;
-
-const FLAGSHIP_MODEL: Partial<Record<CategorySlug, string>> = {
-  analogue: "M3030VA",
-};
-
-function pickFlagship(
-  products: Product[],
-  slug: CategorySlug,
-): Product | undefined {
-  const preferred = FLAGSHIP_MODEL[slug];
-  if (preferred) {
-    const match = products.find(
-      (p) =>
-        categoryForSeries(p.series) === slug &&
-        p.model.toLowerCase() === preferred.toLowerCase(),
-    );
-    if (match) return match;
-  }
-  return products.find((p) => categoryForSeries(p.series) === slug);
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
