@@ -62,7 +62,7 @@ export default async function CategoryPage({ params }: Props) {
     flowRange: e.flowRange,
     accuracy: e.accuracy,
     image: e.image?.asset
-      ? urlFor(e.image).width(960).fit("max").url()
+      ? urlFor(e.image).width(960).url()
       : "/products/lti/placeholder.svg",
     href: `/${locale}/products/${category}/${e.slug}`,
   }));
