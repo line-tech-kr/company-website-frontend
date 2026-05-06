@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/Button";
 import { Glyph } from "@/components/ui/Glyph";
 import type { HomeContent } from "@/lib/content/home";
+import { FeatureChip } from "./FeatureChip";
 import "./Feature.css";
 
 type Props = { h: HomeContent };
@@ -31,15 +32,7 @@ export function Feature({ h }: Props) {
         </Button>
       </div>
       <div>
-        <div className="ho-feature__chip">
-          <div className="ho-feature__chip-tl">M3030VA</div>
-          <div className="ho-feature__chip-tr">REV.7</div>
-          <div className="ho-feature__chip-body">
-            <div className="ho-feature__lbl">PLACEHOLDER · PRODUCT</div>
-          </div>
-          <div className="ho-feature__chip-bl">LINE TECH</div>
-          <div className="ho-feature__chip-br">N₂ · 20 SLM</div>
-        </div>
+        <FeatureChip />
       </div>
     </section>
   );
