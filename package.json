@@ -21,6 +21,9 @@
     "test:run": "vitest run",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
+    "e2e:report": "playwright show-report",
     "i18n:check": "tsx scripts/check-i18n-parity.ts",
     "seed:products": "tsx scripts/seed-products.ts",
     "upload:product-images": "tsx scripts/upload-product-images.ts",
@@ -48,6 +51,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
