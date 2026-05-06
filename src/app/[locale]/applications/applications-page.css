@@ -229,7 +229,7 @@
   gap: 20px;
   padding: 56px 32px;
   margin-bottom: 64px;
-  background: var(--lt-primary-700);
+  background: var(--pd-primary-dark);
   border-radius: 12px;
   text-align: center;
 }

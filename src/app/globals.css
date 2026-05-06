@@ -60,6 +60,7 @@
 
   --pd-primary: var(--lt-primary-500);
   --pd-primary-hover: var(--lt-primary-600);
+  --pd-primary-dark: var(--lt-primary-700);
   --pd-on-primary: #ffffff;
   --pd-accent: var(--lt-accent-400);
 
