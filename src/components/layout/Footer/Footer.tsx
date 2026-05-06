@@ -27,7 +27,18 @@ export async function Footer({ locale }: Props) {
 
         <div className="pd-foot__col">
           <h2 className="pd-foot__heading">{contact.heading}</h2>
-          <address className="pd-foot__addr">{contact.address}</address>
+          <a
+            href={
+              locale === "ko"
+                ? "https://map.naver.com/search/806%20대덕대로%20유성구%20대전"
+                : "https://www.google.com/maps/search/806+Daedeok-daero,+Yuseong-gu,+Daejeon"
+            }
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pd-foot__addr-link"
+          >
+            <address className="pd-foot__addr">{contact.address}</address>
+          </a>
           <ul className="pd-foot__list">
             <li>
               <span className="pd-foot__label">{t("tel")}</span>
@@ -81,6 +92,9 @@ export async function Footer({ locale }: Props) {
 
       <div className="pd-foot__base">
         <span>{rights}</span>
+        <Link href="/legal/privacy" className="pd-foot__privacy-link">
+          {t("privacy")}
+        </Link>
       </div>
     </footer>
   );

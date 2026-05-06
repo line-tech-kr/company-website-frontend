@@ -151,6 +151,16 @@
   opacity: 0.6;
 }
 
+.dr-list__btn--request {
+  border-color: var(--pd-border);
+  color: var(--pd-primary);
+}
+
+.dr-list__btn--request:hover {
+  border-color: var(--pd-primary);
+  background: var(--pd-surface-2);
+}
+
 /* ── Drawings table ───────────────────────────────────────────────────── */
 
 .dr-drawings {

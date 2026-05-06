@@ -9,6 +9,7 @@ import {
 } from "@/lib/content/company";
 import type { Locale } from "@/lib/content/home";
 import { buildCompanyMetadata } from "@/lib/seo";
+import { formatYearMonth } from "@/lib/i18n/dates";
 
 function MapPinIcon() {
   return (
@@ -58,7 +59,7 @@ export default async function CompanyPage({ params }: Props) {
   return (
     <CompanyShell locale={locale} breadcrumbs={breadcrumbs}>
       <Greeting c={c} />
-      <History c={c} />
+      <History c={c} locale={locale} />
       <Certifications c={c} />
       <Location c={c} />
     </CompanyShell>
@@ -102,7 +103,7 @@ function Greeting({ c }: { c: CompanyContent }) {
   );
 }
 
-function History({ c }: { c: CompanyContent }) {
+function History({ c, locale }: { c: CompanyContent; locale: string }) {
   return (
     <section id="history" className="co-section">
       <header className="co-sechd">
@@ -125,7 +126,7 @@ function History({ c }: { c: CompanyContent }) {
                 className="co-timeline__date"
                 dateTime={row.date.replace(".", "-")}
               >
-                {row.date}
+                {formatYearMonth(row.date, locale)}
               </time>
               <span className="co-timeline__event">{row.event}</span>
             </li>

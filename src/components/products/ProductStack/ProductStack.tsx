@@ -3,6 +3,7 @@ import type { Product } from "@/lib/types/product";
 import type { CategorySlug } from "@/lib/categories";
 import type { Locale } from "@/i18n/routing";
 import { urlFor } from "@/sanity/imageUrl";
+import { EmptyState } from "@/components/shared/EmptyState";
 import "./ProductStack.css";
 
 type Props = {
@@ -42,7 +43,7 @@ export function ProductStack({
       </header>
 
       {products.length === 0 ? (
-        <p className="lt-prod-stack__empty">{emptyLabel}</p>
+        <EmptyState message={emptyLabel} />
       ) : (
         <table className="lt-prod-stack__table">
           <caption className="lt-prod-stack__sr-caption">{title}</caption>
