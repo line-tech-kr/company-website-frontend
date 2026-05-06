@@ -35,20 +35,18 @@ test.describe("Product browsing", () => {
     await expect(firstProductLink).toBeVisible();
 
     const productHref = await firstProductLink.getAttribute("href");
-    await firstProductLink.click();
+    expect(productHref).toBeTruthy();
+    const slug = productHref!.split("/").at(-1)!;
 
+    await firstProductLink.click();
     await page.waitForURL(/\/en\/products\/analogue\/.+/);
 
     // Product detail renders — at minimum, a spec table is present
     await expect(page.locator("table").first()).toBeVisible();
 
-    // The model code from the link should appear in the page heading
-    if (productHref) {
-      const slug = productHref.split("/").at(-1) ?? "";
-      // Slug is lowercase (e.g. "m3030va"); the page heading is uppercase
-      await expect(
-        page.getByRole("heading", { name: new RegExp(slug, "i") }).first(),
-      ).toBeVisible();
-    }
+    // Slug is lowercase (e.g. "m3030va"); the page heading is uppercase
+    await expect(
+      page.getByRole("heading", { name: new RegExp(slug, "i") }).first(),
+    ).toBeVisible();
   });
 });

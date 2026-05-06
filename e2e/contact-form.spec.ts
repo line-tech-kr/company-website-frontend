@@ -19,9 +19,7 @@ test.describe("Contact form", () => {
   }) => {
     // The NEXT_PUBLIC_TURNSTILE_SITE_KEY env var is set in playwright.config.ts
     // webServer.env. Without it, the button stays permanently disabled.
-    const submitBtn = page.getByRole("button", {
-      name: /send|submit|sending/i,
-    });
+    const submitBtn = page.getByRole("button", { name: /send inquiry/i });
     await expect(submitBtn).toBeEnabled();
   });
 
@@ -37,7 +35,7 @@ test.describe("Contact form", () => {
       .locator("#ct-message")
       .fill("This is an automated E2E test submission — please ignore.");
 
-    await page.getByRole("button", { name: /send|submit/i }).click();
+    await page.getByRole("button", { name: /send inquiry/i }).click();
 
     // The form either succeeds (role="status") or returns a server error
     // (role="alert"). Both prove the full submit path ran. Email delivery is
