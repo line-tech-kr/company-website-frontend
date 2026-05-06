@@ -6,6 +6,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { LT_APPLICATIONS } from "@/lib/content/applications";
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
+import { buildApplicationDetailMetadata } from "@/lib/seo";
 import "../applications-page.css";
 
 type Props = { params: Promise<{ locale: Locale; slug: string }> };
@@ -27,10 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   const app = LT_APPLICATIONS[locale].applications.find((a) => a.slug === slug);
   if (!app) return {};
-  return {
-    title: `${app.title} — Line Tech`,
-    description: app.lede,
-  };
+  return buildApplicationDetailMetadata(locale, slug, app.title, app.lede);
 }
 
 const CATEGORY_HREFS: Record<string, string> = {

@@ -5,7 +5,20 @@ export const alt = "Line Tech — Mass Flow Controllers & Meters";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OgImage() {
+const TAGLINE: Record<string, string> = {
+  ko: "매스플로우 컨트롤러 · 미터",
+  zh: "质量流量控制器与流量计",
+  en: "Mass Flow Controllers & Meters",
+};
+
+export default async function OgImage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const tagline = TAGLINE[locale] ?? TAGLINE.en;
+
   return new ImageResponse(
     <div
       style={{
@@ -56,7 +69,7 @@ export default function OgImage() {
           lineHeight: 1.4,
         }}
       >
-        Mass Flow Controllers &amp; Meters
+        {tagline}
       </div>
 
       {/* Domain */}

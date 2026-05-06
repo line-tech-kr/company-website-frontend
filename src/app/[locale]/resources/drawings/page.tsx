@@ -4,6 +4,8 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { sanityClient } from "@/sanity/client";
 import { allDrawingsQuery } from "@/sanity/queries";
 import { routing } from "@/i18n/routing";
+import type { Locale } from "@/lib/content/home";
+import { buildResourcesMetadata } from "@/lib/seo";
 import "../resources-subpage.css";
 
 export const revalidate = 3600;
@@ -25,11 +27,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "resources" });
-  return {
-    title: `${t("drawings.title")} — Line Tech`,
-    description: t("drawings.intro"),
-  };
+  return buildResourcesMetadata(locale as Locale, "drawings");
 }
 
 export default async function DrawingsPage({ params }: Props) {
