@@ -15,7 +15,7 @@ const COUNTRY_LOCALE: Record<string, string> = {
   MO: "zh",
 };
 
-function detectLocale(req: NextRequest): string {
+export function detectLocale(req: NextRequest): string {
   const locales: readonly string[] = routing.locales;
 
   const cookie = req.cookies.get(LOCALE_COOKIE)?.value;
@@ -41,6 +41,8 @@ export default function middleware(req: NextRequest) {
     (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
   );
 
+  const secure = process.env.NODE_ENV === "production";
+
   if (matchedLocale) {
     const response = intlMiddleware(req);
     if (req.cookies.get(LOCALE_COOKIE)?.value !== matchedLocale) {
@@ -48,9 +50,15 @@ export default function middleware(req: NextRequest) {
         path: "/",
         maxAge: COOKIE_MAX_AGE,
         sameSite: "lax",
+        secure,
       });
     }
     return response;
+  }
+
+  // Unknown locale-like prefix (e.g. /xx/about) — let intlMiddleware normalize it
+  if (/^\/[a-z]{2}(\/|$)/.test(pathname)) {
+    return intlMiddleware(req);
   }
 
   const locale = detectLocale(req);
@@ -61,6 +69,7 @@ export default function middleware(req: NextRequest) {
     path: "/",
     maxAge: COOKIE_MAX_AGE,
     sameSite: "lax",
+    secure,
   });
   return response;
 }
