@@ -22,7 +22,7 @@ export default defineConfig({
     { name: "webkit", use: { ...devices["Desktop Safari"] } },
   ],
   webServer: {
-    command: "pnpm dev",
+    command: "pnpm dev --webpack",
     url: "http://localhost:3000",
     reuseExistingServer: !CI,
     timeout: 120_000,
