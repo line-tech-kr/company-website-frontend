@@ -240,6 +240,7 @@ export function ContactForm({ form, privacyNotice, defaults }: Props) {
           <p className="ct-form__help">{form.submitDisabledHelp}</p>
         )}
       </div>
+      <p className="ct-form__sla">{t("slaHint")}</p>
       <p className="ct-form__privacy">{privacyNotice}</p>
     </form>
   );

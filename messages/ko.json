@@ -18,7 +18,8 @@
   },
   "footer": {
     "tel": "TEL",
-    "fax": "FAX"
+    "fax": "FAX",
+    "privacy": "개인정보처리방침"
   },
   "errors": {
     "notFound": {
@@ -246,7 +247,9 @@
       "validThrough": "유효 기간",
       "ongoing": "계속 유효"
     },
-    "empty": "아직 등록된 파일이 없습니다. 곧 업데이트될 예정입니다."
+    "empty": "아직 등록된 파일이 없습니다. 곧 업데이트될 예정입니다.",
+    "emptyStateCta": "문의하기",
+    "requestFile": "파일 요청"
   },
   "skipLink": {
     "main": "본문으로 건너뛰기"
@@ -259,6 +262,7 @@
       "server": "메시지를 보낼 수 없습니다. 이메일로 직접 연락해 주세요."
     },
     "success": "메시지가 전송되었습니다. 영업일 기준 1일 이내 답변드리겠습니다.",
-    "submitting": "전송 중…"
+    "submitting": "전송 중…",
+    "slaHint": "영업일 기준 1일 이내에 답변드립니다."
   }
 }

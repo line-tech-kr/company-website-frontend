@@ -18,7 +18,8 @@
   },
   "footer": {
     "tel": "TEL",
-    "fax": "FAX"
+    "fax": "FAX",
+    "privacy": "Privacy Policy"
   },
   "errors": {
     "notFound": {
@@ -246,7 +247,9 @@
       "validThrough": "Valid through",
       "ongoing": "Ongoing"
     },
-    "empty": "No files available yet. Check back soon."
+    "empty": "No files available yet. Check back soon.",
+    "emptyStateCta": "Contact us",
+    "requestFile": "Request file"
   },
   "skipLink": {
     "main": "Skip to main content"
@@ -258,7 +261,8 @@
       "captcha": "Verification failed. Please complete the challenge again.",
       "server": "We could not send your message. Please email us directly."
     },
-    "success": "Thanks — your message has been sent. We will reply within one business day.",
-    "submitting": "Sending…"
+    "success": "Thanks — your message has been sent. We typically respond within 1 business day.",
+    "submitting": "Sending…",
+    "slaHint": "We typically respond within 1 business day."
   }
 }

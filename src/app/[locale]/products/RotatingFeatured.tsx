@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Link } from "@/i18n/navigation";
 
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
@@ -43,6 +43,7 @@ export function RotatingFeatured({
   const [active, setActive] = useState(0);
   const [mouseInside, setMouseInside] = useState(false);
   const [focusInside, setFocusInside] = useState(false);
+  const touchStartX = useRef<number | null>(null);
   const reducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
     getReducedMotionSnapshot,
@@ -68,6 +69,20 @@ export function RotatingFeatured({
       onMouseLeave={() => setMouseInside(false)}
       onFocusCapture={() => setFocusInside(true)}
       onBlurCapture={() => setFocusInside(false)}
+      onTouchStart={(e) => {
+        touchStartX.current = e.touches[0].clientX;
+      }}
+      onTouchEnd={(e) => {
+        if (touchStartX.current === null) return;
+        const delta = e.changedTouches[0].clientX - touchStartX.current;
+        touchStartX.current = null;
+        if (Math.abs(delta) < 50) return;
+        setActive((prev) =>
+          delta < 0
+            ? (prev + 1) % slides.length
+            : (prev - 1 + slides.length) % slides.length,
+        );
+      }}
     >
       <div className="lt-products-side__rot-stack">
         {slides.map((s, i) => {

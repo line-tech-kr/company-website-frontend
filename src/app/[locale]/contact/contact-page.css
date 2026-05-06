@@ -198,6 +198,13 @@
   line-height: 1.45;
   flex: 1 1 240px;
 }
+.ct-form__sla {
+  margin: 10px 0 0;
+  font-size: var(--lt-fs-xs);
+  line-height: 1.45;
+  color: var(--pd-muted);
+}
+
 .ct-form__privacy {
   margin: 14px 0 0;
   padding-top: 14px;

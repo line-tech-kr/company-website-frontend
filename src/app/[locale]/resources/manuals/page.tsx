@@ -1,7 +1,10 @@
 import { Fragment } from "react";
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
+import { EmptyState } from "@/components/shared/EmptyState";
+import { formatISODate } from "@/lib/i18n/dates";
 import { sanityClient } from "@/sanity/client";
 import { allManualsQuery } from "@/sanity/queries";
 import { routing } from "@/i18n/routing";
@@ -73,7 +76,11 @@ export default async function ManualsPage({ params }: Props) {
       </header>
 
       {manuals.length === 0 ? (
-        <p style={{ color: "var(--pd-muted)" }}>{tRes("empty")}</p>
+        <EmptyState
+          message={tRes("empty")}
+          ctaHref="/contact?topic=request"
+          ctaLabel={tRes("emptyStateCta")}
+        />
       ) : (
         <ul className="dr-list" role="list">
           {SERIES_ORDER.filter((s) => grouped[s]).map((s) => (
@@ -100,7 +107,9 @@ export default async function ManualsPage({ params }: Props) {
                         {item.rev && item.publishedAt && (
                           <span className="dr-list__sep">·</span>
                         )}
-                        {item.publishedAt && <span>{item.publishedAt}</span>}
+                        {item.publishedAt && (
+                          <span>{formatISODate(item.publishedAt, locale)}</span>
+                        )}
                       </div>
                     )}
                   </div>
@@ -109,9 +118,12 @@ export default async function ManualsPage({ params }: Props) {
                       {tRes("download")}
                     </a>
                   ) : (
-                    <span className="dr-list__btn dr-list__btn--disabled">
-                      {tRes("comingSoon")}
-                    </span>
+                    <Link
+                      href={`/contact?topic=request&file=${encodeURIComponent(item.title)}`}
+                      className="dr-list__btn dr-list__btn--request"
+                    >
+                      {tRes("requestFile")}
+                    </Link>
                   )}
                 </li>
               ))}
@@ -132,7 +144,9 @@ export default async function ManualsPage({ params }: Props) {
                     {item.rev && item.publishedAt && (
                       <span className="dr-list__sep">·</span>
                     )}
-                    {item.publishedAt && <span>{item.publishedAt}</span>}
+                    {item.publishedAt && (
+                      <span>{formatISODate(item.publishedAt, locale)}</span>
+                    )}
                   </div>
                 )}
               </div>
@@ -141,9 +155,12 @@ export default async function ManualsPage({ params }: Props) {
                   {tRes("download")}
                 </a>
               ) : (
-                <span className="dr-list__btn dr-list__btn--disabled">
-                  {tRes("comingSoon")}
-                </span>
+                <Link
+                  href={`/contact?topic=request&file=${encodeURIComponent(item.title)}`}
+                  className="dr-list__btn dr-list__btn--request"
+                >
+                  {tRes("requestFile")}
+                </Link>
               )}
             </li>
           ))}

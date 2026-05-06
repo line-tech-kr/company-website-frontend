@@ -186,7 +186,14 @@ export function HeaderShell({
     <SearchStateCtx.Provider value={searchCtx}>
       <HeaderNavProvider value={navCtx}>
         <MobileNavProvider value={mobileNavCtx}>
-          <header className={cls}>
+          <header
+            className={cls}
+            onBlur={(e) => {
+              if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                navCtx.setOpenId(null);
+              }
+            }}
+          >
             {children}
             <SearchPanel
               content={search}

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
+import { EmptyState } from "@/components/shared/EmptyState";
 import { sanityClient } from "@/sanity/client";
 import { allCertificationsQuery } from "@/sanity/queries";
 import { routing } from "@/i18n/routing";
@@ -63,7 +65,11 @@ export default async function CertificationsPage({ params }: Props) {
       </header>
 
       {certs.length === 0 ? (
-        <p style={{ color: "var(--pd-muted)" }}>{tRes("empty")}</p>
+        <EmptyState
+          message={tRes("empty")}
+          ctaHref="/contact?topic=request"
+          ctaLabel={tRes("emptyStateCta")}
+        />
       ) : (
         <ul className="dr-certs" role="list">
           {certs.map((cert) => {
@@ -100,9 +106,12 @@ export default async function CertificationsPage({ params }: Props) {
                       {tRes("download")}
                     </a>
                   ) : (
-                    <span className="dr-list__btn dr-list__btn--disabled">
-                      {tRes("comingSoon")}
-                    </span>
+                    <Link
+                      href={`/contact?topic=request&file=${encodeURIComponent(cert.name)}`}
+                      className="dr-list__btn dr-list__btn--request"
+                    >
+                      {tRes("requestFile")}
+                    </Link>
                   )}
                 </div>
               </li>
