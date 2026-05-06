@@ -31,7 +31,12 @@ const FLAGSHIP_IMAGE_PLACEHOLDER = "/products/lti/placeholder.svg";
 
 function flagshipImageUrl(flagship: Product): string {
   const image = flagship.images?.[0];
-  if (!image?.asset) return FLAGSHIP_IMAGE_PLACEHOLDER;
+  if (!image?.asset) {
+    console.warn(
+      `[products rotator] No image for flagship ${flagship.model} — showing placeholder`,
+    );
+    return FLAGSHIP_IMAGE_PLACEHOLDER;
+  }
   return urlFor(image).width(720).url();
 }
 
@@ -56,6 +61,8 @@ const SERIES_COUNT = 4;
 
 const FLAGSHIP_MODEL: Partial<Record<CategorySlug, string>> = {
   analogue: "M3030VA",
+  digital: "MD800C",
+  specialized: "LD030C",
 };
 
 function pickFlagship(
