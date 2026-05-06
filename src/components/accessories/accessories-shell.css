@@ -145,7 +145,7 @@
 }
 .acc-hero__title {
   margin: 0 0 16px;
-  font: 500 var(--lt-fs-h1)/1.05 var(--lt-sans);
+  font: 500 var(--lt-fs-h2)/1.05 var(--lt-sans);
   letter-spacing: -0.02em;
   color: var(--pd-fg-strong);
   max-width: 720px;
@@ -350,12 +350,6 @@
   }
   .acc-section + .acc-section {
     margin-top: 12px;
-  }
-  .acc-hero__title {
-    font-size: 32px;
-  }
-  .acc-sechd__title {
-    font-size: 28px;
   }
   .acc-item {
     grid-template-columns: 1fr;

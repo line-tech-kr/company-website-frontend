@@ -18,7 +18,8 @@
   },
   "footer": {
     "tel": "TEL",
-    "fax": "FAX"
+    "fax": "FAX",
+    "privacy": "隐私政策"
   },
   "errors": {
     "notFound": {
@@ -58,8 +59,22 @@
   "products": {
     "list": {
       "title": "产品目录",
-      "intro": "涵盖模拟、数字和专用系列的质量流量控制器与质量流量计。{count} 款型号专为实验室、工业和工艺应用设计。",
-      "cardCount": "{count} 款型号"
+      "lede": "涵盖模拟、数字和专用系列的质量流量控制器（MFC）和质量流量计（MFM）。",
+      "cardCount": "{count} 款型号",
+      "stats": {
+        "modelsLabel": "目录型号",
+        "modelsSub": "覆盖 {count} 个系列",
+        "rangeLabel": "SLPM 流量范围",
+        "rangeSub": "全系列合计",
+        "industriesLabel": "服务行业",
+        "industriesSub": "1997 年起现场验证",
+        "certificationsLabel": "认证",
+        "certificationsSub": "KGS · CE · ISO 9001"
+      },
+      "applications": {
+        "label": "常见应用",
+        "viewAll": "查看全部 {count} 项应用 →"
+      }
     },
     "kicker": "产品系列",
     "categories": {
@@ -151,13 +166,14 @@
       "sub": "仅发布最新版。如需历史资料，请通过联系表单申请。",
       "download": "下载",
       "done": "完成",
-      "placeholders": {
-        "datasheet": "{model} 数据手册",
-        "manual": "{model} 使用手册",
-        "cad": "{model} 外形图",
-        "rev": "Rev. —",
-        "tbd": "待发布"
-      }
+      "datasheetFor": "{model} 数据手册",
+      "manualFor": "{model} 使用手册"
+    },
+    "requestDocs": {
+      "kicker": "技术资料",
+      "heading": "需要数据手册、说明书或CAD图纸？",
+      "body": "技术资料可应需求提供。请告知型号和应用场景，我们将在一个工作日内回复。",
+      "cta": "申请技术资料"
     }
   },
   "resources": {
@@ -175,6 +191,11 @@
         "title": "CAD 图纸",
         "desc": "AutoCAD (.dwg) 及 STEP (.stp) 文件",
         "count": "{count}个图纸"
+      },
+      "datasheets": {
+        "title": "数据手册",
+        "desc": "各型号规格说明书",
+        "count": "{count}份文件"
       },
       "manuals": {
         "title": "使用手册",
@@ -194,6 +215,10 @@
     "drawings": {
       "title": "CAD 图纸",
       "intro": "提供各型号外形图，支持 AutoCAD (.dwg) 和 STEP (.stp) 格式下载。"
+    },
+    "datasheets": {
+      "title": "数据手册",
+      "intro": "各型号产品的规格说明书。下载最新版本或申请特定配置。"
     },
     "manuals": {
       "title": "使用手册",
@@ -222,7 +247,9 @@
       "validThrough": "有效期至",
       "ongoing": "持续有效"
     },
-    "empty": "暂无可用文件，敬请期待。"
+    "empty": "暂无可用文件，敬请期待。",
+    "emptyStateCta": "联系我们",
+    "requestFile": "申请文件"
   },
   "skipLink": {
     "main": "跳到主要内容"
@@ -235,6 +262,7 @@
       "server": "无法发送您的消息。请直接通过邮件联系我们。"
     },
     "success": "感谢您的留言，我们将在 1 个工作日内回复。",
-    "submitting": "发送中…"
+    "submitting": "发送中…",
+    "slaHint": "我们通常在1个工作日内回复。"
   }
 }

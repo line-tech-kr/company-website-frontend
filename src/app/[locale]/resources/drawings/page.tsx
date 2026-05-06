@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
+import { EmptyState } from "@/components/shared/EmptyState";
 import { sanityClient } from "@/sanity/client";
 import { allDrawingsQuery } from "@/sanity/queries";
 import { routing } from "@/i18n/routing";
+import type { Locale } from "@/lib/content/home";
+import { buildResourcesMetadata } from "@/lib/seo";
 import "../resources-subpage.css";
 
 export const revalidate = 3600;
@@ -25,11 +29,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "resources" });
-  return {
-    title: `${t("drawings.title")} — Line Tech`,
-    description: t("drawings.intro"),
-  };
+  return buildResourcesMetadata(locale as Locale, "drawings");
 }
 
 export default async function DrawingsPage({ params }: Props) {
@@ -59,7 +59,11 @@ export default async function DrawingsPage({ params }: Props) {
       </header>
 
       {drawings.length === 0 ? (
-        <p style={{ color: "var(--pd-muted)" }}>{tRes("empty")}</p>
+        <EmptyState
+          message={tRes("empty")}
+          ctaHref="/contact?topic=request"
+          ctaLabel={tRes("emptyStateCta")}
+        />
       ) : (
         <table className="dr-drawings">
           <thead>
@@ -116,9 +120,12 @@ export default async function DrawingsPage({ params }: Props) {
                       </a>
                     )}
                     {!item.dwgUrl && !item.stpUrl && (
-                      <span className="dr-list__btn dr-list__btn--disabled">
-                        {tRes("comingSoon")}
-                      </span>
+                      <Link
+                        href={`/contact?topic=request&file=${encodeURIComponent(item.title)}`}
+                        className="dr-list__btn dr-list__btn--request"
+                      >
+                        {tRes("requestFile")}
+                      </Link>
                     )}
                   </div>
                 </td>

@@ -21,6 +21,9 @@
     "test:run": "vitest run",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
+    "e2e:report": "playwright show-report",
     "i18n:check": "tsx scripts/check-i18n-parity.ts",
     "seed:products": "tsx scripts/seed-products.ts",
     "upload:product-images": "tsx scripts/upload-product-images.ts",
@@ -45,9 +48,10 @@
     "resend": "^6.12.2",
     "sanity": "^5.23.0",
     "sanity-plugin-internationalized-array": "^5.1.0",
-    "zod": "^3.23.8"
+    "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
@@ -71,5 +75,12 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,mjs,cjs,json,css,md,yml,yaml}": "prettier --write"
+  },
+  "pnpm": {
+    "overrides": {
+      "js-yaml@<3.14.2": ">=3.14.2",
+      "postcss@<8.5.10": ">=8.5.10",
+      "uuid@<14.0.0": ">=14.0.0"
+    }
   }
 }

@@ -129,9 +129,6 @@
   .ho-feature {
     grid-template-columns: 1fr;
   }
-  .ho-feature__title {
-    font-size: 44px;
-  }
 }
 @media (max-width: 640px) {
   .ho-feature__bullets {
@@ -145,7 +142,9 @@
   }
 }
 @media (max-width: 500px) {
+  /* Phone target deliberately smaller than the feature token's MIN; preserves
+   * the original mobile hierarchy. */
   .ho-feature__title {
-    font-size: clamp(24px, 7vw, 32px);
+    font-size: clamp(1.5rem, 7vw, 2rem);
   }
 }

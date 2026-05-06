@@ -1,0 +1,28 @@
+.lt-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 24px 0;
+}
+
+.lt-empty-state__msg {
+  margin: 0;
+  color: var(--pd-muted);
+  font-size: var(--lt-fs-sm);
+  line-height: 1.5;
+}
+
+.lt-empty-state__cta {
+  font-size: var(--lt-fs-sm);
+  font-weight: 500;
+  color: var(--pd-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(24, 86, 134, 0.35);
+  transition: text-decoration-color 120ms ease;
+}
+
+.lt-empty-state__cta:hover {
+  text-decoration-color: var(--pd-primary);
+}

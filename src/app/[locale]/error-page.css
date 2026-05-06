@@ -47,12 +47,6 @@
   color: var(--pd-muted);
 }
 
-@media (max-width: 640px) {
-  .lt-error__title {
-    font-size: 28px;
-  }
-}
-
 :lang(ko) .lt-error__code,
 :lang(zh) .lt-error__code {
   letter-spacing: 0;

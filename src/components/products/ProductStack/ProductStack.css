@@ -73,16 +73,6 @@
   text-align: left;
 }
 
-.lt-prod-stack__empty {
-  margin: 16px 0;
-  padding: 32px;
-  border: 1px dashed var(--pd-border);
-  border-radius: var(--pd-r-md);
-  text-align: center;
-  color: var(--pd-muted);
-  font-size: var(--lt-fs-sm);
-}
-
 :lang(ko) .lt-prod-stack__kicker,
 :lang(zh) .lt-prod-stack__kicker,
 :lang(ko) .lt-prod-stack__head-cell,

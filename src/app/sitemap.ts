@@ -21,6 +21,16 @@ const STATIC_ROUTES: StaticRoute[] = [
   { path: "contact", priority: 0.3, changeFrequency: "yearly" },
   { path: "products", priority: 0.7, changeFrequency: "monthly" },
   { path: "products/accessories", priority: 0.6, changeFrequency: "monthly" },
+  { path: "resources", priority: 0.5, changeFrequency: "monthly" },
+  { path: "resources/catalogues", priority: 0.4, changeFrequency: "monthly" },
+  { path: "resources/drawings", priority: 0.4, changeFrequency: "monthly" },
+  { path: "resources/datasheets", priority: 0.4, changeFrequency: "monthly" },
+  { path: "resources/manuals", priority: 0.4, changeFrequency: "monthly" },
+  {
+    path: "resources/certifications",
+    priority: 0.4,
+    changeFrequency: "monthly",
+  },
 ];
 
 function buildLocaleAlternates(path: string): Record<string, string> {

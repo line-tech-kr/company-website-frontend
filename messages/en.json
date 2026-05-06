@@ -18,7 +18,8 @@
   },
   "footer": {
     "tel": "TEL",
-    "fax": "FAX"
+    "fax": "FAX",
+    "privacy": "Privacy Policy"
   },
   "errors": {
     "notFound": {
@@ -58,8 +59,22 @@
   "products": {
     "list": {
       "title": "Product catalog",
-      "intro": "Mass Flow Controllers and Mass Flow Meters across analogue, digital, and specialized series. {count} models engineered for laboratory, industrial, and process applications.",
-      "cardCount": "{count} models"
+      "lede": "Mass Flow Controllers and Mass Flow Meters across analogue, digital, and specialized series.",
+      "cardCount": "{count} models",
+      "stats": {
+        "modelsLabel": "Models in catalog",
+        "modelsSub": "Across {count} series",
+        "rangeLabel": "SLPM, full range",
+        "rangeSub": "Cumulative across series",
+        "industriesLabel": "Industries served",
+        "industriesSub": "Field-validated since 1997",
+        "certificationsLabel": "Certifications",
+        "certificationsSub": "KGS · CE · ISO 9001"
+      },
+      "applications": {
+        "label": "Common applications",
+        "viewAll": "View all {count} applications →"
+      }
     },
     "kicker": "Product series",
     "categories": {
@@ -151,13 +166,14 @@
       "sub": "Latest revisions only. Request historical files via the contact form.",
       "download": "Download",
       "done": "Done",
-      "placeholders": {
-        "datasheet": "{model} datasheet",
-        "manual": "{model} user manual",
-        "cad": "{model} outline drawing",
-        "rev": "Rev. —",
-        "tbd": "TBD"
-      }
+      "datasheetFor": "{model} datasheet",
+      "manualFor": "{model} user manual"
+    },
+    "requestDocs": {
+      "kicker": "Documentation",
+      "heading": "Need datasheets, manuals, or CAD drawings?",
+      "body": "Technical documents are sent on request. Tell us the model and your application — we'll respond within one business day.",
+      "cta": "Request technical documents"
     }
   },
   "resources": {
@@ -175,6 +191,11 @@
         "title": "CAD Drawings",
         "desc": "AutoCAD (.dwg) and STEP (.stp) files",
         "count": "{count} models"
+      },
+      "datasheets": {
+        "title": "Datasheets",
+        "desc": "Per-model specification sheets",
+        "count": "{count} documents"
       },
       "manuals": {
         "title": "Manuals",
@@ -194,6 +215,10 @@
     "drawings": {
       "title": "CAD Drawings",
       "intro": "Outline drawings for each model in AutoCAD (.dwg) and STEP (.stp) formats."
+    },
+    "datasheets": {
+      "title": "Datasheets",
+      "intro": "Specification sheets for every model. Download the latest revision or request a specific configuration."
     },
     "manuals": {
       "title": "Manuals",
@@ -222,7 +247,9 @@
       "validThrough": "Valid through",
       "ongoing": "Ongoing"
     },
-    "empty": "No files available yet. Check back soon."
+    "empty": "No files available yet. Check back soon.",
+    "emptyStateCta": "Contact us",
+    "requestFile": "Request file"
   },
   "skipLink": {
     "main": "Skip to main content"
@@ -234,7 +261,8 @@
       "captcha": "Verification failed. Please complete the challenge again.",
       "server": "We could not send your message. Please email us directly."
     },
-    "success": "Thanks — your message has been sent. We will reply within one business day.",
-    "submitting": "Sending…"
+    "success": "Thanks — your message has been sent. We typically respond within 1 business day.",
+    "submitting": "Sending…",
+    "slaHint": "We typically respond within 1 business day."
   }
 }

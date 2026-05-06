@@ -33,7 +33,7 @@ export default async function HomePage({ params }: Props) {
         <Applications h={h} />
         <Feature h={h} />
         <Credentials h={h} />
-        <Contact h={h} locale={locale} />
+        <Contact h={h} />
       </div>
     </main>
   );
