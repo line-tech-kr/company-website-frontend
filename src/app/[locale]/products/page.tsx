@@ -22,10 +22,7 @@ import {
   type RotatingSlide,
   type SlideAccent,
 } from "./RotatingFeatured";
-import {
-  flagshipImageUrl,
-  pickFlagship,
-} from "@/lib/products/flagship";
+import { flagshipImageUrl, pickFlagship } from "@/lib/products/flagship";
 import "./products-list.css";
 
 export const revalidate = 3600;

@@ -9,10 +9,14 @@ import { CATEGORY_SLUGS, type CategorySlug } from "@/lib/categories";
 import type { Product } from "@/lib/types/product";
 
 vi.mock("@/sanity/imageUrl", () => ({
-  urlFor: () => ({ width: () => ({ url: () => "https://cdn.sanity.io/mock.jpg" }) }),
+  urlFor: () => ({
+    width: () => ({ url: () => "https://cdn.sanity.io/mock.jpg" }),
+  }),
 }));
 
-function makeProduct(overrides: Partial<Product> & Pick<Product, "model" | "series">): Product {
+function makeProduct(
+  overrides: Partial<Product> & Pick<Product, "model" | "series">,
+): Product {
   return {
     slug: { current: overrides.model.toLowerCase() },
     function: "MFC",
@@ -26,7 +30,10 @@ function makeProduct(overrides: Partial<Product> & Pick<Product, "model" | "seri
   } as unknown as Product;
 }
 
-function makeProductWithImage(model: string, series: Product["series"]): Product {
+function makeProductWithImage(
+  model: string,
+  series: Product["series"],
+): Product {
   return makeProduct({
     model,
     series,
@@ -119,7 +126,10 @@ describe("flagshipImageUrl", () => {
 
   it("placeholder cannot silently reach the rotator — warn fires for every imageless flagship", () => {
     const imagelessFlagships = CATEGORY_SLUGS.map((slug) =>
-      makeProduct({ model: FLAGSHIP_MODEL[slug]!, series: slug as Product["series"] }),
+      makeProduct({
+        model: FLAGSHIP_MODEL[slug]!,
+        series: slug as Product["series"],
+      }),
     );
     for (const p of imagelessFlagships) {
       vi.mocked(console.warn).mockClear();
