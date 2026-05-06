@@ -7,12 +7,14 @@ test.describe("Locale switching", () => {
   });
 
   test("switches from Korean to English to Chinese", async ({ page }) => {
-    await page.goto("/ko");
+    // Wait for network idle so React has hydrated and onClick is bound —
+    // without this, parallel-worker runs race the dev server and the click
+    // fires before hydration completes.
+    await page.goto("/ko", { waitUntil: "networkidle" });
 
-    const langNav = page.getByRole("navigation", { name: "Language" });
-
-    // Switch to English
-    await langNav.getByRole("button", { name: "English" }).click();
+    // Locale switcher's nav aria-label is translated per locale; target buttons
+    // by their lang attribute instead, which is locale-agnostic.
+    await page.locator('.pd-top__right .lt-locale__seg[lang="en"]').click();
     await expect(page).toHaveURL(/\/en/);
 
     // Confirm English content is present (nav link uses English label)
@@ -22,19 +24,18 @@ test.describe("Locale switching", () => {
       }),
     ).toBeVisible();
 
-    // Switch to Chinese
-    await langNav.getByRole("button", { name: "中文" }).click();
+    await page.locator('.pd-top__right .lt-locale__seg[lang="zh"]').click();
     await expect(page).toHaveURL(/\/zh/);
   });
 
   test("preserves the current page path when switching locale", async ({
     page,
   }) => {
-    await page.goto("/en/products");
+    await page.goto("/en/products", { waitUntil: "networkidle" });
 
-    const langNav = page.getByRole("navigation", { name: "Language" });
-    await langNav.getByRole("button", { name: "한국어" }).click();
-
-    await expect(page).toHaveURL(/\/ko\/products/);
+    await Promise.all([
+      page.waitForURL(/\/ko\/products/),
+      page.locator('.pd-top__right .lt-locale__seg[lang="ko"]').click(),
+    ]);
   });
 });

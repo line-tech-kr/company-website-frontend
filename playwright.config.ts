@@ -7,7 +7,10 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: CI,
   retries: CI ? 1 : 0,
-  workers: CI ? 1 : undefined,
+  // Always 1 worker — multiple workers race the dev server's on-demand
+  // compilation, causing flaky hydration-dependent tests (locale switcher,
+  // Next.js Link clicks).
+  workers: 1,
   reporter: CI
     ? [["github"], ["html", { open: "never" }]]
     : [["html", { open: "never" }]],
@@ -26,14 +29,8 @@ export default defineConfig({
     url: "http://localhost:3000",
     reuseExistingServer: !CI,
     timeout: 120_000,
-    env: {
-      // Public Sanity project — no auth token required for reads.
-      NEXT_PUBLIC_SANITY_PROJECT_ID: "9ped5k0o",
-      NEXT_PUBLIC_SANITY_DATASET: "production",
-      // Turnstile test site key — always passes, never prompts the user.
-      // The server-side captcha.ts no-ops without TURNSTILE_SECRET_KEY in
-      // dev mode, so no secret key is needed here.
-      NEXT_PUBLIC_TURNSTILE_SITE_KEY: "1x00000000000000000000AA",
-    },
+    // NEXT_PUBLIC_* vars used in client components must come from a .env file
+    // (webpack inlines them at compile time, not from process.env). See
+    // .env.local in this worktree, and the "Write .env.local" CI step.
   },
 });

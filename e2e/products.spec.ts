@@ -41,8 +41,8 @@ test.describe("Product browsing", () => {
     await firstProductLink.click();
     await page.waitForURL(/\/en\/products\/analogue\/.+/);
 
-    // Product detail renders — at minimum, a spec table is present
-    await expect(page.locator("table").first()).toBeVisible();
+    // Product detail renders — spec list is present (it's a <dl>, not a <table>)
+    await expect(page.locator("#specs")).toBeVisible();
 
     // Slug is lowercase (e.g. "m3030va"); the page heading is uppercase
     await expect(

@@ -70,12 +70,18 @@ jobs:
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps chromium
 
+      # NEXT_PUBLIC_* vars used in client components must be in .env files —
+      # webpack inlines them at compile time, not from process.env.
+      - name: Write .env.local for E2E
+        run: |
+          cat > .env.local <<'EOF'
+          NEXT_PUBLIC_SANITY_PROJECT_ID=9ped5k0o
+          NEXT_PUBLIC_SANITY_DATASET=production
+          NEXT_PUBLIC_TURNSTILE_SITE_KEY=1x00000000000000000000AA
+          EOF
+
       - name: Run E2E tests
         run: pnpm e2e --project=chromium
-        env:
-          NEXT_PUBLIC_SANITY_PROJECT_ID: 9ped5k0o
-          NEXT_PUBLIC_SANITY_DATASET: production
-          NEXT_PUBLIC_TURNSTILE_SITE_KEY: 1x00000000000000000000AA
 
       - name: Upload Playwright report
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
