@@ -1,6 +1,9 @@
 // @vitest-environment node
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { NextRequest } from "next/server";
+
+vi.mock("next-intl/middleware", () => ({ default: vi.fn() }));
+
 import { detectLocale } from "./middleware";
 
 function makeReq(
