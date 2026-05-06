@@ -126,6 +126,31 @@
   object-fit: contain;
   padding: 72px;
 }
+.ho-feature__dots {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+.ho-feature__dot {
+  width: 28px;
+  height: 4px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: var(--pd-rule);
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    width 0.2s ease;
+}
+.ho-feature__dot:hover {
+  background: var(--pd-border-strong);
+}
+.ho-feature__dot[data-active="true"] {
+  background: var(--pd-primary);
+  width: 40px;
+}
 
 :lang(ko) .ho-feature__kicker,
 :lang(zh) .ho-feature__kicker {
