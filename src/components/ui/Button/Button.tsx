@@ -20,7 +20,7 @@ type Base = {
 // `plain: true` renders a bare <a> instead of the locale-aware <Link>.
 // Use for non-route URLs: mailto:, tel:, static files, external origins.
 type AsLocalLink = Base & { href: LinkHref; plain?: false };
-type AsPlainLink = Base & { href: string; plain: true };
+type AsPlainLink = Base & { href: string; plain: true; download?: boolean };
 type AsButton = Base & {
   onClick?: () => void;
   type?: "button" | "submit";
@@ -66,7 +66,7 @@ export function Button(props: Props) {
   if (isLink(props)) {
     if (props.plain) {
       return (
-        <a className={cls} href={props.href}>
+        <a className={cls} href={props.href} download={props.download}>
           {inner}
         </a>
       );

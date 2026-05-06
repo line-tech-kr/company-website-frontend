@@ -5,6 +5,8 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { sanityClient } from "@/sanity/client";
 import { resourceCountsQuery } from "@/sanity/queries";
 import { routing } from "@/i18n/routing";
+import type { Locale } from "@/lib/content/home";
+import { buildResourcesMetadata } from "@/lib/seo";
 import "./resources-hub.css";
 
 export const revalidate = 3600;
@@ -17,16 +19,13 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "resources" });
-  return {
-    title: `${t("hub.title")} — Line Tech`,
-    description: t("hub.intro"),
-  };
+  return buildResourcesMetadata(locale as Locale, "hub");
 }
 
 const CARDS = [
   { key: "catalogues", href: "/resources/catalogues" },
   { key: "drawings", href: "/resources/drawings" },
+  { key: "datasheets", href: "/resources/datasheets" },
   { key: "manuals", href: "/resources/manuals" },
   { key: "certifications", href: "/resources/certifications" },
 ] as const;

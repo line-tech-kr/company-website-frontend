@@ -1,15 +1,10 @@
 import { Fragment } from "react";
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
-import { EmptyState } from "@/components/shared/EmptyState";
-import { formatISODate } from "@/lib/i18n/dates";
 import { sanityClient } from "@/sanity/client";
-import { allManualsQuery } from "@/sanity/queries";
+import { allDatasheetsQuery } from "@/sanity/queries";
 import { routing } from "@/i18n/routing";
-import type { Locale } from "@/lib/content/home";
-import { buildResourcesMetadata } from "@/lib/seo";
 import "../resources-subpage.css";
 
 export const revalidate = 3600;
@@ -19,7 +14,7 @@ type Props = { params: Promise<{ locale: string }> };
 type Series = "analogue" | "digital" | "specialized";
 const SERIES_ORDER: Series[] = ["analogue", "digital", "specialized"];
 
-type ManualItem = {
+type DatasheetItem = {
   _id: string;
   title: string;
   model?: string | null;
@@ -35,52 +30,52 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return buildResourcesMetadata(locale as Locale, "manuals");
+  const t = await getTranslations({ locale, namespace: "resources" });
+  return {
+    title: `${t("datasheets.title")} — Line Tech`,
+    description: t("datasheets.intro"),
+  };
 }
 
-export default async function ManualsPage({ params }: Props) {
+export default async function DatasheetsPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [tCommon, tNav, tRes, manuals] = await Promise.all([
+  const [tCommon, tNav, tRes, datasheets] = await Promise.all([
     getTranslations("common"),
     getTranslations("nav"),
     getTranslations("resources"),
-    sanityClient.fetch<ManualItem[]>(allManualsQuery),
+    sanityClient.fetch<DatasheetItem[]>(allDatasheetsQuery),
   ]);
 
   const breadcrumbs = [
     { label: tCommon("home"), href: "/" },
     { label: tNav("dataRoom"), href: "/resources" },
-    { label: tRes("manuals.title") },
+    { label: tRes("datasheets.title") },
   ];
 
-  const grouped = SERIES_ORDER.reduce<Record<string, typeof manuals>>(
+  const grouped = SERIES_ORDER.reduce<Record<string, typeof datasheets>>(
     (acc, s) => {
-      const items = manuals.filter((m) => m.series === s);
+      const items = datasheets.filter((d) => d.series === s);
       if (items.length) acc[s] = items;
       return acc;
     },
     {},
   );
 
-  const ungrouped = manuals.filter((m) => !m.series);
+  const ungrouped = datasheets.filter((d) => !d.series);
 
   return (
     <main className="lt-wrap dr-sub">
       <Breadcrumbs items={breadcrumbs} />
 
       <header className="dr-sub__hero">
-        <h1 className="dr-sub__title">{tRes("manuals.title")}</h1>
-        <p className="dr-sub__intro">{tRes("manuals.intro")}</p>
+        <h1 className="dr-sub__title">{tRes("datasheets.title")}</h1>
+        <p className="dr-sub__intro">{tRes("datasheets.intro")}</p>
       </header>
 
-      {manuals.length === 0 ? (
-        <EmptyState
-          message={tRes("empty")}
-          ctaHref="/contact?topic=request"
-          ctaLabel={tRes("emptyStateCta")}
-        />
+      {datasheets.length === 0 ? (
+        <p style={{ color: "var(--pd-muted)" }}>{tRes("empty")}</p>
       ) : (
         <ul className="dr-list" role="list">
           {SERIES_ORDER.filter((s) => grouped[s]).map((s) => (
@@ -107,9 +102,7 @@ export default async function ManualsPage({ params }: Props) {
                         {item.rev && item.publishedAt && (
                           <span className="dr-list__sep">·</span>
                         )}
-                        {item.publishedAt && (
-                          <span>{formatISODate(item.publishedAt, locale)}</span>
-                        )}
+                        {item.publishedAt && <span>{item.publishedAt}</span>}
                       </div>
                     )}
                   </div>
@@ -118,12 +111,9 @@ export default async function ManualsPage({ params }: Props) {
                       {tRes("download")}
                     </a>
                   ) : (
-                    <Link
-                      href={`/contact?topic=request&file=${encodeURIComponent(item.title)}`}
-                      className="dr-list__btn dr-list__btn--request"
-                    >
-                      {tRes("requestFile")}
-                    </Link>
+                    <span className="dr-list__btn dr-list__btn--disabled">
+                      {tRes("comingSoon")}
+                    </span>
                   )}
                 </li>
               ))}
@@ -144,9 +134,7 @@ export default async function ManualsPage({ params }: Props) {
                     {item.rev && item.publishedAt && (
                       <span className="dr-list__sep">·</span>
                     )}
-                    {item.publishedAt && (
-                      <span>{formatISODate(item.publishedAt, locale)}</span>
-                    )}
+                    {item.publishedAt && <span>{item.publishedAt}</span>}
                   </div>
                 )}
               </div>
@@ -155,12 +143,9 @@ export default async function ManualsPage({ params }: Props) {
                   {tRes("download")}
                 </a>
               ) : (
-                <Link
-                  href={`/contact?topic=request&file=${encodeURIComponent(item.title)}`}
-                  className="dr-list__btn dr-list__btn--request"
-                >
-                  {tRes("requestFile")}
-                </Link>
+                <span className="dr-list__btn dr-list__btn--disabled">
+                  {tRes("comingSoon")}
+                </span>
               )}
             </li>
           ))}

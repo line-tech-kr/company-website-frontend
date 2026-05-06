@@ -199,49 +199,6 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         id: "applications",
         href: "/applications",
         label: "응용 분야",
-        menu: {
-          kind: "resources",
-          heading: "응용 분야",
-          links: [
-            {
-              href: "/applications/semiconductor",
-              label: "반도체",
-              desc: "CVD · 식각 · 도펀트 공정",
-            },
-            {
-              href: "/applications/fuel-cells",
-              label: "연료전지",
-              desc: "H₂ · O₂ 공급 제어",
-            },
-            {
-              href: "/applications/biotech-pharmaceutical",
-              label: "바이오텍 · 제약",
-              desc: "바이오리액터 · 분석 가스",
-            },
-            {
-              href: "/applications/chemical-petrochemical",
-              label: "화학 · 석유화학",
-              desc: "고압 반응기 · 방폭 환경",
-            },
-            {
-              href: "/applications/research-development",
-              label: "연구 · 개발",
-              desc: "실험실 · 파일럿 플랜트",
-            },
-            {
-              href: "/applications",
-              label: "전체 응용 분야 보기",
-              desc: "12개 산업 분야",
-            },
-          ],
-          featured: {
-            eyebrow: "주요 응용",
-            title: "반도체 공정",
-            blurb: "CVD·식각 가스 제어를 위한 라인테크 MFC 적용 사례.",
-            href: "/applications/semiconductor",
-            cta: "자세히 보기",
-          },
-        },
       },
       {
         id: "resources",
@@ -260,6 +217,11 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               href: "/resources/drawings",
               label: "도면",
               desc: "AutoCAD (.dwg · .stp)",
+            },
+            {
+              href: "/resources/datasheets",
+              label: "데이터시트",
+              desc: "모델별 사양서",
             },
             {
               href: "/resources/manuals",
@@ -352,7 +314,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         registration: "사업자등록번호 314-86-55562",
       },
       links: {
-        heading: "빠른 링크",
+        heading: "관련 링크",
         items: [
           { href: "/applications", label: "응용 분야" },
           { href: "/faq", label: "자주 묻는 질문" },
@@ -428,49 +390,6 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         id: "applications",
         href: "/applications",
         label: "Applications",
-        menu: {
-          kind: "resources",
-          heading: "Applications",
-          links: [
-            {
-              href: "/applications/semiconductor",
-              label: "Semiconductor",
-              desc: "CVD · etch · dopant gas delivery",
-            },
-            {
-              href: "/applications/fuel-cells",
-              label: "Fuel cells",
-              desc: "H₂ · O₂ flow control",
-            },
-            {
-              href: "/applications/biotech-pharmaceutical",
-              label: "Biotech & pharma",
-              desc: "Bioreactors · analytical gas",
-            },
-            {
-              href: "/applications/chemical-petrochemical",
-              label: "Chemical & petrochemical",
-              desc: "High-pressure reactors · ATEX",
-            },
-            {
-              href: "/applications/research-development",
-              label: "Research & development",
-              desc: "Lab · pilot plant",
-            },
-            {
-              href: "/applications",
-              label: "All applications",
-              desc: "12 industries covered",
-            },
-          ],
-          featured: {
-            eyebrow: "Key application",
-            title: "Semiconductor processing",
-            blurb: "How Line Tech MFCs are used in CVD and etch gas delivery.",
-            href: "/applications/semiconductor",
-            cta: "Learn more",
-          },
-        },
       },
       {
         id: "resources",
@@ -489,6 +408,11 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               href: "/resources/drawings",
               label: "CAD drawings",
               desc: "AutoCAD (.dwg · .stp)",
+            },
+            {
+              href: "/resources/datasheets",
+              label: "Datasheets",
+              desc: "Per-model specification sheets",
             },
             {
               href: "/resources/manuals",
@@ -577,7 +501,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         email: "linetech@line-tech.co.kr",
       },
       links: {
-        heading: "Quick links",
+        heading: "Related links",
         items: [
           { href: "/applications", label: "Applications" },
           { href: "/faq", label: "Frequently asked questions" },
@@ -647,49 +571,6 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         id: "applications",
         href: "/applications",
         label: "应用领域",
-        menu: {
-          kind: "resources",
-          heading: "应用领域",
-          links: [
-            {
-              href: "/applications/semiconductor",
-              label: "半导体",
-              desc: "CVD · 刻蚀 · 掺杂气体输送",
-            },
-            {
-              href: "/applications/fuel-cells",
-              label: "燃料电池",
-              desc: "H₂ · O₂ 流量控制",
-            },
-            {
-              href: "/applications/biotech-pharmaceutical",
-              label: "生物技术与制药",
-              desc: "生物反应器 · 分析气体",
-            },
-            {
-              href: "/applications/chemical-petrochemical",
-              label: "化工与石油化工",
-              desc: "高压反应器 · 防爆环境",
-            },
-            {
-              href: "/applications/research-development",
-              label: "研究与开发",
-              desc: "实验室 · 中试工厂",
-            },
-            {
-              href: "/applications",
-              label: "查看全部应用领域",
-              desc: "覆盖 12 个行业",
-            },
-          ],
-          featured: {
-            eyebrow: "重点应用",
-            title: "半导体工艺",
-            blurb: "莱因 MFC 在 CVD 与刻蚀气体输送中的应用。",
-            href: "/applications/semiconductor",
-            cta: "了解更多",
-          },
-        },
       },
       {
         id: "resources",
@@ -708,6 +589,11 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               href: "/resources/drawings",
               label: "CAD 图纸",
               desc: "AutoCAD (.dwg · .stp)",
+            },
+            {
+              href: "/resources/datasheets",
+              label: "数据手册",
+              desc: "各型号规格说明书",
             },
             {
               href: "/resources/manuals",
@@ -800,7 +686,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         address: "江苏省无锡市锡山区锡沪东荟智企业中心 6 号楼 117 号",
       },
       links: {
-        heading: "快速链接",
+        heading: "相关链接",
         items: [
           { href: "/applications", label: "应用领域" },
           { href: "/faq", label: "常见问题" },

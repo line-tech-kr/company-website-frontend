@@ -1,0 +1,9 @@
+.lt-pdp-rd {
+  margin-bottom: 64px;
+  scroll-margin-top: 72px;
+}
+.lt-pdp-rd__cta {
+  display: flex;
+  justify-content: flex-start;
+  padding: 8px 16px 0;
+}

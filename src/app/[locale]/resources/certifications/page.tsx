@@ -5,7 +5,9 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { sanityClient } from "@/sanity/client";
 import { allCertificationsQuery } from "@/sanity/queries";
-import { routing, type Locale } from "@/i18n/routing";
+import { routing } from "@/i18n/routing";
+import type { Locale } from "@/lib/content/home";
+import { buildResourcesMetadata } from "@/lib/seo";
 import "../resources-subpage.css";
 
 export const revalidate = 3600;
@@ -31,11 +33,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "resources" });
-  return {
-    title: `${t("certifications.title")} — Line Tech`,
-    description: t("certifications.intro"),
-  };
+  return buildResourcesMetadata(locale as Locale, "certifications");
 }
 
 export default async function CertificationsPage({ params }: Props) {

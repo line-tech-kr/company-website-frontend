@@ -1,14 +1,12 @@
 import { Button } from "@/components/ui/Button";
 import { Glyph } from "@/components/ui/Glyph";
-import { LT_SHELL } from "@/lib/content/shell";
-import type { HomeContent, Locale } from "@/lib/content/home";
+import type { HomeContent } from "@/lib/content/home";
 import "./Contact.css";
 
-type Props = { h: HomeContent; locale: Locale };
+type Props = { h: HomeContent };
 
-export function Contact({ h, locale }: Props) {
+export function Contact({ h }: Props) {
   const { contact } = h;
-  const email = LT_SHELL[locale].footer.contact.email;
   return (
     <section className="ho-contact">
       <div className="ho-contact__inner">
@@ -18,13 +16,12 @@ export function Contact({ h, locale }: Props) {
           <Button
             variant="primary"
             size="lg"
-            href={`mailto:${email}`}
-            plain
+            href="/contact"
             icon={<Glyph name="phone" size={14} />}
           >
             {contact.primary}
           </Button>
-          <Button variant="ghost" size="lg" href={`mailto:${email}`} plain>
+          <Button variant="ghost" size="lg" href="/contact">
             {contact.secondary}
           </Button>
         </div>

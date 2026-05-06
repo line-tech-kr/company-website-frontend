@@ -27,6 +27,9 @@ export const productFixture: Product = {
     },
     controlRange: { display: "2–100% F.S.", min: 2, max: 100, unit: "% F.S." },
   },
+  datasheets: [],
+  manuals: [],
+  drawings: [],
 };
 
 export function makeProduct(overrides: Partial<Product> = {}): Product {

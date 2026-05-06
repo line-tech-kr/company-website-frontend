@@ -7,6 +7,15 @@ const TO = "info@linetech.co.kr";
 const FROM =
   process.env.RESEND_FROM ?? "Line Tech Contact <onboarding@resend.dev>";
 
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 function buildSubject(data: ContactFormPayload): string {
   const parts = [data.inquiryType];
   if (data.typeDetail) parts.push(`(${data.typeDetail})`);
@@ -18,14 +27,15 @@ function buildHtml(data: ContactFormPayload): string {
   const row = (label: string, value: string) =>
     `<tr><td style="padding:6px 12px 6px 0;font-weight:600;white-space:nowrap;vertical-align:top">${label}</td><td style="padding:6px 0">${value}</td></tr>`;
 
+  const safeEmail = escapeHtml(data.email);
   const rows = [
-    row("Inquiry type", data.inquiryType),
-    ...(data.typeDetail ? [row("Detail", data.typeDetail)] : []),
-    row("Name", data.name),
-    row("Email", `<a href="mailto:${data.email}">${data.email}</a>`),
-    ...(data.company ? [row("Company", data.company)] : []),
-    ...(data.phone ? [row("Phone", data.phone)] : []),
-    ...(data.subject ? [row("Subject", data.subject)] : []),
+    row("Inquiry type", escapeHtml(data.inquiryType)),
+    ...(data.typeDetail ? [row("Detail", escapeHtml(data.typeDetail))] : []),
+    row("Name", escapeHtml(data.name)),
+    row("Email", `<a href="mailto:${safeEmail}">${safeEmail}</a>`),
+    ...(data.company ? [row("Company", escapeHtml(data.company))] : []),
+    ...(data.phone ? [row("Phone", escapeHtml(data.phone))] : []),
+    ...(data.subject ? [row("Subject", escapeHtml(data.subject))] : []),
   ].join("");
 
   return `
@@ -34,7 +44,7 @@ function buildHtml(data: ContactFormPayload): string {
   <table style="border-collapse:collapse;width:100%">${rows}</table>
   <hr style="margin:24px 0">
   <h3 style="margin-bottom:8px">Message</h3>
-  <p style="white-space:pre-wrap;margin:0">${data.message}</p>
+  <p style="white-space:pre-wrap;margin:0">${escapeHtml(data.message)}</p>
 </div>`;
 }
 

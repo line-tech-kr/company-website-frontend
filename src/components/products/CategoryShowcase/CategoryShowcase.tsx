@@ -99,6 +99,7 @@ export function CategoryShowcase({
               alt={p.model}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
+              quality={85}
               className="lt-showcase__img"
               priority={i === 0}
             />
