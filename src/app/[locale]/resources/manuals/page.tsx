@@ -146,7 +146,9 @@ export default async function ManualsPage({ params }: Props) {
                     {item.rev && item.publishedAt && (
                       <span className="dr-list__sep">·</span>
                     )}
-                    {item.publishedAt && <span>{item.publishedAt}</span>}
+                    {item.publishedAt && (
+                      <span>{formatISODate(item.publishedAt, locale)}</span>
+                    )}
                   </div>
                 )}
               </div>
@@ -155,9 +157,12 @@ export default async function ManualsPage({ params }: Props) {
                   {tRes("download")}
                 </a>
               ) : (
-                <span className="dr-list__btn dr-list__btn--disabled">
-                  {tRes("comingSoon")}
-                </span>
+                <Link
+                  href={`/contact?topic=request&file=${encodeURIComponent(item.title)}`}
+                  className="dr-list__btn dr-list__btn--request"
+                >
+                  {tRes("requestFile")}
+                </Link>
               )}
             </li>
           ))}
