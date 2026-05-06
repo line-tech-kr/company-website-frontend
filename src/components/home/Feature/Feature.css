@@ -141,3 +141,10 @@
     padding-left: 0;
   }
 }
+@media (max-width: 500px) {
+  /* Phone target deliberately smaller than the feature token's MIN; preserves
+   * the original mobile hierarchy. */
+  .ho-feature__title {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+  }
+}
