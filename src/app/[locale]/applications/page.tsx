@@ -5,10 +5,13 @@ import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { Chip } from "@/components/ui/Chip/Chip";
 import { INDUSTRY_ICONS } from "@/lib/content/application-icons";
-import { LT_APPLICATIONS } from "@/lib/content/applications";
+import { LT_APPLICATIONS, type ApplicationEntry } from "@/lib/content/applications";
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
 import { buildApplicationsMetadata } from "@/lib/seo";
+import { sanityClient } from "@/sanity/client";
+import { fetchSanity } from "@/sanity/fetch";
+import { allApplicationsQuery } from "@/sanity/queries";
 import "./applications-page.css";
 
 type ChipTone = "neutral" | "info" | "warning" | "danger";
@@ -39,6 +42,15 @@ function buildStats(locale: Locale, industryCount: number): StatItem[] {
 
 type Props = { params: Promise<{ locale: Locale }> };
 
+type SanityApp = {
+  slug: string;
+  title: Record<string, string>;
+  lede: Record<string, string>;
+  body: Record<string, string>;
+  recommendedSeries: string[];
+  relatedCategories: string[];
+};
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -52,13 +64,32 @@ export default async function ApplicationsPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [tCommon, tNav] = await Promise.all([
+  const [tCommon, tNav, rawApps] = await Promise.all([
     getTranslations("common"),
     getTranslations("nav"),
+    fetchSanity(
+      () => sanityClient.fetch<SanityApp[]>(allApplicationsQuery),
+      { name: "allApplications" },
+    ).catch(() => [] as SanityApp[]),
   ]);
 
   const c = LT_APPLICATIONS[locale];
-  const stats = buildStats(locale, c.applications.length);
+
+  const applications: ApplicationEntry[] = rawApps.length
+    ? rawApps.map((a) => ({
+        slug: a.slug,
+        title: a.title?.[locale] ?? a.title?.en ?? "",
+        lede: a.lede?.[locale] ?? a.lede?.en ?? "",
+        body: (a.body?.[locale] ?? a.body?.en ?? "")
+          .split(/\n\n+/)
+          .filter(Boolean),
+        recommendedSeries: a.recommendedSeries ?? [],
+        relatedCategories: (a.relatedCategories ??
+          []) as ApplicationEntry["relatedCategories"],
+      }))
+    : c.applications;
+
+  const stats = buildStats(locale, applications.length);
 
   const breadcrumbs = [
     { label: tCommon("home"), href: "/" },
@@ -108,7 +139,7 @@ export default async function ApplicationsPage({ params }: Props) {
       <section id="industries" aria-label={c.gridHeading}>
         <h2 className="ap-grid__heading">{c.gridHeading}</h2>
         <ul className="ap-grid">
-          {c.applications.map((app) => (
+          {applications.map((app) => (
             <li key={app.slug} className="ap-card">
               <Link
                 href={`/applications/${app.slug}`}

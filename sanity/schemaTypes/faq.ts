@@ -1,0 +1,59 @@
+import { defineType, defineField } from "sanity";
+
+export const faqGroup = defineType({
+  name: "faqGroup",
+  title: "FAQ Group",
+  type: "document",
+  fields: [
+    defineField({
+      name: "id",
+      title: "Group ID",
+      type: "slug",
+      description: "URL-safe identifier, e.g. mfc-vs-mfm-basics",
+      options: { source: "heading" },
+      validation: (r) => r.required(),
+    }),
+    defineField({
+      name: "heading",
+      title: "Heading",
+      type: "internationalizedArrayString",
+      validation: (r) => r.required(),
+    }),
+    defineField({
+      name: "order",
+      title: "Display order",
+      type: "number",
+    }),
+    defineField({
+      name: "questions",
+      title: "Questions",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({
+              name: "id",
+              title: "Question ID",
+              type: "string",
+              description: "Unique identifier, e.g. mfc-vs-mfm-difference",
+              validation: (r) => r.required(),
+            }),
+            defineField({
+              name: "q",
+              title: "Question",
+              type: "internationalizedArrayString",
+              validation: (r) => r.required(),
+            }),
+            defineField({
+              name: "a",
+              title: "Answer",
+              type: "internationalizedArrayText",
+              validation: (r) => r.required(),
+            }),
+          ],
+        },
+      ],
+    }),
+  ],
+});
