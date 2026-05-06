@@ -8,6 +8,7 @@ import { INDUSTRY_ICONS } from "@/lib/content/application-icons";
 import { LT_APPLICATIONS } from "@/lib/content/applications";
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
+import { buildApplicationsMetadata } from "@/lib/seo";
 import "./applications-page.css";
 
 type ChipTone = "neutral" | "info" | "warning" | "danger";
@@ -44,11 +45,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const c = LT_APPLICATIONS[locale];
-  return {
-    title: `${c.pageTitle} — Line Tech`,
-    description: c.pageSub,
-  };
+  return buildApplicationsMetadata(locale);
 }
 
 export default async function ApplicationsPage({ params }: Props) {

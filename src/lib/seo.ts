@@ -8,6 +8,7 @@ function resolveSiteUrl(): string {
   const fromEnv = process.env.NEXT_PUBLIC_SITE_URL;
   if (fromEnv) return fromEnv.replace(/\/$/, "");
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  if (process.env.NODE_ENV === "development") return "http://localhost:3000";
   return "https://linetech.co.kr";
 }
 
@@ -288,4 +289,146 @@ const CONTACT_SEO: Record<Locale, PageSeo> = {
 
 export function buildContactMetadata(locale: Locale): Metadata {
   return buildBase(locale, CONTACT_SEO[locale], "contact");
+}
+
+const APPLICATIONS_SEO: Record<Locale, PageSeo> = {
+  ko: {
+    title: "응용 분야 — 라인테크",
+    description:
+      "라인테크 MFC·MFM은 정밀하고 신뢰할 수 있는 가스 유량 측정 및 제어가 필요한 다양한 산업 현장에서 사용되고 있습니다.",
+  },
+  en: {
+    title: "Applications — Line Tech",
+    description:
+      "Line Tech MFCs and MFMs are deployed across a broad range of industries that require precise, reliable gas flow measurement and control.",
+  },
+  zh: {
+    title: "应用领域 — Line Tech",
+    description:
+      "莱因 MFC 与 MFM 广泛应用于需要精确、可靠气体流量测量与控制的各类工业场合。",
+  },
+};
+
+export function buildApplicationsMetadata(locale: Locale): Metadata {
+  return buildBase(locale, APPLICATIONS_SEO[locale], "applications");
+}
+
+export function buildApplicationDetailMetadata(
+  locale: Locale,
+  slug: string,
+  appTitle: string,
+  appLede: string,
+): Metadata {
+  const brand = locale === "ko" ? "라인테크" : "Line Tech";
+  return buildBase(
+    locale,
+    { title: `${appTitle} — ${brand}`, description: appLede },
+    `applications/${slug}`,
+  );
+}
+
+type ResourceSection =
+  | "hub"
+  | "catalogues"
+  | "drawings"
+  | "manuals"
+  | "certifications";
+
+const RESOURCES_SEO: Record<ResourceSection, Record<Locale, PageSeo>> = {
+  hub: {
+    ko: {
+      title: "자료실 — 라인테크",
+      description:
+        "라인테크의 카탈로그, 도면, 매뉴얼 및 인증 서류를 다운로드하실 수 있습니다.",
+    },
+    en: {
+      title: "Data Room — Line Tech",
+      description:
+        "Download Line Tech catalogues, CAD drawings, user manuals, and certification documents.",
+    },
+    zh: {
+      title: "资料室 — Line Tech",
+      description: "下载莱因技术的产品样册、CAD 图纸、使用手册及认证文件。",
+    },
+  },
+  catalogues: {
+    ko: {
+      title: "카탈로그 — 라인테크",
+      description: "시리즈별 제품 브로슈어를 PDF로 제공합니다.",
+    },
+    en: {
+      title: "Catalogues — Line Tech",
+      description: "Series-level product brochures in PDF format.",
+    },
+    zh: {
+      title: "产品样册 — Line Tech",
+      description: "提供各系列产品的 PDF 格式宣传册。",
+    },
+  },
+  drawings: {
+    ko: {
+      title: "CAD 도면 — 라인테크",
+      description:
+        "모델별 외형 도면을 AutoCAD (.dwg) 및 STEP (.stp) 형식으로 제공합니다.",
+    },
+    en: {
+      title: "CAD Drawings — Line Tech",
+      description:
+        "Outline drawings for each model in AutoCAD (.dwg) and STEP (.stp) formats.",
+    },
+    zh: {
+      title: "CAD 图纸 — Line Tech",
+      description:
+        "提供各型号外形图，支持 AutoCAD (.dwg) 和 STEP (.stp) 格式下载。",
+    },
+  },
+  manuals: {
+    ko: {
+      title: "매뉴얼 — 라인테크",
+      description: "각 제품 모델의 사용자 가이드 및 설치 매뉴얼입니다.",
+    },
+    en: {
+      title: "Manuals — Line Tech",
+      description:
+        "User guides and installation manuals for each product model.",
+    },
+    zh: {
+      title: "使用手册 — Line Tech",
+      description: "各产品型号的用户指南与安装手册。",
+    },
+  },
+  certifications: {
+    ko: {
+      title: "인증서 — 라인테크",
+      description: "라인테크가 보유한 품질경영 및 제품 적합성 인증서입니다.",
+    },
+    en: {
+      title: "Certifications — Line Tech",
+      description:
+        "Quality management and product conformity certificates held by Line Tech.",
+    },
+    zh: {
+      title: "认证文件 — Line Tech",
+      description: "莱因技术持有的质量管理及产品合规认证证书。",
+    },
+  },
+};
+
+const RESOURCES_PATHS: Record<ResourceSection, string> = {
+  hub: "resources",
+  catalogues: "resources/catalogues",
+  drawings: "resources/drawings",
+  manuals: "resources/manuals",
+  certifications: "resources/certifications",
+};
+
+export function buildResourcesMetadata(
+  locale: Locale,
+  section: ResourceSection,
+): Metadata {
+  return buildBase(
+    locale,
+    RESOURCES_SEO[section][locale],
+    RESOURCES_PATHS[section],
+  );
 }
