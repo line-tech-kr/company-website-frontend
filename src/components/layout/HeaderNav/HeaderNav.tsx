@@ -17,11 +17,6 @@ export function HeaderNav({ items }: Props) {
       className="pd-top__nav"
       aria-label={t("primaryNav")}
       onMouseLeave={onItemLeave}
-      onBlur={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget as Node)) {
-          setOpenId(null);
-        }
-      }}
     >
       {items.map((item) => {
         const isOpen = openId === item.id;

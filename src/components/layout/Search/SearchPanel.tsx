@@ -51,6 +51,7 @@ export function SearchPanel({ content, open, onClose, triggerRef }: Props) {
   const close = useCallback(() => {
     setValue("");
     setResults(null);
+    setIndexError(false);
     onClose();
   }, [onClose]);
 
