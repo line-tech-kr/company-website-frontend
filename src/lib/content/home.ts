@@ -15,7 +15,13 @@ type SeriesItem = {
 
 type ApplicationItem = { n: string; k: string; slug: string };
 type Stat = { k: string; l: string; sub: string };
-type Bullet = { k: string; v: string };
+type FeatureBulletLabels = {
+  flow: string;
+  accuracy: string;
+  response: string;
+  io: string;
+};
+type FeatureSlide = { model: string; sub: string };
 
 export type HomeContent = {
   intro: {
@@ -37,10 +43,9 @@ export type HomeContent = {
   };
   feature: {
     kicker: string;
-    title: string;
-    sub: string;
-    bullets: Bullet[];
     cta: string;
+    bulletLabels: FeatureBulletLabels;
+    slides: FeatureSlide[];
   };
   credentials: { kicker: string; title: string; sub: string; items: string[] };
   contact: { title: string; sub: string; primary: string; secondary: string };
@@ -125,15 +130,27 @@ export const LT_HOME: Record<Locale, HomeContent> = {
     },
     feature: {
       kicker: "03 — 핵심 모델",
-      title: "M3030VA",
-      sub: "반도체·디스플레이 공정용 디지털 압전식 질량유량제어기.",
-      bullets: [
-        { k: "유량", v: "10 SCCM – 20 SLM" },
-        { k: "정확도", v: "± 1.0 % S.P." },
-        { k: "응답", v: "≤ 1.0 s" },
-        { k: "통신", v: "0–5 VDC / Modbus RTU" },
-      ],
       cta: "제품 상세 보기",
+      bulletLabels: {
+        flow: "유량",
+        accuracy: "정확도",
+        response: "응답",
+        io: "통신",
+      },
+      slides: [
+        {
+          model: "M3030VA",
+          sub: "반도체·디스플레이 공정용 아날로그 질량유량제어기, 0.01–30 slpm.",
+        },
+        {
+          model: "MD800C",
+          sub: "디지털 8점 보정 방식의 대유량 질량유량제어기, 2500–5000 slpm.",
+        },
+        {
+          model: "LD030C",
+          sub: "7-세그먼트 디스플레이 일체형 질량유량제어기, 0.01–30 slpm.",
+        },
+      ],
     },
     credentials: {
       kicker: "04 — 인증",
@@ -233,15 +250,27 @@ export const LT_HOME: Record<Locale, HomeContent> = {
     },
     feature: {
       kicker: "03 — Featured model",
-      title: "M3030VA",
-      sub: "Digital piezo-actuated mass flow controller for semiconductor and display process lines.",
-      bullets: [
-        { k: "Flow", v: "10 SCCM – 20 SLM" },
-        { k: "Accuracy", v: "± 1.0 % S.P." },
-        { k: "Response", v: "≤ 1.0 s" },
-        { k: "I/O", v: "0–5 VDC / Modbus RTU" },
-      ],
       cta: "Open product page",
+      bulletLabels: {
+        flow: "Flow",
+        accuracy: "Accuracy",
+        response: "Response",
+        io: "I/O",
+      },
+      slides: [
+        {
+          model: "M3030VA",
+          sub: "Analogue mass flow controller for semiconductor and display process lines, 0.01–30 slpm.",
+        },
+        {
+          model: "MD800C",
+          sub: "Digital high-flow mass flow controller with 8-point calibration, 2500–5000 slpm.",
+        },
+        {
+          model: "LD030C",
+          sub: "Mass flow controller with integrated 7-segment display, 0.01–30 slpm.",
+        },
+      ],
     },
     credentials: {
       kicker: "04 — Certifications",
@@ -331,15 +360,27 @@ export const LT_HOME: Record<Locale, HomeContent> = {
     },
     feature: {
       kicker: "03 — 重点型号",
-      title: "M3030VA",
-      sub: "用于半导体与显示工艺线的数字压电式质量流量控制器。",
-      bullets: [
-        { k: "流量", v: "10 SCCM – 20 SLM" },
-        { k: "精度", v: "± 1.0 % S.P." },
-        { k: "响应", v: "≤ 1.0 s" },
-        { k: "信号", v: "0–5 VDC / Modbus RTU" },
-      ],
       cta: "打开产品页",
+      bulletLabels: {
+        flow: "流量",
+        accuracy: "精度",
+        response: "响应",
+        io: "信号",
+      },
+      slides: [
+        {
+          model: "M3030VA",
+          sub: "模拟式质量流量控制器，适用于半导体与显示工艺，0.01–30 slpm。",
+        },
+        {
+          model: "MD800C",
+          sub: "数字式大流量质量流量控制器，8 点校准，2500–5000 slpm。",
+        },
+        {
+          model: "LD030C",
+          sub: "带 7 段显示屏的一体式质量流量控制器，0.01–30 slpm。",
+        },
+      ],
     },
     credentials: {
       kicker: "04 — 认证",
