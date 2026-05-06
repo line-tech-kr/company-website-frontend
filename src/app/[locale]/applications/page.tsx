@@ -34,7 +34,7 @@ const STAT_LABELS: Record<Locale, [string, string, string]> = {
 function buildStats(locale: Locale, industryCount: number): StatItem[] {
   const [industries, models, certs] = STAT_LABELS[locale];
   return [
-    { value: String(industryCount), label: industries, href: "#industries" },
+    { value: `${industryCount}+`, label: industries, href: "#industries" },
     { value: "40+", label: models, href: "/products" },
     { value: "13", label: certs, href: "/resources/certifications" },
   ];
