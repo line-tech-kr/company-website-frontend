@@ -106,18 +106,21 @@ describe("MegaMenu", () => {
     expect(resources).toHaveAttribute("aria-hidden", "true");
   });
 
-  it("renders 4 company links + 13-certifications featured card when company is open", () => {
+  it("renders 4 company links + certifications featured card when company is open", () => {
     const { container } = renderMega(stubCtx({ openId: "company" }));
 
     const panel = container.querySelector('[data-id="company"]');
     expect(panel).toHaveAttribute("aria-hidden", "false");
     expect(panel).toHaveClass("is-open");
 
+    const linkList = panel!.querySelector(".pd-mega__list");
     ["Greeting", "History", "Certifications", "Location"].forEach((label) => {
-      expect(within(panel as HTMLElement).getByText(label)).toBeInTheDocument();
+      expect(
+        within(linkList as HTMLElement).getByText(label),
+      ).toBeInTheDocument();
     });
     expect(
-      within(panel as HTMLElement).getByText(/13 certifications/i),
+      within(panel as HTMLElement).getByText("View all certifications"),
     ).toBeInTheDocument();
   });
 

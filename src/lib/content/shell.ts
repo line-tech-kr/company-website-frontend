@@ -169,7 +169,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           ],
           featured: {
             eyebrow: "신뢰",
-            title: "13종 인증",
+            title: "인증서",
             blurb: "ISO 9001 · CE · INNOBIZ · RoHS / REACH 외 9종.",
             href: "/company#certifications",
             cta: "전체 인증 보기",
@@ -231,7 +231,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             {
               href: "/resources/certifications",
               label: "인증서",
-              desc: "13종 인증 문서",
+              desc: "인증 문서",
             },
             {
               href: "/faq",
@@ -358,7 +358,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           ],
           featured: {
             eyebrow: "Trust",
-            title: "13 certifications",
+            title: "Certifications",
             blurb:
               "ISO 9001, CE, INNOBIZ, RoHS / REACH and 9 more — the full set procurement teams ask for.",
             href: "/company#certifications",
@@ -422,7 +422,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             {
               href: "/resources/certifications",
               label: "Certifications",
-              desc: "13 certification documents",
+              desc: "Certification documents",
             },
             {
               href: "/faq",
@@ -541,8 +541,8 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           ],
           featured: {
             eyebrow: "信赖",
-            title: "13 项资质认证",
-            blurb: "ISO 9001 · CE · INNOBIZ · RoHS / REACH 等 13 项认证文件。",
+            title: "资质认证",
+            blurb: "ISO 9001 · CE · INNOBIZ · RoHS / REACH 等认证文件。",
             href: "/company#certifications",
             cta: "查看全部认证",
           },
@@ -603,7 +603,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             {
               href: "/resources/certifications",
               label: "认证文件",
-              desc: "13 份认证文件",
+              desc: "认证文件",
             },
             {
               href: "/faq",
