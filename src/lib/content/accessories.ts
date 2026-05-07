@@ -45,7 +45,7 @@ export type AccessoryItem = {
   id: AccessoryItemId;
   /** Display model code, e.g., "LTI-200". */
   model: string;
-  /** Functional descriptor under the model code, e.g., "Read Out Box". */
+  /** Functional descriptor under the model code, e.g., "Readout Box". */
   title: string;
   /** Short prose intro, 1–2 sentences. */
   blurb: string;
@@ -146,7 +146,7 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
         {
           id: "lti-200",
           model: "LTI-200",
-          title: "Read Out Box",
+          title: "Readout Box",
           blurb:
             "Compact panel-mount readout. 4-digit 7-segment display, 0–5 Vdc set-point input, six-button front face for flow on/off, scrolling, and menu navigation.",
           image: {
@@ -172,7 +172,7 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
         {
           id: "lti-1000",
           model: "LTI-1000",
-          title: "Multi-channel Read Out Box",
+          title: "Multi-channel Readout Box",
           blurb:
             "Rackable readout box with D-SUB remote control, optional 4–20 mA output, and an RS-232 link to companion PC software. Handles up to 8 channels in 1U / 2U / 4U arrangements.",
           image: {

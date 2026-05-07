@@ -40,7 +40,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
         title: "Semiconductor",
         lede: "Precise dopant and precursor gas delivery is critical in wafer fabrication — even sub-percent flow errors affect device yield.",
         body: [
-          "In semiconductor manufacturing, mass flow controllers regulate the delivery of process gases — dopants, etchants, and chemical vapour deposition (CVD) precursors — into reaction chambers with tight repeatability. Any deviation in flow rate directly impacts film thickness, doping concentration, and ultimately device performance.",
+          "In semiconductor manufacturing, mass flow controllers regulate the delivery of process gases — dopants, etchants, and chemical vapor deposition (CVD) precursors — into reaction chambers with tight repeatability. Any deviation in flow rate directly impacts film thickness, doping concentration, and ultimately device performance.",
           "Line Tech's MD Digital series, with ±0.25% F.S. accuracy and sub-second response, is well suited to precision deposition and etch steps. The proven M/MS Analogue series handles high-volume gas lines where wide flow ranges (up to 5,000 slpm) and long-term stability are the priority.",
           "All instruments are available with Kalrez or Teflon seals for aggressive semiconductor gases including HF, BCl₃, and ClF₃.",
         ],
@@ -66,7 +66,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
         body: [
           "Bioprocess applications include sparging CO₂ and O₂ into fermenters and bioreactors to support cell culture, blanketing tanks with N₂ to prevent oxidation, and supplying calibrated gas mixtures for analytical reference systems. All require instruments that maintain specification over long production campaigns.",
           "The MD Digital series' ±0.25% F.S. accuracy and RS-485 communication facilitate data logging and batch record compliance. The M/MS Analogue series is the established choice for non-critical blanketing and purge lines where a simple analogue signal is sufficient.",
-          "Viton seals are standard for pharmaceutical process gases; Kalrez is available for more aggressive sterilisation agents on request.",
+          "Viton seals are standard for pharmaceutical process gases; Kalrez is available for more aggressive sterilization agents on request.",
         ],
         recommendedSeries: ["MD", "M / MS"],
         relatedCategories: ["digital", "analogue"],
@@ -77,8 +77,8 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
         lede: "High-pressure reactor feed lines, flammable process gases, and aggressive chemicals require instruments built for demanding environments.",
         body: [
           "Chemical and petrochemical plants use mass flow controllers to meter reactant gases, carrier gases, and catalyst regeneration streams across reactors operating at high pressure. The wide operating pressure range of Line Tech instruments (up to 90 bar for M/MS and MD series) makes them a direct fit for most reactor inlet conditions.",
-          "Where the process atmosphere contains flammable or explosive gases — such as hydrogen, hydrocarbons, or solvent vapours — the EX series provides the required ATEX certification (Ex ec IIC T4 Gc) and IP 65 protection. It covers flow ranges up to 1,000 slpm.",
-          "Seal material selection is critical in chemical service: Kalrez for most corrosive halide gases, Teflon for the most aggressive oxidisers. Line Tech's gas-conversion Appendix covers over 100 process gases with seal recommendations.",
+          "Where the process atmosphere contains flammable or explosive gases — such as hydrogen, hydrocarbons, or solvent vapors — the EX series provides the required ATEX certification (Ex ec IIC T4 Gc) and IP 65 protection. It covers flow ranges up to 1,000 slpm.",
+          "Seal material selection is critical in chemical service: Kalrez for most corrosive halide gases, Teflon for the most aggressive oxidizers. Line Tech's gas-conversion Appendix covers over 100 process gases with seal recommendations.",
         ],
         recommendedSeries: ["EX", "M / MS"],
         relatedCategories: ["specialized", "analogue"],
@@ -89,7 +89,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
         lede: "Specialty gas mixtures and calibration standards require flow accuracy that is traceable and verifiable across the full blend composition.",
         body: [
           "Gas blending systems — whether producing certified reference gas mixtures, multi-component calibration standards, or specialty process gases — rely on tightly controlled individual component flows. The final mixture composition is only as accurate as the individual MFCs or MFMs in each gas line.",
-          "The MD Digital series, with ±0.25% F.S. accuracy at low ranges, is the recommended choice for high-precision blending. Its 8-point linearisation ensures accuracy across the full operating range of each component flow, not just at a single calibration point.",
+          "The MD Digital series, with ±0.25% F.S. accuracy at low ranges, is the recommended choice for high-precision blending. Its 8-point linearization ensures accuracy across the full operating range of each component flow, not just at a single calibration point.",
           "Line Tech's sonic-nozzle calibration system (uncertainty ±0.2%) provides the measurement traceability required by gas-mixture certification standards. RS-485 communication on MD instruments allows direct integration with blend-management software.",
         ],
         recommendedSeries: ["MD"],
@@ -110,9 +110,9 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "metals-processing",
         title: "Metals processing",
-        lede: "Annealing, carburising, and sintering furnaces depend on controlled protective and reactive gas atmospheres to produce consistent metallurgical results.",
+        lede: "Annealing, carburizing, and sintering furnaces depend on controlled protective and reactive gas atmospheres to produce consistent metallurgical results.",
         body: [
-          "Heat treatment processes in metals manufacturing use precisely controlled gas atmospheres — typically nitrogen, hydrogen, ammonia, or endothermic gas mixtures — to achieve specific surface chemistry and mechanical properties. An incorrect gas ratio can result in surface defects, decarburisation, or improper case hardening.",
+          "Heat treatment processes in metals manufacturing use precisely controlled gas atmospheres — typically nitrogen, hydrogen, ammonia, or endothermic gas mixtures — to achieve specific surface chemistry and mechanical properties. An incorrect gas ratio can result in surface defects, decarburization, or improper case hardening.",
           "The M/MS Analogue series, with flow ranges extending to 5,000 slpm, covers the high-volume purge and atmosphere flows typical of continuous furnace lines. The instruments' wide operating pressure tolerance (up to 90 bar) accommodates the varying supply pressures found across industrial gas distribution systems.",
           "For processes involving flammable atmospheres such as hydrogen or cracked ammonia, the EX series provides the ATEX-compliant protection required in those zones.",
         ],
@@ -124,7 +124,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
         title: "LED lighting",
         lede: "Epitaxial growth of LED structures requires sub-percent flow control over MOCVD precursor and carrier gases to achieve target wavelength and efficiency.",
         body: [
-          "Metal-organic chemical vapour deposition (MOCVD) for LED production demands extremely precise delivery of metalorganic precursors (TMGa, TMAl, TMIn) and hydride sources (AsH₃, PH₃, NH₃) alongside hydrogen and nitrogen carrier gases. Any variation in precursor flow directly shifts the bandgap of the deposited layer and therefore the emission wavelength.",
+          "Metal-organic chemical vapor deposition (MOCVD) for LED production demands extremely precise delivery of metalorganic precursors (TMGa, TMAl, TMIn) and hydride sources (AsH₃, PH₃, NH₃) alongside hydrogen and nitrogen carrier gases. Any variation in precursor flow directly shifts the bandgap of the deposited layer and therefore the emission wavelength.",
           "The MD Digital series offers the ±0.25% F.S. accuracy and fast response required by MOCVD reactors, and its RS-485 interface integrates cleanly with reactor control systems for logging and recipe management.",
           "Kalrez seals are recommended for corrosive hydride precursor gases; Viton is adequate for hydrogen and nitrogen carrier lines.",
         ],
@@ -146,11 +146,11 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "fiber-optics",
         title: "Fiber optics & glass",
-        lede: "Optical fibre preform manufacturing and specialty glass deposition require tightly controlled precursor and dopant gas flows to achieve target refractive index profiles.",
+        lede: "Optical fiber preform manufacturing and specialty glass deposition require tightly controlled precursor and dopant gas flows to achieve target refractive index profiles.",
         body: [
-          "Modified chemical vapour deposition (MCVD) and outside vapour deposition (OVD) processes used in optical fibre production deposit silica and dopant layers from SiCl₄, GeCl₄, and POCl₃ precursors with oxygen carrier gas. The refractive index profile of the fibre — which determines its transmission characteristics — is set by the ratio of these precursor flows.",
+          "Modified chemical vapor deposition (MCVD) and outside vapor deposition (OVD) processes used in optical fiber production deposit silica and dopant layers from SiCl₄, GeCl₄, and POCl₃ precursors with oxygen carrier gas. The refractive index profile of the fiber — which determines its transmission characteristics — is set by the ratio of these precursor flows.",
           "Line Tech's M/MS Analogue series covers the stable, long-run flow control needed during the preform deposition phase. The MD Digital series is preferred for the dopant lines where high precision is most critical.",
-          "Chloride precursor gases require Kalrez or Teflon seals, and Line Tech's published seal recommendations cover all standard optical fibre process gases.",
+          "Chloride precursor gases require Kalrez or Teflon seals, and Line Tech's published seal recommendations cover all standard optical fiber process gases.",
         ],
         recommendedSeries: ["M / MS", "MD"],
         relatedCategories: ["analogue", "digital"],
@@ -158,7 +158,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       {
         slug: "surface-treatment",
         title: "Gas injection & surface treatment",
-        lede: "Plasma surface treatment, physical vapour deposition, and thermal spray processes all require controlled gas injection into the treatment zone.",
+        lede: "Plasma surface treatment, physical vapor deposition, and thermal spray processes all require controlled gas injection into the treatment zone.",
         body: [
           "Surface treatment processes use controlled gas flows to generate and sustain plasma discharges, create reactive coating atmospheres, or carry powdered materials in thermal spray systems. Applications include plasma nitriding, PVD/CVD hard coating, atmospheric plasma cleaning, and thermal spray.",
           "The M/MS Analogue series is widely used for argon, nitrogen, and oxygen flows in PVD and plasma systems. For processes in areas classified as hazardous due to flammable carrier gases or solvents, the EX series meets the ATEX requirements of the zone.",

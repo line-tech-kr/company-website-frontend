@@ -59,17 +59,17 @@
   "products": {
     "list": {
       "title": "Product catalog",
-      "lede": "Mass Flow Controllers and Mass Flow Meters across analogue, digital, and specialized series.",
+      "lede": "Mass Flow Controllers and Mass Flow Meters across analogue, digital, specialized series, and accessories.",
       "cardCount": "{count} models",
       "stats": {
         "modelsLabel": "Models in catalog",
         "modelsSub": "Across {count} series",
-        "rangeLabel": "SLPM, full range",
+        "rangeLabel": "slpm, full range",
         "rangeSub": "Cumulative across series",
         "industriesLabel": "Industries served",
         "industriesSub": "Field-validated since 1997",
         "certificationsLabel": "Certifications",
-        "certificationsSub": "KGS · CE · ISO 9001"
+        "certificationsSub": "ISO 9001 · CE · RoHS"
       },
       "applications": {
         "label": "Common applications",
@@ -157,7 +157,7 @@
         "A": "W · overall width",
         "B": "H · overall height",
         "C": "L · overall length",
-        "D": "Fitting centre-to-centre",
+        "D": "Fitting center-to-center",
         "E": "Mounting holes"
       }
     },
@@ -179,11 +179,11 @@
   "resources": {
     "hub": {
       "title": "Data Room",
-      "intro": "Download Line Tech catalogues, CAD drawings, user manuals, and certification documents."
+      "intro": "Download Line Tech catalogs, CAD drawings, user manuals, and certification documents."
     },
     "cards": {
       "catalogues": {
-        "title": "Catalogues",
+        "title": "Catalogs",
         "desc": "Series-level PDF brochures",
         "count": "{count} documents"
       },
@@ -209,7 +209,7 @@
       }
     },
     "catalogues": {
-      "title": "Catalogues",
+      "title": "Catalogs",
       "intro": "Series-level product brochures in PDF format."
     },
     "drawings": {

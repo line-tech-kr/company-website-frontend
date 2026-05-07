@@ -199,7 +199,7 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
         { date: HISTORY_DATES[4], event: "기업부설연구소 설립" },
         {
           date: HISTORY_DATES[5],
-          event: "Read Out Unit (LTI 시리즈) 개발",
+          event: "Readout Unit (LTI 시리즈) 개발",
         },
         {
           date: HISTORY_DATES[6],
@@ -303,15 +303,15 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
       title: "Welcome to Line Tech.",
       paragraphs: [
         "Since 1997, Line Tech has designed and built mass flow controllers and meters using technology developed in-house — earning the trust of process engineers for more than 25 years across industries that demand precision measurement.",
-        "Through our R&D collaboration with KAIST, we became the first Korean manufacturer to mass-produce MFCs and MFMs in 2003. Our instruments have set a reliable measurement standard across semiconductor, display, biotech, and fuel-cell process lines ever since.",
+        "Through our R&D collaboration with KAIST, we became the first Korean manufacturer to mass-produce MFCs and MFMs in 2003. Our instruments have set a reliable measurement standard across semiconductor, display, biotech, and fuel cell process lines ever since.",
         "Proven technology paired with attentive after-sales support — that has been our commitment for the last quarter-century, and it remains the standard we hold ourselves to with every customer.",
       ],
       factsHeading: "Line Tech in brief",
       facts: [
         { k: "1997", l: "Founded" },
-        { k: "2003", l: "First Korean MFC produced" },
+        { k: "2003", l: "First MFC made in Korea" },
         { k: "KAIST", l: "R&D collaboration partner" },
-        { k: "13", l: "Certifications held" },
+        { k: "13", l: "Certifications" },
       ],
     },
     history: {
@@ -326,7 +326,7 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
         },
         {
           date: HISTORY_DATES[2],
-          event: "First MFC / MFM models developed (first in Korea)",
+          event: "Korea's first MFC and MFM models developed",
         },
         {
           date: HISTORY_DATES[3],
@@ -335,18 +335,18 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
         { date: HISTORY_DATES[4], event: "Corporate R&D Center established" },
         {
           date: HISTORY_DATES[5],
-          event: "Read Out Unit (LTI series) developed",
+          event: "Readout Unit (LTI series) developed",
         },
         {
           date: HISTORY_DATES[6],
-          event: "Capacity extended — 150 · 500 · 1,000 · 2,500 SLPM",
+          event: "Capacity extended — 150 · 500 · 1,000 · 2,500 slpm",
         },
         {
           date: HISTORY_DATES[7],
           event: "CE and ISO 9001 certifications obtained",
         },
-        { date: HISTORY_DATES[8], event: "Certified as INNOBIZ" },
-        { date: HISTORY_DATES[9], event: "Capacity extended — 5,000 SLPM" },
+        { date: HISTORY_DATES[8], event: "Awarded INNOBIZ certification" },
+        { date: HISTORY_DATES[9], event: "Capacity extended — 5,000 slpm" },
         {
           date: HISTORY_DATES[10],
           event: "First international licensed distributor (India)",
@@ -471,7 +471,7 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
         { date: HISTORY_DATES[4], event: "设立企业附设研究所" },
         {
           date: HISTORY_DATES[5],
-          event: "开发 LTI 系列显示单元 (Read Out Unit)",
+          event: "开发 LTI 系列显示单元 (Readout Unit)",
         },
         {
           date: HISTORY_DATES[6],

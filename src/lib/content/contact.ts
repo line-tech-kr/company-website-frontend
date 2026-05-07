@@ -228,7 +228,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
         phone: "+1 555 000 0000",
         subject: "e.g. Quote request, technical question, distributor inquiry",
         message:
-          "Tell us how we can help. If it's a product inquiry, gas type, flow range, and timeline help us route you faster.",
+          "Tell us how we can help. For product inquiries, sharing gas type, flow range, and timeline helps us route you faster.",
       },
       inquiryTypeOptions: [
         {
@@ -263,7 +263,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       required: "Required",
       submit: "Send inquiry",
       submitDisabledHelp:
-        "Submission backend is in progress. Please email the address above for an immediate reply.",
+        "Form submission isn't live yet — please email the address above for an immediate reply.",
       productInquiry: {
         subject: "Inquiry: {model}",
         message:
@@ -274,7 +274,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       "We'll handle your message per our privacy policy and won't share your details with third parties.",
     distributors: {
       heading: "Global network",
-      lede: "Headquartered in Korea, supporting key markets directly or through our subsidiary and partners.",
+      lede: "Headquartered in Korea — we support key markets directly or through our subsidiary and partners.",
       regions: [
         {
           id: "kr",

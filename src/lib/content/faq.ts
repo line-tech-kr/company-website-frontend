@@ -42,7 +42,7 @@ export const LT_FAQ: Record<Locale, FaqContent> = {
           {
             id: "mfc-vs-mfm-choose",
             q: "How do I choose between an MFC and an MFM?",
-            a: "Use an MFC when you need to actively set and maintain a precise gas flow rate — typical in semiconductor deposition, fuel cell gas feeds, or any closed-loop flow control process. Use an MFM when you only need to monitor flow without controlling it, such as in process verification or analytical instrumentation. Most multi-gas systems use several MFCs — one per gas line — with an optional readout box for centralised display.",
+            a: "Use an MFC when you need to actively set and maintain a precise gas flow rate — typical in semiconductor deposition, fuel cell gas feeds, or any closed-loop flow control process. Use an MFM when you only need to monitor flow without controlling it, such as in process verification or analytical instrumentation. Most multi-gas systems use several MFCs — one per gas line — with an optional readout box for centralized display.",
           },
         ],
       },
@@ -94,22 +94,22 @@ export const LT_FAQ: Record<Locale, FaqContent> = {
           {
             id: "md-vs-analogue",
             q: "When should I use the Digital (MD) series instead of Analogue (M/MS)?",
-            a: "The MD series offers three advantages over M/MS: higher accuracy at low ranges (±0.25% F.S. via 8-point linearisation versus ±1% F.S.), faster response time (0.5–1 second versus under 2 seconds), and RS-485 digital communication for remote monitoring and setpoint control. Choose MD when tighter accuracy, faster control loop, or digital integration with a PLC or PC is required.",
+            a: "The MD series offers three advantages over M/MS: higher accuracy at low ranges (±0.25% F.S. via 8-point linearization versus ±1% F.S.), faster response time (0.5–1 second versus under 2 seconds), and RS-485 digital communication for remote monitoring and setpoint control. Choose MD when tighter accuracy, faster control loop, or digital integration with a PLC or PC is required.",
           },
           {
             id: "lm-series",
             q: "What is the LM (MEMS) series best for?",
-            a: "The LM series uses MEMS sensor technology to offer a cost-efficient instrument for low-pressure applications. It delivers the same ±1% F.S. accuracy and ±0.25% repeatability as the standard series, with a slightly faster response (under 1 second). The key constraint is a maximum operating pressure of 10 bar — it is not suitable for high-pressure lines. The LM is recognisable by its purple housing.",
+            a: "The LM series uses MEMS sensor technology to offer a cost-efficient instrument for low-pressure applications. It delivers the same ±1% F.S. accuracy and ±0.25% repeatability as the standard series, with a slightly faster response (under 1 second). The key constraint is a maximum operating pressure of 10 bar — it is not suitable for high-pressure lines. The LM is recognizable by its purple housing.",
           },
           {
             id: "ld-series",
             q: "When should I use the LD series with built-in display?",
-            a: "The LD series adds a built-in 4-digit 7-segment display showing live flow values, plus front-panel buttons for direct setpoint adjustment — no external controller or PC required. It is ideal for standalone laboratory setups, field calibration checks, or anywhere real-time visibility without a readout box is needed. Note the LD supports only 0–5 Vdc signalling (no 4–20 mA option) and is limited to a maximum range of 30 slpm.",
+            a: "The LD series adds a built-in 4-digit 7-segment display showing live flow values, plus front-panel buttons for direct setpoint adjustment — no external controller or PC required. It is ideal for standalone laboratory setups, field calibration checks, or anywhere real-time visibility without a readout box is needed. Note the LD supports only 0–5 Vdc signaling (no 4–20 mA option) and is limited to a maximum range of 30 slpm.",
           },
           {
             id: "ex-series",
             q: "What does explosion-proof mean for the EX series?",
-            a: "The EX series is certified for use in potentially explosive atmospheres, carrying Ex ec IIC T4 Gc (ATEX/IEC) certification and IP 65 ingress protection against dust and water. It is the correct choice when the process environment contains flammable vapours, gases, or dusts requiring ATEX-rated equipment — typical in chemical plants, petrochemical lines, and solvent-based coating operations. Available for flow ranges up to 1,000 slpm.",
+            a: "The EX series is certified for use in potentially explosive atmospheres, carrying Ex ec IIC T4 Gc (ATEX/IEC) certification and IP 65 ingress protection against dust and water. It is the correct choice when the process environment contains flammable vapors, gases, or dusts requiring ATEX-rated equipment — typical in chemical plants, petrochemical lines, and solvent-based coating operations. Available for flow ranges up to 1,000 slpm.",
           },
         ],
       },
@@ -120,7 +120,7 @@ export const LT_FAQ: Record<Locale, FaqContent> = {
           {
             id: "fs-accuracy",
             q: "What does ±1% F.S. accuracy mean?",
-            a: "F.S. stands for Full Scale — the maximum rated flow for the selected range. An accuracy of ±1% F.S. means the reading may deviate by up to 1% of the full-scale value at any point. For example, an instrument rated to 30 slpm has an absolute error of ±0.3 slpm. For ranges above 100 slpm in the M/MS analogue series the specification widens to ±2% F.S. The MD Digital series achieves ±0.25% F.S. at low-flow ranges through 8-point linearisation.",
+            a: "F.S. stands for Full Scale — the maximum rated flow for the selected range. An accuracy of ±1% F.S. means the reading may deviate by up to 1% of the full-scale value at any point. For example, an instrument rated to 30 slpm has an absolute error of ±0.3 slpm. For ranges above 100 slpm in the M/MS analogue series the specification widens to ±2% F.S. The MD Digital series achieves ±0.25% F.S. at low-flow ranges through 8-point linearization.",
           },
           {
             id: "accuracy-vs-repeatability",
@@ -130,7 +130,7 @@ export const LT_FAQ: Record<Locale, FaqContent> = {
           {
             id: "calibration-method",
             q: "How are Line Tech instruments calibrated?",
-            a: "Line Tech uses a sonic-nozzle calibration system with 14 nozzles, covering 0.02–3,000 slpm at regulated supply pressures of 0–6 bar. The system achieves an overall uncertainty of ±0.2% — tighter than any product accuracy specification, ensuring full measurement traceability. This calibration infrastructure also underpins the 8-point linearisation used in the MD Digital series.",
+            a: "Line Tech uses a sonic-nozzle calibration system with 14 nozzles, covering 0.02–3,000 slpm at regulated supply pressures of 0–6 bar. The system achieves an overall uncertainty of ±0.2% — tighter than any product accuracy specification, ensuring full measurement traceability. This calibration infrastructure also underpins the 8-point linearization used in the MD Digital series.",
           },
         ],
       },
@@ -193,7 +193,7 @@ export const LT_FAQ: Record<Locale, FaqContent> = {
           {
             id: "signal-types",
             q: "What analogue and digital signal types are supported?",
-            a: "All Line Tech series support both 0–5 Vdc voltage and 4–20 mA current-loop signalling for flow output and MFC setpoint input. The signal mode is selected at time of order and configured at the factory. The 4–20 mA mode is preferred over long cable runs where voltage drop would degrade a 0–5 Vdc signal. The MD Digital series additionally supports RS-485 at 38,400 bps for remote monitoring and control.",
+            a: "All Line Tech series support both 0–5 Vdc voltage and 4–20 mA current-loop signaling for flow output and MFC setpoint input. The signal mode is selected at the time of order and configured at the factory. The 4–20 mA mode is preferred over long cable runs where voltage drop would degrade a 0–5 Vdc signal. The MD Digital series additionally supports RS-485 at 38,400 bps for remote monitoring and control.",
           },
         ],
       },
