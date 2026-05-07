@@ -71,10 +71,18 @@ export type ContactFormCopy = {
   };
 };
 
+export type DistributorRegionId = "kr" | "cn" | "sea" | "other";
+
 export type DistributorRegion = {
-  id: string;
+  id: DistributorRegionId;
   name: string;
   status: string;
+};
+
+export type RegionPageCopy = {
+  comingSoonTitle: string;
+  comingSoonBody: string;
+  backLabel: string;
 };
 
 export type ContactContent = {
@@ -95,6 +103,7 @@ export type ContactContent = {
     lede: string;
     regions: DistributorRegion[];
   };
+  regionPage: RegionPageCopy;
   map: {
     heading: string;
     caption: string;
@@ -220,6 +229,12 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
           status: "유럽 · 북미 · 일본 — 본사 직접 문의",
         },
       ],
+    },
+    regionPage: {
+      comingSoonTitle: "준비 중입니다",
+      comingSoonBody:
+        "이 지역의 페이지는 곧 공개될 예정입니다. 그동안 문의는 본사로 직접 보내주세요.",
+      backLabel: "문의 페이지로 돌아가기",
     },
     map: {
       heading: "오시는 길",
@@ -351,6 +366,12 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
         },
       ],
     },
+    regionPage: {
+      comingSoonTitle: "Coming soon",
+      comingSoonBody:
+        "A dedicated page for this region is on the way. In the meantime, please reach out to headquarters directly.",
+      backLabel: "Back to contact page",
+    },
     map: {
       heading: "Find us",
       caption: "Line Tech HQ · Daejeon, Korea",
@@ -474,6 +495,12 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
           status: "欧洲 · 北美 · 日本 — 请联系总部",
         },
       ],
+    },
+    regionPage: {
+      comingSoonTitle: "敬请期待",
+      comingSoonBody:
+        "该地区的专属页面即将上线。在此期间，欢迎您直接联系总部咨询。",
+      backLabel: "返回联系页面",
     },
     map: {
       heading: "公司位置",
