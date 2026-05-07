@@ -56,7 +56,7 @@ export default async function ContactPage({ params, searchParams }: Props) {
 
   const defaults = product
     ? {
-        inquiryType: "sales" as const,
+        inquiryType: "doc-request" as const,
         extraField: product.model,
         subject: form.productInquiry.subject.replaceAll(
           "{model}",
@@ -107,11 +107,7 @@ export default async function ContactPage({ params, searchParams }: Props) {
               {form.heading}
             </h2>
 
-            <ContactForm
-              form={form}
-              privacyNotice={c.privacyNotice}
-              defaults={defaults}
-            />
+            <ContactForm form={form} defaults={defaults} />
           </section>
 
           <aside className="ct-info" aria-labelledby="ct-info-heading">

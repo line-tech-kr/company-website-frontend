@@ -163,6 +163,18 @@
   font: var(--lt-fs-sm)/1.4 var(--lt-sans);
 }
 
+.pd-search__unavailable {
+  margin: 0;
+  padding: 12px 0;
+  color: var(--pd-muted);
+  font: var(--lt-fs-sm)/1.4 var(--lt-sans);
+}
+
+.pd-search__unavailable a {
+  color: var(--pd-primary);
+  text-decoration: underline;
+}
+
 .pd-search__result-list {
   list-style: none;
   margin: 0;

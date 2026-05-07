@@ -7,6 +7,8 @@ import { manual } from "./manual";
 import { drawing } from "./drawing";
 import { datasheet } from "./datasheet";
 import { certification } from "./certification";
+import { faqGroup } from "./faq";
+import { application } from "./application";
 
 export const schemaTypes = [
   product,
@@ -18,4 +20,6 @@ export const schemaTypes = [
   drawing,
   datasheet,
   certification,
+  faqGroup,
+  application,
 ];

@@ -46,10 +46,12 @@ export function SearchPanel({ content, open, onClose, triggerRef }: Props) {
   const [value, setValue] = useState("");
   const [results, setResults] = useState<SearchEntry[] | null>(null);
   const [indexReady, setIndexReady] = useState(false);
+  const [indexError, setIndexError] = useState(false);
 
   const close = useCallback(() => {
     setValue("");
     setResults(null);
+    setIndexError(false);
     onClose();
   }, [onClose]);
 
@@ -70,7 +72,7 @@ export function SearchPanel({ content, open, onClose, triggerRef }: Props) {
         setIndexReady(true);
       })
       .catch(() => {
-        console.warn("[search] index not found — run pnpm build:search-index");
+        setIndexError(true);
       });
   }, [open, locale]);
 
@@ -170,6 +172,15 @@ export function SearchPanel({ content, open, onClose, triggerRef }: Props) {
               </li>
             ))}
           </ul>
+
+          {indexError && !indexReady && (
+            <p className="pd-search__unavailable">
+              {content.searchUnavailable}{" "}
+              <Link href="/products" onClick={close}>
+                {content.browseProducts}
+              </Link>
+            </p>
+          )}
 
           <form
             className="pd-search__form"

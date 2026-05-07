@@ -112,6 +112,10 @@ export type ShellSearch = {
   quickChips: { id: string; label: string }[];
   /** Shown when a query returns zero results. Use {q} as query placeholder. */
   noResults: string;
+  /** Shown when the search index fails to load. */
+  searchUnavailable: string;
+  /** Link label shown alongside searchUnavailable. */
+  browseProducts: string;
 };
 
 /** Mobile nav panel copy (#34). Renders below 1000px. */
@@ -294,6 +298,8 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         { id: "certifications", label: "인증서" },
       ],
       noResults: '"{q}"에 대한 결과가 없습니다',
+      searchUnavailable: "검색을 일시적으로 사용할 수 없습니다.",
+      browseProducts: "제품 목록 보기",
     },
     mobileNav: {
       openLabel: "메뉴 열기",
@@ -360,7 +366,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             eyebrow: "Trust",
             title: "Certifications",
             blurb:
-              "ISO 9001, CE, INNOBIZ, RoHS / REACH and 9 more — the full set procurement teams ask for.",
+              "ISO 9001, CE, INNOBIZ, RoHS / REACH and 9 more — everything procurement teams typically request.",
             href: "/company#certifications",
             cta: "View all certifications",
           },
@@ -379,7 +385,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             eyebrow: "Featured model",
             title: "M3030VA",
             blurb:
-              "Digital piezo-actuated MFC for semiconductor and display process lines.",
+              "Analogue piezo-actuated MFC for semiconductor and display process lines.",
             href: "/products/analogue/m3030va",
             cta: "View product",
             image: "/products/m3030va/product-1.jpg",
@@ -401,8 +407,8 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           links: [
             {
               href: "/resources/catalogues",
-              label: "Catalogues",
-              desc: "Series-level PDF catalogues",
+              label: "Catalogs",
+              desc: "Series-level PDF catalogs",
             },
             {
               href: "/resources/drawings",
@@ -432,7 +438,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           ],
           featured: {
             eyebrow: "Spotlight",
-            title: "M3030VA manual + catalogue",
+            title: "M3030VA manual + catalog",
             blurb:
               "Full specs and Modbus protocol for our flagship digital MFC.",
             href: "/products/analogue/m3030va",
@@ -477,15 +483,17 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
       openLabel: "Open search",
       heading: "Search the site",
       inputLabel: "Search products, resources, models",
-      inputPlaceholder: "Try M3030VA, catalogue, digital MFC",
+      inputPlaceholder: "Try M3030VA, catalog, digital MFC",
       quickChips: [
         { id: "m3030va", label: "M3030VA" },
         { id: "digital-mfc", label: "Digital MFC" },
-        { id: "catalogue", label: "Catalogue PDF" },
+        { id: "catalogue", label: "Catalog PDF" },
         { id: "calibration", label: "Calibration" },
         { id: "certifications", label: "Certifications" },
       ],
       noResults: 'No results for "{q}"',
+      searchUnavailable: "Search is temporarily unavailable.",
+      browseProducts: "Browse products",
     },
     mobileNav: {
       openLabel: "Open menu",
@@ -666,6 +674,8 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         { id: "certifications", label: "认证文件" },
       ],
       noResults: '"{q}"无搜索结果',
+      searchUnavailable: "搜索暂时不可用。",
+      browseProducts: "浏览产品",
     },
     mobileNav: {
       openLabel: "打开菜单",
