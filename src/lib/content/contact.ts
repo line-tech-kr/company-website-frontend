@@ -7,7 +7,12 @@
  */
 import type { Locale } from "./home";
 
-export type InquiryTypeId = "sales" | "support" | "partnership" | "general";
+export type InquiryTypeId =
+  | "sales"
+  | "support"
+  | "doc-request"
+  | "partnership"
+  | "general";
 
 export type ContactFormCopy = {
   heading: string;
@@ -147,6 +152,15 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
           },
         },
         {
+          id: "doc-request",
+          label: "자료 요청",
+          extraField: {
+            label: "모델명",
+            placeholder: "예: M3030VA",
+            required: false,
+          },
+        },
+        {
           id: "partnership",
           label: "협력·파트너십",
           extraField: {
@@ -163,7 +177,8 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
         "제출 백엔드는 현재 작업 중입니다. 위 이메일 주소로 보내주시면 즉시 회신드리겠습니다.",
       productInquiry: {
         subject: "기술 자료 요청: {model}",
-        message: "{model} 관련 기술 자료(데이터시트, 매뉴얼 등)를 요청드립니다.",
+        message:
+          "{model} 관련 기술 자료(데이터시트, 매뉴얼 등)를 요청드립니다.",
       },
     },
     privacyNotice:
@@ -247,6 +262,15 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
             label: "Model and serial number",
             placeholder: "e.g. M3030VA / SN-12345",
             required: true,
+          },
+        },
+        {
+          id: "doc-request",
+          label: "Document request",
+          extraField: {
+            label: "Model",
+            placeholder: "e.g. M3030VA",
+            required: false,
           },
         },
         {
@@ -355,6 +379,15 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
             label: "型号与序列号",
             placeholder: "例如：M3030VA / SN-12345",
             required: true,
+          },
+        },
+        {
+          id: "doc-request",
+          label: "资料请求",
+          extraField: {
+            label: "型号",
+            placeholder: "例如：M3030VA",
+            required: false,
           },
         },
         {
