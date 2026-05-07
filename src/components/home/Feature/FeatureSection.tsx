@@ -136,7 +136,7 @@ export function FeatureSection({ kicker, cta, bulletLabels, slides }: Props) {
           href={`/products/${spec.category}/${spec.slug}`}
           trailingGlyph={<Glyph name="arrow-right" size={14} />}
         >
-          {cta.replace("{model}", current.model)}
+          {cta.replaceAll("{model}", current.model)}
         </Button>
       </div>
       <div>
