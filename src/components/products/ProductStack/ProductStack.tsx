@@ -95,7 +95,7 @@ export function ProductStack({
           <tbody>
             {products.map((p) => {
               const imageSrc = p.cutout?.asset
-                ? urlFor(p.cutout).width(88).url()
+                ? urlFor(p.cutout).width(128).url()
                 : null;
               return (
                 <ProductRow

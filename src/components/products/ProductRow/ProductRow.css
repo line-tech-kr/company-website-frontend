@@ -28,18 +28,15 @@
 }
 .lt-prod-row__thumb {
   position: relative;
-  width: 44px;
-  height: 30px;
-  background: var(--pd-surface, #f8fafc);
-  border: 1px solid var(--pd-rule, #eef2f7);
-  border-radius: 4px;
-  overflow: hidden;
+  width: 56px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .lt-prod-row__thumb-img {
   object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(12, 14, 20, 0.12));
 }
 .lt-prod-row__cell--code {
   font: 500 var(--lt-fs-sm) var(--lt-mono);

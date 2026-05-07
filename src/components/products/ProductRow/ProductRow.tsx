@@ -63,7 +63,7 @@ export function ProductRow({ product, imageSrc, category, locale }: Props) {
               src={imageSrc}
               alt=""
               fill
-              sizes="44px"
+              sizes="56px"
               className="lt-prod-row__thumb-img"
             />
           ) : (
