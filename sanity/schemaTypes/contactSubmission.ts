@@ -51,12 +51,6 @@ export const contactSubmission = defineType({
       title: "Message",
       type: "text",
     }),
-    defineField({
-      name: "ip",
-      title: "IP Address",
-      type: "string",
-      hidden: true,
-    }),
   ],
   preview: {
     select: {

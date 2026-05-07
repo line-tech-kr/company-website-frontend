@@ -7,7 +7,13 @@
  */
 import type { Locale } from "./home";
 
-export type InquiryTypeId = "sales" | "support" | "partnership" | "general";
+export type InquiryTypeId =
+  | "sales"
+  | "support"
+  | "doc-request"
+  | "partnership"
+  | "general"
+  | "site-visit";
 
 export type ContactFormCopy = {
   heading: string;
@@ -47,6 +53,15 @@ export type ContactFormCopy = {
   submit: string;
   submitDisabledHelp: string;
   /**
+   * PIPA Art. 22 explicit-consent checkbox label. Split into three parts so
+   * the privacy-policy link can be rendered as an actual <a> in the middle.
+   */
+  consent: {
+    prefix: string;
+    linkText: string;
+    suffix: string;
+  };
+  /**
    * Templates used when the contact form is reached from a product page via
    * `?product=<model>`. `{model}` is replaced at render time.
    */
@@ -75,12 +90,6 @@ export type ContactContent = {
   emailLabel: string;
   emailDirectCta: string;
   form: ContactFormCopy;
-  /**
-   * Inline fine-print under the form's submit. References "privacy policy" in
-   * each locale's natural phrasing — wrap the relevant phrase in an <a> once
-   * the policy page lands.
-   */
-  privacyNotice: string;
   distributors: {
     heading: string;
     lede: string;
@@ -147,6 +156,15 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
           },
         },
         {
+          id: "doc-request",
+          label: "자료 요청",
+          extraField: {
+            label: "모델명",
+            placeholder: "예: M3030VA",
+            required: false,
+          },
+        },
+        {
           id: "partnership",
           label: "협력·파트너십",
           extraField: {
@@ -156,18 +174,31 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
           },
         },
         { id: "general", label: "일반 문의" },
+        {
+          id: "site-visit",
+          label: "현장 방문 지원",
+          extraField: {
+            label: "방문 위치 또는 설비 정보",
+            placeholder: "예: 공정 가스 라인, 설치 현장 주소",
+            required: false,
+          },
+        },
       ],
       required: "필수",
       submit: "문의 보내기",
       submitDisabledHelp:
         "제출 백엔드는 현재 작업 중입니다. 위 이메일 주소로 보내주시면 즉시 회신드리겠습니다.",
+      consent: {
+        prefix: "",
+        linkText: "개인정보처리방침",
+        suffix: "을 확인하였으며 개인정보 수집·이용에 동의합니다. (필수)",
+      },
       productInquiry: {
-        subject: "견적 문의: {model}",
-        message: "{model}에 대한 견적 및 자세한 정보를 받고 싶습니다.",
+        subject: "기술 자료 요청: {model}",
+        message:
+          "{model} 관련 기술 자료(데이터시트, 매뉴얼 등)를 요청드립니다.",
       },
     },
-    privacyNotice:
-      "문의 내용은 개인정보처리방침에 따라 처리되며 제3자에 공유되지 않습니다.",
     distributors: {
       heading: "글로벌 네트워크",
       lede: "한국 본사를 중심으로 주요 시장을 직간접적으로 지원하고 있습니다.",
@@ -203,7 +234,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
     lede: "Product questions, technical support, partnership ideas — whatever brings you here, we'll reply within two business days.",
     infoHeading: "Contact details",
     hoursLabel: "Hours",
-    hoursValue: "Mon – Fri, 09:00 – 18:00 KST · Lunch 12:00 – 13:00",
+    hoursValue: "Mon – Fri, 09:00 – 18:00 KST · Closed 12:00 – 13:00 for lunch",
     addressLabel: "Address",
     phoneLabel: "Phone",
     faxLabel: "Fax",
@@ -228,7 +259,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
         phone: "+1 555 000 0000",
         subject: "e.g. Quote request, technical question, distributor inquiry",
         message:
-          "Tell us how we can help. If it's a product inquiry, gas type, flow range, and timeline help us route you faster.",
+          "Tell us how we can help. For product inquiries, sharing gas type, flow range, and timeline helps us route you faster.",
       },
       inquiryTypeOptions: [
         {
@@ -250,6 +281,15 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
           },
         },
         {
+          id: "doc-request",
+          label: "Document request",
+          extraField: {
+            label: "Model",
+            placeholder: "e.g. M3030VA",
+            required: false,
+          },
+        },
+        {
           id: "partnership",
           label: "Partnership / distributor",
           extraField: {
@@ -259,22 +299,35 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
           },
         },
         { id: "general", label: "General inquiry" },
+        {
+          id: "site-visit",
+          label: "On-site support visit",
+          extraField: {
+            label: "Site or equipment details",
+            placeholder: "e.g. process gas line, facility location",
+            required: false,
+          },
+        },
       ],
       required: "Required",
       submit: "Send inquiry",
       submitDisabledHelp:
-        "Submission backend is in progress. Please email the address above for an immediate reply.",
+        "Form submission isn't live yet — please email us directly for an immediate reply.",
+      consent: {
+        prefix: "I have read the ",
+        linkText: "Privacy Policy",
+        suffix:
+          " and consent to the collection and use of my personal information. (Required)",
+      },
       productInquiry: {
-        subject: "Inquiry: {model}",
+        subject: "Document request: {model}",
         message:
-          "I'd like to request a quote and more information about the {model}.",
+          "I'd like to request technical documents (datasheet, manual, etc.) for the {model}.",
       },
     },
-    privacyNotice:
-      "We'll handle your message per our privacy policy and won't share your details with third parties.",
     distributors: {
       heading: "Global network",
-      lede: "Headquartered in Korea, supporting key markets directly or through our subsidiary and partners.",
+      lede: "Headquartered in Korea — we support key markets directly or through our subsidiary and partners.",
       regions: [
         {
           id: "kr",
@@ -358,6 +411,15 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
           },
         },
         {
+          id: "doc-request",
+          label: "资料请求",
+          extraField: {
+            label: "型号",
+            placeholder: "例如：M3030VA",
+            required: false,
+          },
+        },
+        {
           id: "partnership",
           label: "合作·代理",
           extraField: {
@@ -367,17 +429,30 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
           },
         },
         { id: "general", label: "一般咨询" },
+        {
+          id: "site-visit",
+          label: "现场支持访问",
+          extraField: {
+            label: "现场或设备信息",
+            placeholder: "例如：工艺气体管路、设施地址",
+            required: false,
+          },
+        },
       ],
       required: "必填",
       submit: "发送咨询",
       submitDisabledHelp:
         "提交后端正在开发中。请使用上方邮箱直接联系我们以获得即时回复。",
+      consent: {
+        prefix: "我已阅读",
+        linkText: "隐私政策",
+        suffix: "并同意收集和使用我的个人信息。（必填）",
+      },
       productInquiry: {
-        subject: "询价：{model}",
-        message: "我想了解关于 {model} 的报价和更多信息。",
+        subject: "技术资料请求：{model}",
+        message: "我想索取 {model} 的技术文件（数据表、手册等）。",
       },
     },
-    privacyNotice: "您的信息将依据我们的隐私政策处理，不会与第三方共享。",
     distributors: {
       heading: "全球网络",
       lede: "以韩国总部为核心，直接或通过子公司与合作伙伴覆盖主要市场。",

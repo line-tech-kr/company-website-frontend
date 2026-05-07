@@ -28,6 +28,10 @@ type Props = {
   slidesLabel: string;
   slidesAriaLabel: string;
   slideAriaLabels: string[];
+  heroKickerLabel: string;
+  heroTitle: string;
+  heroCode: string;
+  heroLede: string;
 };
 
 const INTERVAL_MS = 4500;
@@ -44,6 +48,10 @@ export function CategoryShowcase({
   slidesLabel,
   slidesAriaLabel,
   slideAriaLabels,
+  heroKickerLabel,
+  heroTitle,
+  heroCode,
+  heroLede,
 }: Props) {
   const [active, setActive] = useState(0);
   const isPaused = useRef(false);
@@ -84,6 +92,15 @@ export function CategoryShowcase({
         className="lt-showcase__bracket lt-showcase__bracket--br"
         aria-hidden
       />
+
+      {/* hero header */}
+      <header className="lt-showcase__hero">
+        <div className="lt-showcase__hero-kicker">
+          {heroCode} — {heroKickerLabel}
+        </div>
+        <h1 className="lt-showcase__hero-title">{heroTitle}</h1>
+        <p className="lt-showcase__hero-lede">{heroLede}</p>
+      </header>
 
       {/* image side */}
       <div className="lt-showcase__img-col">

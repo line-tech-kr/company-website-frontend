@@ -10,8 +10,8 @@ export default defineConfig({
     setupFiles: ["./vitest.setup.ts"],
     css: false,
     passWithNoTests: true,
-    // Playwright owns the e2e/ directory.
-    exclude: ["**/node_modules/**", "**/dist/**", "e2e/**"],
+    // Playwright owns e2e/; .claude/ holds temporary worktrees.
+    exclude: ["**/node_modules/**", "**/dist/**", "e2e/**", ".claude/**"],
     coverage: {
       provider: "v8",
       reporter: ["text", "html"],

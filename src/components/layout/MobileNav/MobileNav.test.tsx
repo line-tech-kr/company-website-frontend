@@ -129,7 +129,7 @@ describe("MobileNav", () => {
     const body = container.querySelector(
       "#pd-mnav-section-resources",
     ) as HTMLElement;
-    ["Catalogues", "CAD drawings", "Manuals", "Certifications"].forEach(
+    ["Catalogs", "CAD drawings", "Manuals", "Certifications"].forEach(
       (label) => {
         expect(within(body).getByText(label)).toBeInTheDocument();
       },

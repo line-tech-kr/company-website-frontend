@@ -45,7 +45,7 @@ export type AccessoryItem = {
   id: AccessoryItemId;
   /** Display model code, e.g., "LTI-200". */
   model: string;
-  /** Functional descriptor under the model code, e.g., "Read Out Box". */
+  /** Functional descriptor under the model code, e.g., "Readout Box". */
   title: string;
   /** Short prose intro, 1–2 sentences. */
   blurb: string;
@@ -136,7 +136,7 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
     hero: {
       kicker: "Accessories",
       title: "Readouts and pressure accessories.",
-      lede: "Supporting hardware that pairs with our MFC and MFM lines — panel readouts that surface live flow, and upstream pressure regulators that condition gas before it reaches the controller. These are not standalone flow products; they exist to make the rest of the catalog work in real installations.",
+      lede: "Supporting hardware that pairs with our MFC and MFM lines — panel readouts that surface live flow, and upstream pressure regulators that condition gas before it reaches the controller. These aren't standalone flow products; they're what makes the rest of the catalog work in real installations.",
     },
     readouts: {
       kicker: "01 — Readouts",
@@ -146,9 +146,9 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
         {
           id: "lti-200",
           model: "LTI-200",
-          title: "Read Out Box",
+          title: "Readout Box",
           blurb:
-            "Compact panel-mount readout. 4-digit 7-segment display, 0–5 Vdc set-point input, six-button front face for flow on/off, scrolling, and menu navigation.",
+            "Compact panel-mount readout. 4-digit 7-segment display, 0–5 Vdc setpoint input, six-button front face for flow on/off, scrolling, and menu navigation.",
           image: {
             src: LTI_PLACEHOLDER_SRC,
             alt: "Generic placeholder for LTI-200 panel readout",
@@ -162,7 +162,7 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
             { label: "Display Repeatability", value: "≤ ±1.0 % of Full Scale" },
             { label: "Output Signal", value: "0 – 5 Vdc" },
             { label: "Units of Display", value: "SCCM, SLM, %" },
-            { label: "Set-Point", value: "0 – 5 Vdc for full scale" },
+            { label: "Setpoint", value: "0 – 5 Vdc for full scale" },
             { label: "Flow On/Off", value: "TTL input signal" },
             { label: "Flow Out Signal", value: "0 – 5 Vdc" },
             { label: "Communication", value: "RS-485 (option)" },
@@ -172,7 +172,7 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
         {
           id: "lti-1000",
           model: "LTI-1000",
-          title: "Multi-channel Read Out Box",
+          title: "Multi-channel Readout Box",
           blurb:
             "Rackable readout box with D-SUB remote control, optional 4–20 mA output, and an RS-232 link to companion PC software. Handles up to 8 channels in 1U / 2U / 4U arrangements.",
           image: {
@@ -192,7 +192,7 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
             { label: "Output Signal", value: "0 – 5 Vdc (option 4 – 20 mA)" },
             { label: "Units of Display", value: "SCCM, SLM, %" },
             { label: "Remote Control", value: "D-SUB 9-pin (male)" },
-            { label: "Set-Point", value: "0 – 5 Vdc for full scale" },
+            { label: "Setpoint", value: "0 – 5 Vdc for full scale" },
             { label: "Flow On/Off", value: "TTL input signal" },
             {
               label: "Relay Contact Rate",

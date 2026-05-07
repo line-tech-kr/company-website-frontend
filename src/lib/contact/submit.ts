@@ -55,7 +55,7 @@ export async function submitContact(
 
   // Persist to Sanity first (best-effort — a write failure doesn't block the email).
   try {
-    await persistContactSubmission(parsed.data, ip);
+    await persistContactSubmission(parsed.data);
   } catch (err) {
     console.error("contact_submission_persist_failed", err);
   }
