@@ -37,7 +37,7 @@
   display: flex;
   align-items: baseline;
   gap: 10px;
-  font: 600 1.125rem var(--lt-sans);
+  font: 600 var(--lt-fs-lg) var(--lt-sans);
   color: var(--pd-fg-strong);
   height: fit-content;
   margin: 0;
