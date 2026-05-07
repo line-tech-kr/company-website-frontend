@@ -59,11 +59,11 @@
   "products": {
     "list": {
       "title": "Product catalog",
-      "lede": "Mass Flow Controllers and Mass Flow Meters across analogue, digital, specialized series, and accessories.",
+      "lede": "Every Line Tech instrument in one place — Mass Flow Controllers, Mass Flow Meters, and accessories across analogue, digital, and specialized lines.",
       "cardCount": "{count} models",
       "stats": {
         "modelsLabel": "Models in catalog",
-        "modelsSub": "Across {count} series",
+        "modelsSub": "Across {count} lines",
         "rangeLabel": "slpm, full range",
         "rangeSub": "Cumulative across series",
         "industriesLabel": "Industries served",
@@ -80,7 +80,7 @@
     "categories": {
       "analogue": {
         "title": "Analogue series",
-        "lede": "Proven analogue mass flow controllers and meters."
+        "lede": "The longest-running Line Tech line. 0–5 VDC / 4–20 mA signal, ±1% F.S. accuracy, 18 models from 0.01 to 5,000 slpm."
       },
       "digital": {
         "title": "Digital series",
@@ -135,7 +135,7 @@
     },
     "overview": {
       "heading": "Overview",
-      "sub": "Engineered for precision processes that need long-term stability and fast response."
+      "sub": "Built for precision gas processes — long-term stability, fast response, traceable accuracy."
     },
     "specs": {
       "heading": "Technical specifications",
