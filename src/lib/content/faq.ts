@@ -37,12 +37,12 @@ export const LT_FAQ: Record<Locale, FaqContent> = {
           {
             id: "mfc-vs-mfm-difference",
             q: "What is the difference between an MFC and an MFM?",
-            a: "A Mass Flow Controller (MFC) actively regulates the flow of gas to a commanded setpoint using a built-in proportional valve. A Mass Flow Meter (MFM) measures flow passively — it outputs a signal proportional to the measured flow rate but cannot adjust it. Both devices use the same thermal mass flow sensing technology and share identical pressure and temperature ratings within the same series.",
+            a: "A Mass Flow Controller (MFC) actively regulates gas flow to a commanded setpoint using a built-in proportional valve. A Mass Flow Meter (MFM) measures flow passively — it outputs a signal proportional to the measured flow rate but cannot adjust it. Both devices use the same thermal mass flow sensing technology and share identical pressure and temperature ratings within the same series.",
           },
           {
             id: "mfc-vs-mfm-choose",
             q: "How do I choose between an MFC and an MFM?",
-            a: "Use an MFC when you need to actively set and maintain a precise gas flow rate — typical in semiconductor deposition, fuel cell gas feeds, or any closed-loop flow control process. Use an MFM when you only need to monitor flow without controlling it, such as in process verification or analytical instrumentation. Most multi-gas systems use several MFCs — one per gas line — with an optional readout box for centralized display.",
+            a: "Use an MFC when you need to actively set and maintain a precise gas flow rate — typical in semiconductor deposition, fuel cell gas feeds, or any closed-loop flow control process. Use an MFM when you only need to monitor flow without controlling it, such as process verification or analytical instrumentation. Most multi-gas systems use several MFCs — one per gas line — with an optional readout box for centralized display.",
           },
         ],
       },
@@ -58,7 +58,7 @@ export const LT_FAQ: Record<Locale, FaqContent> = {
           {
             id: "after-sales-services",
             q: "What after-sales services does Line Tech provide?",
-            a: "Line Tech offers a full range of post-sale services: repair, parts and unit replacement, on-site or return-to-factory instrument recalibration to restore factory-specified accuracy, and on-site or remote technical consultation for troubleshooting. Customer training seminars are also available to support in-house engineering teams.",
+            a: "Line Tech offers a full range of post-sale services: repair, parts and unit replacement, instrument recalibration (on-site or return-to-factory) to restore factory accuracy, and technical consultation (on-site or remote) for troubleshooting. Customer training seminars are also available for in-house engineering teams.",
           },
           {
             id: "on-site-support",
@@ -68,7 +68,7 @@ export const LT_FAQ: Record<Locale, FaqContent> = {
           {
             id: "request-repair",
             q: "How do I request a repair or recalibration?",
-            a: "Contact Line Tech at linetech@line-tech.co.kr or +82-42-624-0700. Describe the instrument model, the issue observed, and your process conditions. The service team will advise whether on-site or return-to-factory service is more appropriate, and arrange calibration traceable to Line Tech's sonic-nozzle standard (system uncertainty ±0.2%).",
+            a: "Contact Line Tech at linetech@line-tech.co.kr or +82-42-624-0700. Describe the instrument model, the issue you're seeing, and your process conditions. The service team will advise whether on-site or return-to-factory service is more appropriate, and arrange calibration traceable to Line Tech's sonic-nozzle standard (system uncertainty ±0.2%).",
           },
           {
             id: "training",
@@ -104,7 +104,7 @@ export const LT_FAQ: Record<Locale, FaqContent> = {
           {
             id: "ld-series",
             q: "When should I use the LD series with built-in display?",
-            a: "The LD series adds a built-in 4-digit 7-segment display showing live flow values, plus front-panel buttons for direct setpoint adjustment — no external controller or PC required. It is ideal for standalone laboratory setups, field calibration checks, or anywhere real-time visibility without a readout box is needed. Note the LD supports only 0–5 Vdc signaling (no 4–20 mA option) and is limited to a maximum range of 30 slpm.",
+            a: "The LD series adds a built-in 4-digit 7-segment display showing live flow values, plus front-panel buttons for direct setpoint adjustment — no external controller or PC required. It is ideal for standalone laboratory setups, field calibration checks, or anywhere real-time visibility without a readout box is needed. Note that the LD supports only 0–5 Vdc signaling (no 4–20 mA option) and is limited to a maximum range of 30 slpm.",
           },
           {
             id: "ex-series",
@@ -125,7 +125,7 @@ export const LT_FAQ: Record<Locale, FaqContent> = {
           {
             id: "accuracy-vs-repeatability",
             q: "What is the difference between accuracy and repeatability?",
-            a: "Accuracy describes how close the instrument's reading is to the true value — it governs absolute measurement error. Repeatability describes how consistently the instrument returns the same reading under the same conditions across multiple measurements — it governs long-term stability. All Line Tech series carry ±0.25% repeatability regardless of accuracy rating, indicating strong consistency in sustained operation.",
+            a: "Accuracy describes how close the instrument's reading is to the true value — it governs absolute measurement error. Repeatability describes how consistently the instrument returns the same reading under the same conditions across multiple measurements — it governs long-term stability. All Line Tech series carry ±0.25% repeatability regardless of accuracy rating, for consistent long-term operation.",
           },
           {
             id: "calibration-method",
@@ -167,7 +167,7 @@ export const LT_FAQ: Record<Locale, FaqContent> = {
           {
             id: "pre-use",
             q: "What preparation is needed before using an MFC/MFM?",
-            a: "Before first use: verify the gas flow direction arrow on the instrument body; for corrosive or flammable gases, purge the system with dry N₂ to displace moisture and confirm no leakage; clean the pipe interior with high-pressure gas before connecting; and mount in a location free from mechanical vibration and physical damage. All inlet and outlet connections are standard VCR male type.",
+            a: "Before first use: verify the gas flow direction arrow on the instrument body; for corrosive or flammable gases, purge the system with dry N₂ to displace moisture and confirm no leakage; clean the pipe interior with high-pressure gas before connecting; and mount in a location protected from vibration and impact. All inlet and outlet connections are standard VCR male type.",
           },
           {
             id: "warmup",
