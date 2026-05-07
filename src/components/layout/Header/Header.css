@@ -54,21 +54,19 @@
 .pd-top__wordmark-stack {
   display: inline-flex;
   flex-direction: column;
-  gap: 0;
-  line-height: 1;
 }
 .pd-top__wordmark {
   font: 900 18px/1 var(--lt-sans);
   letter-spacing: -0.005em;
 }
 .pd-top__wordmark-line {
-  color: #e5952c;
+  color: var(--pd-accent);
 }
 .pd-top__wordmark-tech {
   color: var(--pd-primary);
 }
 .pd-top__wordmark-dot {
-  color: #e5952c;
+  color: var(--pd-accent);
   padding: 0 3px;
 }
 .pd-top__tagline {

@@ -23,7 +23,7 @@ These are final — do not propose alternatives:
 primary:      #185686  (brand blue — headings, primary actions)
 primary-dark: #1f375e  (hover/active states)
 primary-deep: #172e75  (rare — deep headers)
-accent:       #fdbc04  (gold — CTAs, highlights)
+accent:       #e5952c  (amber — CTAs, highlights; matches the Logomark fill)
 ```
 
 Build the full Tailwind color scale (50–950) around these anchors. Neutrals, state colors, and semantic tokens get rebuilt fresh.
