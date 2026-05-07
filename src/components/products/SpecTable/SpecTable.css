@@ -54,7 +54,7 @@
 }
 .lt-pdp-spec__row {
   display: grid;
-  grid-template-columns: 36px 1.1fr 1.4fr;
+  grid-template-columns: 36px 180px 1fr;
   align-items: center;
   gap: 16px;
   padding: 14px 16px;
@@ -69,7 +69,7 @@
   background: var(--lt-neutral-100);
 }
 .lt-pdp-spec__lbl {
-  font: 400 0.875rem / 1.4 var(--lt-sans);
+  font: 400 var(--lt-fs-sm) / 1.4 var(--lt-sans);
   color: var(--pd-fg);
   margin: 0;
 }
