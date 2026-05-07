@@ -130,7 +130,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
     },
     feature: {
       kicker: "03 — 핵심 모델",
-      cta: "제품 상세 보기",
+      cta: "{model} 살펴보기",
       bulletLabels: {
         flow: "유량",
         accuracy: "정확도",
@@ -258,7 +258,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
     },
     feature: {
       kicker: "03 — Featured model",
-      cta: "Open product page",
+      cta: "Explore {model}",
       bulletLabels: {
         flow: "Flow",
         accuracy: "Accuracy",
@@ -368,7 +368,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
     },
     feature: {
       kicker: "03 — 重点型号",
-      cta: "打开产品页",
+      cta: "了解 {model}",
       bulletLabels: {
         flow: "流量",
         accuracy: "精度",
