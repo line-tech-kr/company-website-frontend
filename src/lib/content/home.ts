@@ -236,7 +236,11 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       items: [
         { n: "Semiconductor", k: "Wafer fab gas", slug: "semiconductor" },
         { n: "Fuel Cells", k: "Stack feed gas", slug: "fuel-cells" },
-        { n: "LED · Fiber Optics", k: "Deposition control", slug: "led-lighting" },
+        {
+          n: "LED · Fiber Optics",
+          k: "Deposition control",
+          slug: "led-lighting",
+        },
         {
           n: "Biotech · Pharma",
           k: "Bioreactor gas",
@@ -245,7 +249,11 @@ export const LT_HOME: Record<Locale, HomeContent> = {
         { n: "Chemical", k: "Reactor feed", slug: "chemical-petrochemical" },
         { n: "Photovoltaic", k: "Cell deposition", slug: "solar-photovoltaic" },
         { n: "Metals", k: "Furnace atmospheres", slug: "metals-processing" },
-        { n: "R&D · Labs", k: "Bench gas dosing", slug: "research-development" },
+        {
+          n: "R&D · Labs",
+          k: "Bench gas dosing",
+          slug: "research-development",
+        },
       ],
     },
     feature: {
