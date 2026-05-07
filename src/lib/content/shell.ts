@@ -366,7 +366,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             eyebrow: "Trust",
             title: "Certifications",
             blurb:
-              "ISO 9001, CE, INNOBIZ, RoHS / REACH and 9 more — the full set procurement teams ask for.",
+              "ISO 9001, CE, INNOBIZ, RoHS / REACH and 9 more — everything procurement teams typically request.",
             href: "/company#certifications",
             cta: "View all certifications",
           },
@@ -385,7 +385,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             eyebrow: "Featured model",
             title: "M3030VA",
             blurb:
-              "Digital piezo-actuated MFC for semiconductor and display process lines.",
+              "Analogue piezo-actuated MFC for semiconductor and display process lines.",
             href: "/products/analogue/m3030va",
             cta: "View product",
             image: "/products/m3030va/product-1.jpg",
@@ -407,8 +407,8 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           links: [
             {
               href: "/resources/catalogues",
-              label: "Catalogues",
-              desc: "Series-level PDF catalogues",
+              label: "Catalogs",
+              desc: "Series-level PDF catalogs",
             },
             {
               href: "/resources/drawings",
@@ -438,7 +438,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           ],
           featured: {
             eyebrow: "Spotlight",
-            title: "M3030VA manual + catalogue",
+            title: "M3030VA manual + catalog",
             blurb:
               "Full specs and Modbus protocol for our flagship digital MFC.",
             href: "/products/analogue/m3030va",
@@ -483,11 +483,11 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
       openLabel: "Open search",
       heading: "Search the site",
       inputLabel: "Search products, resources, models",
-      inputPlaceholder: "Try M3030VA, catalogue, digital MFC",
+      inputPlaceholder: "Try M3030VA, catalog, digital MFC",
       quickChips: [
         { id: "m3030va", label: "M3030VA" },
         { id: "digital-mfc", label: "Digital MFC" },
-        { id: "catalogue", label: "Catalogue PDF" },
+        { id: "catalogue", label: "Catalog PDF" },
         { id: "calibration", label: "Calibration" },
         { id: "certifications", label: "Certifications" },
       ],

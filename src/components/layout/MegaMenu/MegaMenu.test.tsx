@@ -71,7 +71,7 @@ describe("MegaMenu", () => {
     expect(panel).toHaveAttribute("aria-hidden", "false");
     expect(panel).toHaveClass("is-open");
 
-    ["Catalogues", "CAD drawings", "Manuals", "Certifications"].forEach(
+    ["Catalogs", "CAD drawings", "Manuals", "Certifications"].forEach(
       (label) => {
         expect(
           within(panel as HTMLElement).getByText(label),

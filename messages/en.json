@@ -59,17 +59,17 @@
   "products": {
     "list": {
       "title": "Product catalog",
-      "lede": "Mass Flow Controllers and Mass Flow Meters across analogue, digital, and specialized series.",
+      "lede": "Every Line Tech instrument in one place — Mass Flow Controllers, Mass Flow Meters, and accessories across analogue, digital, and specialized lines.",
       "cardCount": "{count} models",
       "stats": {
         "modelsLabel": "Models in catalog",
-        "modelsSub": "Across {count} series",
-        "rangeLabel": "SLPM, full range",
+        "modelsSub": "Across {count} lines",
+        "rangeLabel": "slpm, full range",
         "rangeSub": "Cumulative across series",
         "industriesLabel": "Industries served",
         "industriesSub": "Field-validated since 1997",
         "certificationsLabel": "Certifications",
-        "certificationsSub": "KGS · CE · ISO 9001"
+        "certificationsSub": "ISO 9001 · CE · RoHS"
       },
       "applications": {
         "label": "Common applications",
@@ -80,7 +80,7 @@
     "categories": {
       "analogue": {
         "title": "Analogue series",
-        "lede": "Proven analogue mass flow controllers and meters."
+        "lede": "The longest-running Line Tech line. 0–5 VDC / 4–20 mA signal, ±1% F.S. accuracy, 18 models from 0.01 to 5,000 slpm."
       },
       "digital": {
         "title": "Digital series",
@@ -135,11 +135,11 @@
     },
     "overview": {
       "heading": "Overview",
-      "sub": "Engineered for precision processes that need long-term stability and fast response."
+      "sub": "Built for precision gas processes — long-term stability, fast response, traceable accuracy."
     },
     "specs": {
       "heading": "Technical specifications",
-      "sub": "Reference values measured at 25°C, N₂ basis, unless otherwise noted.",
+      "sub": "All values measured at 25°C with N₂ as the reference gas, unless otherwise noted.",
       "copy": "Copy all",
       "copied": "Copied"
     },
@@ -150,14 +150,14 @@
     },
     "dimensions": {
       "heading": "Outline dimensions",
-      "sub": "Units in mm. Reference dimensions for 1/4\" VCR fittings.",
+      "sub": "Units in millimeters. Dimensions shown are for the 1/4\" VCR fitting variant.",
       "caption": "Flow direction left → right. Model name engraved on the top face.",
       "note": "Drawing is for reference only. Refer to the datasheet for the official outline.",
       "callouts": {
         "A": "W · overall width",
         "B": "H · overall height",
         "C": "L · overall length",
-        "D": "Fitting centre-to-centre",
+        "D": "Fitting center-to-center",
         "E": "Mounting holes"
       }
     },
@@ -172,18 +172,18 @@
     "requestDocs": {
       "kicker": "Documentation",
       "heading": "Need datasheets, manuals, or CAD drawings?",
-      "body": "Technical documents are sent on request. Tell us the model and your application — we'll respond within one business day.",
+      "body": "Technical documents are available on request. Send us the model and your application, and we'll respond within one business day.",
       "cta": "Request technical documents"
     }
   },
   "resources": {
     "hub": {
       "title": "Data Room",
-      "intro": "Download Line Tech catalogues, CAD drawings, user manuals, and certification documents."
+      "intro": "Download Line Tech catalogs, CAD drawings, user manuals, and certification documents."
     },
     "cards": {
       "catalogues": {
-        "title": "Catalogues",
+        "title": "Catalogs",
         "desc": "Series-level PDF brochures",
         "count": "{count} documents"
       },
@@ -209,7 +209,7 @@
       }
     },
     "catalogues": {
-      "title": "Catalogues",
+      "title": "Catalogs",
       "intro": "Series-level product brochures in PDF format."
     },
     "drawings": {
