@@ -22,7 +22,7 @@
   --lt-accent-100: #fff3c2;
   --lt-accent-200: #ffe58a;
   --lt-accent-300: #ffd24d;
-  --lt-accent-400: #fdbc04; /* locked */
+  --lt-accent-400: #e5952c; /* locked — matches Logomark.tsx */
   --lt-accent-500: #e4a502;
   --lt-accent-600: #b88004;
   --lt-accent-700: #935f0b;
