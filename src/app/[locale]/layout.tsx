@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -12,14 +12,14 @@ import { siteUrl } from "@/lib/seo";
 import { safeJsonLd } from "@/lib/seo/jsonLd";
 import "../globals.css";
 
-const fontSans = Inter({
+const fontSans = IBM_Plex_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   variable: "--font-sans",
   display: "swap",
 });
 
-const fontMono = JetBrains_Mono({
+const fontMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   variable: "--font-mono",
