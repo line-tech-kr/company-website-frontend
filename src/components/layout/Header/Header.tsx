@@ -29,12 +29,15 @@ export function Header({ locale }: Props) {
           <span className="pd-top__logomark">
             <Logomark size={28} />
           </span>
-          <span className="pd-top__wordmark">
-            LINE
-            <span className="pd-top__wordmark-dot" aria-hidden="true">
-              ·
+          <span className="pd-top__wordmark-stack">
+            <span className="pd-top__wordmark">
+              <span className="pd-top__wordmark-line">LINE</span>
+              <span className="pd-top__wordmark-dot" aria-hidden="true">
+                ·
+              </span>
+              <span className="pd-top__wordmark-tech">TECH</span>
             </span>
-            TECH
+            <span className="pd-top__tagline">Precision mass flow</span>
           </span>
         </Link>
 
