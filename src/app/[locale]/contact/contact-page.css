@@ -205,13 +205,25 @@
   color: var(--pd-muted);
 }
 
-.ct-form__privacy {
-  margin: 14px 0 0;
-  padding-top: 14px;
-  border-top: 1px solid var(--pd-rule);
-  font-size: var(--lt-fs-xs);
+.ct-form__consent {
+  margin-top: 20px;
+}
+.ct-form__consent-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: var(--lt-fs-sm);
   line-height: 1.5;
-  color: var(--pd-muted);
+  color: var(--pd-fg);
+  cursor: pointer;
+}
+.ct-form__consent-label input[type="checkbox"] {
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+.ct-form__consent-link {
+  color: var(--pd-link, var(--pd-fg-strong));
+  text-decoration: underline;
 }
 .ct-form__captcha {
   margin-top: 20px;
