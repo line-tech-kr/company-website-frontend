@@ -9,6 +9,7 @@ const ShowcaseEntrySchema = z.object({
   flowRange: z.string().nullable(),
   accuracy: z.string().nullable(),
   image: SanityImageSchema.nullable().optional(),
+  cutout: SanityImageSchema.nullable().optional(),
 });
 
 export const CategoryShowcaseSchema = z.object({
