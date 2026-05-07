@@ -2,10 +2,47 @@
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin-bottom: 32px;
-  min-height: 380px;
+  grid-template-rows: auto 1fr;
+  margin: 24px 0 32px;
   border: 1px solid var(--pd-border);
   background: var(--pd-surface);
+}
+
+.lt-showcase__hero {
+  grid-column: 1 / -1;
+  padding: 32px 36px 28px;
+  border-bottom: 1px solid var(--pd-border);
+  background: var(--pd-surface-2);
+}
+.lt-showcase__hero-kicker {
+  font: 500 11px var(--lt-sans);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--pd-muted);
+  margin-bottom: 8px;
+}
+:lang(ko) .lt-showcase__hero-kicker,
+:lang(zh) .lt-showcase__hero-kicker {
+  letter-spacing: 0;
+  text-transform: none;
+}
+.lt-showcase__hero-title {
+  margin: 0 0 12px;
+  font: 500 var(--lt-fs-h2-dense) / 1.1 var(--lt-sans);
+  letter-spacing: -0.015em;
+  color: var(--pd-primary);
+}
+.lt-showcase__hero-lede {
+  margin: 0;
+  font-size: var(--lt-fs-sm);
+  line-height: 1.55;
+  color: var(--pd-fg);
+  max-width: 620px;
+}
+
+.lt-showcase__img-col,
+.lt-showcase__data {
+  min-height: 380px;
 }
 
 /* ── Corner brackets ─────────────────────────────────────── */
@@ -90,7 +127,7 @@
 }
 
 .lt-showcase__section-label {
-  font: 500 11px var(--lt-mono);
+  font: 500 12px var(--lt-mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--pd-muted);
@@ -134,7 +171,7 @@
 }
 
 .lt-showcase__row-label {
-  font: 500 11px var(--lt-mono);
+  font: 500 12px var(--lt-mono);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--pd-muted);
@@ -148,12 +185,12 @@
 }
 
 .lt-showcase__row-value {
-  font: 400 14px var(--lt-sans);
+  font: 400 15px var(--lt-sans);
   color: var(--pd-fg-strong);
 }
 
 .lt-showcase__row-value[data-mono="true"] {
-  font: 600 18px var(--lt-mono);
+  font: 600 20px var(--lt-mono);
   letter-spacing: -0.005em;
 }
 
@@ -162,7 +199,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font: 500 12px / 1 var(--lt-mono);
+  font: 500 13px / 1 var(--lt-mono);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--pd-primary);

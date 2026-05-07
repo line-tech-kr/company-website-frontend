@@ -162,8 +162,8 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       submitDisabledHelp:
         "제출 백엔드는 현재 작업 중입니다. 위 이메일 주소로 보내주시면 즉시 회신드리겠습니다.",
       productInquiry: {
-        subject: "견적 문의: {model}",
-        message: "{model}에 대한 견적 및 자세한 정보를 받고 싶습니다.",
+        subject: "기술 자료 요청: {model}",
+        message: "{model} 관련 기술 자료(데이터시트, 매뉴얼 등)를 요청드립니다.",
       },
     },
     privacyNotice:
@@ -265,9 +265,9 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       submitDisabledHelp:
         "Submission backend is in progress. Please email the address above for an immediate reply.",
       productInquiry: {
-        subject: "Inquiry: {model}",
+        subject: "Document request: {model}",
         message:
-          "I'd like to request a quote and more information about the {model}.",
+          "I'd like to request technical documents (datasheet, manual, etc.) for the {model}.",
       },
     },
     privacyNotice:
@@ -373,8 +373,8 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       submitDisabledHelp:
         "提交后端正在开发中。请使用上方邮箱直接联系我们以获得即时回复。",
       productInquiry: {
-        subject: "询价：{model}",
-        message: "我想了解关于 {model} 的报价和更多信息。",
+        subject: "技术资料请求：{model}",
+        message: "我想索取 {model} 的技术文件（数据表、手册等）。",
       },
     },
     privacyNotice: "您的信息将依据我们的隐私政策处理，不会与第三方共享。",

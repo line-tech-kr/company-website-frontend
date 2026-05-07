@@ -223,7 +223,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  max-width: 720px;
 }
 .co-cert {
   border: 1px solid var(--pd-rule);
@@ -270,7 +269,6 @@
   border-left: 2px solid var(--pd-rule);
   font: 400 var(--lt-fs-sm)/1.55 var(--lt-sans);
   color: var(--pd-muted);
-  max-width: 720px;
 }
 
 /* Location: HQ + optional subsidiary card. */
