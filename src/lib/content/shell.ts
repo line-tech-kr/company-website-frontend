@@ -379,7 +379,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             eyebrow: "Featured model",
             title: "M3030VA",
             blurb:
-              "Digital piezo-actuated MFC for semiconductor and display process lines.",
+              "Analogue piezo-actuated MFC for semiconductor and display process lines.",
             href: "/products/analogue/m3030va",
             cta: "View product",
             image: "/products/m3030va/product-1.jpg",

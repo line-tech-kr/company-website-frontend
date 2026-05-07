@@ -203,7 +203,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
     lede: "Product questions, technical support, partnership ideas — whatever brings you here, we'll reply within two business days.",
     infoHeading: "Contact details",
     hoursLabel: "Hours",
-    hoursValue: "Mon – Fri, 09:00 – 18:00 KST · Lunch 12:00 – 13:00",
+    hoursValue: "Mon – Fri, 09:00 – 18:00 KST · Closed 12:00 – 13:00 for lunch",
     addressLabel: "Address",
     phoneLabel: "Phone",
     faxLabel: "Fax",
@@ -263,7 +263,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       required: "Required",
       submit: "Send inquiry",
       submitDisabledHelp:
-        "Form submission isn't live yet — please email the address above for an immediate reply.",
+        "Form submission isn't live yet — please email us directly for an immediate reply.",
       productInquiry: {
         subject: "Inquiry: {model}",
         message:
