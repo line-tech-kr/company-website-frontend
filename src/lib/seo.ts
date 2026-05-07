@@ -432,3 +432,23 @@ export function buildResourcesMetadata(
     RESOURCES_PATHS[section],
   );
 }
+
+const PRIVACY_SEO: Record<Locale, PageSeo> = {
+  ko: {
+    title: "개인정보처리방침 — 라인테크",
+    description: "주식회사 라인테크의 개인정보처리방침을 확인하세요.",
+  },
+  en: {
+    title: "Privacy Policy — Line Tech",
+    description:
+      "How Line Tech collects, uses, and protects your personal data.",
+  },
+  zh: {
+    title: "隐私政策 — Line Tech",
+    description: "了解莱因科技如何收集、使用和保护您的个人信息。",
+  },
+};
+
+export function buildPrivacyMetadata(locale: Locale): Metadata {
+  return buildBase(locale, PRIVACY_SEO[locale], "legal/privacy");
+}

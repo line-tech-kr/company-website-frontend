@@ -112,6 +112,10 @@ export type ShellSearch = {
   quickChips: { id: string; label: string }[];
   /** Shown when a query returns zero results. Use {q} as query placeholder. */
   noResults: string;
+  /** Shown when the search index fails to load. */
+  searchUnavailable: string;
+  /** Link label shown alongside searchUnavailable. */
+  browseProducts: string;
 };
 
 /** Mobile nav panel copy (#34). Renders below 1000px. */
@@ -294,6 +298,8 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         { id: "certifications", label: "인증서" },
       ],
       noResults: '"{q}"에 대한 결과가 없습니다',
+      searchUnavailable: "검색을 일시적으로 사용할 수 없습니다.",
+      browseProducts: "제품 목록 보기",
     },
     mobileNav: {
       openLabel: "메뉴 열기",
@@ -486,6 +492,8 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         { id: "certifications", label: "Certifications" },
       ],
       noResults: 'No results for "{q}"',
+      searchUnavailable: "Search is temporarily unavailable.",
+      browseProducts: "Browse products",
     },
     mobileNav: {
       openLabel: "Open menu",
@@ -666,6 +674,8 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         { id: "certifications", label: "认证文件" },
       ],
       noResults: '"{q}"无搜索结果',
+      searchUnavailable: "搜索暂时不可用。",
+      browseProducts: "浏览产品",
     },
     mobileNav: {
       openLabel: "打开菜单",

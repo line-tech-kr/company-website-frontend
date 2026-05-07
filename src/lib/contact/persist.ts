@@ -3,7 +3,6 @@ import type { ContactFormPayload } from "./schema";
 
 export async function persistContactSubmission(
   data: ContactFormPayload,
-  ip: string,
 ): Promise<void> {
   await sanityWriteClient.create({
     _type: "contactSubmission",
@@ -16,6 +15,5 @@ export async function persistContactSubmission(
     phone: data.phone ?? undefined,
     subject: data.subject ?? undefined,
     message: data.message,
-    ip,
   });
 }

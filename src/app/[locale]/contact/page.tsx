@@ -107,11 +107,7 @@ export default async function ContactPage({ params, searchParams }: Props) {
               {form.heading}
             </h2>
 
-            <ContactForm
-              form={form}
-              privacyNotice={c.privacyNotice}
-              defaults={defaults}
-            />
+            <ContactForm form={form} defaults={defaults} />
           </section>
 
           <aside className="ct-info" aria-labelledby="ct-info-heading">
