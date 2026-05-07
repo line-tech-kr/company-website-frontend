@@ -22,7 +22,8 @@ const PRODUCT_BASE_PROJECTION = `
   description,
   features,
   connections,
-  massFlowSpecs
+  massFlowSpecs,
+  cutout
 `;
 
 const PRODUCT_LIST_PROJECTION = `
@@ -121,6 +122,13 @@ export const categoryShowcaseQuery = defineQuery(`
       "accuracy": product->massFlowSpecs.accuracy.display,
       "image": product->images[0],
     },
+  }
+`);
+
+export const flagshipCutoutsQuery = defineQuery(`
+  *[_type == "product" && lower(model) in $models]{
+    model,
+    cutout
   }
 `);
 

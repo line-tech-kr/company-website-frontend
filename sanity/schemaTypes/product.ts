@@ -220,6 +220,12 @@ export const product = defineType({
       of: [{ type: "image", options: { hotspot: true } }],
     }),
     defineField({
+      name: "cutout",
+      type: "image",
+      description:
+        "Background-removed PNG for chip/card frames. Optional — surfaces fall back to images[0].",
+    }),
+    defineField({
       name: "dimensionDrawing",
       type: "image",
     }),
