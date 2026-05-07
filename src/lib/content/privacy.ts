@@ -42,11 +42,18 @@ export const LT_PRIVACY: Record<Locale, PrivacyContent> = {
       },
       {
         heading: "개인정보의 제3자 제공",
-        body: "회사는 정보주체의 개인정보를 원칙적으로 외부에 제공하지 않습니다. 다만, 정보주체의 동의가 있거나 법률에 특별한 규정이 있는 경우에는 그러하지 않습니다.",
+        body: "회사는 정보주체의 개인정보를 원칙적으로 외부에 제공하지 않습니다 (제5조의 위탁 처리는 제외). 다만, 정보주체의 동의가 있거나 법률에 특별한 규정이 있는 경우에는 그러하지 않습니다.",
       },
       {
-        heading: "개인정보처리 위탁",
-        body: "회사는 현재 개인정보 처리업무를 외부 업체에 위탁하고 있지 않습니다.",
+        heading: "개인정보 처리위탁 및 국외이전",
+        body: "회사는 서비스 제공을 위해 다음과 같이 개인정보 처리업무를 외부 업체에 위탁하고 있으며, 수탁업체가 국외에 위치한 경우 개인정보가 국외로 이전됩니다.",
+        items: [
+          "Sanity Inc. (미국) — 문의 내용 저장 및 관리. 보유기간은 본 방침에 따름",
+          "Resend, Inc. (미국) — 문의 이메일 발송 (전송 로그 약 30일 보관)",
+          "Cloudflare, Inc. (미국) — 봇 차단(Turnstile) 검증 및 보안 (전송 항목: IP 주소)",
+          "Vercel Inc. (미국) — 웹사이트 호스팅, 트래픽 분석, 성능 측정",
+        ],
+        note: "이전 시점·방법: 문의 양식 제출 시 인터넷 통신망을 통해 즉시 이전됩니다. 정보주체는 위탁 또는 국외이전을 거부할 권리가 있으며, 거부 시 문의 처리가 제한될 수 있습니다.",
       },
       {
         heading: "정보주체의 권리와 행사방법",
@@ -106,11 +113,18 @@ export const LT_PRIVACY: Record<Locale, PrivacyContent> = {
       },
       {
         heading: "Third-Party Disclosure",
-        body: "The Company does not share personal data with third parties as a general rule. Exceptions apply only where the data subject has consented or where a specific legal provision requires disclosure.",
+        body: "The Company does not share personal data with third parties as a general rule (excluding the processors listed in Section 5). Exceptions apply only where the data subject has consented or where a specific legal provision requires disclosure.",
       },
       {
-        heading: "Processing Outsourcing",
-        body: "The Company does not currently outsource any personal data processing to third-party service providers.",
+        heading: "Processing by Third Parties and Overseas Transfers",
+        body: "The Company engages the following service providers to process personal data. Where these providers are located outside Korea, personal data is transferred overseas.",
+        items: [
+          "Sanity Inc. (United States) — Storage and management of inquiry submissions. Retained per this policy.",
+          "Resend, Inc. (United States) — Delivery of inquiry emails. Delivery logs retained ~30 days.",
+          "Cloudflare, Inc. (United States) — Bot mitigation (Turnstile) and security checks. Items transferred: IP address.",
+          "Vercel Inc. (United States) — Website hosting, traffic analytics, and performance monitoring.",
+        ],
+        note: "Transfer timing and method: Personal data is transferred via the public internet at the moment a form is submitted. You have the right to refuse the outsourcing or overseas transfer; refusal may limit our ability to process your inquiry.",
       },
       {
         heading: "Your Rights",
@@ -167,11 +181,18 @@ export const LT_PRIVACY: Record<Locale, PrivacyContent> = {
       },
       {
         heading: "个人信息的第三方提供",
-        body: "公司原则上不向第三方提供信息主体的个人信息。仅在信息主体同意或法律有特别规定的情况下例外。",
+        body: "公司原则上不向第三方提供信息主体的个人信息（不含第5条所列受托处理）。仅在信息主体同意或法律有特别规定的情况下例外。",
       },
       {
-        heading: "个人信息处理委托",
-        body: "公司目前未将任何个人信息处理业务委托给外部供应商。",
+        heading: "个人信息处理委托及跨境转移",
+        body: "公司为提供服务，将下列个人信息处理业务委托给外部服务商。当受托方位于韩国境外时，个人信息将被跨境转移。",
+        items: [
+          "Sanity Inc.（美国）—— 咨询内容的存储与管理。保留期限按本政策执行。",
+          "Resend, Inc.（美国）—— 咨询邮件的发送（发送日志保留约30天）。",
+          "Cloudflare, Inc.（美国）—— 机器人识别（Turnstile）及安全防护（传输项：IP 地址）。",
+          "Vercel Inc.（美国）—— 网站托管、流量分析及性能监测。",
+        ],
+        note: "转移时点及方式：用户提交咨询表单时，个人信息通过互联网即时转移。信息主体有权拒绝委托或跨境转移；拒绝可能导致咨询处理受限。",
       },
       {
         heading: "您的权利及行使方式",
