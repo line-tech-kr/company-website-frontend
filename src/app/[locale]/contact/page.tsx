@@ -3,6 +3,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { buildContactMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { Button } from "@/components/ui/Button";
+import { Link } from "@/i18n/navigation";
 import { LT_CONTACT } from "@/lib/content/contact";
 import { LT_SHELL } from "@/lib/content/shell";
 import type { Locale } from "@/lib/content/home";
@@ -167,9 +168,14 @@ export default async function ContactPage({ params, searchParams }: Props) {
           </header>
           <ul className="ct-dist__grid">
             {c.distributors.regions.map((region) => (
-              <li key={region.id} className="ct-dist__card">
-                <span className="ct-dist__region">{region.name}</span>
-                <span className="ct-dist__status">{region.status}</span>
+              <li key={region.id}>
+                <Link
+                  href={`/contact/network/${region.id}`}
+                  className="ct-dist__card"
+                >
+                  <span className="ct-dist__region">{region.name}</span>
+                  <span className="ct-dist__status">{region.status}</span>
+                </Link>
               </li>
             ))}
           </ul>
