@@ -261,8 +261,8 @@
       "captcha": "Verification failed. Please complete the challenge again.",
       "server": "We could not send your message. Please email us directly."
     },
-    "success": "Thanks — your message has been sent. We typically respond within 1 business day.",
+    "success": "Thanks — your message has been sent. We typically respond within 2 business days.",
     "submitting": "Sending…",
-    "slaHint": "We typically respond within 1 business day."
+    "slaHint": "We typically respond within 2 business days."
   }
 }

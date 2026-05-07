@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 /** Founding, first-in-Korea MFC, and the two cert milestones get a filled
  * dot on the timeline. Everything else is a hollow tick. */
-const MILESTONE_DATES = new Set(["1997.03", "2003.03", "2017.08", "2018.03"]);
+const MILESTONE_DATES = new Set(["1997.03", "2003.03", "2017.08", "2019.11", "2020.06"]);
 
 export default async function CompanyPage({ params }: Props) {
   const { locale } = await params;

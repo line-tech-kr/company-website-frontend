@@ -97,13 +97,7 @@ export default async function CategoryPage({ params }: Props) {
     <>
       <main className="lt-wrap">
         <Breadcrumbs items={breadcrumbs} />
-        <CategoryHero
-          kickerLabel={tProducts("kicker")}
-          title={tProducts(`categories.${category}.title`)}
-          code={cat.code}
-          lede={tProducts(`categories.${category}.lede`)}
-        />
-        {showcaseProducts.length > 0 && (
+        {showcaseProducts.length > 0 ? (
           <CategoryShowcase
             products={showcaseProducts}
             viewLabel={tProducts("showcase.viewProduct")}
@@ -118,6 +112,17 @@ export default async function CategoryPage({ params }: Props) {
             slideAriaLabels={showcaseProducts.map((_, i) =>
               tProducts("showcase.slideAriaLabel", { n: i + 1 }),
             )}
+            heroKickerLabel={tProducts("kicker")}
+            heroTitle={tProducts(`categories.${category}.title`)}
+            heroCode={cat.code}
+            heroLede={tProducts(`categories.${category}.lede`)}
+          />
+        ) : (
+          <CategoryHero
+            kickerLabel={tProducts("kicker")}
+            title={tProducts(`categories.${category}.title`)}
+            code={cat.code}
+            lede={tProducts(`categories.${category}.lede`)}
           />
         )}
         <ProductStack
