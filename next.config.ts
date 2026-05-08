@@ -38,7 +38,25 @@ const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
 ];
 
+// Renamed slugs from 2020 → 2026 catalogue resync
+const SLUG_REDIRECTS = [
+  { from: "specialized/ex070c", to: "specialized/ex70c" },
+  { from: "specialized/ex070m", to: "specialized/ex70m" },
+  { from: "digital/md100c", to: "digital/md150c" },
+  { from: "digital/md100m", to: "digital/md150m" },
+];
+
 const nextConfig: NextConfig = {
+  async redirects() {
+    const locales = ["ko", "en", "zh"];
+    return locales.flatMap((locale) =>
+      SLUG_REDIRECTS.map(({ from, to }) => ({
+        source: `/${locale}/products/${from}`,
+        destination: `/${locale}/products/${to}`,
+        permanent: true,
+      })),
+    );
+  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

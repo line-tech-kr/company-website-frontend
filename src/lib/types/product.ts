@@ -134,6 +134,7 @@ export const SanityProductSchema = z.object({
     .nullable()
     .optional(),
   cutout: SanityImageSchema.nullable().optional(),
+  connectorType: z.string().nullable().optional(),
   dimensionDrawing: SanityImageSchema.nullable().optional(),
   datasheets: z
     .array(

@@ -56,6 +56,9 @@ function productToSeedFields(p: Product) {
   if (p.digitalCommunication) {
     fields.digitalCommunication = p.digitalCommunication;
   }
+  if (p.connectorType) {
+    fields.connectorType = p.connectorType;
+  }
   return fields;
 }
 

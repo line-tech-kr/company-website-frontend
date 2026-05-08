@@ -226,6 +226,12 @@ export const product = defineType({
         "Background-removed PNG for chip/card frames. Optional — surfaces fall back to images[0].",
     }),
     defineField({
+      name: "connectorType",
+      title: "Electrical connector",
+      type: "string",
+      description: "e.g. '15-Pin D-Connector', '9-Pin D-Connector'",
+    }),
+    defineField({
       name: "dimensionDrawing",
       type: "image",
     }),
