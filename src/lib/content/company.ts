@@ -65,7 +65,13 @@ export type CompanyHistory = {
 };
 
 export type CompanyCert = {
-  /** Stable slug for keys + future linking. */
+  /**
+   * Stable slug used as the deep-link target on /resources/certifications#<id>.
+   *
+   * MUST equal the `slug.current` field on the matching Sanity `certification`
+   * document — verified by `pnpm tsx scripts/verify-cert-slugs.ts`. If you
+   * rename/replace a cert, update the slug here and in Sanity in lockstep.
+   */
   id: string;
   /** Short title (e.g., "ISO 9001"). */
   name: string;

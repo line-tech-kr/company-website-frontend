@@ -12,15 +12,11 @@ import "../resources-subpage.css";
 
 export const revalidate = 3600;
 
-const slugifyCertName = (s: string) =>
-  s
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-
 type CertItem = {
   _id: string;
   name: string;
+  /** Stable URL slug from Sanity. Used as the anchor target for /company deep-links. */
+  slug: string | null;
   issuer?: {
     ko?: string | null;
     en?: string | null;
@@ -84,7 +80,7 @@ export default async function CertificationsPage({ params }: Props) {
             return (
               <li
                 key={cert._id}
-                id={slugifyCertName(cert.name)}
+                id={cert.slug ?? undefined}
                 className="dr-cert"
               >
                 <h2 className="dr-cert__name">{cert.name}</h2>
