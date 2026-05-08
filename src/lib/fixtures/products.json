@@ -92,11 +92,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -226,11 +232,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -360,11 +372,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -494,11 +512,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -624,11 +648,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -754,11 +784,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -880,11 +916,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -1006,11 +1048,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -1140,11 +1188,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -1268,11 +1322,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -1396,11 +1456,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -1524,11 +1590,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -1648,11 +1720,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -1772,11 +1850,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -1892,11 +1976,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -2012,11 +2102,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -2140,11 +2236,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -2281,11 +2383,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -2422,11 +2530,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -2559,11 +2673,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -2696,11 +2816,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -2829,11 +2955,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -2962,11 +3094,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -3103,11 +3241,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -3238,11 +3382,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -3373,11 +3523,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -3504,11 +3660,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -3635,11 +3797,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -3762,11 +3930,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -3889,11 +4063,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -4028,11 +4208,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -4170,11 +4356,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -4219,21 +4411,26 @@
     "series": "specialized",
     "function": "MFC",
     "productLabel": {
-      "en": "Mass Flow Controller",
-      "ko": "질량 유량 제어기 (MFC)",
-      "zh": "质量流量控制器 (MFC)"
+      "en": "Electronic Pressure Controller",
+      "ko": "전자식 압력 제어기 (EPC)",
+      "zh": "电子式压力控制器 (EPC)"
     },
     "tags": [],
     "features": [
       {
-        "en": "Accurate at Low Flow",
-        "ko": "저유량에서도 정밀한 측정",
-        "zh": "低流量下精准测量"
+        "en": "Precise Pressure Control",
+        "ko": "정밀 압력 제어",
+        "zh": "精密压力控制"
       },
       {
-        "en": "Fast Response",
-        "ko": "빠른 응답 속도",
-        "zh": "快速响应"
+        "en": "OLED Display",
+        "ko": "OLED 디스플레이 내장",
+        "zh": "内置 OLED 显示屏"
+      },
+      {
+        "en": "RS-485 / Modbus RTU",
+        "ko": "RS-485 / Modbus RTU 통신",
+        "zh": "RS-485 / Modbus RTU 通信"
       },
       {
         "en": "Wide Pressure Range Compatibility",
@@ -4254,11 +4451,6 @@
         "en": "High Corrosion Resistance",
         "ko": "강한 내부식성",
         "zh": "高耐腐蚀性"
-      },
-      {
-        "en": "Highly Stable Removable Sensor",
-        "ko": "고안정 분리형 센서",
-        "zh": "高稳定可拆卸式传感器"
       },
       {
         "en": "Compact Connection",
@@ -4304,11 +4496,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -4436,11 +4634,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -4572,11 +4776,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -4660,6 +4870,11 @@
         "en": "Compact Connection",
         "ko": "컴팩트한 연결부",
         "zh": "紧凑型连接结构"
+      },
+      {
+        "en": "Modular Design",
+        "ko": "모듈형 설계",
+        "zh": "模块化设计"
       }
     ],
     "connections": [],
@@ -4683,11 +4898,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +26 Vdc, 350 mA",
-        "voltages": [15, 26],
+        "voltages": [
+          15,
+          26
+        ],
         "currentMA": 350
       },
       "tempRange": {
