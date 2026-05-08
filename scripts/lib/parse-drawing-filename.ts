@@ -56,6 +56,7 @@ export function parseFitting(raw: string): ParsedFitting | null {
 
 export type ParsedStepFile = {
   basename: string;
+  model: string;
   fitting: ParsedFitting;
 };
 
@@ -68,13 +69,25 @@ export function parseStepFilename(basename: string): ParsedStepFile | null {
   if (!m) return null;
   const fitting = parseFitting(m[2]);
   if (!fitting) return null;
-  return { basename, fitting };
+  return { basename, model: m[1].trim(), fitting };
 }
 
+export type ParsedDwgFile = {
+  basename: string;
+  model: string;
+};
+
 /**
- * Identify a DWG filename. Returns true for any of:
+ * Parse a DWG filename. Accepts:
  *   M3030VA.DWG, M3030VA Ass'y.DWG, M3200VA ASS'Y..DWG, EX1000C Ass'y.DWG
  */
+export function parseDwgFilename(basename: string): ParsedDwgFile | null {
+  const m = basename.match(DWG_NAME_RE);
+  if (!m) return null;
+  return { basename, model: m[1].trim() };
+}
+
+/** Backwards-compatible boolean form. */
 export function isDwgFilename(basename: string): boolean {
   return DWG_NAME_RE.test(basename);
 }

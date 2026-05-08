@@ -10,7 +10,7 @@ import { createClient } from "@sanity/client";
 import {
   parseFolderName,
   parseStepFilename,
-  isDwgFilename,
+  parseDwgFilename,
 } from "./lib/parse-drawing-filename";
 
 function loadEnv(filePath: string) {
@@ -79,7 +79,7 @@ type StpVariantPlan = {
   fullPath: string;
 };
 
-type FolderPlan = {
+type DrawingPlan = {
   folder: string;
   primaryModel: string;
   models: string[];
@@ -88,67 +88,121 @@ type FolderPlan = {
   warnings: string[];
 };
 
-function buildFolderPlans(): FolderPlan[] {
+/**
+ * Build one DrawingPlan per distinct model code found in a folder.
+ *
+ * Most folders contain files for a single model (or a folder-level alias group
+ * like M3200VA(M2200VA), where the alias models still share the primary model's
+ * filename prefix). EX1000 and EX70 contain files with mixed prefixes (e.g.
+ * EX1000 + EX1000C) and split into separate drawing docs per the user's call.
+ */
+function buildDrawingPlans(): DrawingPlan[] {
   const entries = readdirSync(SOURCE_DIR, { withFileTypes: true });
   const folders = entries
     .filter((e) => e.isDirectory())
     .map((e) => e.name)
     .sort();
 
-  return folders.map((folder) => {
+  const plans: DrawingPlan[] = [];
+
+  for (const folder of folders) {
     const folderPath = path.join(SOURCE_DIR, folder);
     const files = readdirSync(folderPath).filter((name) =>
       statSync(path.join(folderPath, name)).isFile(),
     );
 
     const { primaryModel, aliasModels } = parseFolderName(folder);
-    const warnings: string[] = [];
 
-    const dwgFiles = files.filter(isDwgFilename);
-    if (dwgFiles.length === 0) warnings.push("no DWG file");
-    if (dwgFiles.length > 1)
-      warnings.push(`multiple DWG files: ${dwgFiles.join(", ")} (using first)`);
-    const dwgName = dwgFiles[0] ?? null;
+    type Bucket = {
+      dwgs: { filename: string; fullPath: string }[];
+      stps: StpVariantPlan[];
+      unparsed: string[];
+    };
+    const buckets = new Map<string, Bucket>();
+    const bucket = (model: string): Bucket => {
+      let b = buckets.get(model);
+      if (!b) {
+        b = { dwgs: [], stps: [], unparsed: [] };
+        buckets.set(model, b);
+      }
+      return b;
+    };
 
-    const stps: StpVariantPlan[] = [];
     for (const file of files) {
-      if (!/\.(step|stp)$/i.test(file)) continue;
-      const parsed = parseStepFilename(file);
-      if (!parsed) {
-        warnings.push(`STEP filename did not parse: ${file}`);
+      const dwg = parseDwgFilename(file);
+      if (dwg) {
+        bucket(dwg.model).dwgs.push({
+          filename: file,
+          fullPath: path.join(folderPath, file),
+        });
         continue;
       }
-      stps.push({
-        fitting: parsed.fitting.label,
-        sortKey: parsed.fitting.sortKey,
-        filename: file,
-        fullPath: path.join(folderPath, file),
+      const step = parseStepFilename(file);
+      if (step) {
+        bucket(step.model).stps.push({
+          fitting: step.fitting.label,
+          sortKey: step.fitting.sortKey,
+          filename: file,
+          fullPath: path.join(folderPath, file),
+        });
+        continue;
+      }
+      // Unrecognised — attribute to primary model so it surfaces as a warning.
+      bucket(primaryModel).unparsed.push(file);
+    }
+
+    // Sort models: primary first (if present), then alphabetical.
+    const modelOrder = [...buckets.keys()].sort((a, b) => {
+      if (a === primaryModel) return -1;
+      if (b === primaryModel) return 1;
+      return a.localeCompare(b);
+    });
+
+    for (const model of modelOrder) {
+      const b = buckets.get(model)!;
+      const warnings: string[] = [];
+
+      if (b.dwgs.length === 0) warnings.push("no DWG file");
+      if (b.dwgs.length > 1)
+        warnings.push(
+          `multiple DWG files: ${b.dwgs.map((d) => d.filename).join(", ")} (using first)`,
+        );
+      if (b.stps.length === 0) warnings.push("no STEP files");
+      for (const u of b.unparsed) warnings.push(`unrecognised file: ${u}`);
+
+      b.stps.sort((a, b) => a.sortKey - b.sortKey);
+
+      // Folder-level aliases (e.g. M3200VA(M2200VA)) attach to the primary
+      // model only, not to other split-out models in the same folder.
+      const isPrimary = model === primaryModel;
+      const models = isPrimary ? [model, ...aliasModels] : [model];
+
+      plans.push({
+        folder,
+        primaryModel: model,
+        models,
+        dwg: b.dwgs[0] ?? null,
+        stps: b.stps,
+        warnings,
       });
     }
-    stps.sort((a, b) => a.sortKey - b.sortKey);
-    if (stps.length === 0) warnings.push("no STEP files");
+  }
 
-    return {
-      folder,
-      primaryModel,
-      models: [primaryModel, ...aliasModels],
-      dwg: dwgName
-        ? { filename: dwgName, fullPath: path.join(folderPath, dwgName) }
-        : null,
-      stps,
-      warnings,
-    };
-  });
+  return plans;
 }
 
-function printPlanSummary(plans: FolderPlan[]) {
-  console.log(`\nFound ${plans.length} folders in ${SOURCE_DIR}\n`);
+function printPlanSummary(plans: DrawingPlan[]) {
+  const folderCount = new Set(plans.map((p) => p.folder)).size;
+  console.log(
+    `\nFound ${folderCount} folders → ${plans.length} drawings in ${SOURCE_DIR}\n`,
+  );
   for (const p of plans) {
-    const modelStr =
-      p.models.length > 1 ? p.models.join(" + ") : p.models[0];
+    const modelStr = p.models.length > 1 ? p.models.join(" + ") : p.models[0];
     const dwg = p.dwg ? p.dwg.filename : "(none)";
     const stps = p.stps.length;
-    console.log(`  ${p.folder.padEnd(22)}  models: ${modelStr.padEnd(20)} dwg: ${dwg.padEnd(28)} stps: ${stps}`);
+    console.log(
+      `  ${p.folder.padEnd(22)}  models: ${modelStr.padEnd(20)} dwg: ${dwg.padEnd(28)} stps: ${stps}`,
+    );
     for (const w of p.warnings) console.log(`    ⚠  ${w}`);
   }
 }
@@ -162,7 +216,7 @@ async function lookupSeries(model: string): Promise<string | null> {
   return series ?? null;
 }
 
-async function uploadFolder(plan: FolderPlan): Promise<{ uploaded: number }> {
+async function uploadDrawing(plan: DrawingPlan): Promise<{ uploaded: number }> {
   if (!client) throw new Error("client not initialised");
   if (!plan.dwg && plan.stps.length === 0) {
     console.log(`  skip     ${plan.folder} (no files)`);
@@ -238,7 +292,7 @@ async function uploadFolder(plan: FolderPlan): Promise<{ uploaded: number }> {
 }
 
 async function main() {
-  const plans = buildFolderPlans();
+  const plans = buildDrawingPlans();
   printPlanSummary(plans);
 
   if (dryRun) {
@@ -254,12 +308,12 @@ async function main() {
   let failed = 0;
   for (const plan of plans) {
     try {
-      const { uploaded } = await uploadFolder(plan);
+      const { uploaded } = await uploadDrawing(plan);
       totalAssets += uploaded;
       okDocs++;
     } catch (err) {
       failed++;
-      console.error(`  FAILED   ${plan.folder}:`, err);
+      console.error(`  FAILED   ${plan.primaryModel}:`, err);
     }
   }
   console.log(
