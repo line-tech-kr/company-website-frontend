@@ -91,25 +91,20 @@ const TAGS: TagDef[] = [
       zh: "危险环境",
     },
   },
+  {
+    slug: "mid-flow",
+    kind: "capability",
+    label: { ko: "중간 유량", en: "Mid flow", zh: "中等流量" },
+  },
+  {
+    slug: "low-pressure",
+    kind: "capability",
+    label: { ko: "저압", en: "Low pressure", zh: "低压" },
+  },
 ];
 
 function tagsForProduct(p: Product): string[] {
-  const tags: string[] = [];
-  if (p.series === "digital") tags.push("digital");
-  if (p.model.startsWith("LM")) tags.push("mems");
-  if (p.model.startsWith("EX")) {
-    tags.push("explosion-proof");
-    tags.push("hazardous-environment");
-  }
-  if (p.model.startsWith("LD")) tags.push("integrated-display");
-  const { min, max } = p.massFlowSpecs.flowRange;
-  if (min !== undefined && max !== undefined) {
-    // Catalog tops out at 30 slpm for ultra-low models; >=1000 marks the high-flow band.
-    if (min <= 0.01 && max <= 30) tags.push("ultra-low-flow");
-    if (max >= 1000) tags.push("high-flow");
-  }
-  if (p.function === "MFM") tags.push("meter-only");
-  return tags;
+  return p.tagSlugs ?? [];
 }
 
 function tagDocFields(t: TagDef) {

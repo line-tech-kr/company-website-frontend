@@ -26,11 +26,18 @@ const CATALOG_PATH =
   process.env.CATALOG_PATH ??
   resolve(
     homedir(),
-    "Dev/linetech/company-docs-private/docs/product-catalog-2020-en.md",
+    "Dev/linetech/company-docs-private/docs/product-catalog-2026.md",
   );
 const OUTPUT_PATH = resolve(__dirname, "../src/lib/fixtures/products.json");
 
-const SKIP_MODELS = new Set(["LTI-200", "LTI-1000", "FC-050S", "PR-030"]);
+// DO400 is a special-order SKU with no fluid connection table in the 2026 catalog.
+const SKIP_MODELS = new Set([
+  "LTI-200",
+  "LTI-1000",
+  "FC-050S",
+  "PR-030",
+  "DO400",
+]);
 
 // Translation table.
 // - Korean follows modern Korean technical writing: spaces between native words
@@ -258,10 +265,24 @@ const FEATURES_EX = [
   "High Corrosion Resistance",
 ];
 
+// LEPC is a low-pressure specialized controller — no source feature text in 2026 catalog.
+const FEATURES_LEPC = [
+  "Accurate at Low Flow",
+  "Excellent Linearity",
+  "Long-Term Stability",
+  "High Corrosion Resistance",
+  "Compact Connection",
+];
+
+// 2026 catalog: EX1000(Controller) → EX1000C, EX70(Meter) → EX70M, etc.
+function normalizeModelName(raw: string): string {
+  return raw.replace(/\(Controller\)$/, "C").replace(/\(Meter\)$/, "M");
+}
+
 function determineSeries(model: string): Product["series"] {
   if (/^MD/.test(model)) return "digital";
   if (/^M[S]?\d/.test(model)) return "analogue";
-  if (/^(LD|LM|EX)/.test(model)) return "specialized";
+  if (/^(LD|LM|EX|LEPC)/.test(model)) return "specialized";
   throw new Error(`Cannot determine series for model "${model}"`);
 }
 
@@ -275,6 +296,7 @@ function featuresFor(model: string): string[] {
   if (/^LD/.test(model)) return FEATURES_LD;
   if (/^LM/.test(model)) return FEATURES_LM;
   if (/^EX/.test(model)) return FEATURES_EX;
+  if (/^LEPC/.test(model)) return FEATURES_LEPC;
   return SHARED_FEATURES_M_MS_MD;
 }
 
@@ -355,15 +377,19 @@ function parseSupplyPower(raw: string): SupplyPower {
 
 function parseMaxPressure(raw: string): MaxPressure | undefined {
   if (/inquiry/i.test(raw)) return undefined;
-  const m = raw.match(/<\s*([\d.]+)\s*bar/i);
-  if (!m) throw new Error(`Cannot parse max pressure: "${raw}"`);
-  const value = parseFloat(m[1]);
-  return {
-    display: `<${value} bar`,
-    value,
-    unit: "bar",
-    comparator: "lt",
-  };
+  // Standard format: "< 90bar", "< 13 barG"
+  const ltMatch = raw.match(/<\s*([\d.]+)\s*bar/i);
+  if (ltMatch) {
+    const value = parseFloat(ltMatch[1]);
+    return { display: `<${value} bar`, value, unit: "bar", comparator: "lt" };
+  }
+  // LEPC format: "0.1~6 barA" (absolute pressure range — use upper bound as max)
+  const rangeMatch = raw.match(/([\d.]+)\s*~\s*([\d.]+)\s*barA/i);
+  if (rangeMatch) {
+    const value = parseFloat(rangeMatch[2]);
+    return { display: `${value} barA`, value, unit: "barA", comparator: "eq" };
+  }
+  throw new Error(`Cannot parse max pressure: "${raw}"`);
 }
 
 function parseTempRange(raw: string): TempRange {
@@ -462,7 +488,7 @@ function parseAtAGlance(catalog: string): Map<string, AtAGlanceRow> {
       if (j >= lines.length) continue;
       const { rows, endIdx } = parseMarkdownTable(lines, j);
       for (const row of rows) {
-        const model = row["Model"];
+        const model = normalizeModelName(row["Model"] ?? "");
         if (!model) continue;
         map.set(model, {
           flowRange: row["Full Scale N2 (slpm)"] ?? "",
@@ -497,8 +523,8 @@ function extractProductSections(catalog: string): ProductSection[] {
   for (const line of lines) {
     // top-level section markers we care about
     if (/^##\s+\d+\.\s/.test(line)) {
-      // entering a new ## section
-      if (/##\s+(4|5|6)\./.test(line)) inMassFlowSection = true;
+      // entering a new ## section — 2026 product sections are 5, 6, 7, 8
+      if (/##\s+(5|6|7|8)\./.test(line)) inMassFlowSection = true;
       else inMassFlowSection = false;
       if (current) sections.push(current);
       current = null;
@@ -507,19 +533,21 @@ function extractProductSections(catalog: string): ProductSection[] {
 
     if (!inMassFlowSection) continue;
 
+    // 2026 headings: "### M3030VA — Mass Flow Controller" (no page number)
+    // 2026 EX headings: "### EX1000(Controller) — Mass Flow Controller"
     const headingMatch = line.match(
-      /^###\s+([\w-]+)\s+—\s+(.+?)\s+\(page\s+(\d+)\)/,
+      /^###\s+([\w()-]+)\s+—\s+(.+?)(?:\s+\(page\s+\d+\))?\s*$/,
     );
     if (headingMatch) {
       if (current) sections.push(current);
-      const model = headingMatch[1];
+      const model = normalizeModelName(headingMatch[1]);
       if (SKIP_MODELS.has(model)) {
         current = null;
       } else {
         current = {
           model,
           headingTitle: headingMatch[2],
-          page: parseInt(headingMatch[3], 10),
+          page: 0,
           body: [],
         };
       }
@@ -538,7 +566,8 @@ function parseConnectionTable(body: string[]): Connection[] {
       const { rows } = parseMarkdownTable(body, i);
       return rows.map((row) => {
         const type = normalizeQuotes(row["Connection"] ?? "").trim();
-        const lengthRaw = row["A (mm)"] ?? "";
+        // 2026 catalog uses '"A" Dimension (mm)', 2020 used 'A (mm)'
+        const lengthRaw = row['"A" Dimension (mm)'] ?? row["A (mm)"] ?? "";
         return { type, length: `${lengthRaw} mm` };
       });
     }
@@ -557,6 +586,7 @@ type MiniSpecTable = {
   maxTemp?: string;
   leakRate?: string;
   controlRange?: string;
+  connectorType?: string;
 };
 
 function parseMiniSpecTable(body: string[]): MiniSpecTable {
@@ -576,11 +606,13 @@ function parseMiniSpecTable(body: string[]): MiniSpecTable {
         accuracy: map["Accuracy"],
         repeatability: map["Repeatability"],
         ioSignal: map["In/Out Signal"],
-        supply: map["Supply"],
+        // 2026 catalog uses "Supply Power"; 2020 used "Supply"
+        supply: map["Supply Power"] ?? map["Supply"],
         maxPressure: map["Max Operating Pressure"],
         maxTemp: map["Max Operating Temp"],
         leakRate: map["Leak Rate"],
         controlRange: map["Control Range"],
+        connectorType: map["Electrical Connection"],
       };
     }
   }
@@ -611,12 +643,19 @@ function buildMassFlowSpecs(
     mini.repeatability ?? glance?.repeatability ?? "±0.25 %";
   const repeatability = parseRepeatability(repeatabilityRaw);
 
-  // Response time: only for MFC
+  // Response time: only for MFC. Specialized series (e.g., LEPC) may omit it.
   let responseTime: ResponseTime | undefined;
   if (function_ === "MFC") {
-    const responseRaw =
-      mini.responseTime ?? glance?.response ?? defaultResponse(series);
-    responseTime = parseResponseTime(responseRaw);
+    const explicitResponse =
+      mini.responseTime ??
+      (glance?.response && glance.response !== "-"
+        ? glance.response
+        : undefined);
+    if (explicitResponse) {
+      responseTime = parseResponseTime(explicitResponse);
+    } else if (series !== "specialized") {
+      responseTime = parseResponseTime(defaultResponse(series));
+    }
   }
 
   // IO signal
@@ -690,6 +729,7 @@ function buildProduct(
     datasheets: [],
     manuals: [],
     drawings: [],
+    ...(mini.connectorType ? { connectorType: mini.connectorType } : {}),
   };
   if (series === "digital") {
     product.digitalCommunication = STANDARD_DIGITAL_COMM;
@@ -713,7 +753,8 @@ function validate(p: Product): void {
     throw new Error(`${p.model}: bad flowRange`);
   if (s.accuracy.value! <= 0)
     throw new Error(`${p.model}: bad accuracy ${s.accuracy.value}`);
-  if (p.function === "MFC" && !s.responseTime)
+  // Specialized MFCs (e.g., LEPC) legitimately omit response time
+  if (p.function === "MFC" && p.series !== "specialized" && !s.responseTime)
     throw new Error(`${p.model}: MFC missing responseTime`);
   if (p.series === "digital" && !p.digitalCommunication)
     throw new Error(`${p.model}: digital missing digitalCommunication`);
