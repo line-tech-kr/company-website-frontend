@@ -107,8 +107,7 @@
       "range": "유량 범위",
       "accuracy": "정확도",
       "response": "응답",
-      "fitting": "연결",
-      "view": "보기"
+      "fitting": "연결"
     },
     "emptyStack": "이 카테고리에는 아직 등록된 제품이 없습니다.",
     "showcase": {
@@ -244,8 +243,7 @@
     "certCard": {
       "issuer": "발급 기관",
       "scope": "인증 범위",
-      "validThrough": "유효 기간",
-      "ongoing": "계속 유효"
+      "validThrough": "유효 기간"
     },
     "empty": "아직 등록된 파일이 없습니다. 곧 업데이트될 예정입니다.",
     "emptyStateCta": "문의하기",
