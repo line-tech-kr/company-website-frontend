@@ -37,7 +37,7 @@
  * table accessibility semantics with display:contents. */
 .lt-prod-stack__table {
   display: grid;
-  grid-template-columns: 56px 96px 2fr 3fr 2fr 1.5fr 2fr;
+  grid-template-columns: 56px 96px 2fr 2.5fr 2fr 1.5fr 2fr;
   border-collapse: collapse;
   width: 100%;
 }
@@ -85,7 +85,7 @@
 
 @media (max-width: 1024px) {
   .lt-prod-stack__table {
-    grid-template-columns: 48px 88px 2fr 3fr 2fr;
+    grid-template-columns: 48px 88px 2fr 2.5fr 2fr;
   }
   .lt-prod-stack__head-cell--resp,
   .lt-prod-stack__head-cell--fit {
@@ -94,7 +94,7 @@
 }
 @media (max-width: 640px) {
   .lt-prod-stack__table {
-    grid-template-columns: 88px 2fr 3fr 2fr;
+    grid-template-columns: 88px 2fr 2.5fr 2fr;
   }
   .lt-prod-stack__head-cell--thumb {
     display: none;
