@@ -113,7 +113,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -254,7 +254,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -395,7 +395,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -536,7 +536,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -673,7 +673,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -810,7 +810,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -943,7 +943,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -1076,7 +1076,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -1217,7 +1217,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -1352,7 +1352,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -1487,7 +1487,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -1621,7 +1621,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -1752,7 +1752,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -1883,7 +1883,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -2010,7 +2010,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -2137,7 +2137,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -2272,7 +2272,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -2419,7 +2419,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -2566,7 +2566,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -2709,7 +2709,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -2852,7 +2852,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -2991,7 +2991,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -3130,7 +3130,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -3277,7 +3277,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -3418,7 +3418,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -3559,7 +3559,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -3696,7 +3696,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -3833,7 +3833,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -3966,7 +3966,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -4099,7 +4099,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -4244,7 +4244,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -4392,7 +4392,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -4517,7 +4517,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -4655,7 +4655,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -4758,15 +4758,15 @@
     ],
     "massFlowSpecs": {
       "flowRange": {
-        "display": "70–1000 slpm",
-        "min": 70,
-        "max": 1000,
+        "display": "0.01–70 slpm",
+        "min": 0.01,
+        "max": 70,
         "unit": "slpm",
         "referenceGas": "N2"
       },
       "accuracy": {
-        "display": "±2% of FS",
-        "value": 2,
+        "display": "±1% of FS",
+        "value": 1,
         "unit": "%FS"
       },
       "repeatability": {
@@ -4797,7 +4797,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
+        "value": 1e-09,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
