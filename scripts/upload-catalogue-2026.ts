@@ -216,31 +216,27 @@ function buildEntries(): Entry[] {
     "PDF",
   );
 
-  const manualFiles = [
-    "M2030 Maunal.pdf",
-    "M2200 Maunal.pdf",
-    "M3030 Maunal.pdf",
-    "M3030 Series.pdf",
-    "M3100 series.pdf",
-    "M3200 Maunal.pdf",
-    "M3200 Series.pdf",
-    "MS2400 Manual.pdf",
-    "MS2500 Maunal.pdf",
-    "MS2600 Maunal.pdf",
-    "MS2700 Series.pdf",
-    "MS2800 Manual.pdf",
-    "MS3500&MS3600 Series.pdf",
+  const manualFiles: Array<{ filename: string; title: string; model: string }> = [
+    { filename: "M2030 Maunal.pdf",         title: "M2030 Manual",               model: "M2030"  },
+    { filename: "M2200 Maunal.pdf",         title: "M2200 Manual",               model: "M2200"  },
+    { filename: "M3030 Maunal.pdf",         title: "M3030 Manual",               model: "M3030"  },
+    { filename: "M3030 Series.pdf",         title: "M3030 Series Manual",        model: "M3030"  },
+    { filename: "M3100 series.pdf",         title: "M3100 Series Manual",        model: "M3100"  },
+    { filename: "M3200 Maunal.pdf",         title: "M3200 Manual",               model: "M3200"  },
+    { filename: "M3200 Series.pdf",         title: "M3200 Series Manual",        model: "M3200"  },
+    { filename: "MS2400 Manual.pdf",        title: "MS2400 Manual",              model: "MS2400" },
+    { filename: "MS2500 Maunal.pdf",        title: "MS2500 Manual",              model: "MS2500" },
+    { filename: "MS2600 Maunal.pdf",        title: "MS2600 Manual",              model: "MS2600" },
+    { filename: "MS2700 Series.pdf",        title: "MS2700 Series Manual",       model: "MS2700" },
+    { filename: "MS2800 Manual.pdf",        title: "MS2800 Manual",              model: "MS2800" },
+    { filename: "MS3500&MS3600 Series.pdf", title: "MS3500 / MS3600 Series Manual", model: "MS3500" },
   ];
 
-  for (const filename of manualFiles) {
-    // Extract model from filename (first token before space)
-    const stem = filename.replace(/\.pdf$/i, "");
-    const model = stem.split(/\s/)[0];
+  for (const { filename, title, model } of manualFiles) {
     const series = classifySeries(model) as "analogue" | "digital" | "specialized";
-    const title = `${stem} Manual`.replace(/\s+Manual Manual$/, " Manual");
     entries.push({
       _type: "manual",
-      title: stem,
+      title,
       model,
       series,
       filePath: path.join(manualDir, filename),
