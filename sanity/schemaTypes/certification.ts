@@ -13,6 +13,19 @@ export const certification = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      description:
+        "Stable URL fragment for deep-linking (e.g. iso-9001). Once set, do not change — the /company page links to /resources/certifications#<slug>.",
+      options: {
+        source: "name",
+        maxLength: 40,
+        isUnique: (slug, ctx) => ctx.defaultIsUnique(slug, ctx),
+      },
+      validation: (r) => r.required(),
+    }),
+    defineField({
       name: "issuer",
       title: "Issuing body",
       type: "internationalizedArrayString",

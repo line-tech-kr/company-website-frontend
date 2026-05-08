@@ -65,7 +65,13 @@ export type CompanyHistory = {
 };
 
 export type CompanyCert = {
-  /** Stable slug for keys + future linking. */
+  /**
+   * Stable slug used as the deep-link target on /resources/certifications#<id>.
+   *
+   * MUST equal the `slug.current` field on the matching Sanity `certification`
+   * document — verified by `pnpm tsx scripts/verify-cert-slugs.ts`. If you
+   * rename/replace a cert, update the slug here and in Sanity in lockstep.
+   */
   id: string;
   /** Short title (e.g., "ISO 9001"). */
   name: string;
@@ -83,6 +89,8 @@ export type CompanyCertifications = {
   sub: string;
   /** The 3 named certs with full text. */
   named: CompanyCert[];
+  /** CTA pointing to the Data Room hub with the full set. */
+  viewAll: string;
   /** Footnote acknowledging the additional 10 documents. */
   footnote: string;
 };
@@ -248,8 +256,9 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
             "기술혁신형 중소기업으로 선정. 기술경쟁력과 미래 성장 가능성을 정부에서 인증받았습니다.",
         },
       ],
+      viewAll: "데이터룸에서 전체 목록 확인",
       footnote:
-        "위 3종 외에도 라인테크의 품질 시스템 안에는 RoHS · REACH 등 10건의 적합성 증빙 문서가 운용되고 있으며, 필요 시 영업 담당자를 통해 사본을 제공해 드립니다.",
+        "위 3종 외에도 라인테크의 품질 시스템 안에는 RoHS · REACH 등 10건의 적합성 증빙 문서가 운용되고 있습니다. {viewAll}하거나 영업 담당자를 통해 사본을 요청하실 수 있습니다.",
     },
     location: {
       kicker: "04 — 오시는 길",
@@ -384,8 +393,9 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
             "Government recognition awarded to technology-driven Korean SMEs with proven competitiveness and growth potential.",
         },
       ],
+      viewAll: "see the full list in the Data Room",
       footnote:
-        "Beyond the three above, Line Tech maintains 10 additional conformity documents within its quality system — including RoHS and REACH declarations. Copies are provided on request through your sales contact.",
+        "Beyond the three above, Line Tech maintains 10 additional conformity documents within its quality system — including RoHS and REACH declarations. You can {viewAll} or request a copy through your sales contact.",
     },
     location: {
       kicker: "04 — Location",
@@ -519,8 +529,9 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
             "韩国政府授予具备技术竞争力与成长潜力的技术创新型中小企业的资质。",
         },
       ],
+      viewAll: "在数据中心查看完整列表",
       footnote:
-        "除上述三项外，莱因质量体系内另维护包括 RoHS 与 REACH 在内的 10 份符合性证明文件，可通过销售对接人按需提供。",
+        "除上述三项外，莱因质量体系内另维护包括 RoHS 与 REACH 在内的 10 份符合性证明文件。{viewAll}，或通过销售对接人申请副本。",
     },
     location: {
       kicker: "04 — 联系地址",

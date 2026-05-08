@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { CompanyShell } from "@/components/company/CompanyShell";
 import {
   LT_COMPANY,
@@ -144,6 +145,7 @@ function History({ c, locale }: { c: CompanyContent; locale: string }) {
 }
 
 function Certifications({ c }: { c: CompanyContent }) {
+  const [pre, post] = c.certifications.footnote.split("{viewAll}");
   return (
     <section id="certifications" className="co-section">
       <header className="co-sechd">
@@ -154,16 +156,30 @@ function Certifications({ c }: { c: CompanyContent }) {
       <ul className="co-certs">
         {c.certifications.named.map((cert) => (
           <li key={cert.id} className="co-cert">
-            <div className="co-cert__head">
-              <h3 className="co-cert__name">{cert.name}</h3>
-              <span className="co-cert__date">{cert.date}</span>
-            </div>
-            <p className="co-cert__issuer">{cert.issuer}</p>
-            <p className="co-cert__blurb">{cert.blurb}</p>
+            <Link
+              href={`/resources/certifications#${cert.id}`}
+              className="co-cert__link"
+            >
+              <div className="co-cert__head">
+                <h3 className="co-cert__name">{cert.name}</h3>
+                <span className="co-cert__date">{cert.date}</span>
+              </div>
+              <p className="co-cert__issuer">{cert.issuer}</p>
+              <p className="co-cert__blurb">{cert.blurb}</p>
+            </Link>
           </li>
         ))}
       </ul>
-      <p className="co-certs__footnote">{c.certifications.footnote}</p>
+      <p className="co-certs__footnote">
+        {pre}
+        <Link
+          href="/resources/certifications"
+          className="co-certs__inline-link"
+        >
+          {c.certifications.viewAll}
+        </Link>
+        {post}
+      </p>
     </section>
   );
 }

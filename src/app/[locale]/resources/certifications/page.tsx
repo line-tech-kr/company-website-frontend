@@ -15,6 +15,8 @@ export const revalidate = 3600;
 type CertItem = {
   _id: string;
   name: string;
+  /** Stable URL slug from Sanity. Used as the anchor target for /company deep-links. */
+  slug: string | null;
   issuer?: {
     ko?: string | null;
     en?: string | null;
@@ -76,7 +78,11 @@ export default async function CertificationsPage({ params }: Props) {
             const issuer = cert.issuer?.[lang] ?? cert.issuer?.en ?? null;
             const scope = cert.scope?.[lang] ?? cert.scope?.en ?? null;
             return (
-              <li key={cert._id} className="dr-cert">
+              <li
+                key={cert._id}
+                id={cert.slug ?? undefined}
+                className="dr-cert"
+              >
                 <h2 className="dr-cert__name">{cert.name}</h2>
                 <dl className="dr-cert__dl">
                   {issuer && (

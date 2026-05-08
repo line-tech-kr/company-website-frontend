@@ -279,6 +279,7 @@ export const allCertificationsQuery = defineQuery(`
   *[_type == "certification"] | order(coalesce(order, 99) asc) {
     _id,
     name,
+    "slug": slug.current,
     "issuer": ${localized("issuer")},
     "scope": ${localized("scope")},
     validThrough,

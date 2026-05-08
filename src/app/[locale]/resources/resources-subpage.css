@@ -258,6 +258,11 @@
   border-top: 3px solid var(--pd-primary);
   border-radius: 4px;
   background: var(--pd-surface);
+  scroll-margin-top: 88px;
+}
+.dr-cert:target {
+  border-color: var(--pd-primary);
+  background: var(--pd-surface-2);
 }
 
 .dr-cert__name {
