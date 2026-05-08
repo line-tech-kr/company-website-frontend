@@ -36,6 +36,12 @@ Build the full Tailwind color scale (50–950) around these anchors. Neutrals, s
 - Company history timeline (1997–2020) — strong credibility asset
 - Certifications (13 total, need real text labels — old site had unlabeled JPGs only)
 
+## Testing expectations
+
+- New `src/` modules with logic ship with vitest coverage (component or unit).
+- New dynamic routes (`src/app/[locale]/.../[param]/page.tsx`) ship with a Playwright spec covering the happy path and the `notFound()` path.
+- Run locally with Node 22 (`nvm use 22`) — vitest 4 + std-env requires `require(esm)` support.
+
 ## Reference
 
 - `docs/current-site-audit.md` — full audit of the legacy site with product inventory, color extraction, sitemap, and open questions
