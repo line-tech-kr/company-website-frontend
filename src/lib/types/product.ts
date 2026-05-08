@@ -171,8 +171,17 @@ export const SanityProductSchema = z.object({
         models: z.array(z.string()).nullable().optional(),
         dwgUrl: z.string().nullable().optional(),
         dwgSize: z.number().nullable().optional(),
-        stpUrl: z.string().nullable().optional(),
-        stpSize: z.number().nullable().optional(),
+        stpVariants: z
+          .array(
+            z.object({
+              fitting: z.string(),
+              sortKey: z.number().nullable().optional(),
+              url: z.string().nullable().optional(),
+              size: z.number().nullable().optional(),
+            }),
+          )
+          .nullable()
+          .optional(),
         pdfUrl: z.string().nullable().optional(),
         pdfSize: z.number().nullable().optional(),
         updatedAt: z.string().nullable().optional(),

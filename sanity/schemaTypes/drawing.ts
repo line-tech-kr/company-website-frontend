@@ -41,10 +41,43 @@ export const drawing = defineType({
       options: { accept: ".dwg" },
     }),
     defineField({
-      name: "stpFile",
-      title: "STEP file (.stp)",
-      type: "file",
-      options: { accept: ".stp,.step" },
+      name: "stpFiles",
+      title: "STEP files (per fitting)",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          name: "stpVariant",
+          title: "STEP variant",
+          fields: [
+            defineField({
+              name: "fitting",
+              title: "Fitting",
+              type: "string",
+              description: 'Display label, e.g. \'1/4" SW\' or \'1/2" VCR\'',
+              validation: (r) => r.required(),
+            }),
+            defineField({
+              name: "sortKey",
+              title: "Sort key (inches)",
+              type: "number",
+              description:
+                "Numeric size in inches for ordering (e.g. 0.25 for 1/4\")",
+              hidden: true,
+            }),
+            defineField({
+              name: "file",
+              title: "STEP file",
+              type: "file",
+              options: { accept: ".stp,.step" },
+              validation: (r) => r.required(),
+            }),
+          ],
+          preview: {
+            select: { title: "fitting" },
+          },
+        },
+      ],
     }),
     defineField({
       name: "pdfFile",

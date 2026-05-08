@@ -82,8 +82,12 @@ const PRODUCT_DETAIL_PROJECTION = `
       models,
       "dwgUrl": dwgFile.asset->url,
       "dwgSize": dwgFile.asset->size,
-      "stpUrl": stpFile.asset->url,
-      "stpSize": stpFile.asset->size,
+      "stpVariants": stpFiles[]{
+        fitting,
+        sortKey,
+        "url": file.asset->url,
+        "size": file.asset->size
+      } | order(sortKey asc),
       "pdfUrl": pdfFile.asset->url,
       "pdfSize": pdfFile.asset->size,
       "updatedAt": _updatedAt
@@ -221,8 +225,15 @@ export const allDrawingsQuery = defineQuery(`
     models,
     series,
     "dwgUrl": dwgFile.asset->url,
-    "stpUrl": stpFile.asset->url,
-    "pdfUrl": pdfFile.asset->url
+    "dwgSize": dwgFile.asset->size,
+    "stpVariants": stpFiles[]{
+      fitting,
+      sortKey,
+      "url": file.asset->url,
+      "size": file.asset->size
+    } | order(sortKey asc),
+    "pdfUrl": pdfFile.asset->url,
+    "pdfSize": pdfFile.asset->size
   }
 `);
 

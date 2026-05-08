@@ -12,7 +12,7 @@ const SANITY_BASE = {
 };
 
 describe("SanityProductSchema drawings (#174)", () => {
-  it("accepts drawings with models[], pdfUrl, and pdfSize", () => {
+  it("accepts drawings with models[], pdfUrl, pdfSize, and stpVariants[]", () => {
     const parsed = SanityProductSchema.parse({
       ...SANITY_BASE,
       drawings: [
@@ -23,7 +23,20 @@ describe("SanityProductSchema drawings (#174)", () => {
           pdfUrl: "https://cdn.sanity.io/files/x/y.pdf",
           pdfSize: 12345,
           dwgUrl: "https://cdn.sanity.io/files/x/y.dwg",
-          stpUrl: null,
+          stpVariants: [
+            {
+              fitting: '1/4" SW',
+              sortKey: 0.25,
+              url: "https://cdn.sanity.io/files/x/y.step",
+              size: 4_172_863,
+            },
+            {
+              fitting: '3/8" SW',
+              sortKey: 0.375,
+              url: "https://cdn.sanity.io/files/x/z.step",
+              size: 4_172_916,
+            },
+          ],
           updatedAt: "2026-05-07T00:00:00Z",
         },
       ],
@@ -34,6 +47,8 @@ describe("SanityProductSchema drawings (#174)", () => {
       "https://cdn.sanity.io/files/x/y.pdf",
     );
     expect(parsed.drawings[0]!.pdfSize).toBe(12345);
+    expect(parsed.drawings[0]!.stpVariants).toHaveLength(2);
+    expect(parsed.drawings[0]!.stpVariants?.[0]?.fitting).toBe('1/4" SW');
   });
 
   it("accepts drawings with pdf-only (no DWG/STP)", () => {
@@ -50,7 +65,7 @@ describe("SanityProductSchema drawings (#174)", () => {
       ],
     });
     expect(parsed.drawings[0]!.dwgUrl ?? null).toBeNull();
-    expect(parsed.drawings[0]!.stpUrl ?? null).toBeNull();
+    expect(parsed.drawings[0]!.stpVariants ?? null).toBeNull();
     expect(parsed.drawings[0]!.pdfUrl).toBeTruthy();
   });
 
