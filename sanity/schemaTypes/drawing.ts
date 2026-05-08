@@ -54,7 +54,7 @@ export const drawing = defineType({
               name: "fitting",
               title: "Fitting",
               type: "string",
-              description: 'Display label, e.g. \'1/4" SW\' or \'1/2" VCR\'',
+              description: "Display label, e.g. '1/4\" SW' or '1/2\" VCR'",
               validation: (r) => r.required(),
             }),
             defineField({
@@ -62,7 +62,7 @@ export const drawing = defineType({
               title: "Sort key (inches)",
               type: "number",
               description:
-                "Numeric size in inches for ordering (e.g. 0.25 for 1/4\")",
+                'Numeric size in inches for ordering (e.g. 0.25 for 1/4")',
               hidden: true,
             }),
             defineField({

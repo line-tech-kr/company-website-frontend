@@ -46,7 +46,11 @@ export function parseFitting(raw: string): ParsedFitting | null {
   const numerator = Number(m[1]);
   const denominator = m[2] ? Number(m[2]) : 1;
   const kind = m[3];
-  if (!Number.isFinite(numerator) || !Number.isFinite(denominator) || denominator === 0) {
+  if (
+    !Number.isFinite(numerator) ||
+    !Number.isFinite(denominator) ||
+    denominator === 0
+  ) {
     return null;
   }
   const sortKey = numerator / denominator;

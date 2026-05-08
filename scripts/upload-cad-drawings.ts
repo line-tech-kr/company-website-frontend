@@ -232,8 +232,10 @@ async function uploadDrawing(plan: DrawingPlan): Promise<{ uploaded: number }> {
 
   let uploaded = 0;
 
-  let dwgRef: { _type: "file"; asset: { _type: "reference"; _ref: string } } | null =
-    null;
+  let dwgRef: {
+    _type: "file";
+    asset: { _type: "reference"; _ref: string };
+  } | null = null;
   if (plan.dwg) {
     const asset = await client.assets.upload(
       "file",
