@@ -17,6 +17,7 @@ describe("localizeSpecValue", () => {
       "0–5 Vdc 또는 4–20 mA",
     );
     expect(localizeSpecValue("±1% of FS", "ko")).toBe("±1% F.S.");
+    expect(localizeSpecValue("±1% of fs", "ko")).toBe("±1% F.S.");
     expect(localizeSpecValue("+15 or +24 Vdc, 350 mA", "ko")).toBe(
       "+15 또는 +24 Vdc, 350 mA",
     );
@@ -38,6 +39,15 @@ describe("localizeSpecValue", () => {
       expect(localizeSpecValue("1×10⁻⁹ atm·cc/sec", loc)).toBe(
         "1×10⁻⁹ atm·cc/sec",
       );
+    }
+  });
+
+  it("is idempotent", () => {
+    for (const loc of ["ko", "zh"] as const) {
+      const once = localizeSpecValue("±1% of FS", loc);
+      expect(localizeSpecValue(once, loc)).toBe(once);
+      const once2 = localizeSpecValue("<2 seconds", loc);
+      expect(localizeSpecValue(once2, loc)).toBe(once2);
     }
   });
 });

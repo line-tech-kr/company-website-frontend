@@ -4,13 +4,13 @@ const RULES: Record<Locale, Array<[RegExp, string]>> = {
   en: [],
   ko: [
     [/\bseconds?\b/gi, "초"],
-    [/\bor\b/gi, "또는"],
-    [/\bof FS\b/g, "F.S."],
+    [/(\s)or(\s)/gi, "$1또는$2"],
+    [/\bof FS\b/gi, "F.S."],
   ],
   zh: [
     [/\bseconds?\b/gi, "秒"],
-    [/\bor\b/gi, "或"],
-    [/\bof FS\b/g, "F.S."],
+    [/(\s)or(\s)/gi, "$1或$2"],
+    [/\bof FS\b/gi, "F.S."],
   ],
 };
 
