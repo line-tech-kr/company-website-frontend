@@ -47,7 +47,13 @@ export type HomeContent = {
     bulletLabels: FeatureBulletLabels;
     slides: FeatureSlide[];
   };
-  credentials: { kicker: string; title: string; sub: string; items: string[] };
+  credentials: {
+    kicker: string;
+    title: string;
+    sub: string;
+    items: { name: string; scope: string }[];
+    viewAll: string;
+  };
   contact: { title: string; sub: string; primary: string; secondary: string };
 };
 
@@ -157,12 +163,13 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       title: "검증된 국제 인증",
       sub: "ISO 9001, CE 인증을 포함한 국제 기준을 충족합니다.",
       items: [
-        "ISO 9001",
-        "CE",
-        "INNOBIZ 인증",
-        "RoHS / REACH",
-        "KAIST 공동 R&D",
+        { name: "ISO 9001", scope: "품질경영시스템" },
+        { name: "CE", scope: "EU 안전·전자파 적합성" },
+        { name: "INNOBIZ 인증", scope: "기술혁신형 중소기업" },
+        { name: "RoHS / REACH", scope: "유해물질·화학물질 규제 적합" },
+        { name: "KAIST 공동 R&D", scope: "산학 협력" },
       ],
+      viewAll: "전체 인증 보기",
     },
     contact: {
       title: "도입 검토 중이십니까?",
@@ -284,7 +291,14 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       kicker: "04 — Certifications",
       title: "International certifications.",
       sub: "ISO 9001, CE, RoHS — recognized standards across global process industries.",
-      items: ["ISO 9001", "CE", "INNOBIZ", "RoHS / REACH"],
+      items: [
+        { name: "ISO 9001", scope: "Quality management system" },
+        { name: "CE", scope: "EU safety & EMC compliance" },
+        { name: "INNOBIZ", scope: "Korean tech-innovation SME" },
+        { name: "RoHS / REACH", scope: "Hazardous substances & chemicals" },
+        { name: "KAIST R&D", scope: "Research collaboration" },
+      ],
+      viewAll: "View all certifications",
     },
     contact: {
       title: "Evaluating a line?",
@@ -394,7 +408,14 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       kicker: "04 — 认证",
       title: "经验证的国际认证",
       sub: "满足 ISO 9001、CE 等国际认证标准。",
-      items: ["ISO 9001", "CE", "INNOBIZ", "RoHS / REACH", "KAIST 联合研发"],
+      items: [
+        { name: "ISO 9001", scope: "质量管理体系" },
+        { name: "CE", scope: "欧盟安全与电磁兼容性" },
+        { name: "INNOBIZ", scope: "韩国技术革新型中小企业" },
+        { name: "RoHS / REACH", scope: "有害物质与化学品合规" },
+        { name: "KAIST 联合研发", scope: "产学研合作" },
+      ],
+      viewAll: "查看全部认证",
     },
     contact: {
       title: "正在评估方案?",
