@@ -264,7 +264,7 @@ async function uploadDrawing(plan: DrawingPlan): Promise<{ uploaded: number }> {
     );
     stpFiles.push({
       _type: "stpVariant",
-      _key: asset._id,
+      _key: stp.fitting.replace(/[^a-z0-9]/gi, "-").toLowerCase(),
       fitting: stp.fitting,
       sortKey: stp.sortKey,
       file: {
