@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { CompanyShell } from "@/components/company/CompanyShell";
+import { MarketsMap } from "@/components/company/MarketsMap";
 import {
   LT_COMPANY,
+  LT_MARKETS_DESTINATIONS,
+  LT_MARKETS_HQ,
   type CompanyContent,
   type CompanyLocationLabels,
   type CompanyLocationOffice,
@@ -67,6 +70,7 @@ export default async function CompanyPage({ params }: Props) {
     <CompanyShell locale={locale} breadcrumbs={breadcrumbs}>
       <Greeting c={c} />
       <History c={c} locale={locale} />
+      <Markets c={c} />
       <Certifications c={c} />
       <Location c={c} />
     </CompanyShell>
@@ -140,6 +144,27 @@ function History({ c, locale }: { c: CompanyContent; locale: string }) {
           );
         })}
       </ol>
+    </section>
+  );
+}
+
+function Markets({ c }: { c: CompanyContent }) {
+  const m = c.markets;
+  return (
+    <section id="markets" className="co-section">
+      <header className="co-sechd">
+        <div className="co-sechd__kicker">{m.kicker}</div>
+        <h2 className="co-sechd__title">{m.title}</h2>
+      </header>
+      <div className="co-markets">
+        <MarketsMap
+          hq={LT_MARKETS_HQ}
+          destinations={LT_MARKETS_DESTINATIONS}
+          countryNames={m.countryNames}
+          ariaLabel={m.title}
+        />
+        <p className="co-markets__legend">{m.legend}</p>
+      </div>
     </section>
   );
 }
