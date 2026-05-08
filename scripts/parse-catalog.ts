@@ -26,11 +26,21 @@ const CATALOG_PATH =
   process.env.CATALOG_PATH ??
   resolve(
     homedir(),
-    "Dev/linetech/company-docs-private/docs/product-catalog-2020-en.md",
+    "Dev/linetech/company-docs-private/docs/product-catalog-2026.md",
   );
 const OUTPUT_PATH = resolve(__dirname, "../src/lib/fixtures/products.json");
 
-const SKIP_MODELS = new Set(["LTI-200", "LTI-1000", "FC-050S", "PR-030"]);
+// Section 9 (Other Devices & Parts) models. LTI-1000 and LTI-2000 ship in
+// their own PR — see issue #179 (read-out units have no flow specs and
+// require a separate schema). FC-050S and PR-030 are accessories carried
+// over from 2020 unchanged but not yet wired into the product catalogue.
+const SKIP_MODELS = new Set([
+  "LTI-200",
+  "LTI-1000",
+  "LTI-2000",
+  "FC-050S",
+  "PR-030",
+]);
 
 // Translation table.
 // - Korean follows modern Korean technical writing: spaces between native words
@@ -205,14 +215,9 @@ function localize(en: string): LocalizedString {
 }
 
 // Per-product label overrides — used when the catalog heading is a known
-// inconsistency. Documented inline so it's obvious why a value diverges.
-const PRODUCT_LABEL_OVERRIDES: Record<string, string> = {
-  // LD030M heading in catalog says "MEMS-Tech Mass Flow Meter" but LD is the
-  // display series (catalog section opener: "LD Series — built-in 7-segment
-  // display"). Treat as Mass Flow Meter with Display, matching its sibling
-  // LD030C and the section narrative.
-  LD030M: "Mass Flow Meter with Display",
-};
+// inconsistency. Empty for the 2026 catalog; kept as the extension point
+// for the next catalog cycle.
+const PRODUCT_LABEL_OVERRIDES: Record<string, string> = {};
 
 const SHARED_FEATURES_M_MS_MD = [
   "Accurate at Low Flow",
@@ -261,7 +266,9 @@ const FEATURES_EX = [
 function determineSeries(model: string): Product["series"] {
   if (/^MD/.test(model)) return "digital";
   if (/^M[S]?\d/.test(model)) return "analogue";
-  if (/^(LD|LM|EX)/.test(model)) return "specialized";
+  if (/^(LD|LM|EX|LEPC)/.test(model)) return "specialized";
+  // DO400 — special-order analogue MFC. Lives in section 8 of 2026 catalog.
+  if (/^DO\d/.test(model)) return "analogue";
   throw new Error(`Cannot determine series for model "${model}"`);
 }
 
@@ -340,12 +347,15 @@ function parseIoSignal(raw: string): IoSignal {
 }
 
 function parseSupplyPower(raw: string): SupplyPower {
-  // examples: "+15 ~ 24", "+15 ~ +24 Vdc", "+15 or +24 Vdc, 350 mA"
-  const voltageMatches = raw.match(/[+]?(\d+)\s*[~or]+\s*[+]?(\d+)/);
+  // examples: "+15 ~ 24", "+15 ~ +24 Vdc", "+15 or +24 Vdc, 350 mA",
+  // "+15Vdc ~ +26Vdc , 350㎃" (DO400 — units interleaved between voltages)
+  const voltageMatches = raw.match(
+    /[+]?(\d+)\s*(?:Vdc)?\s*[~or]+\s*[+]?(\d+)/i,
+  );
   if (!voltageMatches) throw new Error(`Cannot parse supply power: "${raw}"`);
   const v1 = parseInt(voltageMatches[1], 10);
   const v2 = parseInt(voltageMatches[2], 10);
-  const currentMA = 350; // catalog standard for all M/MS/MD/LD/LM/EX
+  const currentMA = 350; // catalog standard for all M/MS/MD/LD/LM/EX/LEPC/DO
   return {
     display: `+${v1} or +${v2} Vdc, ${currentMA} mA`,
     voltages: [v1, v2],
@@ -355,15 +365,62 @@ function parseSupplyPower(raw: string): SupplyPower {
 
 function parseMaxPressure(raw: string): MaxPressure | undefined {
   if (/inquiry/i.test(raw)) return undefined;
-  const m = raw.match(/<\s*([\d.]+)\s*bar/i);
-  if (!m) throw new Error(`Cannot parse max pressure: "${raw}"`);
-  const value = parseFloat(m[1]);
+  // Single-bound form: "< 90bar", "< 13 barG"
+  const ltMatch = raw.match(/<\s*([\d.]+)\s*bar([a-z]*)/i);
+  if (ltMatch) {
+    const value = parseFloat(ltMatch[1]);
+    const suffix = ltMatch[2] ? ltMatch[2].toUpperCase() : "";
+    return {
+      display: `<${value} bar${suffix}`,
+      value,
+      unit: `bar${suffix}`,
+      comparator: "lt",
+    };
+  }
+  // Range form: "0.1~6 barA" (LEPC). Take the upper bound; display shows
+  // the range. Comparator stays "lt" since the schema doesn't yet model
+  // ranges — see issue #179 for the broader instrument-schema work.
+  const rangeMatch = raw.match(/([\d.]+)\s*~\s*([\d.]+)\s*bar([a-z]*)/i);
+  if (rangeMatch) {
+    const min = parseFloat(rangeMatch[1]);
+    const max = parseFloat(rangeMatch[2]);
+    const suffix = rangeMatch[3] ? rangeMatch[3].toUpperCase() : "";
+    return {
+      display: `${min}–${max} bar${suffix}`,
+      value: max,
+      unit: `bar${suffix}`,
+      comparator: "lt",
+    };
+  }
+  throw new Error(`Cannot parse max pressure: "${raw}"`);
+}
+
+function parseLeakRate(raw: string): LeakRate {
+  // Examples: "1x10-9 atm.cc/sec", "1×10-8 atm.cc/sec", "1x10⁻⁹"
+  const m = raw.match(/([\d.]+)\s*[x×]\s*10\s*[⁻-]?\s*(\d+)/);
+  if (!m) throw new Error(`Cannot parse leak rate: "${raw}"`);
+  const mantissa = parseFloat(m[1]);
+  const exponent = parseInt(m[2], 10);
+  const value = mantissa * Math.pow(10, -exponent);
+  const supers = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"];
+  const expDisplay = String(exponent)
+    .split("")
+    .map((d) => supers[parseInt(d, 10)])
+    .join("");
   return {
-    display: `<${value} bar`,
+    display: `${mantissa}×10⁻${expDisplay} atm·cc/sec`,
     value,
-    unit: "bar",
-    comparator: "lt",
+    unit: "atm·cc/sec",
   };
+}
+
+function parseControlRange(raw: string): ControlRange {
+  // Examples: "3~100%", "2 ~ 100%"
+  const m = raw.match(/([\d.]+)\s*~\s*([\d.]+)\s*%/);
+  if (!m) throw new Error(`Cannot parse control range: "${raw}"`);
+  const min = parseFloat(m[1]);
+  const max = parseFloat(m[2]);
+  return { display: `${min}–${max}%`, min, max, unit: "%" };
 }
 
 function parseTempRange(raw: string): TempRange {
@@ -462,8 +519,9 @@ function parseAtAGlance(catalog: string): Map<string, AtAGlanceRow> {
       if (j >= lines.length) continue;
       const { rows, endIdx } = parseMarkdownTable(lines, j);
       for (const row of rows) {
-        const model = row["Model"];
-        if (!model) continue;
+        const rawModel = row["Model"];
+        if (!rawModel) continue;
+        const model = normalizeModelName(rawModel);
         map.set(model, {
           flowRange: row["Full Scale N2 (slpm)"] ?? "",
           accuracy: row["Accuracy (%FS)"] ?? "",
@@ -488,38 +546,47 @@ type ProductSection = {
   body: string[];
 };
 
+// Normalize 2026-catalog model headings into stable identifiers used as
+// fixtures.json keys and Sanity slugs.
+//   "EX1000(Controller)" → "EX1000C"   "EX70(Meter)" → "EX70M"
+//   "DO400" / "LEPC" / "M3030VA" → unchanged
+function normalizeModelName(raw: string): string {
+  return raw.replace(/\(Controller\)$/i, "C").replace(/\(Meter\)$/i, "M");
+}
+
 function extractProductSections(catalog: string): ProductSection[] {
   const lines = catalog.split("\n");
   const sections: ProductSection[] = [];
   let current: ProductSection | null = null;
-  let inMassFlowSection = false;
+  let inProductSection = false;
 
   for (const line of lines) {
-    // top-level section markers we care about
+    // Section 5 = Analogue (M/MS), 6 = Digital (MD), 7 = Specialized (EX/LEPC),
+    // 8 = Special-Order (DO400). Section 9 (Other Devices) has the read-out
+    // units which ship separately — skipped via SKIP_MODELS too.
     if (/^##\s+\d+\.\s/.test(line)) {
-      // entering a new ## section
-      if (/##\s+(4|5|6)\./.test(line)) inMassFlowSection = true;
-      else inMassFlowSection = false;
+      inProductSection = /^##\s+(5|6|7|8)\./.test(line);
       if (current) sections.push(current);
       current = null;
       continue;
     }
 
-    if (!inMassFlowSection) continue;
+    if (!inProductSection) continue;
 
-    const headingMatch = line.match(
-      /^###\s+([\w-]+)\s+—\s+(.+?)\s+\(page\s+(\d+)\)/,
-    );
+    // 2026 catalog drops the "(page N)" suffix that 2020 had. Heading is now
+    // just `### <model> — <title>`. The model captures any non-whitespace
+    // including parens — normalizeModelName collapses parenthesized variants.
+    const headingMatch = line.match(/^###\s+(\S+)\s+—\s+(.+?)\s*$/);
     if (headingMatch) {
       if (current) sections.push(current);
-      const model = headingMatch[1];
+      const model = normalizeModelName(headingMatch[1]);
       if (SKIP_MODELS.has(model)) {
         current = null;
       } else {
         current = {
           model,
           headingTitle: headingMatch[2],
-          page: parseInt(headingMatch[3], 10),
+          page: 0,
           body: [],
         };
       }
@@ -538,7 +605,13 @@ function parseConnectionTable(body: string[]): Connection[] {
       const { rows } = parseMarkdownTable(body, i);
       return rows.map((row) => {
         const type = normalizeQuotes(row["Connection"] ?? "").trim();
-        const lengthRaw = row["A (mm)"] ?? "";
+        // 2020 catalog used "A (mm)"; 2026 uses '"A" Dimension (mm)'.
+        // Look up either header to stay compatible.
+        const lengthRaw =
+          row["A (mm)"] ??
+          row['"A" Dimension (mm)'] ??
+          row["A Dimension (mm)"] ??
+          "";
         return { type, length: `${lengthRaw} mm` };
       });
     }
@@ -611,11 +684,16 @@ function buildMassFlowSpecs(
     mini.repeatability ?? glance?.repeatability ?? "±0.25 %";
   const repeatability = parseRepeatability(repeatabilityRaw);
 
-  // Response time: only for MFC
+  // Response time: only for MFC. LEPC is classified MFC by the catalog
+  // heading but is actually an Electronic Pressure Controller; the catalog
+  // intentionally omits a response-time spec ("-" in at-a-glance, no row in
+  // mini-table) so let it through without one.
   let responseTime: ResponseTime | undefined;
-  if (function_ === "MFC") {
+  if (function_ === "MFC" && model !== "LEPC") {
+    const glanceResponse =
+      glance?.response && glance.response !== "-" ? glance.response : undefined;
     const responseRaw =
-      mini.responseTime ?? glance?.response ?? defaultResponse(series);
+      mini.responseTime ?? glanceResponse ?? defaultResponse(series);
     responseTime = parseResponseTime(responseRaw);
   }
 
@@ -637,6 +715,17 @@ function buildMassFlowSpecs(
   const tempRaw = mini.maxTemp ?? glance?.maxTemp ?? "0 ~ 50";
   const tempRange = parseTempRange(tempRaw);
 
+  // Leak rate and control range have constant defaults (1×10⁻⁹ atm·cc/sec
+  // and 3–100% respectively) for the M/MS/MD families. DO400 and LEPC
+  // diverge — DO400 has a 1×10⁻⁸ leak rate, LEPC has a 2–100% control
+  // range — so prefer the per-product mini-spec value when present.
+  const leakRate = mini.leakRate
+    ? parseLeakRate(mini.leakRate)
+    : STANDARD_LEAK_RATE;
+  const controlRange = mini.controlRange
+    ? parseControlRange(mini.controlRange)
+    : STANDARD_CONTROL_RANGE;
+
   const specs: MassFlowSpecs = {
     flowRange,
     accuracy,
@@ -644,8 +733,8 @@ function buildMassFlowSpecs(
     ioSignal,
     supplyPower,
     tempRange,
-    leakRate: STANDARD_LEAK_RATE,
-    controlRange: STANDARD_CONTROL_RANGE,
+    leakRate,
+    controlRange,
   };
   if (responseTime) specs.responseTime = responseTime;
   if (maxPressure) specs.maxPressure = maxPressure;
@@ -706,14 +795,17 @@ function validate(p: Product): void {
     throw new Error(`${p.model}: bad series "${p.series}"`);
   if (!["MFC", "MFM"].includes(p.function))
     throw new Error(`${p.model}: bad function "${p.function}"`);
-  if (p.connections.length === 0)
+  // DO400 is a special-order analogue MFC and only specifies a single
+  // electrical connector (9-Pin D-Connector) — no SWG/VCR flow-line size
+  // table. All other products have a per-size connection table.
+  if (p.connections.length === 0 && p.model !== "DO400")
     throw new Error(`${p.model}: no connections parsed`);
   const s = p.massFlowSpecs;
   if (!s.flowRange || !(s.flowRange.max! > s.flowRange.min!))
     throw new Error(`${p.model}: bad flowRange`);
   if (s.accuracy.value! <= 0)
     throw new Error(`${p.model}: bad accuracy ${s.accuracy.value}`);
-  if (p.function === "MFC" && !s.responseTime)
+  if (p.function === "MFC" && !s.responseTime && p.model !== "LEPC")
     throw new Error(`${p.model}: MFC missing responseTime`);
   if (p.series === "digital" && !p.digitalCommunication)
     throw new Error(`${p.model}: digital missing digitalCommunication`);

@@ -10,7 +10,7 @@ export const CATEGORIES: Record<
 > = {
   analogue: { code: "M·MS", series: "analogue" },
   digital: { code: "MD", series: "digital" },
-  specialized: { code: "LD·LM", series: "specialized" },
+  specialized: { code: "EX·LEPC", series: "specialized" },
 };
 
 const SERIES_TO_CATEGORY: Record<Product["series"], CategorySlug> = {
