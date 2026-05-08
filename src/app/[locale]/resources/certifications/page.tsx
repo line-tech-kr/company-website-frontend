@@ -12,6 +12,12 @@ import "../resources-subpage.css";
 
 export const revalidate = 3600;
 
+const slugifyCertName = (s: string) =>
+  s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+
 type CertItem = {
   _id: string;
   name: string;
@@ -76,7 +82,11 @@ export default async function CertificationsPage({ params }: Props) {
             const issuer = cert.issuer?.[lang] ?? cert.issuer?.en ?? null;
             const scope = cert.scope?.[lang] ?? cert.scope?.en ?? null;
             return (
-              <li key={cert._id} className="dr-cert">
+              <li
+                key={cert._id}
+                id={slugifyCertName(cert.name)}
+                className="dr-cert"
+              >
                 <h2 className="dr-cert__name">{cert.name}</h2>
                 <dl className="dr-cert__dl">
                   {issuer && (

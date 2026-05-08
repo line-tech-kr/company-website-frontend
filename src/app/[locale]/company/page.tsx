@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { CompanyShell } from "@/components/company/CompanyShell";
 import {
   LT_COMPANY,
@@ -154,12 +155,17 @@ function Certifications({ c }: { c: CompanyContent }) {
       <ul className="co-certs">
         {c.certifications.named.map((cert) => (
           <li key={cert.id} className="co-cert">
-            <div className="co-cert__head">
-              <h3 className="co-cert__name">{cert.name}</h3>
-              <span className="co-cert__date">{cert.date}</span>
-            </div>
-            <p className="co-cert__issuer">{cert.issuer}</p>
-            <p className="co-cert__blurb">{cert.blurb}</p>
+            <Link
+              href={`/resources/certifications#${cert.id}`}
+              className="co-cert__link"
+            >
+              <div className="co-cert__head">
+                <h3 className="co-cert__name">{cert.name}</h3>
+                <span className="co-cert__date">{cert.date}</span>
+              </div>
+              <p className="co-cert__issuer">{cert.issuer}</p>
+              <p className="co-cert__blurb">{cert.blurb}</p>
+            </Link>
           </li>
         ))}
       </ul>
