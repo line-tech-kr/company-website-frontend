@@ -4,6 +4,7 @@ import {
   FLAGSHIP_IMAGE_PLACEHOLDER,
   pickFlagship,
   flagshipImageUrl,
+  flagshipCutoutUrl,
 } from "./flagship";
 import { CATEGORY_SLUGS, type CategorySlug } from "@/lib/categories";
 import type { Product } from "@/lib/types/product";
@@ -135,6 +136,57 @@ describe("flagshipImageUrl", () => {
       vi.mocked(console.warn).mockClear();
       flagshipImageUrl(p);
       expect(console.warn).toHaveBeenCalled();
+    }
+  });
+});
+
+describe("flagshipCutoutUrl", () => {
+  const cutoutRef = {
+    _type: "image",
+    asset: { _type: "reference", _ref: "image-abc-jpg" },
+  } as Parameters<typeof flagshipCutoutUrl>[1];
+
+  beforeEach(() => {
+    vi.spyOn(console, "warn").mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("returns the Sanity CDN URL when a cutout is provided", () => {
+    expect(flagshipCutoutUrl("M3030VA", cutoutRef)).toBe(
+      "https://cdn.sanity.io/mock.jpg",
+    );
+    expect(console.warn).not.toHaveBeenCalled();
+  });
+
+  it("returns the placeholder for null/undefined cutouts", () => {
+    expect(flagshipCutoutUrl("MD800C", null)).toBe(FLAGSHIP_IMAGE_PLACEHOLDER);
+    expect(flagshipCutoutUrl("LD030C", undefined)).toBe(
+      FLAGSHIP_IMAGE_PLACEHOLDER,
+    );
+  });
+
+  it("warns in non-production when the cutout is missing", () => {
+    vi.stubEnv("NODE_ENV", "test");
+    try {
+      flagshipCutoutUrl("MD800C", null);
+      expect(console.warn).toHaveBeenCalledWith(
+        expect.stringContaining("MD800C"),
+      );
+    } finally {
+      vi.unstubAllEnvs();
+    }
+  });
+
+  it("does not warn in production", () => {
+    vi.stubEnv("NODE_ENV", "production");
+    try {
+      flagshipCutoutUrl("MD800C", null);
+      expect(console.warn).not.toHaveBeenCalled();
+    } finally {
+      vi.unstubAllEnvs();
     }
   });
 });
