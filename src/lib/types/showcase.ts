@@ -5,7 +5,7 @@ const ShowcaseEntrySchema = z.object({
   model: z.string(),
   slug: z.string(),
   caption: z.string().nullable(),
-  function: z.enum(["MFC", "MFM"]).nullable(),
+  function: z.enum(["MFC", "MFM", "EPC"]).nullable(),
   flowRange: z.string().nullable(),
   accuracy: z.string().nullable(),
   image: SanityImageSchema.nullable().optional(),

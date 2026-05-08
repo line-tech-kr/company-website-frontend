@@ -33,6 +33,18 @@ const SERIES_LABELS: Record<Product["series"], string> = {
   specialized: "Specialized",
 };
 
+const FUNCTION_LABELS: Record<
+  Product["function"],
+  { short: string; long: string }
+> = {
+  MFC: { short: "Mass Flow Controller", long: "Mass Flow Controller (MFC)" },
+  MFM: { short: "Mass Flow Meter", long: "Mass Flow Meter (MFM)" },
+  EPC: {
+    short: "Electronic Pressure Controller",
+    long: "Electronic Pressure Controller (EPC)",
+  },
+};
+
 export type SpecJsonPayload = {
   model: string;
   slug: string;
@@ -97,10 +109,12 @@ export function buildSpecMarkdown(product: Product, siteUrl: string): string {
   const koUrl = `${siteUrl}/ko/products/${category}/${slug}`;
   const zhUrl = `${siteUrl}/zh/products/${category}/${slug}`;
 
+  const fn = FUNCTION_LABELS[product.function];
+
   const lines: string[] = [
-    `# ${product.model} — ${seriesLabel} Mass Flow ${product.function === "MFC" ? "Controller" : "Meter"}`,
+    `# ${product.model} — ${seriesLabel} ${fn.short}`,
     "",
-    `**Series:** ${seriesLabel} · **Function:** ${product.function === "MFC" ? "Mass Flow Controller (MFC)" : "Mass Flow Meter (MFM)"}`,
+    `**Series:** ${seriesLabel} · **Function:** ${fn.long}`,
     `**Product name:** ${product.productLabel.en}`,
     `**Canonical page:** ${canonicalUrl}`,
     "",

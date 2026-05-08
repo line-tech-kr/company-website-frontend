@@ -744,7 +744,7 @@ function validate(p: Product): void {
   if (!p.slug.current) throw new Error(`${p.model}: missing slug`);
   if (!["analogue", "digital", "specialized"].includes(p.series))
     throw new Error(`${p.model}: bad series "${p.series}"`);
-  if (!["MFC", "MFM"].includes(p.function))
+  if (!["MFC", "MFM", "EPC"].includes(p.function))
     throw new Error(`${p.model}: bad function "${p.function}"`);
   if (p.connections.length === 0)
     throw new Error(`${p.model}: no connections parsed`);

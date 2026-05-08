@@ -37,7 +37,11 @@ function productLine(product: Product, siteUrl: string): string {
   const mdUrl = `${siteUrl}/products/${slug}/spec.md`;
 
   const fnLabel =
-    product.function === "MFC" ? "Mass Flow Controller" : "Mass Flow Meter";
+    product.function === "MFC"
+      ? "Mass Flow Controller"
+      : product.function === "MFM"
+        ? "Mass Flow Meter"
+        : "Electronic Pressure Controller";
   const flowRange = product.massFlowSpecs.flowRange?.display;
   const accuracy = product.massFlowSpecs.accuracy?.display;
 
@@ -112,6 +116,7 @@ export async function buildLlmsManifest(siteUrl: string): Promise<string> {
 
     const mfcs = list.filter((p) => p.function === "MFC");
     const mfms = list.filter((p) => p.function === "MFM");
+    const epcs = list.filter((p) => p.function === "EPC");
 
     if (mfcs.length > 0) {
       lines.push("**Mass Flow Controllers**", "");
@@ -121,6 +126,11 @@ export async function buildLlmsManifest(siteUrl: string): Promise<string> {
     if (mfms.length > 0) {
       lines.push("**Mass Flow Meters**", "");
       for (const p of mfms) lines.push(productLine(p, siteUrl));
+      lines.push("");
+    }
+    if (epcs.length > 0) {
+      lines.push("**Electronic Pressure Controllers**", "");
+      for (const p of epcs) lines.push(productLine(p, siteUrl));
       lines.push("");
     }
   }
