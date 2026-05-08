@@ -108,29 +108,28 @@ function classifySeries(model: string): Series {
 // Title normalization for catalogue PDFs
 // ---------------------------------------------------------------------------
 
-const COMBINED_PDF_TITLES: Record<string, { title: string; series: Series }> =
-  {
-    "EX1000C,M.pdf": {
-      title: "EX1000 Series (Controller + Meter)",
-      series: "specialized",
-    },
-    "EX70C,M 수정본.pdf": {
-      title: "EX70 Series (Controller + Meter)",
-      series: "specialized",
-    },
-    "M3200VA,M2200VA 수정본.pdf": {
-      title: "M3200VA / M2200VA Brochure",
-      series: "analogue",
-    },
-    "MS2500VA, 2600VA.pdf": {
-      title: "MS2500VA / MS2600VA Brochure",
-      series: "analogue",
-    },
-    "MS3500VA, MS3600VA 수정본.pdf": {
-      title: "MS3500VA / MS3600VA Brochure",
-      series: "analogue",
-    },
-  };
+const COMBINED_PDF_TITLES: Record<string, { title: string; series: Series }> = {
+  "EX1000C,M.pdf": {
+    title: "EX1000 Series (Controller + Meter)",
+    series: "specialized",
+  },
+  "EX70C,M 수정본.pdf": {
+    title: "EX70 Series (Controller + Meter)",
+    series: "specialized",
+  },
+  "M3200VA,M2200VA 수정본.pdf": {
+    title: "M3200VA / M2200VA Brochure",
+    series: "analogue",
+  },
+  "MS2500VA, 2600VA.pdf": {
+    title: "MS2500VA / MS2600VA Brochure",
+    series: "analogue",
+  },
+  "MS3500VA, MS3600VA 수정본.pdf": {
+    title: "MS3500VA / MS3600VA Brochure",
+    series: "analogue",
+  },
+};
 
 function normalizeCatalogueTitle(filename: string): {
   title: string;
@@ -152,18 +151,13 @@ function normalizeCatalogueTitle(filename: string): {
 // Build the full entry list
 // ---------------------------------------------------------------------------
 
-const BASE =
-  ".work/2026-catalogue/해외 카달로그 제작";
+const BASE = ".work/2026-catalogue/해외 카달로그 제작";
 
 function buildEntries(): Entry[] {
   const entries: Entry[] = [];
 
   // --- Catalogue PDFs ---
-  const catalogueDir = path.join(
-    process.cwd(),
-    BASE,
-    "카달로그 모델 PDF",
-  );
+  const catalogueDir = path.join(process.cwd(), BASE, "카달로그 모델 PDF");
 
   const catalogueFiles = [
     "EX1000C,M.pdf",
@@ -216,24 +210,64 @@ function buildEntries(): Entry[] {
     "PDF",
   );
 
-  const manualFiles: Array<{ filename: string; title: string; model: string }> = [
-    { filename: "M2030 Maunal.pdf",         title: "M2030 Manual",               model: "M2030"  },
-    { filename: "M2200 Maunal.pdf",         title: "M2200 Manual",               model: "M2200"  },
-    { filename: "M3030 Maunal.pdf",         title: "M3030 Manual",               model: "M3030"  },
-    { filename: "M3030 Series.pdf",         title: "M3030 Series Manual",        model: "M3030"  },
-    { filename: "M3100 series.pdf",         title: "M3100 Series Manual",        model: "M3100"  },
-    { filename: "M3200 Maunal.pdf",         title: "M3200 Manual",               model: "M3200"  },
-    { filename: "M3200 Series.pdf",         title: "M3200 Series Manual",        model: "M3200"  },
-    { filename: "MS2400 Manual.pdf",        title: "MS2400 Manual",              model: "MS2400" },
-    { filename: "MS2500 Maunal.pdf",        title: "MS2500 Manual",              model: "MS2500" },
-    { filename: "MS2600 Maunal.pdf",        title: "MS2600 Manual",              model: "MS2600" },
-    { filename: "MS2700 Series.pdf",        title: "MS2700 Series Manual",       model: "MS2700" },
-    { filename: "MS2800 Manual.pdf",        title: "MS2800 Manual",              model: "MS2800" },
-    { filename: "MS3500&MS3600 Series.pdf", title: "MS3500 / MS3600 Series Manual", model: "MS3500" },
-  ];
+  const manualFiles: Array<{ filename: string; title: string; model: string }> =
+    [
+      { filename: "M2030 Maunal.pdf", title: "M2030 Manual", model: "M2030" },
+      { filename: "M2200 Maunal.pdf", title: "M2200 Manual", model: "M2200" },
+      { filename: "M3030 Maunal.pdf", title: "M3030 Manual", model: "M3030" },
+      {
+        filename: "M3030 Series.pdf",
+        title: "M3030 Series Manual",
+        model: "M3030",
+      },
+      {
+        filename: "M3100 series.pdf",
+        title: "M3100 Series Manual",
+        model: "M3100",
+      },
+      { filename: "M3200 Maunal.pdf", title: "M3200 Manual", model: "M3200" },
+      {
+        filename: "M3200 Series.pdf",
+        title: "M3200 Series Manual",
+        model: "M3200",
+      },
+      {
+        filename: "MS2400 Manual.pdf",
+        title: "MS2400 Manual",
+        model: "MS2400",
+      },
+      {
+        filename: "MS2500 Maunal.pdf",
+        title: "MS2500 Manual",
+        model: "MS2500",
+      },
+      {
+        filename: "MS2600 Maunal.pdf",
+        title: "MS2600 Manual",
+        model: "MS2600",
+      },
+      {
+        filename: "MS2700 Series.pdf",
+        title: "MS2700 Series Manual",
+        model: "MS2700",
+      },
+      {
+        filename: "MS2800 Manual.pdf",
+        title: "MS2800 Manual",
+        model: "MS2800",
+      },
+      {
+        filename: "MS3500&MS3600 Series.pdf",
+        title: "MS3500 / MS3600 Series Manual",
+        model: "MS3500",
+      },
+    ];
 
   for (const { filename, title, model } of manualFiles) {
-    const series = classifySeries(model) as "analogue" | "digital" | "specialized";
+    const series = classifySeries(model) as
+      | "analogue"
+      | "digital"
+      | "specialized";
     entries.push({
       _type: "manual",
       title,
@@ -262,22 +296,17 @@ function buildEntries(): Entry[] {
     title: "LEPC Manual",
     model: "LEPC",
     series: "specialized",
-    filePath: path.join(
-      process.cwd(),
-      BASE,
-      "EPC 메뉴얼",
-      "LEPC Maunal.pdf",
-    ),
+    filePath: path.join(process.cwd(), BASE, "EPC 메뉴얼", "LEPC Maunal.pdf"),
   });
 
   // --- Datasheet PDFs ---
-  const datasheetDir = path.join(
-    process.cwd(),
-    BASE,
-    "Analogue MFC 메뉴얼",
-  );
+  const datasheetDir = path.join(process.cwd(), BASE, "Analogue MFC 메뉴얼");
 
-  const datasheetFiles: Array<{ filename: string; model: string; series: Series }> = [
+  const datasheetFiles: Array<{
+    filename: string;
+    model: string;
+    series: Series;
+  }> = [
     { filename: "MS3150 Series.pdf", model: "MS3150", series: "analogue" },
     { filename: "MS3400 Series.pdf", model: "MS3400", series: "analogue" },
     { filename: "MS3600 Series.pdf", model: "MS3600", series: "analogue" },
@@ -303,10 +332,7 @@ function buildEntries(): Entry[] {
 // Upload helpers
 // ---------------------------------------------------------------------------
 
-async function docExists(
-  _type: string,
-  title: string,
-): Promise<boolean> {
+async function docExists(_type: string, title: string): Promise<boolean> {
   const result = await client.fetch<{ _id: string } | null>(
     `*[_type == $type && title == $title][0]{ _id }`,
     { type: _type, title },
@@ -318,11 +344,10 @@ async function uploadPdf(
   filePath: string,
   filename: string,
 ): Promise<{ _type: "reference"; _ref: string }> {
-  const asset = await client.assets.upload(
-    "file",
-    createReadStream(filePath),
-    { filename, contentType: "application/pdf" },
-  );
+  const asset = await client.assets.upload("file", createReadStream(filePath), {
+    filename,
+    contentType: "application/pdf",
+  });
   return { _type: "reference", _ref: asset._id };
 }
 
@@ -367,7 +392,9 @@ async function main() {
     }
 
     if (isDryRun) {
-      console.log(`  would create  ${label}  ← ${path.basename(entry.filePath)}`);
+      console.log(
+        `  would create  ${label}  ← ${path.basename(entry.filePath)}`,
+      );
       created++;
       continue;
     }
