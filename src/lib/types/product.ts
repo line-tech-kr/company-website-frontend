@@ -80,7 +80,7 @@ export const SanityProductSchema = z.object({
   model: z.string(),
   slug: z.object({ current: z.string() }),
   series: z.enum(["analogue", "digital", "specialized"]),
-  function: z.enum(["MFC", "MFM"]),
+  function: z.enum(["MFC", "MFM", "EPC"]),
   productLabel: z.object({
     ko: z.string(),
     en: z.string(),

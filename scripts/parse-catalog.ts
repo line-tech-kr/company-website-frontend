@@ -208,6 +208,13 @@ const PRODUCT_LABEL_OVERRIDES: Record<string, string> = {
   LEPC: "Electronic Pressure Controller",
 };
 
+// Per-product function overrides — same catalog inconsistency. The
+// at-a-glance "Type" column is the source of truth: M/MS = analogue MFC/MFM,
+// MD = digital MFC/MFM, EX = specialized MFC/MFM, LEPC = EPC.
+const PRODUCT_FUNCTION_OVERRIDES: Record<string, Product["function"]> = {
+  LEPC: "EPC",
+};
+
 const SHARED_FEATURES_M_MS_MD = [
   "Accurate at Low Flow",
   "Fast Response",
@@ -611,7 +618,8 @@ function buildMassFlowSpecs(
     mini.repeatability ?? glance?.repeatability ?? "±0.25 %";
   const repeatability = parseRepeatability(repeatabilityRaw);
 
-  // Response time: only for MFC. Specialized series (e.g., LEPC) may omit it.
+  // Response time: only for flow controllers (MFC). MFM and EPC don't have
+  // a response-time spec — the catalog at-a-glance shows "-" for those.
   let responseTime: ResponseTime | undefined;
   if (function_ === "MFC") {
     const explicitResponse =
@@ -619,11 +627,8 @@ function buildMassFlowSpecs(
       (glance?.response && glance.response !== "-"
         ? glance.response
         : undefined);
-    if (explicitResponse) {
-      responseTime = parseResponseTime(explicitResponse);
-    } else if (series !== "specialized") {
-      responseTime = parseResponseTime(defaultResponse(series));
-    }
+    const responseRaw = explicitResponse ?? defaultResponse(series);
+    responseTime = parseResponseTime(responseRaw);
   }
 
   // IO signal
@@ -669,7 +674,9 @@ function buildProduct(
   glance: Map<string, AtAGlanceRow>,
 ): Product {
   const series = determineSeries(section.model);
-  const function_ = determineFunction(section.headingTitle);
+  const function_ =
+    PRODUCT_FUNCTION_OVERRIDES[section.model] ??
+    determineFunction(section.headingTitle);
   const mini = parseMiniSpecTable(section.body);
   const connections = parseConnectionTable(section.body);
   const glanceRow = glance.get(section.model);
@@ -712,7 +719,7 @@ function validate(p: Product): void {
   if (!p.slug.current) throw new Error(`${p.model}: missing slug`);
   if (!["analogue", "digital", "specialized"].includes(p.series))
     throw new Error(`${p.model}: bad series "${p.series}"`);
-  if (!["MFC", "MFM"].includes(p.function))
+  if (!["MFC", "MFM", "EPC"].includes(p.function))
     throw new Error(`${p.model}: bad function "${p.function}"`);
   if (p.connections.length === 0)
     throw new Error(`${p.model}: no connections parsed`);
@@ -722,7 +729,7 @@ function validate(p: Product): void {
   if (s.accuracy.value! <= 0)
     throw new Error(`${p.model}: bad accuracy ${s.accuracy.value}`);
   // Specialized MFCs (e.g., LEPC) legitimately omit response time
-  if (p.function === "MFC" && p.series !== "specialized" && !s.responseTime)
+  if (p.function === "MFC" && !s.responseTime)
     throw new Error(`${p.model}: MFC missing responseTime`);
   if (p.series === "digital" && !p.digitalCommunication)
     throw new Error(`${p.model}: digital missing digitalCommunication`);

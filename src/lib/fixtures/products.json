@@ -4232,7 +4232,7 @@
       "current": "lepc"
     },
     "series": "specialized",
-    "function": "MFC",
+    "function": "EPC",
     "productLabel": {
       "en": "Electronic Pressure Controller",
       "ko": "전자식 압력 제어기 (EPC)",
