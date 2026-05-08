@@ -96,9 +96,7 @@ function classifySeries(model: string): Series {
   if (
     upper.startsWith("EX") ||
     upper.startsWith("LEPC") ||
-    upper.startsWith("DEPC") ||
-    upper.startsWith("LD") ||
-    upper.startsWith("LM")
+    upper.startsWith("DEPC")
   )
     return "specialized";
   return "analogue"; // fallback
