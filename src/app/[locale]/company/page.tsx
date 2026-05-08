@@ -145,6 +145,7 @@ function History({ c, locale }: { c: CompanyContent; locale: string }) {
 }
 
 function Certifications({ c }: { c: CompanyContent }) {
+  const [pre, post] = c.certifications.footnote.split("{viewAll}");
   return (
     <section id="certifications" className="co-section">
       <header className="co-sechd">
@@ -169,7 +170,16 @@ function Certifications({ c }: { c: CompanyContent }) {
           </li>
         ))}
       </ul>
-      <p className="co-certs__footnote">{c.certifications.footnote}</p>
+      <p className="co-certs__footnote">
+        {pre}
+        <Link
+          href="/resources/certifications"
+          className="co-certs__inline-link"
+        >
+          {c.certifications.viewAll}
+        </Link>
+        {post}
+      </p>
     </section>
   );
 }

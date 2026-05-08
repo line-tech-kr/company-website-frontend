@@ -292,6 +292,15 @@
   font: 400 var(--lt-fs-sm)/1.55 var(--lt-sans);
   color: var(--pd-muted);
 }
+.co-certs__inline-link {
+  color: var(--pd-primary);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.co-certs__inline-link:hover {
+  text-decoration-thickness: 2px;
+}
 
 /* Location: HQ + optional subsidiary card. */
 .co-locations {
