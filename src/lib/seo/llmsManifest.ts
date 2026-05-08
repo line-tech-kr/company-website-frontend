@@ -79,11 +79,12 @@ export async function buildLlmsManifest(siteUrl: string): Promise<string> {
     })
     .filter((p): p is Product => p !== null);
 
-  const byCategory = {
-    analogue: products.filter((p) => p.series === "analogue"),
-    digital: products.filter((p) => p.series === "digital"),
-    specialized: products.filter((p) => p.series === "specialized"),
+  const byCategory: Record<Product["series"], Product[]> = {
+    analogue: [],
+    digital: [],
+    specialized: [],
   };
+  for (const p of products) byCategory[p.series].push(p);
 
   const lines: string[] = [
     "# Line Tech",
