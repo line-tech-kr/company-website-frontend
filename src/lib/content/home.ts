@@ -290,7 +290,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
     credentials: {
       kicker: "04 — Certifications",
       title: "International certifications.",
-      sub: "ISO 9001, CE, RoHS — recognized standards across global process industries.",
+      sub: "Certified to international quality, safety, and compliance standards.",
       items: [
         { name: "ISO 9001", scope: "Quality management system" },
         { name: "CE", scope: "EU safety & EMC compliance" },
