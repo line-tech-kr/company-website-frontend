@@ -65,3 +65,7 @@ public/search/
 # Playwright
 /playwright-report/
 /test-results/
+
+# Catalogue resync working dir (CP949 source unzip + intermediate text/image extracts)
+/.work/
+.work/
