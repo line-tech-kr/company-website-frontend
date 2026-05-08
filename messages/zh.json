@@ -53,7 +53,8 @@
       "maxPressure": "最大压力",
       "tempRange": "温度范围",
       "leakRate": "泄漏率",
-      "controlRange": "控制范围"
+      "controlRange": "控制范围",
+      "electricalConnection": "接头"
     }
   },
   "products": {

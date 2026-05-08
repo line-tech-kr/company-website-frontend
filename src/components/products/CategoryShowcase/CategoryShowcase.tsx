@@ -9,7 +9,7 @@ export type ShowcaseProduct = {
   slug: string;
   model: string;
   caption: string | null;
-  function: "MFC" | "MFM" | null;
+  function: "MFC" | "MFM" | "EPC" | null;
   flowRange: string | null;
   accuracy: string | null;
   image: string;

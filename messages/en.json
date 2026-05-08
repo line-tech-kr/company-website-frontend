@@ -53,7 +53,8 @@
       "maxPressure": "Max pressure",
       "tempRange": "Temperature range",
       "leakRate": "Leak rate",
-      "controlRange": "Control range"
+      "controlRange": "Control range",
+      "electricalConnection": "Connector"
     }
   },
   "products": {

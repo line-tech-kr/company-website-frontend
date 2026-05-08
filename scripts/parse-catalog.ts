@@ -218,6 +218,13 @@ const PRODUCT_LABEL_OVERRIDES: Record<string, string> = {
   LEPC: "Electronic Pressure Controller",
 };
 
+// Per-product function overrides — for the same catalog inconsistencies. The
+// at-a-glance table column 1 ("Type") is the source of truth: M/MS = analogue
+// MFC/MFM, MD = digital MFC/MFM, EX = specialized MFC/MFM, LEPC = EPC.
+const PRODUCT_FUNCTION_OVERRIDES: Record<string, Product["function"]> = {
+  LEPC: "EPC",
+};
+
 const SHARED_FEATURES_M_MS_MD = [
   "Accurate at Low Flow",
   "Fast Response",
@@ -251,10 +258,7 @@ const FEATURES_LEPC = [
   "Compact Connection",
 ];
 
-const FEATURES_DO = [
-  ...SHARED_FEATURES_M_MS_MD,
-  "Modular Design",
-];
+const FEATURES_DO = [...SHARED_FEATURES_M_MS_MD, "Modular Design"];
 
 function determineSeries(model: string): Product["series"] {
   if (/^MD/.test(model)) return "digital";
@@ -623,6 +627,7 @@ type MiniSpecTable = {
   maxTemp?: string;
   leakRate?: string;
   controlRange?: string;
+  electricalConnection?: string;
 };
 
 function parseMiniSpecTable(body: string[]): MiniSpecTable {
@@ -647,6 +652,7 @@ function parseMiniSpecTable(body: string[]): MiniSpecTable {
         maxTemp: map["Max Operating Temp"],
         leakRate: map["Leak Rate"],
         controlRange: map["Control Range"],
+        electricalConnection: map["Electrical Connection"],
       };
     }
   }
@@ -677,12 +683,10 @@ function buildMassFlowSpecs(
     mini.repeatability ?? glance?.repeatability ?? "±0.25 %";
   const repeatability = parseRepeatability(repeatabilityRaw);
 
-  // Response time: only for MFC. LEPC is classified MFC by the catalog
-  // heading but is actually an Electronic Pressure Controller; the catalog
-  // intentionally omits a response-time spec ("-" in at-a-glance, no row in
-  // mini-table) so let it through without one.
+  // Response time: only for MFC (flow controllers). MFM and EPC don't have
+  // a response-time spec — for EPC, the catalog at-a-glance shows "-".
   let responseTime: ResponseTime | undefined;
-  if (function_ === "MFC" && model !== "LEPC") {
+  if (function_ === "MFC") {
     const glanceResponse =
       glance?.response && glance.response !== "-" ? glance.response : undefined;
     const responseRaw =
@@ -719,6 +723,13 @@ function buildMassFlowSpecs(
     ? parseControlRange(mini.controlRange)
     : STANDARD_CONTROL_RANGE;
 
+  // Electrical connection — D-connector for I/O signal. Most M/MS/MD/EX
+  // products ship with 9-Pin; some MD digital variants use 15-Pin. Pulled
+  // straight from the catalog row when present; otherwise omitted.
+  const electricalConnection = mini.electricalConnection
+    ? { display: mini.electricalConnection.trim() }
+    : undefined;
+
   const specs: MassFlowSpecs = {
     flowRange,
     accuracy,
@@ -731,6 +742,7 @@ function buildMassFlowSpecs(
   };
   if (responseTime) specs.responseTime = responseTime;
   if (maxPressure) specs.maxPressure = maxPressure;
+  if (electricalConnection) specs.electricalConnection = electricalConnection;
   return specs;
 }
 
@@ -744,7 +756,9 @@ function buildProduct(
   glance: Map<string, AtAGlanceRow>,
 ): Product {
   const series = determineSeries(section.model);
-  const function_ = determineFunction(section.headingTitle);
+  const function_ =
+    PRODUCT_FUNCTION_OVERRIDES[section.model] ??
+    determineFunction(section.headingTitle);
   const mini = parseMiniSpecTable(section.body);
   const connections = parseConnectionTable(section.body);
   const glanceRow = glance.get(section.model);
@@ -786,7 +800,7 @@ function validate(p: Product): void {
   if (!p.slug.current) throw new Error(`${p.model}: missing slug`);
   if (!["analogue", "digital", "specialized"].includes(p.series))
     throw new Error(`${p.model}: bad series "${p.series}"`);
-  if (!["MFC", "MFM"].includes(p.function))
+  if (!["MFC", "MFM", "EPC"].includes(p.function))
     throw new Error(`${p.model}: bad function "${p.function}"`);
   // DO400 is a special-order analogue MFC and only specifies a single
   // electrical connector (9-Pin D-Connector) — no SWG/VCR flow-line size
@@ -798,7 +812,7 @@ function validate(p: Product): void {
     throw new Error(`${p.model}: bad flowRange`);
   if (s.accuracy.value! <= 0)
     throw new Error(`${p.model}: bad accuracy ${s.accuracy.value}`);
-  if (p.function === "MFC" && !s.responseTime && p.model !== "LEPC")
+  if (p.function === "MFC" && !s.responseTime)
     throw new Error(`${p.model}: MFC missing responseTime`);
   if (p.series === "digital" && !p.digitalCommunication)
     throw new Error(`${p.model}: digital missing digitalCommunication`);

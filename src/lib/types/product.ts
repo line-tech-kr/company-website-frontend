@@ -48,6 +48,7 @@ const MassFlowSpecsSchema = z.object({
     max: z.number().optional(),
     unit: z.string().optional(),
   }),
+  electricalConnection: SpecBaseSchema.optional(),
 });
 
 const SanityImageRefSchema = z.object({
@@ -80,7 +81,7 @@ export const SanityProductSchema = z.object({
   model: z.string(),
   slug: z.object({ current: z.string() }),
   series: z.enum(["analogue", "digital", "specialized"]),
-  function: z.enum(["MFC", "MFM"]),
+  function: z.enum(["MFC", "MFM", "EPC"]),
   productLabel: z.object({
     ko: z.string(),
     en: z.string(),
@@ -192,6 +193,9 @@ export type MaxPressure = NonNullable<MassFlowSpecs["maxPressure"]>;
 export type TempRange = NonNullable<MassFlowSpecs["tempRange"]>;
 export type LeakRate = NonNullable<MassFlowSpecs["leakRate"]>;
 export type ControlRange = NonNullable<MassFlowSpecs["controlRange"]>;
+export type ElectricalConnection = NonNullable<
+  MassFlowSpecs["electricalConnection"]
+>;
 export type ResponseTime = NonNullable<MassFlowSpecs["responseTime"]>;
 export type DigitalCommunication = NonNullable<Product["digitalCommunication"]>;
 export type SanityImage = NonNullable<Product["dimensionDrawing"]>;

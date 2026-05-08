@@ -42,7 +42,7 @@ export const product = defineType({
     defineField({
       name: "function",
       type: "string",
-      options: { list: ["MFC", "MFM"] },
+      options: { list: ["MFC", "MFM", "EPC"] },
     }),
     defineField({
       name: "productLabel",
@@ -196,6 +196,11 @@ export const product = defineType({
             numberField("max"),
             stringField("unit"),
           ],
+        }),
+        defineField({
+          name: "electricalConnection",
+          type: "object",
+          fields: [displayField],
         }),
       ],
     }),

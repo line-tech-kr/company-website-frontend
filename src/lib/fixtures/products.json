@@ -92,17 +92,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -133,6 +127,9 @@
         "value": 90,
         "unit": "bar",
         "comparator": "lt"
+      },
+      "electricalConnection": {
+        "display": "15-Pin D-Connector"
       }
     },
     "datasheets": [],
@@ -232,17 +229,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -273,6 +264,9 @@
         "value": 90,
         "unit": "bar",
         "comparator": "lt"
+      },
+      "electricalConnection": {
+        "display": "9-Pin D-Connector"
       }
     },
     "datasheets": [],
@@ -372,17 +366,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -413,6 +401,9 @@
         "value": 90,
         "unit": "bar",
         "comparator": "lt"
+      },
+      "electricalConnection": {
+        "display": "9-Pin D-Connector"
       }
     },
     "datasheets": [],
@@ -512,17 +503,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -553,6 +538,9 @@
         "value": 13,
         "unit": "bar",
         "comparator": "lt"
+      },
+      "electricalConnection": {
+        "display": "9-Pin D-Connector"
       }
     },
     "datasheets": [],
@@ -648,17 +636,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -689,6 +671,9 @@
         "value": 13,
         "unit": "bar",
         "comparator": "lt"
+      },
+      "electricalConnection": {
+        "display": "9-Pin D-Connector"
       }
     },
     "datasheets": [],
@@ -784,17 +769,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -825,6 +804,9 @@
         "value": 13,
         "unit": "bar",
         "comparator": "lt"
+      },
+      "electricalConnection": {
+        "display": "9-Pin D-Connector"
       }
     },
     "datasheets": [],
@@ -916,17 +898,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -957,6 +933,9 @@
         "value": 13,
         "unit": "bar",
         "comparator": "lt"
+      },
+      "electricalConnection": {
+        "display": "9-Pin D-Connector"
       }
     },
     "datasheets": [],
@@ -1048,17 +1027,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -1089,6 +1062,9 @@
         "value": 13,
         "unit": "bar",
         "comparator": "lt"
+      },
+      "electricalConnection": {
+        "display": "9-Pin D-Connector"
       }
     },
     "datasheets": [],
@@ -1188,17 +1164,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -1223,6 +1193,9 @@
         "value": 90,
         "unit": "bar",
         "comparator": "lt"
+      },
+      "electricalConnection": {
+        "display": "15-Pin D-Connector"
       }
     },
     "datasheets": [],
@@ -1322,17 +1295,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -1357,6 +1324,9 @@
         "value": 90,
         "unit": "bar",
         "comparator": "lt"
+      },
+      "electricalConnection": {
+        "display": "9-Pin D-Connector"
       }
     },
     "datasheets": [],
@@ -1456,17 +1426,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -1590,17 +1554,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -1625,6 +1583,9 @@
         "value": 90,
         "unit": "bar",
         "comparator": "lt"
+      },
+      "electricalConnection": {
+        "display": "9-Pin D-Connector"
       }
     },
     "datasheets": [],
@@ -1720,17 +1681,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -1755,6 +1710,9 @@
         "value": 90,
         "unit": "bar",
         "comparator": "lt"
+      },
+      "electricalConnection": {
+        "display": "9-Pin D-Connector"
       }
     },
     "datasheets": [],
@@ -1850,17 +1808,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -1885,6 +1837,9 @@
         "value": 90,
         "unit": "bar",
         "comparator": "lt"
+      },
+      "electricalConnection": {
+        "display": "9-Pin D-Connector"
       }
     },
     "datasheets": [],
@@ -1976,17 +1931,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -2011,6 +1960,9 @@
         "value": 90,
         "unit": "bar",
         "comparator": "lt"
+      },
+      "electricalConnection": {
+        "display": "9-Pin D-Connector"
       }
     },
     "datasheets": [],
@@ -2102,17 +2054,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -2137,6 +2083,9 @@
         "value": 90,
         "unit": "bar",
         "comparator": "lt"
+      },
+      "electricalConnection": {
+        "display": "9-Pin D-Connector"
       }
     },
     "datasheets": [],
@@ -2236,17 +2185,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -2383,17 +2326,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -2530,17 +2467,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -2673,17 +2604,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -2816,17 +2741,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -2955,17 +2874,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -3094,17 +3007,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -3241,17 +3148,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -3382,17 +3283,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -3523,17 +3418,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -3660,17 +3549,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -3797,17 +3680,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -3930,17 +3807,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -4063,17 +3934,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -4208,17 +4073,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -4356,17 +4215,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -4409,7 +4262,7 @@
       "current": "lepc"
     },
     "series": "specialized",
-    "function": "MFC",
+    "function": "EPC",
     "productLabel": {
       "en": "Electronic Pressure Controller",
       "ko": "전자식 압력 제어기 (EPC)",
@@ -4496,17 +4349,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -4634,17 +4481,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -4776,17 +4617,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -4898,17 +4733,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +26 Vdc, 350 mA",
-        "voltages": [
-          15,
-          26
-        ],
+        "voltages": [15, 26],
         "currentMA": 350
       },
       "tempRange": {
@@ -4939,6 +4768,9 @@
         "value": 13,
         "unit": "barG",
         "comparator": "lt"
+      },
+      "electricalConnection": {
+        "display": "9-Pin D-Connector"
       }
     },
     "datasheets": [],

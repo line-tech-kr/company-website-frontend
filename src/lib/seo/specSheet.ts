@@ -12,6 +12,7 @@ const SPEC_LABELS: Record<keyof MassFlowSpecs, string> = {
   tempRange: "Temperature range",
   leakRate: "Leak rate",
   controlRange: "Control range",
+  electricalConnection: "Connector",
 };
 
 const SPEC_ORDER: Array<keyof MassFlowSpecs> = [
@@ -22,6 +23,7 @@ const SPEC_ORDER: Array<keyof MassFlowSpecs> = [
   "controlRange",
   "ioSignal",
   "supplyPower",
+  "electricalConnection",
   "maxPressure",
   "tempRange",
   "leakRate",

@@ -53,7 +53,8 @@
       "maxPressure": "최대 압력",
       "tempRange": "온도 범위",
       "leakRate": "누설률",
-      "controlRange": "제어 범위"
+      "controlRange": "제어 범위",
+      "electricalConnection": "커넥터"
     }
   },
   "products": {

@@ -67,7 +67,11 @@ const SPEC_GROUPS: Array<{
       "controlRange",
     ],
   },
-  { id: "signal", num: "02", keys: ["ioSignal", "supplyPower"] },
+  {
+    id: "signal",
+    num: "02",
+    keys: ["ioSignal", "supplyPower", "electricalConnection"],
+  },
   {
     id: "environment",
     num: "03",
