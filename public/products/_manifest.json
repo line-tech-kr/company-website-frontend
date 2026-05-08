@@ -722,54 +722,6 @@
       ]
     },
     {
-      "model": "PR-030",
-      "slug": "pr-030",
-      "category": "component",
-      "boTable": "02_06_e",
-      "wrId": 1,
-      "images": [
-        {
-          "path": "/products/pr-030/product-1.gif",
-          "source": "https://line-tech.co.kr/data/file/02_06_e/981398834_kPtGsvh3_58f14c97f8edd339f384860da86d7c7d9ee2ff31.gif",
-          "kind": "product"
-        },
-        {
-          "path": "/products/pr-030/product-2.gif",
-          "source": "https://line-tech.co.kr/data/file/02_06_e/981398834_7ntRvgIU_cda5aa4b4e2d8f75742831b9e87695529a8e14f9.gif",
-          "kind": "product"
-        },
-        {
-          "path": "/products/pr-030/editor-1.jpg",
-          "source": "http://line-tech.co.kr/data/editor/2101/6c6493ad98045f5ce9beacb6900e06e4_1610543932_9424.jpg",
-          "kind": "editor"
-        }
-      ]
-    },
-    {
-      "model": "FC-050S",
-      "slug": "fc-050s",
-      "category": "component",
-      "boTable": "02_06_e",
-      "wrId": 2,
-      "images": [
-        {
-          "path": "/products/fc-050s/product-1.gif",
-          "source": "https://line-tech.co.kr/data/file/02_06_e/981398834_XTNHKYyS_fc4b0bf8a1c499d3240fb44c22997dffbb652ed2.gif",
-          "kind": "product"
-        },
-        {
-          "path": "/products/fc-050s/product-2.gif",
-          "source": "https://line-tech.co.kr/data/file/02_06_e/981398834_esXdf0xG_d5c27553a810ced7f3b5c0bab17478c49113017a.gif",
-          "kind": "product"
-        },
-        {
-          "path": "/products/fc-050s/editor-1.jpg",
-          "source": "http://line-tech.co.kr/data/editor/2101/6c6493ad98045f5ce9beacb6900e06e4_1610543854_7436.jpg",
-          "kind": "editor"
-        }
-      ]
-    },
-    {
       "model": "EX70C",
       "slug": "ex70c",
       "category": "exproof-mfc",

@@ -30,13 +30,15 @@ const CATALOG_PATH =
   );
 const OUTPUT_PATH = resolve(__dirname, "../src/lib/fixtures/products.json");
 
-// DO400 is a special-order SKU with no fluid connection table in the 2026 catalog.
+// Section 9 read-out units and accessories — none of these have flow specs
+// to parse. LTI-2000 ships in its own follow-up (issue #179) once photo and
+// prose copy are available; LTI-1000 is the rack-mount sibling of LTI-200.
 const SKIP_MODELS = new Set([
   "LTI-200",
   "LTI-1000",
+  "LTI-2000",
   "FC-050S",
   "PR-030",
-  "DO400",
 ]);
 
 // Translation table.
@@ -185,6 +187,13 @@ const I18N: Record<string, LocalizedString> = {
     ko: "정밀 압력 제어",
     zh: "精密压力控制",
   },
+
+  // ─── DO-specific (special-order high-flow analogue) ───
+  "Modular Design": {
+    en: "Modular Design",
+    ko: "모듈형 설계",
+    zh: "模块化设计",
+  },
 };
 
 // Track which keys were requested but missing — surfaced at end of run.
@@ -251,6 +260,10 @@ const FEATURES_LEPC = [
   "Compact Connection",
 ];
 
+// DO400 is a special-order high-flow analogue MFC. Catalog feature list is
+// the M/MS/MD baseline plus a "Modular Design" callout unique to DO.
+const FEATURES_DO = [...SHARED_FEATURES_M_MS_MD, "Modular Design"];
+
 // 2026 catalog: EX1000(Controller) → EX1000C, EX70(Meter) → EX70M, etc.
 function normalizeModelName(raw: string): string {
   return raw.replace(/\(Controller\)$/, "C").replace(/\(Meter\)$/, "M");
@@ -260,6 +273,8 @@ function determineSeries(model: string): Product["series"] {
   if (/^MD/.test(model)) return "digital";
   if (/^M[S]?\d/.test(model)) return "analogue";
   if (/^(EX|LEPC)/.test(model)) return "specialized";
+  // DO400 — special-order analogue MFC. Lives in section 8 of 2026 catalog.
+  if (/^DO\d/.test(model)) return "analogue";
   throw new Error(`Cannot determine series for model "${model}"`);
 }
 
@@ -271,6 +286,7 @@ function determineFunction(headingTitle: string): Product["function"] {
 
 function featuresFor(model: string): string[] {
   if (model === "LEPC") return FEATURES_LEPC;
+  if (/^DO\d/.test(model)) return FEATURES_DO;
   if (/^EX/.test(model)) return FEATURES_EX;
   return SHARED_FEATURES_M_MS_MD;
 }
@@ -337,17 +353,48 @@ function parseIoSignal(raw: string): IoSignal {
 }
 
 function parseSupplyPower(raw: string): SupplyPower {
-  // examples: "+15 ~ 24", "+15 ~ +24 Vdc", "+15 or +24 Vdc, 350 mA"
-  const voltageMatches = raw.match(/[+]?(\d+)\s*[~or]+\s*[+]?(\d+)/);
+  // examples: "+15 ~ 24", "+15 ~ +24 Vdc", "+15 or +24 Vdc, 350 mA",
+  // "+15Vdc ~ +26Vdc , 350㎃" (DO400 — units interleaved between voltages)
+  const voltageMatches = raw.match(
+    /[+]?(\d+)\s*(?:Vdc)?\s*[~or]+\s*[+]?(\d+)/i,
+  );
   if (!voltageMatches) throw new Error(`Cannot parse supply power: "${raw}"`);
   const v1 = parseInt(voltageMatches[1], 10);
   const v2 = parseInt(voltageMatches[2], 10);
-  const currentMA = 350; // catalog standard for all M/MS/MD/LD/LM/EX
+  const currentMA = 350; // catalog standard for all M/MS/MD/EX/LEPC/DO
   return {
     display: `+${v1} or +${v2} Vdc, ${currentMA} mA`,
     voltages: [v1, v2],
     currentMA,
   };
+}
+
+function parseLeakRate(raw: string): LeakRate {
+  // Examples: "1x10-9 atm.cc/sec", "1×10-8 atm.cc/sec"
+  const m = raw.match(/([\d.]+)\s*[x×]\s*10\s*[⁻-]?\s*(\d+)/);
+  if (!m) throw new Error(`Cannot parse leak rate: "${raw}"`);
+  const mantissa = parseFloat(m[1]);
+  const exponent = parseInt(m[2], 10);
+  const value = mantissa * Math.pow(10, -exponent);
+  const supers = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"];
+  const expDisplay = String(exponent)
+    .split("")
+    .map((d) => supers[parseInt(d, 10)])
+    .join("");
+  return {
+    display: `${mantissa}×10⁻${expDisplay} atm·cc/sec`,
+    value,
+    unit: "atm·cc/sec",
+  };
+}
+
+function parseControlRange(raw: string): ControlRange {
+  // Examples: "3~100%", "2 ~ 100%"
+  const m = raw.match(/([\d.]+)\s*~\s*([\d.]+)\s*%/);
+  if (!m) throw new Error(`Cannot parse control range: "${raw}"`);
+  const min = parseFloat(m[1]);
+  const max = parseFloat(m[2]);
+  return { display: `${min}–${max}%`, min, max, unit: "%" };
 }
 
 function parseMaxPressure(raw: string): MaxPressure | undefined {
@@ -649,6 +696,17 @@ function buildMassFlowSpecs(
   const tempRaw = mini.maxTemp ?? glance?.maxTemp ?? "0 ~ 50";
   const tempRange = parseTempRange(tempRaw);
 
+  // Leak rate and control range have constant defaults (1×10⁻⁹ atm·cc/sec
+  // and 3–100% respectively) for the M/MS/MD families. DO400 and LEPC
+  // diverge — DO400 has a 1×10⁻⁸ leak rate, LEPC has a 2–100% control
+  // range — so prefer the per-product mini-spec value when present.
+  const leakRate = mini.leakRate
+    ? parseLeakRate(mini.leakRate)
+    : STANDARD_LEAK_RATE;
+  const controlRange = mini.controlRange
+    ? parseControlRange(mini.controlRange)
+    : STANDARD_CONTROL_RANGE;
+
   const specs: MassFlowSpecs = {
     flowRange,
     accuracy,
@@ -656,8 +714,8 @@ function buildMassFlowSpecs(
     ioSignal,
     supplyPower,
     tempRange,
-    leakRate: STANDARD_LEAK_RATE,
-    controlRange: STANDARD_CONTROL_RANGE,
+    leakRate,
+    controlRange,
   };
   if (responseTime) specs.responseTime = responseTime;
   if (maxPressure) specs.maxPressure = maxPressure;
@@ -721,7 +779,10 @@ function validate(p: Product): void {
     throw new Error(`${p.model}: bad series "${p.series}"`);
   if (!["MFC", "MFM", "EPC"].includes(p.function))
     throw new Error(`${p.model}: bad function "${p.function}"`);
-  if (p.connections.length === 0)
+  // DO400 is a special-order analogue MFC that lists only an electrical
+  // connector ("9-Pin D-Connector"); the catalog has no SWG/VCR fluid-line
+  // size table for it. All other products do.
+  if (p.connections.length === 0 && p.model !== "DO400")
     throw new Error(`${p.model}: no connections parsed`);
   const s = p.massFlowSpecs;
   if (!s.flowRange || !(s.flowRange.max! > s.flowRange.min!))
