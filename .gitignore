@@ -44,7 +44,11 @@ yarn-error.log*
 docs/handoff/uploads/
 
 # extracted catalogue page renders — regenerate from docs/handoff/uploads/catalog.pdf
-docs/catalog-extract/
+# (allow translation drafts — they're hand-curated, not regenerated)
+docs/catalog-extract/*
+!docs/catalog-extract/2026/
+docs/catalog-extract/2026/*
+!docs/catalog-extract/2026/translations/
 
 # internal-only drafts and planning docs (lives in ~/Dev/linetech/company-docs-private/)
 docs/internal/
