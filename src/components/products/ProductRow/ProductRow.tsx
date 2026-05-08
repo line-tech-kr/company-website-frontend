@@ -7,6 +7,7 @@ import { Chip } from "@/components/ui/Chip/Chip";
 import type { Product } from "@/lib/types/product";
 import type { CategorySlug } from "@/lib/categories";
 import type { Locale } from "@/i18n/routing";
+import { localizeSpecValue } from "@/lib/products/localizeSpecValue";
 import "./ProductRow.css";
 
 type Props = {
@@ -31,9 +32,17 @@ function fittingSummary(connections: Product["connections"]): string {
 export function ProductRow({ product, imageSrc, category, locale }: Props) {
   const href = `/products/${category}/${product.slug.current}`;
   const label = product.description?.[locale] ?? product.productLabel[locale];
-  const range = product.massFlowSpecs.flowRange.display;
-  const accuracy = product.massFlowSpecs.accuracy.display;
-  const response = product.massFlowSpecs.responseTime?.display ?? "—";
+  const range = localizeSpecValue(
+    product.massFlowSpecs.flowRange.display,
+    locale,
+  );
+  const accuracy = localizeSpecValue(
+    product.massFlowSpecs.accuracy.display,
+    locale,
+  );
+  const response = product.massFlowSpecs.responseTime
+    ? localizeSpecValue(product.massFlowSpecs.responseTime.display, locale)
+    : "—";
   const fitting = fittingSummary(product.connections);
   const visibleTags = product.tags
     .filter((t) => VISIBLE_TAG_KINDS.has(t.kind))

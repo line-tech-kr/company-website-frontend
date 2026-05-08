@@ -35,6 +35,7 @@ import type { MassFlowSpecs, Product } from "@/lib/types/product";
 import { buildProductMetadata, siteUrl } from "@/lib/seo";
 import { safeJsonLd } from "@/lib/seo/jsonLd";
 import { LT_APPLICATIONS } from "@/lib/content/applications";
+import { localizeSpecValue } from "@/lib/products/localizeSpecValue";
 import "./product-detail.css";
 
 export const revalidate = 3600;
@@ -153,24 +154,33 @@ export default async function ProductPage({ params }: Props) {
     label: tPdp(`specGroups.${g.id}`),
     rows: g.keys.flatMap<SpecRow>((k) => {
       const spec = product.massFlowSpecs[k];
-      return spec ? [{ key: k, label: tSpecs(k), value: spec.display }] : [];
+      return spec
+        ? [
+            {
+              key: k,
+              label: tSpecs(k),
+              value: localizeSpecValue(spec.display, locale),
+            },
+          ]
+        : [];
     }),
   }));
 
-  const features = product.features.map((f) => f[locale]);
+  const features = product.features.map((f) => f[locale] || f.en);
   const specs = product.massFlowSpecs;
+  const loc = (s: string) => localizeSpecValue(s, locale);
   const overviewRows = [
     {
       feature: features[0] ?? "",
-      values: [specs.flowRange.display, specs.accuracy.display],
+      values: [loc(specs.flowRange.display), loc(specs.accuracy.display)],
     },
     {
       feature: features[1] ?? "",
-      values: specs.responseTime ? [specs.responseTime.display] : [],
+      values: specs.responseTime ? [loc(specs.responseTime.display)] : [],
     },
     {
       feature: features[2] ?? "",
-      values: specs.maxPressure ? [specs.maxPressure.display] : [],
+      values: specs.maxPressure ? [loc(specs.maxPressure.display)] : [],
     },
   ].filter((r) => r.feature);
 

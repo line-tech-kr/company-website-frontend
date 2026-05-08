@@ -3,6 +3,7 @@ import type { Locale } from "@/lib/content/home";
 import type { CategorySlug } from "@/lib/categories";
 import type { Product } from "@/lib/types/product";
 import { routing } from "@/i18n/routing";
+import { localizeSpecValue } from "@/lib/products/localizeSpecValue";
 
 function resolveSiteUrl(): string {
   const fromEnv = process.env.NEXT_PUBLIC_SITE_URL;
@@ -241,8 +242,14 @@ export function buildProductMetadata(
 ): Metadata {
   const label = product.productLabel[locale];
   const fn = product.function;
-  const flowRange = product.massFlowSpecs.flowRange.display;
-  const accuracy = product.massFlowSpecs.accuracy.display;
+  const flowRange = localizeSpecValue(
+    product.massFlowSpecs.flowRange.display,
+    locale,
+  );
+  const accuracy = localizeSpecValue(
+    product.massFlowSpecs.accuracy.display,
+    locale,
+  );
   const application = SERIES_APPLICATION[product.series][locale];
 
   const titles: Record<Locale, string> = {
