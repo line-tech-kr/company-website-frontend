@@ -4,6 +4,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { EmptyState } from "@/components/shared/EmptyState";
+import { DocRow } from "@/components/resources/DocRow";
 import { formatISODate } from "@/lib/i18n/dates";
 import { sanityClient } from "@/sanity/client";
 import { allManualsQuery } from "@/sanity/queries";
@@ -70,6 +71,32 @@ export default async function ManualsPage({ params }: Props) {
 
   const ungrouped = manuals.filter((m) => !m.series);
 
+  const renderRow = (item: ManualItem) => (
+    <DocRow
+      key={item._id}
+      label={item.title}
+      meta={[
+        modelLabel(item),
+        item.rev,
+        item.publishedAt && formatISODate(item.publishedAt, locale),
+      ]}
+      action={
+        item.fileUrl ? (
+          <a href={item.fileUrl} download className="dr-list__btn">
+            {tRes("download")}
+          </a>
+        ) : (
+          <Link
+            href={`/contact?topic=request&file=${encodeURIComponent(item.title)}`}
+            className="dr-list__btn dr-list__btn--request"
+          >
+            {tRes("requestFile")}
+          </Link>
+        )
+      }
+    />
+  );
+
   return (
     <main className="lt-wrap dr-sub">
       <Breadcrumbs items={breadcrumbs} />
@@ -94,80 +121,10 @@ export default async function ManualsPage({ params }: Props) {
                   {tRes(`seriesLabel.${s}`)}
                 </h2>
               </li>
-              {grouped[s].map((item) => (
-                <li key={item._id} className="dr-list__row">
-                  <span className="dr-list__badge dr-list__badge--pdf">
-                    PDF
-                  </span>
-                  <div>
-                    <div className="dr-list__label">{item.title}</div>
-                    {(modelLabel(item) || item.rev || item.publishedAt) && (
-                      <div className="dr-list__meta">
-                        {modelLabel(item) && <span>{modelLabel(item)}</span>}
-                        {modelLabel(item) && (item.rev || item.publishedAt) && (
-                          <span className="dr-list__sep">·</span>
-                        )}
-                        {item.rev && <span>{item.rev}</span>}
-                        {item.rev && item.publishedAt && (
-                          <span className="dr-list__sep">·</span>
-                        )}
-                        {item.publishedAt && (
-                          <span>{formatISODate(item.publishedAt, locale)}</span>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                  {item.fileUrl ? (
-                    <a href={item.fileUrl} download className="dr-list__btn">
-                      {tRes("download")}
-                    </a>
-                  ) : (
-                    <Link
-                      href={`/contact?topic=request&file=${encodeURIComponent(item.title)}`}
-                      className="dr-list__btn dr-list__btn--request"
-                    >
-                      {tRes("requestFile")}
-                    </Link>
-                  )}
-                </li>
-              ))}
+              {grouped[s].map(renderRow)}
             </Fragment>
           ))}
-          {ungrouped.map((item) => (
-            <li key={item._id} className="dr-list__row">
-              <span className="dr-list__badge dr-list__badge--pdf">PDF</span>
-              <div>
-                <div className="dr-list__label">{item.title}</div>
-                {(modelLabel(item) || item.rev || item.publishedAt) && (
-                  <div className="dr-list__meta">
-                    {modelLabel(item) && <span>{modelLabel(item)}</span>}
-                    {modelLabel(item) && (item.rev || item.publishedAt) && (
-                      <span className="dr-list__sep">·</span>
-                    )}
-                    {item.rev && <span>{item.rev}</span>}
-                    {item.rev && item.publishedAt && (
-                      <span className="dr-list__sep">·</span>
-                    )}
-                    {item.publishedAt && (
-                      <span>{formatISODate(item.publishedAt, locale)}</span>
-                    )}
-                  </div>
-                )}
-              </div>
-              {item.fileUrl ? (
-                <a href={item.fileUrl} download className="dr-list__btn">
-                  {tRes("download")}
-                </a>
-              ) : (
-                <Link
-                  href={`/contact?topic=request&file=${encodeURIComponent(item.title)}`}
-                  className="dr-list__btn dr-list__btn--request"
-                >
-                  {tRes("requestFile")}
-                </Link>
-              )}
-            </li>
-          ))}
+          {ungrouped.map(renderRow)}
         </ul>
       )}
     </main>

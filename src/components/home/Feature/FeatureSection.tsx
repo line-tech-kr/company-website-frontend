@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useState } from "react";
 import Image from "next/image";
+import { useCarousel } from "@/lib/hooks/useCarousel";
 import { Button } from "@/components/ui/Button";
 import { Glyph } from "@/components/ui/Glyph";
 import { FLAGSHIP_IMAGE_PLACEHOLDER } from "@/lib/products/flagship";
@@ -74,16 +75,6 @@ const SLIDE_SPECS: Record<string, SlideSpec> = {
 };
 
 const INTERVAL_MS = 5500;
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-
-const subscribeReducedMotion = (cb: () => void) => {
-  if (typeof window === "undefined") return () => {};
-  const mql = window.matchMedia(REDUCED_MOTION_QUERY);
-  mql.addEventListener("change", cb);
-  return () => mql.removeEventListener("change", cb);
-};
-const getRMSnapshot = () => window.matchMedia(REDUCED_MOTION_QUERY).matches;
-const getRMServerSnapshot = () => false;
 
 export function FeatureSection({
   kicker,
@@ -92,23 +83,12 @@ export function FeatureSection({
   slides,
   cutoutByModel,
 }: Props) {
-  const [active, setActive] = useState(0);
   const [mouseInside, setMouseInside] = useState(false);
   const [focusInside, setFocusInside] = useState(false);
-  const reducedMotion = useSyncExternalStore(
-    subscribeReducedMotion,
-    getRMSnapshot,
-    getRMServerSnapshot,
-  );
-
-  useEffect(() => {
-    if (slides.length <= 1 || reducedMotion) return;
-    if (mouseInside || focusInside) return;
-    const id = window.setInterval(() => {
-      setActive((n) => (n + 1) % slides.length);
-    }, INTERVAL_MS);
-    return () => window.clearInterval(id);
-  }, [mouseInside, focusInside, reducedMotion, slides.length]);
+  const { active, setActive } = useCarousel(slides.length, {
+    intervalMs: INTERVAL_MS,
+    paused: mouseInside || focusInside,
+  });
 
   const current = slides[active];
   const spec = SLIDE_SPECS[current.model];

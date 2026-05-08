@@ -1,23 +1,41 @@
 import { defineQuery } from "next-sanity";
 
+/**
+ * Localized-field projection helpers.
+ *
+ * The CMS stores localized text as `[{ language, value }]` arrays. Every query
+ * needs to project a `{ ko, en, zh }` object with locale fallbacks. There are
+ * two fallback shapes in use:
+ *
+ *   - localized(field):     ko↔en↔ko, zh→en→zh   (most fields)
+ *   - localizedFull(field): full circular fallback through all 3 locales
+ *                           (used where every locale must produce a value, e.g.
+ *                           product tag labels surfaced in the UI)
+ *
+ * Helpers return a GROQ object literal — embed inside a projection with `:`.
+ */
+const localized = (field: string) => `{
+    "ko": coalesce(${field}[language == "ko"][0].value, ${field}[language == "en"][0].value),
+    "en": coalesce(${field}[language == "en"][0].value, ${field}[language == "ko"][0].value),
+    "zh": coalesce(${field}[language == "zh"][0].value, ${field}[language == "en"][0].value)
+  }`;
+
+const localizedFull = (field: string) => `{
+    "ko": coalesce(${field}[language == "ko"][0].value, ${field}[language == "en"][0].value, ${field}[language == "zh"][0].value),
+    "en": coalesce(${field}[language == "en"][0].value, ${field}[language == "ko"][0].value, ${field}[language == "zh"][0].value),
+    "zh": coalesce(${field}[language == "zh"][0].value, ${field}[language == "en"][0].value, ${field}[language == "ko"][0].value)
+  }`;
+
 const PRODUCT_BASE_PROJECTION = `
   model,
   slug,
   series,
   "function": function,
-  "productLabel": {
-    "ko": coalesce(productLabel[language == "ko"][0].value, productLabel[language == "en"][0].value),
-    "en": coalesce(productLabel[language == "en"][0].value, productLabel[language == "ko"][0].value),
-    "zh": coalesce(productLabel[language == "zh"][0].value, productLabel[language == "en"][0].value)
-  },
+  "productLabel": ${localized("productLabel")},
   "tags": coalesce(tags[]->{
     "slug": slug,
     kind,
-    "label": {
-      "ko": coalesce(label[language == "ko"][0].value, label[language == "en"][0].value, label[language == "zh"][0].value),
-      "en": coalesce(label[language == "en"][0].value, label[language == "ko"][0].value, label[language == "zh"][0].value),
-      "zh": coalesce(label[language == "zh"][0].value, label[language == "en"][0].value, label[language == "ko"][0].value)
-    }
+    "label": ${localizedFull("label")}
   }, []),
   description,
   features,
@@ -211,44 +229,20 @@ export const allDrawingsQuery = defineQuery(`
 export const allFaqGroupsQuery = defineQuery(`
   *[_type == "faqGroup"] | order(coalesce(order, 99) asc) {
     "id": id.current,
-    "heading": {
-      "ko": coalesce(heading[language == "ko"][0].value, heading[language == "en"][0].value),
-      "en": coalesce(heading[language == "en"][0].value, heading[language == "ko"][0].value),
-      "zh": coalesce(heading[language == "zh"][0].value, heading[language == "en"][0].value)
-    },
+    "heading": ${localized("heading")},
     "questions": questions[] {
       id,
-      "q": {
-        "ko": coalesce(q[language == "ko"][0].value, q[language == "en"][0].value),
-        "en": coalesce(q[language == "en"][0].value, q[language == "ko"][0].value),
-        "zh": coalesce(q[language == "zh"][0].value, q[language == "en"][0].value)
-      },
-      "a": {
-        "ko": coalesce(a[language == "ko"][0].value, a[language == "en"][0].value),
-        "en": coalesce(a[language == "en"][0].value, a[language == "ko"][0].value),
-        "zh": coalesce(a[language == "zh"][0].value, a[language == "en"][0].value)
-      }
+      "q": ${localized("q")},
+      "a": ${localized("a")}
     }
   }
 `);
 
 const APPLICATION_PROJECTION = `
   "slug": slug.current,
-  "title": {
-    "ko": coalesce(title[language == "ko"][0].value, title[language == "en"][0].value),
-    "en": coalesce(title[language == "en"][0].value, title[language == "ko"][0].value),
-    "zh": coalesce(title[language == "zh"][0].value, title[language == "en"][0].value)
-  },
-  "lede": {
-    "ko": coalesce(lede[language == "ko"][0].value, lede[language == "en"][0].value),
-    "en": coalesce(lede[language == "en"][0].value, lede[language == "ko"][0].value),
-    "zh": coalesce(lede[language == "zh"][0].value, lede[language == "en"][0].value)
-  },
-  "body": {
-    "ko": coalesce(body[language == "ko"][0].value, body[language == "en"][0].value),
-    "en": coalesce(body[language == "en"][0].value, body[language == "ko"][0].value),
-    "zh": coalesce(body[language == "zh"][0].value, body[language == "en"][0].value)
-  },
+  "title": ${localized("title")},
+  "lede": ${localized("lede")},
+  "body": ${localized("body")},
   recommendedSeries,
   relatedCategories
 `;
@@ -285,16 +279,8 @@ export const allCertificationsQuery = defineQuery(`
   *[_type == "certification"] | order(coalesce(order, 99) asc) {
     _id,
     name,
-    "issuer": {
-      "ko": coalesce(issuer[language == "ko"][0].value, issuer[language == "en"][0].value),
-      "en": coalesce(issuer[language == "en"][0].value, issuer[language == "ko"][0].value),
-      "zh": coalesce(issuer[language == "zh"][0].value, issuer[language == "en"][0].value)
-    },
-    "scope": {
-      "ko": coalesce(scope[language == "ko"][0].value, scope[language == "en"][0].value),
-      "en": coalesce(scope[language == "en"][0].value, scope[language == "ko"][0].value),
-      "zh": coalesce(scope[language == "zh"][0].value, scope[language == "en"][0].value)
-    },
+    "issuer": ${localized("issuer")},
+    "scope": ${localized("scope")},
     validThrough,
     "fileUrl": file.asset->url
   }

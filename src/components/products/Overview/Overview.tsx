@@ -1,3 +1,4 @@
+import { SectionHeader } from "../SectionHeader/SectionHeader";
 import "./Overview.css";
 
 export type OverviewRow = {
@@ -30,13 +31,7 @@ export function Overview({
 }: Props) {
   return (
     <section id="overview" className={`lt-pdp-over lt-pdp-over--${tone}`}>
-      <header className="lt-pdp-section-hd">
-        <div>
-          <div className="lt-pdp-section-hd__kicker">{kicker}</div>
-          <h2 className="lt-pdp-section-hd__title">{heading}</h2>
-          <p className="lt-pdp-section-hd__sub">{sub}</p>
-        </div>
-      </header>
+      <SectionHeader kicker={kicker} title={heading} sub={sub} />
 
       <ol className="lt-pdp-over__list">
         {rows.map((r, i) => (

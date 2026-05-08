@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useCarousel } from "@/lib/hooks/useCarousel";
 import "./CategoryShowcase.css";
 
 export type ShowcaseProduct = {
@@ -53,19 +54,13 @@ export function CategoryShowcase({
   heroCode,
   heroLede,
 }: Props) {
-  const [active, setActive] = useState(0);
-  const isPaused = useRef(false);
-  const len = products.length;
+  const [hovered, setHovered] = useState(false);
+  const { active, setActive } = useCarousel(products.length, {
+    intervalMs: INTERVAL_MS,
+    paused: hovered,
+  });
 
-  useEffect(() => {
-    if (len < 2) return;
-    const id = setInterval(() => {
-      if (!isPaused.current) setActive((n) => (n + 1) % len);
-    }, INTERVAL_MS);
-    return () => clearInterval(id);
-  }, [len]);
-
-  const selectSlide = useCallback((i: number) => setActive(i), []);
+  const selectSlide = (i: number) => setActive(i);
 
   return (
     <div
@@ -73,8 +68,8 @@ export function CategoryShowcase({
       role="region"
       aria-roledescription="carousel"
       aria-label={slidesAriaLabel}
-      onMouseEnter={() => (isPaused.current = true)}
-      onMouseLeave={() => (isPaused.current = false)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
       <span
         className="lt-showcase__bracket lt-showcase__bracket--tl"
@@ -157,7 +152,7 @@ export function CategoryShowcase({
         <div className="lt-showcase__nav">
           <span className="lt-showcase__nav-label">{slidesLabel}</span>
           <span className="lt-showcase__nav-spacer" />
-          {Array.from({ length: len }, (_, i) => (
+          {Array.from({ length: products.length }, (_, i) => (
             <button
               key={i}
               type="button"

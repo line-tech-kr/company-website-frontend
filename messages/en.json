@@ -107,8 +107,7 @@
       "range": "Flow range",
       "accuracy": "Accuracy",
       "response": "Response",
-      "fitting": "Fitting",
-      "view": "View"
+      "fitting": "Fitting"
     },
     "emptyStack": "No products in this category yet.",
     "showcase": {
@@ -244,8 +243,7 @@
     "certCard": {
       "issuer": "Issuing body",
       "scope": "Scope",
-      "validThrough": "Valid through",
-      "ongoing": "Ongoing"
+      "validThrough": "Valid through"
     },
     "empty": "No files available yet. Check back soon.",
     "emptyStateCta": "Contact us",

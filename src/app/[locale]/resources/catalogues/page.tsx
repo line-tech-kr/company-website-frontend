@@ -3,6 +3,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { EmptyState } from "@/components/shared/EmptyState";
+import { DocRow } from "@/components/resources/DocRow";
 import { formatISODate } from "@/lib/i18n/dates";
 import { sanityClient } from "@/sanity/client";
 import { allCataloguesQuery } from "@/sanity/queries";
@@ -67,41 +68,31 @@ export default async function CataloguesPage({ params }: Props) {
       ) : (
         <ul className="dr-list" role="list">
           {catalogues.map((item) => (
-            <li key={item._id} className="dr-list__row">
-              <span className="dr-list__badge dr-list__badge--pdf">PDF</span>
-              <div>
-                <div className="dr-list__label">{item.title}</div>
-                {(item.series || item.publishedAt) && (
-                  <div className="dr-list__meta">
-                    {item.series && (
-                      <span>
-                        {tRes(
-                          `seriesLabel.${item.series as "all" | "analogue" | "digital" | "specialized"}`,
-                        )}
-                      </span>
-                    )}
-                    {item.series && item.publishedAt && (
-                      <span className="dr-list__sep">·</span>
-                    )}
-                    {item.publishedAt && (
-                      <span>{formatISODate(item.publishedAt, locale)}</span>
-                    )}
-                  </div>
-                )}
-              </div>
-              {item.fileUrl ? (
-                <a href={item.fileUrl} download className="dr-list__btn">
-                  {tRes("download")}
-                </a>
-              ) : (
-                <Link
-                  href={`/contact?topic=request&file=${encodeURIComponent(item.title)}`}
-                  className="dr-list__btn dr-list__btn--request"
-                >
-                  {tRes("requestFile")}
-                </Link>
-              )}
-            </li>
+            <DocRow
+              key={item._id}
+              label={item.title}
+              meta={[
+                item.series &&
+                  tRes(
+                    `seriesLabel.${item.series as "all" | "analogue" | "digital" | "specialized"}`,
+                  ),
+                item.publishedAt && formatISODate(item.publishedAt, locale),
+              ]}
+              action={
+                item.fileUrl ? (
+                  <a href={item.fileUrl} download className="dr-list__btn">
+                    {tRes("download")}
+                  </a>
+                ) : (
+                  <Link
+                    href={`/contact?topic=request&file=${encodeURIComponent(item.title)}`}
+                    className="dr-list__btn dr-list__btn--request"
+                  >
+                    {tRes("requestFile")}
+                  </Link>
+                )
+              }
+            />
           ))}
         </ul>
       )}

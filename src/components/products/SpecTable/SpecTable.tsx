@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Glyph } from "@/components/ui/Glyph";
+import { SectionHeader } from "../SectionHeader/SectionHeader";
 import "./SpecTable.css";
 
 type Row = { key: string; label: string; value: string };
@@ -44,12 +45,7 @@ export function SpecTable({
 
   return (
     <section id="specs" className="lt-pdp-specs">
-      <header className="lt-pdp-section-hd">
-        <div>
-          <div className="lt-pdp-section-hd__kicker">{kicker}</div>
-          <h2 className="lt-pdp-section-hd__title">{heading}</h2>
-          <p className="lt-pdp-section-hd__sub">{sub}</p>
-        </div>
+      <SectionHeader kicker={kicker} title={heading} sub={sub}>
         <Button
           variant="ghost"
           size="sm"
@@ -58,7 +54,7 @@ export function SpecTable({
         >
           {copied ? copiedLabel : copyLabel}
         </Button>
-      </header>
+      </SectionHeader>
 
       <div className="lt-pdp-spec">
         {groups.map((g) => (

@@ -107,8 +107,7 @@
       "range": "流量范围",
       "accuracy": "精度",
       "response": "响应",
-      "fitting": "接口",
-      "view": "查看"
+      "fitting": "接口"
     },
     "emptyStack": "该类别下暂无产品。",
     "showcase": {
@@ -244,8 +243,7 @@
     "certCard": {
       "issuer": "颁发机构",
       "scope": "认证范围",
-      "validThrough": "有效期至",
-      "ongoing": "持续有效"
+      "validThrough": "有效期至"
     },
     "empty": "暂无可用文件，敬请期待。",
     "emptyStateCta": "联系我们",
