@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 
 type Props = {
   /** Document title shown as the row's primary label. */
@@ -24,10 +24,10 @@ export function DocRow({ label, meta, action }: Props) {
         {parts.length > 0 && (
           <div className="dr-list__meta">
             {parts.map((part, i) => (
-              <span key={i}>
+              <Fragment key={i}>
                 {i > 0 && <span className="dr-list__sep">·</span>}
                 <span>{part}</span>
-              </span>
+              </Fragment>
             ))}
           </div>
         )}

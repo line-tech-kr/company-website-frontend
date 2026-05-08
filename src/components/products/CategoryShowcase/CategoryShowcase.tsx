@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCarousel } from "@/lib/hooks/useCarousel";
@@ -60,7 +60,7 @@ export function CategoryShowcase({
     paused: hovered,
   });
 
-  const selectSlide = useCallback((i: number) => setActive(i), [setActive]);
+  const selectSlide = (i: number) => setActive(i);
 
   return (
     <div
