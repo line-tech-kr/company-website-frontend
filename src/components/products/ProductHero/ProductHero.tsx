@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/Button";
 import { Glyph } from "@/components/ui/Glyph";
 import type { Product } from "@/lib/types/product";
 import type { Locale } from "@/i18n/routing";
+import { localizeSpecValue } from "@/lib/products/localizeSpecValue";
 import "./ProductHero.css";
 
 type Props = {
@@ -25,7 +26,8 @@ export function ProductHero({
   const name = product.productLabel[locale];
   const tagline = product.features
     .slice(0, 3)
-    .map((f) => f[locale])
+    .map((f) => f[locale] || f.en)
+    .filter(Boolean)
     .join(" · ");
 
   return (
@@ -88,7 +90,8 @@ export function ProductHero({
             LINE TECH
           </div>
           <div className="lt-pdp-hero__stamp lt-pdp-hero__stamp--br">
-            N₂ · {product.massFlowSpecs.flowRange.display}
+            N₂ ·{" "}
+            {localizeSpecValue(product.massFlowSpecs.flowRange.display, locale)}
           </div>
         </div>
       </div>

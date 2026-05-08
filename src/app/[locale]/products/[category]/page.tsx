@@ -16,6 +16,7 @@ import { CategoryShowcaseSchema } from "@/lib/types/showcase";
 import { urlFor } from "@/sanity/imageUrl";
 import { z } from "zod";
 import { buildCategoryMetadata } from "@/lib/seo";
+import { localizeSpecValue } from "@/lib/products/localizeSpecValue";
 
 export const revalidate = 3600;
 
@@ -59,8 +60,8 @@ export default async function CategoryPage({ params }: Props) {
     model: e.model,
     caption: e.caption,
     function: e.function,
-    flowRange: e.flowRange,
-    accuracy: e.accuracy,
+    flowRange: e.flowRange ? localizeSpecValue(e.flowRange, locale) : null,
+    accuracy: e.accuracy ? localizeSpecValue(e.accuracy, locale) : null,
     image: e.cutout?.asset
       ? urlFor(e.cutout).width(960).url()
       : e.image?.asset
