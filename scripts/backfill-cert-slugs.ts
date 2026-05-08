@@ -46,20 +46,14 @@ const client = createClient({
 /**
  * Hand-curated mapping for certs the /company page references. These slugs
  * MUST equal the `id` values in src/lib/content/company.ts (verified by
- * scripts/verify-cert-slugs.ts).
+ * scripts/verify-cert-slugs.ts). Anything not in this table is left for the
+ * editor to slug explicitly in Studio — we deliberately don't auto-derive.
  */
 const KNOWN_SLUGS: Record<string, string> = {
   "ISO 9001": "iso-9001",
   CE: "ce",
   INNOBIZ: "innobiz",
 };
-
-function deriveSlug(name: string): string {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-}
 
 type CertRow = { _id: string; name: string; slug?: { current?: string } };
 
@@ -82,10 +76,10 @@ async function main() {
       skipped++;
       continue;
     }
-    const slug = KNOWN_SLUGS[cert.name] ?? deriveSlug(cert.name);
+    const slug = KNOWN_SLUGS[cert.name];
     if (!slug) {
       console.warn(
-        `! ${cert._id} "${cert.name}" — derived slug is empty; assign manually in Studio`,
+        `! ${cert._id} "${cert.name}" — not in KNOWN_SLUGS; assign slug manually in Studio`,
       );
       continue;
     }

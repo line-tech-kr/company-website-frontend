@@ -79,6 +79,12 @@ function buildDocs() {
   const en = LT_COMPANY.en.certifications.named;
   const zh = LT_COMPANY.zh.certifications.named;
 
+  if (ko.length !== en.length || ko.length !== zh.length) {
+    throw new Error(
+      `Cert array length mismatch across locales: ko=${ko.length}, en=${en.length}, zh=${zh.length}`,
+    );
+  }
+
   return ko.map((k, i) => {
     const e = en[i];
     const z = zh[i];

@@ -39,7 +39,9 @@ async function main() {
   const certs = await client.fetch<{ slug: string | null }[]>(
     `*[_type == "certification"]{ "slug": slug.current }`,
   );
-  const sanitySlugs = new Set(certs.map((c) => c.slug).filter(Boolean));
+  const sanitySlugs = new Set(
+    certs.map((c) => c.slug).filter((s): s is string => Boolean(s)),
+  );
 
   // The featured ids are identical across locales — just read en.
   const featured = LT_COMPANY.en.certifications.named.map((c) => c.id);
