@@ -207,6 +207,15 @@ export default async function ProductPage({ params }: Props) {
       })),
     ...product.drawings.flatMap<DownloadItem>((d) => {
       const items: DownloadItem[] = [];
+      if (d.pdfUrl) {
+        items.push({
+          label: d.title,
+          type: "PDF",
+          href: d.pdfUrl,
+          size: formatBytes(d.pdfSize),
+          date: formatDate(d.updatedAt, locale),
+        });
+      }
       if (d.dwgUrl) {
         items.push({
           label: `${d.title} (DWG)`,

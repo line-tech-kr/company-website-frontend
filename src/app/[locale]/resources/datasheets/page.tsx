@@ -17,12 +17,16 @@ const SERIES_ORDER: Series[] = ["analogue", "digital", "specialized"];
 type DatasheetItem = {
   _id: string;
   title: string;
-  model?: string | null;
+  models?: string[] | null;
   series?: string | null;
   rev?: string | null;
   publishedAt?: string | null;
   fileUrl?: string | null;
 };
+
+function modelLabel(item: DatasheetItem): string | null {
+  return item.models && item.models.length > 0 ? item.models.join(" / ") : null;
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -92,10 +96,10 @@ export default async function DatasheetsPage({ params }: Props) {
                   </span>
                   <div>
                     <div className="dr-list__label">{item.title}</div>
-                    {(item.model || item.rev || item.publishedAt) && (
+                    {(modelLabel(item) || item.rev || item.publishedAt) && (
                       <div className="dr-list__meta">
-                        {item.model && <span>{item.model}</span>}
-                        {item.model && (item.rev || item.publishedAt) && (
+                        {modelLabel(item) && <span>{modelLabel(item)}</span>}
+                        {modelLabel(item) && (item.rev || item.publishedAt) && (
                           <span className="dr-list__sep">·</span>
                         )}
                         {item.rev && <span>{item.rev}</span>}
@@ -124,10 +128,10 @@ export default async function DatasheetsPage({ params }: Props) {
               <span className="dr-list__badge dr-list__badge--pdf">PDF</span>
               <div>
                 <div className="dr-list__label">{item.title}</div>
-                {(item.model || item.rev || item.publishedAt) && (
+                {(modelLabel(item) || item.rev || item.publishedAt) && (
                   <div className="dr-list__meta">
-                    {item.model && <span>{item.model}</span>}
-                    {item.model && (item.rev || item.publishedAt) && (
+                    {modelLabel(item) && <span>{modelLabel(item)}</span>}
+                    {modelLabel(item) && (item.rev || item.publishedAt) && (
                       <span className="dr-list__sep">·</span>
                     )}
                     {item.rev && <span>{item.rev}</span>}

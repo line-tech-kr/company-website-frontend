@@ -166,10 +166,13 @@ export const SanityProductSchema = z.object({
       z.object({
         _id: z.string(),
         title: z.string(),
+        models: z.array(z.string()).nullable().optional(),
         dwgUrl: z.string().nullable().optional(),
         dwgSize: z.number().nullable().optional(),
         stpUrl: z.string().nullable().optional(),
         stpSize: z.number().nullable().optional(),
+        pdfUrl: z.string().nullable().optional(),
+        pdfSize: z.number().nullable().optional(),
         updatedAt: z.string().nullable().optional(),
       }),
     )
