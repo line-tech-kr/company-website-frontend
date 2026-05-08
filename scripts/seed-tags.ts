@@ -1,7 +1,5 @@
 import { readFileSync } from "node:fs";
 import { createClient } from "@sanity/client";
-import { ALL_PRODUCTS } from "../src/lib/fixtures/products";
-import type { Product } from "../src/lib/types/product";
 
 function loadEnv(path: string) {
   for (const line of readFileSync(path, "utf-8").split("\n")) {
@@ -103,10 +101,6 @@ const TAGS: TagDef[] = [
   },
 ];
 
-function tagsForProduct(p: Product): string[] {
-  return p.tagSlugs ?? [];
-}
-
 function tagDocFields(t: TagDef) {
   return {
     slug: { _type: "slug", current: t.slug },
@@ -121,8 +115,9 @@ function tagDocFields(t: TagDef) {
 
 async function main() {
   console.log(
-    `Seeding ${TAGS.length} tags + patching ${ALL_PRODUCTS.length} products → ${projectId}/${dataset} (force=${force}, dryRun=${dryRun})`,
+    `Seeding ${TAGS.length} tag documents → ${projectId}/${dataset} (force=${force}, dryRun=${dryRun})`,
   );
+  // Tag assignment to products is managed in Sanity Studio, not via this script.
 
   for (const tag of TAGS) {
     const _id = `tag-${tag.slug}`;
@@ -149,54 +144,7 @@ async function main() {
     }
   }
 
-  let patchedCount = 0;
-  let skippedCount = 0;
-  let preservedCount = 0;
-
-  for (const product of ALL_PRODUCTS) {
-    const _id = `product-${product.slug.current}`;
-    const slugs = tagsForProduct(product);
-    if (slugs.length === 0) {
-      console.log(`  skipped  ${product.model} (no tags derived)`);
-      skippedCount++;
-      continue;
-    }
-    const refs = slugs.map((s) => ({
-      _key: s,
-      _type: "reference" as const,
-      _ref: `tag-${s}`,
-    }));
-    if (dryRun) {
-      console.log(`  [dry] patch  ${_id} ← [${slugs.join(", ")}]`);
-      patchedCount++;
-      continue;
-    }
-    try {
-      // Preserve existing tag arrays (e.g. Studio-curated gas/application
-      // tags) unless --force is set. Mirrors the tag-document --force gate.
-      if (!force) {
-        const existing = await client.getDocument<{ tags?: unknown[] }>(_id);
-        const existingCount = existing?.tags?.length ?? 0;
-        if (existingCount > 0) {
-          console.log(
-            `  preserved  ${product.model} (has ${existingCount} existing tags; --force to overwrite)`,
-          );
-          preservedCount++;
-          continue;
-        }
-      }
-      await client.patch(_id).set({ tags: refs }).commit();
-      console.log(`  patched  ${product.model} ← [${slugs.join(", ")}]`);
-      patchedCount++;
-    } catch (err) {
-      console.error(`  FAILED   ${product.model}:`, err);
-      process.exit(1);
-    }
-  }
-
-  console.log(
-    `Done. Tags=${TAGS.length}, products patched=${patchedCount}, preserved=${preservedCount}, skipped=${skippedCount}.`,
-  );
+  console.log(`Done. Tags=${TAGS.length}.`);
   console.log(
     "Note: zh strings are machine-drafted from English. Native review pending — file follow-up issue.",
   );

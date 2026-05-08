@@ -789,7 +789,7 @@ function validate(p: Product): void {
     throw new Error(`${p.model}: bad flowRange`);
   if (s.accuracy.value! <= 0)
     throw new Error(`${p.model}: bad accuracy ${s.accuracy.value}`);
-  // Specialized MFCs (e.g., LEPC) legitimately omit response time
+  // EPC (e.g., LEPC) legitimately omits response time — only MFC carries this spec
   if (p.function === "MFC" && !s.responseTime)
     throw new Error(`${p.model}: MFC missing responseTime`);
   if (p.series === "digital" && !p.digitalCommunication)
