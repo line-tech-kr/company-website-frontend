@@ -153,8 +153,8 @@ export const LT_HOME: Record<Locale, HomeContent> = {
           sub: "디지털 8점 보정 방식의 대유량 질량유량제어기, 2500–5000 slpm.",
         },
         {
-          model: "LD030C",
-          sub: "7-세그먼트 디스플레이 일체형 질량유량제어기, 0.01–30 slpm.",
+          model: "EX1000C",
+          sub: "위험 지역용 방폭 질량유량제어기, 70–1000 slpm.",
         },
       ],
     },
@@ -282,8 +282,8 @@ export const LT_HOME: Record<Locale, HomeContent> = {
           sub: "Digital high-flow mass flow controller with 8-point calibration, 2500–5000 slpm.",
         },
         {
-          model: "LD030C",
-          sub: "Mass flow controller with integrated 7-segment display, 0.01–30 slpm.",
+          model: "EX1000C",
+          sub: "Explosion-proof mass flow controller for hazardous-environment applications, 70–1000 slpm.",
         },
       ],
     },
@@ -399,8 +399,8 @@ export const LT_HOME: Record<Locale, HomeContent> = {
           sub: "数字式大流量质量流量控制器，8 点校准，2500–5000 slpm。",
         },
         {
-          model: "LD030C",
-          sub: "带 7 段显示屏的一体式质量流量控制器，0.01–30 slpm。",
+          model: "EX1000C",
+          sub: "用于危险场所的防爆质量流量控制器，70–1000 slpm。",
         },
       ],
     },

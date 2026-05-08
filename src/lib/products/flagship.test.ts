@@ -50,14 +50,14 @@ function makeProductWithImage(
 
 const ANALOGUE_FLAGSHIP = makeProductWithImage("M3030VA", "analogue");
 const DIGITAL_FLAGSHIP = makeProductWithImage("MD800C", "digital");
-const SPECIALIZED_FLAGSHIP = makeProductWithImage("LD030C", "specialized");
+const SPECIALIZED_FLAGSHIP = makeProductWithImage("EX1000C", "specialized");
 
 const ALL_PRODUCTS: Product[] = [
   makeProduct({ model: "M3010VA", series: "analogue" }),
   ANALOGUE_FLAGSHIP,
-  makeProduct({ model: "MD100C", series: "digital" }),
+  makeProduct({ model: "MD150C", series: "digital" }),
   DIGITAL_FLAGSHIP,
-  makeProduct({ model: "LD010C", series: "specialized" }),
+  makeProduct({ model: "EX70C", series: "specialized" }),
   SPECIALIZED_FLAGSHIP,
 ];
 
@@ -73,7 +73,7 @@ describe("pickFlagship", () => {
   it("returns the pinned model when present", () => {
     expect(pickFlagship(ALL_PRODUCTS, "analogue")?.model).toBe("M3030VA");
     expect(pickFlagship(ALL_PRODUCTS, "digital")?.model).toBe("MD800C");
-    expect(pickFlagship(ALL_PRODUCTS, "specialized")?.model).toBe("LD030C");
+    expect(pickFlagship(ALL_PRODUCTS, "specialized")?.model).toBe("EX1000C");
   });
 
   it("falls back when the pinned model is not in the product list", () => {
@@ -163,7 +163,7 @@ describe("flagshipCutoutUrl", () => {
 
   it("returns the placeholder for null/undefined cutouts", () => {
     expect(flagshipCutoutUrl("MD800C", null)).toBe(FLAGSHIP_IMAGE_PLACEHOLDER);
-    expect(flagshipCutoutUrl("LD030C", undefined)).toBe(
+    expect(flagshipCutoutUrl("EX1000C", undefined)).toBe(
       FLAGSHIP_IMAGE_PLACEHOLDER,
     );
   });

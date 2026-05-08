@@ -38,12 +38,20 @@ const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
 ];
 
-// Renamed slugs from 2020 → 2026 catalogue resync
+// 2020 → 2026 catalogue resync. Renamed SKUs go to their new slug; SKUs
+// retired entirely fall back to the category index page so old bookmarks
+// and search-index entries stay reachable.
 const SLUG_REDIRECTS = [
   { from: "specialized/ex070c", to: "specialized/ex70c" },
   { from: "specialized/ex070m", to: "specialized/ex70m" },
   { from: "digital/md100c", to: "digital/md150c" },
   { from: "digital/md100m", to: "digital/md150m" },
+  { from: "specialized/ld030c", to: "specialized" },
+  { from: "specialized/ld030m", to: "specialized" },
+  { from: "specialized/lm030c", to: "specialized" },
+  { from: "specialized/lm030m", to: "specialized" },
+  { from: "analogue/m2100va", to: "analogue" },
+  { from: "analogue/m3100va", to: "analogue" },
 ];
 
 const nextConfig: NextConfig = {
