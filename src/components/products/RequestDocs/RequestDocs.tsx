@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { Glyph } from "@/components/ui/Glyph";
+import { SectionHeader } from "../SectionHeader/SectionHeader";
 import "./RequestDocs.css";
 
 type Props = {
@@ -19,13 +20,7 @@ export function RequestDocs({
 }: Props) {
   return (
     <section id="downloads" className="lt-pdp-rd">
-      <header className="lt-pdp-section-hd">
-        <div>
-          <div className="lt-pdp-section-hd__kicker">{kicker}</div>
-          <h2 className="lt-pdp-section-hd__title">{heading}</h2>
-          <p className="lt-pdp-section-hd__sub">{body}</p>
-        </div>
-      </header>
+      <SectionHeader kicker={kicker} title={heading} sub={body} />
       <div className="lt-pdp-rd__cta">
         <Button
           variant="primary"

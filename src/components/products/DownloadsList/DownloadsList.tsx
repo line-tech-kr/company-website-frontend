@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Glyph } from "@/components/ui/Glyph";
+import { SectionHeader } from "../SectionHeader/SectionHeader";
 import "./DownloadsList.css";
 
 export type DownloadItem = {
@@ -49,13 +50,7 @@ export function DownloadsList({
 
   return (
     <section id="downloads" className="lt-pdp-dl">
-      <header className="lt-pdp-section-hd">
-        <div>
-          <div className="lt-pdp-section-hd__kicker">{kicker}</div>
-          <h2 className="lt-pdp-section-hd__title">{heading}</h2>
-          <p className="lt-pdp-section-hd__sub">{sub}</p>
-        </div>
-      </header>
+      <SectionHeader kicker={kicker} title={heading} sub={sub} />
 
       <ul className="lt-pdp-dl__list" role="list">
         {items.map((it, i) => {

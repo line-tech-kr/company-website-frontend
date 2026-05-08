@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { M3030VAOutline } from "./M3030VAOutline";
+import { SectionHeader } from "../SectionHeader/SectionHeader";
 import "./DimensionDrawing.css";
 
 export type Callout = { id: string; label: string; value: string };
@@ -32,13 +33,7 @@ export function DimensionDrawing({
 
   return (
     <section id="dimensions" className="lt-pdp-dim">
-      <header className="lt-pdp-section-hd">
-        <div>
-          <div className="lt-pdp-section-hd__kicker">{kicker}</div>
-          <h2 className="lt-pdp-section-hd__title">{heading}</h2>
-          <p className="lt-pdp-section-hd__sub">{sub}</p>
-        </div>
-      </header>
+      <SectionHeader kicker={kicker} title={heading} sub={sub} />
 
       <div className="lt-pdp-dim__frame">
         <div className="lt-pdp-dim__canvas">
