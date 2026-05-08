@@ -235,12 +235,13 @@ export default async function ProductPage({ params }: Props) {
           date: formatDate(d.updatedAt, locale),
         });
       }
-      if (d.stpUrl) {
+      for (const v of d.stpVariants ?? []) {
+        if (!v.url) continue;
         items.push({
-          label: `${d.title} (STEP)`,
+          label: `${d.title} (STEP · ${v.fitting})`,
           type: "STEP",
-          href: d.stpUrl,
-          size: formatBytes(d.stpSize),
+          href: v.url,
+          size: formatBytes(v.size),
           date: formatDate(d.updatedAt, locale),
         });
       }

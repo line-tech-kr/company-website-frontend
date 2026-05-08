@@ -14,14 +14,23 @@ export const revalidate = 3600;
 
 type Props = { params: Promise<{ locale: string }> };
 
+type StpVariant = {
+  fitting: string;
+  sortKey?: number | null;
+  url?: string | null;
+  size?: number | null;
+};
+
 type DrawingItem = {
   _id: string;
   title: string;
   models?: string[] | null;
   series?: string | null;
   dwgUrl?: string | null;
-  stpUrl?: string | null;
+  dwgSize?: number | null;
+  stpVariants?: StpVariant[] | null;
   pdfUrl?: string | null;
+  pdfSize?: number | null;
 };
 
 export function generateStaticParams() {
@@ -81,7 +90,11 @@ export default async function DrawingsPage({ params }: Props) {
                 item.models && item.models.length > 0
                   ? item.models.join(" / ")
                   : "—";
-              const hasFile = item.pdfUrl || item.dwgUrl || item.stpUrl;
+              const stpVariants = (item.stpVariants ?? []).filter(
+                (v): v is StpVariant & { url: string } => Boolean(v.url),
+              );
+              const hasFile =
+                item.pdfUrl || item.dwgUrl || stpVariants.length > 0;
               return (
                 <tr key={item._id}>
                   <td>
@@ -109,9 +122,11 @@ export default async function DrawingsPage({ params }: Props) {
                           DWG
                         </span>
                       )}
-                      {item.stpUrl && (
+                      {stpVariants.length > 0 && (
                         <span className="dr-list__badge dr-list__badge--stp">
-                          STP
+                          {stpVariants.length === 1
+                            ? "STP"
+                            : `STP × ${stpVariants.length}`}
                         </span>
                       )}
                       {!hasFile && <span className="dr-list__badge">—</span>}
@@ -129,11 +144,17 @@ export default async function DrawingsPage({ params }: Props) {
                           DWG
                         </a>
                       )}
-                      {item.stpUrl && (
-                        <a href={item.stpUrl} download className="dr-list__btn">
-                          STP
+                      {stpVariants.map((v) => (
+                        <a
+                          key={`${item._id}-${v.fitting}`}
+                          href={v.url}
+                          download
+                          className="dr-list__btn"
+                          title={`STEP · ${v.fitting}`}
+                        >
+                          {`STP · ${v.fitting}`}
                         </a>
-                      )}
+                      ))}
                       {!hasFile && (
                         <Link
                           href={`/contact?topic=request&file=${encodeURIComponent(item.title)}`}
