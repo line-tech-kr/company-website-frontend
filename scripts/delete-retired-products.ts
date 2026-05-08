@@ -42,6 +42,9 @@ async function main() {
     digital: { _key: string; caption: string; product: { _ref: string } }[];
   }>(`*[_id == "category-showcases"][0]{ digital }`);
 
+  if (!doc?.digital)
+    throw new Error("category-showcases not found or has no digital field");
+
   const updatedDigital = doc.digital.map((item) =>
     item.product._ref === "product-md100c"
       ? {

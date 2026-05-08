@@ -34,6 +34,7 @@ const PRODUCT_LIST_PROJECTION = `
 const PRODUCT_DETAIL_PROJECTION = `
   ${PRODUCT_BASE_PROJECTION},
   digitalCommunication,
+  connectorType,
   images,
   dimensionDrawing,
   "datasheets": *[_type == "datasheet" && lower(model) == lower(^.model)]

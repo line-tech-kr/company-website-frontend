@@ -387,7 +387,7 @@ function parseMaxPressure(raw: string): MaxPressure | undefined {
   const rangeMatch = raw.match(/([\d.]+)\s*~\s*([\d.]+)\s*barA/i);
   if (rangeMatch) {
     const value = parseFloat(rangeMatch[2]);
-    return { display: `${value} barA`, value, unit: "barA", comparator: "lt" };
+    return { display: `${value} barA`, value, unit: "barA", comparator: "eq" };
   }
   throw new Error(`Cannot parse max pressure: "${raw}"`);
 }
