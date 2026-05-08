@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-24T18:46:34.414Z",
+  "generatedAt": "2026-05-08T13:26:17.733Z",
   "products": [
     {
       "model": "MS3700VA",
@@ -506,24 +506,24 @@
       ]
     },
     {
-      "model": "MD100C",
-      "slug": "md100c",
+      "model": "MD150C",
+      "slug": "md150c",
       "category": "digital-mfc",
       "boTable": "02_03_e",
       "wrId": 7,
       "images": [
         {
-          "path": "/products/md100c/product-1.jpg",
+          "path": "/products/md150c/product-1.jpg",
           "source": "https://line-tech.co.kr/data/file/02_03_e/3543863211_B5LCviJy_f92d55c7c3332660c45abba8c338f555777063fe.jpg",
           "kind": "product"
         },
         {
-          "path": "/products/md100c/product-2.jpg",
+          "path": "/products/md150c/product-2.jpg",
           "source": "https://line-tech.co.kr/data/file/02_03_e/3543863211_b6L5HewT_c3cab287540724ed4bb61c2db9cff5afef4066ef.jpg",
           "kind": "product"
         },
         {
-          "path": "/products/md100c/editor-1.jpg",
+          "path": "/products/md150c/editor-1.jpg",
           "source": "https://line-tech.co.kr/data/editor/2101/6c6493ad98045f5ce9beacb6900e06e4_1610530539_2925.jpg",
           "kind": "editor"
         }
@@ -626,24 +626,24 @@
       ]
     },
     {
-      "model": "MD100M",
-      "slug": "md100m",
+      "model": "MD150M",
+      "slug": "md150m",
       "category": "digital-mfm",
       "boTable": "02_04_e",
       "wrId": 4,
       "images": [
         {
-          "path": "/products/md100m/product-1.jpg",
+          "path": "/products/md150m/product-1.jpg",
           "source": "https://line-tech.co.kr/data/file/02_04_e/3543863211_4Os0PARd_80ef67428433c6755db138dd5d102df5fc345ab7.jpg",
           "kind": "product"
         },
         {
-          "path": "/products/md100m/product-2.jpg",
+          "path": "/products/md150m/product-2.jpg",
           "source": "https://line-tech.co.kr/data/file/02_04_e/3543863211_0vmxSg3Y_9779982bf00d0963d5fc300ce0f2e8a7571807c6.jpg",
           "kind": "product"
         },
         {
-          "path": "/products/md100m/editor-1.jpg",
+          "path": "/products/md150m/editor-1.jpg",
           "source": "https://line-tech.co.kr/data/editor/2101/6c6493ad98045f5ce9beacb6900e06e4_1610533337_7587.jpg",
           "kind": "editor"
         }
@@ -770,96 +770,24 @@
       ]
     },
     {
-      "model": "LD030C",
-      "slug": "ld030c",
-      "category": "display-mfc",
-      "boTable": "02_07_e",
-      "wrId": 1,
-      "images": [
-        {
-          "path": "/products/ld030c/product-1.jpg",
-          "source": "https://line-tech.co.kr/data/file/02_07_e/3543863211_CdeskEhF_97f05749a279f5a4f92a02319b784b428d496c06.jpg",
-          "kind": "product"
-        },
-        {
-          "path": "/products/ld030c/product-2.jpg",
-          "source": "https://line-tech.co.kr/data/file/02_07_e/3543863211_HSiGUaOd_10ecf442b07f91036c6b6f89d3c1155014d28dcb.jpg",
-          "kind": "product"
-        },
-        {
-          "path": "/products/ld030c/editor-1.jpg",
-          "source": "https://line-tech.co.kr/data/editor/2101/a8cf6b714608d1ea29d5c103657b47bd_1610590518_9411.jpg",
-          "kind": "editor"
-        }
-      ]
-    },
-    {
-      "model": "LM030C",
-      "slug": "lm030c",
-      "category": "mems-mfc",
-      "boTable": "02_07_02_e",
-      "wrId": 1,
-      "images": [
-        {
-          "path": "/products/lm030c/product-1.jpg",
-          "source": "https://line-tech.co.kr/data/file/02_07_02_e/3543863211_QW4HdDF9_205884698179f8cb2b7ec8f041abfbfd9420f806.jpg",
-          "kind": "product"
-        },
-        {
-          "path": "/products/lm030c/product-2.jpg",
-          "source": "https://line-tech.co.kr/data/file/02_07_02_e/3543863211_fGm1Tq5k_3d9fbc2d4458f02756d3ce7a7930dc18c774492f.jpg",
-          "kind": "product"
-        },
-        {
-          "path": "/products/lm030c/editor-1.jpg",
-          "source": "https://line-tech.co.kr/data/editor/2101/a8cf6b714608d1ea29d5c103657b47bd_1610591686_3478.jpg",
-          "kind": "editor"
-        }
-      ]
-    },
-    {
-      "model": "LM030M",
-      "slug": "lm030m",
-      "category": "mems-mfm",
-      "boTable": "02_07_03_e",
-      "wrId": 1,
-      "images": [
-        {
-          "path": "/products/lm030m/product-1.jpg",
-          "source": "https://line-tech.co.kr/data/file/02_07_03_e/3543863211_n2Np1RmA_c853b9b085b01e3a52bb7131f4f307e458c36164.jpg",
-          "kind": "product"
-        },
-        {
-          "path": "/products/lm030m/product-2.jpg",
-          "source": "https://line-tech.co.kr/data/file/02_07_03_e/3543863211_WGOiYtue_1c19e50c5aefa2fad2f35621e12a4f1f5370261d.jpg",
-          "kind": "product"
-        },
-        {
-          "path": "/products/lm030m/editor-1.jpg",
-          "source": "https://line-tech.co.kr/data/editor/2101/a8cf6b714608d1ea29d5c103657b47bd_1610591838_3011.jpg",
-          "kind": "editor"
-        }
-      ]
-    },
-    {
-      "model": "EX070C",
-      "slug": "ex070c",
+      "model": "EX70C",
+      "slug": "ex70c",
       "category": "exproof-mfc",
       "boTable": "02_07_04_e",
       "wrId": 1,
       "images": [
         {
-          "path": "/products/ex070c/product-1.jpg",
+          "path": "/products/ex70c/product-1.jpg",
           "source": "https://line-tech.co.kr/data/file/02_07_04_e/3543863211_dsinrUW6_bd8d9df7a5038af87556cdd621a6050f4899f711.jpg",
           "kind": "product"
         },
         {
-          "path": "/products/ex070c/product-2.jpg",
+          "path": "/products/ex70c/product-2.jpg",
           "source": "https://line-tech.co.kr/data/file/02_07_04_e/3543863211_SxoJt9TO_46525cc09444571d2deb81485360d72d2969ba2c.jpg",
           "kind": "product"
         },
         {
-          "path": "/products/ex070c/editor-1.jpg",
+          "path": "/products/ex70c/editor-1.jpg",
           "source": "https://line-tech.co.kr/data/editor/2101/a8cf6b714608d1ea29d5c103657b47bd_1610592285_2101.jpg",
           "kind": "editor"
         }
@@ -890,24 +818,24 @@
       ]
     },
     {
-      "model": "EX070M",
-      "slug": "ex070m",
+      "model": "EX70M",
+      "slug": "ex70m",
       "category": "exproof-mfm",
       "boTable": "02_07_05_e",
       "wrId": 1,
       "images": [
         {
-          "path": "/products/ex070m/product-1.jpg",
+          "path": "/products/ex70m/product-1.jpg",
           "source": "https://line-tech.co.kr/data/file/02_07_05_e/3543863211_qxGUdjVH_fddd4e125e35852245c5af2c6189be3c1502e576.jpg",
           "kind": "product"
         },
         {
-          "path": "/products/ex070m/product-2.jpg",
+          "path": "/products/ex70m/product-2.jpg",
           "source": "https://line-tech.co.kr/data/file/02_07_05_e/3543863211_FB3dYNVm_3177f76098a7c5ba5d04de1f98087b6c5b6e1dec.jpg",
           "kind": "product"
         },
         {
-          "path": "/products/ex070m/editor-1.jpg",
+          "path": "/products/ex70m/editor-1.jpg",
           "source": "https://line-tech.co.kr/data/editor/2101/a8cf6b714608d1ea29d5c103657b47bd_1610592746_796.jpg",
           "kind": "editor"
         }
@@ -934,6 +862,34 @@
           "path": "/products/ex1000m/editor-1.jpg",
           "source": "https://line-tech.co.kr/data/editor/2101/a8cf6b714608d1ea29d5c103657b47bd_1610592923_3115.jpg",
           "kind": "editor"
+        }
+      ]
+    },
+    {
+      "model": "DO400",
+      "slug": "do400",
+      "category": "analogue-mfc",
+      "boTable": "_2026",
+      "wrId": null,
+      "images": [
+        {
+          "path": "/products/do400/product-1.jpg",
+          "source": "manual:DO400 Maunal.pdf p.1",
+          "kind": "product"
+        }
+      ]
+    },
+    {
+      "model": "LEPC",
+      "slug": "lepc",
+      "category": "specialized-mfc",
+      "boTable": "_2026",
+      "wrId": null,
+      "images": [
+        {
+          "path": "/products/lepc/product-1.jpg",
+          "source": "company-docs-private/docs/catalog-extract/2026/images/lepc/product-render.png",
+          "kind": "product"
         }
       ]
     }
