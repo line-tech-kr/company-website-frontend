@@ -1,0 +1,1 @@
+export { LogoLockup } from "./LogoLockup";
