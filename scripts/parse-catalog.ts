@@ -142,40 +142,6 @@ const I18N: Record<string, LocalizedString> = {
     zh: "紧凑型连接结构",
   },
 
-  // ─── LD-specific (display series) ───
-  "Accurate Real Time Flow Measurements": {
-    en: "Accurate Real Time Flow Measurements",
-    ko: "실시간 정밀 유량 측정",
-    zh: "实时精准流量测量",
-  },
-  "Real Time Setting Changes": {
-    en: "Real Time Setting Changes",
-    ko: "실시간 설정 변경 지원",
-    zh: "支持实时参数调整",
-  },
-  "Built-in 7-Segment Display": {
-    en: "Built-in 7-Segment Display",
-    ko: "7-세그먼트 디스플레이 내장",
-    zh: "内置七段数码显示屏",
-  },
-
-  // ─── LM-specific (MEMS series) ───
-  "MEMS-Tech Sensor": {
-    en: "MEMS-Tech Sensor",
-    ko: "MEMS 기반 센서",
-    zh: "MEMS 传感器",
-  },
-  "Cost-Efficient Design": {
-    en: "Cost-Efficient Design",
-    ko: "경제적인 설계",
-    zh: "高性价比设计",
-  },
-  "Improved Response Time": {
-    en: "Improved Response Time",
-    ko: "향상된 응답 속도",
-    zh: "更快的响应速度",
-  },
-
   // ─── EX-specific (explosion-proof series) ───
   "Explosion-Proof for Hazardous Environments": {
     en: "Explosion-Proof for Hazardous Environments",
@@ -197,6 +163,28 @@ const I18N: Record<string, LocalizedString> = {
     ko: "견고한 산업용 구조",
     zh: "坚固的工业级结构",
   },
+
+  // ─── LEPC-specific (electronic pressure controller) ───
+  "Electronic Pressure Controller": {
+    en: "Electronic Pressure Controller",
+    ko: "전자식 압력 제어기 (EPC)",
+    zh: "电子式压力控制器 (EPC)",
+  },
+  "OLED Display": {
+    en: "OLED Display",
+    ko: "OLED 디스플레이 내장",
+    zh: "内置 OLED 显示屏",
+  },
+  "RS-485 / Modbus RTU": {
+    en: "RS-485 / Modbus RTU",
+    ko: "RS-485 / Modbus RTU 통신",
+    zh: "RS-485 / Modbus RTU 通信",
+  },
+  "Precise Pressure Control": {
+    en: "Precise Pressure Control",
+    ko: "정밀 압력 제어",
+    zh: "精密压力控制",
+  },
 };
 
 // Track which keys were requested but missing — surfaced at end of run.
@@ -214,11 +202,10 @@ function localize(en: string): LocalizedString {
 // Per-product label overrides — used when the catalog heading is a known
 // inconsistency. Documented inline so it's obvious why a value diverges.
 const PRODUCT_LABEL_OVERRIDES: Record<string, string> = {
-  // LD030M heading in catalog says "MEMS-Tech Mass Flow Meter" but LD is the
-  // display series (catalog section opener: "LD Series — built-in 7-segment
-  // display"). Treat as Mass Flow Meter with Display, matching its sibling
-  // LD030C and the section narrative.
-  LD030M: "Mass Flow Meter with Display",
+  // The 2026 catalog section heading reads "LEPC — Mass Flow Controller" but
+  // LEPC is an Electronic Pressure Controller (the at-a-glance Type column
+  // labels it "EPC"). Override the heading to the correct product type.
+  LEPC: "Electronic Pressure Controller",
 };
 
 const SHARED_FEATURES_M_MS_MD = [
@@ -229,28 +216,6 @@ const SHARED_FEATURES_M_MS_MD = [
   "Long-Term Stability",
   "High Corrosion Resistance",
   "Highly Stable Removable Sensor",
-  "Compact Connection",
-];
-
-const FEATURES_LD = [
-  "Accurate Real Time Flow Measurements",
-  "Real Time Setting Changes",
-  "Built-in 7-Segment Display",
-  "Fast Response",
-  "Wide Pressure Range Compatibility",
-  "Excellent Linearity",
-  "Long-Term Stability",
-  "High Corrosion Resistance",
-  "Compact Connection",
-];
-
-const FEATURES_LM = [
-  "MEMS-Tech Sensor",
-  "Cost-Efficient Design",
-  "Improved Response Time",
-  "Excellent Linearity",
-  "Long-Term Stability",
-  "High Corrosion Resistance",
   "Compact Connection",
 ];
 
@@ -265,9 +230,14 @@ const FEATURES_EX = [
   "High Corrosion Resistance",
 ];
 
-// LEPC is a low-pressure specialized controller — no source feature text in 2026 catalog.
+// LEPC is an electronic pressure controller (not a flow controller despite
+// the catalog section heading); features focus on pressure-control behaviour
+// and the digital interface that distinguishes it from EX-series MFCs.
 const FEATURES_LEPC = [
-  "Accurate at Low Flow",
+  "Precise Pressure Control",
+  "OLED Display",
+  "RS-485 / Modbus RTU",
+  "Wide Pressure Range Compatibility",
   "Excellent Linearity",
   "Long-Term Stability",
   "High Corrosion Resistance",
@@ -282,7 +252,7 @@ function normalizeModelName(raw: string): string {
 function determineSeries(model: string): Product["series"] {
   if (/^MD/.test(model)) return "digital";
   if (/^M[S]?\d/.test(model)) return "analogue";
-  if (/^(LD|LM|EX|LEPC)/.test(model)) return "specialized";
+  if (/^(EX|LEPC)/.test(model)) return "specialized";
   throw new Error(`Cannot determine series for model "${model}"`);
 }
 
@@ -293,10 +263,8 @@ function determineFunction(headingTitle: string): Product["function"] {
 }
 
 function featuresFor(model: string): string[] {
-  if (/^LD/.test(model)) return FEATURES_LD;
-  if (/^LM/.test(model)) return FEATURES_LM;
+  if (model === "LEPC") return FEATURES_LEPC;
   if (/^EX/.test(model)) return FEATURES_EX;
-  if (/^LEPC/.test(model)) return FEATURES_LEPC;
   return SHARED_FEATURES_M_MS_MD;
 }
 

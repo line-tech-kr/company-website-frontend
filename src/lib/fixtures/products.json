@@ -132,8 +132,7 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "15-Pin D-Connector",
-    "tagSlugs": ["ultra-low-flow"]
+    "connectorType": "15-Pin D-Connector"
   },
   {
     "model": "M3200VA",
@@ -268,8 +267,7 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector",
-    "tagSlugs": ["mid-flow"]
+    "connectorType": "9-Pin D-Connector"
   },
   {
     "model": "MS3150VA",
@@ -404,8 +402,7 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector",
-    "tagSlugs": ["mid-flow"]
+    "connectorType": "9-Pin D-Connector"
   },
   {
     "model": "MS3400VA",
@@ -540,8 +537,7 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector",
-    "tagSlugs": ["high-flow"]
+    "connectorType": "9-Pin D-Connector"
   },
   {
     "model": "MS3500VA",
@@ -672,8 +668,7 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector",
-    "tagSlugs": ["high-flow"]
+    "connectorType": "9-Pin D-Connector"
   },
   {
     "model": "MS3600VA",
@@ -804,8 +799,7 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector",
-    "tagSlugs": ["high-flow"]
+    "connectorType": "9-Pin D-Connector"
   },
   {
     "model": "MS3700VA",
@@ -932,8 +926,7 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector",
-    "tagSlugs": ["high-flow"]
+    "connectorType": "9-Pin D-Connector"
   },
   {
     "model": "MS3800VA",
@@ -1060,8 +1053,7 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector",
-    "tagSlugs": ["high-flow"]
+    "connectorType": "9-Pin D-Connector"
   },
   {
     "model": "M2030VA",
@@ -1190,8 +1182,7 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "15-Pin D-Connector",
-    "tagSlugs": ["ultra-low-flow", "meter-only"]
+    "connectorType": "15-Pin D-Connector"
   },
   {
     "model": "M2200VA",
@@ -1320,8 +1311,7 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector",
-    "tagSlugs": ["meter-only"]
+    "connectorType": "9-Pin D-Connector"
   },
   {
     "model": "MS2150VA",
@@ -1449,8 +1439,7 @@
     },
     "datasheets": [],
     "manuals": [],
-    "drawings": [],
-    "tagSlugs": ["meter-only"]
+    "drawings": []
   },
   {
     "model": "MS2400VA",
@@ -1579,8 +1568,7 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector",
-    "tagSlugs": ["high-flow", "meter-only"]
+    "connectorType": "9-Pin D-Connector"
   },
   {
     "model": "MS2500VA",
@@ -1705,8 +1693,7 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector",
-    "tagSlugs": ["high-flow", "meter-only"]
+    "connectorType": "9-Pin D-Connector"
   },
   {
     "model": "MS2600VA",
@@ -1831,8 +1818,7 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector",
-    "tagSlugs": ["high-flow", "meter-only"]
+    "connectorType": "9-Pin D-Connector"
   },
   {
     "model": "MS2700VA",
@@ -1953,8 +1939,7 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector",
-    "tagSlugs": ["high-flow", "meter-only"]
+    "connectorType": "9-Pin D-Connector"
   },
   {
     "model": "MS2800VA",
@@ -2075,8 +2060,7 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector",
-    "tagSlugs": ["high-flow", "meter-only"]
+    "connectorType": "9-Pin D-Connector"
   },
   {
     "model": "MD150C",
@@ -2217,8 +2201,7 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    },
-    "tagSlugs": ["digital"]
+    }
   },
   {
     "model": "MD30C",
@@ -2359,8 +2342,7 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    },
-    "tagSlugs": ["digital", "ultra-low-flow"]
+    }
   },
   {
     "model": "MD400C",
@@ -2501,8 +2483,7 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    },
-    "tagSlugs": ["digital"]
+    }
   },
   {
     "model": "MD500C",
@@ -2639,8 +2620,7 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    },
-    "tagSlugs": ["digital", "high-flow"]
+    }
   },
   {
     "model": "MD600C",
@@ -2777,8 +2757,7 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    },
-    "tagSlugs": ["digital", "high-flow"]
+    }
   },
   {
     "model": "MD700C",
@@ -2911,8 +2890,7 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    },
-    "tagSlugs": ["digital", "high-flow"]
+    }
   },
   {
     "model": "MD800C",
@@ -3045,8 +3023,7 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    },
-    "tagSlugs": ["digital", "high-flow"]
+    }
   },
   {
     "model": "MD150M",
@@ -3181,8 +3158,7 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    },
-    "tagSlugs": ["digital", "meter-only"]
+    }
   },
   {
     "model": "MD30M",
@@ -3317,8 +3293,7 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    },
-    "tagSlugs": ["digital", "ultra-low-flow", "meter-only"]
+    }
   },
   {
     "model": "MD400M",
@@ -3453,8 +3428,7 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    },
-    "tagSlugs": ["digital", "meter-only"]
+    }
   },
   {
     "model": "MD500M",
@@ -3585,8 +3559,7 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    },
-    "tagSlugs": ["digital", "high-flow", "meter-only"]
+    }
   },
   {
     "model": "MD600M",
@@ -3717,8 +3690,7 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    },
-    "tagSlugs": ["digital", "high-flow", "meter-only"]
+    }
   },
   {
     "model": "MD700M",
@@ -3845,8 +3817,7 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    },
-    "tagSlugs": ["digital", "high-flow", "meter-only"]
+    }
   },
   {
     "model": "MD800M",
@@ -3973,8 +3944,7 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    },
-    "tagSlugs": ["digital", "high-flow", "meter-only"]
+    }
   },
   {
     "model": "EX1000C",
@@ -4112,8 +4082,7 @@
     },
     "datasheets": [],
     "manuals": [],
-    "drawings": [],
-    "tagSlugs": ["explosion-proof", "hazardous-environment", "high-flow"]
+    "drawings": []
   },
   {
     "model": "EX70C",
@@ -4255,8 +4224,7 @@
     },
     "datasheets": [],
     "manuals": [],
-    "drawings": [],
-    "tagSlugs": ["explosion-proof", "hazardous-environment"]
+    "drawings": []
   },
   {
     "model": "LEPC",
@@ -4266,16 +4234,31 @@
     "series": "specialized",
     "function": "MFC",
     "productLabel": {
-      "en": "Mass Flow Controller",
-      "ko": "질량 유량 제어기 (MFC)",
-      "zh": "质量流量控制器 (MFC)"
+      "en": "Electronic Pressure Controller",
+      "ko": "전자식 압력 제어기 (EPC)",
+      "zh": "电子式压力控制器 (EPC)"
     },
     "tags": [],
     "features": [
       {
-        "en": "Accurate at Low Flow",
-        "ko": "저유량에서도 정밀한 측정",
-        "zh": "低流量下精准测量"
+        "en": "Precise Pressure Control",
+        "ko": "정밀 압력 제어",
+        "zh": "精密压力控制"
+      },
+      {
+        "en": "OLED Display",
+        "ko": "OLED 디스플레이 내장",
+        "zh": "内置 OLED 显示屏"
+      },
+      {
+        "en": "RS-485 / Modbus RTU",
+        "ko": "RS-485 / Modbus RTU 통신",
+        "zh": "RS-485 / Modbus RTU 通信"
+      },
+      {
+        "en": "Wide Pressure Range Compatibility",
+        "ko": "넓은 압력 범위 대응",
+        "zh": "宽压力范围适用"
       },
       {
         "en": "Excellent Linearity",
@@ -4364,13 +4347,12 @@
         "display": "6 barA",
         "value": 6,
         "unit": "barA",
-        "comparator": "lt"
+        "comparator": "eq"
       }
     },
     "datasheets": [],
     "manuals": [],
-    "drawings": [],
-    "tagSlugs": ["low-pressure", "ultra-low-flow"]
+    "drawings": []
   },
   {
     "model": "EX1000M",
@@ -4502,13 +4484,7 @@
     },
     "datasheets": [],
     "manuals": [],
-    "drawings": [],
-    "tagSlugs": [
-      "explosion-proof",
-      "hazardous-environment",
-      "high-flow",
-      "meter-only"
-    ]
+    "drawings": []
   },
   {
     "model": "EX70M",
@@ -4644,7 +4620,6 @@
     },
     "datasheets": [],
     "manuals": [],
-    "drawings": [],
-    "tagSlugs": ["explosion-proof", "hazardous-environment", "meter-only"]
+    "drawings": []
   }
 ]
