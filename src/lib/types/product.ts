@@ -133,6 +133,7 @@ export const SanityProductSchema = z.object({
     .array(SanityImageSchema.extend({ _key: z.string() }))
     .nullable()
     .optional(),
+  cutout: SanityImageSchema.nullable().optional(),
   dimensionDrawing: SanityImageSchema.nullable().optional(),
   datasheets: z
     .array(

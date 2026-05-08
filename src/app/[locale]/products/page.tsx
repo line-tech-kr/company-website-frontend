@@ -22,7 +22,7 @@ import {
   type RotatingSlide,
   type SlideAccent,
 } from "./RotatingFeatured";
-import { flagshipImageUrl, pickFlagship } from "@/lib/products/flagship";
+import { flagshipCutoutUrl, pickFlagship } from "@/lib/products/flagship";
 import "./products-list.css";
 
 export const revalidate = 3600;
@@ -94,7 +94,7 @@ export default async function ProductsListPage({ params }: Props) {
       eyebrow: tProducts(`categories.${slug}.title`),
       model: flagship.model,
       blurb: tProducts(`categories.${slug}.lede`),
-      image: flagshipImageUrl(flagship),
+      image: flagshipCutoutUrl(flagship.model, flagship.cutout),
       cta: tProducts("showcase.viewProduct"),
     };
   }).filter((x): x is RotatingSlide => Boolean(x));

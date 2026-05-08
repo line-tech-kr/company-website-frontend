@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Glyph } from "@/components/ui/Glyph";
 import type { Product } from "@/lib/types/product";
@@ -10,6 +11,7 @@ type Props = {
   categoryLabel: string;
   quoteLabel: string;
   specsLabel: string;
+  cutoutUrl: string | null;
 };
 
 export function ProductHero({
@@ -18,6 +20,7 @@ export function ProductHero({
   categoryLabel,
   quoteLabel,
   specsLabel,
+  cutoutUrl,
 }: Props) {
   const name = product.productLabel[locale];
   const tagline = product.features
@@ -59,24 +62,33 @@ export function ProductHero({
       <div className="lt-pdp-hero__media">
         <div className="lt-pdp-hero__imgwrap">
           <div className="lt-pdp-hero__grid" aria-hidden />
-          <div className="lt-pdp-hero__imgframe">
+          <div className="lt-pdp-hero__imgframe" aria-hidden>
             <span className="lt-pdp-hero__corner lt-pdp-hero__corner--tl" />
             <span className="lt-pdp-hero__corner lt-pdp-hero__corner--tr" />
             <span className="lt-pdp-hero__corner lt-pdp-hero__corner--bl" />
             <span className="lt-pdp-hero__corner lt-pdp-hero__corner--br" />
-            <div className="lt-pdp-hero__label">
-              <div className="lt-pdp-hero__label-row">
-                <span>PLACEHOLDER</span>
-                <span>0001 / A</span>
-              </div>
-              <div className="lt-pdp-hero__label-body">
-                {product.model} · {product.function}
-              </div>
-              <div className="lt-pdp-hero__label-row">
-                <span>{product.model}</span>
-                <span>N₂ · {product.massFlowSpecs.flowRange.display}</span>
-              </div>
-            </div>
+          </div>
+          {cutoutUrl && (
+            <Image
+              src={cutoutUrl}
+              alt={`Line Tech ${product.model}`}
+              fill
+              sizes="(max-width: 1000px) 100vw, 50vw"
+              priority
+              className="lt-pdp-hero__img"
+            />
+          )}
+          <div className="lt-pdp-hero__stamp lt-pdp-hero__stamp--tl">
+            {product.model}
+          </div>
+          <div className="lt-pdp-hero__stamp lt-pdp-hero__stamp--tr">
+            {product.function}
+          </div>
+          <div className="lt-pdp-hero__stamp lt-pdp-hero__stamp--bl">
+            LINE TECH
+          </div>
+          <div className="lt-pdp-hero__stamp lt-pdp-hero__stamp--br">
+            N₂ · {product.massFlowSpecs.flowRange.display}
           </div>
         </div>
       </div>

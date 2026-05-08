@@ -2,6 +2,8 @@ import { urlFor } from "@/sanity/imageUrl";
 import { categoryForSeries, type CategorySlug } from "@/lib/categories";
 import type { Product } from "@/lib/types/product";
 
+type SanityImageRef = Parameters<typeof urlFor>[0];
+
 export const FLAGSHIP_IMAGE_PLACEHOLDER = "/products/lti/placeholder.svg";
 
 export const FLAGSHIP_MODEL: Partial<Record<CategorySlug, string>> = {
@@ -35,4 +37,19 @@ export function flagshipImageUrl(flagship: Product): string {
     return FLAGSHIP_IMAGE_PLACEHOLDER;
   }
   return urlFor(image).width(720).url();
+}
+
+export function flagshipCutoutUrl(
+  model: string,
+  cutout: SanityImageRef | null | undefined,
+): string {
+  if (!cutout) {
+    if (process.env.NODE_ENV !== "production") {
+      console.warn(
+        `[home feature] No cutout for flagship ${model} — showing placeholder`,
+      );
+    }
+    return FLAGSHIP_IMAGE_PLACEHOLDER;
+  }
+  return urlFor(cutout).width(720).url();
 }

@@ -19,6 +19,7 @@ import {
 import { RequestDocs } from "@/components/products/RequestDocs";
 import { formatBytes, formatDate } from "@/lib/format";
 import { sanityClient, sanityBuildClient } from "@/sanity/client";
+import { urlFor } from "@/sanity/imageUrl";
 import { fetchSanity } from "@/sanity/fetch";
 import { productBySlugQuery, productSlugsQuery } from "@/sanity/queries";
 import {
@@ -336,6 +337,11 @@ export default async function ProductPage({ params }: Props) {
           categoryLabel={categoryLabel}
           quoteLabel={tPdp("ctas.quote")}
           specsLabel={tPdp("ctas.viewSpecs")}
+          cutoutUrl={
+            product.cutout?.asset
+              ? urlFor(product.cutout).width(960).url()
+              : null
+          }
         />
 
         <TabNav tabs={tabs} ariaLabel={tA11y("sectionNav")} />

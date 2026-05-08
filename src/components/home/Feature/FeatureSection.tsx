@@ -4,6 +4,7 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Glyph } from "@/components/ui/Glyph";
+import { FLAGSHIP_IMAGE_PLACEHOLDER } from "@/lib/products/flagship";
 
 type BulletLabels = {
   flow: string;
@@ -18,6 +19,7 @@ type Props = {
   cta: string;
   bulletLabels: BulletLabels;
   slides: Slide[];
+  cutoutByModel: Record<string, string>;
 };
 
 type SlideSpec = {
@@ -83,7 +85,13 @@ const subscribeReducedMotion = (cb: () => void) => {
 const getRMSnapshot = () => window.matchMedia(REDUCED_MOTION_QUERY).matches;
 const getRMServerSnapshot = () => false;
 
-export function FeatureSection({ kicker, cta, bulletLabels, slides }: Props) {
+export function FeatureSection({
+  kicker,
+  cta,
+  bulletLabels,
+  slides,
+  cutoutByModel,
+}: Props) {
   const [active, setActive] = useState(0);
   const [mouseInside, setMouseInside] = useState(false);
   const [focusInside, setFocusInside] = useState(false);
@@ -155,7 +163,7 @@ export function FeatureSection({ kicker, cta, bulletLabels, slides }: Props) {
                   aria-hidden={i !== active}
                 >
                   <Image
-                    src={`/products/${sp.slug}/product-1.jpg`}
+                    src={cutoutByModel[s.model] ?? FLAGSHIP_IMAGE_PLACEHOLDER}
                     alt={`Line Tech ${s.model}`}
                     fill
                     className="ho-feature__chip-img"
