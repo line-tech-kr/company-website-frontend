@@ -11,6 +11,8 @@ import { Contact } from "@/components/home/Contact";
 import { buildHomeMetadata } from "@/lib/seo";
 import "@/components/home/home-shell.css";
 
+export const revalidate = 3600;
+
 type Props = { params: Promise<{ locale: Locale }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

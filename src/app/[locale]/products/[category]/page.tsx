@@ -63,7 +63,9 @@ export default async function CategoryPage({ params }: Props) {
     accuracy: e.accuracy,
     image: e.cutout?.asset
       ? urlFor(e.cutout).width(960).url()
-      : "/products/lti/placeholder.svg",
+      : e.image?.asset
+        ? urlFor(e.image).width(960).url()
+        : "/products/lti/placeholder.svg",
     href: `/${locale}/products/${category}/${e.slug}`,
   }));
 

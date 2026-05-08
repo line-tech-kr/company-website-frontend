@@ -94,9 +94,13 @@ export function ProductStack({
           </thead>
           <tbody>
             {products.map((p) => {
-              const imageSrc = p.cutout?.asset
-                ? urlFor(p.cutout).width(128).url()
-                : null;
+              const fallback = p.images?.[0];
+              const source = p.cutout?.asset
+                ? p.cutout
+                : fallback?.asset
+                  ? fallback
+                  : null;
+              const imageSrc = source ? urlFor(source).width(128).url() : null;
               return (
                 <ProductRow
                   key={p.slug.current}

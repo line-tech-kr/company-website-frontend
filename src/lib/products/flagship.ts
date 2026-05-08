@@ -44,9 +44,11 @@ export function flagshipCutoutUrl(
   cutout: SanityImageRef | null | undefined,
 ): string {
   if (!cutout) {
-    console.warn(
-      `[home feature] No cutout for flagship ${model} — showing placeholder`,
-    );
+    if (process.env.NODE_ENV !== "production") {
+      console.warn(
+        `[home feature] No cutout for flagship ${model} — showing placeholder`,
+      );
+    }
     return FLAGSHIP_IMAGE_PLACEHOLDER;
   }
   return urlFor(cutout).width(720).url();
