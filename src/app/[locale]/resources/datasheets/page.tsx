@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
+import { DocRow } from "@/components/resources/DocRow";
 import { sanityClient } from "@/sanity/client";
 import { allDatasheetsQuery } from "@/sanity/queries";
 import { routing } from "@/i18n/routing";
@@ -69,6 +70,25 @@ export default async function DatasheetsPage({ params }: Props) {
 
   const ungrouped = datasheets.filter((d) => !d.series);
 
+  const renderRow = (item: DatasheetItem) => (
+    <DocRow
+      key={item._id}
+      label={item.title}
+      meta={[modelLabel(item), item.rev, item.publishedAt]}
+      action={
+        item.fileUrl ? (
+          <a href={item.fileUrl} download className="dr-list__btn">
+            {tRes("download")}
+          </a>
+        ) : (
+          <span className="dr-list__btn dr-list__btn--disabled">
+            {tRes("comingSoon")}
+          </span>
+        )
+      }
+    />
+  );
+
   return (
     <main className="lt-wrap dr-sub">
       <Breadcrumbs items={breadcrumbs} />
@@ -89,70 +109,10 @@ export default async function DatasheetsPage({ params }: Props) {
                   {tRes(`seriesLabel.${s}`)}
                 </h2>
               </li>
-              {grouped[s].map((item) => (
-                <li key={item._id} className="dr-list__row">
-                  <span className="dr-list__badge dr-list__badge--pdf">
-                    PDF
-                  </span>
-                  <div>
-                    <div className="dr-list__label">{item.title}</div>
-                    {(modelLabel(item) || item.rev || item.publishedAt) && (
-                      <div className="dr-list__meta">
-                        {modelLabel(item) && <span>{modelLabel(item)}</span>}
-                        {modelLabel(item) && (item.rev || item.publishedAt) && (
-                          <span className="dr-list__sep">·</span>
-                        )}
-                        {item.rev && <span>{item.rev}</span>}
-                        {item.rev && item.publishedAt && (
-                          <span className="dr-list__sep">·</span>
-                        )}
-                        {item.publishedAt && <span>{item.publishedAt}</span>}
-                      </div>
-                    )}
-                  </div>
-                  {item.fileUrl ? (
-                    <a href={item.fileUrl} download className="dr-list__btn">
-                      {tRes("download")}
-                    </a>
-                  ) : (
-                    <span className="dr-list__btn dr-list__btn--disabled">
-                      {tRes("comingSoon")}
-                    </span>
-                  )}
-                </li>
-              ))}
+              {grouped[s].map(renderRow)}
             </Fragment>
           ))}
-          {ungrouped.map((item) => (
-            <li key={item._id} className="dr-list__row">
-              <span className="dr-list__badge dr-list__badge--pdf">PDF</span>
-              <div>
-                <div className="dr-list__label">{item.title}</div>
-                {(modelLabel(item) || item.rev || item.publishedAt) && (
-                  <div className="dr-list__meta">
-                    {modelLabel(item) && <span>{modelLabel(item)}</span>}
-                    {modelLabel(item) && (item.rev || item.publishedAt) && (
-                      <span className="dr-list__sep">·</span>
-                    )}
-                    {item.rev && <span>{item.rev}</span>}
-                    {item.rev && item.publishedAt && (
-                      <span className="dr-list__sep">·</span>
-                    )}
-                    {item.publishedAt && <span>{item.publishedAt}</span>}
-                  </div>
-                )}
-              </div>
-              {item.fileUrl ? (
-                <a href={item.fileUrl} download className="dr-list__btn">
-                  {tRes("download")}
-                </a>
-              ) : (
-                <span className="dr-list__btn dr-list__btn--disabled">
-                  {tRes("comingSoon")}
-                </span>
-              )}
-            </li>
-          ))}
+          {ungrouped.map(renderRow)}
         </ul>
       )}
     </main>
