@@ -19,9 +19,19 @@ const PRODUCTS_DIR = path.join(process.cwd(), "public/products");
 
 // Products with updated 2026 cutout PNGs (prefer cutout-2026.png over cutout.png)
 const CUTOUT_2026 = [
-  "m2030va", "m3030va",
-  "ms2400va", "ms2500va", "ms2600va", "ms2700va", "ms2800va",
-  "ms3150va", "ms3400va", "ms3500va", "ms3600va", "ms3700va", "ms3800va",
+  "m2030va",
+  "m3030va",
+  "ms2400va",
+  "ms2500va",
+  "ms2600va",
+  "ms2700va",
+  "ms2800va",
+  "ms3150va",
+  "ms3400va",
+  "ms3500va",
+  "ms3600va",
+  "ms3700va",
+  "ms3800va",
 ];
 
 // Renamed slugs — their Sanity docs are brand new, need cutout.png uploaded
@@ -34,13 +44,22 @@ async function uploadCutout(slug: string, filename: string) {
     return;
   }
 
-  const asset = await client.assets.upload("image", createReadStream(filePath), {
-    filename: `${slug}-cutout.png`,
-  });
+  const asset = await client.assets.upload(
+    "image",
+    createReadStream(filePath),
+    {
+      filename: `${slug}-cutout.png`,
+    },
+  );
 
   await client
     .patch(`product-${slug}`)
-    .set({ cutout: { _type: "image", asset: { _type: "reference", _ref: asset._id } } })
+    .set({
+      cutout: {
+        _type: "image",
+        asset: { _type: "reference", _ref: asset._id },
+      },
+    })
     .commit();
 
   console.log(`  uploaded ${slug} (${filename})`);

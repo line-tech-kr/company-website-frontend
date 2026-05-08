@@ -92,17 +92,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -113,7 +107,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -139,9 +133,7 @@
     "manuals": [],
     "drawings": [],
     "connectorType": "15-Pin D-Connector",
-    "tagSlugs": [
-      "ultra-low-flow"
-    ]
+    "tagSlugs": ["ultra-low-flow"]
   },
   {
     "model": "M3200VA",
@@ -236,17 +228,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -257,7 +243,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -283,9 +269,7 @@
     "manuals": [],
     "drawings": [],
     "connectorType": "9-Pin D-Connector",
-    "tagSlugs": [
-      "mid-flow"
-    ]
+    "tagSlugs": ["mid-flow"]
   },
   {
     "model": "MS3150VA",
@@ -380,17 +364,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -401,7 +379,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -427,9 +405,7 @@
     "manuals": [],
     "drawings": [],
     "connectorType": "9-Pin D-Connector",
-    "tagSlugs": [
-      "mid-flow"
-    ]
+    "tagSlugs": ["mid-flow"]
   },
   {
     "model": "MS3400VA",
@@ -524,17 +500,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -545,7 +515,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -571,9 +541,7 @@
     "manuals": [],
     "drawings": [],
     "connectorType": "9-Pin D-Connector",
-    "tagSlugs": [
-      "high-flow"
-    ]
+    "tagSlugs": ["high-flow"]
   },
   {
     "model": "MS3500VA",
@@ -664,17 +632,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -685,7 +647,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -711,9 +673,7 @@
     "manuals": [],
     "drawings": [],
     "connectorType": "9-Pin D-Connector",
-    "tagSlugs": [
-      "high-flow"
-    ]
+    "tagSlugs": ["high-flow"]
   },
   {
     "model": "MS3600VA",
@@ -804,17 +764,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -825,7 +779,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -851,9 +805,7 @@
     "manuals": [],
     "drawings": [],
     "connectorType": "9-Pin D-Connector",
-    "tagSlugs": [
-      "high-flow"
-    ]
+    "tagSlugs": ["high-flow"]
   },
   {
     "model": "MS3700VA",
@@ -940,17 +892,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -961,7 +907,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -987,9 +933,7 @@
     "manuals": [],
     "drawings": [],
     "connectorType": "9-Pin D-Connector",
-    "tagSlugs": [
-      "high-flow"
-    ]
+    "tagSlugs": ["high-flow"]
   },
   {
     "model": "MS3800VA",
@@ -1076,17 +1020,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -1097,7 +1035,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -1123,9 +1061,7 @@
     "manuals": [],
     "drawings": [],
     "connectorType": "9-Pin D-Connector",
-    "tagSlugs": [
-      "high-flow"
-    ]
+    "tagSlugs": ["high-flow"]
   },
   {
     "model": "M2030VA",
@@ -1220,17 +1156,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -1241,7 +1171,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -1261,10 +1191,7 @@
     "manuals": [],
     "drawings": [],
     "connectorType": "15-Pin D-Connector",
-    "tagSlugs": [
-      "ultra-low-flow",
-      "meter-only"
-    ]
+    "tagSlugs": ["ultra-low-flow", "meter-only"]
   },
   {
     "model": "M2200VA",
@@ -1359,17 +1286,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -1380,7 +1301,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -1400,9 +1321,7 @@
     "manuals": [],
     "drawings": [],
     "connectorType": "9-Pin D-Connector",
-    "tagSlugs": [
-      "meter-only"
-    ]
+    "tagSlugs": ["meter-only"]
   },
   {
     "model": "MS2150VA",
@@ -1497,17 +1416,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -1518,7 +1431,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -1537,9 +1450,7 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "tagSlugs": [
-      "meter-only"
-    ]
+    "tagSlugs": ["meter-only"]
   },
   {
     "model": "MS2400VA",
@@ -1634,17 +1545,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -1655,7 +1560,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -1675,10 +1580,7 @@
     "manuals": [],
     "drawings": [],
     "connectorType": "9-Pin D-Connector",
-    "tagSlugs": [
-      "high-flow",
-      "meter-only"
-    ]
+    "tagSlugs": ["high-flow", "meter-only"]
   },
   {
     "model": "MS2500VA",
@@ -1769,17 +1671,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -1790,7 +1686,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -1810,10 +1706,7 @@
     "manuals": [],
     "drawings": [],
     "connectorType": "9-Pin D-Connector",
-    "tagSlugs": [
-      "high-flow",
-      "meter-only"
-    ]
+    "tagSlugs": ["high-flow", "meter-only"]
   },
   {
     "model": "MS2600VA",
@@ -1904,17 +1797,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -1925,7 +1812,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -1945,10 +1832,7 @@
     "manuals": [],
     "drawings": [],
     "connectorType": "9-Pin D-Connector",
-    "tagSlugs": [
-      "high-flow",
-      "meter-only"
-    ]
+    "tagSlugs": ["high-flow", "meter-only"]
   },
   {
     "model": "MS2700VA",
@@ -2035,17 +1919,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -2056,7 +1934,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -2076,10 +1954,7 @@
     "manuals": [],
     "drawings": [],
     "connectorType": "9-Pin D-Connector",
-    "tagSlugs": [
-      "high-flow",
-      "meter-only"
-    ]
+    "tagSlugs": ["high-flow", "meter-only"]
   },
   {
     "model": "MS2800VA",
@@ -2166,17 +2041,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -2187,7 +2056,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -2207,10 +2076,7 @@
     "manuals": [],
     "drawings": [],
     "connectorType": "9-Pin D-Connector",
-    "tagSlugs": [
-      "high-flow",
-      "meter-only"
-    ]
+    "tagSlugs": ["high-flow", "meter-only"]
   },
   {
     "model": "MD150C",
@@ -2305,17 +2171,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -2326,7 +2186,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -2358,9 +2218,7 @@
       "stopBits": 1,
       "parity": "None"
     },
-    "tagSlugs": [
-      "digital"
-    ]
+    "tagSlugs": ["digital"]
   },
   {
     "model": "MD30C",
@@ -2455,17 +2313,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -2476,7 +2328,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -2508,10 +2360,7 @@
       "stopBits": 1,
       "parity": "None"
     },
-    "tagSlugs": [
-      "digital",
-      "ultra-low-flow"
-    ]
+    "tagSlugs": ["digital", "ultra-low-flow"]
   },
   {
     "model": "MD400C",
@@ -2606,17 +2455,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -2627,7 +2470,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -2659,9 +2502,7 @@
       "stopBits": 1,
       "parity": "None"
     },
-    "tagSlugs": [
-      "digital"
-    ]
+    "tagSlugs": ["digital"]
   },
   {
     "model": "MD500C",
@@ -2752,17 +2593,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -2773,7 +2608,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -2805,10 +2640,7 @@
       "stopBits": 1,
       "parity": "None"
     },
-    "tagSlugs": [
-      "digital",
-      "high-flow"
-    ]
+    "tagSlugs": ["digital", "high-flow"]
   },
   {
     "model": "MD600C",
@@ -2899,17 +2731,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -2920,7 +2746,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -2952,10 +2778,7 @@
       "stopBits": 1,
       "parity": "None"
     },
-    "tagSlugs": [
-      "digital",
-      "high-flow"
-    ]
+    "tagSlugs": ["digital", "high-flow"]
   },
   {
     "model": "MD700C",
@@ -3042,17 +2865,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -3063,7 +2880,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -3095,10 +2912,7 @@
       "stopBits": 1,
       "parity": "None"
     },
-    "tagSlugs": [
-      "digital",
-      "high-flow"
-    ]
+    "tagSlugs": ["digital", "high-flow"]
   },
   {
     "model": "MD800C",
@@ -3185,17 +2999,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -3206,7 +3014,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -3238,10 +3046,7 @@
       "stopBits": 1,
       "parity": "None"
     },
-    "tagSlugs": [
-      "digital",
-      "high-flow"
-    ]
+    "tagSlugs": ["digital", "high-flow"]
   },
   {
     "model": "MD150M",
@@ -3336,17 +3141,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -3357,7 +3156,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -3383,10 +3182,7 @@
       "stopBits": 1,
       "parity": "None"
     },
-    "tagSlugs": [
-      "digital",
-      "meter-only"
-    ]
+    "tagSlugs": ["digital", "meter-only"]
   },
   {
     "model": "MD30M",
@@ -3481,17 +3277,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -3502,7 +3292,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -3528,11 +3318,7 @@
       "stopBits": 1,
       "parity": "None"
     },
-    "tagSlugs": [
-      "digital",
-      "ultra-low-flow",
-      "meter-only"
-    ]
+    "tagSlugs": ["digital", "ultra-low-flow", "meter-only"]
   },
   {
     "model": "MD400M",
@@ -3627,17 +3413,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -3648,7 +3428,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -3674,10 +3454,7 @@
       "stopBits": 1,
       "parity": "None"
     },
-    "tagSlugs": [
-      "digital",
-      "meter-only"
-    ]
+    "tagSlugs": ["digital", "meter-only"]
   },
   {
     "model": "MD500M",
@@ -3768,17 +3545,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -3789,7 +3560,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -3815,11 +3586,7 @@
       "stopBits": 1,
       "parity": "None"
     },
-    "tagSlugs": [
-      "digital",
-      "high-flow",
-      "meter-only"
-    ]
+    "tagSlugs": ["digital", "high-flow", "meter-only"]
   },
   {
     "model": "MD600M",
@@ -3910,17 +3677,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -3931,7 +3692,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -3957,11 +3718,7 @@
       "stopBits": 1,
       "parity": "None"
     },
-    "tagSlugs": [
-      "digital",
-      "high-flow",
-      "meter-only"
-    ]
+    "tagSlugs": ["digital", "high-flow", "meter-only"]
   },
   {
     "model": "MD700M",
@@ -4048,17 +3805,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -4069,7 +3820,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -4095,11 +3846,7 @@
       "stopBits": 1,
       "parity": "None"
     },
-    "tagSlugs": [
-      "digital",
-      "high-flow",
-      "meter-only"
-    ]
+    "tagSlugs": ["digital", "high-flow", "meter-only"]
   },
   {
     "model": "MD800M",
@@ -4186,17 +3933,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -4207,7 +3948,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -4233,11 +3974,7 @@
       "stopBits": 1,
       "parity": "None"
     },
-    "tagSlugs": [
-      "digital",
-      "high-flow",
-      "meter-only"
-    ]
+    "tagSlugs": ["digital", "high-flow", "meter-only"]
   },
   {
     "model": "EX1000C",
@@ -4336,17 +4073,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -4357,7 +4088,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -4382,11 +4113,7 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "tagSlugs": [
-      "explosion-proof",
-      "hazardous-environment",
-      "high-flow"
-    ]
+    "tagSlugs": ["explosion-proof", "hazardous-environment", "high-flow"]
   },
   {
     "model": "EX70C",
@@ -4489,17 +4216,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -4510,7 +4231,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -4535,10 +4256,7 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "tagSlugs": [
-      "explosion-proof",
-      "hazardous-environment"
-    ]
+    "tagSlugs": ["explosion-proof", "hazardous-environment"]
   },
   {
     "model": "LEPC",
@@ -4618,17 +4336,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -4639,7 +4351,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -4658,10 +4370,7 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "tagSlugs": [
-      "low-pressure",
-      "ultra-low-flow"
-    ]
+    "tagSlugs": ["low-pressure", "ultra-low-flow"]
   },
   {
     "model": "EX1000M",
@@ -4760,17 +4469,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -4781,7 +4484,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -4908,17 +4611,11 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": [
-          "0-5Vdc",
-          "4-20mA"
-        ]
+        "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [
-          15,
-          24
-        ],
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -4929,7 +4626,7 @@
       },
       "leakRate": {
         "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-09,
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -4948,10 +4645,6 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "tagSlugs": [
-      "explosion-proof",
-      "hazardous-environment",
-      "meter-only"
-    ]
+    "tagSlugs": ["explosion-proof", "hazardous-environment", "meter-only"]
   }
 ]
