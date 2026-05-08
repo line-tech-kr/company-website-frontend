@@ -15,7 +15,7 @@ const BULLET_LABELS = {
 const SLIDES = [
   { model: "M3030VA", sub: "Analogue MFC" },
   { model: "MD800C", sub: "Digital MFC" },
-  { model: "LD030C", sub: "Specialized MFC" },
+  { model: "EX1000C", sub: "Specialized MFC" },
 ];
 
 const CUTOUT_M3030VA = "https://cdn.sanity.io/m3030va.jpg";
@@ -94,8 +94,8 @@ describe("FeatureSection", () => {
       cutoutByModel: { M3030VA: CUTOUT_M3030VA },
     });
     const slides = container.querySelectorAll(".ho-feature__chip-slide");
-    const ld030 = slides[2]!.querySelector("img") as HTMLImageElement;
-    expect(ld030.src).toContain(FLAGSHIP_IMAGE_PLACEHOLDER);
+    const ex1000 = slides[2]!.querySelector("img") as HTMLImageElement;
+    expect(ex1000.src).toContain(FLAGSHIP_IMAGE_PLACEHOLDER);
   });
 
   it("returns null when the active model has no SLIDE_SPECS entry", () => {

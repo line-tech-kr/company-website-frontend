@@ -35,12 +35,19 @@ const FEATURED: Record<string, { model: string; caption: string }[]> = {
   ],
   digital: [
     { model: "MD30C", caption: "8-point linearization, RS-485 / Modbus RTU" },
-    { model: "MD100C", caption: "±0.25% F.S. accuracy" },
+    { model: "MD150C", caption: "±0.25% F.S. accuracy" },
     { model: "MD400C", caption: "High-flow digital mass flow control" },
   ],
   specialized: [
-    { model: "LD030C", caption: "Display-integrated mass flow controller" },
-    { model: "LM030C", caption: "Display-integrated mass flow meter" },
+    {
+      model: "EX1000C",
+      caption: "Ex-proof high-flow MFC, Ex ec IIC T4 Gc certified",
+    },
+    {
+      model: "LEPC",
+      caption:
+        "Electronic pressure controller with OLED display and RS-485 / Modbus",
+    },
   ],
 };
 

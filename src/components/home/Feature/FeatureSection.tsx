@@ -59,17 +59,17 @@ const SLIDE_SPECS: Record<string, SlideSpec> = {
       io: "0–5 Vdc / 4–20 mA",
     },
   },
-  LD030C: {
+  EX1000C: {
     category: "specialized",
-    slug: "ld030c",
+    slug: "ex1000c",
     fn: "MFC",
     gas: "N₂",
-    flowChip: "30 SLPM",
+    flowChip: "1000 SLPM",
     bullets: {
-      flow: "0.01–30 slpm",
-      accuracy: "±1% FS",
+      flow: "70–1000 slpm",
+      accuracy: "±2% FS",
       response: "<2 s",
-      io: "0–5 Vdc",
+      io: "0–5 Vdc / 4–20 mA",
     },
   },
 };

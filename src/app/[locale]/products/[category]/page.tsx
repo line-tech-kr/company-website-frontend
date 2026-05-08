@@ -77,7 +77,11 @@ export default async function CategoryPage({ params }: Props) {
     getTranslations("products"),
   ]);
 
-  const controllers = products.filter((p) => p.function === "MFC");
+  // EPC (Electronic Pressure Controller — currently only LEPC) joins the
+  // flow controllers in the Controllers stack. Catalog convention.
+  const controllers = products.filter(
+    (p) => p.function === "MFC" || p.function === "EPC",
+  );
   const meters = products.filter((p) => p.function === "MFM");
 
   const breadcrumbs = [

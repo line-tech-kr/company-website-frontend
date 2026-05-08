@@ -42,7 +42,7 @@ export const product = defineType({
     defineField({
       name: "function",
       type: "string",
-      options: { list: ["MFC", "MFM"] },
+      options: { list: ["MFC", "MFM", "EPC"] },
     }),
     defineField({
       name: "productLabel",

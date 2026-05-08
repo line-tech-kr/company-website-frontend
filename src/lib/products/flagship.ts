@@ -9,7 +9,7 @@ export const FLAGSHIP_IMAGE_PLACEHOLDER = "/products/lti/placeholder.svg";
 export const FLAGSHIP_MODEL: Partial<Record<CategorySlug, string>> = {
   analogue: "M3030VA",
   digital: "MD800C",
-  specialized: "LD030C",
+  specialized: "EX1000C",
 };
 
 export function pickFlagship(
