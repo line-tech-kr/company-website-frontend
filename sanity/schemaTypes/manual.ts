@@ -12,10 +12,13 @@ export const manual = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
-      name: "model",
-      title: "Model",
-      type: "string",
-      description: "Product model code (e.g. M3030VA)",
+      name: "models",
+      title: "Models",
+      type: "array",
+      of: [{ type: "string" }],
+      options: { layout: "tags" },
+      description:
+        "Product model codes covered by this manual (e.g. M3030VA). Multiple entries when the manual covers a series (e.g. MS3500VA + MS3600VA).",
     }),
     defineField({
       name: "series",
@@ -47,13 +50,32 @@ export const manual = defineType({
       title: "Published",
       type: "date",
     }),
+    defineField({
+      name: "archived",
+      title: "Archived",
+      type: "boolean",
+      description:
+        "Hide from Data Room and product pages (e.g. retired product). File remains in Sanity.",
+      initialValue: false,
+    }),
   ],
   preview: {
-    select: { title: "title", model: "model", series: "series" },
-    prepare({ title, model, series }) {
+    select: {
+      title: "title",
+      models: "models",
+      series: "series",
+      archived: "archived",
+    },
+    prepare({ title, models, series, archived }) {
+      const modelLabel =
+        Array.isArray(models) && models.length > 0
+          ? models.join(", ")
+          : undefined;
       return {
-        title: title ?? "(untitled)",
-        subtitle: [model, series].filter(Boolean).join(" · "),
+        title: archived
+          ? `[Archived] ${title ?? "(untitled)"}`
+          : (title ?? "(untitled)"),
+        subtitle: [modelLabel, series].filter(Boolean).join(" · "),
       };
     },
   },

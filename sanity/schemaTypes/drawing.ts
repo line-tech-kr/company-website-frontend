@@ -12,11 +12,14 @@ export const drawing = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
-      name: "model",
-      title: "Model",
-      type: "string",
-      description: "Product model code (e.g. M3030VA)",
-      validation: (r) => r.required(),
+      name: "models",
+      title: "Models",
+      type: "array",
+      of: [{ type: "string" }],
+      options: { layout: "tags" },
+      description:
+        "Product model codes covered by this drawing (e.g. M3030VA). Multiple entries supported when one drawing covers several models.",
+      validation: (r) => r.min(1),
     }),
     defineField({
       name: "series",
@@ -43,11 +46,34 @@ export const drawing = defineType({
       type: "file",
       options: { accept: ".stp,.step" },
     }),
+    defineField({
+      name: "pdfFile",
+      title: "PDF dimensional drawing",
+      type: "file",
+      options: { accept: ".pdf" },
+    }),
+    defineField({
+      name: "archived",
+      title: "Archived",
+      type: "boolean",
+      description:
+        "Hide from Data Room and product pages (e.g. retired product). File remains in Sanity.",
+      initialValue: false,
+    }),
   ],
   preview: {
-    select: { title: "title", model: "model" },
-    prepare({ title, model }) {
-      return { title: title ?? "(untitled)", subtitle: model };
+    select: { title: "title", models: "models", archived: "archived" },
+    prepare({ title, models, archived }) {
+      const modelLabel =
+        Array.isArray(models) && models.length > 0
+          ? models.join(", ")
+          : undefined;
+      return {
+        title: archived
+          ? `[Archived] ${title ?? "(untitled)"}`
+          : (title ?? "(untitled)"),
+        subtitle: modelLabel,
+      };
     },
   },
 });

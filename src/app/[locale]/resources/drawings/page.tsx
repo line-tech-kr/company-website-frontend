@@ -17,10 +17,11 @@ type Props = { params: Promise<{ locale: string }> };
 type DrawingItem = {
   _id: string;
   title: string;
-  model: string;
+  models?: string[] | null;
   series?: string | null;
   dwgUrl?: string | null;
   stpUrl?: string | null;
+  pdfUrl?: string | null;
 };
 
 export function generateStaticParams() {
@@ -75,62 +76,77 @@ export default async function DrawingsPage({ params }: Props) {
             </tr>
           </thead>
           <tbody>
-            {drawings.map((item) => (
-              <tr key={item._id}>
-                <td>
-                  <div className="dr-drawings__model">{item.model}</div>
-                  <div className="dr-drawings__series">{item.title}</div>
-                </td>
-                <td>
-                  {item.series && (
-                    <span className="dr-drawings__series">
-                      {tRes(
-                        `seriesLabel.${item.series as "analogue" | "digital" | "specialized"}`,
+            {drawings.map((item) => {
+              const modelLabel =
+                item.models && item.models.length > 0
+                  ? item.models.join(" / ")
+                  : "—";
+              const hasFile = item.pdfUrl || item.dwgUrl || item.stpUrl;
+              return (
+                <tr key={item._id}>
+                  <td>
+                    <div className="dr-drawings__model">{modelLabel}</div>
+                    <div className="dr-drawings__series">{item.title}</div>
+                  </td>
+                  <td>
+                    {item.series && (
+                      <span className="dr-drawings__series">
+                        {tRes(
+                          `seriesLabel.${item.series as "analogue" | "digital" | "specialized"}`,
+                        )}
+                      </span>
+                    )}
+                  </td>
+                  <td>
+                    <div className="dr-drawings__files">
+                      {item.pdfUrl && (
+                        <span className="dr-list__badge dr-list__badge--pdf">
+                          PDF
+                        </span>
                       )}
-                    </span>
-                  )}
-                </td>
-                <td>
-                  <div className="dr-drawings__files">
-                    {item.dwgUrl && (
-                      <span className="dr-list__badge dr-list__badge--dwg">
-                        DWG
-                      </span>
-                    )}
-                    {item.stpUrl && (
-                      <span className="dr-list__badge dr-list__badge--stp">
-                        STP
-                      </span>
-                    )}
-                    {!item.dwgUrl && !item.stpUrl && (
-                      <span className="dr-list__badge">—</span>
-                    )}
-                  </div>
-                </td>
-                <td>
-                  <div className="dr-drawings__actions">
-                    {item.dwgUrl && (
-                      <a href={item.dwgUrl} download className="dr-list__btn">
-                        DWG
-                      </a>
-                    )}
-                    {item.stpUrl && (
-                      <a href={item.stpUrl} download className="dr-list__btn">
-                        STP
-                      </a>
-                    )}
-                    {!item.dwgUrl && !item.stpUrl && (
-                      <Link
-                        href={`/contact?topic=request&file=${encodeURIComponent(item.title)}`}
-                        className="dr-list__btn dr-list__btn--request"
-                      >
-                        {tRes("requestFile")}
-                      </Link>
-                    )}
-                  </div>
-                </td>
-              </tr>
-            ))}
+                      {item.dwgUrl && (
+                        <span className="dr-list__badge dr-list__badge--dwg">
+                          DWG
+                        </span>
+                      )}
+                      {item.stpUrl && (
+                        <span className="dr-list__badge dr-list__badge--stp">
+                          STP
+                        </span>
+                      )}
+                      {!hasFile && <span className="dr-list__badge">—</span>}
+                    </div>
+                  </td>
+                  <td>
+                    <div className="dr-drawings__actions">
+                      {item.pdfUrl && (
+                        <a href={item.pdfUrl} download className="dr-list__btn">
+                          PDF
+                        </a>
+                      )}
+                      {item.dwgUrl && (
+                        <a href={item.dwgUrl} download className="dr-list__btn">
+                          DWG
+                        </a>
+                      )}
+                      {item.stpUrl && (
+                        <a href={item.stpUrl} download className="dr-list__btn">
+                          STP
+                        </a>
+                      )}
+                      {!hasFile && (
+                        <Link
+                          href={`/contact?topic=request&file=${encodeURIComponent(item.title)}`}
+                          className="dr-list__btn dr-list__btn--request"
+                        >
+                          {tRes("requestFile")}
+                        </Link>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       )}

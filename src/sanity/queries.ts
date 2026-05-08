@@ -37,7 +37,7 @@ const PRODUCT_DETAIL_PROJECTION = `
   connectorType,
   images,
   dimensionDrawing,
-  "datasheets": *[_type == "datasheet" && lower(model) == lower(^.model)]
+  "datasheets": *[_type == "datasheet" && archived != true && ^.model in coalesce(models, [])]
     | order(coalesce(publishedAt, _updatedAt) desc) {
       _id,
       title,
@@ -47,7 +47,7 @@ const PRODUCT_DETAIL_PROJECTION = `
       "size": file.asset->size,
       "updatedAt": _updatedAt
     },
-  "manuals": *[_type == "manual" && lower(model) == lower(^.model)]
+  "manuals": *[_type == "manual" && archived != true && ^.model in coalesce(models, [])]
     | order(coalesce(publishedAt, _updatedAt) desc) {
       _id,
       title,
@@ -57,14 +57,17 @@ const PRODUCT_DETAIL_PROJECTION = `
       "size": file.asset->size,
       "updatedAt": _updatedAt
     },
-  "drawings": *[_type == "drawing" && lower(model) == lower(^.model)]
+  "drawings": *[_type == "drawing" && archived != true && ^.model in coalesce(models, [])]
     | order(_updatedAt desc) {
       _id,
       title,
+      models,
       "dwgUrl": dwgFile.asset->url,
       "dwgSize": dwgFile.asset->size,
       "stpUrl": stpFile.asset->url,
       "stpSize": stpFile.asset->size,
+      "pdfUrl": pdfFile.asset->url,
+      "pdfSize": pdfFile.asset->size,
       "updatedAt": _updatedAt
     }
 `;
@@ -158,14 +161,14 @@ export const allCataloguesQuery = defineQuery(`
 `);
 
 export const allManualsQuery = defineQuery(`
-  *[_type == "manual"]
+  *[_type == "manual" && archived != true]
   | order(
     select(series == "analogue" => 0, series == "digital" => 1, 2),
-    model asc
+    models[0] asc
   ) {
     _id,
     title,
-    model,
+    models,
     series,
     rev,
     publishedAt,
@@ -174,14 +177,14 @@ export const allManualsQuery = defineQuery(`
 `);
 
 export const allDatasheetsQuery = defineQuery(`
-  *[_type == "datasheet"]
+  *[_type == "datasheet" && archived != true]
   | order(
     select(series == "analogue" => 0, series == "digital" => 1, 2),
-    model asc
+    models[0] asc
   ) {
     _id,
     title,
-    model,
+    models,
     series,
     rev,
     publishedAt,
@@ -190,17 +193,18 @@ export const allDatasheetsQuery = defineQuery(`
 `);
 
 export const allDrawingsQuery = defineQuery(`
-  *[_type == "drawing"]
+  *[_type == "drawing" && archived != true]
   | order(
     select(series == "analogue" => 0, series == "digital" => 1, 2),
-    model asc
+    models[0] asc
   ) {
     _id,
     title,
-    model,
+    models,
     series,
     "dwgUrl": dwgFile.asset->url,
-    "stpUrl": stpFile.asset->url
+    "stpUrl": stpFile.asset->url,
+    "pdfUrl": pdfFile.asset->url
   }
 `);
 
@@ -270,9 +274,9 @@ export const applicationSlugsQuery = defineQuery(`
 export const resourceCountsQuery = defineQuery(`
   {
     "catalogues": count(*[_type == "catalogue"]),
-    "datasheets": count(*[_type == "datasheet"]),
-    "manuals": count(*[_type == "manual"]),
-    "drawings": count(*[_type == "drawing"]),
+    "datasheets": count(*[_type == "datasheet" && archived != true]),
+    "manuals": count(*[_type == "manual" && archived != true]),
+    "drawings": count(*[_type == "drawing" && archived != true]),
     "certifications": count(*[_type == "certification"])
   }
 `);
