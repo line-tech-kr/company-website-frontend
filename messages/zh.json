@@ -88,17 +88,17 @@
       },
       "specialized": {
         "title": "特殊系列",
-        "lede": "集成显示、防爆、MEMS 等针对苛刻环境的特殊型号产品线。"
+        "lede": "防爆（EX）与低压精密控制（LEPC）等针对苛刻环境的特殊型号产品线。"
       }
     },
     "stack": {
       "controllers": {
         "title": "质量流量控制器 · MFC",
-        "subtitle": "Controllers"
+        "subtitle": "控制器"
       },
       "meters": {
         "title": "质量流量测量仪 · MFM",
-        "subtitle": "Meters"
+        "subtitle": "测量仪"
       }
     },
     "table": {

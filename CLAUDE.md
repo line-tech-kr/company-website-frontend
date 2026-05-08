@@ -44,7 +44,9 @@ Build the full Tailwind color scale (50–950) around these anchors. Neutrals, s
 
 ## Reference
 
-- `docs/current-site-audit.md` — full audit of the legacy site with product inventory, color extraction, sitemap, and open questions
-- `docs/linetech-slice-1.md` — first vertical slice plan (M3030VA product page end-to-end)
+- `docs/catalogue-2026-handoff.md` — 2026 product catalog refresh; active source-of-truth for the current lineup (LM and LD series retired, LEPC and DO400 added)
+- `docs/catalog-extract/` — machine-readable extracts from the 2026 catalog
+- `docs/handoff/` — design system handoff prototype
+- `docs/brand-reference/` — brand assets and colour reference
 
 @AGENTS.md

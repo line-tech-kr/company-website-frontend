@@ -147,7 +147,7 @@ export default async function ApplicationDetailPage({ params }: Props) {
                         .filter((s) => {
                           if (cat === "digital") return s === "MD";
                           if (cat === "specialized")
-                            return ["LD", "LM", "EX"].includes(s);
+                            return ["EX", "LEPC"].includes(s);
                           return s === "M / MS";
                         })
                         .join(" / ") || app.recommendedSeries[0]}

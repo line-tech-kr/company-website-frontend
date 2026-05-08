@@ -58,7 +58,7 @@ describe("SanityProductSchema drawings (#174)", () => {
         {
           _id: "drawing-2",
           title: "PDF-only outline",
-          models: ["LD030C"],
+          models: ["LEPC"],
           pdfUrl: "https://cdn.sanity.io/files/a/b.pdf",
           pdfSize: 9876,
         },

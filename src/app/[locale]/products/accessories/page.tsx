@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { AccessoriesShell } from "@/components/accessories/AccessoriesShell";
 import {
@@ -97,7 +98,13 @@ function ItemCard({ item }: { item: AccessoryItem }) {
           (item.image.placeholder ? " acc-item__media--placeholder" : "")
         }
       >
-        <img src={item.image.src} alt={item.image.alt} loading="lazy" />
+        <Image
+          src={item.image.src}
+          alt={item.image.alt}
+          width={480}
+          height={360}
+          sizes="(min-width: 768px) 280px, 100vw"
+        />
       </div>
       <div className="acc-item__body">
         <h3 className="acc-item__model">{item.model}</h3>
