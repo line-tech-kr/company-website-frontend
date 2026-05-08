@@ -16,7 +16,8 @@
  * Run:  pnpm tsx scripts/rework-doc-types.ts
  *       pnpm tsx scripts/rework-doc-types.ts --dry-run
  *
- * Idempotent — re-running is a no-op once everything is migrated.
+ * Single-pass and idempotent: a fresh run does steps 1-5 in one transaction;
+ * re-running on already-migrated data writes nothing.
  */
 import { readFileSync } from "node:fs";
 import { createClient } from "@sanity/client";
@@ -71,6 +72,7 @@ type Manual = {
   title: string;
   model?: string | null;
   models?: string[] | null;
+  archived?: boolean | null;
 };
 type ProductRef = { model: string };
 
@@ -141,7 +143,7 @@ async function main() {
   `);
 
   const manuals = await client.fetch<Manual[]>(
-    `*[_type == "manual"]{_id, title, model, models} | order(title asc)`,
+    `*[_type == "manual"]{_id, title, model, models, archived} | order(title asc)`,
   );
 
   // Plan datasheet → manual moves
@@ -159,9 +161,12 @@ async function main() {
     }
   }
 
-  // Plan archive (retired)
+  // Plan archive (retired). Skip if already archived so re-runs are a true no-op.
   const retiredManual = manuals.find(
-    (m) => m.model === "M3100" && /Manual/i.test(m.title),
+    (m) =>
+      m.model === "M3100" &&
+      /Manual/i.test(m.title) &&
+      m.archived !== true,
   );
 
   // Plan manual model→models[] migration (existing docs use legacy `model` prefix
@@ -213,7 +218,8 @@ async function main() {
   );
   console.log(`\n  datasheet → manual  (${dsMigrate.length} docs):`);
   for (const d of dsMigrate) {
-    console.log(`    "${d.title}" (model=${d.model})`);
+    const derived = deriveModels(d.title, productModels);
+    console.log(`    "${d.title}" → models=[${derived.join(", ")}]`);
   }
 
   console.log(`\n  delete datasheet (collision)  (${dsDelete.length} docs):`);
@@ -288,10 +294,17 @@ async function main() {
       console.warn(`  skipping ${d._id} — no file asset`);
       continue;
     }
+    const derived = deriveModels(d.title, productModels);
+    if (derived.length === 0) {
+      console.warn(
+        `  skipping ${d._id} — could not derive models from "${d.title}"`,
+      );
+      continue;
+    }
     tx = tx.create({
       _type: "manual",
       title: d.title,
-      ...(d.model ? { model: d.model } : {}),
+      models: derived,
       ...(d.series ? { series: d.series } : {}),
       ...(d.rev ? { rev: d.rev } : {}),
       ...(d.publishedAt ? { publishedAt: d.publishedAt } : {}),
