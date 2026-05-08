@@ -99,6 +99,7 @@ export const SanityProductSchema = z.object({
       }),
     )
     .default([]),
+  tagSlugs: z.array(z.string()).optional(),
   description: z
     .object({ ko: z.string(), en: z.string(), zh: z.string() })
     .nullable()

@@ -138,7 +138,10 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "15-Pin D-Connector"
+    "connectorType": "15-Pin D-Connector",
+    "tagSlugs": [
+      "ultra-low-flow"
+    ]
   },
   {
     "model": "M3200VA",
@@ -279,7 +282,10 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    "connectorType": "9-Pin D-Connector",
+    "tagSlugs": [
+      "mid-flow"
+    ]
   },
   {
     "model": "MS3150VA",
@@ -420,7 +426,10 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    "connectorType": "9-Pin D-Connector",
+    "tagSlugs": [
+      "mid-flow"
+    ]
   },
   {
     "model": "MS3400VA",
@@ -561,7 +570,10 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    "connectorType": "9-Pin D-Connector",
+    "tagSlugs": [
+      "high-flow"
+    ]
   },
   {
     "model": "MS3500VA",
@@ -698,7 +710,10 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    "connectorType": "9-Pin D-Connector",
+    "tagSlugs": [
+      "high-flow"
+    ]
   },
   {
     "model": "MS3600VA",
@@ -835,7 +850,10 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    "connectorType": "9-Pin D-Connector",
+    "tagSlugs": [
+      "high-flow"
+    ]
   },
   {
     "model": "MS3700VA",
@@ -968,7 +986,10 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    "connectorType": "9-Pin D-Connector",
+    "tagSlugs": [
+      "high-flow"
+    ]
   },
   {
     "model": "MS3800VA",
@@ -1101,7 +1122,10 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    "connectorType": "9-Pin D-Connector",
+    "tagSlugs": [
+      "high-flow"
+    ]
   },
   {
     "model": "M2030VA",
@@ -1236,7 +1260,11 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "15-Pin D-Connector"
+    "connectorType": "15-Pin D-Connector",
+    "tagSlugs": [
+      "ultra-low-flow",
+      "meter-only"
+    ]
   },
   {
     "model": "M2200VA",
@@ -1371,7 +1399,10 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    "connectorType": "9-Pin D-Connector",
+    "tagSlugs": [
+      "meter-only"
+    ]
   },
   {
     "model": "MS2150VA",
@@ -1505,7 +1536,10 @@
     },
     "datasheets": [],
     "manuals": [],
-    "drawings": []
+    "drawings": [],
+    "tagSlugs": [
+      "meter-only"
+    ]
   },
   {
     "model": "MS2400VA",
@@ -1640,7 +1674,11 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    "connectorType": "9-Pin D-Connector",
+    "tagSlugs": [
+      "high-flow",
+      "meter-only"
+    ]
   },
   {
     "model": "MS2500VA",
@@ -1771,7 +1809,11 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    "connectorType": "9-Pin D-Connector",
+    "tagSlugs": [
+      "high-flow",
+      "meter-only"
+    ]
   },
   {
     "model": "MS2600VA",
@@ -1902,7 +1944,11 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    "connectorType": "9-Pin D-Connector",
+    "tagSlugs": [
+      "high-flow",
+      "meter-only"
+    ]
   },
   {
     "model": "MS2700VA",
@@ -2029,7 +2075,11 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    "connectorType": "9-Pin D-Connector",
+    "tagSlugs": [
+      "high-flow",
+      "meter-only"
+    ]
   },
   {
     "model": "MS2800VA",
@@ -2156,7 +2206,11 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    "connectorType": "9-Pin D-Connector",
+    "tagSlugs": [
+      "high-flow",
+      "meter-only"
+    ]
   },
   {
     "model": "MD150C",
@@ -2303,7 +2357,10 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    }
+    },
+    "tagSlugs": [
+      "digital"
+    ]
   },
   {
     "model": "MD30C",
@@ -2450,7 +2507,11 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    }
+    },
+    "tagSlugs": [
+      "digital",
+      "ultra-low-flow"
+    ]
   },
   {
     "model": "MD400C",
@@ -2597,7 +2658,10 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    }
+    },
+    "tagSlugs": [
+      "digital"
+    ]
   },
   {
     "model": "MD500C",
@@ -2740,7 +2804,11 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    }
+    },
+    "tagSlugs": [
+      "digital",
+      "high-flow"
+    ]
   },
   {
     "model": "MD600C",
@@ -2883,7 +2951,11 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    }
+    },
+    "tagSlugs": [
+      "digital",
+      "high-flow"
+    ]
   },
   {
     "model": "MD700C",
@@ -3022,7 +3094,11 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    }
+    },
+    "tagSlugs": [
+      "digital",
+      "high-flow"
+    ]
   },
   {
     "model": "MD800C",
@@ -3161,7 +3237,11 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    }
+    },
+    "tagSlugs": [
+      "digital",
+      "high-flow"
+    ]
   },
   {
     "model": "MD150M",
@@ -3302,7 +3382,11 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    }
+    },
+    "tagSlugs": [
+      "digital",
+      "meter-only"
+    ]
   },
   {
     "model": "MD30M",
@@ -3443,7 +3527,12 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    }
+    },
+    "tagSlugs": [
+      "digital",
+      "ultra-low-flow",
+      "meter-only"
+    ]
   },
   {
     "model": "MD400M",
@@ -3584,7 +3673,11 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    }
+    },
+    "tagSlugs": [
+      "digital",
+      "meter-only"
+    ]
   },
   {
     "model": "MD500M",
@@ -3721,7 +3814,12 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    }
+    },
+    "tagSlugs": [
+      "digital",
+      "high-flow",
+      "meter-only"
+    ]
   },
   {
     "model": "MD600M",
@@ -3858,7 +3956,12 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    }
+    },
+    "tagSlugs": [
+      "digital",
+      "high-flow",
+      "meter-only"
+    ]
   },
   {
     "model": "MD700M",
@@ -3991,7 +4094,12 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    }
+    },
+    "tagSlugs": [
+      "digital",
+      "high-flow",
+      "meter-only"
+    ]
   },
   {
     "model": "MD800M",
@@ -4124,7 +4232,12 @@
       "dataBits": 8,
       "stopBits": 1,
       "parity": "None"
-    }
+    },
+    "tagSlugs": [
+      "digital",
+      "high-flow",
+      "meter-only"
+    ]
   },
   {
     "model": "EX1000C",
@@ -4268,7 +4381,12 @@
     },
     "datasheets": [],
     "manuals": [],
-    "drawings": []
+    "drawings": [],
+    "tagSlugs": [
+      "explosion-proof",
+      "hazardous-environment",
+      "high-flow"
+    ]
   },
   {
     "model": "EX70C",
@@ -4416,7 +4534,11 @@
     },
     "datasheets": [],
     "manuals": [],
-    "drawings": []
+    "drawings": [],
+    "tagSlugs": [
+      "explosion-proof",
+      "hazardous-environment"
+    ]
   },
   {
     "model": "LEPC",
@@ -4535,7 +4657,11 @@
     },
     "datasheets": [],
     "manuals": [],
-    "drawings": []
+    "drawings": [],
+    "tagSlugs": [
+      "low-pressure",
+      "ultra-low-flow"
+    ]
   },
   {
     "model": "EX1000M",
@@ -4673,7 +4799,13 @@
     },
     "datasheets": [],
     "manuals": [],
-    "drawings": []
+    "drawings": [],
+    "tagSlugs": [
+      "explosion-proof",
+      "hazardous-environment",
+      "high-flow",
+      "meter-only"
+    ]
   },
   {
     "model": "EX70M",
@@ -4815,6 +4947,11 @@
     },
     "datasheets": [],
     "manuals": [],
-    "drawings": []
+    "drawings": [],
+    "tagSlugs": [
+      "explosion-proof",
+      "hazardous-environment",
+      "meter-only"
+    ]
   }
 ]
