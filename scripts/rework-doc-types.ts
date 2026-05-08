@@ -164,9 +164,7 @@ async function main() {
   // Plan archive (retired). Skip if already archived so re-runs are a true no-op.
   const retiredManual = manuals.find(
     (m) =>
-      m.model === "M3100" &&
-      /Manual/i.test(m.title) &&
-      m.archived !== true,
+      m.model === "M3100" && /Manual/i.test(m.title) && m.archived !== true,
   );
 
   // Plan manual model→models[] migration (existing docs use legacy `model` prefix
