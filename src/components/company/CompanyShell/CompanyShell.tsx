@@ -5,7 +5,7 @@ import {
 } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { LT_COMPANY } from "@/lib/content/company";
 import type { Locale } from "@/lib/content/home";
-import { CompanySideNav } from "./CompanySideNav";
+import { CompanySideNav } from "../CompanySideNav";
 import "./company-shell.css";
 
 type Props = {

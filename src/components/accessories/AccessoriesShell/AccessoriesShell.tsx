@@ -5,7 +5,7 @@ import {
 } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { LT_ACCESSORIES } from "@/lib/content/accessories";
 import type { Locale } from "@/lib/content/home";
-import { AccessoriesSideNav } from "./AccessoriesSideNav";
+import { AccessoriesSideNav } from "../AccessoriesSideNav";
 import "./accessories-shell.css";
 
 type Props = {

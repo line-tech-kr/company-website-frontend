@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { M3030VAOutline } from "./M3030VAOutline";
-import { SectionHeader } from "../SectionHeader/SectionHeader";
+import { SectionHeader } from "../SectionHeader";
 import "./DimensionDrawing.css";
 
 export type Callout = { id: string; label: string; value: string };

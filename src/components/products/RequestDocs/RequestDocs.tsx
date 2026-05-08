@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { Glyph } from "@/components/ui/Glyph";
-import { SectionHeader } from "../SectionHeader/SectionHeader";
+import { SectionHeader } from "../SectionHeader";
 import "./RequestDocs.css";
 
 type Props = {

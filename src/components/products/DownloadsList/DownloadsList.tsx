@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Glyph } from "@/components/ui/Glyph";
-import { SectionHeader } from "../SectionHeader/SectionHeader";
+import { SectionHeader } from "../SectionHeader";
 import "./DownloadsList.css";
 
 export type DownloadItem = {
