@@ -72,6 +72,10 @@
         "length": "127.8 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
+    "connectorType": "15-Pin D-Connector",
     "massFlowSpecs": {
       "flowRange": {
         "display": "0.01–30 slpm",
@@ -92,11 +96,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -128,11 +138,7 @@
         "unit": "bar",
         "comparator": "lt"
       }
-    },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
-    "connectorType": "15-Pin D-Connector"
+    }
   },
   {
     "model": "M3200VA",
@@ -207,6 +213,10 @@
         "length": "148.8 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
+    "connectorType": "9-Pin D-Connector",
     "massFlowSpecs": {
       "flowRange": {
         "display": "30–100 slpm",
@@ -227,11 +237,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -263,11 +279,7 @@
         "unit": "bar",
         "comparator": "lt"
       }
-    },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    }
   },
   {
     "model": "MS3150VA",
@@ -342,6 +354,10 @@
         "length": "148.9 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
+    "connectorType": "9-Pin D-Connector",
     "massFlowSpecs": {
       "flowRange": {
         "display": "0.01–100 slpm",
@@ -362,11 +378,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -398,11 +420,7 @@
         "unit": "bar",
         "comparator": "lt"
       }
-    },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    }
   },
   {
     "model": "MS3400VA",
@@ -477,6 +495,10 @@
         "length": "197.5 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
+    "connectorType": "9-Pin D-Connector",
     "massFlowSpecs": {
       "flowRange": {
         "display": "100–300 slpm",
@@ -497,11 +519,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -533,11 +561,7 @@
         "unit": "bar",
         "comparator": "lt"
       }
-    },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    }
   },
   {
     "model": "MS3500VA",
@@ -608,6 +632,10 @@
         "length": "254.6 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
+    "connectorType": "9-Pin D-Connector",
     "massFlowSpecs": {
       "flowRange": {
         "display": "300–1000 slpm",
@@ -628,11 +656,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -664,11 +698,7 @@
         "unit": "bar",
         "comparator": "lt"
       }
-    },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    }
   },
   {
     "model": "MS3600VA",
@@ -739,6 +769,10 @@
         "length": "254.6 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
+    "connectorType": "9-Pin D-Connector",
     "massFlowSpecs": {
       "flowRange": {
         "display": "1000–1500 slpm",
@@ -759,11 +793,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -795,11 +835,7 @@
         "unit": "bar",
         "comparator": "lt"
       }
-    },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    }
   },
   {
     "model": "MS3700VA",
@@ -866,6 +902,10 @@
         "length": "256.6 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
+    "connectorType": "9-Pin D-Connector",
     "massFlowSpecs": {
       "flowRange": {
         "display": "1500–2500 slpm",
@@ -886,11 +926,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -922,11 +968,7 @@
         "unit": "bar",
         "comparator": "lt"
       }
-    },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    }
   },
   {
     "model": "MS3800VA",
@@ -993,6 +1035,10 @@
         "length": "268.6 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
+    "connectorType": "9-Pin D-Connector",
     "massFlowSpecs": {
       "flowRange": {
         "display": "2500–5000 slpm",
@@ -1013,11 +1059,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -1049,11 +1101,7 @@
         "unit": "bar",
         "comparator": "lt"
       }
-    },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    }
   },
   {
     "model": "M2030VA",
@@ -1128,6 +1176,10 @@
         "length": "107.2 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
+    "connectorType": "15-Pin D-Connector",
     "massFlowSpecs": {
       "flowRange": {
         "display": "0.01–30 slpm",
@@ -1148,11 +1200,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -1178,11 +1236,7 @@
         "unit": "bar",
         "comparator": "lt"
       }
-    },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
-    "connectorType": "15-Pin D-Connector"
+    }
   },
   {
     "model": "M2200VA",
@@ -1257,6 +1311,10 @@
         "length": "148.8 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
+    "connectorType": "9-Pin D-Connector",
     "massFlowSpecs": {
       "flowRange": {
         "display": "30–100 slpm",
@@ -1277,11 +1335,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -1307,11 +1371,7 @@
         "unit": "bar",
         "comparator": "lt"
       }
-    },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    }
   },
   {
     "model": "MS2150VA",
@@ -1386,6 +1446,9 @@
         "length": "136.3 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
         "display": "0.01–100 slpm",
@@ -1406,11 +1469,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -1436,10 +1505,7 @@
         "unit": "bar",
         "comparator": "lt"
       }
-    },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": []
+    }
   },
   {
     "model": "MS2400VA",
@@ -1514,6 +1580,10 @@
         "length": "152.5 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
+    "connectorType": "9-Pin D-Connector",
     "massFlowSpecs": {
       "flowRange": {
         "display": "100–300 slpm",
@@ -1534,11 +1604,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -1564,11 +1640,7 @@
         "unit": "bar",
         "comparator": "lt"
       }
-    },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    }
   },
   {
     "model": "MS2500VA",
@@ -1639,6 +1711,10 @@
         "length": "217.6 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
+    "connectorType": "9-Pin D-Connector",
     "massFlowSpecs": {
       "flowRange": {
         "display": "300–1000 slpm",
@@ -1659,11 +1735,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -1689,11 +1771,7 @@
         "unit": "bar",
         "comparator": "lt"
       }
-    },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    }
   },
   {
     "model": "MS2600VA",
@@ -1764,6 +1842,10 @@
         "length": "217.6 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
+    "connectorType": "9-Pin D-Connector",
     "massFlowSpecs": {
       "flowRange": {
         "display": "1000–1500 slpm",
@@ -1784,11 +1866,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -1814,11 +1902,7 @@
         "unit": "bar",
         "comparator": "lt"
       }
-    },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    }
   },
   {
     "model": "MS2700VA",
@@ -1885,6 +1969,10 @@
         "length": "221.6 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
+    "connectorType": "9-Pin D-Connector",
     "massFlowSpecs": {
       "flowRange": {
         "display": "1500–2500 slpm",
@@ -1905,11 +1993,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -1935,11 +2029,7 @@
         "unit": "bar",
         "comparator": "lt"
       }
-    },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    }
   },
   {
     "model": "MS2800VA",
@@ -2006,6 +2096,10 @@
         "length": "231.6 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
+    "connectorType": "9-Pin D-Connector",
     "massFlowSpecs": {
       "flowRange": {
         "display": "2500–5000 slpm",
@@ -2026,11 +2120,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -2056,11 +2156,7 @@
         "unit": "bar",
         "comparator": "lt"
       }
-    },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    }
   },
   {
     "model": "MD150C",
@@ -2135,6 +2231,9 @@
         "length": "148.8 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
         "display": "0.01–100 slpm",
@@ -2155,11 +2254,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -2192,9 +2297,6 @@
         "comparator": "lt"
       }
     },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
     "digitalCommunication": {
       "protocol": "RS-485",
       "baudRate": 38400,
@@ -2276,6 +2378,9 @@
         "length": "127.8 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
         "display": "0.01–30 slpm",
@@ -2296,11 +2401,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -2333,9 +2444,6 @@
         "comparator": "lt"
       }
     },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
     "digitalCommunication": {
       "protocol": "RS-485",
       "baudRate": 38400,
@@ -2417,6 +2525,9 @@
         "length": "196.4 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
         "display": "100–300 slpm",
@@ -2437,11 +2548,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -2474,9 +2591,6 @@
         "comparator": "lt"
       }
     },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
     "digitalCommunication": {
       "protocol": "RS-485",
       "baudRate": 38400,
@@ -2554,6 +2668,9 @@
         "length": "254.7 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
         "display": "300–1000 slpm",
@@ -2574,11 +2691,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -2611,9 +2734,6 @@
         "comparator": "lt"
       }
     },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
     "digitalCommunication": {
       "protocol": "RS-485",
       "baudRate": 38400,
@@ -2691,6 +2811,9 @@
         "length": "254.7 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
         "display": "1000–1500 slpm",
@@ -2711,11 +2834,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -2748,9 +2877,6 @@
         "comparator": "lt"
       }
     },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
     "digitalCommunication": {
       "protocol": "RS-485",
       "baudRate": 38400,
@@ -2824,6 +2950,9 @@
         "length": "256.7 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
         "display": "1500–2500 slpm",
@@ -2844,11 +2973,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -2881,9 +3016,6 @@
         "comparator": "lt"
       }
     },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
     "digitalCommunication": {
       "protocol": "RS-485",
       "baudRate": 38400,
@@ -2957,6 +3089,9 @@
         "length": "268.7 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
         "display": "2500–5000 slpm",
@@ -2977,11 +3112,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -3014,9 +3155,6 @@
         "comparator": "lt"
       }
     },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
     "digitalCommunication": {
       "protocol": "RS-485",
       "baudRate": 38400,
@@ -3098,6 +3236,9 @@
         "length": "136.3 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
         "display": "0.01–100 slpm",
@@ -3118,11 +3259,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -3149,9 +3296,6 @@
         "comparator": "lt"
       }
     },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
     "digitalCommunication": {
       "protocol": "RS-485",
       "baudRate": 38400,
@@ -3233,6 +3377,9 @@
         "length": "107.2 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
         "display": "0.01–30 slpm",
@@ -3253,11 +3400,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -3284,9 +3437,6 @@
         "comparator": "lt"
       }
     },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
     "digitalCommunication": {
       "protocol": "RS-485",
       "baudRate": 38400,
@@ -3368,6 +3518,9 @@
         "length": "152.4 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
         "display": "100–300 slpm",
@@ -3388,11 +3541,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -3419,9 +3578,6 @@
         "comparator": "lt"
       }
     },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
     "digitalCommunication": {
       "protocol": "RS-485",
       "baudRate": 38400,
@@ -3499,6 +3655,9 @@
         "length": "217.7 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
         "display": "300–1000 slpm",
@@ -3519,11 +3678,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -3550,9 +3715,6 @@
         "comparator": "lt"
       }
     },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
     "digitalCommunication": {
       "protocol": "RS-485",
       "baudRate": 38400,
@@ -3630,6 +3792,9 @@
         "length": "217.7 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
         "display": "1000–1500 slpm",
@@ -3650,11 +3815,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -3681,9 +3852,6 @@
         "comparator": "lt"
       }
     },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
     "digitalCommunication": {
       "protocol": "RS-485",
       "baudRate": 38400,
@@ -3757,6 +3925,9 @@
         "length": "221.7 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
         "display": "1500–2500 slpm",
@@ -3777,11 +3948,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -3808,9 +3985,6 @@
         "comparator": "lt"
       }
     },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
     "digitalCommunication": {
       "protocol": "RS-485",
       "baudRate": 38400,
@@ -3884,6 +4058,9 @@
         "length": "231.7 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
         "display": "2500–5000 slpm",
@@ -3904,11 +4081,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -3935,9 +4118,6 @@
         "comparator": "lt"
       }
     },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": [],
     "digitalCommunication": {
       "protocol": "RS-485",
       "baudRate": 38400,
@@ -4023,6 +4203,9 @@
         "length": "210.2 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
         "display": "70–1000 slpm",
@@ -4043,11 +4226,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -4079,10 +4268,7 @@
         "unit": "bar",
         "comparator": "lt"
       }
-    },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": []
+    }
   },
   {
     "model": "EX70C",
@@ -4165,6 +4351,9 @@
         "length": "177 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
         "display": "0.01–70 slpm",
@@ -4185,11 +4374,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -4221,10 +4416,7 @@
         "unit": "bar",
         "comparator": "lt"
       }
-    },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": []
+    }
   },
   {
     "model": "LEPC",
@@ -4299,6 +4491,9 @@
         "length": "123.9 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
         "display": "0.01–30 slpm",
@@ -4319,11 +4514,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -4349,10 +4550,7 @@
         "unit": "barA",
         "comparator": "eq"
       }
-    },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": []
+    }
   },
   {
     "model": "EX1000M",
@@ -4431,6 +4629,9 @@
         "length": "210.2 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
         "display": "70–1000 slpm",
@@ -4451,11 +4652,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -4481,10 +4688,7 @@
         "unit": "bar",
         "comparator": "lt"
       }
-    },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": []
+    }
   },
   {
     "model": "EX70M",
@@ -4567,6 +4771,9 @@
         "length": "177 mm"
       }
     ],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
         "display": "0.01–70 slpm",
@@ -4587,11 +4794,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
+        "voltages": [
+          15,
+          24
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -4617,10 +4830,7 @@
         "unit": "bar",
         "comparator": "lt"
       }
-    },
-    "datasheets": [],
-    "manuals": [],
-    "drawings": []
+    }
   },
   {
     "model": "DO400",
@@ -4683,6 +4893,10 @@
       }
     ],
     "connections": [],
+    "datasheets": [],
+    "manuals": [],
+    "drawings": [],
+    "connectorType": "9-Pin D-Connector",
     "massFlowSpecs": {
       "flowRange": {
         "display": "100–400 slpm",
@@ -4703,11 +4917,17 @@
       },
       "ioSignal": {
         "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
+        "outputs": [
+          "0-5Vdc",
+          "4-20mA"
+        ]
       },
       "supplyPower": {
         "display": "+15 or +26 Vdc, 350 mA",
-        "voltages": [15, 26],
+        "voltages": [
+          15,
+          26
+        ],
         "currentMA": 350
       },
       "tempRange": {
@@ -4739,10 +4959,107 @@
         "unit": "bar",
         "comparator": "lt"
       }
+    }
+  },
+  {
+    "model": "LTI-2000",
+    "slug": {
+      "current": "lti-2000"
     },
+    "series": "specialized",
+    "function": "ROU",
+    "productLabel": {
+      "en": "Read-Out Unit",
+      "ko": "리드아웃 유닛",
+      "zh": "读数单元"
+    },
+    "tags": [],
+    "features": [
+      {
+        "en": "OLED Display",
+        "ko": "OLED 디스플레이 내장",
+        "zh": "内置 OLED 显示屏"
+      },
+      {
+        "en": "RS-232 / RS-485 Dual Communication",
+        "ko": "RS-232 / RS-485 이중 통신",
+        "zh": "RS-232 / RS-485 双通信"
+      },
+      {
+        "en": "External Setpoint Control",
+        "ko": "외부 설정값 제어",
+        "zh": "外部设定点控制"
+      },
+      {
+        "en": "Multiple Display Units",
+        "ko": "다중 표시 단위 지원 (SCCM, SLPM, %)",
+        "zh": "多单位显示 (SCCM, SLPM, %)"
+      },
+      {
+        "en": "Relay Contact Output",
+        "ko": "릴레이 접점 출력",
+        "zh": "继电器触点输出"
+      }
+    ],
+    "connections": [],
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "connectorType": "9-Pin D-Connector"
+    "instrumentSpecs": {
+      "rows": [
+        {
+          "label": "Input Power",
+          "value": "220VAC (50–60 Hz)"
+        },
+        {
+          "label": "Output Power",
+          "value": "+15 or +24 Vdc @ 500 mA"
+        },
+        {
+          "label": "Display Window",
+          "value": "256×64 Dot 6\" Wide OLED LCD"
+        },
+        {
+          "label": "Display Repeatability",
+          "value": "≤±1.0% of Full Scale"
+        },
+        {
+          "label": "Output Signal",
+          "value": "0–5 Vdc or 4–20 mA"
+        },
+        {
+          "label": "Units of Display",
+          "value": "SCCM, SLPM, %"
+        },
+        {
+          "label": "Remote Control",
+          "value": "D-SUB 9-pin (Male)"
+        },
+        {
+          "label": "Setpoint",
+          "value": "0–5 Vdc for Full Scale"
+        },
+        {
+          "label": "Flow ON/OFF",
+          "value": "Input Signal (TTL)"
+        },
+        {
+          "label": "Flow Out Signal",
+          "value": "0–5 Vdc or 4–20 mA"
+        },
+        {
+          "label": "Relay Contact Rate",
+          "value": "1 Relay (Max 24 Vdc @ 1A)"
+        },
+        {
+          "label": "Communication",
+          "value": "RS-232 (9600 Baud, 8-N-1), RS-485"
+        },
+        {
+          "label": "External Setpoint",
+          "value": "Analogue In/Out 0–5 Vdc"
+        }
+      ]
+    }
   }
 ]

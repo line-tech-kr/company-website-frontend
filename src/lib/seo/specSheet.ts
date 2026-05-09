@@ -43,6 +43,7 @@ const FUNCTION_LABELS: Record<
     short: "Electronic Pressure Controller",
     long: "Electronic Pressure Controller (EPC)",
   },
+  ROU: { short: "Read-Out Unit", long: "Read-Out Unit (ROU)" },
 };
 
 export type SpecJsonPayload = {
@@ -68,7 +69,7 @@ export function buildSpecJson(
 
   const specifications: SpecJsonPayload["specifications"] = {};
   for (const key of SPEC_ORDER) {
-    const spec = product.massFlowSpecs[key];
+    const spec = product.massFlowSpecs?.[key];
     if (spec) {
       specifications[key] = spec as Record<string, unknown>;
     }
@@ -133,7 +134,7 @@ export function buildSpecMarkdown(product: Product, siteUrl: string): string {
   lines.push("| Spec | Value |");
   lines.push("|---|---|");
   for (const key of SPEC_ORDER) {
-    const spec = product.massFlowSpecs[key];
+    const spec = product.massFlowSpecs?.[key];
     if (spec) {
       lines.push(`| ${SPEC_LABELS[key]} | ${spec.display} |`);
     }

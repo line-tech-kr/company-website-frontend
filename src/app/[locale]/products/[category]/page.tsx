@@ -83,6 +83,7 @@ export default async function CategoryPage({ params }: Props) {
     (p) => p.function === "MFC" || p.function === "EPC",
   );
   const meters = products.filter((p) => p.function === "MFM");
+  const instruments = products.filter((p) => p.function === "ROU");
 
   const breadcrumbs = [
     { label: tCommon("home"), href: "/" },
@@ -150,6 +151,17 @@ export default async function CategoryPage({ params }: Props) {
           emptyLabel={emptyLabel}
           headers={headers}
         />
+        {instruments.length > 0 && (
+          <ProductStack
+            title={tProducts("stack.instruments.title")}
+            subtitle={tProducts("stack.instruments.subtitle")}
+            products={instruments}
+            category={category}
+            locale={locale}
+            emptyLabel={emptyLabel}
+            headers={headers}
+          />
+        )}
       </main>
     </>
   );

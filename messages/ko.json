@@ -98,7 +98,12 @@
       },
       "meters": {
         "title": "질량유량 측정기 · MFM",
+<<<<<<< HEAD
         "subtitle": "측정기"
+      },
+      "instruments": {
+        "title": "리드아웃 유닛",
+        "subtitle": "계측 장치"
       }
     },
     "table": {
@@ -145,7 +150,8 @@
     "specGroups": {
       "performance": "성능",
       "signal": "신호 · 전원",
-      "environment": "환경"
+      "environment": "환경",
+      "instrument": "사양"
     },
     "dimensions": {
       "heading": "외형 치수",

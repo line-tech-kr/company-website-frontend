@@ -99,6 +99,10 @@
       "meters": {
         "title": "Mass Flow Meters · MFM",
         "subtitle": "Meters"
+      },
+      "instruments": {
+        "title": "Read-Out Units",
+        "subtitle": "Instruments"
       }
     },
     "table": {
@@ -145,7 +149,8 @@
     "specGroups": {
       "performance": "Performance",
       "signal": "Signal & power",
-      "environment": "Environment"
+      "environment": "Environment",
+      "instrument": "Specifications"
     },
     "dimensions": {
       "heading": "Outline dimensions",

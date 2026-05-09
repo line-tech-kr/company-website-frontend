@@ -8,6 +8,7 @@ import type {
   ControlRange,
   DigitalCommunication,
   FlowRange,
+  InstrumentSpecs,
   IoSignal,
   LeakRate,
   LocalizedString,
@@ -30,13 +31,12 @@ const CATALOG_PATH =
   );
 const OUTPUT_PATH = resolve(__dirname, "../src/lib/fixtures/products.json");
 
-// Section 9 read-out units and accessories — none of these have flow specs
-// to parse. LTI-2000 ships in its own follow-up (issue #179) once photo and
-// prose copy are available; LTI-1000 is the rack-mount sibling of LTI-200.
+// Section 9 read-out units and accessories. LTI-200 is retired; LTI-1000,
+// FC-050S and PR-030 are legacy accessories without structured spec data.
+// LTI-2000 is parsed as an instrument (function "ROU") from section 9.
 const SKIP_MODELS = new Set([
   "LTI-200",
   "LTI-1000",
-  "LTI-2000",
   "FC-050S",
   "PR-030",
 ]);
@@ -194,6 +194,33 @@ const I18N: Record<string, LocalizedString> = {
     ko: "모듈형 설계",
     zh: "模块化设计",
   },
+
+  // ─── LTI-2000 read-out unit ───
+  "Read-Out Unit": {
+    en: "Read-Out Unit",
+    ko: "리드아웃 유닛",
+    zh: "读数单元",
+  },
+  "RS-232 / RS-485 Dual Communication": {
+    en: "RS-232 / RS-485 Dual Communication",
+    ko: "RS-232 / RS-485 이중 통신",
+    zh: "RS-232 / RS-485 双通信",
+  },
+  "External Setpoint Control": {
+    en: "External Setpoint Control",
+    ko: "외부 설정값 제어",
+    zh: "外部设定点控制",
+  },
+  "Multiple Display Units": {
+    en: "Multiple Display Units",
+    ko: "다중 표시 단위 지원 (SCCM, SLPM, %)",
+    zh: "多单位显示 (SCCM, SLPM, %)",
+  },
+  "Relay Contact Output": {
+    en: "Relay Contact Output",
+    ko: "릴레이 접점 출력",
+    zh: "继电器触点输出",
+  },
 };
 
 // Track which keys were requested but missing — surfaced at end of run.
@@ -215,6 +242,8 @@ const PRODUCT_LABEL_OVERRIDES: Record<string, string> = {
   // LEPC is an Electronic Pressure Controller (the at-a-glance Type column
   // labels it "EPC"). Override the heading to the correct product type.
   LEPC: "Electronic Pressure Controller",
+  // Section 9 heading says "Mass Flow Device" for all read-out units.
+  "LTI-2000": "Read-Out Unit",
 };
 
 // Per-product function overrides — same catalog inconsistency. The
@@ -222,6 +251,7 @@ const PRODUCT_LABEL_OVERRIDES: Record<string, string> = {
 // MD = digital MFC/MFM, EX = specialized MFC/MFM, LEPC = EPC.
 const PRODUCT_FUNCTION_OVERRIDES: Record<string, Product["function"]> = {
   LEPC: "EPC",
+  "LTI-2000": "ROU",
 };
 
 const SHARED_FEATURES_M_MS_MD = [
@@ -264,6 +294,16 @@ const FEATURES_LEPC = [
 // the M/MS/MD baseline plus a "Modular Design" callout unique to DO.
 const FEATURES_DO = [...SHARED_FEATURES_M_MS_MD, "Modular Design"];
 
+// LTI-2000 is a 2026 read-out unit. Features focus on the OLED display,
+// dual-comm interface, and external setpoint — the differentiators vs. LTI-200.
+const FEATURES_LTI2000 = [
+  "OLED Display",
+  "RS-232 / RS-485 Dual Communication",
+  "External Setpoint Control",
+  "Multiple Display Units",
+  "Relay Contact Output",
+];
+
 // 2026 catalog: EX1000(Controller) → EX1000C, EX70(Meter) → EX70M, etc.
 function normalizeModelName(raw: string): string {
   return raw.replace(/\(Controller\)$/, "C").replace(/\(Meter\)$/, "M");
@@ -275,6 +315,8 @@ function determineSeries(model: string): Product["series"] {
   if (/^(EX|LEPC)/.test(model)) return "specialized";
   // DO400 — special-order analogue MFC. Lives in section 8 of 2026 catalog.
   if (/^DO\d/.test(model)) return "analogue";
+  // LTI-2000 — read-out unit; grouped with the specialized series.
+  if (/^LTI-/.test(model)) return "specialized";
   throw new Error(`Cannot determine series for model "${model}"`);
 }
 
@@ -285,6 +327,7 @@ function determineFunction(headingTitle: string): Product["function"] {
 }
 
 function featuresFor(model: string): string[] {
+  if (model === "LTI-2000") return FEATURES_LTI2000;
   if (model === "LEPC") return FEATURES_LEPC;
   if (/^DO\d/.test(model)) return FEATURES_DO;
   if (/^EX/.test(model)) return FEATURES_EX;
@@ -536,24 +579,38 @@ type ProductSection = {
   body: string[];
 };
 
+function buildInstrumentSpecs(body: string[]): InstrumentSpecs {
+  for (let i = 0; i < body.length; i++) {
+    if (/^\s*\|\s*Spec\s*\|\s*Value\s*\|/.test(body[i])) {
+      const { rows } = parseMarkdownTable(body, i);
+      return {
+        rows: rows
+          .map((row) => ({ label: row["Spec"] ?? "", value: row["Value"] ?? "" }))
+          .filter((r) => r.label),
+      };
+    }
+  }
+  return { rows: [] };
+}
+
 function extractProductSections(catalog: string): ProductSection[] {
   const lines = catalog.split("\n");
   const sections: ProductSection[] = [];
   let current: ProductSection | null = null;
-  let inMassFlowSection = false;
+  let inProductSection = false;
 
   for (const line of lines) {
     // top-level section markers we care about
     if (/^##\s+\d+\.\s/.test(line)) {
-      // entering a new ## section — 2026 product sections are 5, 6, 7, 8
-      if (/##\s+(5|6|7|8)\./.test(line)) inMassFlowSection = true;
-      else inMassFlowSection = false;
+      // sections 5–8: MFC product lines; section 9: accessories/instruments
+      if (/##\s+(5|6|7|8|9)\./.test(line)) inProductSection = true;
+      else inProductSection = false;
       if (current) sections.push(current);
       current = null;
       continue;
     }
 
-    if (!inMassFlowSection) continue;
+    if (!inProductSection) continue;
 
     // 2026 headings: "### M3030VA — Mass Flow Controller" (no page number)
     // 2026 EX headings: "### EX1000(Controller) — Mass Flow Controller"
@@ -738,16 +795,10 @@ function buildProduct(
   const mini = parseMiniSpecTable(section.body);
   const connections = parseConnectionTable(section.body);
   const glanceRow = glance.get(section.model);
-  const massFlowSpecs = buildMassFlowSpecs(
-    section.model,
-    function_,
-    series,
-    mini,
-    glanceRow,
-  );
-
   const labelKey =
     PRODUCT_LABEL_OVERRIDES[section.model] ?? section.headingTitle;
+
+  const isROU = function_ === "ROU";
 
   const product: Product = {
     model: section.model,
@@ -758,15 +809,27 @@ function buildProduct(
     tags: [],
     features: featuresFor(section.model).map(localize),
     connections,
-    massFlowSpecs,
     datasheets: [],
     manuals: [],
     drawings: [],
     ...(mini.connectorType ? { connectorType: mini.connectorType } : {}),
   };
-  if (series === "digital") {
-    product.digitalCommunication = STANDARD_DIGITAL_COMM;
+
+  if (isROU) {
+    product.instrumentSpecs = buildInstrumentSpecs(section.body);
+  } else {
+    product.massFlowSpecs = buildMassFlowSpecs(
+      section.model,
+      function_,
+      series,
+      mini,
+      glanceRow,
+    );
+    if (series === "digital") {
+      product.digitalCommunication = STANDARD_DIGITAL_COMM;
+    }
   }
+
   return product;
 }
 
@@ -777,21 +840,26 @@ function validate(p: Product): void {
   if (!p.slug.current) throw new Error(`${p.model}: missing slug`);
   if (!["analogue", "digital", "specialized"].includes(p.series))
     throw new Error(`${p.model}: bad series "${p.series}"`);
-  if (!["MFC", "MFM", "EPC"].includes(p.function))
+  if (!["MFC", "MFM", "EPC", "ROU"].includes(p.function))
     throw new Error(`${p.model}: bad function "${p.function}"`);
-  // DO400 is a special-order analogue MFC that lists only an electrical
-  // connector ("9-Pin D-Connector"); the catalog has no SWG/VCR fluid-line
-  // size table for it. All other products do.
-  if (p.connections.length === 0 && p.model !== "DO400")
+  // DO400 and ROU instruments have no fluid connection table in the catalog.
+  if (p.connections.length === 0 && p.function !== "ROU" && p.model !== "DO400")
     throw new Error(`${p.model}: no connections parsed`);
-  const s = p.massFlowSpecs;
-  if (!s.flowRange || !(s.flowRange.max! > s.flowRange.min!))
-    throw new Error(`${p.model}: bad flowRange`);
-  if (s.accuracy.value! <= 0)
-    throw new Error(`${p.model}: bad accuracy ${s.accuracy.value}`);
-  // EPC (e.g., LEPC) legitimately omits response time — only MFC carries this spec
-  if (p.function === "MFC" && !s.responseTime)
-    throw new Error(`${p.model}: MFC missing responseTime`);
+
+  if (p.function === "ROU") {
+    if (!p.instrumentSpecs || p.instrumentSpecs.rows.length === 0)
+      throw new Error(`${p.model}: ROU missing instrumentSpecs rows`);
+  } else {
+    const s = p.massFlowSpecs;
+    if (!s) throw new Error(`${p.model}: missing massFlowSpecs`);
+    if (!s.flowRange || !(s.flowRange.max! > s.flowRange.min!))
+      throw new Error(`${p.model}: bad flowRange`);
+    if (s.accuracy.value! <= 0)
+      throw new Error(`${p.model}: bad accuracy ${s.accuracy.value}`);
+    // EPC (e.g., LEPC) legitimately omits response time — only MFC carries this spec
+    if (p.function === "MFC" && !s.responseTime)
+      throw new Error(`${p.model}: MFC missing responseTime`);
+  }
   if (p.series === "digital" && !p.digitalCommunication)
     throw new Error(`${p.model}: digital missing digitalCommunication`);
 
