@@ -30,8 +30,8 @@ describe("MarketsMap", () => {
   it("renders one path per country in the dataset", () => {
     const { container } = renderMap();
     const paths = container.querySelectorAll("path[data-iso]");
-    // World atlas has 173 countries; assert we render >150 to be tolerant of
-    // dataset updates without locking to an exact count.
+    // Bundle currently ships 175 countries; assert >= 150 so dataset
+    // refreshes don't break the test on a count drift.
     expect(paths.length).toBeGreaterThan(150);
   });
 

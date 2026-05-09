@@ -235,7 +235,6 @@
   fill: rgba(12, 14, 20, 0.05);
   stroke: rgba(12, 14, 20, 0.18);
   stroke-width: 0.4;
-  transition: fill 160ms ease;
 }
 .co-markets__country.is-selected {
   fill: var(--pd-primary);

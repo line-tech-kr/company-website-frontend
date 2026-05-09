@@ -71,7 +71,6 @@ export function MarketsMap({
       <g className="co-markets__countries">
         {Object.entries(COUNTRY_PATHS).map(([iso, d]) => {
           const isSelected = selected.has(iso);
-          const name = countryNames[iso];
           return (
             <path
               key={iso}
@@ -81,7 +80,9 @@ export function MarketsMap({
                 "co-markets__country" + (isSelected ? " is-selected" : "")
               }
             >
-              {isSelected && name ? <title>{name}</title> : null}
+              {isSelected && countryNames[iso] ? (
+                <title>{countryNames[iso]}</title>
+              ) : null}
             </path>
           );
         })}

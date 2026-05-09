@@ -161,7 +161,7 @@ function Markets({ c }: { c: CompanyContent }) {
           hq={LT_MARKETS_HQ}
           destinations={LT_MARKETS_DESTINATIONS}
           countryNames={m.countryNames}
-          ariaLabel={m.title}
+          ariaLabel={m.mapAriaLabel}
         />
         <p className="co-markets__legend">{m.legend}</p>
       </div>
