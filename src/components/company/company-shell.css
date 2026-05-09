@@ -238,7 +238,7 @@
   transition: fill 160ms ease;
 }
 .co-markets__country.is-selected {
-  fill: var(--lt-accent-400);
+  fill: var(--pd-primary);
   stroke: var(--pd-primary-dark);
   stroke-width: 0.5;
 }
@@ -256,10 +256,12 @@
   opacity: 0.3;
 }
 .co-markets__hqDot {
-  fill: var(--pd-primary);
+  fill: var(--lt-accent-400);
+  stroke: var(--pd-primary-dark);
+  stroke-width: 0.6;
 }
 .co-markets__hqGlow {
-  fill: var(--pd-primary);
+  fill: var(--lt-accent-400);
   opacity: 0.35;
 }
 
