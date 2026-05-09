@@ -76,30 +76,7 @@ function DeviceSilhouette({ cx, cy }: { cx: number; cy: number }) {
       <circle cx={towerX + 22} cy={baseY + 6} r="2.2" fill="#3a3d42" />
       <circle cx={towerX + tw - 22} cy={baseY + 6} r="2.2" fill="#3a3d42" />
 
-      {/* Line Tech logomark on the tower face (white). Viewbox traced
-          from the brand logo; rendered monochrome here to read on black. */}
-      <svg
-        x={towerX + 10}
-        y={towerY + 12}
-        width="28"
-        height="28"
-        viewBox="56.45 101.51 53.78 54.31"
-      >
-        <path
-          fill="#E5952C"
-          d="M 75.109375 149.835938 C 73.539062 148.53125 72.429688 147.046875 71.785156 145.386719 C 71.144531 143.730469 70.820312 141.398438 70.820312 138.402344 L 70.820312 115.75 L 80.800781 115.75 L 80.800781 138.136719 C 80.800781 140.367188 80.917969 141.9375 81.167969 142.839844 C 81.414062 143.75 81.839844 144.476562 82.441406 145.035156 C 83.386719 145.933594 84.542969 146.570312 85.910156 146.949219 C 87.289062 147.328125 89.183594 147.515625 91.609375 147.515625 L 99.273438 147.515625 C 104.746094 142.953125 108.230469 136.085938 108.230469 128.402344 C 108.230469 114.652344 97.089844 103.507812 83.339844 103.507812 C 69.589844 103.507812 58.449219 114.652344 58.449219 128.402344 C 58.449219 141.839844 69.101562 152.785156 82.425781 153.269531 C 81.863281 153.167969 81.335938 153.058594 80.871094 152.929688 C 78.726562 152.332031 76.808594 151.304688 75.109375 149.835938 Z"
-        />
-        <path
-          fill="#B0B3B6"
-          d="M 83.339844 153.285156 C 83.035156 153.285156 82.730469 153.277344 82.429688 153.265625 C 84.5 153.632812 87.261719 153.820312 90.742188 153.820312 L 103.320312 153.820312 L 103.320312 147.519531 L 99.277344 147.519531 C 94.957031 151.125 89.402344 153.285156 83.339844 153.285156 Z"
-        />
-        <path
-          fill="#FFFFFF"
-          d="M 99.273438 147.515625 L 91.609375 147.515625 C 89.183594 147.515625 87.285156 147.332031 85.914062 146.949219 C 84.546875 146.570312 83.382812 145.933594 82.445312 145.035156 C 81.839844 144.480469 81.414062 143.75 81.164062 142.84375 C 80.921875 141.9375 80.800781 140.367188 80.800781 138.140625 L 80.800781 115.75 L 70.820312 115.75 L 70.820312 138.394531 C 70.820312 141.398438 71.140625 143.730469 71.789062 145.386719 C 72.429688 147.039062 73.535156 148.523438 75.113281 149.839844 C 76.800781 151.300781 78.726562 152.332031 80.878906 152.929688 C 81.339844 153.054688 81.863281 153.164062 82.425781 153.269531 C 82.730469 153.277344 83.035156 153.285156 83.339844 153.285156 C 89.40625 153.285156 94.957031 151.121094 99.273438 147.515625 Z"
-        />
-      </svg>
-
-      {/* Red flow indicator below the logo */}
+      {/* Red flow indicator */}
       <g transform={`translate(${towerX + tw - 50} ${towerY + th - 14})`}>
         <path d="M22,-4 L34,-4 L34,-7 L40,-2 L34,3 L34,0 L22,0 Z" fill="#d13a2a" />
       </g>
@@ -124,7 +101,7 @@ const SPECS = [
 export function IntroVisual() {
   const tagX = 360;
   const tagY = 188;
-  const tagW = 116;
+  const tagW = 102;
   const tagH = 64;
 
   return (
@@ -169,15 +146,15 @@ export function IntroVisual() {
         <text x={tagX + 10} y={tagY + 40} fontSize="18" fill="var(--pd-fg-strong)" fontWeight="600" fontFamily="var(--lt-mono)" letterSpacing="-0.5">
           <tspan className="ho-svg__val">20.0</tspan>
         </text>
-        <text x={tagX + tagW - 6} y={tagY + 40} textAnchor="end" fontSize="8" fill="currentColor" opacity=".55" fontFamily="var(--lt-mono)">SLM</text>
+        <text x={tagX + tagW - 8} y={tagY + 40} textAnchor="end" fontSize="8" fill="currentColor" opacity=".55" fontFamily="var(--lt-mono)">SLM</text>
         <text x={tagX + 10} y={tagY + 54} fontSize="6.5" fill="currentColor" opacity=".55" letterSpacing="1.5" fontFamily="var(--lt-mono)">SP 20.0 · LOCKED</text>
         <circle cx={tagX + tagW - 6} cy={tagY + 12} r="2.4" fill="var(--pd-primary)">
           <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite" />
         </circle>
 
-        <g transform="translate(76 444)">
+        <g transform="translate(92 444)">
           {SPECS.map((c, i) => (
-            <g key={c.l} transform={`translate(${i * 124} 0)`}>
+            <g key={c.l} transform={`translate(${i * 144} 0)`}>
               <text x="0" y="0" fontSize="6.5" fill="currentColor" opacity=".5" letterSpacing="1.5" fontFamily="var(--lt-mono)">{c.l}</text>
               <text x="0" y="22" fontSize="14" fill="var(--pd-fg-strong)" fontWeight="500" fontFamily="var(--lt-sans)">{c.v}</text>
             </g>
