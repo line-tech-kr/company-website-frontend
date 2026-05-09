@@ -218,6 +218,89 @@
   color: var(--pd-fg-strong);
 }
 
+/* Markets: world map with HQ→destination arcs.
+ * Server-rendered SVG; arc travelers animate via CSS `offset-path`. */
+.co-markets {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 1000px;
+}
+.co-markets__map {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.co-markets__country {
+  fill: rgba(12, 14, 20, 0.05);
+  stroke: rgba(12, 14, 20, 0.18);
+  stroke-width: 0.4;
+}
+.co-markets__country.is-selected {
+  fill: var(--pd-primary);
+  stroke: var(--pd-primary-dark);
+  stroke-width: 0.5;
+}
+.co-markets__arc {
+  fill: none;
+  stroke: var(--lt-accent-400);
+  stroke-width: 1;
+  opacity: 0.55;
+}
+.co-markets__dot {
+  fill: var(--lt-accent-400);
+}
+.co-markets__dotGlow {
+  fill: var(--lt-accent-400);
+  opacity: 0.3;
+}
+.co-markets__hqDot {
+  fill: var(--lt-accent-400);
+  stroke: var(--pd-primary-dark);
+  stroke-width: 0.6;
+}
+.co-markets__hqGlow {
+  fill: var(--lt-accent-400);
+  opacity: 0.35;
+}
+
+/* Traveling pulse along each arc. Same motion vocabulary as the home hero
+ * `.ho-flow` bars: linear infinite, ~2.6s, staggered. */
+@keyframes co-markets-traveler {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+.co-markets__traveler {
+  fill: var(--lt-accent-400);
+  offset-rotate: 0deg;
+  animation: co-markets-traveler 2.6s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .co-markets__traveler {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+.co-markets__legend {
+  margin: 0;
+  max-width: 620px;
+  font: 400 var(--lt-fs-sm)/1.55 var(--lt-sans);
+  color: var(--pd-muted);
+}
+
 /* Certifications: 3 cards stacked. */
 .co-certs {
   display: flex;

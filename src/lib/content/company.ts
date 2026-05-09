@@ -21,6 +21,7 @@ import type { Locale } from "./home";
 export type CompanySectionId =
   | "greeting"
   | "history"
+  | "markets"
   | "certifications"
   | "location";
 
@@ -95,6 +96,19 @@ export type CompanyCertifications = {
   footnote: string;
 };
 
+export type CompanyMarkets = {
+  kicker: string;
+  title: string;
+  /** Caption sentence rendered under the map. */
+  legend: string;
+  /** Descriptive label for the map SVG itself (read by screen readers).
+   * Should describe the visual content, not repeat the section heading. */
+  mapAriaLabel: string;
+  /** ISO Alpha-2 → localized country name. Drives `<title>` tooltips on
+   * highlighted countries and the HQ marker. */
+  countryNames: Record<string, string>;
+};
+
 export type CompanyMapLink = {
   label: string;
   href: string;
@@ -137,6 +151,7 @@ export type CompanyContent = {
   navHeading: string;
   greeting: CompanyGreeting;
   history: CompanyHistory;
+  markets: CompanyMarkets;
   certifications: CompanyCertifications;
   location: CompanyLocation;
 };
@@ -162,6 +177,34 @@ const HISTORY_DATES = [
   "2020.06",
 ] as const;
 
+/**
+ * Markets section data — illustrative (not real customer data).
+ * Lat/lon are decimal degrees, WGS84. Replace this constant with a Sanity
+ * query when the real export list is curated; the rendering pipeline only
+ * cares about the shape.
+ */
+export const LT_MARKETS_HQ = {
+  iso: "KR",
+  lat: 36.35,
+  lon: 127.38,
+} as const;
+
+export const LT_MARKETS_DESTINATIONS = [
+  { iso: "JP", lat: 35.7, lon: 139.7 },
+  { iso: "CN", lat: 39.9, lon: 116.4 },
+  { iso: "TW", lat: 23.7, lon: 121.0 },
+  { iso: "SG", lat: 1.35, lon: 103.8 },
+  { iso: "MY", lat: 3.1, lon: 101.7 },
+  { iso: "VN", lat: 21.0, lon: 105.8 },
+  { iso: "IN", lat: 19.1, lon: 72.9 },
+  { iso: "IL", lat: 31.8, lon: 35.2 },
+  { iso: "NL", lat: 52.4, lon: 4.9 },
+  { iso: "DE", lat: 52.5, lon: 13.4 },
+  { iso: "FR", lat: 48.9, lon: 2.4 },
+  { iso: "GB", lat: 51.5, lon: -0.1 },
+  { iso: "US", lat: 39.0, lon: -98.0 },
+] as const;
+
 // ─── Content ────────────────────────────────────────────────────────────────
 
 export const LT_COMPANY: Record<Locale, CompanyContent> = {
@@ -170,6 +213,7 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
     nav: [
       { id: "greeting", href: "#greeting", label: "인사말" },
       { id: "history", href: "#history", label: "발자취" },
+      { id: "markets", href: "#markets", label: "수출 현황" },
       { id: "certifications", href: "#certifications", label: "인증" },
       { id: "location", href: "#location", label: "오시는 길" },
     ],
@@ -226,8 +270,32 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
         { date: HISTORY_DATES[11], event: "EX · LD · LM 시리즈 개발" },
       ],
     },
+    markets: {
+      kicker: "03 — 수출 현황",
+      title: "해외 공급 현황",
+      legend:
+        "현지 대리점망과 직접 공급을 통해 해외 13개국에 라인테크 제품이 공급됩니다.",
+      mapAriaLabel:
+        "대전 본사에서 해외 13개국으로 이어지는 라인테크 수출 지도.",
+      countryNames: {
+        KR: "대한민국",
+        JP: "일본",
+        CN: "중국",
+        TW: "대만",
+        SG: "싱가포르",
+        MY: "말레이시아",
+        VN: "베트남",
+        IN: "인도",
+        IL: "이스라엘",
+        NL: "네덜란드",
+        DE: "독일",
+        FR: "프랑스",
+        GB: "영국",
+        US: "미국",
+      },
+    },
     certifications: {
-      kicker: "03 — 인증",
+      kicker: "04 — 인증",
       title: "검증된 품질 시스템.",
       sub: "주요 인증 3종을 명시합니다. 그 외 적합성 증빙 문서는 요청 시 제공해 드립니다.",
       named: [
@@ -261,7 +329,7 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
         "위 3종 외에도 라인테크의 품질 시스템 안에는 RoHS · REACH 등 10건의 적합성 증빙 문서가 운용되고 있습니다. {viewAll}하거나 영업 담당자를 통해 사본을 요청하실 수 있습니다.",
     },
     location: {
-      kicker: "04 — 오시는 길",
+      kicker: "05 — 오시는 길",
       title: "대전 본사",
       sub: "대덕연구개발특구 안에 위치한 본사 및 생산 시설.",
       labels: {
@@ -300,6 +368,7 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
     nav: [
       { id: "greeting", href: "#greeting", label: "Greeting" },
       { id: "history", href: "#history", label: "History" },
+      { id: "markets", href: "#markets", label: "Export Markets" },
       {
         id: "certifications",
         href: "#certifications",
@@ -363,8 +432,32 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
         { date: HISTORY_DATES[11], event: "EX · LD · LM series developed" },
       ],
     },
+    markets: {
+      kicker: "03 — Export Markets",
+      title: "Overseas supply at a glance",
+      legend:
+        "Reaching 13 overseas markets through licensed distributors and direct supply.",
+      mapAriaLabel:
+        "World map of Line Tech export destinations — 13 countries highlighted with arcs radiating from Daejeon headquarters.",
+      countryNames: {
+        KR: "Korea",
+        JP: "Japan",
+        CN: "China",
+        TW: "Taiwan",
+        SG: "Singapore",
+        MY: "Malaysia",
+        VN: "Vietnam",
+        IN: "India",
+        IL: "Israel",
+        NL: "Netherlands",
+        DE: "Germany",
+        FR: "France",
+        GB: "United Kingdom",
+        US: "United States",
+      },
+    },
     certifications: {
-      kicker: "03 — Certifications",
+      kicker: "04 — Certifications",
       title: "A documented quality system.",
       sub: "Three core certifications are listed below. Additional conformity documents are available on request.",
       named: [
@@ -398,7 +491,7 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
         "Beyond the three above, Line Tech maintains 10 additional conformity documents within its quality system — including RoHS and REACH declarations. You can {viewAll} or request a copy through your sales contact.",
     },
     location: {
-      kicker: "04 — Location",
+      kicker: "05 — Location",
       title: "Daejeon headquarters.",
       sub: "Headquarters and production located within the Daedeok Innopolis research cluster.",
       labels: {
@@ -437,6 +530,7 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
     nav: [
       { id: "greeting", href: "#greeting", label: "问候语" },
       { id: "history", href: "#history", label: "发展历程" },
+      { id: "markets", href: "#markets", label: "出口市场" },
       {
         id: "certifications",
         href: "#certifications",
@@ -500,8 +594,30 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
         { date: HISTORY_DATES[11], event: "开发 EX · LD · LM 系列" },
       ],
     },
+    markets: {
+      kicker: "03 — 出口市场",
+      title: "海外供应概况",
+      legend: "通过当地代理商网络与直接供货，莱因产品已进入海外 13 个国家。",
+      mapAriaLabel: "莱因海外出口地图 — 大田总部出发，连接海外 13 个国家。",
+      countryNames: {
+        KR: "韩国",
+        JP: "日本",
+        CN: "中国",
+        TW: "台湾",
+        SG: "新加坡",
+        MY: "马来西亚",
+        VN: "越南",
+        IN: "印度",
+        IL: "以色列",
+        NL: "荷兰",
+        DE: "德国",
+        FR: "法国",
+        GB: "英国",
+        US: "美国",
+      },
+    },
     certifications: {
-      kicker: "03 — 资质认证",
+      kicker: "04 — 资质认证",
       title: "经过认证的质量体系。",
       sub: "以下列出三项核心资质。其余符合性证明文件可按需提供。",
       named: [
@@ -534,7 +650,7 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
         "除上述三项外，莱因质量体系内另维护包括 RoHS 与 REACH 在内的 10 份符合性证明文件。{viewAll}，或通过销售对接人申请副本。",
     },
     location: {
-      kicker: "04 — 联系地址",
+      kicker: "05 — 联系地址",
       title: "大田总部",
       sub: "总部与生产基地位于大德研发特区内。",
       labels: {
