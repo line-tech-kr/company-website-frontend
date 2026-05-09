@@ -51,8 +51,14 @@ function productToSeedFields(p: Product) {
     ...(p.description ? { description: p.description } : {}),
     features: p.features.map((f, i) => ({ ...f, _key: `feature-${i}` })),
     connections: p.connections.map((c, i) => ({ ...c, _key: `conn-${i}` })),
-    massFlowSpecs: p.massFlowSpecs,
+    ...(p.massFlowSpecs ? { massFlowSpecs: p.massFlowSpecs } : {}),
   };
+  if (p.instrumentSpecs) {
+    fields.instrumentSpecs = p.instrumentSpecs.rows.map((r, i) => ({
+      ...r,
+      _key: `spec-${i}`,
+    }));
+  }
   if (p.digitalCommunication) {
     fields.digitalCommunication = p.digitalCommunication;
   }
