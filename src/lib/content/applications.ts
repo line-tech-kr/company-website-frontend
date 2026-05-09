@@ -53,10 +53,10 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
         lede: "Fuel cells live or die on stoichiometry — under-feed and the stack starves, over-pressure and the membrane fails. MFCs on hydrogen, oxygen, and purge lines deliver the exact ratios each cell type requires, with MFMs handling the monitoring side of the same loop.",
         body: [
           "Fuel cell systems — whether PEM, solid oxide, or alkaline — depend on controlled delivery of hydrogen, oxygen, and inert purge gases across each cell stack. An MFC on each gas line ensures the stoichiometric ratios required for peak power output while protecting membranes from over-pressure or starvation conditions.",
-          "The M/MS Analogue series covers the wide flow ranges typical of stack-level hydrogen feeds. For lower-pressure laboratory fuel cell testing rigs, the LM MEMS series offers a cost-efficient option with fast response and a compact footprint.",
+          "The M/MS Analogue series covers the wide flow ranges typical of stack-level hydrogen feeds. For lower-pressure laboratory fuel cell testing rigs operating below the standard 10 bar minimum, the LEPC controller delivers accurate flow regulation down to 0.1 bar.",
           "Line Tech supplies both MFC and MFM variants, making it straightforward to build measurement-only monitoring loops alongside controlled feed lines in the same system.",
         ],
-        recommendedSeries: ["M / MS", "LM"],
+        recommendedSeries: ["M / MS", "LEPC"],
         relatedCategories: ["analogue", "specialized"],
       },
       {
@@ -101,10 +101,10 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
         lede: "R&D rigs change weekly — new gases, new flow ranges, new geometries. MFCs and MFMs in this environment need to span 0.01 sccm to 5,000 slpm and integrate with whatever data acquisition or control system happens to be on the bench.",
         body: [
           "R&D environments typically involve frequent reconfiguration — new gases, new flow ranges, and new experimental conditions. The breadth of the Line Tech product range means that a single supplier can cover flows from 0.01 sccm to 5,000 slpm across analogue, digital, and specialist configurations.",
-          "The LD series is particularly useful in standalone laboratory setups: the built-in 7-segment display and front-panel setpoint adjustment eliminate the need for a separate controller or PC, making it easy to operate a single instrument independently on a bench.",
-          "The LM MEMS series offers a cost-efficient option for low-pressure lab gas lines — useful when a multi-channel experiment needs many MFCs without driving up the per-channel cost.",
+          "The MD Digital series suits structured R&D work that requires recipe management or data logging — its RS-485 interface integrates cleanly with whichever data acquisition or process control system is already on the bench, and 8-point linearization holds ±0.25% F.S. across the working range.",
+          "For low-pressure analytical and vacuum-adjacent rigs operating below the standard 10 bar minimum, the LEPC controller provides accurate flow regulation down to 0.1 bar — particularly useful in spectroscopy, GC inlet, and benchtop reactor work.",
         ],
-        recommendedSeries: ["LD", "LM", "MD"],
+        recommendedSeries: ["MD", "LEPC"],
         relatedCategories: ["specialized", "digital"],
       },
       {
@@ -210,10 +210,10 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
         lede: "수소 및 반응 가스 공급 유량을 정밀하게 계량해야 셀 효율을 유지하고 막 손상을 방지할 수 있습니다.",
         body: [
           "PEM, 고체산화물 또는 알칼리형 연료전지 시스템은 각 셀 스택에 수소, 산소, 불활성 퍼지 가스를 정확히 공급해야 합니다. 가스 라인마다 MFC를 적용하면 최대 출력에 필요한 화학양론적 비율을 유지하면서 막 과압 및 공급 부족 상황을 방지할 수 있습니다.",
-          "M/MS 아날로그 시리즈는 스택 수준의 수소 공급에서 요구되는 넓은 유량 범위를 커버합니다. 저압 실험실용 연료전지 테스트 리그에는 빠른 응답과 컴팩트한 폼팩터를 갖춘 LM MEMS 시리즈가 비용 효율적인 선택입니다.",
+          "M/MS 아날로그 시리즈는 스택 수준의 수소 공급에서 요구되는 넓은 유량 범위를 커버합니다. 표준 최저 압력 10 bar에 미치지 못하는 저압 실험실 연료전지 테스트 리그에는 LEPC 컨트롤러가 0.1 bar까지 정확한 유량 제어를 제공합니다.",
           "라인테크는 MFC와 MFM을 모두 제공하므로, 같은 시스템 안에서 제어 공급 라인과 측정 전용 모니터링 루프를 간편하게 구성할 수 있습니다.",
         ],
-        recommendedSeries: ["M / MS", "LM"],
+        recommendedSeries: ["M / MS", "LEPC"],
         relatedCategories: ["analogue", "specialized"],
       },
       {
@@ -258,10 +258,10 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
         lede: "실험실 및 파일럿 플랜트 가스 시스템은 다양한 가스, 유량 범위, 구성에 걸친 유연성을 필요로 합니다.",
         body: [
           "R&D 환경에서는 새로운 가스, 새로운 유량 범위, 새로운 실험 조건으로 빈번하게 재구성이 이루어집니다. 라인테크 제품 라인의 폭넓은 범위 덕분에 아날로그, 디지털, 특수 사양을 망라한 0.01 sccm부터 5,000 slpm까지의 유량을 단일 공급사에서 해결할 수 있습니다.",
-          "LD 시리즈는 독립형 실험실 설비에 특히 유용합니다. 내장 7세그먼트 디스플레이와 전면 패널 설정값 조절 기능 덕분에 별도의 컨트롤러나 PC 없이 벤치 위에서 단독으로 기기를 쉽게 운용할 수 있습니다.",
-          "LM MEMS 시리즈는 저압 실험실 가스 라인에 비용 효율적인 선택으로, 다채널 실험에 많은 수의 기기가 필요할 때 채널당 비용을 절감할 수 있습니다.",
+          "MD 디지털 시리즈는 레시피 관리나 데이터 로깅이 필요한 정형화된 R&D 작업에 적합합니다. RS-485 인터페이스는 벤치에 이미 설치된 어떤 데이터 수집 또는 공정 제어 시스템과도 깔끔하게 연동되며, 8포인트 선형화로 운용 범위 전체에서 ±0.25% F.S.를 유지합니다.",
+          "표준 최저 압력 10 bar에 미치지 못하는 저압 분석 또는 진공 인접 실험에서는 LEPC 컨트롤러가 0.1 bar까지 정밀한 유량 제어를 제공합니다 — 분광, GC 인렛, 벤치 반응기 실험에 특히 유용합니다.",
         ],
-        recommendedSeries: ["LD", "LM", "MD"],
+        recommendedSeries: ["MD", "LEPC"],
         relatedCategories: ["specialized", "digital"],
       },
       {
@@ -367,10 +367,10 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
         lede: "必须对氢气和反应气体的供给流量进行精确计量，以维持电池效率并防止膜损坏。",
         body: [
           "无论是 PEM、固体氧化物还是碱性燃料电池系统，都需要对每个电堆中的氢气、氧气和惰性吹扫气体进行精确控制。在每条气体管线上配置 MFC，可在防止膜过压或气体供给不足的同时，维持最大功率输出所需的化学计量比。",
-          "M/MS 模拟系列覆盖电堆级氢气供应所需的宽流量范围。对于低压实验室燃料电池测试台，LM MEMS 系列提供响应快速、外形紧凑的高性价比选择。",
+          "M/MS 模拟系列覆盖电堆级氢气供应所需的宽流量范围。对于低于标准 10 bar 最低压力的低压实验室燃料电池测试台，LEPC 控制器可在低至 0.1 bar 的供气压力下实现精确的流量控制。",
           "莱因同时提供 MFC 和 MFM 两种形式，便于在同一系统中同时构建受控供气管线和纯测量监控回路。",
         ],
-        recommendedSeries: ["M / MS", "LM"],
+        recommendedSeries: ["M / MS", "LEPC"],
         relatedCategories: ["analogue", "specialized"],
       },
       {
@@ -415,10 +415,10 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
         lede: "实验室和中试工厂气体系统需要在各种气体、流量范围和配置之间具备灵活性。",
         body: [
           "研发环境通常需要频繁重新配置——新气体、新流量范围和新实验条件。莱因产品系列的宽广覆盖意味着一家供应商即可满足从 0.01 sccm 到 5,000 slpm 的模拟、数字和特殊规格各类配置需求。",
-          "LD 系列在独立实验室配置中尤为实用：内置 7 段显示屏和前面板设定值调节功能使单台仪器可在工作台上独立操作，无需单独的控制器或 PC。",
-          "LM MEMS 系列为低压实验室气体管线提供高性价比选择——当多通道实验需要大量仪器时，可有效降低单通道成本。",
+          "MD 数字系列适用于需要配方管理或数据记录的结构化研发工作——其 RS-485 接口可与工作台上已部署的任何数据采集或工艺控制系统无缝集成，并通过 8 点线性化在整个工作范围内保持 ±0.25% F.S. 精度。",
+          "对于低于标准 10 bar 最低压力的低压分析或真空相邻实验台，LEPC 控制器可在低至 0.1 bar 的压力下提供精确的流量调节——在光谱学、GC 进样口和台式反应器工作中尤为实用。",
         ],
-        recommendedSeries: ["LD", "LM", "MD"],
+        recommendedSeries: ["MD", "LEPC"],
         relatedCategories: ["specialized", "digital"],
       },
       {

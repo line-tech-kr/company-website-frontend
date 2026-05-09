@@ -6,7 +6,7 @@ import {
   flagshipImageUrl,
   flagshipCutoutUrl,
 } from "./flagship";
-import { CATEGORY_SLUGS, type CategorySlug } from "@/lib/categories";
+import { CATEGORY_SLUGS } from "@/lib/categories";
 import type { Product } from "@/lib/types/product";
 
 vi.mock("@/sanity/imageUrl", () => ({

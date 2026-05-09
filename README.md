@@ -54,7 +54,7 @@ src/
 sanity/schemaTypes/    # Sanity schema definitions
 messages/              # next-intl message catalogs (en/ko/zh)
 public/products/       # migrated product imagery + manifest
-docs/                  # site audit, slice plans, design handoff
+docs/                  # 2026 catalog handoff, brand reference, design handoff
 scripts/               # catalog parser + Sanity seeder
 ```
 
@@ -82,7 +82,8 @@ Vitest + Testing Library + jsdom. Tests live next to the code as `*.test.ts(x)`.
 
 ## Reference docs
 
-- `docs/current-site-audit.md` — full audit of the legacy site (product inventory, color extraction, sitemap)
-- `docs/linetech-slice-1.md` — first vertical slice plan (M3030VA product page)
+- `docs/catalogue-2026-handoff.md` — 2026 product catalog refresh handoff (active product lineup)
+- `docs/catalog-extract/` — machine-readable extracts from the 2026 catalog
 - `docs/handoff/` — design system handoff prototype
+- `docs/brand-reference/` — brand assets and colour reference
 - `CLAUDE.md` / `AGENTS.md` — instructions for AI assistants working in this repo

@@ -136,17 +136,17 @@ const CATEGORY_SEO: Record<CategorySlug, Record<Locale, PageSeo>> = {
     ko: {
       title: "특수 사양 MFC·MFM — 라인테크",
       description:
-        "고압·저유량·부식성 가스 등 극한 환경을 위한 매스플로우 컨트롤러(MFC)·미터(MFM). 맞춤형 사양 설계가 가능한 라인테크 LD·LM 시리즈.",
+        "고압·저유량·부식성 가스 등 극한 환경을 위한 매스플로우 컨트롤러(MFC)·미터(MFM). 라인테크 EX·LEPC 특수 시리즈와 맞춤형 사양 설계.",
     },
     en: {
       title: "Specialized MFC & MFM — Line Tech",
       description:
-        "Mass Flow Controllers and Meters for extreme conditions — high pressure, low flow, corrosive gases. Custom-spec Line Tech LD·LM series.",
+        "Mass Flow Controllers and Meters for extreme conditions — high pressure, low flow, corrosive gases. Line Tech EX·LEPC specialized series with custom-spec design.",
     },
     zh: {
       title: "特殊规格MFC与MFM — Line Tech",
       description:
-        "适用于高压、低流量、腐蚀性气体等极端环境的质量流量控制器与流量计。莱因科技LD·LM系列，支持定制化规格设计。",
+        "适用于高压、低流量、腐蚀性气体等极端环境的质量流量控制器与流量计。莱因科技EX·LEPC特殊系列，支持定制化规格设计。",
     },
   },
 };

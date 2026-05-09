@@ -22,7 +22,7 @@ type ChipTone = "neutral" | "info" | "warning" | "danger";
 function seriesTone(series: string): ChipTone {
   if (series === "MD") return "info";
   if (series === "EX") return "danger";
-  if (series === "LM" || series === "LD") return "warning";
+  if (series === "LEPC") return "warning";
   return "neutral";
 }
 

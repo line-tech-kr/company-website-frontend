@@ -22,10 +22,10 @@ const CATEGORY_META: Record<
       "When you need ±0.25% FS accuracy, 8-point linearization, or RS-485 / Modbus RTU for bus integration. Sub-second response. Preferred for semiconductor process lines.",
   },
   specialized: {
-    heading: "Specialized series (LD / LM)",
-    code: "LD·LM",
+    heading: "Specialized series (EX / LEPC)",
+    code: "EX·LEPC",
     description:
-      "Hazardous locations, display-integrated units, MEMS sensors. Choose when standard variants don't fit the environment.",
+      "Hazardous locations (EX, ATEX-certified explosion-proof) and low-pressure precision control (LEPC, 0.1–6 bar). Choose when standard variants don't fit the environment.",
   },
 };
 

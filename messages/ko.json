@@ -88,17 +88,17 @@
       },
       "specialized": {
         "title": "특수 시리즈",
-        "lede": "디스플레이 일체형, 방폭, MEMS 등 까다로운 환경을 위한 특수 사양 라인업."
+        "lede": "방폭(EX) 및 저압 정밀 제어(LEPC) 등 까다로운 환경을 위한 특수 사양 라인업."
       }
     },
     "stack": {
       "controllers": {
         "title": "질량유량 제어기 · MFC",
-        "subtitle": "Controllers"
+        "subtitle": "제어기"
       },
       "meters": {
         "title": "질량유량 측정기 · MFM",
-        "subtitle": "Meters"
+        "subtitle": "측정기"
       }
     },
     "table": {

@@ -31,6 +31,11 @@ export type AccessorySpecRow = {
 export type AccessoryItemImage = {
   src: string;
   alt: string;
+  /** Intrinsic pixel dimensions of the source asset. Used by next/image to
+   * preserve aspect ratio under the responsive `width: 100%; height: auto`
+   * rule in `accessories-shell.css`. */
+  width: number;
+  height: number;
   /** Whether the image is a generic placeholder (rendered with reduced
    * emphasis); LTI items use this until real photography lands. */
   placeholder?: boolean;
@@ -101,9 +106,21 @@ export type AccessoriesContent = {
 // ─── Shared (locale-independent) ────────────────────────────────────────────
 
 /** LTI items use a shared neutral placeholder until real product photos exist. */
-const LTI_PLACEHOLDER_SRC = "/products/lti/placeholder.svg";
-const FC_050S_IMAGE_SRC = "/products/fc-050s/product-1.gif";
-const PR_030_IMAGE_SRC = "/products/pr-030/product-1.gif";
+const LTI_PLACEHOLDER_IMAGE = {
+  src: "/products/lti/placeholder.svg",
+  width: 320,
+  height: 200,
+} as const;
+const FC_050S_IMAGE = {
+  src: "/products/fc-050s/product-1.gif",
+  width: 370,
+  height: 306,
+} as const;
+const PR_030_IMAGE = {
+  src: "/products/pr-030/product-1.gif",
+  width: 370,
+  height: 287,
+} as const;
 
 // ─── Content ────────────────────────────────────────────────────────────────
 
@@ -150,7 +167,7 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           blurb:
             "Compact panel-mount readout. 4-digit 7-segment display, 0–5 Vdc setpoint input, six-button front face for flow on/off, scrolling, and menu navigation.",
           image: {
-            src: LTI_PLACEHOLDER_SRC,
+            ...LTI_PLACEHOLDER_IMAGE,
             alt: "Generic placeholder for LTI-200 panel readout",
             placeholder: true,
           },
@@ -176,7 +193,7 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           blurb:
             "Rackable readout box with D-SUB remote control, optional 4–20 mA output, and an RS-232 link to companion PC software. Handles up to 8 channels in 1U / 2U / 4U arrangements.",
           image: {
-            src: LTI_PLACEHOLDER_SRC,
+            ...LTI_PLACEHOLDER_IMAGE,
             alt: "Generic placeholder for LTI-1000 rackable readout",
             placeholder: true,
           },
@@ -217,7 +234,7 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           blurb:
             "Upstream pressure regulator that takes a 100 bar feed and delivers 95–97 bar to the MFC inlet, holding a 3–5 bar differential automatically. Operates across 15–300 bar feed pressure. Corrosion-resistant.",
           image: {
-            src: FC_050S_IMAGE_SRC,
+            ...FC_050S_IMAGE,
             alt: "FC-050S high-pressure flow controller",
           },
           specsHeading: "Specifications",
@@ -244,7 +261,7 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           blurb:
             "Pressure resistor that closes automatically below a minimum flow threshold and re-opens at full-range flow. Used in front of FC-050S on 200 bar lines, or standalone where pressure shocks need damping.",
           image: {
-            src: PR_030_IMAGE_SRC,
+            ...PR_030_IMAGE,
             alt: "PR-030 pressure shock protector",
           },
           specsHeading: "Specifications",
@@ -316,7 +333,7 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           blurb:
             "소형 패널 장착형 표시기. 4자리 7-세그먼트 디스플레이, 0–5 Vdc 설정값 입력, 유량 ON/OFF · 스크롤 · 메뉴 조작을 위한 전면 6버튼 구성.",
           image: {
-            src: LTI_PLACEHOLDER_SRC,
+            ...LTI_PLACEHOLDER_IMAGE,
             alt: "LTI-200 표시기 자리표시 이미지",
             placeholder: true,
           },
@@ -343,7 +360,7 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           blurb:
             "랙 마운트형 표시기 박스. D-SUB 원격 제어, 4–20 mA 출력 옵션, 전용 PC 소프트웨어 연결용 RS-232 통신 지원. 1U / 2U / 4U 구성으로 최대 8채널까지 처리합니다.",
           image: {
-            src: LTI_PLACEHOLDER_SRC,
+            ...LTI_PLACEHOLDER_IMAGE,
             alt: "LTI-1000 표시기 자리표시 이미지",
             placeholder: true,
           },
@@ -385,7 +402,7 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           blurb:
             "100 bar 입력을 받아 95–97 bar로 MFC 입구에 공급하며, 3–5 bar의 차압을 자동으로 유지하는 상류 압력 조절기. 15–300 bar 공급 압력 범위에서 동작하며 내부식성 사양입니다.",
           image: {
-            src: FC_050S_IMAGE_SRC,
+            ...FC_050S_IMAGE,
             alt: "FC-050S 고압 유량 제어기",
           },
           specsHeading: "사양",
@@ -411,7 +428,7 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           blurb:
             "최소 유량 이하에서 자동으로 차단되고 전 영역 유량에서 다시 개방되는 압력 저항기. 200 bar 라인에서는 FC-050S 앞단에 설치하며, 압력 충격을 단독으로 완충해야 하는 환경에서는 단독으로 사용합니다.",
           image: {
-            src: PR_030_IMAGE_SRC,
+            ...PR_030_IMAGE,
             alt: "PR-030 압력 충격 보호기",
           },
           specsHeading: "사양",
@@ -485,7 +502,7 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           blurb:
             "紧凑型面板安装式显示器。4 位 7 段数码管显示，0–5 Vdc 设定值输入，前面板 6 按键支持流量启停、滚动与菜单操作。",
           image: {
-            src: LTI_PLACEHOLDER_SRC,
+            ...LTI_PLACEHOLDER_IMAGE,
             alt: "LTI-200 显示器占位图",
             placeholder: true,
           },
@@ -512,7 +529,7 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           blurb:
             "机架式显示器箱。支持 D-SUB 远程控制、可选 4–20 mA 输出，以及通过 RS-232 与配套 PC 软件通信。1U / 2U / 4U 机架结构，最多支持 8 通道。",
           image: {
-            src: LTI_PLACEHOLDER_SRC,
+            ...LTI_PLACEHOLDER_IMAGE,
             alt: "LTI-1000 显示器占位图",
             placeholder: true,
           },
@@ -551,7 +568,7 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           blurb:
             "上游压力调节器，将 100 bar 进气压力降至 95–97 bar 并供给 MFC 入口，自动维持 3–5 bar 差压。在 15–300 bar 进气压力范围内运行，耐腐蚀。",
           image: {
-            src: FC_050S_IMAGE_SRC,
+            ...FC_050S_IMAGE,
             alt: "FC-050S 高压流量控制器",
           },
           specsHeading: "规格",
@@ -577,7 +594,7 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           blurb:
             "在最低流量阈值以下自动关闭、在全量程流量下重新开启的压力阻力器。200 bar 管线中安装于 FC-050S 上游，需要单独缓冲压力冲击的场景下也可独立使用。",
           image: {
-            src: PR_030_IMAGE_SRC,
+            ...PR_030_IMAGE,
             alt: "PR-030 压力冲击保护器",
           },
           specsHeading: "规格",

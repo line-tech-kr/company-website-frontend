@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 import type { ContactFormPayload } from "./schema";
 
-const TO = "info@linetech.co.kr";
+const TO = "linetech@line-tech.co.kr";
 // Use a verified sending domain once configured in Resend; fall back to the
 // shared testing address during initial setup.
 const FROM =

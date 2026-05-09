@@ -83,8 +83,8 @@ export const LT_FAQ: Record<Locale, FaqContent> = {
         questions: [
           {
             id: "series-overview",
-            q: "What are the main product series and how do I choose?",
-            a: "Line Tech produces five series: M/MS (Analogue) — proven controllers and meters covering 0.01–5,000 slpm; MD (Digital) — RS-485 communication, 8-point calibration, and sub-second response; LD (Specialized) — built-in 7-segment display for direct monitoring; LM (Specialized) — MEMS-based, cost-efficient, suited to low-pressure applications below 10 bar; and EX (Specialized) — explosion-proof (Ex ec IIC T4 Gc, IP 65) for hazardous environments. All series cover both MFC and MFM variants.",
+            q: "What are the main product families and how do I choose?",
+            a: "Line Tech produces four product families. M/MS (Analogue) — proven controllers and meters covering 0.01–5,000 slpm for general industrial process work. MD (Digital) — RS-485 communication, 8-point linearization for ±0.25% F.S. accuracy, and sub-second response, recommended for PLC/PC integration. EX/LEPC (Specialized) — EX is explosion-proof (Ex ec IIC T4 Gc, IP 65) for hazardous environments; LEPC is a low-pressure (0.1–6 bar) MFC delivering ±0.5% F.S. accuracy. DO400 (Special-order) — custom-spec controllers for unique requirements. All standard series cover both MFC and MFM; LEPC and DO400 are MFC-only.",
           },
           {
             id: "m-vs-ms",
@@ -97,14 +97,9 @@ export const LT_FAQ: Record<Locale, FaqContent> = {
             a: "The MD series offers three advantages over M/MS: higher accuracy at low ranges (±0.25% F.S. via 8-point linearization versus ±1% F.S.), faster response time (0.5–1 second versus under 2 seconds), and RS-485 digital communication for remote monitoring and setpoint control. Choose MD when tighter accuracy, faster control loop, or digital integration with a PLC or PC is required.",
           },
           {
-            id: "lm-series",
-            q: "What is the LM (MEMS) series best for?",
-            a: "The LM series uses MEMS sensor technology to offer a cost-efficient instrument for low-pressure applications. It delivers the same ±1% F.S. accuracy and ±0.25% repeatability as the standard series, with a slightly faster response (under 1 second). The key constraint is a maximum operating pressure of 10 bar — it is not suitable for high-pressure lines. The LM is recognizable by its purple housing.",
-          },
-          {
-            id: "ld-series",
-            q: "When should I use the LD series with built-in display?",
-            a: "The LD series adds a built-in 4-digit 7-segment display showing live flow values, plus front-panel buttons for direct setpoint adjustment — no external controller or PC required. It is ideal for standalone laboratory setups, field calibration checks, or anywhere real-time visibility without a readout box is needed. Note that the LD supports only 0–5 Vdc signaling (no 4–20 mA option) and is limited to a maximum range of 30 slpm.",
+            id: "lepc-series",
+            q: "When should I use the LEPC low-pressure controller?",
+            a: "The LEPC is purpose-built for low-pressure applications operating between 0.1 and 6 bar absolute, with a flow range of 0.01–30 slpm and ±0.5% F.S. accuracy. Choose LEPC when your process supply pressure is below the standard 10 bar minimum and you need accurate, controllable flow at low driving pressure — typical in vacuum-adjacent and analytical instrumentation lines. LEPC is offered as an MFC only.",
           },
           {
             id: "ex-series",
@@ -259,8 +254,8 @@ export const LT_FAQ: Record<Locale, FaqContent> = {
         questions: [
           {
             id: "series-overview",
-            q: "주요 제품 시리즈는 무엇이며, 어떻게 선택하나요?",
-            a: "라인테크는 다섯 가지 시리즈를 제공합니다. M/MS(아날로그) — 0.01~5,000 slpm의 검증된 MFC·MFM; MD(디지털) — RS-485 통신, 8포인트 교정, 1초 미만 응답; LD(특수) — 실시간 모니터링을 위한 내장 7세그먼트 디스플레이; LM(특수) — MEMS 기반으로 10 bar 미만 저압 환경에 최적화된 비용 효율적 모델; EX(특수) — 위험 환경용 방폭 사양(Ex ec IIC T4 Gc, IP 65). 모든 시리즈에서 MFC와 MFM을 모두 제공합니다.",
+            q: "주요 제품군은 무엇이며, 어떻게 선택하나요?",
+            a: "라인테크는 네 가지 주요 제품군을 제공합니다. M/MS(아날로그) — 0.01~5,000 slpm 범위의 검증된 MFC·MFM, 일반 산업 공정에 적합합니다. MD(디지털) — RS-485 통신, 8포인트 선형화로 ±0.25% F.S. 정확도, 1초 미만 응답으로 PLC·PC 연동에 권장됩니다. EX·LEPC(특수) — EX는 Ex ec IIC T4 Gc·IP 65의 방폭 사양으로 위험 환경에 사용하며, LEPC는 0.1~6 bar 저압 환경에 ±0.5% F.S. 정확도의 MFC를 제공합니다. DO400(특수 주문) — 맞춤 사양 컨트롤러. 모든 표준 시리즈는 MFC와 MFM을 모두 제공하며, LEPC와 DO400은 MFC 전용입니다.",
           },
           {
             id: "m-vs-ms",
@@ -273,14 +268,9 @@ export const LT_FAQ: Record<Locale, FaqContent> = {
             a: "MD 시리즈는 M/MS 대비 세 가지 장점이 있습니다: 저유량 범위에서의 높은 정확도(8포인트 선형화로 ±0.25% F.S., M/MS는 ±1% F.S.), 더 빠른 응답 시간(0.5~1초, M/MS는 2초 미만), RS-485 디지털 통신으로 원격 모니터링 및 설정값 제어 가능. 더 높은 정확도, 빠른 제어 루프, 또는 PLC·PC와의 디지털 연동이 필요한 경우 MD를 선택하십시오.",
           },
           {
-            id: "lm-series",
-            q: "LM(MEMS) 시리즈는 어떤 용도에 가장 적합한가요?",
-            a: "LM 시리즈는 MEMS 센서 기술을 사용해 저압 환경에 비용 효율적인 기기를 제공합니다. 표준 시리즈와 동일한 ±1% F.S. 정확도와 ±0.25% 재현성을 가지며, 응답 시간은 1초 미만으로 약간 더 빠릅니다. 주요 제약은 최대 동작 압력 10 bar로, 고압 라인에는 적합하지 않습니다. LM은 자주색 케이스로 구분됩니다.",
-          },
-          {
-            id: "ld-series",
-            q: "내장 디스플레이가 있는 LD 시리즈는 언제 사용하나요?",
-            a: "LD 시리즈는 실시간 유량을 표시하는 내장 4자리 7세그먼트 디스플레이와 전면 패널 버튼으로 직접 설정값을 조절할 수 있어, 외부 컨트롤러나 PC 없이도 사용 가능합니다. 독립형 실험 설비, 현장 교정 확인, 또는 리드아웃 박스 없이 실시간 확인이 필요한 환경에 이상적입니다. 단, 신호는 0~5 Vdc만 지원(4~20 mA 미지원)하며 최대 범위는 30 slpm입니다.",
+            id: "lepc-series",
+            q: "저압 컨트롤러 LEPC는 언제 선택하나요?",
+            a: "LEPC는 0.1~6 bar(절대압)의 저압 환경 전용으로 설계되었으며, 0.01~30 slpm 유량 범위에서 ±0.5% F.S. 정확도를 제공합니다. 표준 제품의 최저 동작 압력 10 bar를 만족하지 못하는 공정, 즉 진공 인접 라인이나 분석 계측 라인 등 낮은 구동 압력에서도 정밀한 유량 제어가 필요한 경우 LEPC를 선택하십시오. LEPC는 MFC 형태로만 공급됩니다.",
           },
           {
             id: "ex-series",
@@ -436,7 +426,7 @@ export const LT_FAQ: Record<Locale, FaqContent> = {
           {
             id: "series-overview",
             q: "莱因有哪些主要产品系列，该如何选择？",
-            a: "莱因提供五个系列：M/MS（模拟系列）——覆盖 0.01~5,000 slpm 的成熟 MFC 与 MFM；MD（数字系列）——RS-485 通信、8 点校准、亚秒级响应；LD（特殊系列）——内置 7 段显示屏，支持直接监控；LM（特殊系列）——MEMS 技术，性价比高，适用于 10 bar 以下低压场合；EX（特殊系列）——防爆认证（Ex ec IIC T4 Gc，IP 65），适用于危险环境。所有系列均提供 MFC 和 MFM 两种形式。",
+            a: "莱因提供四大产品系列。M/MS（模拟系列）——覆盖 0.01~5,000 slpm 的成熟 MFC 与 MFM，适用于一般工业工艺。MD（数字系列）——RS-485 通信，8 点线性化达 ±0.25% F.S. 精度，亚秒级响应，推荐用于 PLC/PC 集成。EX/LEPC（特殊系列）——EX 为防爆型（Ex ec IIC T4 Gc，IP 65），适用于危险环境；LEPC 为 0.1~6 bar 低压 MFC，精度 ±0.5% F.S.。DO400（特殊订货）——针对特殊应用的定制规格控制器。所有标准系列均提供 MFC 与 MFM 形式；LEPC 与 DO400 仅提供 MFC 形式。",
           },
           {
             id: "m-vs-ms",
@@ -449,14 +439,9 @@ export const LT_FAQ: Record<Locale, FaqContent> = {
             a: "MD 系列相较 M/MS 具备三项优势：低流量范围的更高精度（8 点线性化达 ±0.25% F.S.，M/MS 为 ±1% F.S.）；更快的响应时间（0.5~1 秒，M/MS 低于 2 秒）；RS-485 数字通信，支持远程监控与设定值控制。当需要更高精度、更快控制回路或与 PLC/PC 数字集成时，选择 MD。",
           },
           {
-            id: "lm-series",
-            q: "LM（MEMS）系列最适合哪些应用？",
-            a: "LM 系列采用 MEMS 传感器技术，为低压场合提供高性价比的仪器。其精度（±1% F.S.）与重复性（±0.25%）与标准系列相同，响应时间更快（低于 1 秒）。主要限制是最高工作压力为 10 bar，不适用于高压管线。LM 系列以紫色外壳为识别特征。",
-          },
-          {
-            id: "ld-series",
-            q: "何时应选择带内置显示屏的 LD 系列？",
-            a: "LD 系列内置 4 位 7 段显示屏实时显示流量值，并配有前面板按键直接调节设定值，无需外部控制器或 PC。适合独立实验室配置、现场校准验证，或任何需要实时可视化但不具备显示单元的场合。请注意：LD 仅支持 0~5 Vdc 信号（不支持 4~20 mA），最大量程为 30 slpm。",
+            id: "lepc-series",
+            q: "何时应选择 LEPC 低压控制器？",
+            a: "LEPC 专为 0.1~6 bar 绝压低压场合设计，流量范围 0.01~30 slpm，精度 ±0.5% F.S.。当工艺供气压力低于标准 10 bar 最低值，且仍需在低驱动压力下进行精确流量控制时（典型应用包括真空相邻管线和分析仪器气路），选择 LEPC。LEPC 仅以 MFC 形式供应。",
           },
           {
             id: "ex-series",
