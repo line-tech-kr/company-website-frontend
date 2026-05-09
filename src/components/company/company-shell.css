@@ -297,16 +297,9 @@
 
 .co-markets__legend {
   margin: 0;
-  font: 500 var(--lt-fs-xs) var(--lt-mono);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  max-width: 620px;
+  font: 400 var(--lt-fs-sm)/1.55 var(--lt-sans);
   color: var(--pd-muted);
-}
-:lang(ko) .co-markets__legend,
-:lang(zh) .co-markets__legend {
-  font-family: var(--lt-sans);
-  letter-spacing: 0;
-  text-transform: none;
 }
 
 /* Certifications: 3 cards stacked. */

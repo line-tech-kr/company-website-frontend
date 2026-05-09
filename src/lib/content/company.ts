@@ -270,7 +270,8 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
     markets: {
       kicker: "03 — 수출 현황",
       title: "해외 공급 현황",
-      legend: "아시아 · 유럽 · 북미",
+      legend:
+        "현지 대리점망과 직접 공급을 통해 해외 13개국에 라인테크 제품이 공급됩니다.",
       countryNames: {
         KR: "대한민국",
         JP: "일본",
@@ -429,7 +430,8 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
     markets: {
       kicker: "03 — Export Markets",
       title: "Overseas supply at a glance",
-      legend: "Asia · Europe · Americas",
+      legend:
+        "Reaching 13 overseas markets through licensed distributors and direct supply.",
       countryNames: {
         KR: "Korea",
         JP: "Japan",
@@ -588,7 +590,7 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
     markets: {
       kicker: "03 — 出口市场",
       title: "海外供应概况",
-      legend: "亚洲 · 欧洲 · 北美",
+      legend: "通过当地代理商网络与直接供货，莱因产品已进入海外 13 个国家。",
       countryNames: {
         KR: "韩国",
         JP: "日本",
