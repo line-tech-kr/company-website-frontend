@@ -221,6 +221,28 @@ export function buildAccessoriesMetadata(locale: Locale): Metadata {
   return buildBase(locale, ACCESSORIES_SEO[locale], "products/accessories");
 }
 
+const FINDER_SEO: Record<Locale, PageSeo> = {
+  ko: {
+    title: "제품 찾기 — 라인테크",
+    description:
+      "가스와 유량을 입력하면 적합한 라인테크 매스플로우 컨트롤러(MFC)·미터(MFM)를 추천해 드립니다. K-인자 환산 자동 적용.",
+  },
+  en: {
+    title: "Find your mass flow controller — Line Tech",
+    description:
+      "Pick a gas and target flow rate — we'll match it to the right Line Tech MFC or MFM, with automatic K-factor conversion.",
+  },
+  zh: {
+    title: "查找质量流量控制器 — Line Tech",
+    description:
+      "选择气体并输入目标流量，自动匹配合适的莱因科技 MFC 或 MFM，K 因子换算自动完成。",
+  },
+};
+
+export function buildFinderMetadata(locale: Locale): Metadata {
+  return buildBase(locale, FINDER_SEO[locale], "products/finder");
+}
+
 export function buildCategoryMetadata(
   locale: Locale,
   category: CategorySlug,

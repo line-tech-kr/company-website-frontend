@@ -12,7 +12,6 @@ import {
   type CategorySlug,
 } from "@/lib/categories";
 import { SanityProductSchema } from "@/lib/types/product";
-import { z } from "zod";
 import { buildProductsMetadata } from "@/lib/seo";
 import { getProductsCategories } from "@/lib/content/shell";
 import { LT_HOME, type Locale } from "@/lib/content/home";
@@ -61,12 +60,17 @@ export default async function ProductsListPage({ params }: Props) {
     getTranslations("products"),
   ]);
 
-  const [products, certificationCount] = await Promise.all([
-    sanityClient
-      .fetch(allProductsQuery)
-      .then((data) => z.array(SanityProductSchema).parse(data)),
+  const [rawProducts, certificationCount] = await Promise.all([
+    sanityClient.fetch(allProductsQuery),
     sanityClient.fetch<number>('count(*[_type == "certification"])'),
   ]);
+  // safeParse per row: skip Sanity documents that don't conform to the
+  // product schema (e.g. accessories accidentally typed as products) so a
+  // single bad row doesn't 500 the whole catalogue page.
+  const products = (rawProducts as unknown[]).flatMap((row) => {
+    const parsed = SanityProductSchema.safeParse(row);
+    return parsed.success ? [parsed.data] : [];
+  });
 
   const counts = new Map<CategorySlug, number>(
     CATEGORY_SLUGS.map((slug) => [slug, 0]),
@@ -170,6 +174,23 @@ export default async function ProductsListPage({ params }: Props) {
           </div>
         </li>
       </ul>
+
+      <Link href="/products/finder" className="lt-products-list__finder-cta">
+        <div className="lt-products-list__finder-cta-body">
+          <span className="lt-products-list__finder-cta-eyebrow">
+            {tProducts("list.finderCta.eyebrow")}
+          </span>
+          <span className="lt-products-list__finder-cta-title">
+            {tProducts("list.finderCta.title")}
+          </span>
+          <span className="lt-products-list__finder-cta-lede">
+            {tProducts("list.finderCta.lede")}
+          </span>
+        </div>
+        <span className="lt-products-list__finder-cta-chev" aria-hidden="true">
+          →
+        </span>
+      </Link>
 
       <div className="lt-products-side">
         <ul className="lt-products-side__stack">

@@ -1,0 +1,27 @@
+.lt-finder-page {
+  display: grid;
+  gap: 24px;
+  padding-top: 16px;
+  padding-bottom: 64px;
+}
+
+.lt-finder-page__intro {
+  display: grid;
+  gap: 8px;
+  max-width: 720px;
+}
+
+.lt-finder-page__title {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--lt-primary-700);
+}
+
+.lt-finder-page__lede {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--lt-neutral-700);
+}

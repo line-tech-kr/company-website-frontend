@@ -496,3 +496,95 @@
     align-items: flex-start;
   }
 }
+
+/* ───────────── Finder CTA ───────────── */
+
+.lt-products-list__finder-cta {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 22px 28px;
+  background: linear-gradient(
+    135deg,
+    var(--lt-primary-700) 0%,
+    var(--lt-primary-500) 100%
+  );
+  color: white;
+  text-decoration: none;
+  border-radius: var(--pd-r-lg, 12px);
+  border: 1px solid var(--lt-primary-700);
+  transition:
+    transform 0.12s,
+    box-shadow 0.15s,
+    border-color 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+.lt-products-list__finder-cta::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 6px;
+  background: var(--lt-accent-400);
+}
+.lt-products-list__finder-cta:hover {
+  border-color: var(--lt-accent-400);
+  box-shadow: 0 12px 28px -10px rgba(15, 23, 42, 0.35);
+  transform: translateY(-1px);
+}
+.lt-products-list__finder-cta:focus-visible {
+  outline: 3px solid var(--lt-accent-400);
+  outline-offset: 2px;
+}
+
+.lt-products-list__finder-cta-body {
+  display: grid;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.lt-products-list__finder-cta-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lt-accent-300);
+}
+:lang(ko) .lt-products-list__finder-cta-eyebrow,
+:lang(zh) .lt-products-list__finder-cta-eyebrow {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.lt-products-list__finder-cta-title {
+  font-size: clamp(20px, 2.4vw, 24px);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.lt-products-list__finder-cta-lede {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.84);
+  line-height: 1.5;
+}
+
+.lt-products-list__finder-cta-chev {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--lt-accent-400);
+  transition: transform 0.15s;
+  flex-shrink: 0;
+}
+.lt-products-list__finder-cta:hover .lt-products-list__finder-cta-chev {
+  transform: translateX(4px);
+}
+
+@media (max-width: 600px) {
+  .lt-products-list__finder-cta {
+    padding: 18px 20px;
+    gap: 16px;
+  }
+}
