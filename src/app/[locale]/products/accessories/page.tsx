@@ -101,8 +101,8 @@ function ItemCard({ item }: { item: AccessoryItem }) {
         <Image
           src={item.image.src}
           alt={item.image.alt}
-          width={480}
-          height={360}
+          width={item.image.width}
+          height={item.image.height}
           sizes="(min-width: 768px) 280px, 100vw"
         />
       </div>
