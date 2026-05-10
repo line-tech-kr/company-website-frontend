@@ -1,7 +1,11 @@
 "use client";
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
-import { GAS_FACTORS, type GasFactor } from "@/lib/finder/gas-factors";
+import {
+  GAS_FACTORS,
+  normalizeGasQuery,
+  type GasFactor,
+} from "@/lib/finder/gas-factors";
 
 type Props = {
   value: string;
@@ -15,14 +19,9 @@ type Props = {
   };
 };
 
-function gasMatches(gas: GasFactor, query: string): boolean {
-  if (!query) return true;
-  const q = query.toLowerCase();
-  return (
-    gas.id.includes(q) ||
-    gas.formula.toLowerCase().includes(q) ||
-    gas.names.en.toLowerCase().includes(q)
-  );
+function gasMatches(gas: GasFactor, normalizedQuery: string): boolean {
+  if (!normalizedQuery) return true;
+  return gas.searchKey.includes(normalizedQuery);
 }
 
 function renderLabel(gas: GasFactor): string {
@@ -45,7 +44,8 @@ export function GasSelect({ value, onChange, labels }: Props) {
   );
 
   const { pinned, rest } = useMemo(() => {
-    const filtered = GAS_FACTORS.filter((g) => gasMatches(g, query));
+    const q = normalizeGasQuery(query);
+    const filtered = GAS_FACTORS.filter((g) => gasMatches(g, q));
     return {
       pinned: filtered.filter((g) => g.pinned),
       rest: filtered.filter((g) => !g.pinned),

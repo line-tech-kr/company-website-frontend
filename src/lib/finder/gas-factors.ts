@@ -23,6 +23,11 @@ export type GasFactor = {
   sealNote?: GasSealNote;
   /** True for the seven gases pinned at the top of the picker. */
   pinned?: true;
+  /**
+   * Lowercased id + ASCII-folded formula + English name, joined for substring
+   * search. Subscript digits are folded to ASCII so typing "CO2" matches "CO₂".
+   */
+  searchKey: string;
 };
 
 export const GAS_FACTORS: readonly GasFactor[] = [
@@ -33,6 +38,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Nitrogen" },
     category: "common",
     pinned: true,
+    searchKey: "nitrogen n2 nitrogen",
   },
   {
     id: "oxygen",
@@ -41,6 +47,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Oxygen" },
     category: "common",
     pinned: true,
+    searchKey: "oxygen o2 oxygen",
   },
   {
     id: "argon",
@@ -49,6 +56,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Argon" },
     category: "common",
     pinned: true,
+    searchKey: "argon ar argon",
   },
   {
     id: "helium",
@@ -57,6 +65,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Helium" },
     category: "common",
     pinned: true,
+    searchKey: "helium he helium",
   },
   {
     id: "hydrogen",
@@ -65,6 +74,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Hydrogen" },
     category: "common",
     pinned: true,
+    searchKey: "hydrogen h2 hydrogen",
   },
   {
     id: "air",
@@ -73,6 +83,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Air" },
     category: "common",
     pinned: true,
+    searchKey: "air air air",
   },
   {
     id: "carbon-dioxide",
@@ -81,6 +92,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Carbon Dioxide" },
     category: "common",
     pinned: true,
+    searchKey: "carbon-dioxide co2 carbon dioxide",
   },
   {
     id: "1-butene",
@@ -88,6 +100,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.294,
     names: { en: "1-Butene" },
     category: "common",
+    searchKey: "1-butene c4h8 1-butene",
   },
   {
     id: "1-pentene-4-methyl",
@@ -95,6 +108,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.2,
     names: { en: "1-Pentene, 4-Methyl" },
     category: "specialty",
+    searchKey: "1-pentene-4-methyl c6h12 1-pentene, 4-methyl",
   },
   {
     id: "1-1-difluoro-1-chloroethane",
@@ -102,6 +116,8 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.341,
     names: { en: "1,1-Difluoro-1-Chloroethane" },
     category: "common",
+    searchKey:
+      "1-1-difluoro-1-chloroethane c2h3clf2 1,1-difluoro-1-chloroethane",
   },
   {
     id: "1-1-difluoroethane",
@@ -110,6 +126,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "1,1-Difluoroethane" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "1-1-difluoroethane ch3chf2 1,1-difluoroethane",
   },
   {
     id: "1-1-difluoroethylene",
@@ -117,6 +134,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.458,
     names: { en: "1,1-Difluoroethylene" },
     category: "common",
+    searchKey: "1-1-difluoroethylene ch2:cf2 1,1-difluoroethylene",
   },
   {
     id: "1-1-1-2-tetrafluoroethane-r134a",
@@ -124,6 +142,8 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.307,
     names: { en: "1,1,1,2-Tetrafluoroethane (R134A)" },
     category: "common",
+    searchKey:
+      "1-1-1-2-tetrafluoroethane-r134a c2h2f4 1,1,1,2-tetrafluoroethane (r134a)",
   },
   {
     id: "1-1-2-trichloro-1-1-2-trifluoroet-f113",
@@ -131,6 +151,8 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.231,
     names: { en: "1,1,2-Trichloro-1,1,2-Trifluoroet (f113)" },
     category: "common",
+    searchKey:
+      "1-1-2-trichloro-1-1-2-trifluoroet-f113 c2cl3f3 1,1,2-trichloro-1,1,2-trifluoroet (f113)",
   },
   {
     id: "1-1-2-2-tetrafluoroethane-r134",
@@ -138,6 +160,8 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.295,
     names: { en: "1,1,2,2-Tetrafluoroethane (R134)" },
     category: "specialty",
+    searchKey:
+      "1-1-2-2-tetrafluoroethane-r134 c2h2f4 1,1,2,2-tetrafluoroethane (r134)",
   },
   {
     id: "1-2-dibromotetrafluoroethane-f114b2",
@@ -146,6 +170,8 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "1,2-Dibromotetrafluoroethane (f114B2)" },
     category: "specialty",
     sealNote: "teflon",
+    searchKey:
+      "1-2-dibromotetrafluoroethane-f114b2 c2br2f4 1,2-dibromotetrafluoroethane (f114b2)",
   },
   {
     id: "1-2-dichloroethane-ethylene-dichloride",
@@ -153,6 +179,8 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.382,
     names: { en: "1,2-Dichloroethane (Ethylene dichloride)" },
     category: "common",
+    searchKey:
+      "1-2-dichloroethane-ethylene-dichloride c2h4cl2 1,2-dichloroethane (ethylene dichloride)",
   },
   {
     id: "1-2-dichlorotetrafluoroethane-f114",
@@ -160,6 +188,8 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.231,
     names: { en: "1,2-Dichlorotetrafluoroethane (f114)" },
     category: "common",
+    searchKey:
+      "1-2-dichlorotetrafluoroethane-f114 c2cl2f4 1,2-dichlorotetrafluoroethane (f114)",
   },
   {
     id: "1-2-propylene-oxide",
@@ -167,6 +197,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.348,
     names: { en: "1,2-Propylene Oxide" },
     category: "specialty",
+    searchKey: "1-2-propylene-oxide c3h6o 1,2-propylene oxide",
   },
   {
     id: "1-3-butadiene",
@@ -174,6 +205,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.354,
     names: { en: "1,3-Butadiene" },
     category: "common",
+    searchKey: "1-3-butadiene c4h6 1,3-butadiene",
   },
   {
     id: "2-chloro-1-1-1-2-tetrafluoroethane-r124",
@@ -181,6 +213,8 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.027,
     names: { en: "2-Chloro-1,1,1,2-Tetrafluoroethane (R124)" },
     category: "specialty",
+    searchKey:
+      "2-chloro-1-1-1-2-tetrafluoroethane-r124 c2hcif4 2-chloro-1,1,1,2-tetrafluoroethane (r124)",
   },
   {
     id: "2-chlorobutane",
@@ -188,6 +222,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.234,
     names: { en: "2-Chlorobutane" },
     category: "specialty",
+    searchKey: "2-chlorobutane c4h9cl 2-chlorobutane",
   },
   {
     id: "2-methyl-1-3-butadiene",
@@ -195,6 +230,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.247,
     names: { en: "2-Methyl-1,3-Butadiene" },
     category: "specialty",
+    searchKey: "2-methyl-1-3-butadiene c5h8 2-methyl-1,3-butadiene",
   },
   {
     id: "2-2-dichloro-1-1-1-trifloroethane",
@@ -202,6 +238,8 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.259,
     names: { en: "2,2-Dichloro-1,1,1-Trifloroethane" },
     category: "specialty",
+    searchKey:
+      "2-2-dichloro-1-1-1-trifloroethane c2hcl2f3 2,2-dichloro-1,1,1-trifloroethane",
   },
   {
     id: "2-2-dimethylpropane",
@@ -209,6 +247,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.247,
     names: { en: "2,2-Dimethylpropane" },
     category: "common",
+    searchKey: "2-2-dimethylpropane c(ch3)4 2,2-dimethylpropane",
   },
   {
     id: "3-methyl-1-butene",
@@ -216,6 +255,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.252,
     names: { en: "3-Methyl-1-butene" },
     category: "specialty",
+    searchKey: "3-methyl-1-butene c5h1o 3-methyl-1-butene",
   },
   {
     id: "acetonitrile",
@@ -223,6 +263,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.51,
     names: { en: "Acetonitrile" },
     category: "specialty",
+    searchKey: "acetonitrile c2h3n acetonitrile",
   },
   {
     id: "acetylene-ethyne",
@@ -230,6 +271,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.615,
     names: { en: "Acetylene (Ethyne)" },
     category: "common",
+    searchKey: "acetylene-ethyne c2h2 acetylene (ethyne)",
   },
   {
     id: "acrolein",
@@ -237,6 +279,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.362,
     names: { en: "Acrolein" },
     category: "specialty",
+    searchKey: "acrolein c3h4o acrolein",
   },
   {
     id: "allene",
@@ -244,6 +287,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.478,
     names: { en: "Allene" },
     category: "common",
+    searchKey: "allene c3h4 allene",
   },
   {
     id: "ammonia",
@@ -251,6 +295,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.786,
     names: { en: "Ammonia" },
     category: "common",
+    searchKey: "ammonia nh3 ammonia",
   },
   {
     id: "arsine",
@@ -259,6 +304,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Arsine" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "arsine ash3 arsine",
   },
   {
     id: "benzene",
@@ -266,6 +312,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.294,
     names: { en: "Benzene" },
     category: "specialty",
+    searchKey: "benzene c6h6 benzene",
   },
   {
     id: "borane",
@@ -273,6 +320,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.778,
     names: { en: "Borane" },
     category: "specialty",
+    searchKey: "borane h3b borane",
   },
   {
     id: "boron-trichloride",
@@ -281,6 +329,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Boron Trichloride" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "boron-trichloride bcl3 boron trichloride",
   },
   {
     id: "boron-trifluoride",
@@ -289,6 +338,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Boron Trifluoride" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "boron-trifluoride bf3 boron trifluoride",
   },
   {
     id: "bromine",
@@ -296,6 +346,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.8,
     names: { en: "Bromine" },
     category: "specialty",
+    searchKey: "bromine br2 bromine",
   },
   {
     id: "bromine-pentafluoride",
@@ -304,6 +355,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Bromine Pentafluoride" },
     category: "specialty",
     sealNote: "teflon",
+    searchKey: "bromine-pentafluoride brf5 bromine pentafluoride",
   },
   {
     id: "bromine-trifluoride",
@@ -312,6 +364,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Bromine Trifluoride" },
     category: "specialty",
     sealNote: "teflon",
+    searchKey: "bromine-trifluoride brf3 bromine trifluoride",
   },
   {
     id: "bromotrifluoroethylene",
@@ -319,6 +372,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.326,
     names: { en: "Bromotrifluoroethylene" },
     category: "common",
+    searchKey: "bromotrifluoroethylene c2brf3 bromotrifluoroethylene",
   },
   {
     id: "bromotrifluoromethane-f13b1",
@@ -326,6 +380,8 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.412,
     names: { en: "Bromotrifluoromethane (f13B1)" },
     category: "common",
+    searchKey:
+      "bromotrifluoromethane-f13b1 cbrf3 bromotrifluoromethane (f13b1)",
   },
   {
     id: "butane",
@@ -333,6 +389,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.257,
     names: { en: "Butane" },
     category: "common",
+    searchKey: "butane c4h1o butane",
   },
   {
     id: "carbon-disulfide",
@@ -340,6 +397,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.638,
     names: { en: "Carbon Disulfide" },
     category: "common",
+    searchKey: "carbon-disulfide cs2 carbon disulfide",
   },
   {
     id: "carbon-monoxide",
@@ -347,6 +405,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.995,
     names: { en: "Carbon Monoxide" },
     category: "specialty",
+    searchKey: "carbon-monoxide co carbon monoxide",
   },
   {
     id: "carbon-tetrachloride",
@@ -354,6 +413,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.344,
     names: { en: "Carbon Tetrachloride" },
     category: "common",
+    searchKey: "carbon-tetrachloride ccl4 carbon tetrachloride",
   },
   {
     id: "carbon-tetrachloride-f14",
@@ -361,6 +421,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.44,
     names: { en: "Carbon Tetrachloride (f14)" },
     category: "common",
+    searchKey: "carbon-tetrachloride-f14 cf4 carbon tetrachloride (f14)",
   },
   {
     id: "carbonyl-fluoride",
@@ -368,6 +429,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.567,
     names: { en: "Carbonyl Fluoride" },
     category: "common",
+    searchKey: "carbonyl-fluoride cof2 carbonyl fluoride",
   },
   {
     id: "carbonyl-sulfide",
@@ -375,6 +437,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.68,
     names: { en: "Carbonyl Sulfide" },
     category: "common",
+    searchKey: "carbonyl-sulfide cos carbonyl sulfide",
   },
   {
     id: "chlorine",
@@ -382,6 +445,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.876,
     names: { en: "Chlorine" },
     category: "common",
+    searchKey: "chlorine cl2 chlorine",
   },
   {
     id: "chlorine-dioxide",
@@ -389,6 +453,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.693,
     names: { en: "Chlorine Dioxide" },
     category: "common",
+    searchKey: "chlorine-dioxide clo2 chlorine dioxide",
   },
   {
     id: "chlorine-trifluoride",
@@ -397,6 +462,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Chlorine Trifluoride" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "chlorine-trifluoride clf3 chlorine trifluoride",
   },
   {
     id: "chlorodifluoromethane-f22",
@@ -404,6 +470,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.505,
     names: { en: "Chlorodifluoromethane (f22)" },
     category: "common",
+    searchKey: "chlorodifluoromethane-f22 chclf2 chlorodifluoromethane (f22)",
   },
   {
     id: "chloroform-trichloromethane",
@@ -411,6 +478,8 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.442,
     names: { en: "Chloroform (Trichloromethane)" },
     category: "common",
+    searchKey:
+      "chloroform-trichloromethane chcl3 chloroform (trichloromethane)",
   },
   {
     id: "chloropentafluoroethane-f115",
@@ -418,6 +487,8 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.243,
     names: { en: "Chloropentafluoroethane (f115)" },
     category: "common",
+    searchKey:
+      "chloropentafluoroethane-f115 c2clf5 chloropentafluoroethane (f115)",
   },
   {
     id: "chlorotrifluoroethylene",
@@ -426,6 +497,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Chlorotrifluoroethylene" },
     category: "specialty",
     sealNote: "teflon",
+    searchKey: "chlorotrifluoroethylene c2clf3 chlorotrifluoroethylene",
   },
   {
     id: "chlorotrifluoromethane-f13",
@@ -434,6 +506,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Chlorotrifluoromethane (f13)" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "chlorotrifluoromethane-f13 cclf3 chlorotrifluoromethane (f13)",
   },
   {
     id: "cis-2-butene",
@@ -441,6 +514,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.32,
     names: { en: "CIS-2-Butene" },
     category: "common",
+    searchKey: "cis-2-butene c4h8 cis-2-butene",
   },
   {
     id: "cyanogen",
@@ -449,6 +523,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Cyanogen" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "cyanogen (cn)2 cyanogen",
   },
   {
     id: "cyanogen-chloride",
@@ -457,6 +532,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Cyanogen Chloride" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "cyanogen-chloride clcn cyanogen chloride",
   },
   {
     id: "cyclobutane",
@@ -464,6 +540,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.387,
     names: { en: "Cyclobutane" },
     category: "common",
+    searchKey: "cyclobutane c4h8 cyclobutane",
   },
   {
     id: "cyclopropane",
@@ -471,6 +548,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.505,
     names: { en: "Cyclopropane" },
     category: "common",
+    searchKey: "cyclopropane c3h6 cyclopropane",
   },
   {
     id: "deuterium",
@@ -478,6 +556,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.995,
     names: { en: "Deuterium" },
     category: "common",
+    searchKey: "deuterium d2 deuterium",
   },
   {
     id: "diabromodifluoromethane-f12b2",
@@ -485,6 +564,8 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.363,
     names: { en: "Diabromodifluoromethane (f12B2)" },
     category: "common",
+    searchKey:
+      "diabromodifluoromethane-f12b2 cbr2f2 diabromodifluoromethane (f12b2)",
   },
   {
     id: "diborane",
@@ -493,6 +574,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Diborane" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "diborane b2h6 diborane",
   },
   {
     id: "dichlorodifluoromethane-f12",
@@ -500,6 +582,8 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.39,
     names: { en: "Dichlorodifluoromethane (f12)" },
     category: "common",
+    searchKey:
+      "dichlorodifluoromethane-f12 ccl2f2 dichlorodifluoromethane (f12)",
   },
   {
     id: "dichloroethylene",
@@ -507,6 +591,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.397,
     names: { en: "Dichloroethylene" },
     category: "specialty",
+    searchKey: "dichloroethylene c2h2cl2 dichloroethylene",
   },
   {
     id: "dichlorofluoromethane-f21",
@@ -515,6 +600,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Dichlorofluoromethane (f21)" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "dichlorofluoromethane-f21 chcl2f dichlorofluoromethane (f21)",
   },
   {
     id: "dichloromethane",
@@ -522,6 +608,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.522,
     names: { en: "Dichloromethane" },
     category: "specialty",
+    searchKey: "dichloromethane ch2cl2 dichloromethane",
   },
   {
     id: "dichlorosilane",
@@ -530,6 +617,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Dichlorosilane" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "dichlorosilane sih2cl2 dichlorosilane",
   },
   {
     id: "diethylamine",
@@ -537,6 +625,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.222,
     names: { en: "Diethylamine" },
     category: "specialty",
+    searchKey: "diethylamine c4h1n diethylamine",
   },
   {
     id: "diethylsilane",
@@ -544,6 +633,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.183,
     names: { en: "Diethylsilane" },
     category: "specialty",
+    searchKey: "diethylsilane c4h12si diethylsilane",
   },
   {
     id: "difluoromethane-r32",
@@ -551,6 +641,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.627,
     names: { en: "Difluoromethane (R32)" },
     category: "specialty",
+    searchKey: "difluoromethane-r32 cf2h2 difluoromethane (r32)",
   },
   {
     id: "dimethylamine",
@@ -559,6 +650,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Dimethylamine" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "dimethylamine (ch3)2nh dimethylamine",
   },
   {
     id: "dimethylether",
@@ -566,6 +658,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.392,
     names: { en: "Dimethylether" },
     category: "common",
+    searchKey: "dimethylether (ch3)2o dimethylether",
   },
   {
     id: "dimethylsulfide",
@@ -573,6 +666,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.357,
     names: { en: "Dimethylsulfide" },
     category: "specialty",
+    searchKey: "dimethylsulfide c2h6s dimethylsulfide",
   },
   {
     id: "dimethylzinc",
@@ -580,6 +674,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.234,
     names: { en: "Dimethylzinc" },
     category: "specialty",
+    searchKey: "dimethylzinc c2h6zn dimethylzinc",
   },
   {
     id: "disilane",
@@ -588,6 +683,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Disilane" },
     category: "specialty",
     sealNote: "teflon",
+    searchKey: "disilane si2h6 disilane",
   },
   {
     id: "ethane",
@@ -595,6 +691,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.49,
     names: { en: "Ethane" },
     category: "common",
+    searchKey: "ethane c2h6 ethane",
   },
   {
     id: "ethanol",
@@ -602,6 +699,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.394,
     names: { en: "Ethanol" },
     category: "specialty",
+    searchKey: "ethanol c2h6o ethanol",
   },
   {
     id: "ethyl-chloride",
@@ -609,6 +707,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.408,
     names: { en: "Ethyl chloride" },
     category: "common",
+    searchKey: "ethyl-chloride c2h5cl ethyl chloride",
   },
   {
     id: "ethylacetylene",
@@ -616,6 +715,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.365,
     names: { en: "Ethylacetylene" },
     category: "common",
+    searchKey: "ethylacetylene c4h6 ethylacetylene",
   },
   {
     id: "ethylene",
@@ -623,6 +723,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.619,
     names: { en: "Ethylene" },
     category: "common",
+    searchKey: "ethylene c2h4 ethylene",
   },
   {
     id: "ethylene-oxide",
@@ -631,6 +732,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Ethylene Oxide" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "ethylene-oxide c2h4o ethylene oxide",
   },
   {
     id: "fluorine",
@@ -639,6 +741,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Fluorine" },
     category: "specialty",
     sealNote: "metal",
+    searchKey: "fluorine f2 fluorine",
   },
   {
     id: "fluoroform-f23",
@@ -647,6 +750,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Fluoroform (f23)" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "fluoroform-f23 chf3 fluoroform (f23)",
   },
   {
     id: "germanium-tetrachloride",
@@ -655,6 +759,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Germanium Tetrachloride" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "germanium-tetrachloride gecl4 germanium tetrachloride",
   },
   {
     id: "germanium-tetrafluoride",
@@ -662,6 +767,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.356,
     names: { en: "Germanium Tetrafluoride" },
     category: "specialty",
+    searchKey: "germanium-tetrafluoride gef4 germanium tetrafluoride",
   },
   {
     id: "germanium-tetrahydride-germane",
@@ -669,6 +775,8 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.559,
     names: { en: "Germanium Tetrahydride (Germane)" },
     category: "specialty",
+    searchKey:
+      "germanium-tetrahydride-germane geh4 germanium tetrahydride (germane)",
   },
   {
     id: "halothane-r123b1",
@@ -676,6 +784,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.257,
     names: { en: "Halothane (R123B1)" },
     category: "specialty",
+    searchKey: "halothane-r123b1 c2hbrclf3 halothane (r123b1)",
   },
   {
     id: "hexafluoroacetone",
@@ -683,6 +792,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.219,
     names: { en: "Hexafluoroacetone" },
     category: "specialty",
+    searchKey: "hexafluoroacetone c3f6o hexafluoroacetone",
   },
   {
     id: "hexafluorobenzine",
@@ -690,6 +800,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.632,
     names: { en: "Hexafluorobenzine" },
     category: "specialty",
+    searchKey: "hexafluorobenzine c6f6 hexafluorobenzine",
   },
   {
     id: "hexafluorobutadiene",
@@ -697,6 +808,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.213,
     names: { en: "Hexafluorobutadiene" },
     category: "specialty",
+    searchKey: "hexafluorobutadiene c4f6 hexafluorobutadiene",
   },
   {
     id: "hexafluoroethane-f116",
@@ -704,6 +816,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.255,
     names: { en: "Hexafluoroethane (f116)" },
     category: "common",
+    searchKey: "hexafluoroethane-f116 c2f6 hexafluoroethane (f116)",
   },
   {
     id: "hexafluoropropylene-hfp",
@@ -711,6 +824,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.249,
     names: { en: "Hexafluoropropylene (HFP)" },
     category: "common",
+    searchKey: "hexafluoropropylene-hfp c3f6 hexafluoropropylene (hfp)",
   },
   {
     id: "hexamethyldisilane-hmds",
@@ -719,6 +833,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Hexamethyldisilane (HMDS)" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "hexamethyldisilane-hmds (ch2)6si2 hexamethyldisilane (hmds)",
   },
   {
     id: "hexamethyldisiloxane",
@@ -726,6 +841,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.11,
     names: { en: "Hexamethyldisiloxane" },
     category: "specialty",
+    searchKey: "hexamethyldisiloxane c6h18osi2 hexamethyldisiloxane",
   },
   {
     id: "hexane",
@@ -733,6 +849,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.204,
     names: { en: "Hexane" },
     category: "common",
+    searchKey: "hexane c6h14 hexane",
   },
   {
     id: "hexylamine",
@@ -740,6 +857,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.158,
     names: { en: "Hexylamine" },
     category: "specialty",
+    searchKey: "hexylamine c6h15n hexylamine",
   },
   {
     id: "hydrogen-bromide",
@@ -747,6 +865,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.987,
     names: { en: "Hydrogen Bromide" },
     category: "common",
+    searchKey: "hydrogen-bromide hbr hydrogen bromide",
   },
   {
     id: "hydrogen-chloride",
@@ -754,6 +873,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.983,
     names: { en: "Hydrogen Chloride" },
     category: "common",
+    searchKey: "hydrogen-chloride hcl hydrogen chloride",
   },
   {
     id: "hydrogen-cyanide",
@@ -762,6 +882,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Hydrogen Cyanide" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "hydrogen-cyanide hcn hydrogen cyanide",
   },
   {
     id: "hydrogen-fluoride",
@@ -770,6 +891,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Hydrogen Fluoride" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "hydrogen-fluoride hf hydrogen fluoride",
   },
   {
     id: "hydrogen-iodide",
@@ -778,6 +900,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Hydrogen Iodide" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "hydrogen-iodide hi hydrogen iodide",
   },
   {
     id: "hydrogen-selenide",
@@ -786,6 +909,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Hydrogen Selenide" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "hydrogen-selenide h2se hydrogen selenide",
   },
   {
     id: "hydrogen-sulfide",
@@ -794,6 +918,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Hydrogen Sulfide" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "hydrogen-sulfide h2s hydrogen sulfide",
   },
   {
     id: "iodine-pentafluoride",
@@ -802,6 +927,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Iodine Pentafluoride" },
     category: "specialty",
     sealNote: "teflon",
+    searchKey: "iodine-pentafluoride if5 iodine pentafluoride",
   },
   {
     id: "isobutane",
@@ -810,6 +936,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Isobutane" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "isobutane c4h1o isobutane",
   },
   {
     id: "isobutene",
@@ -818,6 +945,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Isobutene" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "isobutene c4h8 isobutene",
   },
   {
     id: "isopentane",
@@ -825,6 +953,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.211,
     names: { en: "Isopentane" },
     category: "specialty",
+    searchKey: "isopentane c5h12 isopentane",
   },
   {
     id: "krypton",
@@ -832,6 +961,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 1.382,
     names: { en: "Krypton" },
     category: "common",
+    searchKey: "krypton kr krypton",
   },
   {
     id: "methacrolein",
@@ -839,6 +969,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.313,
     names: { en: "Methacrolein" },
     category: "specialty",
+    searchKey: "methacrolein c4h6o methacrolein",
   },
   {
     id: "methane",
@@ -846,6 +977,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.763,
     names: { en: "Methane" },
     category: "common",
+    searchKey: "methane ch4 methane",
   },
   {
     id: "methanol",
@@ -853,6 +985,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.609,
     names: { en: "Methanol" },
     category: "specialty",
+    searchKey: "methanol ch4o methanol",
   },
   {
     id: "methyl-bromide",
@@ -860,6 +993,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.646,
     names: { en: "Methyl Bromide" },
     category: "specialty",
+    searchKey: "methyl-bromide ch3br methyl bromide",
   },
   {
     id: "methyl-chloride",
@@ -868,6 +1002,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Methyl Chloride" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "methyl-chloride ch3cl methyl chloride",
   },
   {
     id: "methyl-fluoride",
@@ -875,6 +1010,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.761,
     names: { en: "Methyl Fluoride" },
     category: "specialty",
+    searchKey: "methyl-fluoride ch3f methyl fluoride",
   },
   {
     id: "methyl-mercaptan",
@@ -882,6 +1018,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.588,
     names: { en: "Methyl Mercaptan" },
     category: "specialty",
+    searchKey: "methyl-mercaptan ch4s methyl mercaptan",
   },
   {
     id: "methyl-silane",
@@ -889,6 +1026,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.393,
     names: { en: "Methyl Silane" },
     category: "specialty",
+    searchKey: "methyl-silane ch6si methyl silane",
   },
   {
     id: "methyl-trichlorosilane-mts",
@@ -896,6 +1034,8 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.267,
     names: { en: "Methyl Trichlorosilane (MTS)" },
     category: "specialty",
+    searchKey:
+      "methyl-trichlorosilane-mts ch3cl3si methyl trichlorosilane (mts)",
   },
   {
     id: "methyl-vinyl-ether",
@@ -904,6 +1044,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Methyl Vinyl Ether" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "methyl-vinyl-ether c3h6o methyl vinyl ether",
   },
   {
     id: "methylacetylene",
@@ -912,6 +1053,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Methylacetylene" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "methylacetylene c3h4 methylacetylene",
   },
   {
     id: "monoethyanolamine",
@@ -919,6 +1061,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.305,
     names: { en: "Monoethyanolamine" },
     category: "specialty",
+    searchKey: "monoethyanolamine c2h7no monoethyanolamine",
   },
   {
     id: "monoethylamine-ch3ch2nh2",
@@ -927,6 +1070,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Monoethylamine (CH3CH2NH2)" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "monoethylamine-ch3ch2nh2 c2h7 monoethylamine (ch3ch2nh2)",
   },
   {
     id: "monomethylamine",
@@ -935,6 +1079,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Monomethylamine" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "monomethylamine ch3nh2 monomethylamine",
   },
   {
     id: "neon",
@@ -942,6 +1087,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 1.398,
     names: { en: "Neon" },
     category: "common",
+    searchKey: "neon ne neon",
   },
   {
     id: "nickel-carbonyl",
@@ -949,6 +1095,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.212,
     names: { en: "Nickel Carbonyl" },
     category: "specialty",
+    searchKey: "nickel-carbonyl ni(co)4 nickel carbonyl",
   },
   {
     id: "nitric-acid",
@@ -956,6 +1103,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.491,
     names: { en: "Nitric Acid" },
     category: "specialty",
+    searchKey: "nitric-acid hno3 nitric acid",
   },
   {
     id: "nitric-oxide",
@@ -964,6 +1112,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Nitric Oxide" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "nitric-oxide no nitric oxide",
   },
   {
     id: "nitrogen-dioxide",
@@ -972,6 +1121,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Nitrogen Dioxide" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "nitrogen-dioxide no2 nitrogen dioxide",
   },
   {
     id: "nitrogen-trifluoride",
@@ -980,6 +1130,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Nitrogen Trifluoride" },
     category: "specialty",
     sealNote: "teflon",
+    searchKey: "nitrogen-trifluoride nf3 nitrogen trifluoride",
   },
   {
     id: "nitrogen-trioxide",
@@ -987,6 +1138,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.443,
     names: { en: "Nitrogen Trioxide" },
     category: "specialty",
+    searchKey: "nitrogen-trioxide n2o3 nitrogen trioxide",
   },
   {
     id: "nitrosyl-chloride",
@@ -995,6 +1147,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Nitrosyl Chloride" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "nitrosyl-chloride nocl nitrosyl chloride",
   },
   {
     id: "nitrous-oxide",
@@ -1002,6 +1155,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.752,
     names: { en: "Nitrous Oxide" },
     category: "common",
+    searchKey: "nitrous-oxide n2o nitrous oxide",
   },
   {
     id: "octofluorocyclobutane",
@@ -1009,6 +1163,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.169,
     names: { en: "Octofluorocyclobutane" },
     category: "specialty",
+    searchKey: "octofluorocyclobutane c4f8 octofluorocyclobutane",
   },
   {
     id: "octofluorotetrahydrofuran",
@@ -1016,6 +1171,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.165,
     names: { en: "Octofluorotetrahydrofuran" },
     category: "specialty",
+    searchKey: "octofluorotetrahydrofuran c4f8o octofluorotetrahydrofuran",
   },
   {
     id: "oxygen-difluoride",
@@ -1023,6 +1179,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.672,
     names: { en: "Oxygen Difluoride" },
     category: "specialty",
+    searchKey: "oxygen-difluoride of2 oxygen difluoride",
   },
   {
     id: "ozone",
@@ -1030,6 +1187,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.738,
     names: { en: "Ozone" },
     category: "common",
+    searchKey: "ozone o3 ozone",
   },
   {
     id: "pentafluoroethane",
@@ -1037,6 +1195,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.287,
     names: { en: "Pentafluoroethane" },
     category: "specialty",
+    searchKey: "pentafluoroethane c2hf5 pentafluoroethane",
   },
   {
     id: "pentane-n-pentane",
@@ -1044,6 +1203,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.212,
     names: { en: "Pentane (n-Pentane)" },
     category: "specialty",
+    searchKey: "pentane-n-pentane c5h12 pentane (n-pentane)",
   },
   {
     id: "perchlory-fluoride",
@@ -1051,6 +1211,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.448,
     names: { en: "Perchlory Fluoride" },
     category: "specialty",
+    searchKey: "perchlory-fluoride clo3f perchlory fluoride",
   },
   {
     id: "perfluoro-2-butene",
@@ -1058,6 +1219,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.268,
     names: { en: "Perfluoro-2-Butene" },
     category: "specialty",
+    searchKey: "perfluoro-2-butene c4f8 perfluoro-2-butene",
   },
   {
     id: "perfluorobutane",
@@ -1065,6 +1227,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.738,
     names: { en: "Perfluorobutane" },
     category: "specialty",
+    searchKey: "perfluorobutane c4f10 perfluorobutane",
   },
   {
     id: "perfluoromethyl-vinylether-pmve",
@@ -1072,6 +1235,8 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.296,
     names: { en: "Perfluoromethyl-Vinylether (PMVE)" },
     category: "specialty",
+    searchKey:
+      "perfluoromethyl-vinylether-pmve pmve perfluoromethyl-vinylether (pmve)",
   },
   {
     id: "perfluoropropane",
@@ -1079,6 +1244,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.179,
     names: { en: "Perfluoropropane" },
     category: "specialty",
+    searchKey: "perfluoropropane c3f8 perfluoropropane",
   },
   {
     id: "phosgene",
@@ -1087,6 +1253,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Phosgene" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "phosgene cocl2 phosgene",
   },
   {
     id: "phosphine",
@@ -1095,6 +1262,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Phosphine" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "phosphine ph3 phosphine",
   },
   {
     id: "phosphorous-oxychloride",
@@ -1102,6 +1270,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.327,
     names: { en: "Phosphorous Oxychloride" },
     category: "specialty",
+    searchKey: "phosphorous-oxychloride pocl3 phosphorous oxychloride",
   },
   {
     id: "phosphorous-pentafluoride",
@@ -1109,6 +1278,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.346,
     names: { en: "Phosphorous Pentafluoride" },
     category: "specialty",
+    searchKey: "phosphorous-pentafluoride pf5 phosphorous pentafluoride",
   },
   {
     id: "phosphorous-trifluoride",
@@ -1116,6 +1286,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.495,
     names: { en: "Phosphorous Trifluoride" },
     category: "specialty",
+    searchKey: "phosphorous-trifluoride pf3 phosphorous trifluoride",
   },
   {
     id: "propadiene",
@@ -1123,6 +1294,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.439,
     names: { en: "Propadiene" },
     category: "specialty",
+    searchKey: "propadiene c3h4 propadiene",
   },
   {
     id: "propane-same-as-ch3ch2ch3",
@@ -1130,6 +1302,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.343,
     names: { en: "Propane (same as CH3CH2CH3)" },
     category: "common",
+    searchKey: "propane-same-as-ch3ch2ch3 c3h8 propane (same as ch3ch2ch3)",
   },
   {
     id: "propylene-propene",
@@ -1137,6 +1310,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.401,
     names: { en: "Propylene (Propene)*" },
     category: "common",
+    searchKey: "propylene-propene c3h6 propylene (propene)*",
   },
   {
     id: "rhenium-hexafluoride",
@@ -1144,6 +1318,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.23,
     names: { en: "Rhenium Hexafluoride" },
     category: "specialty",
+    searchKey: "rhenium-hexafluoride ref6 rhenium hexafluoride",
   },
   {
     id: "silane",
@@ -1152,6 +1327,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Silane" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "silane sih4 silane",
   },
   {
     id: "silicon-tetrachloride",
@@ -1160,6 +1336,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Silicon Tetrachloride" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "silicon-tetrachloride sicl4 silicon tetrachloride",
   },
   {
     id: "silicon-tetrafluoride",
@@ -1168,6 +1345,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Silicon Tetrafluoride" },
     category: "specialty",
     sealNote: "teflon",
+    searchKey: "silicon-tetrafluoride sif4 silicon tetrafluoride",
   },
   {
     id: "sulfur-dioxide",
@@ -1175,6 +1353,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.728,
     names: { en: "Sulfur Dioxide" },
     category: "common",
+    searchKey: "sulfur-dioxide so2 sulfur dioxide",
   },
   {
     id: "sulfur-hexafluoride",
@@ -1182,6 +1361,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.27,
     names: { en: "Sulfur Hexafluoride" },
     category: "common",
+    searchKey: "sulfur-hexafluoride sf6 sulfur hexafluoride",
   },
   {
     id: "sulfur-tetrafluoride",
@@ -1189,6 +1369,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.353,
     names: { en: "Sulfur Tetrafluoride" },
     category: "specialty",
+    searchKey: "sulfur-tetrafluoride sf4 sulfur tetrafluoride",
   },
   {
     id: "sulfur-trioxide",
@@ -1196,6 +1377,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.535,
     names: { en: "Sulfur Trioxide" },
     category: "specialty",
+    searchKey: "sulfur-trioxide so3 sulfur trioxide",
   },
   {
     id: "sulfuryl-fluoride",
@@ -1203,6 +1385,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.423,
     names: { en: "Sulfuryl Fluoride" },
     category: "specialty",
+    searchKey: "sulfuryl-fluoride so2f2 sulfuryl fluoride",
   },
   {
     id: "tetrachloromethane",
@@ -1210,6 +1393,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.344,
     names: { en: "Tetrachloromethane" },
     category: "specialty",
+    searchKey: "tetrachloromethane ccl4 tetrachloromethane",
   },
   {
     id: "tetraethylsilane",
@@ -1217,6 +1401,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.111,
     names: { en: "Tetraethylsilane" },
     category: "specialty",
+    searchKey: "tetraethylsilane c8h20si tetraethylsilane",
   },
   {
     id: "tetrafluoroethylene-tfe",
@@ -1224,6 +1409,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.361,
     names: { en: "Tetrafluoroethylene (TFE)" },
     category: "common",
+    searchKey: "tetrafluoroethylene-tfe c2f4 tetrafluoroethylene (tfe)",
   },
   {
     id: "tetrafluorohydrazine",
@@ -1231,6 +1417,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.367,
     names: { en: "Tetrafluorohydrazine" },
     category: "specialty",
+    searchKey: "tetrafluorohydrazine n2f4 tetrafluorohydrazine",
   },
   {
     id: "tetramethylsilane",
@@ -1238,6 +1425,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.183,
     names: { en: "Tetramethylsilane" },
     category: "specialty",
+    searchKey: "tetramethylsilane c4h12si tetramethylsilane",
   },
   {
     id: "titanium-tetrachloride",
@@ -1245,6 +1433,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.296,
     names: { en: "Titanium Tetrachloride" },
     category: "specialty",
+    searchKey: "titanium-tetrachloride ticl4 titanium tetrachloride",
   },
   {
     id: "toluene-c6h5",
@@ -1252,6 +1441,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.234,
     names: { en: "Toluene (C6H5)" },
     category: "specialty",
+    searchKey: "toluene-c6h5 ch3 toluene (c6h5)",
   },
   {
     id: "trans-2-butene",
@@ -1259,6 +1449,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.291,
     names: { en: "Trans-2-Butene" },
     category: "specialty",
+    searchKey: "trans-2-butene c4h8 trans-2-butene",
   },
   {
     id: "trichlorofluoromethane-f11",
@@ -1267,6 +1458,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Trichlorofluoromethane (f11)" },
     category: "specialty",
     sealNote: "teflon",
+    searchKey: "trichlorofluoromethane-f11 ccl3f trichlorofluoromethane (f11)",
   },
   {
     id: "trichlorosilane",
@@ -1274,6 +1466,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.329,
     names: { en: "Trichlorosilane" },
     category: "common",
+    searchKey: "trichlorosilane sihcl3 trichlorosilane",
   },
   {
     id: "trifluoroethane",
@@ -1281,6 +1474,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.333,
     names: { en: "Trifluoroethane" },
     category: "specialty",
+    searchKey: "trifluoroethane c2f3f3 trifluoroethane",
   },
   {
     id: "trifluoropropene",
@@ -1288,6 +1482,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.286,
     names: { en: "Trifluoropropene" },
     category: "specialty",
+    searchKey: "trifluoropropene c3h3f3 trifluoropropene",
   },
   {
     id: "trimethyl-aluminum",
@@ -1295,6 +1490,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.259,
     names: { en: "Trimethyl Aluminum" },
     category: "specialty",
+    searchKey: "trimethyl-aluminum c3h9al trimethyl aluminum",
   },
   {
     id: "trimethylamine",
@@ -1303,6 +1499,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Trimethylamine" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "trimethylamine (ch3)3n trimethylamine",
   },
   {
     id: "trimethylgallium",
@@ -1310,6 +1507,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.237,
     names: { en: "Trimethylgallium" },
     category: "specialty",
+    searchKey: "trimethylgallium c3h9ga trimethylgallium",
   },
   {
     id: "trimethyloxyborane-tmb",
@@ -1317,6 +1515,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.3,
     names: { en: "Trimethyloxyborane (TMB)" },
     category: "specialty",
+    searchKey: "trimethyloxyborane-tmb b(och3)3 trimethyloxyborane (tmb)",
   },
   {
     id: "trimethylsilane",
@@ -1324,6 +1523,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.235,
     names: { en: "Trimethylsilane" },
     category: "specialty",
+    searchKey: "trimethylsilane c3h10si trimethylsilane",
   },
   {
     id: "tungsten-hexafluoride",
@@ -1332,6 +1532,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Tungsten Hexafluoride" },
     category: "specialty",
     sealNote: "teflon",
+    searchKey: "tungsten-hexafluoride wf6 tungsten hexafluoride",
   },
   {
     id: "uranium-hexafluoride",
@@ -1340,6 +1541,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Uranium Hexafluoride" },
     category: "specialty",
     sealNote: "teflon",
+    searchKey: "uranium-hexafluoride uf6 uranium hexafluoride",
   },
   {
     id: "vinyl-bromide",
@@ -1347,6 +1549,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.524,
     names: { en: "Vinyl Bromide" },
     category: "specialty",
+    searchKey: "vinyl-bromide c2h3br vinyl bromide",
   },
   {
     id: "vinyl-chloride",
@@ -1354,6 +1557,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.542,
     names: { en: "Vinyl Chloride" },
     category: "common",
+    searchKey: "vinyl-chloride c2h3cl vinyl chloride",
   },
   {
     id: "vinyl-fluoride",
@@ -1362,6 +1566,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     names: { en: "Vinyl Fluoride" },
     category: "specialty",
     sealNote: "kalrez",
+    searchKey: "vinyl-fluoride c2h3f vinyl fluoride",
   },
   {
     id: "water-vapor",
@@ -1369,6 +1574,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 0.861,
     names: { en: "Water Vapor" },
     category: "specialty",
+    searchKey: "water-vapor h2o water vapor",
   },
   {
     id: "xennon",
@@ -1376,6 +1582,7 @@ export const GAS_FACTORS: readonly GasFactor[] = [
     factor: 1.383,
     names: { en: "Xennon" },
     category: "common",
+    searchKey: "xennon xe xennon",
   },
 ];
 
@@ -1385,4 +1592,18 @@ export const REFERENCE_GAS_ID = "nitrogen";
 /** Lookup by id. Returns undefined if not found. */
 export function getGasFactor(id: string): GasFactor | undefined {
   return GAS_FACTORS.find((g) => g.id === id);
+}
+
+/**
+ * Fold Unicode subscript digits (U+2080..U+2089) in a query to ASCII so the
+ * caller can match precomputed `searchKey` values regardless of how the user
+ * typed the formula. Exported for tests.
+ */
+const SUB_DIGITS = /[\u2080-\u2089]/g;
+export function normalizeGasQuery(query: string): string {
+  return query
+    .toLowerCase()
+    .replace(SUB_DIGITS, (d) =>
+      String.fromCharCode(d.charCodeAt(0) - 0x2080 + 0x30),
+    );
 }

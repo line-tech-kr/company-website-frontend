@@ -143,6 +143,31 @@ describe("<ProductFinder />", () => {
     expect(within(list).getByText("Helium")).toBeInTheDocument();
   });
 
+  it("matches gases by ASCII formula like 'CO2' (not just the subscripted 'CO₂')", () => {
+    render(<ProductFinder products={PRODUCTS} locale="en" />);
+    const combo = screen.getByPlaceholderText("gas.placeholder");
+    fireEvent.focus(combo);
+    fireEvent.change(combo, { target: { value: "CO2" } });
+    const list = screen.getByRole("listbox");
+    expect(within(list).getByText("Carbon Dioxide")).toBeInTheDocument();
+    // Other CO₂-typed entries (e.g. CO₂ shouldn't pull in unrelated gases) — sanity check
+    expect(within(list).queryByText("Nitrogen")).not.toBeInTheDocument();
+  });
+
+  it("matches gases by ASCII formula 'SF6' and 'NH3'", () => {
+    render(<ProductFinder products={PRODUCTS} locale="en" />);
+    const combo = screen.getByPlaceholderText("gas.placeholder");
+    fireEvent.focus(combo);
+    fireEvent.change(combo, { target: { value: "SF6" } });
+    expect(
+      within(screen.getByRole("listbox")).getByText("Sulfur Hexafluoride"),
+    ).toBeInTheDocument();
+    fireEvent.change(combo, { target: { value: "NH3" } });
+    expect(
+      within(screen.getByRole("listbox")).getByText("Ammonia"),
+    ).toBeInTheDocument();
+  });
+
   it("supports keyboard navigation in the gas combobox", () => {
     render(<ProductFinder products={PRODUCTS} locale="en" />);
     const combo = screen.getByPlaceholderText(
