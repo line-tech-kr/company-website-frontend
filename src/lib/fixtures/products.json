@@ -4303,12 +4303,11 @@
     "manuals": [],
     "drawings": [],
     "massFlowSpecs": {
-      "flowRange": {
-        "display": "0.01–30 slpm",
-        "min": 0.01,
-        "max": 30,
-        "unit": "slpm",
-        "referenceGas": "N2"
+      "pressureRange": {
+        "display": "0.1–6 barA",
+        "min": 0.1,
+        "max": 6,
+        "unit": "barA"
       },
       "accuracy": {
         "display": "±0.5% of FS",
@@ -4345,12 +4344,6 @@
         "min": 2,
         "max": 100,
         "unit": "%"
-      },
-      "maxPressure": {
-        "display": "6 barA",
-        "value": 6,
-        "unit": "barA",
-        "comparator": "eq"
       }
     }
   },

@@ -62,6 +62,7 @@ const SPEC_GROUPS: Array<{
     num: "01",
     keys: [
       "flowRange",
+      "pressureRange",
       "responseTime",
       "accuracy",
       "repeatability",
@@ -183,6 +184,11 @@ export default async function ProductPage({ params }: Props) {
         }),
       }));
 
+  // EPCs have pressureRange in place of flowRange — pick whichever exists
+  // for the headline overview row.
+  const headlineRange =
+    product.massFlowSpecs?.flowRange ?? product.massFlowSpecs?.pressureRange;
+
   const overviewRows = isROU
     ? (product.instrumentSpecs?.rows ?? []).slice(0, 3).map((r) => ({
         feature: r.label,
@@ -192,7 +198,7 @@ export default async function ProductPage({ params }: Props) {
         {
           feature: features[0] ?? "",
           values: [
-            loc(product.massFlowSpecs!.flowRange.display),
+            loc(headlineRange!.display),
             loc(product.massFlowSpecs!.accuracy.display),
           ],
         },
@@ -299,11 +305,24 @@ export default async function ProductPage({ params }: Props) {
         value: r.value,
       }))
     : [
-        {
-          "@type": "PropertyValue",
-          name: "Flow Range",
-          value: product.massFlowSpecs!.flowRange.display,
-        },
+        ...(product.massFlowSpecs?.flowRange
+          ? [
+              {
+                "@type": "PropertyValue",
+                name: "Flow Range",
+                value: product.massFlowSpecs.flowRange.display,
+              },
+            ]
+          : []),
+        ...(product.massFlowSpecs?.pressureRange
+          ? [
+              {
+                "@type": "PropertyValue",
+                name: "Pressure Range",
+                value: product.massFlowSpecs.pressureRange.display,
+              },
+            ]
+          : []),
         {
           "@type": "PropertyValue",
           name: "Accuracy",
@@ -362,7 +381,7 @@ export default async function ProductPage({ params }: Props) {
     sku: product.model,
     description: isROU
       ? productLabel
-      : `${productLabel} — ${product.massFlowSpecs!.flowRange.display} flow range, ${product.massFlowSpecs!.accuracy.display} accuracy`,
+      : `${productLabel} — ${headlineRange!.display} ${product.massFlowSpecs?.pressureRange ? "pressure range" : "flow range"}, ${product.massFlowSpecs!.accuracy.display} accuracy`,
     brand: {
       "@type": "Brand",
       name: "Line Tech",

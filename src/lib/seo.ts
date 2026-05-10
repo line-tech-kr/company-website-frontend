@@ -272,20 +272,25 @@ export function buildProductMetadata(
     zh: `${product.model} ${fn} — Line Tech`,
   };
 
-  const descriptions: Record<Locale, string> = product.massFlowSpecs
+  // EPC products use pressureRange in place of flowRange.
+  const range =
+    product.massFlowSpecs?.flowRange ?? product.massFlowSpecs?.pressureRange;
+  const isPressure = !product.massFlowSpecs?.flowRange;
+
+  const descriptions: Record<Locale, string> = product.massFlowSpecs && range
     ? (() => {
-        const flowRange = localizeSpecValue(
-          product.massFlowSpecs.flowRange.display,
-          locale,
-        );
+        const rangeDisplay = localizeSpecValue(range.display, locale);
         const accuracy = localizeSpecValue(
           product.massFlowSpecs.accuracy.display,
           locale,
         );
+        const rangeLabels = isPressure
+          ? { ko: "압력 범위", en: "pressure range", zh: "压力范围" }
+          : { ko: "유량", en: "flow range", zh: "流量范围" };
         return {
-          ko: `라인테크 ${product.model} ${label} — 유량 ${flowRange}, 정확도 ${accuracy}. ${application}.`,
-          en: `Line Tech ${product.model} ${label} — flow range ${flowRange}, accuracy ${accuracy}. ${application}.`,
-          zh: `莱因科技 ${product.model} ${label} — 流量范围 ${flowRange}，精度 ${accuracy}。${application}。`,
+          ko: `라인테크 ${product.model} ${label} — ${rangeLabels.ko} ${rangeDisplay}, 정확도 ${accuracy}. ${application}.`,
+          en: `Line Tech ${product.model} ${label} — ${rangeLabels.en} ${rangeDisplay}, accuracy ${accuracy}. ${application}.`,
+          zh: `莱因科技 ${product.model} ${label} — ${rangeLabels.zh} ${rangeDisplay}，精度 ${accuracy}。${application}。`,
         };
       })()
     : {
