@@ -176,17 +176,17 @@ export default async function ProductsListPage({ params }: Props) {
       </ul>
 
       <Link href="/products/finder" className="lt-products-list__finder-cta">
-        <div className="lt-products-list__finder-cta-body">
-          <span className="lt-products-list__finder-cta-eyebrow">
-            {tProducts("list.finderCta.eyebrow")}
-          </span>
+        <span className="lt-products-list__finder-cta-eyebrow">
+          {tProducts("list.finderCta.eyebrow")}
+        </span>
+        <span className="lt-products-list__finder-cta-body">
           <span className="lt-products-list__finder-cta-title">
             {tProducts("list.finderCta.title")}
           </span>
           <span className="lt-products-list__finder-cta-lede">
             {tProducts("list.finderCta.lede")}
           </span>
-        </div>
+        </span>
         <span className="lt-products-list__finder-cta-chev" aria-hidden="true">
           →
         </span>
