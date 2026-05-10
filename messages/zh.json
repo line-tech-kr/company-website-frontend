@@ -45,6 +45,7 @@
   "product": {
     "specs": {
       "flowRange": "流量范围",
+      "pressureRange": "压力范围",
       "responseTime": "响应时间",
       "accuracy": "精度",
       "repeatability": "重复性",

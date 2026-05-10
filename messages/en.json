@@ -45,6 +45,7 @@
   "product": {
     "specs": {
       "flowRange": "Flow range",
+      "pressureRange": "Pressure range",
       "responseTime": "Response time",
       "accuracy": "Accuracy",
       "repeatability": "Repeatability",

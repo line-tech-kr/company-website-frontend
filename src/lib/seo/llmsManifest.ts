@@ -45,6 +45,7 @@ function productLine(product: Product, siteUrl: string): string {
           ? "Read-Out Unit"
           : "Electronic Pressure Controller";
   const flowRange = product.massFlowSpecs?.flowRange?.display;
+  const pressureRange = product.massFlowSpecs?.pressureRange?.display;
   const accuracy = product.massFlowSpecs?.accuracy?.display;
 
   const features = product.features
@@ -56,6 +57,7 @@ function productLine(product: Product, siteUrl: string): string {
   const detail = [
     `${fnLabel}`,
     flowRange && `flow range ${flowRange}`,
+    pressureRange && `pressure range ${pressureRange}`,
     accuracy && `accuracy ${accuracy}`,
     features,
   ]

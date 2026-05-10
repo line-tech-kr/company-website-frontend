@@ -90,17 +90,14 @@ export function ProductHero({
             LINE TECH
           </div>
           <div className="lt-pdp-hero__stamp lt-pdp-hero__stamp--br">
-            {product.massFlowSpecs ? (
-              <>
-                N₂ ·{" "}
-                {localizeSpecValue(
-                  product.massFlowSpecs.flowRange.display,
-                  locale,
-                )}
-              </>
-            ) : (
-              product.function
-            )}
+            {(() => {
+              const range =
+                product.massFlowSpecs?.flowRange ??
+                product.massFlowSpecs?.pressureRange;
+              if (!range) return product.function;
+              const prefix = product.massFlowSpecs?.flowRange ? "N₂ · " : "";
+              return `${prefix}${localizeSpecValue(range.display, locale)}`;
+            })()}
           </div>
         </div>
       </div>
