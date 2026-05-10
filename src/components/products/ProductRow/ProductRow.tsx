@@ -26,6 +26,7 @@ function fittingSummary(connections: Product["connections"]): string {
     const last = c.type.split(/\s+/).at(-1);
     if (last) types.add(last);
   }
+  if (types.size === 0) return "—";
   return [...types].join(" · ");
 }
 
