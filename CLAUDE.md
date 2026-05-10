@@ -42,6 +42,20 @@ Build the full Tailwind color scale (50–950) around these anchors. Neutrals, s
 - New dynamic routes (`src/app/[locale]/.../[param]/page.tsx`) ship with a Playwright spec covering the happy path and the `notFound()` path.
 - Run locally with Node 22 (`nvm use 22`) — vitest 4 + std-env requires `require(esm)` support.
 
+### Tiers (see `docs/test-coverage-audit.md`)
+
+- **Tier A (must test)** — logic in `src/lib/`, route handlers, middleware, hooks with state. Coverage gap = correctness gap.
+- **Tier B (should test)** — stateful or branching components: forms, search, dialogs, locale switcher, tab nav.
+- **Tier C (skip)** — pure presentational components, `src/lib/content/*`, type-only files, Sanity/studio.
+
+### Coverage gate
+
+`vitest.config.ts` enforces coverage thresholds. CI (`pnpm test:coverage` in `.github/workflows/ci.yml`) fails on regression below baseline.
+
+The `coverage.exclude` list scopes the gate to Tier A only — presentational components, static content, RSC pages/layouts, and type-only files are excluded so Tier C additions don't fight the threshold. Tier B component tests still run; they just don't contribute to the % gate.
+
+**Ratchet policy:** when you add Tier A tests that raise coverage, raise the `thresholds` in `vitest.config.ts` to the new baseline (rounded down). Coverage can never silently regress on Tier A code.
+
 ## Reference
 
 - `docs/catalogue-2026-handoff.md` — 2026 product catalog refresh; active source-of-truth for the current lineup (LM and LD series retired, LEPC and DO400 added)

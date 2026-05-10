@@ -16,13 +16,37 @@ export default defineConfig({
       provider: "v8",
       reporter: ["text", "html"],
       include: ["src/**/*.{ts,tsx}"],
+      // Coverage % gates Tier A only (logic, route handlers, middleware,
+      // hooks). Tier C paths — presentational components, static content,
+      // type-only files, RSC pages/layouts whose behavior is covered by
+      // Playwright — are excluded so Tier C additions don't fight the
+      // threshold. Tier B components are still tested for behavior; their
+      // tests run, they just don't contribute to the % gate.
+      // See docs/test-coverage-audit.md.
       exclude: [
         "src/**/*.test.{ts,tsx}",
         "src/test/**",
         "src/**/*.d.ts",
         "src/sanity/**",
         "src/app/studio/**",
+        // Tier C — presentational + static content
+        "src/components/**",
+        "src/lib/content/**",
+        "src/lib/fixtures/**",
+        "src/lib/types/**",
+        "src/lib/search/**",
+        // Pages/layouts/error boundaries/icons — Playwright covers behavior
+        "src/app/**/*.tsx",
       ],
+      // Ratchet policy: thresholds equal current baseline (rounded down).
+      // When new tests land, raise these to the new baseline so coverage
+      // can never silently regress. See docs/test-coverage-audit.md.
+      thresholds: {
+        statements: 31,
+        branches: 27,
+        functions: 27,
+        lines: 31,
+      },
     },
   },
 });
