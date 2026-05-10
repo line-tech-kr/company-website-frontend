@@ -32,7 +32,6 @@ export function Intro({ h }: Props) {
             variant="ghost"
             size="lg"
             href="/products"
-            plain
             trailingGlyph={<Glyph name="arrow-right" size={14} />}
           >
             {h.intro.ctaSecondary}
