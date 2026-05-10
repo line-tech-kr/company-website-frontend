@@ -52,7 +52,7 @@ export function ProductFinder({ products, locale, initial }: Props) {
     initial?.series ?? DEFAULT_SERIES,
   );
 
-  // Sync state to URL whenever the form changes (after initial mount).
+  // Sync state to URL whenever the form changes.
   useEffect(() => {
     const query: Record<string, string> = {};
     if (fn !== DEFAULT_FN) query.fn = fn;
@@ -116,6 +116,12 @@ export function ProductFinder({ products, locale, initial }: Props) {
           labels={fnLabels}
           legend={t("fn.label")}
         />
+        <SeriesPicker
+          value={series}
+          onChange={setSeries}
+          labels={seriesLabels}
+          legend={t("series.label")}
+        />
         <GasSelect value={gasId} onChange={setGasId} labels={gasLabels} />
         <FlowInput
           flow={flow}
@@ -123,12 +129,6 @@ export function ProductFinder({ products, locale, initial }: Props) {
           onFlowChange={setFlow}
           onUnitChange={setUnit}
           labels={{ legend: t("flow.label"), unit: unitLabels }}
-        />
-        <SeriesPicker
-          value={series}
-          onChange={setSeries}
-          labels={seriesLabels}
-          legend={t("series.label")}
         />
       </form>
 
