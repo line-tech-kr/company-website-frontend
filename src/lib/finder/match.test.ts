@@ -17,7 +17,7 @@ function withRange(
     model,
     slug: { current: model.toLowerCase() },
     massFlowSpecs: {
-      ...makeProduct().massFlowSpecs,
+      ...makeProduct().massFlowSpecs!,
       flowRange: { display: `${min}–${max} slpm`, min, max, unit: "slpm" },
     },
     ...overrides,

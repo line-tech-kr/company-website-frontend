@@ -96,6 +96,7 @@ export function findProducts(
   for (const product of products) {
     if (!functionMatches(product, input.function)) continue;
     if (!seriesMatches(product, input.series)) continue;
+    if (!product.massFlowSpecs) continue;
     const range = product.massFlowSpecs.flowRange;
     if (range.min == null || range.max == null) continue;
     const score = fitScore(n2EquivalentSlpm, range.min, range.max);
