@@ -58,7 +58,7 @@
   },
   "products": {
     "list": {
-      "title": "제품 카탈로그",
+      "title": "제품",
       "lede": "아날로그·디지털·특수 시리즈로 구성된 매스플로우 컨트롤러(MFC)와 매스플로우 미터(MFM).",
       "cardCount": "{count}개 모델",
       "stats": {

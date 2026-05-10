@@ -58,7 +58,7 @@
   },
   "products": {
     "list": {
-      "title": "Product catalog",
+      "title": "Products",
       "lede": "Every Line Tech instrument in one place — Mass Flow Controllers, Mass Flow Meters, and accessories across analogue, digital, and specialized lines.",
       "cardCount": "{count} models",
       "stats": {

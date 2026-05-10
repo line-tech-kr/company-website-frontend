@@ -58,7 +58,7 @@
   },
   "products": {
     "list": {
-      "title": "产品目录",
+      "title": "产品",
       "lede": "涵盖模拟、数字和专用系列的质量流量控制器（MFC）和质量流量计（MFM）。",
       "cardCount": "{count} 款型号",
       "stats": {
