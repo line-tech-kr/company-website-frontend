@@ -48,9 +48,9 @@
   gap: 0.5rem;
   padding: 1.5rem 1.25rem;
   width: 100%;
-  background: white;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 8px;
+  background: var(--pd-surface);
+  border: 1px solid var(--pd-border);
+  border-radius: var(--pd-r-lg, 12px);
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
 }
 
@@ -63,7 +63,7 @@
 }
 
 .lt-products-list__stat-link:hover {
-  border-color: rgba(0, 0, 0, 0.18);
+  border-color: var(--pd-border-strong);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
@@ -77,7 +77,7 @@
 }
 
 .lt-products-list__stat-num {
-  font: 500 2rem / 1 var(--lt-sans);
+  font: 500 var(--lt-fs-xl) / 1 var(--lt-sans);
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
   color: var(--pd-fg-strong);
@@ -85,12 +85,12 @@
 }
 
 .lt-products-list__stat-label {
-  font: 500 0.9rem var(--lt-sans);
+  font: 500 var(--lt-fs-sm) var(--lt-sans);
   color: var(--pd-fg-strong);
 }
 
 .lt-products-list__stat-sub {
-  font: 400 0.8rem var(--lt-sans);
+  font: 400 var(--lt-fs-xs) var(--lt-sans);
   color: var(--pd-muted);
 }
 
