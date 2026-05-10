@@ -498,9 +498,9 @@
 }
 
 /* ───────────── Finder CTA ─────────────
- * Same visual language as the category cards directly below: light
- * surface, thin border, narrow accent stripe on the left. Gold stripe
- * (instead of the cards' primary stripe) flags this as the action card.
+ * Shares the category-card structure (3-column grid, thin border, left
+ * accent stripe) but with a soft gold tint background to mark it as the
+ * action card without going as loud as a full primary-blue gradient.
  */
 
 .lt-products-list__finder-cta {
@@ -510,10 +510,10 @@
   align-items: center;
   gap: 1.25rem;
   padding: 1.25rem 1.5rem;
-  border: 1px solid var(--pd-border);
+  border: 1px solid var(--lt-accent-300);
   border-left: 3px solid var(--lt-accent-400);
   border-radius: var(--pd-r-lg, 12px);
-  background: var(--pd-surface);
+  background: linear-gradient(180deg, var(--lt-accent-50) 0%, white 100%);
   text-decoration: none;
   color: inherit;
   transition:
@@ -524,7 +524,7 @@
 .lt-products-list__finder-cta:hover {
   border-color: var(--lt-accent-400);
   transform: translateX(2px);
-  box-shadow: 0 4px 12px rgba(12, 14, 20, 0.06);
+  box-shadow: 0 6px 16px rgba(165, 116, 4, 0.12);
 }
 .lt-products-list__finder-cta:focus-visible {
   outline: 2px solid var(--lt-accent-400);
@@ -535,7 +535,7 @@
   font: 700 var(--lt-fs-xs) / 1 var(--lt-sans);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--lt-accent-700);
+  color: var(--lt-accent-800);
   min-width: 72px;
 }
 :lang(ko) .lt-products-list__finder-cta-eyebrow,
@@ -552,8 +552,9 @@
 }
 
 .lt-products-list__finder-cta-title {
-  font: 600 var(--lt-fs-lg) / 1.2 var(--lt-sans);
+  font: 700 20px / 1.2 var(--lt-sans);
   color: var(--pd-fg-strong);
+  letter-spacing: -0.01em;
 }
 
 .lt-products-list__finder-cta-lede {
@@ -564,7 +565,7 @@
 .lt-products-list__finder-cta-chev {
   font-size: 22px;
   font-weight: 600;
-  color: var(--lt-accent-600);
+  color: var(--lt-accent-700);
   transition: transform 0.15s;
   flex-shrink: 0;
 }
