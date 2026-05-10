@@ -141,7 +141,9 @@ export function CategoryShowcase({
             )}
             {p.flowRange && (
               <DataRow
-                label={p.function === "EPC" ? pressureRangeLabel : flowRangeLabel}
+                label={
+                  p.function === "EPC" ? pressureRangeLabel : flowRangeLabel
+                }
                 value={p.flowRange}
               />
             )}

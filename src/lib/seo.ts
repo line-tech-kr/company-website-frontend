@@ -277,27 +277,28 @@ export function buildProductMetadata(
     product.massFlowSpecs?.flowRange ?? product.massFlowSpecs?.pressureRange;
   const isPressure = !product.massFlowSpecs?.flowRange;
 
-  const descriptions: Record<Locale, string> = product.massFlowSpecs && range
-    ? (() => {
-        const rangeDisplay = localizeSpecValue(range.display, locale);
-        const accuracy = localizeSpecValue(
-          product.massFlowSpecs.accuracy.display,
-          locale,
-        );
-        const rangeLabels = isPressure
-          ? { ko: "압력 범위", en: "pressure range", zh: "压力范围" }
-          : { ko: "유량", en: "flow range", zh: "流量范围" };
-        return {
-          ko: `라인테크 ${product.model} ${label} — ${rangeLabels.ko} ${rangeDisplay}, 정확도 ${accuracy}. ${application}.`,
-          en: `Line Tech ${product.model} ${label} — ${rangeLabels.en} ${rangeDisplay}, accuracy ${accuracy}. ${application}.`,
-          zh: `莱因科技 ${product.model} ${label} — ${rangeLabels.zh} ${rangeDisplay}，精度 ${accuracy}。${application}。`,
+  const descriptions: Record<Locale, string> =
+    product.massFlowSpecs && range
+      ? (() => {
+          const rangeDisplay = localizeSpecValue(range.display, locale);
+          const accuracy = localizeSpecValue(
+            product.massFlowSpecs.accuracy.display,
+            locale,
+          );
+          const rangeLabels = isPressure
+            ? { ko: "압력 범위", en: "pressure range", zh: "压力范围" }
+            : { ko: "유량", en: "flow range", zh: "流量范围" };
+          return {
+            ko: `라인테크 ${product.model} ${label} — ${rangeLabels.ko} ${rangeDisplay}, 정확도 ${accuracy}. ${application}.`,
+            en: `Line Tech ${product.model} ${label} — ${rangeLabels.en} ${rangeDisplay}, accuracy ${accuracy}. ${application}.`,
+            zh: `莱因科技 ${product.model} ${label} — ${rangeLabels.zh} ${rangeDisplay}，精度 ${accuracy}。${application}。`,
+          };
+        })()
+      : {
+          ko: `라인테크 ${product.model} ${label}. ${application}.`,
+          en: `Line Tech ${product.model} ${label}. ${application}.`,
+          zh: `莱因科技 ${product.model} ${label}。${application}。`,
         };
-      })()
-    : {
-        ko: `라인테크 ${product.model} ${label}. ${application}.`,
-        en: `Line Tech ${product.model} ${label}. ${application}.`,
-        zh: `莱因科技 ${product.model} ${label}。${application}。`,
-      };
 
   const page: PageSeo = {
     title: titles[locale],
