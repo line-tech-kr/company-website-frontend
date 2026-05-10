@@ -17,10 +17,11 @@ export function ResultCard({ match, locale, rankLabel }: Props) {
   const { product, fitScore } = match;
   const category = categoryForSeries(product.series);
   const href = `/products/${category}/${product.slug.current}`;
-  // findProducts only emits matches whose massFlowSpecs is set, so the
+  // findProducts only emits matches whose massFlowSpecs + range is set, so the
   // non-null assertions are safe here.
   const specs = product.massFlowSpecs!;
-  const range = localizeSpecValue(specs.flowRange.display, locale);
+  const rangeSpec = specs.flowRange ?? specs.pressureRange!;
+  const range = localizeSpecValue(rangeSpec.display, locale);
   const accuracy = localizeSpecValue(specs.accuracy.display, locale);
   const tone = fitScore >= 1 ? "success" : fitScore >= 0.7 ? "info" : "warning";
 
