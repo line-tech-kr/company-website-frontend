@@ -119,10 +119,7 @@ export default async function ProductsListPage({ params }: Props) {
         <p className="lt-products-list__lede">{tProducts("list.lede")}</p>
       </header>
 
-      <ul
-        className="lt-products-list__stats lt-products-list__stats--dark lt-products-list__stats--engineered"
-        aria-label={tProducts("list.title")}
-      >
+      <ul className="lt-products-list__stats">
         <li className="lt-products-list__stat">
           <div className="lt-products-list__stat-cell">
             <div className="lt-products-list__stat-num">{products.length}</div>

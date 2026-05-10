@@ -4,9 +4,7 @@ test.describe("Product browsing", () => {
   test("products hub renders with category cards", async ({ page }) => {
     await page.goto("/en/products");
 
-    await expect(
-      page.getByRole("heading", { name: "Product catalog" }),
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Products" })).toBeVisible();
 
     // Category links exist
     await expect(
