@@ -184,8 +184,8 @@ export default async function ProductPage({ params }: Props) {
       }));
 
   const overviewRows = isROU
-    ? (product.instrumentSpecs?.rows ?? []).slice(0, 3).map((r, i) => ({
-        feature: features[i] ?? r.label,
+    ? (product.instrumentSpecs?.rows ?? []).slice(0, 3).map((r) => ({
+        feature: r.label,
         values: [r.value],
       }))
     : [
