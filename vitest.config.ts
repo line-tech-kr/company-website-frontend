@@ -23,6 +23,15 @@ export default defineConfig({
         "src/sanity/**",
         "src/app/studio/**",
       ],
+      // Ratchet policy: thresholds equal current baseline (rounded down).
+      // When new tests land, raise these to the new baseline so coverage
+      // can never silently regress. See docs/test-coverage-audit.md.
+      thresholds: {
+        statements: 18,
+        branches: 13,
+        functions: 14,
+        lines: 19,
+      },
     },
   },
 });
