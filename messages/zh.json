@@ -45,6 +45,7 @@
   "product": {
     "specs": {
       "flowRange": "流量范围",
+      "pressureRange": "压力范围",
       "responseTime": "响应时间",
       "accuracy": "精度",
       "repeatability": "重复性",
@@ -113,7 +114,9 @@
     "table": {
       "model": "型号",
       "description": "特点",
-      "range": "流量范围",
+      "range": "范围",
+      "flowRange": "流量范围",
+      "pressureRange": "压力范围",
       "accuracy": "精度",
       "response": "响应",
       "fitting": "接口"

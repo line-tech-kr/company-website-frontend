@@ -97,8 +97,9 @@ export function findProducts(
     if (!functionMatches(product, input.function)) continue;
     if (!seriesMatches(product, input.series)) continue;
     if (!product.massFlowSpecs) continue;
+    // Flow-rate finder skips EPCs (no flowRange — they advertise pressureRange).
     const range = product.massFlowSpecs.flowRange;
-    if (range.min == null || range.max == null) continue;
+    if (!range || range.min == null || range.max == null) continue;
     const score = fitScore(n2EquivalentSlpm, range.min, range.max);
     if (score === 0) continue;
     matches.push({ product, n2EquivalentSlpm, fitScore: score });

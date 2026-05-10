@@ -45,6 +45,7 @@
   "product": {
     "specs": {
       "flowRange": "유량 범위",
+      "pressureRange": "압력 범위",
       "responseTime": "응답 시간",
       "accuracy": "정확도",
       "repeatability": "반복도",
@@ -113,7 +114,9 @@
     "table": {
       "model": "모델",
       "description": "특징",
-      "range": "유량 범위",
+      "range": "범위",
+      "flowRange": "유량 범위",
+      "pressureRange": "압력 범위",
       "accuracy": "정확도",
       "response": "응답",
       "fitting": "연결"
