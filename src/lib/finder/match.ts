@@ -103,8 +103,17 @@ export function findProducts(
     matches.push({ product, n2EquivalentSlpm, fitScore: score });
   }
 
+  // Sort: fit score (desc) → series (analogue, digital, specialized) → model.
+  const SERIES_RANK: Record<NonNullable<Product["series"]>, number> = {
+    analogue: 0,
+    digital: 1,
+    specialized: 2,
+  };
   matches.sort((a, b) => {
     if (b.fitScore !== a.fitScore) return b.fitScore - a.fitScore;
+    const seriesDelta =
+      SERIES_RANK[a.product.series] - SERIES_RANK[b.product.series];
+    if (seriesDelta !== 0) return seriesDelta;
     return a.product.model.localeCompare(b.product.model);
   });
 

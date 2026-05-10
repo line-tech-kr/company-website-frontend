@@ -187,6 +187,28 @@ describe("findProducts", () => {
     expect(result.gas).toBeUndefined();
   });
 
+  it("orders matches with the same fit by series: analogue → digital → specialized", () => {
+    // Three products that all cover 200 slpm at the same fit score (50% — ideal).
+    const sameFitProducts: Product[] = [
+      withRange("MX-DIG", 100, 300, { series: "digital", function: "MFC" }),
+      withRange("MX-SPC", 100, 300, { series: "specialized", function: "MFC" }),
+      withRange("MX-ANA", 100, 300, { series: "analogue", function: "MFC" }),
+    ];
+    const result = findProducts(sameFitProducts, {
+      function: "MFC",
+      gasId: "nitrogen",
+      flow: 200,
+      unit: "slpm",
+    });
+    expect(result.matches.map((m) => m.product.model)).toEqual([
+      "MX-ANA",
+      "MX-DIG",
+      "MX-SPC",
+    ]);
+    // All three should have the same fit score.
+    expect(new Set(result.matches.map((m) => m.fitScore)).size).toBe(1);
+  });
+
   it("respects function filter for MFM products", () => {
     const result = findProducts(products, {
       function: "MFM",
