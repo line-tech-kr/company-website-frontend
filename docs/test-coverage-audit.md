@@ -4,16 +4,18 @@ Snapshot of the test suite at the time of the "strengthen tests" initiative. Cap
 
 ## Baseline
 
+Coverage % is scoped to **Tier A only** (logic, route handlers, middleware, hooks). Tier C paths — presentational components, static content, type-only files, RSC pages/layouts — are excluded from the coverage `include` so the threshold gate isn't diluted by code that policy says shouldn't be unit-tested. See `vitest.config.ts → coverage.exclude`.
+
 `pnpm test:coverage` on a clean checkout:
 
 | Metric     | Covered / Total | Percent |
 | ---------- | --------------- | ------- |
-| Statements | 317 / 1670      | 18.98%  |
-| Branches   | 130 / 948       | 13.71%  |
-| Functions  | 82 / 547        | 14.99%  |
-| Lines      | 291 / 1496      | 19.45%  |
+| Statements | 155 / 496       | 31.25%  |
+| Branches   | 63 / 228        | 27.63%  |
+| Functions  | 31 / 113        | 27.43%  |
+| Lines      | 137 / 438       | 31.27%  |
 
-Test suite: **13 vitest specs / 90 tests**, **5 Playwright specs**.
+Test suite: **13 vitest specs / 90 tests**, **5 Playwright specs**. Tier B/C component tests (HeaderNav, MegaMenu, MobileNav, MarketsMap, FeatureSection) still run — they verify behavior — but don't contribute to the coverage %.
 
 ## Existing tests
 

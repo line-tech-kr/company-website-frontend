@@ -52,7 +52,9 @@ Build the full Tailwind color scale (50–950) around these anchors. Neutrals, s
 
 `vitest.config.ts` enforces coverage thresholds. CI (`pnpm test:coverage` in `.github/workflows/ci.yml`) fails on regression below baseline.
 
-**Ratchet policy:** when you add tests that raise overall coverage, also raise the `thresholds` in `vitest.config.ts` to the new baseline (rounded down). Coverage can never silently regress.
+The `coverage.exclude` list scopes the gate to Tier A only — presentational components, static content, RSC pages/layouts, and type-only files are excluded so Tier C additions don't fight the threshold. Tier B component tests still run; they just don't contribute to the % gate.
+
+**Ratchet policy:** when you add Tier A tests that raise coverage, raise the `thresholds` in `vitest.config.ts` to the new baseline (rounded down). Coverage can never silently regress on Tier A code.
 
 ## Reference
 
