@@ -64,8 +64,8 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       title1: "신뢰할 수 있는 기술과",
       title2: "확실한 애프터서비스.",
       lede: "한국 최초의 자체 생산 MFC·MFM 제조사. 반도체, 디스플레이, 바이오, 연료전지 공정 현장에서 25년 이상 검증된 정밀 질량유량 제어.",
-      ctaPrimary: "M3030VA 제품 페이지",
-      ctaSecondary: "전체 카탈로그 (PDF)",
+      ctaPrimary: "맞춤 제품 찾기",
+      ctaSecondary: "전체 제품 보기",
       badge: "KAIST 공동연구 기반 · 국내 최초",
     },
     stats: [
@@ -185,8 +185,8 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       title1: "Reliable technology,",
       title2: "trusted service.",
       lede: "Korea's first mass flow controller manufacturer — trusted across semiconductor, display, fuel cell, and biotech process lines for over 25 years.",
-      ctaPrimary: "View M3030VA product",
-      ctaSecondary: "Full catalog (PDF)",
+      ctaPrimary: "Find your controller",
+      ctaSecondary: "Browse all products",
       badge: "ISO 9001 · CE · RoHS",
     },
     stats: [
@@ -314,8 +314,8 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       title1: "可靠的技术,",
       title2: "卓越的服务。",
       lede: "韩国首家自主生产质量流量控制器与流量计的制造商。25 年来在半导体、显示、生物制药与燃料电池工艺线上持续验证。",
-      ctaPrimary: "查看 M3030VA 产品",
-      ctaSecondary: "完整样册 (PDF)",
+      ctaPrimary: "查找适合的型号",
+      ctaSecondary: "浏览全部产品",
       badge: "基于 KAIST 合作研究 · 韩国首家",
     },
     stats: [
