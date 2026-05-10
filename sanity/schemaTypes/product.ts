@@ -202,14 +202,23 @@ export const product = defineType({
     defineField({
       name: "instrumentSpecs",
       title: "Instrument specs",
-      description: "For non-flow instruments (ROU). Each row: label + value string.",
+      description:
+        "For non-flow instruments (ROU). Each row: label + value string.",
       type: "array",
       of: [
         {
           type: "object",
           fields: [
-            defineField({ name: "label", type: "string", validation: (r) => r.required() }),
-            defineField({ name: "value", type: "string", validation: (r) => r.required() }),
+            defineField({
+              name: "label",
+              type: "string",
+              validation: (r) => r.required(),
+            }),
+            defineField({
+              name: "value",
+              type: "string",
+              validation: (r) => r.required(),
+            }),
           ],
           preview: { select: { title: "label", subtitle: "value" } },
         },

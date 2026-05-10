@@ -361,8 +361,8 @@ export default async function ProductPage({ params }: Props) {
     model: product.model,
     sku: product.model,
     description: isROU
-        ? productLabel
-        : `${productLabel} — ${product.massFlowSpecs!.flowRange.display} flow range, ${product.massFlowSpecs!.accuracy.display} accuracy`,
+      ? productLabel
+      : `${productLabel} — ${product.massFlowSpecs!.flowRange.display} flow range, ${product.massFlowSpecs!.accuracy.display} accuracy`,
     brand: {
       "@type": "Brand",
       name: "Line Tech",

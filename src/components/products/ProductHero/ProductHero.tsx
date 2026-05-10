@@ -93,7 +93,10 @@ export function ProductHero({
             {product.massFlowSpecs ? (
               <>
                 N₂ ·{" "}
-                {localizeSpecValue(product.massFlowSpecs.flowRange.display, locale)}
+                {localizeSpecValue(
+                  product.massFlowSpecs.flowRange.display,
+                  locale,
+                )}
               </>
             ) : (
               product.function

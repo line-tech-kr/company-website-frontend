@@ -34,12 +34,7 @@ const OUTPUT_PATH = resolve(__dirname, "../src/lib/fixtures/products.json");
 // Section 9 read-out units and accessories. LTI-200 is retired; LTI-1000,
 // FC-050S and PR-030 are legacy accessories without structured spec data.
 // LTI-2000 is parsed as an instrument (function "ROU") from section 9.
-const SKIP_MODELS = new Set([
-  "LTI-200",
-  "LTI-1000",
-  "FC-050S",
-  "PR-030",
-]);
+const SKIP_MODELS = new Set(["LTI-200", "LTI-1000", "FC-050S", "PR-030"]);
 
 // Translation table.
 // - Korean follows modern Korean technical writing: spaces between native words
@@ -585,7 +580,10 @@ function buildInstrumentSpecs(body: string[]): InstrumentSpecs {
       const { rows } = parseMarkdownTable(body, i);
       return {
         rows: rows
-          .map((row) => ({ label: row["Spec"] ?? "", value: row["Value"] ?? "" }))
+          .map((row) => ({
+            label: row["Spec"] ?? "",
+            value: row["Value"] ?? "",
+          }))
           .filter((r) => r.label),
       };
     }
