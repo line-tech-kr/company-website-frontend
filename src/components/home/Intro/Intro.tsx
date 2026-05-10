@@ -23,7 +23,7 @@ export function Intro({ h }: Props) {
           <Button
             variant="primary"
             size="lg"
-            href="/products/analogue/m3030va"
+            href="/products/finder"
             trailingGlyph={<Glyph name="arrow-right" size={14} />}
           >
             {h.intro.ctaPrimary}
@@ -31,9 +31,8 @@ export function Intro({ h }: Props) {
           <Button
             variant="ghost"
             size="lg"
-            href="/catalog.pdf"
-            plain
-            icon={<Glyph name="download" size={14} />}
+            href="/products"
+            trailingGlyph={<Glyph name="arrow-right" size={14} />}
           >
             {h.intro.ctaSecondary}
           </Button>

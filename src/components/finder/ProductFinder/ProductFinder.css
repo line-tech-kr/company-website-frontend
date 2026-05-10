@@ -1,0 +1,300 @@
+/* Line Tech — Product Finder. Tokens come from globals.css. */
+
+.lt-finder {
+  display: grid;
+  gap: 32px;
+}
+
+.lt-finder__form {
+  display: grid;
+  gap: 20px;
+  padding: 24px;
+  background: var(--pd-surface, var(--lt-neutral-50));
+  border: 1px solid var(--pd-border, var(--lt-neutral-200));
+  border-radius: var(--pd-r-lg, 12px);
+}
+
+@media (min-width: 720px) {
+  .lt-finder__form {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 32px;
+  }
+}
+
+.lt-finder__group {
+  display: grid;
+  gap: 8px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.lt-finder__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--lt-neutral-700);
+  letter-spacing: -0.005em;
+}
+
+/* Chips ---------------------------------------------------------- */
+.lt-finder__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.lt-finder__chip {
+  appearance: none;
+  border: 1px solid var(--lt-neutral-300);
+  background: white;
+  color: var(--lt-neutral-700);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    color 0.15s;
+}
+.lt-finder__chip:hover {
+  border-color: var(--lt-neutral-400);
+}
+.lt-finder__chip--on {
+  background: var(--lt-primary-500);
+  border-color: var(--lt-primary-500);
+  color: white;
+}
+.lt-finder__chip--on:hover {
+  background: var(--lt-primary-600);
+  border-color: var(--lt-primary-600);
+}
+
+/* Combobox ------------------------------------------------------- */
+.lt-finder__combo {
+  position: relative;
+}
+
+.lt-finder__combo-input,
+.lt-finder__num,
+.lt-finder__unit {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  font-size: 14px;
+  border: 1px solid var(--lt-neutral-300);
+  border-radius: var(--pd-r-md, 8px);
+  background: white;
+  color: var(--lt-neutral-900);
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+.lt-finder__combo-input:focus,
+.lt-finder__num:focus,
+.lt-finder__unit:focus {
+  outline: 0;
+  border-color: var(--lt-primary-500);
+  box-shadow: 0 0 0 3px rgba(24, 86, 134, 0.16);
+}
+
+.lt-finder__combo-list {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 280px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  background: white;
+  border: 1px solid var(--lt-neutral-300);
+  border-radius: var(--pd-r-md, 8px);
+  box-shadow: 0 8px 24px -6px rgba(15, 23, 42, 0.18);
+  z-index: 20;
+}
+
+.lt-finder__combo-heading {
+  padding: 8px 10px 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lt-neutral-500);
+}
+:lang(ko) .lt-finder__combo-heading,
+:lang(zh) .lt-finder__combo-heading {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.lt-finder__combo-opt {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.lt-finder__combo-opt--active {
+  background: var(--lt-primary-50);
+  color: var(--lt-primary-700);
+}
+.lt-finder__combo-formula {
+  font-family: var(--lt-font-mono, ui-monospace, monospace);
+  font-size: 13px;
+  color: var(--lt-primary-600);
+  min-width: 64px;
+}
+:lang(ko) .lt-finder__combo-formula,
+:lang(zh) .lt-finder__combo-formula {
+  font-family: inherit;
+}
+.lt-finder__combo-name {
+  color: inherit;
+}
+.lt-finder__combo-empty {
+  padding: 14px;
+  text-align: center;
+  color: var(--lt-neutral-500);
+  font-size: 13px;
+}
+
+/* Flow input ----------------------------------------------------- */
+.lt-finder__flow {
+  display: grid;
+  grid-template-columns: 1fr 110px;
+  gap: 8px;
+}
+
+/* Results -------------------------------------------------------- */
+.lt-finder__results {
+  display: grid;
+  gap: 16px;
+}
+
+.lt-finder__hint,
+.lt-finder__empty {
+  padding: 24px;
+  text-align: center;
+  color: var(--lt-neutral-500);
+  background: var(--lt-neutral-50);
+  border: 1px dashed var(--lt-neutral-300);
+  border-radius: var(--pd-r-md, 8px);
+  font-size: 14px;
+}
+
+.lt-finder__results-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.lt-finder__results-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--lt-neutral-900);
+}
+
+.lt-finder__converted {
+  margin: 0;
+  font-size: 13px;
+  color: var(--lt-neutral-600);
+}
+
+.lt-finder__warn {
+  margin: 0;
+  padding: 12px 14px;
+  background: var(--lt-accent-50);
+  border: 1px solid var(--lt-accent-300);
+  color: var(--lt-accent-900);
+  border-radius: var(--pd-r-md, 8px);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.lt-finder__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.lt-finder__result {
+  display: grid;
+  gap: 8px;
+  padding: 18px 20px;
+  background: white;
+  border: 1px solid var(--lt-neutral-200);
+  border-radius: var(--pd-r-md, 8px);
+  text-decoration: none;
+  color: inherit;
+  transition:
+    border-color 0.15s,
+    transform 0.1s,
+    box-shadow 0.15s;
+}
+.lt-finder__result:hover {
+  border-color: var(--lt-primary-400);
+  box-shadow: 0 4px 12px -4px rgba(15, 23, 42, 0.12);
+  transform: translateY(-1px);
+}
+
+.lt-finder__result-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.lt-finder__result-model {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--lt-primary-700);
+  letter-spacing: -0.01em;
+}
+
+.lt-finder__result-label {
+  font-size: 14px;
+  color: var(--lt-neutral-700);
+  line-height: 1.45;
+}
+
+.lt-finder__result-specs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 4px 0 0;
+}
+.lt-finder__result-specs > div {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.lt-finder__result-specs dt {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--lt-neutral-500);
+}
+:lang(ko) .lt-finder__result-specs dt,
+:lang(zh) .lt-finder__result-specs dt {
+  letter-spacing: 0;
+  text-transform: none;
+}
+.lt-finder__result-specs dd {
+  margin: 0;
+  font-size: 13px;
+  color: var(--lt-neutral-800);
+  font-variant-numeric: tabular-nums;
+}

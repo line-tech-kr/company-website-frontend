@@ -74,6 +74,11 @@
       "applications": {
         "label": "常见应用",
         "viewAll": "查看全部 {count} 项应用 →"
+      },
+      "finderCta": {
+        "eyebrow": "选型工具",
+        "title": "查找产品",
+        "lede": "选择气体并输入流量，自动匹配合适的 MFC 或 MFM。"
       }
     },
     "kicker": "产品系列",
@@ -124,6 +129,49 @@
       "slidesAriaLabel": "精选产品幻灯片",
       "slideAriaLabel": "幻灯片 {n}"
     }
+  },
+  "productFinder": {
+    "breadcrumb": "查找产品",
+    "heading": "查找产品",
+    "lede": "输入您使用的气体和目标流量，我们会为您匹配合适的 Line Tech MFC、MFM 或 EPC，并自动完成 K 因子换算。",
+    "fn": {
+      "label": "类型",
+      "any": "全部",
+      "mfc": "控制器 (MFC)",
+      "mfm": "流量计 (MFM)",
+      "epc": "压力控制器 (EPC)"
+    },
+    "gas": {
+      "label": "气体",
+      "placeholder": "按名称或化学式搜索…",
+      "commonLabel": "常用气体",
+      "allLabel": "全部气体",
+      "empty": "未找到匹配的气体"
+    },
+    "flow": {
+      "label": "目标流量",
+      "unit": {
+        "slpm": "slpm",
+        "sccm": "sccm"
+      }
+    },
+    "series": {
+      "label": "系列",
+      "any": "全部",
+      "analogue": "模拟",
+      "digital": "数字",
+      "specialized": "特殊型"
+    },
+    "results": {
+      "prompt": "请输入流量后查看匹配产品。",
+      "heading": "{count, plural, =0 {无匹配} =1 {1 个匹配} other {# 个匹配}}",
+      "empty": "暂无符合条件的产品。请扩大系列筛选范围或与我们联系。",
+      "specialtyWarning": "此气体通常需要特殊密封件（Kalrez / Teflon / Metal）。下单前请向销售确认密封材质。",
+      "rankIdeal": "最佳匹配",
+      "rankGood": "适合",
+      "rankEdge": "范围边缘"
+    },
+    "convertedNote": "≈ {n2} slpm N₂ 等效流量"
   },
   "pdp": {
     "tabs": {

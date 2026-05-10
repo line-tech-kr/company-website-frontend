@@ -74,6 +74,11 @@
       "applications": {
         "label": "Common applications",
         "viewAll": "View all {count} applications →"
+      },
+      "finderCta": {
+        "eyebrow": "Selector",
+        "title": "Find your controller",
+        "lede": "Pick a gas and flow rate — we'll match it to the right MFC or MFM."
       }
     },
     "kicker": "Product series",
@@ -124,6 +129,49 @@
       "slidesAriaLabel": "Featured product slides",
       "slideAriaLabel": "Slide {n}"
     }
+  },
+  "productFinder": {
+    "breadcrumb": "Find your controller",
+    "heading": "Find your controller",
+    "lede": "Tell us your gas and target flow rate. We'll match it to the right Line Tech MFC, MFM, or EPC and convert to N₂-equivalent automatically.",
+    "fn": {
+      "label": "Function",
+      "any": "Any",
+      "mfc": "Controller (MFC)",
+      "mfm": "Meter (MFM)",
+      "epc": "Pressure (EPC)"
+    },
+    "gas": {
+      "label": "Gas",
+      "placeholder": "Search by name or formula…",
+      "commonLabel": "Common",
+      "allLabel": "All gases",
+      "empty": "No gases match"
+    },
+    "flow": {
+      "label": "Target flow rate",
+      "unit": {
+        "slpm": "slpm",
+        "sccm": "sccm"
+      }
+    },
+    "series": {
+      "label": "Series",
+      "any": "Any",
+      "analogue": "Analogue",
+      "digital": "Digital",
+      "specialized": "Specialized"
+    },
+    "results": {
+      "prompt": "Enter a flow rate above to see matches.",
+      "heading": "{count, plural, =0 {No matches} =1 {1 match} other {# matches}}",
+      "empty": "No products fit those requirements. Try a wider series filter or contact us.",
+      "specialtyWarning": "This gas typically needs a specialty seal (Kalrez/Teflon/Metal). Verify seal material with sales before ordering.",
+      "rankIdeal": "Ideal fit",
+      "rankGood": "Good fit",
+      "rankEdge": "Edge of range"
+    },
+    "convertedNote": "≈ {n2} slpm N₂-equivalent"
   },
   "pdp": {
     "tabs": {

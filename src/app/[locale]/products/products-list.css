@@ -496,3 +496,79 @@
     align-items: flex-start;
   }
 }
+
+/* ───────────── Finder CTA ─────────────
+ * Shares the category-card structure (3-column grid, thin border, left
+ * accent stripe) but with a soft gold tint background to mark it as the
+ * action card without going as loud as a full primary-blue gradient.
+ */
+
+.lt-products-list__finder-cta {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--lt-accent-300);
+  border-left: 3px solid var(--lt-accent-400);
+  border-radius: var(--pd-r-lg, 12px);
+  background: linear-gradient(180deg, var(--lt-accent-50) 0%, white 100%);
+  text-decoration: none;
+  color: inherit;
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.lt-products-list__finder-cta:hover {
+  border-color: var(--lt-accent-400);
+  transform: translateX(2px);
+  box-shadow: 0 6px 16px rgba(165, 116, 4, 0.12);
+}
+.lt-products-list__finder-cta:focus-visible {
+  outline: 2px solid var(--lt-accent-400);
+  outline-offset: 2px;
+}
+
+.lt-products-list__finder-cta-eyebrow {
+  font: 700 var(--lt-fs-xs) / 1 var(--lt-sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lt-accent-800);
+  min-width: 72px;
+}
+:lang(ko) .lt-products-list__finder-cta-eyebrow,
+:lang(zh) .lt-products-list__finder-cta-eyebrow {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.lt-products-list__finder-cta-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.lt-products-list__finder-cta-title {
+  font: 700 20px / 1.2 var(--lt-sans);
+  color: var(--pd-fg-strong);
+  letter-spacing: -0.01em;
+}
+
+.lt-products-list__finder-cta-lede {
+  font: 400 var(--lt-fs-sm) / 1.4 var(--lt-sans);
+  color: var(--pd-muted);
+}
+
+.lt-products-list__finder-cta-chev {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--lt-accent-700);
+  transition: transform 0.15s;
+  flex-shrink: 0;
+}
+.lt-products-list__finder-cta:hover .lt-products-list__finder-cta-chev {
+  transform: translateX(3px);
+}
