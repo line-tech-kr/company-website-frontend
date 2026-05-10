@@ -161,6 +161,11 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               desc: "1997년 설립 이후",
             },
             {
+              href: "/company#markets",
+              label: "수출 현황",
+              desc: "13개 해외 수출 지역",
+            },
+            {
               href: "/company#certifications",
               label: "인증",
               desc: "ISO · CE · INNOBIZ 외",
@@ -352,6 +357,11 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               desc: "From 1997 to today",
             },
             {
+              href: "/company#markets",
+              label: "Export Markets",
+              desc: "13 overseas export destinations",
+            },
+            {
               href: "/company#certifications",
               label: "Certifications",
               desc: "ISO · CE · INNOBIZ and more",
@@ -535,6 +545,11 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               href: "/company#history",
               label: "发展历程",
               desc: "自 1997 年至今",
+            },
+            {
+              href: "/company#markets",
+              label: "出口市场",
+              desc: "13 个海外出口市场",
             },
             {
               href: "/company#certifications",
