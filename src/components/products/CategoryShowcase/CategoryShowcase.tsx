@@ -24,6 +24,7 @@ type Props = {
   modelLabel: string;
   functionLabel: string;
   flowRangeLabel: string;
+  pressureRangeLabel: string;
   accuracyLabel: string;
   highlightLabel: string;
   slidesLabel: string;
@@ -44,6 +45,7 @@ export function CategoryShowcase({
   modelLabel,
   functionLabel,
   flowRangeLabel,
+  pressureRangeLabel,
   accuracyLabel,
   highlightLabel,
   slidesLabel,
@@ -138,7 +140,10 @@ export function CategoryShowcase({
               <DataRow label={functionLabel} value={p.function} mono />
             )}
             {p.flowRange && (
-              <DataRow label={flowRangeLabel} value={p.flowRange} />
+              <DataRow
+                label={p.function === "EPC" ? pressureRangeLabel : flowRangeLabel}
+                value={p.flowRange}
+              />
             )}
             {p.accuracy && <DataRow label={accuracyLabel} value={p.accuracy} />}
             {p.caption && <DataRow label={highlightLabel} value={p.caption} />}

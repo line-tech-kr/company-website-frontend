@@ -112,7 +112,8 @@ export default async function CategoryPage({ params }: Props) {
             sectionLabel={tProducts("showcase.sectionLabel")}
             modelLabel={tProducts("showcase.modelLabel")}
             functionLabel={tProducts("showcase.functionLabel")}
-            flowRangeLabel={tProducts("table.range")}
+            flowRangeLabel={tProducts("table.flowRange")}
+            pressureRangeLabel={tProducts("table.pressureRange")}
             accuracyLabel={tProducts("table.accuracy")}
             highlightLabel={tProducts("showcase.highlightLabel")}
             slidesLabel={tProducts("showcase.slidesLabel")}
