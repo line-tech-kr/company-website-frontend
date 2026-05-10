@@ -162,7 +162,7 @@ export const flagshipCutoutsQuery = defineQuery(`
 `);
 
 export const allProductsQuery = defineQuery(`
-  *[_type == "product"]
+  *[_type == "product" && defined(massFlowSpecs) && function in ["MFC", "MFM", "EPC"]]
   | order(
     select(series == "analogue" => 0, series == "digital" => 1, 2),
     function asc,

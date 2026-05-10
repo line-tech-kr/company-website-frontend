@@ -5,7 +5,7 @@ test.describe("Product browsing", () => {
     await page.goto("/en/products");
 
     await expect(
-      page.getByRole("heading", { name: "Product catalog" }),
+      page.getByRole("heading", { name: "Products" }),
     ).toBeVisible();
 
     // Category links exist
