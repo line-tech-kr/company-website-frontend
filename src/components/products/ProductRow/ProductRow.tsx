@@ -32,15 +32,13 @@ function fittingSummary(connections: Product["connections"]): string {
 export function ProductRow({ product, imageSrc, category, locale }: Props) {
   const href = `/products/${category}/${product.slug.current}`;
   const label = product.description?.[locale] ?? product.productLabel[locale];
-  const range = localizeSpecValue(
-    product.massFlowSpecs.flowRange.display,
-    locale,
-  );
-  const accuracy = localizeSpecValue(
-    product.massFlowSpecs.accuracy.display,
-    locale,
-  );
-  const response = product.massFlowSpecs.responseTime
+  const range = product.massFlowSpecs
+    ? localizeSpecValue(product.massFlowSpecs.flowRange.display, locale)
+    : "—";
+  const accuracy = product.massFlowSpecs
+    ? localizeSpecValue(product.massFlowSpecs.accuracy.display, locale)
+    : "—";
+  const response = product.massFlowSpecs?.responseTime
     ? localizeSpecValue(product.massFlowSpecs.responseTime.display, locale)
     : "—";
   const fitting = fittingSummary(product.connections);

@@ -242,14 +242,6 @@ export function buildProductMetadata(
 ): Metadata {
   const label = product.productLabel[locale];
   const fn = product.function;
-  const flowRange = localizeSpecValue(
-    product.massFlowSpecs.flowRange.display,
-    locale,
-  );
-  const accuracy = localizeSpecValue(
-    product.massFlowSpecs.accuracy.display,
-    locale,
-  );
   const application = SERIES_APPLICATION[product.series][locale];
 
   const titles: Record<Locale, string> = {
@@ -258,11 +250,27 @@ export function buildProductMetadata(
     zh: `${product.model} ${fn} — Line Tech`,
   };
 
-  const descriptions: Record<Locale, string> = {
-    ko: `라인테크 ${product.model} ${label} — 유량 ${flowRange}, 정확도 ${accuracy}. ${application}.`,
-    en: `Line Tech ${product.model} ${label} — flow range ${flowRange}, accuracy ${accuracy}. ${application}.`,
-    zh: `莱因科技 ${product.model} ${label} — 流量范围 ${flowRange}，精度 ${accuracy}。${application}。`,
-  };
+  const descriptions: Record<Locale, string> = product.massFlowSpecs
+    ? (() => {
+        const flowRange = localizeSpecValue(
+          product.massFlowSpecs.flowRange.display,
+          locale,
+        );
+        const accuracy = localizeSpecValue(
+          product.massFlowSpecs.accuracy.display,
+          locale,
+        );
+        return {
+          ko: `라인테크 ${product.model} ${label} — 유량 ${flowRange}, 정확도 ${accuracy}. ${application}.`,
+          en: `Line Tech ${product.model} ${label} — flow range ${flowRange}, accuracy ${accuracy}. ${application}.`,
+          zh: `莱因科技 ${product.model} ${label} — 流量范围 ${flowRange}，精度 ${accuracy}。${application}。`,
+        };
+      })()
+    : {
+        ko: `라인테크 ${product.model} ${label}. ${application}.`,
+        en: `Line Tech ${product.model} ${label}. ${application}.`,
+        zh: `莱因科技 ${product.model} ${label}。${application}。`,
+      };
 
   const page: PageSeo = {
     title: titles[locale],

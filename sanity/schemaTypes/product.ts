@@ -42,7 +42,7 @@ export const product = defineType({
     defineField({
       name: "function",
       type: "string",
-      options: { list: ["MFC", "MFM", "EPC"] },
+      options: { list: ["MFC", "MFM", "EPC", "ROU"] },
     }),
     defineField({
       name: "productLabel",
@@ -197,6 +197,31 @@ export const product = defineType({
             stringField("unit"),
           ],
         }),
+      ],
+    }),
+    defineField({
+      name: "instrumentSpecs",
+      title: "Instrument specs",
+      description:
+        "For non-flow instruments (ROU). Each row: label + value string.",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({
+              name: "label",
+              type: "string",
+              validation: (r) => r.required(),
+            }),
+            defineField({
+              name: "value",
+              type: "string",
+              validation: (r) => r.required(),
+            }),
+          ],
+          preview: { select: { title: "label", subtitle: "value" } },
+        },
       ],
     }),
     defineField({

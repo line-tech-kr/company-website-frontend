@@ -41,9 +41,11 @@ function productLine(product: Product, siteUrl: string): string {
       ? "Mass Flow Controller"
       : product.function === "MFM"
         ? "Mass Flow Meter"
-        : "Electronic Pressure Controller";
-  const flowRange = product.massFlowSpecs.flowRange?.display;
-  const accuracy = product.massFlowSpecs.accuracy?.display;
+        : product.function === "ROU"
+          ? "Read-Out Unit"
+          : "Electronic Pressure Controller";
+  const flowRange = product.massFlowSpecs?.flowRange?.display;
+  const accuracy = product.massFlowSpecs?.accuracy?.display;
 
   const features = product.features
     .map((f: { en?: string }) => f.en)

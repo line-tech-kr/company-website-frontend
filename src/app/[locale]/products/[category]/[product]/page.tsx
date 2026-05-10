@@ -147,42 +147,68 @@ export default async function ProductPage({ params }: Props) {
     { label: product.model },
   ];
 
-  type SpecRow = { key: string; label: string; value: string };
-  const specGroups = SPEC_GROUPS.map((g) => ({
-    id: g.id,
-    num: g.num,
-    label: tPdp(`specGroups.${g.id}`),
-    rows: g.keys.flatMap<SpecRow>((k) => {
-      const spec = product.massFlowSpecs[k];
-      return spec
-        ? [
-            {
-              key: k,
-              label: tSpecs(k),
-              value: localizeSpecValue(spec.display, locale),
-            },
-          ]
-        : [];
-    }),
-  }));
-
   const features = product.features.map((f) => f[locale] || f.en);
-  const specs = product.massFlowSpecs;
+  const isROU = product.function === "ROU";
   const loc = (s: string) => localizeSpecValue(s, locale);
-  const overviewRows = [
-    {
-      feature: features[0] ?? "",
-      values: [loc(specs.flowRange.display), loc(specs.accuracy.display)],
-    },
-    {
-      feature: features[1] ?? "",
-      values: specs.responseTime ? [loc(specs.responseTime.display)] : [],
-    },
-    {
-      feature: features[2] ?? "",
-      values: specs.maxPressure ? [loc(specs.maxPressure.display)] : [],
-    },
-  ].filter((r) => r.feature);
+
+  type SpecRow = { key: string; label: string; value: string };
+  const specGroups = isROU
+    ? [
+        {
+          id: "instrument",
+          num: "01",
+          label: tPdp("tabs.specs"),
+          rows: (product.instrumentSpecs?.rows ?? []).map((r) => ({
+            key: r.label,
+            label: r.label,
+            value: r.value,
+          })),
+        },
+      ]
+    : SPEC_GROUPS.map((g) => ({
+        id: g.id,
+        num: g.num,
+        label: tPdp(`specGroups.${g.id}`),
+        rows: g.keys.flatMap<SpecRow>((k) => {
+          const spec = product.massFlowSpecs?.[k];
+          return spec
+            ? [
+                {
+                  key: k,
+                  label: tSpecs(k),
+                  value: localizeSpecValue(spec.display, locale),
+                },
+              ]
+            : [];
+        }),
+      }));
+
+  const overviewRows = isROU
+    ? (product.instrumentSpecs?.rows ?? []).slice(0, 3).map((r) => ({
+        feature: r.label,
+        values: [r.value],
+      }))
+    : [
+        {
+          feature: features[0] ?? "",
+          values: [
+            loc(product.massFlowSpecs!.flowRange.display),
+            loc(product.massFlowSpecs!.accuracy.display),
+          ],
+        },
+        {
+          feature: features[1] ?? "",
+          values: product.massFlowSpecs?.responseTime
+            ? [loc(product.massFlowSpecs.responseTime.display)]
+            : [],
+        },
+        {
+          feature: features[2] ?? "",
+          values: product.massFlowSpecs?.maxPressure
+            ? [loc(product.massFlowSpecs.maxPressure.display)]
+            : [],
+        },
+      ].filter((r) => r.feature);
 
   const isM3030VA = product.slug.current === "m3030va";
   const dimensionCallouts: Callout[] | null = isM3030VA
@@ -266,61 +292,67 @@ export default async function ProductPage({ params }: Props) {
   const productUrl = `${siteUrl}/${locale}/products/${category}/${product.slug.current}`;
   const productLabel = product.productLabel[locale];
 
-  const additionalProperties = [
-    {
-      "@type": "PropertyValue",
-      name: "Flow Range",
-      value: product.massFlowSpecs.flowRange.display,
-    },
-    {
-      "@type": "PropertyValue",
-      name: "Accuracy",
-      value: product.massFlowSpecs.accuracy.display,
-    },
-    {
-      "@type": "PropertyValue",
-      name: "Repeatability",
-      value: product.massFlowSpecs.repeatability.display,
-    },
-    ...(product.massFlowSpecs.responseTime
-      ? [
-          {
-            "@type": "PropertyValue",
-            name: "Response Time",
-            value: product.massFlowSpecs.responseTime.display,
-          },
-        ]
-      : []),
-    ...(product.massFlowSpecs.maxPressure
-      ? [
-          {
-            "@type": "PropertyValue",
-            name: "Max Pressure",
-            value: product.massFlowSpecs.maxPressure.display,
-          },
-        ]
-      : []),
-    {
-      "@type": "PropertyValue",
-      name: "I/O Signal",
-      value: product.massFlowSpecs.ioSignal.display,
-    },
-    {
-      "@type": "PropertyValue",
-      name: "Supply Power",
-      value: product.massFlowSpecs.supplyPower.display,
-    },
-    {
-      "@type": "PropertyValue",
-      name: "Temperature Range",
-      value: product.massFlowSpecs.tempRange.display,
-    },
-    {
-      "@type": "PropertyValue",
-      name: "Leak Rate",
-      value: product.massFlowSpecs.leakRate.display,
-    },
-  ];
+  const additionalProperties = isROU
+    ? (product.instrumentSpecs?.rows ?? []).map((r) => ({
+        "@type": "PropertyValue",
+        name: r.label,
+        value: r.value,
+      }))
+    : [
+        {
+          "@type": "PropertyValue",
+          name: "Flow Range",
+          value: product.massFlowSpecs!.flowRange.display,
+        },
+        {
+          "@type": "PropertyValue",
+          name: "Accuracy",
+          value: product.massFlowSpecs!.accuracy.display,
+        },
+        {
+          "@type": "PropertyValue",
+          name: "Repeatability",
+          value: product.massFlowSpecs!.repeatability.display,
+        },
+        ...(product.massFlowSpecs?.responseTime
+          ? [
+              {
+                "@type": "PropertyValue",
+                name: "Response Time",
+                value: product.massFlowSpecs.responseTime.display,
+              },
+            ]
+          : []),
+        ...(product.massFlowSpecs?.maxPressure
+          ? [
+              {
+                "@type": "PropertyValue",
+                name: "Max Pressure",
+                value: product.massFlowSpecs.maxPressure.display,
+              },
+            ]
+          : []),
+        {
+          "@type": "PropertyValue",
+          name: "I/O Signal",
+          value: product.massFlowSpecs!.ioSignal.display,
+        },
+        {
+          "@type": "PropertyValue",
+          name: "Supply Power",
+          value: product.massFlowSpecs!.supplyPower.display,
+        },
+        {
+          "@type": "PropertyValue",
+          name: "Temperature Range",
+          value: product.massFlowSpecs!.tempRange.display,
+        },
+        {
+          "@type": "PropertyValue",
+          name: "Leak Rate",
+          value: product.massFlowSpecs!.leakRate.display,
+        },
+      ];
 
   const productJsonLd = {
     "@context": "https://schema.org",
@@ -328,7 +360,9 @@ export default async function ProductPage({ params }: Props) {
     name: `Line Tech ${product.model} ${productLabel}`,
     model: product.model,
     sku: product.model,
-    description: `${productLabel} — ${product.massFlowSpecs.flowRange.display} flow range, ${product.massFlowSpecs.accuracy.display} accuracy`,
+    description: isROU
+      ? productLabel
+      : `${productLabel} — ${product.massFlowSpecs!.flowRange.display} flow range, ${product.massFlowSpecs!.accuracy.display} accuracy`,
     brand: {
       "@type": "Brand",
       name: "Line Tech",

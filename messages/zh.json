@@ -99,6 +99,10 @@
       "meters": {
         "title": "质量流量测量仪 · MFM",
         "subtitle": "测量仪"
+      },
+      "instruments": {
+        "title": "读数单元",
+        "subtitle": "仪表设备"
       }
     },
     "table": {
@@ -145,7 +149,8 @@
     "specGroups": {
       "performance": "性能",
       "signal": "信号 · 电源",
-      "environment": "环境"
+      "environment": "环境",
+      "instrument": "规格"
     },
     "dimensions": {
       "heading": "外形尺寸",

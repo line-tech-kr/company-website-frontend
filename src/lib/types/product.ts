@@ -50,6 +50,10 @@ const MassFlowSpecsSchema = z.object({
   }),
 });
 
+const InstrumentSpecsSchema = z.object({
+  rows: z.array(z.object({ label: z.string(), value: z.string() })),
+});
+
 const SanityImageRefSchema = z.object({
   _ref: z.string(),
   _type: z.literal("reference"),
@@ -80,7 +84,7 @@ export const SanityProductSchema = z.object({
   model: z.string(),
   slug: z.object({ current: z.string() }),
   series: z.enum(["analogue", "digital", "specialized"]),
-  function: z.enum(["MFC", "MFM", "EPC"]),
+  function: z.enum(["MFC", "MFM", "EPC", "ROU"]),
   productLabel: z.object({
     ko: z.string(),
     en: z.string(),
@@ -118,7 +122,8 @@ export const SanityProductSchema = z.object({
       _key: z.string().optional(),
     }),
   ),
-  massFlowSpecs: MassFlowSpecsSchema,
+  massFlowSpecs: MassFlowSpecsSchema.nullable().optional(),
+  instrumentSpecs: InstrumentSpecsSchema.nullable().optional(),
   digitalCommunication: z
     .object({
       protocol: z.string().optional(),
@@ -191,6 +196,7 @@ export const SanityProductSchema = z.object({
 
 export type Product = z.infer<typeof SanityProductSchema>;
 export type MassFlowSpecs = z.infer<typeof MassFlowSpecsSchema>;
+export type InstrumentSpecs = z.infer<typeof InstrumentSpecsSchema>;
 
 export type LocalizedString = { ko: string; en: string; zh: string };
 

@@ -43,6 +43,7 @@ const FUNCTION_LABELS: Record<
     short: "Electronic Pressure Controller",
     long: "Electronic Pressure Controller (EPC)",
   },
+  ROU: { short: "Read-Out Unit", long: "Read-Out Unit (ROU)" },
 };
 
 export type SpecJsonPayload = {
@@ -54,6 +55,7 @@ export type SpecJsonPayload = {
   features: { en?: string; ko?: string; zh?: string }[];
   connections: { type: string; length: string }[];
   specifications: Partial<Record<keyof MassFlowSpecs, Record<string, unknown>>>;
+  instrumentSpecs?: Array<{ label: string; value: string }>;
   digitalCommunication?: Product["digitalCommunication"];
   canonicalUrl: string;
   alternates: { ko: string; zh: string };
@@ -68,7 +70,7 @@ export function buildSpecJson(
 
   const specifications: SpecJsonPayload["specifications"] = {};
   for (const key of SPEC_ORDER) {
-    const spec = product.massFlowSpecs[key];
+    const spec = product.massFlowSpecs?.[key];
     if (spec) {
       specifications[key] = spec as Record<string, unknown>;
     }
@@ -92,6 +94,9 @@ export function buildSpecJson(
       length,
     })),
     specifications,
+    ...(product.instrumentSpecs?.rows.length
+      ? { instrumentSpecs: product.instrumentSpecs.rows }
+      : {}),
     digitalCommunication: product.digitalCommunication ?? undefined,
     canonicalUrl: `${siteUrl}/en/products/${category}/${slug}`,
     alternates: {
@@ -132,10 +137,16 @@ export function buildSpecMarkdown(product: Product, siteUrl: string): string {
   lines.push("## Specifications", "");
   lines.push("| Spec | Value |");
   lines.push("|---|---|");
-  for (const key of SPEC_ORDER) {
-    const spec = product.massFlowSpecs[key];
-    if (spec) {
-      lines.push(`| ${SPEC_LABELS[key]} | ${spec.display} |`);
+  if (product.instrumentSpecs?.rows.length) {
+    for (const r of product.instrumentSpecs.rows) {
+      lines.push(`| ${r.label} | ${r.value} |`);
+    }
+  } else {
+    for (const key of SPEC_ORDER) {
+      const spec = product.massFlowSpecs?.[key];
+      if (spec) {
+        lines.push(`| ${SPEC_LABELS[key]} | ${spec.display} |`);
+      }
     }
   }
   lines.push("");
