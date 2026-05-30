@@ -12,9 +12,9 @@ const TAGLINE: Record<string, string> = {
 };
 
 const DOMAIN: Record<string, string> = {
-  ko: "line-tech.co/ko",
-  en: "line-tech.co/en",
-  zh: "line-tech.co/zh",
+  ko: "line-tech.co.kr/ko",
+  en: "line-tech.co.kr/en",
+  zh: "line-tech.co.kr/zh",
 };
 
 // LogoLockup viewBox dims (traced from catalog.pdf p.1)

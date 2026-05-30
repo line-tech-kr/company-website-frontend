@@ -172,7 +172,7 @@ export function buildSpecMarkdown(product: Product, siteUrl: string): string {
 
   lines.push("---");
   lines.push(
-    `*Source: line-tech.co · English spec sheet for AI agents. Korean: ${koUrl} · Chinese: ${zhUrl}*`,
+    `*Source: line-tech.co.kr · English spec sheet for AI agents. Korean: ${koUrl} · Chinese: ${zhUrl}*`,
   );
 
   return lines.join("\n");

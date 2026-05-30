@@ -312,7 +312,8 @@
       "captcha": "Verification failed. Please complete the challenge again.",
       "server": "We could not send your message. Please email us directly."
     },
-    "success": "Thanks — your message has been sent. We typically respond within 2 business days.",
+    "successTitle": "Your inquiry was sent.",
+    "success": "A Line Tech representative will reply to the email address you provided.",
     "submitting": "Sending…",
     "slaHint": "We typically respond within 2 business days."
   }
