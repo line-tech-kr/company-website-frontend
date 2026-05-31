@@ -55,7 +55,8 @@ Pipeline (intermediate scripts at `.work/scripts/`, gitignored):
 
 | Issue | Status | Output |
 |---|---|---|
-| [#164 — Cutouts](https://github.com/line-tech-kr/company-website-frontend/issues/164) | TBD | 13 new cutouts + 4 rename copies in `public/products/<slug>/` |
+| [#164 — Cutouts (phase 1)](https://github.com/line-tech-kr/company-website-frontend/issues/164) | Closed | 13 retightened cutouts + 4 rename copies in `public/products/<slug>/` |
+| [#215 — Cutouts (phase 2)](https://github.com/line-tech-kr/company-website-frontend/pull/215) | Open | 23 net-new cutouts (DO400, EX1000C/M, EX70C/M, LTI-2000, M2200VA, M3200VA, MD30-800 C/M, MS2150VA) + matching upload-script extension |
 | [#165 — Sanity PDF uploads](https://github.com/line-tech-kr/company-website-frontend/issues/165) | TBD | 50+ new Sanity catalogue/manual/datasheet documents |
 | [#166 — KR→EN/ZH translations](https://github.com/line-tech-kr/company-website-frontend/issues/166) | TBD | 38 translation files in `catalog-extract/2026/translations/<slug>.md` |
 
