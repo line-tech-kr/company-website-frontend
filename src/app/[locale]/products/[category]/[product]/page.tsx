@@ -183,6 +183,8 @@ export default async function ProductPage({ params }: Props) {
         }),
       }));
 
+  const primaryRange =
+    product.massFlowSpecs?.flowRange ?? product.massFlowSpecs?.pressureRange;
   const overviewRows = isROU
     ? (product.instrumentSpecs?.rows ?? []).slice(0, 3).map((r) => ({
         feature: r.label,
@@ -192,8 +194,10 @@ export default async function ProductPage({ params }: Props) {
         {
           feature: features[0] ?? "",
           values: [
-            loc(product.massFlowSpecs!.flowRange.display),
-            loc(product.massFlowSpecs!.accuracy.display),
+            primaryRange ? loc(primaryRange.display) : "",
+            product.massFlowSpecs
+              ? loc(product.massFlowSpecs.accuracy.display)
+              : "",
           ],
         },
         {
@@ -301,8 +305,10 @@ export default async function ProductPage({ params }: Props) {
     : [
         {
           "@type": "PropertyValue",
-          name: "Flow Range",
-          value: product.massFlowSpecs!.flowRange.display,
+          name: product.massFlowSpecs?.flowRange
+            ? "Flow Range"
+            : "Pressure Range",
+          value: primaryRange?.display ?? "",
         },
         {
           "@type": "PropertyValue",
@@ -362,7 +368,9 @@ export default async function ProductPage({ params }: Props) {
     sku: product.model,
     description: isROU
       ? productLabel
-      : `${productLabel} — ${product.massFlowSpecs!.flowRange.display} flow range, ${product.massFlowSpecs!.accuracy.display} accuracy`,
+      : primaryRange
+        ? `${productLabel} — ${primaryRange.display} ${product.massFlowSpecs?.flowRange ? "flow range" : "pressure range"}, ${product.massFlowSpecs!.accuracy.display} accuracy`
+        : productLabel,
     brand: {
       "@type": "Brand",
       name: "Line Tech",

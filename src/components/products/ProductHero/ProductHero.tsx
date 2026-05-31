@@ -90,7 +90,7 @@ export function ProductHero({
             LINE TECH
           </div>
           <div className="lt-pdp-hero__stamp lt-pdp-hero__stamp--br">
-            {product.massFlowSpecs ? (
+            {product.massFlowSpecs?.flowRange ? (
               <>
                 N₂ ·{" "}
                 {localizeSpecValue(
@@ -98,6 +98,11 @@ export function ProductHero({
                   locale,
                 )}
               </>
+            ) : product.massFlowSpecs?.pressureRange ? (
+              localizeSpecValue(
+                product.massFlowSpecs.pressureRange.display,
+                locale,
+              )
             ) : (
               product.function
             )}

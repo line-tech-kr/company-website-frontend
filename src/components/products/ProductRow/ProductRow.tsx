@@ -21,6 +21,7 @@ const VISIBLE_TAG_KINDS = new Set(["capability", "gas"]);
 const MAX_VISIBLE_TAGS = 3;
 
 function fittingSummary(connections: Product["connections"]): string {
+  if (!connections) return "";
   const types = new Set<string>();
   for (const c of connections) {
     const last = c.type.split(/\s+/).at(-1);
@@ -32,8 +33,10 @@ function fittingSummary(connections: Product["connections"]): string {
 export function ProductRow({ product, imageSrc, category, locale }: Props) {
   const href = `/products/${category}/${product.slug.current}`;
   const label = product.description?.[locale] ?? product.productLabel[locale];
-  const range = product.massFlowSpecs
-    ? localizeSpecValue(product.massFlowSpecs.flowRange.display, locale)
+  const primaryRange =
+    product.massFlowSpecs?.flowRange ?? product.massFlowSpecs?.pressureRange;
+  const range = primaryRange
+    ? localizeSpecValue(primaryRange.display, locale)
     : "—";
   const accuracy = product.massFlowSpecs
     ? localizeSpecValue(product.massFlowSpecs.accuracy.display, locale)

@@ -3,6 +3,7 @@ import type { Product, MassFlowSpecs } from "@/lib/types/product";
 
 const SPEC_LABELS: Record<keyof MassFlowSpecs, string> = {
   flowRange: "Flow range",
+  pressureRange: "Pressure range",
   responseTime: "Response time",
   accuracy: "Accuracy",
   repeatability: "Repeatability",
@@ -16,6 +17,7 @@ const SPEC_LABELS: Record<keyof MassFlowSpecs, string> = {
 
 const SPEC_ORDER: Array<keyof MassFlowSpecs> = [
   "flowRange",
+  "pressureRange",
   "accuracy",
   "repeatability",
   "responseTime",
@@ -89,7 +91,7 @@ export function buildSpecJson(
         zh: f.zh,
       }),
     ),
-    connections: product.connections.map(({ type, length }) => ({
+    connections: (product.connections ?? []).map(({ type, length }) => ({
       type,
       length,
     })),
@@ -151,7 +153,7 @@ export function buildSpecMarkdown(product: Product, siteUrl: string): string {
   }
   lines.push("");
 
-  if (product.connections.length > 0) {
+  if (product.connections && product.connections.length > 0) {
     lines.push("## Connections", "");
     for (const c of product.connections) {
       lines.push(`- ${c.type} — body length ${c.length}`);

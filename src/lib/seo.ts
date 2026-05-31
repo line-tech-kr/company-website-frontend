@@ -272,14 +272,14 @@ export function buildProductMetadata(
     zh: `${product.model} ${fn} — Line Tech`,
   };
 
-  const descriptions: Record<Locale, string> = product.massFlowSpecs
+  const descriptions: Record<Locale, string> = product.massFlowSpecs?.flowRange
     ? (() => {
         const flowRange = localizeSpecValue(
-          product.massFlowSpecs.flowRange.display,
+          product.massFlowSpecs!.flowRange!.display,
           locale,
         );
         const accuracy = localizeSpecValue(
-          product.massFlowSpecs.accuracy.display,
+          product.massFlowSpecs!.accuracy.display,
           locale,
         );
         return {

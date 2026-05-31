@@ -8,7 +8,12 @@ const MassFlowSpecsSchema = z.object({
     max: z.number().optional(),
     unit: z.string().optional(),
     referenceGas: z.string().optional(),
-  }),
+  }).optional(),
+  pressureRange: SpecBaseSchema.extend({
+    min: z.number().optional(),
+    max: z.number().optional(),
+    unit: z.string().optional(),
+  }).optional(),
   responseTime: SpecBaseSchema.extend({
     value: z.number().optional(),
     unit: z.string().optional(),
@@ -115,13 +120,15 @@ export const SanityProductSchema = z.object({
       _key: z.string().optional(),
     }),
   ),
-  connections: z.array(
-    z.object({
-      type: z.string(),
-      length: z.string(),
-      _key: z.string().optional(),
-    }),
-  ),
+  connections: z
+    .array(
+      z.object({
+        type: z.string(),
+        length: z.string(),
+        _key: z.string().optional(),
+      }),
+    )
+    .nullable(),
   massFlowSpecs: MassFlowSpecsSchema.nullable().optional(),
   instrumentSpecs: InstrumentSpecsSchema.nullable().optional(),
   digitalCommunication: z

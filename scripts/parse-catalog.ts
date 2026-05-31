@@ -841,7 +841,11 @@ function validate(p: Product): void {
   if (!["MFC", "MFM", "EPC", "ROU"].includes(p.function))
     throw new Error(`${p.model}: bad function "${p.function}"`);
   // DO400 and ROU instruments have no fluid connection table in the catalog.
-  if (p.connections.length === 0 && p.function !== "ROU" && p.model !== "DO400")
+  if (
+    (p.connections?.length ?? 0) === 0 &&
+    p.function !== "ROU" &&
+    p.model !== "DO400"
+  )
     throw new Error(`${p.model}: no connections parsed`);
 
   if (p.function === "ROU") {
@@ -869,7 +873,7 @@ function validate(p: Product): void {
   );
 
   // Connection lengths should look like "<number> mm"
-  for (const c of p.connections) {
+  for (const c of p.connections ?? []) {
     if (!/^[\d.]+\s+mm$/.test(c.length))
       throw new Error(`${p.model}: malformed connection length "${c.length}"`);
     if (!c.type) throw new Error(`${p.model}: empty connection type`);
