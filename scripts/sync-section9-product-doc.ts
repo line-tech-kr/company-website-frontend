@@ -154,9 +154,7 @@ async function upsert(plan: Plan) {
     { id: plan.id },
   );
 
-  const body: Record<string, unknown> = {
-    _id: plan.id,
-    _type: "certification",
+  const fields: Record<string, unknown> = {
     name: plan.name,
     slug: { _type: "slug", current: plan.slug },
     issuer: plan.issuer,
@@ -165,39 +163,36 @@ async function upsert(plan: Plan) {
     order: plan.order,
   };
 
+  // Create the doc first (no file ref), then upload + patch in the asset.
+  // Reverse order would orphan the asset in Sanity if the doc op fails.
   if (!existing) {
     console.log(`  + create ${plan.id}  models=[${plan.models.join(", ")}]`);
     if (!apply) return;
-    const assetId = await ensureAsset(plan);
-    body.file = {
-      _type: "file",
-      asset: { _type: "reference", _ref: assetId },
-    };
-    await client.create(body as never);
-    return;
+    await client.createIfNotExists({
+      _id: plan.id,
+      _type: "certification",
+      ...fields,
+    } as never);
+  } else {
+    console.log(
+      `  ~ patch  ${plan.id}  hasFile=${existing.hasFile}  models=[${plan.models.join(", ")}]`,
+    );
+    if (!apply) return;
+    await client.patch(plan.id).set(fields).commit();
   }
 
-  console.log(
-    `  ~ patch  ${plan.id}  hasFile=${existing.hasFile}  models=[${plan.models.join(", ")}]`,
-  );
-  if (!apply) return;
-
-  const patch: Record<string, unknown> = {
-    name: plan.name,
-    slug: body.slug,
-    issuer: plan.issuer,
-    scope: plan.scope,
-    models: plan.models,
-    order: plan.order,
-  };
-  if (!existing.hasFile) {
+  if (!existing || !existing.hasFile) {
     const assetId = await ensureAsset(plan);
-    patch.file = {
-      _type: "file",
-      asset: { _type: "reference", _ref: assetId },
-    };
+    await client
+      .patch(plan.id)
+      .set({
+        file: {
+          _type: "file",
+          asset: { _type: "reference", _ref: assetId },
+        },
+      })
+      .commit();
   }
-  await client.patch(plan.id).set(patch).commit();
 }
 
 async function main() {

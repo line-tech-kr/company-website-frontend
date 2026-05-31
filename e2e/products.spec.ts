@@ -74,9 +74,9 @@ test.describe("Certifications hub", () => {
     await expect(
       page.getByRole("heading", { name: /Product-specific compliance/i }),
     ).toBeVisible();
-    // Per-product cert renders its Applies-to list
+    // Per-product cert renders its Applies-to list — order of models[] may vary
     await expect(
-      page.getByText("LTI-1000, LTI-2000", { exact: true }),
+      page.getByText(/LTI-1000.*LTI-2000|LTI-2000.*LTI-1000/).first(),
     ).toBeVisible();
   });
 });
