@@ -74,7 +74,7 @@ def main(argv: list[str]) -> int:
         return 1
 
     print(f"loading model: {MODEL}")
-    session = new_session(MODEL)
+    session = new_session(MODEL, providers=["CPUExecutionProvider"])
 
     for sku, src, dst in jobs:
         try:

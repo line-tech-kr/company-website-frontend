@@ -32,6 +32,9 @@ const CUTOUT_2026 = [
   "ex1000m",
   // DO400 digital outlet
   "do400",
+  // LEPC electronic pressure controller — cutout generated locally via
+  // scripts/remove-bg-ml.py since the 05312026 vendor batch omitted LEPC
+  "lepc",
   // LTI read-out unit
   "lti-2000",
   // MD digital MFC/MFM family
