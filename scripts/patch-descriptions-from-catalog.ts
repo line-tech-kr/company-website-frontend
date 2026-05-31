@@ -2,86 +2,90 @@
  * Patches Sanity product docs with localized descriptions for the website rebuild.
  *
  * For --lang=en (default):
- *   Source = the catalogue-research markdown files in
- *   /Users/bspark/Dev/working/line-tech-files/catalog-research/<slug>.md (## description section).
+ *   Source = catalogue-research markdown files under $CATALOG_RESEARCH_DIR/<slug>.md
+ *   (## description section, with `(catalog p.X)` citations and `**…**`/`*…*`
+ *   emphasis stripped).
  *
  * For --lang=ko | --lang=zh:
- *   Source = /Users/bspark/Dev/working/line-tech-files/catalog-research/_translations.json
- *   (shape: { "<slug>": { "en": "...", "ko": "...", "zh": "..." } }).
+ *   Source = $CATALOG_RESEARCH_DIR/_translations.json
+ *   shape: { "<slug>": { "en": "...", "ko": "...", "zh": "..." } }
  *
  * In all cases the patch target is `description.<lang>` on the product doc
  * (_id = `product-<slug>`).
  *
- * What's deliberately held back (no usable source):
- *   - MD150C / MD150M / LTI-2000 — new products that replaced now-retired
- *     catalogue entries (MD100C/M, LTI-200); need fresh source from engineering.
- *   - LEPC / DO400 — 2026 lineup additions absent from the catalogue.
- *
  * Usage:
- *   nvm use 22
- *   tsx scripts/patch-descriptions-from-catalog.ts                     # dry-run, en
- *   tsx scripts/patch-descriptions-from-catalog.ts --apply              # apply, en
- *   tsx scripts/patch-descriptions-from-catalog.ts --lang=ko            # dry-run, ko
- *   tsx scripts/patch-descriptions-from-catalog.ts --lang=ko --apply    # apply, ko
- *   tsx scripts/patch-descriptions-from-catalog.ts --lang=zh --apply    # apply, zh
+ *   tsx scripts/patch-descriptions-from-catalog.ts                  # dry-run, en
+ *   tsx scripts/patch-descriptions-from-catalog.ts --apply           # apply, en
+ *   tsx scripts/patch-descriptions-from-catalog.ts --lang=ko         # dry-run, ko
+ *   tsx scripts/patch-descriptions-from-catalog.ts --lang=ko --apply # apply, ko
  *
- * Requires NEXT_PUBLIC_SANITY_PROJECT_ID, NEXT_PUBLIC_SANITY_DATASET,
- * SANITY_WRITE_TOKEN in .env.local.
- *
- * Uses Sanity's HTTP mutation API via fetch — no @sanity/client SDK needed,
- * so it runs without the project's node_modules installed.
+ * Env (in .env.local):
+ *   NEXT_PUBLIC_SANITY_PROJECT_ID, NEXT_PUBLIC_SANITY_DATASET, SANITY_WRITE_TOKEN
+ *   CATALOG_RESEARCH_DIR  — defaults to /Users/bspark/Dev/working/line-tech-files/catalog-research
  */
 
-import { readFileSync, readdirSync, existsSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { ALL_PRODUCTS } from "../src/lib/fixtures/products";
+import { loadEnv } from "./lib/load-env";
+import { postMutation, readSanityEnv } from "./lib/sanity-mutate";
+
+loadEnv(".env.local");
 
 const CATALOG_RESEARCH_DIR =
+  process.env.CATALOG_RESEARCH_DIR ??
   "/Users/bspark/Dev/working/line-tech-files/catalog-research";
 const TRANSLATIONS_FILE = join(CATALOG_RESEARCH_DIR, "_translations.json");
 
 type Lang = "en" | "ko" | "zh";
 
-// After the 2026-05-31 review of the new (final 2026 Korean) catalogue, all
-// previously-held slugs have catalogue source: MD150C/M p.32-33, DO400(C) p.34,
-// LEPC p.50, LTI-2000 p.53. Nothing is currently held.
+// Slugs without usable catalogue source. As of 2026-05-31 (after the final
+// 2026 Korean catalogue review) all 37 products have source; this set is
+// kept for future flexibility.
 const HOLD: Record<string, string> = {};
 
-function loadEnv(path: string) {
-  for (const line of readFileSync(path, "utf-8").split("\n")) {
-    const m = line.match(/^([A-Z_][A-Z0-9_]*)=(.*)$/);
-    if (m) process.env[m[1]] ??= m[2].trimEnd();
-  }
-}
-
-loadEnv(".env.local");
-
 function extractEnDescription(markdown: string): string | null {
-  const m = markdown.match(/## description\s*\n([\s\S]*?)(?:\n## |\n$)/);
+  // Capture the body between `## description` and either the next `## ` heading
+  // or end-of-file. Tolerates trailing whitespace / multiple trailing newlines.
+  const m = markdown.match(/## description\s*\n([\s\S]*?)(?=\n##\s|\s*$)/);
   if (!m) return null;
   let body = m[1].trim();
-  body = body.replace(/\s*\(catalog p\.[^)]*\)/g, "");
+  // Strip inline catalogue citations: `(catalog p.X)`, `(new catalog p.X)`,
+  // optionally with multiple `p.X` segments.
+  body = body.replace(/\s*\((?:new )?catalog p\.[^)]*\)/g, "");
+  // Strip markdown emphasis (**bold**, *italic*) while preserving the wrapped text.
   body = body.replace(/\*\*([^*]+)\*\*/g, "$1");
   body = body.replace(/\*([^*]+)\*/g, "$1");
+  // Normalise whitespace: trim line ends, collapse 3+ newlines to a blank line.
   body = body
     .split("\n")
     .map((l) => l.trimEnd())
     .join("\n")
     .replace(/\n{3,}/g, "\n\n");
-  return body.trim();
+  return body.trim() || null;
 }
 
-// slug.current → catalog-research filename stem (LTI-2000 → "lti2000")
+// Maps a `products.json` slug.current to its catalog-research filename stem
+// (the .md files use a dashless convention, so `lti-2000` → `lti2000.md`).
 function fileStemForSlug(slug: string): string {
   return slug.replace(/-/g, "");
 }
 
 function loadEnDescriptions(): Map<string, string> {
+  if (!existsSync(CATALOG_RESEARCH_DIR)) {
+    console.error(
+      `\nMissing catalogue-research directory at ${CATALOG_RESEARCH_DIR}. Set CATALOG_RESEARCH_DIR in .env.local or pass it via the shell.`,
+    );
+    process.exit(1);
+  }
   const out = new Map<string, string>();
   for (const name of readdirSync(CATALOG_RESEARCH_DIR)) {
     if (!name.endsWith(".md") || name.startsWith("_")) continue;
     const stem = name.slice(0, -3);
     const md = readFileSync(join(CATALOG_RESEARCH_DIR, name), "utf-8");
+    // Files explicitly marked "not present in the catalogue" still come
+    // through if someone has hand-written a usable description; otherwise
+    // they fall through to the `skip` plan branch below.
     if (md.includes("Not present in the 2026 English catalogue")) continue;
     const desc = extractEnDescription(md);
     if (desc) out.set(stem, desc);
@@ -154,10 +158,12 @@ function printPlan(plans: Plan[], lang: Lang, apply: boolean) {
   console.log(
     `Plan: patch ${patch.length} · hold ${hold.length} · skip ${skip.length} (of ${plans.length} Sanity products)\n`,
   );
-  console.log("--- HELD (no usable source for this slug) ---");
-  for (const p of hold) {
-    if (p.action === "hold")
-      console.log(`  ${p.model.padEnd(10)} — ${p.reason}`);
+  if (hold.length) {
+    console.log("--- HELD (no usable source for this slug) ---");
+    for (const p of hold) {
+      if (p.action === "hold")
+        console.log(`  ${p.model.padEnd(10)} — ${p.reason}`);
+    }
   }
   if (skip.length) {
     console.log("\n--- SKIPPED ---");
@@ -176,55 +182,27 @@ function printPlan(plans: Plan[], lang: Lang, apply: boolean) {
 }
 
 async function applyPlan(plans: Plan[], lang: Lang) {
-  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
-  const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
-  const token = process.env.SANITY_WRITE_TOKEN;
-  if (!projectId || !dataset || !token) {
-    console.error(
-      "\nMissing env vars. Need NEXT_PUBLIC_SANITY_PROJECT_ID, NEXT_PUBLIC_SANITY_DATASET, SANITY_WRITE_TOKEN in .env.local",
-    );
-    process.exit(1);
-  }
-  const url = `https://${projectId}.api.sanity.io/v2026-01-01/data/mutate/${dataset}`;
+  const env = readSanityEnv();
   console.log(
-    `\nApplying description.${lang} to ${projectId}/${dataset} via HTTPS…`,
+    `\nApplying description.${lang} to ${env.projectId}/${env.dataset} via HTTPS…`,
   );
   let ok = 0;
   let fail = 0;
   for (const p of plans) {
     if (p.action !== "patch") continue;
-    const _id = `product-${p.slug}`;
-    const body = {
-      mutations: [
-        {
-          patch: {
-            id: _id,
-            set: { [`description.${lang}`]: p.description },
-          },
-        },
-      ],
-    };
-    try {
-      const res = await fetch(url, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
-      if (!res.ok) {
-        const txt = await res.text();
-        console.error(
-          `  FAILED   ${p.model}: HTTP ${res.status} ${txt.slice(0, 200)}`,
-        );
-        fail++;
-      } else {
-        console.log(`  patched  ${p.model}`);
-        ok++;
-      }
-    } catch (err) {
-      console.error(`  FAILED   ${p.model}:`, err);
+    const result = await postMutation(env, {
+      patch: {
+        id: `product-${p.slug}`,
+        set: { [`description.${lang}`]: p.description },
+      },
+    });
+    if (result.ok) {
+      console.log(`  patched  ${p.model}`);
+      ok++;
+    } else {
+      console.error(
+        `  FAILED   ${p.model}: HTTP ${result.status} ${result.bodyText}`,
+      );
       fail++;
     }
   }
@@ -253,4 +231,7 @@ async function main() {
     );
 }
 
-main();
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

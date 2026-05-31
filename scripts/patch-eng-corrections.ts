@@ -17,23 +17,18 @@
  * SANITY_WRITE_TOKEN in .env.local. Uses fetch — no @sanity/client needed.
  */
 
-import { readFileSync } from "node:fs";
+import { loadEnv } from "./lib/load-env";
+import {
+  type PatchMutation,
+  postMutation,
+  readSanityEnv,
+} from "./lib/sanity-mutate";
 
-function loadEnv(path: string) {
-  for (const line of readFileSync(path, "utf-8").split("\n")) {
-    const m = line.match(/^([A-Z_][A-Z0-9_]*)=(.*)$/);
-    if (m) process.env[m[1]] ??= m[2].trimEnd();
-  }
-}
 loadEnv(".env.local");
 
-type Patch = {
-  id: string;
-  set?: Record<string, unknown>;
-  unset?: string[];
-};
+type Patch = PatchMutation["patch"];
 
-const FLOW_001_100 = {
+const FLOW_0_01_TO_100: Patch["set"] = {
   "massFlowSpecs.flowRange.display": "0.01–100 slpm",
   "massFlowSpecs.flowRange.min": 0.01,
   "massFlowSpecs.flowRange.max": 100,
@@ -41,7 +36,7 @@ const FLOW_001_100 = {
   "massFlowSpecs.flowRange.referenceGas": "N2",
 };
 
-const FLOW_30_100 = {
+const FLOW_30_TO_100: Patch["set"] = {
   "massFlowSpecs.flowRange.display": "30–100 slpm",
   "massFlowSpecs.flowRange.min": 30,
   "massFlowSpecs.flowRange.max": 100,
@@ -49,45 +44,45 @@ const FLOW_30_100 = {
   "massFlowSpecs.flowRange.referenceGas": "N2",
 };
 
+const INQUIRY_SLUGS = [
+  "ms3400va",
+  "ms3500va",
+  "ms3600va",
+  "ms3700va",
+  "ms3800va",
+  "ms2400va",
+  "ms2500va",
+  "ms2600va",
+  "ms2700va",
+  "ms2800va",
+  "md400c",
+  "md500c",
+  "md600c",
+  "md700c",
+  "md800c",
+  "md400m",
+  "md500m",
+  "md600m",
+  "md700m",
+  "md800m",
+  "ex1000c",
+  "ex1000m",
+] as const;
+
 const PATCHES: Patch[] = [
   // 1. EX70 flow range
-  { id: "product-ex70c", set: FLOW_001_100 },
-  { id: "product-ex70m", set: FLOW_001_100 },
+  { id: "product-ex70c", set: FLOW_0_01_TO_100 },
+  { id: "product-ex70m", set: FLOW_0_01_TO_100 },
 
   // 2. MS2150 / MS3150 flow range
-  { id: "product-ms2150va", set: FLOW_30_100 },
-  { id: "product-ms3150va", set: FLOW_30_100 },
+  { id: "product-ms2150va", set: FLOW_30_TO_100 },
+  { id: "product-ms3150va", set: FLOW_30_TO_100 },
 
   // 3. DO400 series
   { id: "product-do400", set: { series: "specialized" } },
 
   // 4. "inquiry" maxPressure for high-flow models
-  ...(
-    [
-      "ms3400va",
-      "ms3500va",
-      "ms3600va",
-      "ms3700va",
-      "ms3800va",
-      "ms2400va",
-      "ms2500va",
-      "ms2600va",
-      "ms2700va",
-      "ms2800va",
-      "md400c",
-      "md500c",
-      "md600c",
-      "md700c",
-      "md800c",
-      "md400m",
-      "md500m",
-      "md600m",
-      "md700m",
-      "md800m",
-      "ex1000c",
-      "ex1000m",
-    ] as const
-  ).map<Patch>((slug) => ({
+  ...INQUIRY_SLUGS.map<Patch>((slug) => ({
     id: `product-${slug}`,
     set: { "massFlowSpecs.maxPressure.display": "inquiry" },
     unset: [
@@ -112,47 +107,21 @@ function printPlan(apply: boolean) {
 }
 
 async function applyAll() {
-  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
-  const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
-  const token = process.env.SANITY_WRITE_TOKEN;
-  if (!projectId || !dataset || !token) {
-    console.error(
-      "\nMissing env vars. Need NEXT_PUBLIC_SANITY_PROJECT_ID, NEXT_PUBLIC_SANITY_DATASET, SANITY_WRITE_TOKEN in .env.local",
-    );
-    process.exit(1);
-  }
-  const url = `https://${projectId}.api.sanity.io/v2026-01-01/data/mutate/${dataset}`;
+  const env = readSanityEnv();
   console.log(
-    `\nApplying ${PATCHES.length} patches to ${projectId}/${dataset} via HTTPS…`,
+    `\nApplying ${PATCHES.length} patches to ${env.projectId}/${env.dataset} via HTTPS…`,
   );
   let ok = 0;
   let fail = 0;
-  for (const p of PATCHES) {
-    const mutation: Record<string, unknown> = { id: p.id };
-    if (p.set) mutation.set = p.set;
-    if (p.unset) mutation.unset = p.unset;
-    const body = { mutations: [{ patch: mutation }] };
-    try {
-      const res = await fetch(url, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
-      if (!res.ok) {
-        const txt = await res.text();
-        console.error(
-          `  FAILED   ${p.id}: HTTP ${res.status} ${txt.slice(0, 200)}`,
-        );
-        fail++;
-      } else {
-        console.log(`  patched  ${p.id}`);
-        ok++;
-      }
-    } catch (err) {
-      console.error(`  FAILED   ${p.id}:`, err);
+  for (const patch of PATCHES) {
+    const result = await postMutation(env, { patch });
+    if (result.ok) {
+      console.log(`  patched  ${patch.id}`);
+      ok++;
+    } else {
+      console.error(
+        `  FAILED   ${patch.id}: HTTP ${result.status} ${result.bodyText}`,
+      );
       fail++;
     }
   }
@@ -167,4 +136,7 @@ async function main() {
   else console.log("\nDry-run only. Re-run with --apply to actually write.");
 }
 
-main();
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

@@ -4609,11 +4609,6 @@
         "en": "Compact Connection",
         "ko": "컴팩트한 연결부",
         "zh": "紧凑型连接结构"
-      },
-      {
-        "en": "Modular Design",
-        "ko": "모듈형 설계",
-        "zh": "模块化设计"
       }
     ],
     "connections": [],
@@ -4666,13 +4661,13 @@
         "unit": "%"
       },
       "responseTime": {
-        "display": "≤1 sec",
+        "display": "<1 sec",
         "value": 1,
         "unit": "sec",
         "comparator": "lt"
       },
       "maxPressure": {
-        "display": "≤30 bar",
+        "display": "<30 bar",
         "value": 30,
         "unit": "bar",
         "comparator": "lt"
