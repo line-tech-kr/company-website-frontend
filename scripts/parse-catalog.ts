@@ -14,6 +14,7 @@ import type {
   LocalizedString,
   MassFlowSpecs,
   MaxPressure,
+  PressureRange,
   Product,
   Repeatability,
   ResponseTime,
@@ -443,13 +444,17 @@ function parseMaxPressure(raw: string): MaxPressure | undefined {
     const value = parseFloat(ltMatch[1]);
     return { display: `<${value} bar`, value, unit: "bar", comparator: "lt" };
   }
-  // LEPC format: "0.1~6 barA" (absolute pressure range — use upper bound as max)
-  const rangeMatch = raw.match(/([\d.]+)\s*~\s*([\d.]+)\s*barA/i);
-  if (rangeMatch) {
-    const value = parseFloat(rangeMatch[2]);
-    return { display: `${value} barA`, value, unit: "barA", comparator: "eq" };
-  }
   throw new Error(`Cannot parse max pressure: "${raw}"`);
+}
+
+function parsePressureRange(raw: string): PressureRange {
+  // EPC format: "0.1~6 barA" — operating pressure range (both bounds meaningful).
+  const m = raw.match(/([\d.]+)\s*~\s*([\d.]+)\s*(barA|bar)/i);
+  if (!m) throw new Error(`Cannot parse pressure range: "${raw}"`);
+  const min = parseFloat(m[1]);
+  const max = parseFloat(m[2]);
+  const unit = m[3];
+  return { display: `${min}–${max} ${unit}`, min, max, unit };
 }
 
 function parseTempRange(raw: string): TempRange {
@@ -705,10 +710,19 @@ function buildMassFlowSpecs(
   mini: MiniSpecTable,
   glance: AtAGlanceRow | undefined,
 ): MassFlowSpecs {
-  // Range: prefer mini-section > at-a-glance
-  const rangeRaw = mini.range ?? glance?.flowRange;
-  if (!rangeRaw) throw new Error(`No flow range for ${model}`);
-  const flowRange = parseFlowRange(rangeRaw);
+  // EPC products advertise an operating pressure range, not a flow range.
+  // Parse the catalog's pressure spec into pressureRange and skip flowRange.
+  let flowRange: FlowRange | undefined;
+  let pressureRange: PressureRange | undefined;
+  if (function_ === "EPC") {
+    const pressureRaw = mini.maxPressure ?? glance?.maxPressure;
+    if (!pressureRaw) throw new Error(`No pressure range for EPC ${model}`);
+    pressureRange = parsePressureRange(pressureRaw);
+  } else {
+    const rangeRaw = mini.range ?? glance?.flowRange;
+    if (!rangeRaw) throw new Error(`No flow range for ${model}`);
+    flowRange = parseFlowRange(rangeRaw);
+  }
 
   // Accuracy: same priority
   const accuracyRaw = mini.accuracy ?? glance?.accuracy;
@@ -741,11 +755,13 @@ function buildMassFlowSpecs(
   const supplyRaw = mini.supply ?? glance?.supply ?? "+15 ~ +24";
   const supplyPower = parseSupplyPower(supplyRaw);
 
-  // Max pressure
+  // Max pressure — only meaningful for flow controllers (an EPC's upper
+  // bound is already captured in pressureRange.max).
   const maxPressureRaw = mini.maxPressure ?? glance?.maxPressure;
-  const maxPressure = maxPressureRaw
-    ? parseMaxPressure(maxPressureRaw)
-    : undefined;
+  const maxPressure =
+    function_ !== "EPC" && maxPressureRaw
+      ? parseMaxPressure(maxPressureRaw)
+      : undefined;
 
   // Temp range
   const tempRaw = mini.maxTemp ?? glance?.maxTemp ?? "0 ~ 50";
@@ -763,7 +779,6 @@ function buildMassFlowSpecs(
     : STANDARD_CONTROL_RANGE;
 
   const specs: MassFlowSpecs = {
-    flowRange,
     accuracy,
     repeatability,
     ioSignal,
@@ -772,6 +787,8 @@ function buildMassFlowSpecs(
     leakRate,
     controlRange,
   };
+  if (flowRange) specs.flowRange = flowRange;
+  if (pressureRange) specs.pressureRange = pressureRange;
   if (responseTime) specs.responseTime = responseTime;
   if (maxPressure) specs.maxPressure = maxPressure;
   return specs;
@@ -850,8 +867,14 @@ function validate(p: Product): void {
   } else {
     const s = p.massFlowSpecs;
     if (!s) throw new Error(`${p.model}: missing massFlowSpecs`);
-    if (!s.flowRange || !(s.flowRange.max! > s.flowRange.min!))
-      throw new Error(`${p.model}: bad flowRange`);
+    // EPCs use pressureRange in place of flowRange; flow controllers/meters use flowRange.
+    if (p.function === "EPC") {
+      if (!s.pressureRange || !(s.pressureRange.max! > s.pressureRange.min!))
+        throw new Error(`${p.model}: bad pressureRange`);
+    } else {
+      if (!s.flowRange || !(s.flowRange.max! > s.flowRange.min!))
+        throw new Error(`${p.model}: bad flowRange`);
+    }
     if (s.accuracy.value! <= 0)
       throw new Error(`${p.model}: bad accuracy ${s.accuracy.value}`);
     // EPC (e.g., LEPC) legitimately omits response time — only MFC carries this spec

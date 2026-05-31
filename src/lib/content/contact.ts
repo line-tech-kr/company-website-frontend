@@ -196,7 +196,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       required: "필수",
       submit: "문의 보내기",
       submitDisabledHelp:
-        "제출 백엔드는 현재 작업 중입니다. 위 이메일 주소로 보내주시면 즉시 회신드리겠습니다.",
+        "보안 확인 설정이 없어 현재 양식을 제출할 수 없습니다. 위 이메일 주소로 직접 연락해 주세요.",
       consent: {
         prefix: "",
         linkText: "개인정보처리방침",
@@ -327,7 +327,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       required: "Required",
       submit: "Send inquiry",
       submitDisabledHelp:
-        "Form submission isn't live yet — please email us directly for an immediate reply.",
+        "Form security verification is not configured, so the form cannot be submitted. Please email us directly.",
       consent: {
         prefix: "I have read the ",
         linkText: "Privacy Policy",
@@ -463,7 +463,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       required: "必填",
       submit: "发送咨询",
       submitDisabledHelp:
-        "提交后端正在开发中。请使用上方邮箱直接联系我们以获得即时回复。",
+        "表单安全验证尚未配置，当前无法提交。请使用上方邮箱直接联系我们。",
       consent: {
         prefix: "我已阅读",
         linkText: "隐私政策",

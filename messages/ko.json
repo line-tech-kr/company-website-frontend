@@ -45,6 +45,7 @@
   "product": {
     "specs": {
       "flowRange": "유량 범위",
+      "pressureRange": "압력 범위",
       "responseTime": "응답 시간",
       "accuracy": "정확도",
       "repeatability": "반복도",
@@ -312,7 +313,8 @@
       "captcha": "보안 확인에 실패했습니다. 다시 시도해 주세요.",
       "server": "메시지를 보낼 수 없습니다. 이메일로 직접 연락해 주세요."
     },
-    "success": "메시지가 전송되었습니다. 영업일 기준 2일 이내 답변드리겠습니다.",
+    "successTitle": "문의가 정상적으로 전송되었습니다.",
+    "success": "입력하신 이메일 주소로 담당자가 회신드릴 예정입니다.",
     "submitting": "전송 중…",
     "slaHint": "영업일 기준 2일 이내에 답변드립니다."
   }

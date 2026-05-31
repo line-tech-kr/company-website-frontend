@@ -3,6 +3,7 @@ import type { Product, MassFlowSpecs } from "@/lib/types/product";
 
 const SPEC_LABELS: Record<keyof MassFlowSpecs, string> = {
   flowRange: "Flow range",
+  pressureRange: "Pressure range",
   responseTime: "Response time",
   accuracy: "Accuracy",
   repeatability: "Repeatability",
@@ -16,6 +17,7 @@ const SPEC_LABELS: Record<keyof MassFlowSpecs, string> = {
 
 const SPEC_ORDER: Array<keyof MassFlowSpecs> = [
   "flowRange",
+  "pressureRange",
   "accuracy",
   "repeatability",
   "responseTime",
@@ -172,7 +174,7 @@ export function buildSpecMarkdown(product: Product, siteUrl: string): string {
 
   lines.push("---");
   lines.push(
-    `*Source: line-tech.co · English spec sheet for AI agents. Korean: ${koUrl} · Chinese: ${zhUrl}*`,
+    `*Source: line-tech.co.kr · English spec sheet for AI agents. Korean: ${koUrl} · Chinese: ${zhUrl}*`,
   );
 
   return lines.join("\n");

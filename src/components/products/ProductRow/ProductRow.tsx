@@ -32,9 +32,9 @@ function fittingSummary(connections: Product["connections"]): string {
 export function ProductRow({ product, imageSrc, category, locale }: Props) {
   const href = `/products/${category}/${product.slug.current}`;
   const label = product.description?.[locale] ?? product.productLabel[locale];
-  const range = product.massFlowSpecs
-    ? localizeSpecValue(product.massFlowSpecs.flowRange.display, locale)
-    : "—";
+  const rangeSpec =
+    product.massFlowSpecs?.flowRange ?? product.massFlowSpecs?.pressureRange;
+  const range = rangeSpec ? localizeSpecValue(rangeSpec.display, locale) : "—";
   const accuracy = product.massFlowSpecs
     ? localizeSpecValue(product.massFlowSpecs.accuracy.display, locale)
     : "—";
