@@ -50,7 +50,7 @@ function productToSeedFields(p: Product) {
     ...(p.massFlowSpecs ? { massFlowSpecs: p.massFlowSpecs } : {}),
   };
   if (p.instrumentSpecs) {
-    fields.instrumentSpecs = p.instrumentSpecs.rows.map((r, i) => ({
+    fields.instrumentSpecs = p.instrumentSpecs.map((r, i) => ({
       ...r,
       _key: `spec-${i}`,
     }));

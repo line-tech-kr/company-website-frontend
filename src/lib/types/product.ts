@@ -58,9 +58,9 @@ const MassFlowSpecsSchema = z.object({
   }),
 });
 
-const InstrumentSpecsSchema = z.object({
-  rows: z.array(z.object({ label: z.string(), value: z.string() })),
-});
+const InstrumentSpecsSchema = z.array(
+  z.object({ label: z.string(), value: z.string() }),
+);
 
 const SanityImageRefSchema = z.object({
   _ref: z.string(),

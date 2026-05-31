@@ -96,8 +96,8 @@ export function buildSpecJson(
       length,
     })),
     specifications,
-    ...(product.instrumentSpecs?.rows.length
-      ? { instrumentSpecs: product.instrumentSpecs.rows }
+    ...(product.instrumentSpecs?.length
+      ? { instrumentSpecs: product.instrumentSpecs }
       : {}),
     digitalCommunication: product.digitalCommunication ?? undefined,
     canonicalUrl: `${siteUrl}/en/products/${category}/${slug}`,
@@ -139,8 +139,8 @@ export function buildSpecMarkdown(product: Product, siteUrl: string): string {
   lines.push("## Specifications", "");
   lines.push("| Spec | Value |");
   lines.push("|---|---|");
-  if (product.instrumentSpecs?.rows.length) {
-    for (const r of product.instrumentSpecs.rows) {
+  if (product.instrumentSpecs?.length) {
+    for (const r of product.instrumentSpecs) {
       lines.push(`| ${r.label} | ${r.value} |`);
     }
   } else {

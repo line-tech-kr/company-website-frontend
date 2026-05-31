@@ -4718,62 +4718,60 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "instrumentSpecs": {
-      "rows": [
-        {
-          "label": "Input Power",
-          "value": "220VAC (50–60 Hz)"
-        },
-        {
-          "label": "Output Power",
-          "value": "+15 or +24 Vdc @ 500 mA"
-        },
-        {
-          "label": "Display Window",
-          "value": "256×64 Dot 6\" Wide OLED LCD"
-        },
-        {
-          "label": "Display Repeatability",
-          "value": "≤±1.0% of Full Scale"
-        },
-        {
-          "label": "Output Signal",
-          "value": "0–5 Vdc or 4–20 mA"
-        },
-        {
-          "label": "Units of Display",
-          "value": "SCCM, SLPM, %"
-        },
-        {
-          "label": "Remote Control",
-          "value": "D-SUB 9-pin (Male)"
-        },
-        {
-          "label": "Setpoint",
-          "value": "0–5 Vdc for Full Scale"
-        },
-        {
-          "label": "Flow ON/OFF",
-          "value": "Input Signal (TTL)"
-        },
-        {
-          "label": "Flow Out Signal",
-          "value": "0–5 Vdc or 4–20 mA"
-        },
-        {
-          "label": "Relay Contact Rate",
-          "value": "1 Relay (Max 24 Vdc @ 1A)"
-        },
-        {
-          "label": "Communication",
-          "value": "RS-232 (9600 Baud, 8-N-1), RS-485"
-        },
-        {
-          "label": "External Setpoint",
-          "value": "Analogue In/Out 0–5 Vdc"
-        }
-      ]
-    }
+    "instrumentSpecs": [
+      {
+        "label": "Input Power",
+        "value": "220VAC (50–60 Hz)"
+      },
+      {
+        "label": "Output Power",
+        "value": "+15 or +24 Vdc @ 500 mA"
+      },
+      {
+        "label": "Display Window",
+        "value": "256×64 Dot 6\" Wide OLED LCD"
+      },
+      {
+        "label": "Display Repeatability",
+        "value": "≤±1.0% of Full Scale"
+      },
+      {
+        "label": "Output Signal",
+        "value": "0–5 Vdc or 4–20 mA"
+      },
+      {
+        "label": "Units of Display",
+        "value": "SCCM, SLPM, %"
+      },
+      {
+        "label": "Remote Control",
+        "value": "D-SUB 9-pin (Male)"
+      },
+      {
+        "label": "Setpoint",
+        "value": "0–5 Vdc for Full Scale"
+      },
+      {
+        "label": "Flow ON/OFF",
+        "value": "Input Signal (TTL)"
+      },
+      {
+        "label": "Flow Out Signal",
+        "value": "0–5 Vdc or 4–20 mA"
+      },
+      {
+        "label": "Relay Contact Rate",
+        "value": "1 Relay (Max 24 Vdc @ 1A)"
+      },
+      {
+        "label": "Communication",
+        "value": "RS-232 (9600 Baud, 8-N-1), RS-485"
+      },
+      {
+        "label": "External Setpoint",
+        "value": "Analogue In/Out 0–5 Vdc"
+      }
+    ]
   },
   {
     "model": "LTI-1000",
@@ -4819,57 +4817,55 @@
     "datasheets": [],
     "manuals": [],
     "drawings": [],
-    "instrumentSpecs": {
-      "rows": [
-        {
-          "label": "Input Power",
-          "value": "220VAC (50–60 Hz)"
-        },
-        {
-          "label": "Output Power",
-          "value": "+15 or +24 Vdc @ 500 mA"
-        },
-        {
-          "label": "Display Window",
-          "value": "4-Digit 7-Segment"
-        },
-        {
-          "label": "Display Repeatability",
-          "value": "≤±1.0% of Full Scale"
-        },
-        {
-          "label": "Output Signal",
-          "value": "0–5 Vdc or 4–20 mA"
-        },
-        {
-          "label": "Units of Display",
-          "value": "SCCM, SLPM, %"
-        },
-        {
-          "label": "Remote Control",
-          "value": "D-SUB 9-pin (Male)"
-        },
-        {
-          "label": "Setpoint",
-          "value": "0–5 Vdc for Full Scale"
-        },
-        {
-          "label": "Flow ON/OFF",
-          "value": "Input Signal (TTL)"
-        },
-        {
-          "label": "Flow Out Signal",
-          "value": "0–5 Vdc or 4–20 mA"
-        },
-        {
-          "label": "Relay Contact Rate",
-          "value": "1 Relay (Max 24 Vdc @ 1A)"
-        },
-        {
-          "label": "Communication",
-          "value": "RS-232 (9600 Baud, 8-N-1)"
-        }
-      ]
-    }
+    "instrumentSpecs": [
+      {
+        "label": "Input Power",
+        "value": "220VAC (50–60 Hz)"
+      },
+      {
+        "label": "Output Power",
+        "value": "+15 or +24 Vdc @ 500 mA"
+      },
+      {
+        "label": "Display Window",
+        "value": "4-Digit 7-Segment"
+      },
+      {
+        "label": "Display Repeatability",
+        "value": "≤±1.0% of Full Scale"
+      },
+      {
+        "label": "Output Signal",
+        "value": "0–5 Vdc or 4–20 mA"
+      },
+      {
+        "label": "Units of Display",
+        "value": "SCCM, SLPM, %"
+      },
+      {
+        "label": "Remote Control",
+        "value": "D-SUB 9-pin (Male)"
+      },
+      {
+        "label": "Setpoint",
+        "value": "0–5 Vdc for Full Scale"
+      },
+      {
+        "label": "Flow ON/OFF",
+        "value": "Input Signal (TTL)"
+      },
+      {
+        "label": "Flow Out Signal",
+        "value": "0–5 Vdc or 4–20 mA"
+      },
+      {
+        "label": "Relay Contact Rate",
+        "value": "1 Relay (Max 24 Vdc @ 1A)"
+      },
+      {
+        "label": "Communication",
+        "value": "RS-232 (9600 Baud, 8-N-1)"
+      }
+    ]
   }
 ]

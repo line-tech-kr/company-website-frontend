@@ -583,17 +583,15 @@ function buildInstrumentSpecs(body: string[]): InstrumentSpecs {
   for (let i = 0; i < body.length; i++) {
     if (/^\s*\|\s*Spec\s*\|\s*Value\s*\|/.test(body[i])) {
       const { rows } = parseMarkdownTable(body, i);
-      return {
-        rows: rows
-          .map((row) => ({
-            label: row["Spec"] ?? "",
-            value: row["Value"] ?? "",
-          }))
-          .filter((r) => r.label),
-      };
+      return rows
+        .map((row) => ({
+          label: row["Spec"] ?? "",
+          value: row["Value"] ?? "",
+        }))
+        .filter((r) => r.label);
     }
   }
-  return { rows: [] };
+  return [];
 }
 
 function extractProductSections(catalog: string): ProductSection[] {
@@ -867,7 +865,7 @@ function validate(p: Product): void {
     throw new Error(`${p.model}: no connections parsed`);
 
   if (p.function === "ROU") {
-    if (!p.instrumentSpecs || p.instrumentSpecs.rows.length === 0)
+    if (!p.instrumentSpecs || p.instrumentSpecs.length === 0)
       throw new Error(`${p.model}: ROU missing instrumentSpecs rows`);
   } else {
     const s = p.massFlowSpecs;
