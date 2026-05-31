@@ -348,8 +348,8 @@
     "connectorType": "9-Pin D-Connector",
     "massFlowSpecs": {
       "flowRange": {
-        "display": "0.01–100 slpm",
-        "min": 0.01,
+        "display": "30–100 slpm",
+        "min": 30,
         "max": 100,
         "unit": "slpm",
         "referenceGas": "N2"
@@ -532,10 +532,7 @@
         "comparator": "lt"
       },
       "maxPressure": {
-        "display": "<13 bar",
-        "value": 13,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     }
   },
@@ -663,10 +660,7 @@
         "comparator": "lt"
       },
       "maxPressure": {
-        "display": "<13 bar",
-        "value": 13,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     }
   },
@@ -794,10 +788,7 @@
         "comparator": "lt"
       },
       "maxPressure": {
-        "display": "<13 bar",
-        "value": 13,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     }
   },
@@ -921,10 +912,7 @@
         "comparator": "lt"
       },
       "maxPressure": {
-        "display": "<13 bar",
-        "value": 13,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     }
   },
@@ -1048,10 +1036,7 @@
         "comparator": "lt"
       },
       "maxPressure": {
-        "display": "<13 bar",
-        "value": 13,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     }
   },
@@ -1391,8 +1376,8 @@
     "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
-        "display": "0.01–100 slpm",
-        "min": 0.01,
+        "display": "30–100 slpm",
+        "min": 30,
         "max": 100,
         "unit": "slpm",
         "referenceGas": "N2"
@@ -1563,10 +1548,7 @@
         "unit": "%"
       },
       "maxPressure": {
-        "display": "<90 bar",
-        "value": 90,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     }
   },
@@ -1688,10 +1670,7 @@
         "unit": "%"
       },
       "maxPressure": {
-        "display": "<90 bar",
-        "value": 90,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     }
   },
@@ -1813,10 +1792,7 @@
         "unit": "%"
       },
       "maxPressure": {
-        "display": "<90 bar",
-        "value": 90,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     }
   },
@@ -1934,10 +1910,7 @@
         "unit": "%"
       },
       "maxPressure": {
-        "display": "<90 bar",
-        "value": 90,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     }
   },
@@ -2055,10 +2028,7 @@
         "unit": "%"
       },
       "maxPressure": {
-        "display": "<90 bar",
-        "value": 90,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     }
   },
@@ -2471,10 +2441,7 @@
         "comparator": "lt"
       },
       "maxPressure": {
-        "display": "<13 bar",
-        "value": 13,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     },
     "digitalCommunication": {
@@ -2608,10 +2575,7 @@
         "comparator": "lt"
       },
       "maxPressure": {
-        "display": "<13 bar",
-        "value": 13,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     },
     "digitalCommunication": {
@@ -2745,10 +2709,7 @@
         "comparator": "lt"
       },
       "maxPressure": {
-        "display": "<13 bar",
-        "value": 13,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     },
     "digitalCommunication": {
@@ -2878,10 +2839,7 @@
         "comparator": "lt"
       },
       "maxPressure": {
-        "display": "<13 bar",
-        "value": 13,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     },
     "digitalCommunication": {
@@ -3011,10 +2969,7 @@
         "comparator": "lt"
       },
       "maxPressure": {
-        "display": "<13 bar",
-        "value": 13,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     },
     "digitalCommunication": {
@@ -3416,10 +3371,7 @@
         "unit": "%"
       },
       "maxPressure": {
-        "display": "<13 bar",
-        "value": 13,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     },
     "digitalCommunication": {
@@ -3547,10 +3499,7 @@
         "unit": "%"
       },
       "maxPressure": {
-        "display": "<90 bar",
-        "value": 90,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     },
     "digitalCommunication": {
@@ -3678,10 +3627,7 @@
         "unit": "%"
       },
       "maxPressure": {
-        "display": "<90 bar",
-        "value": 90,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     },
     "digitalCommunication": {
@@ -3805,10 +3751,7 @@
         "unit": "%"
       },
       "maxPressure": {
-        "display": "<90 bar",
-        "value": 90,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     },
     "digitalCommunication": {
@@ -3932,10 +3875,7 @@
         "unit": "%"
       },
       "maxPressure": {
-        "display": "<90 bar",
-        "value": 90,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     },
     "digitalCommunication": {
@@ -4077,10 +4017,7 @@
         "comparator": "lt"
       },
       "maxPressure": {
-        "display": "<13 bar",
-        "value": 13,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     }
   },
@@ -4170,9 +4107,9 @@
     "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
-        "display": "0.01–70 slpm",
+        "display": "0.01–100 slpm",
         "min": 0.01,
-        "max": 70,
+        "max": 100,
         "unit": "slpm",
         "referenceGas": "N2"
       },
@@ -4479,10 +4416,7 @@
         "unit": "%"
       },
       "maxPressure": {
-        "display": "<13 bar",
-        "value": 13,
-        "unit": "bar",
-        "comparator": "lt"
+        "display": "inquiry"
       }
     }
   },
@@ -4572,9 +4506,9 @@
     "drawings": [],
     "massFlowSpecs": {
       "flowRange": {
-        "display": "0.01–70 slpm",
+        "display": "0.01–100 slpm",
         "min": 0.01,
-        "max": 70,
+        "max": 100,
         "unit": "slpm",
         "referenceGas": "N2"
       },
@@ -4627,7 +4561,7 @@
     "slug": {
       "current": "do400"
     },
-    "series": "analogue",
+    "series": "specialized",
     "function": "MFC",
     "productLabel": {
       "en": "Mass Flow Controller",
@@ -4675,11 +4609,6 @@
         "en": "Compact Connection",
         "ko": "컴팩트한 연결부",
         "zh": "紧凑型连接结构"
-      },
-      {
-        "en": "Modular Design",
-        "ko": "모듈형 설계",
-        "zh": "模块化设计"
       }
     ],
     "connections": [],
@@ -4696,8 +4625,8 @@
         "referenceGas": "N2"
       },
       "accuracy": {
-        "display": "±2% of FS",
-        "value": 2,
+        "display": "±1% of FS",
+        "value": 1,
         "unit": "%FS"
       },
       "repeatability": {
@@ -4710,8 +4639,8 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +26 Vdc, 350 mA",
-        "voltages": [15, 26],
+        "display": "+15 or +24 Vdc, 350 mA",
+        "voltages": [15, 24],
         "currentMA": 350
       },
       "tempRange": {
@@ -4721,8 +4650,8 @@
         "unit": "°C"
       },
       "leakRate": {
-        "display": "1×10⁻⁸ atm·cc/sec",
-        "value": 1e-8,
+        "display": "1×10⁻⁹ atm·cc/sec",
+        "value": 1e-9,
         "unit": "atm·cc/sec"
       },
       "controlRange": {
@@ -4732,17 +4661,24 @@
         "unit": "%"
       },
       "responseTime": {
-        "display": "<3 seconds",
-        "value": 3,
-        "unit": "s",
+        "display": "<1 sec",
+        "value": 1,
+        "unit": "sec",
         "comparator": "lt"
       },
       "maxPressure": {
-        "display": "<13 bar",
-        "value": 13,
+        "display": "<30 bar",
+        "value": 30,
         "unit": "bar",
         "comparator": "lt"
       }
+    },
+    "digitalCommunication": {
+      "protocol": "RS-485",
+      "baudRate": 38400,
+      "dataBits": 8,
+      "stopBits": 1,
+      "parity": "None"
     }
   },
   {

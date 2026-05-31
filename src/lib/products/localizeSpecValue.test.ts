@@ -50,4 +50,17 @@ describe("localizeSpecValue", () => {
       expect(localizeSpecValue(once2, loc)).toBe(once2);
     }
   });
+
+  it("localises the `inquiry` sentinel into a contact-us label per locale", () => {
+    expect(localizeSpecValue("inquiry", "en")).toBe("Contact us");
+    expect(localizeSpecValue("inquiry", "ko")).toBe("문의 바랍니다");
+    expect(localizeSpecValue("inquiry", "zh")).toBe("请咨询");
+    // Case- and whitespace-insensitive so a fixture typo doesn't reach users.
+    expect(localizeSpecValue("Inquiry", "en")).toBe("Contact us");
+    expect(localizeSpecValue("  inquiry  ", "zh")).toBe("请咨询");
+    // Anchored — doesn't rewrite real bar values that happen to contain the word.
+    expect(localizeSpecValue("inquiry only above 100 slpm", "en")).toBe(
+      "inquiry only above 100 slpm",
+    );
+  });
 });

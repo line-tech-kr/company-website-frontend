@@ -1,14 +1,7 @@
-import { readFileSync } from "node:fs";
 import { createClient } from "@sanity/client";
 import { ALL_PRODUCTS } from "../src/lib/fixtures/products";
 import type { LocalizedString, Product } from "../src/lib/types/product";
-
-function loadEnv(path: string) {
-  for (const line of readFileSync(path, "utf-8").split("\n")) {
-    const m = line.match(/^([A-Z_][A-Z0-9_]*)=(.*)$/);
-    if (m) process.env[m[1]] ??= m[2].trimEnd();
-  }
-}
+import { loadEnv } from "./lib/load-env";
 
 loadEnv(".env.local");
 
