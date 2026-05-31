@@ -47,4 +47,36 @@ test.describe("Product browsing", () => {
       page.getByRole("heading", { name: new RegExp(slug, "i") }).first(),
     ).toBeVisible();
   });
+
+  test("MS3150VA detail page surfaces its CE Declaration of Conformity", async ({
+    page,
+  }) => {
+    await page.goto("/en/products/analogue/ms3150va");
+
+    const downloads = page.locator("#downloads");
+    await expect(downloads).toBeVisible();
+    // CERT badge is rendered via the DownloadsList type tag
+    await expect(downloads.getByText("CERT", { exact: true })).toBeVisible();
+    await expect(downloads.getByText(/CE DoC/i)).toBeVisible();
+  });
+});
+
+test.describe("Certifications hub", () => {
+  test("renders company-wide and product-specific groups", async ({ page }) => {
+    await page.goto("/en/resources/certifications");
+
+    await expect(
+      page.getByRole("heading", { name: "Certifications" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: /Company-wide/i }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: /Product-specific compliance/i }),
+    ).toBeVisible();
+    // Per-product cert renders its Applies-to list
+    await expect(
+      page.getByText("LTI-1000, LTI-2000", { exact: true }),
+    ).toBeVisible();
+  });
 });

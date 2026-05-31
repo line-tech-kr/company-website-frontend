@@ -91,6 +91,17 @@ const PRODUCT_DETAIL_PROJECTION = `
       "pdfUrl": pdfFile.asset->url,
       "pdfSize": pdfFile.asset->size,
       "updatedAt": _updatedAt
+    },
+  "certifications": *[_type == "certification" && ^.model in coalesce(models, [])]
+    | order(coalesce(order, 99) asc) {
+      _id,
+      name,
+      "slug": slug.current,
+      "issuer": ${localized("issuer")},
+      "scope": ${localized("scope")},
+      validThrough,
+      "fileUrl": file.asset->url,
+      "size": file.asset->size
     }
 `;
 
@@ -294,6 +305,7 @@ export const allCertificationsQuery = defineQuery(`
     "issuer": ${localized("issuer")},
     "scope": ${localized("scope")},
     validThrough,
+    models,
     "fileUrl": file.asset->url
   }
 `);

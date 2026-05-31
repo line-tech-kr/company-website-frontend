@@ -245,6 +245,18 @@ export default async function ProductPage({ params }: Props) {
         rev: m.rev ?? undefined,
         date: formatDate(m.publishedAt ?? m.updatedAt, locale),
       })),
+    ...product.certifications
+      .filter((c) => c.fileUrl)
+      .map<DownloadItem>((c) => {
+        const issuer = c.issuer?.[locale] ?? c.issuer?.en ?? null;
+        return {
+          label: issuer ? `${c.name} — ${issuer}` : c.name,
+          type: "CERT",
+          href: c.fileUrl ?? undefined,
+          size: formatBytes(c.size),
+          date: c.validThrough ?? "",
+        };
+      }),
     ...product.drawings.flatMap<DownloadItem>((d) => {
       const items: DownloadItem[] = [];
       if (d.pdfUrl) {

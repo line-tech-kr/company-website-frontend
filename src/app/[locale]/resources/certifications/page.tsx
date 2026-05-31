@@ -24,6 +24,7 @@ type CertItem = {
   } | null;
   scope?: { ko?: string | null; en?: string | null; zh?: string | null } | null;
   validThrough?: string | null;
+  models?: string[] | null;
   fileUrl?: string | null;
 };
 
@@ -73,17 +74,24 @@ export default async function CertificationsPage({ params }: Props) {
           ctaLabel={tRes("emptyStateCta")}
         />
       ) : (
-        <ul className="dr-certs" role="list">
-          {certs.map((cert) => {
+        (() => {
+          const companyWide = certs.filter(
+            (c) => !c.models || c.models.length === 0,
+          );
+          const productSpecific = certs.filter(
+            (c) => c.models && c.models.length > 0,
+          );
+          const renderCert = (cert: CertItem) => {
             const issuer = cert.issuer?.[lang] ?? cert.issuer?.en ?? null;
             const scope = cert.scope?.[lang] ?? cert.scope?.en ?? null;
+            const models = cert.models ?? [];
             return (
               <li
                 key={cert._id}
                 id={cert.slug ?? undefined}
                 className="dr-cert"
               >
-                <h2 className="dr-cert__name">{cert.name}</h2>
+                <h3 className="dr-cert__name">{cert.name}</h3>
                 <dl className="dr-cert__dl">
                   {issuer && (
                     <>
@@ -105,6 +113,14 @@ export default async function CertificationsPage({ params }: Props) {
                       <dd className="dr-cert__dd">{cert.validThrough}</dd>
                     </>
                   )}
+                  {models.length > 0 && (
+                    <>
+                      <dt className="dr-cert__dt">
+                        {tRes("certCard.appliesTo")}
+                      </dt>
+                      <dd className="dr-cert__dd">{models.join(", ")}</dd>
+                    </>
+                  )}
                 </dl>
                 <div className="dr-cert__footer">
                   {cert.fileUrl ? (
@@ -122,8 +138,33 @@ export default async function CertificationsPage({ params }: Props) {
                 </div>
               </li>
             );
-          })}
-        </ul>
+          };
+
+          return (
+            <>
+              {companyWide.length > 0 && (
+                <section className="dr-cert-group">
+                  <h2 className="dr-cert-group__heading">
+                    {tRes("certifications.companyWideHeading")}
+                  </h2>
+                  <ul className="dr-certs" role="list">
+                    {companyWide.map(renderCert)}
+                  </ul>
+                </section>
+              )}
+              {productSpecific.length > 0 && (
+                <section className="dr-cert-group">
+                  <h2 className="dr-cert-group__heading">
+                    {tRes("certifications.productSpecificHeading")}
+                  </h2>
+                  <ul className="dr-certs" role="list">
+                    {productSpecific.map(renderCert)}
+                  </ul>
+                </section>
+              )}
+            </>
+          );
+        })()
       )}
     </main>
   );

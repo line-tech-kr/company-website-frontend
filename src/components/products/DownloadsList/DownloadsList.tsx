@@ -8,7 +8,7 @@ import "./DownloadsList.css";
 
 export type DownloadItem = {
   label: string;
-  type: "PDF" | "DWG" | "STEP" | "ZIP";
+  type: "PDF" | "DWG" | "STEP" | "ZIP" | "CERT";
   size: string;
   rev?: string;
   date: string;
@@ -29,6 +29,7 @@ const TYPE_TONE: Record<DownloadItem["type"], string> = {
   DWG: "lt-pdp-dl__type--info",
   STEP: "lt-pdp-dl__type--info",
   ZIP: "lt-pdp-dl__type--neutral",
+  CERT: "lt-pdp-dl__type--accent",
 };
 
 export function DownloadsList({

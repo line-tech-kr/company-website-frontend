@@ -69,7 +69,7 @@
         "industriesLabel": "Industries served",
         "industriesSub": "Field-validated since 1997",
         "certificationsLabel": "Certifications",
-        "certificationsSub": "ISO 9001 · CE · RoHS"
+        "certificationsSub": "ISO 9001 · CE · IECEx"
       },
       "applications": {
         "label": "Common applications",
@@ -278,7 +278,9 @@
     },
     "certifications": {
       "title": "Certifications",
-      "intro": "Quality management and product conformity certificates held by Line Tech."
+      "intro": "Quality management and product conformity certificates held by Line Tech.",
+      "companyWideHeading": "Company-wide",
+      "productSpecificHeading": "Product-specific compliance"
     },
     "download": "Download",
     "comingSoon": "File coming soon",
@@ -296,7 +298,8 @@
     "certCard": {
       "issuer": "Issuing body",
       "scope": "Scope",
-      "validThrough": "Valid through"
+      "validThrough": "Valid through",
+      "appliesTo": "Applies to"
     },
     "empty": "No files available yet. Check back soon.",
     "emptyStateCta": "Contact us",

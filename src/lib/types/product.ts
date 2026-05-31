@@ -199,6 +199,34 @@ export const SanityProductSchema = z.object({
       }),
     )
     .default([]),
+  certifications: z
+    .array(
+      z.object({
+        _id: z.string(),
+        name: z.string(),
+        slug: z.string().nullable().optional(),
+        issuer: z
+          .object({
+            ko: z.string().nullable().optional(),
+            en: z.string().nullable().optional(),
+            zh: z.string().nullable().optional(),
+          })
+          .nullable()
+          .optional(),
+        scope: z
+          .object({
+            ko: z.string().nullable().optional(),
+            en: z.string().nullable().optional(),
+            zh: z.string().nullable().optional(),
+          })
+          .nullable()
+          .optional(),
+        validThrough: z.string().nullable().optional(),
+        fileUrl: z.string().nullable().optional(),
+        size: z.number().nullable().optional(),
+      }),
+    )
+    .default([]),
 });
 
 export type Product = z.infer<typeof SanityProductSchema>;

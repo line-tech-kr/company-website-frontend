@@ -230,7 +230,7 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
         { k: "1997", l: "설립 연도" },
         { k: "2003", l: "국내 최초 MFC 양산" },
         { k: "KAIST", l: "공동 연구 파트너" },
-        { k: "13종", l: "보유 인증" },
+        { k: "15종", l: "보유 인증" },
       ],
     },
     history: {
@@ -326,7 +326,7 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
       ],
       viewAll: "데이터룸에서 전체 목록 확인",
       footnote:
-        "위 3종 외에도 라인테크의 품질 시스템 안에는 RoHS · REACH 등 10건의 적합성 증빙 문서가 운용되고 있습니다. {viewAll}하거나 영업 담당자를 통해 사본을 요청하실 수 있습니다.",
+        "위 3종 외에도 KCs 방폭, IECEx, 특허, 공장등록 등 12건의 인증·증빙 문서가 운용되고 있습니다. {viewAll}하거나 영업 담당자를 통해 사본을 요청하실 수 있습니다.",
     },
     location: {
       kicker: "05 — 오시는 길",
@@ -389,7 +389,7 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
         { k: "1997", l: "Founded" },
         { k: "2003", l: "First MFC made in Korea" },
         { k: "KAIST", l: "R&D collaboration partner" },
-        { k: "13", l: "Certifications" },
+        { k: "15", l: "Certifications" },
       ],
     },
     history: {
@@ -488,7 +488,7 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
       ],
       viewAll: "see the full list in the Data Room",
       footnote:
-        "Beyond the three above, Line Tech maintains 10 additional conformity documents within its quality system — including RoHS and REACH declarations. You can {viewAll} or request a copy through your sales contact.",
+        "Beyond the three above, Line Tech maintains 12 additional certifications and credentials — including KCs explosion-proof approvals, IECEx, patents, and factory registration. You can {viewAll} or request a copy through your sales contact.",
     },
     location: {
       kicker: "05 — Location",
@@ -551,7 +551,7 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
         { k: "1997", l: "成立年份" },
         { k: "2003", l: "国内首款 MFC 量产" },
         { k: "KAIST", l: "联合研发伙伴" },
-        { k: "13 项", l: "已获认证" },
+        { k: "15 项", l: "已获认证" },
       ],
     },
     history: {
@@ -647,7 +647,7 @@ export const LT_COMPANY: Record<Locale, CompanyContent> = {
       ],
       viewAll: "在数据中心查看完整列表",
       footnote:
-        "除上述三项外，莱因质量体系内另维护包括 RoHS 与 REACH 在内的 10 份符合性证明文件。{viewAll}，或通过销售对接人申请副本。",
+        "除上述三项外，莱因另持有包括 KCs 防爆、IECEx、专利及工厂登记在内的 12 项认证与证明文件。{viewAll}，或通过销售对接人申请副本。",
     },
     location: {
       kicker: "05 — 联系地址",

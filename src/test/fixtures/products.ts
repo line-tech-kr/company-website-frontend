@@ -30,6 +30,7 @@ export const productFixture: Product = {
   datasheets: [],
   manuals: [],
   drawings: [],
+  certifications: [],
 };
 
 export function makeProduct(overrides: Partial<Product> = {}): Product {

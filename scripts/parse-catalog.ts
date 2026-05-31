@@ -810,6 +810,7 @@ function buildProduct(
     datasheets: [],
     manuals: [],
     drawings: [],
+    certifications: [],
     ...(mini.connectorType ? { connectorType: mini.connectorType } : {}),
   };
 
