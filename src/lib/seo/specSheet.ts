@@ -1,5 +1,9 @@
 import { categoryForSeries } from "@/lib/categories";
-import type { Product, MassFlowSpecs } from "@/lib/types/product";
+import type {
+  Product,
+  MassFlowSpecs,
+  InstrumentSpecs,
+} from "@/lib/types/product";
 
 const SPEC_LABELS: Record<keyof MassFlowSpecs, string> = {
   flowRange: "Flow range",
@@ -57,7 +61,7 @@ export type SpecJsonPayload = {
   features: { en?: string; ko?: string; zh?: string }[];
   connections: { type: string; length: string }[];
   specifications: Partial<Record<keyof MassFlowSpecs, Record<string, unknown>>>;
-  instrumentSpecs?: Array<{ label: string; value: string }>;
+  instrumentSpecs?: InstrumentSpecs | null;
   digitalCommunication?: Product["digitalCommunication"];
   canonicalUrl: string;
   alternates: { ko: string; zh: string };

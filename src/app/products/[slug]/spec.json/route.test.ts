@@ -2,7 +2,11 @@ import { mockFetchSanity } from "@/test/mocks/sanity";
 
 import { describe, expect, it, beforeEach } from "vitest";
 import { GET } from "./route";
-import { productFixture, makeProduct } from "@/test/fixtures/products";
+import {
+  productFixture,
+  makeProduct,
+  rouProductFixture,
+} from "@/test/fixtures/products";
 
 describe("GET /products/[slug]/spec.json", () => {
   beforeEach(() => {
@@ -37,6 +41,25 @@ describe("GET /products/[slug]/spec.json", () => {
     });
 
     expect(res.status).toBe(404);
+  });
+
+  it("surfaces instrumentSpecs rows for ROU products", async () => {
+    mockFetchSanity({
+      specJson: () => rouProductFixture,
+    });
+
+    const res = await GET(new Request("http://test/products/rou-test"), {
+      params: Promise.resolve({ slug: "rou-test" }),
+    });
+
+    expect(res.status).toBe(200);
+    const body = await res.json();
+    expect(body.function).toBe("ROU");
+    expect(body.instrumentSpecs).toEqual([
+      { label: "Input Power", value: "220VAC (50–60 Hz)" },
+      { label: "Output Signal", value: "0–5 Vdc or 4–20 mA" },
+      { label: "Communication", value: "RS-232, RS-485" },
+    ]);
   });
 
   it("propagates fixture overrides into the response", async () => {

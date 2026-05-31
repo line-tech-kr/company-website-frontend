@@ -36,3 +36,27 @@ export const productFixture: Product = {
 export function makeProduct(overrides: Partial<Product> = {}): Product {
   return { ...productFixture, ...overrides };
 }
+
+export const rouProductFixture: Product = {
+  model: "ROU-TEST",
+  slug: { current: "rou-test" },
+  series: "specialized",
+  function: "ROU",
+  productLabel: {
+    ko: "테스트 리드아웃",
+    en: "Test Read-Out Unit",
+    zh: "测试读数单元",
+  },
+  tags: [],
+  features: [{ ko: "특징 1", en: "Feature 1", zh: "特征 1", _key: "f1" }],
+  connections: [],
+  instrumentSpecs: [
+    { label: "Input Power", value: "220VAC (50–60 Hz)" },
+    { label: "Output Signal", value: "0–5 Vdc or 4–20 mA" },
+    { label: "Communication", value: "RS-232, RS-485" },
+  ],
+  datasheets: [],
+  manuals: [],
+  drawings: [],
+  certifications: [],
+};
