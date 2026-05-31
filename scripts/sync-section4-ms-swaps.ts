@@ -113,7 +113,7 @@ async function main() {
   console.log(`\nsync-section4-ms-swaps  [${isApply ? "APPLY" : "DRY RUN"}]\n`);
 
   let swapped = 0;
-  let skipped = 0;
+  const skipped = 0;
   let failed = 0;
   let warnings = 0;
 
