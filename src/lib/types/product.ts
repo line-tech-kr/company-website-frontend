@@ -123,13 +123,16 @@ export const SanityProductSchema = z.object({
       _key: z.string().optional(),
     }),
   ),
-  connections: z.array(
-    z.object({
-      type: z.string(),
-      length: z.string(),
-      _key: z.string().optional(),
-    }),
-  ),
+  connections: z
+    .array(
+      z.object({
+        type: z.string(),
+        length: z.string(),
+        _key: z.string().optional(),
+      }),
+    )
+    .nullable()
+    .transform((connections) => connections ?? []),
   massFlowSpecs: MassFlowSpecsSchema.nullable().optional(),
   instrumentSpecs: InstrumentSpecsSchema.nullable().optional(),
   digitalCommunication: z

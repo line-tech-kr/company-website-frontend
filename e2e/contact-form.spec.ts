@@ -61,8 +61,7 @@ test.describe("Contact form", () => {
     if (hasResend) {
       await expect(
         page.getByRole("status").filter({
-          hasText:
-            /your message has been sent|we will reply within one business day/i,
+          hasText: /your inquiry was sent/i,
         }),
       ).toBeVisible({ timeout: 15_000 });
     } else {

@@ -98,6 +98,7 @@ export function findProducts(
     if (!seriesMatches(product, input.series)) continue;
     if (!product.massFlowSpecs) continue;
     const range = product.massFlowSpecs.flowRange;
+    if (!range) continue;
     if (range.min == null || range.max == null) continue;
     const score = fitScore(n2EquivalentSlpm, range.min, range.max);
     if (score === 0) continue;

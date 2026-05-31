@@ -1,10 +1,7 @@
 import { Resend } from "resend";
 import type { ContactFormPayload } from "./schema";
 
-const TO = process.env.CONTACT_FORM_TO?.trim() || "linetech@line-tech.co.kr";
-const FROM =
-  process.env.RESEND_FROM?.trim() ||
-  "Line Tech Contact <linetech@line-tech.co.kr>";
+const DEFAULT_TO = "linetech@line-tech.co.kr";
 
 const INQUIRY_LABELS: Record<string, string> = {
   sales: "영업·견적",
@@ -87,6 +84,18 @@ function buildSubject(data: ContactFormPayload): string {
   return `[라인테크 문의] ${inquiryType} - ${who}`;
 }
 
+function requireFromAddress(): string {
+  const from = process.env.RESEND_FROM?.trim();
+  if (!from) {
+    throw new Error("RESEND_FROM is not set");
+  }
+  return from;
+}
+
+function recipientAddress(): string {
+  return process.env.CONTACT_FORM_TO?.trim() || DEFAULT_TO;
+}
+
 function buildHtml(data: ContactFormPayload): string {
   const row = (label: string, value: string) => `
     <tr>
@@ -165,8 +174,8 @@ export async function sendContactEmail(
 
   const resend = new Resend(apiKey);
   const { error } = await resend.emails.send({
-    from: FROM,
-    to: TO,
+    from: requireFromAddress(),
+    to: recipientAddress(),
     replyTo: data.email,
     subject: buildSubject(data),
     html: buildHtml(data),
