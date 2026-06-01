@@ -1,4 +1,5 @@
 import { categoryForSeries } from "@/lib/categories";
+import { MASS_FLOW_SPEC_ORDER } from "@/lib/products/specShape";
 import type {
   Product,
   MassFlowSpecs,
@@ -18,20 +19,6 @@ const SPEC_LABELS: Record<keyof MassFlowSpecs, string> = {
   leakRate: "Leak rate",
   controlRange: "Control range",
 };
-
-const SPEC_ORDER: Array<keyof MassFlowSpecs> = [
-  "flowRange",
-  "pressureRange",
-  "accuracy",
-  "repeatability",
-  "responseTime",
-  "controlRange",
-  "ioSignal",
-  "supplyPower",
-  "maxPressure",
-  "tempRange",
-  "leakRate",
-];
 
 const SERIES_LABELS: Record<Product["series"], string> = {
   analogue: "Analogue",
@@ -75,7 +62,7 @@ export function buildSpecJson(
   const slug = product.slug.current;
 
   const specifications: SpecJsonPayload["specifications"] = {};
-  for (const key of SPEC_ORDER) {
+  for (const key of MASS_FLOW_SPEC_ORDER) {
     const spec = product.massFlowSpecs?.[key];
     if (spec) {
       specifications[key] = spec as Record<string, unknown>;
@@ -148,7 +135,7 @@ export function buildSpecMarkdown(product: Product, siteUrl: string): string {
       lines.push(`| ${r.label} | ${r.value} |`);
     }
   } else {
-    for (const key of SPEC_ORDER) {
+    for (const key of MASS_FLOW_SPEC_ORDER) {
       const spec = product.massFlowSpecs?.[key];
       if (spec) {
         lines.push(`| ${SPEC_LABELS[key]} | ${spec.display} |`);

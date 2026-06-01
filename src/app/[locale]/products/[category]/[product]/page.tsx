@@ -31,11 +31,17 @@ import {
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
 import { SanityProductSchema } from "@/lib/types/product";
-import type { MassFlowSpecs, Product } from "@/lib/types/product";
+import type { Product } from "@/lib/types/product";
 import { buildProductMetadata, siteUrl } from "@/lib/seo";
 import { safeJsonLd } from "@/lib/seo/jsonLd";
 import { LT_APPLICATIONS } from "@/lib/content/applications";
-import { localizeSpecValue } from "@/lib/products/localizeSpecValue";
+import {
+  buildJsonLdDescription,
+  buildJsonLdProperties,
+  buildOverviewRows,
+  buildSpecGroups,
+  type MassFlowGroupId,
+} from "@/lib/products/specShape";
 import "./product-detail.css";
 
 export const revalidate = 3600;
@@ -51,31 +57,6 @@ const getProduct = cache(async (slug: string) => {
   );
   return raw ? SanityProductSchema.parse(raw) : null;
 });
-
-const SPEC_GROUPS: Array<{
-  id: string;
-  num: string;
-  keys: Array<keyof MassFlowSpecs>;
-}> = [
-  {
-    id: "performance",
-    num: "01",
-    keys: [
-      "flowRange",
-      "pressureRange",
-      "responseTime",
-      "accuracy",
-      "repeatability",
-      "controlRange",
-    ],
-  },
-  { id: "signal", num: "02", keys: ["ioSignal", "supplyPower"] },
-  {
-    id: "environment",
-    num: "03",
-    keys: ["maxPressure", "tempRange", "leakRate"],
-  },
-];
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, category, product: productSlug } = await params;
@@ -149,72 +130,14 @@ export default async function ProductPage({ params }: Props) {
   ];
 
   const features = product.features.map((f) => f[locale] || f.en);
-  const isROU = product.function === "ROU";
-  const loc = (s: string) => localizeSpecValue(s, locale);
 
-  type SpecRow = { key: string; label: string; value: string };
-  const specGroups = isROU
-    ? [
-        {
-          id: "instrument",
-          num: "01",
-          label: tPdp("tabs.specs"),
-          rows: (product.instrumentSpecs ?? []).map((r) => ({
-            key: r.label,
-            label: r.label,
-            value: r.value,
-          })),
-        },
-      ]
-    : SPEC_GROUPS.map((g) => ({
-        id: g.id,
-        num: g.num,
-        label: tPdp(`specGroups.${g.id}`),
-        rows: g.keys.flatMap<SpecRow>((k) => {
-          const spec = product.massFlowSpecs?.[k];
-          return spec
-            ? [
-                {
-                  key: k,
-                  label: tSpecs(k),
-                  value: localizeSpecValue(spec.display, locale),
-                },
-              ]
-            : [];
-        }),
-      }));
+  const specGroups = buildSpecGroups(product, locale, {
+    spec: (k) => tSpecs(k),
+    group: (id: MassFlowGroupId) => tPdp(`specGroups.${id}`),
+    instrument: tPdp("tabs.specs"),
+  });
 
-  // EPCs have pressureRange in place of flowRange — pick whichever exists
-  // for the headline overview row.
-  const headlineRange =
-    product.massFlowSpecs?.flowRange ?? product.massFlowSpecs?.pressureRange;
-
-  const overviewRows = isROU
-    ? (product.instrumentSpecs ?? []).slice(0, 3).map((r) => ({
-        feature: r.label,
-        values: [r.value],
-      }))
-    : [
-        {
-          feature: features[0] ?? "",
-          values: [
-            loc(headlineRange!.display),
-            loc(product.massFlowSpecs!.accuracy.display),
-          ],
-        },
-        {
-          feature: features[1] ?? "",
-          values: product.massFlowSpecs?.responseTime
-            ? [loc(product.massFlowSpecs.responseTime.display)]
-            : [],
-        },
-        {
-          feature: features[2] ?? "",
-          values: product.massFlowSpecs?.maxPressure
-            ? [loc(product.massFlowSpecs.maxPressure.display)]
-            : [],
-        },
-      ].filter((r) => r.feature);
+  const overviewRows = buildOverviewRows(product, locale, features);
 
   const isM3030VA = product.slug.current === "m3030va";
   const dimensionCallouts: Callout[] | null = isM3030VA
@@ -310,90 +233,13 @@ export default async function ProductPage({ params }: Props) {
   const productUrl = `${siteUrl}/${locale}/products/${category}/${product.slug.current}`;
   const productLabel = product.productLabel[locale];
 
-  const additionalProperties = isROU
-    ? (product.instrumentSpecs ?? []).map((r) => ({
-        "@type": "PropertyValue",
-        name: r.label,
-        value: r.value,
-      }))
-    : [
-        ...(product.massFlowSpecs?.flowRange
-          ? [
-              {
-                "@type": "PropertyValue",
-                name: "Flow Range",
-                value: product.massFlowSpecs.flowRange.display,
-              },
-            ]
-          : []),
-        ...(product.massFlowSpecs?.pressureRange
-          ? [
-              {
-                "@type": "PropertyValue",
-                name: "Pressure Range",
-                value: product.massFlowSpecs.pressureRange.display,
-              },
-            ]
-          : []),
-        {
-          "@type": "PropertyValue",
-          name: "Accuracy",
-          value: product.massFlowSpecs!.accuracy.display,
-        },
-        {
-          "@type": "PropertyValue",
-          name: "Repeatability",
-          value: product.massFlowSpecs!.repeatability.display,
-        },
-        ...(product.massFlowSpecs?.responseTime
-          ? [
-              {
-                "@type": "PropertyValue",
-                name: "Response Time",
-                value: product.massFlowSpecs.responseTime.display,
-              },
-            ]
-          : []),
-        ...(product.massFlowSpecs?.maxPressure
-          ? [
-              {
-                "@type": "PropertyValue",
-                name: "Max Pressure",
-                value: product.massFlowSpecs.maxPressure.display,
-              },
-            ]
-          : []),
-        {
-          "@type": "PropertyValue",
-          name: "I/O Signal",
-          value: product.massFlowSpecs!.ioSignal.display,
-        },
-        {
-          "@type": "PropertyValue",
-          name: "Supply Power",
-          value: product.massFlowSpecs!.supplyPower.display,
-        },
-        {
-          "@type": "PropertyValue",
-          name: "Temperature Range",
-          value: product.massFlowSpecs!.tempRange.display,
-        },
-        {
-          "@type": "PropertyValue",
-          name: "Leak Rate",
-          value: product.massFlowSpecs!.leakRate.display,
-        },
-      ];
-
   const productJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: `Line Tech ${product.model} ${productLabel}`,
     model: product.model,
     sku: product.model,
-    description: isROU
-      ? productLabel
-      : `${productLabel} — ${headlineRange!.display} ${product.massFlowSpecs?.pressureRange ? "pressure range" : "flow range"}, ${product.massFlowSpecs!.accuracy.display} accuracy`,
+    description: buildJsonLdDescription(product, productLabel),
     brand: {
       "@type": "Brand",
       name: "Line Tech",
@@ -404,7 +250,7 @@ export default async function ProductPage({ params }: Props) {
       url: siteUrl,
     },
     url: productUrl,
-    additionalProperty: additionalProperties,
+    additionalProperty: buildJsonLdProperties(product),
   };
 
   return (

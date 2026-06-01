@@ -15,6 +15,7 @@ type Props = {
   imageSrc: string | null;
   category: CategorySlug;
   locale: Locale;
+  variant?: "default" | "compact";
 };
 
 const VISIBLE_TAG_KINDS = new Set(["capability", "gas"]);
@@ -29,7 +30,14 @@ function fittingSummary(connections: Product["connections"]): string {
   return [...types].join(" · ");
 }
 
-export function ProductRow({ product, imageSrc, category, locale }: Props) {
+export function ProductRow({
+  product,
+  imageSrc,
+  category,
+  locale,
+  variant = "default",
+}: Props) {
+  const isCompact = variant === "compact";
   const href = `/products/${category}/${product.slug.current}`;
   const label = product.description?.[locale] ?? product.productLabel[locale];
   const rangeSpec =
@@ -100,10 +108,22 @@ export function ProductRow({ product, imageSrc, category, locale }: Props) {
           <span className="lt-prod-row__label">{label}</span>
         )}
       </td>
-      <td className="lt-prod-row__cell lt-prod-row__cell--range">{range}</td>
-      <td className="lt-prod-row__cell lt-prod-row__cell--acc">{accuracy}</td>
-      <td className="lt-prod-row__cell lt-prod-row__cell--resp">{response}</td>
-      <td className="lt-prod-row__cell lt-prod-row__cell--fit">{fitting}</td>
+      {!isCompact && (
+        <>
+          <td className="lt-prod-row__cell lt-prod-row__cell--range">
+            {range}
+          </td>
+          <td className="lt-prod-row__cell lt-prod-row__cell--acc">
+            {accuracy}
+          </td>
+          <td className="lt-prod-row__cell lt-prod-row__cell--resp">
+            {response}
+          </td>
+          <td className="lt-prod-row__cell lt-prod-row__cell--fit">
+            {fitting}
+          </td>
+        </>
+      )}
     </tr>
   );
 }

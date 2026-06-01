@@ -6,6 +6,8 @@ import { urlFor } from "@/sanity/imageUrl";
 import { EmptyState } from "@/components/shared/EmptyState";
 import "./ProductStack.css";
 
+export type ProductStackVariant = "default" | "compact";
+
 type Props = {
   title: string;
   subtitle: string;
@@ -21,6 +23,10 @@ type Props = {
     response: string;
     fitting: string;
   };
+  // "compact" omits the spec columns (range/accuracy/response/fitting). Used
+  // for product families that don't have flow-device specs — e.g. ROU
+  // read-out units (#223).
+  variant?: ProductStackVariant;
 };
 
 export function ProductStack({
@@ -31,7 +37,12 @@ export function ProductStack({
   locale,
   emptyLabel,
   headers,
+  variant = "default",
 }: Props) {
+  const isCompact = variant === "compact";
+  const tableClass = isCompact
+    ? "lt-prod-stack__table lt-prod-stack__table--compact"
+    : "lt-prod-stack__table";
   return (
     <section className="lt-prod-stack">
       <header className="lt-prod-stack__hd">
@@ -45,7 +56,7 @@ export function ProductStack({
       {products.length === 0 ? (
         <EmptyState message={emptyLabel} />
       ) : (
-        <table className="lt-prod-stack__table">
+        <table className={tableClass}>
           <caption className="lt-prod-stack__sr-caption">{title}</caption>
           <thead>
             <tr className="lt-prod-stack__head">
@@ -66,30 +77,34 @@ export function ProductStack({
               >
                 {headers.description}
               </th>
-              <th
-                scope="col"
-                className="lt-prod-stack__head-cell lt-prod-stack__head-cell--range"
-              >
-                {headers.range}
-              </th>
-              <th
-                scope="col"
-                className="lt-prod-stack__head-cell lt-prod-stack__head-cell--acc"
-              >
-                {headers.accuracy}
-              </th>
-              <th
-                scope="col"
-                className="lt-prod-stack__head-cell lt-prod-stack__head-cell--resp"
-              >
-                {headers.response}
-              </th>
-              <th
-                scope="col"
-                className="lt-prod-stack__head-cell lt-prod-stack__head-cell--fit"
-              >
-                {headers.fitting}
-              </th>
+              {!isCompact && (
+                <>
+                  <th
+                    scope="col"
+                    className="lt-prod-stack__head-cell lt-prod-stack__head-cell--range"
+                  >
+                    {headers.range}
+                  </th>
+                  <th
+                    scope="col"
+                    className="lt-prod-stack__head-cell lt-prod-stack__head-cell--acc"
+                  >
+                    {headers.accuracy}
+                  </th>
+                  <th
+                    scope="col"
+                    className="lt-prod-stack__head-cell lt-prod-stack__head-cell--resp"
+                  >
+                    {headers.response}
+                  </th>
+                  <th
+                    scope="col"
+                    className="lt-prod-stack__head-cell lt-prod-stack__head-cell--fit"
+                  >
+                    {headers.fitting}
+                  </th>
+                </>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -108,6 +123,7 @@ export function ProductStack({
                   imageSrc={imageSrc}
                   category={category}
                   locale={locale}
+                  variant={variant}
                 />
               );
             })}

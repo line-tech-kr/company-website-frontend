@@ -160,6 +160,7 @@ export default async function CategoryPage({ params }: Props) {
             locale={locale}
             emptyLabel={emptyLabel}
             headers={headers}
+            variant="compact"
           />
         )}
       </main>
