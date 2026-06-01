@@ -99,6 +99,11 @@ const TAGS: TagDef[] = [
     kind: "capability",
     label: { ko: "저압", en: "Low pressure", zh: "低压" },
   },
+  {
+    slug: "readout",
+    kind: "capability",
+    label: { ko: "리드아웃", en: "Readout", zh: "读出器" },
+  },
 ];
 
 function tagDocFields(t: TagDef) {
