@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatISODate, formatYearMonth } from "./dates";
+import { formatISODate, formatShortDate, formatYearMonth } from "./dates";
 
 describe("formatYearMonth", () => {
   it("formats a YYYY.MM string with the English long-month locale", () => {
@@ -36,5 +36,35 @@ describe("formatISODate", () => {
 
   it("returns an empty string when the input is empty", () => {
     expect(formatISODate("", "en")).toBe("");
+  });
+
+  it.each([[null], [undefined]] as const)(
+    "returns an empty string for %p",
+    (input) => {
+      expect(formatISODate(input, "en")).toBe("");
+    },
+  );
+
+  it("preserves the date for a YYYY-MM-DD value regardless of timezone", () => {
+    // Normalizes to local-midnight, so a date-only ISO string never shifts.
+    expect(formatISODate("2026-05-31", "en")).toMatch(/May 31, 2026/);
+  });
+
+  it("accepts a full ISO timestamp", () => {
+    expect(formatISODate("2026-05-31T12:00:00Z", "en")).toMatch(/2026/);
+  });
+});
+
+describe("formatShortDate", () => {
+  it("formats with short month by default", () => {
+    expect(formatShortDate("2026-03-15", "en")).toMatch(/Mar 15, 2026/);
+  });
+
+  it("returns an empty string for null", () => {
+    expect(formatShortDate(null, "en")).toBe("");
+  });
+
+  it("returns an empty string for an unparseable ISO string", () => {
+    expect(formatShortDate("not-a-date", "en")).toBe("");
   });
 });
