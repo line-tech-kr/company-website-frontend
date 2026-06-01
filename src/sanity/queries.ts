@@ -41,6 +41,7 @@ const PRODUCT_BASE_PROJECTION = `
   features,
   connections,
   massFlowSpecs,
+  instrumentSpecs,
   cutout
 `;
 

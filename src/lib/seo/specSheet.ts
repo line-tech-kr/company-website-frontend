@@ -1,5 +1,9 @@
 import { categoryForSeries } from "@/lib/categories";
-import type { Product, MassFlowSpecs } from "@/lib/types/product";
+import type {
+  Product,
+  MassFlowSpecs,
+  InstrumentSpecs,
+} from "@/lib/types/product";
 
 const SPEC_LABELS: Record<keyof MassFlowSpecs, string> = {
   flowRange: "Flow range",
@@ -57,7 +61,7 @@ export type SpecJsonPayload = {
   features: { en?: string; ko?: string; zh?: string }[];
   connections: { type: string; length: string }[];
   specifications: Partial<Record<keyof MassFlowSpecs, Record<string, unknown>>>;
-  instrumentSpecs?: Array<{ label: string; value: string }>;
+  instrumentSpecs?: InstrumentSpecs | null;
   digitalCommunication?: Product["digitalCommunication"];
   canonicalUrl: string;
   alternates: { ko: string; zh: string };
@@ -96,8 +100,8 @@ export function buildSpecJson(
       length,
     })),
     specifications,
-    ...(product.instrumentSpecs?.rows.length
-      ? { instrumentSpecs: product.instrumentSpecs.rows }
+    ...(product.instrumentSpecs?.length
+      ? { instrumentSpecs: product.instrumentSpecs }
       : {}),
     digitalCommunication: product.digitalCommunication ?? undefined,
     canonicalUrl: `${siteUrl}/en/products/${category}/${slug}`,
@@ -139,8 +143,8 @@ export function buildSpecMarkdown(product: Product, siteUrl: string): string {
   lines.push("## Specifications", "");
   lines.push("| Spec | Value |");
   lines.push("|---|---|");
-  if (product.instrumentSpecs?.rows.length) {
-    for (const r of product.instrumentSpecs.rows) {
+  if (product.instrumentSpecs?.length) {
+    for (const r of product.instrumentSpecs) {
       lines.push(`| ${r.label} | ${r.value} |`);
     }
   } else {
