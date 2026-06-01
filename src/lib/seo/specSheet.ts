@@ -91,7 +91,7 @@ export function buildSpecJson(
         zh: f.zh,
       }),
     ),
-    connections: product.connections.map(({ type, length }) => ({
+    connections: (product.connections ?? []).map(({ type, length }) => ({
       type,
       length,
     })),
@@ -153,7 +153,7 @@ export function buildSpecMarkdown(product: Product, siteUrl: string): string {
   }
   lines.push("");
 
-  if (product.connections.length > 0) {
+  if (product.connections && product.connections.length > 0) {
     lines.push("## Connections", "");
     for (const c of product.connections) {
       lines.push(`- ${c.type} — body length ${c.length}`);

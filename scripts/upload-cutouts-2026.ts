@@ -17,25 +17,44 @@ const client = createClient({
 
 const PRODUCTS_DIR = path.join(process.cwd(), "public/products");
 
-// Products with updated 2026 cutout PNGs (prefer cutout-2026.png over cutout.png)
+// Slugs to upload in this run: the 23 cutouts newly added by the 2026 batch.
+// Excludes the 13 previously-shipped cutouts (m2030va, m3030va, ms2400-2800va,
+// ms3150-3800va) whose Sanity assets already match the designer-cropped
+// versions in main — re-uploading would just create duplicate assets.
 const CUTOUT_2026 = [
-  "m2030va",
-  "m3030va",
-  "ms2400va",
-  "ms2500va",
-  "ms2600va",
-  "ms2700va",
-  "ms2800va",
-  "ms3150va",
-  "ms3400va",
-  "ms3500va",
-  "ms3600va",
-  "ms3700va",
-  "ms3800va",
+  // MFC/MFM standard — shared-body pairs
+  "m2200va",
+  "m3200va",
+  // EX explosion-proof variants
+  "ex70c",
+  "ex70m",
+  "ex1000c",
+  "ex1000m",
+  // DO400 digital outlet
+  "do400",
+  // LEPC electronic pressure controller — cutout generated locally via
+  // scripts/remove-bg-ml.py since the 05312026 vendor batch omitted LEPC
+  "lepc",
+  // LTI read-out unit
+  "lti-2000",
+  // MD digital MFC/MFM family
+  "md30c",
+  "md30m",
+  "md150c",
+  "md150m",
+  "md400c",
+  "md400m",
+  "md500c",
+  "md500m",
+  "md600c",
+  "md600m",
+  "md700c",
+  "md700m",
+  "md800c",
+  "md800m",
+  // MS specialized series — only the new MS2150 (rest unchanged)
+  "ms2150va",
 ];
-
-// Renamed slugs — their Sanity docs are brand new, need cutout.png uploaded
-const RENAMED_NEW_CUTOUTS = ["ex70c", "ex70m", "md150c", "md150m"];
 
 async function uploadCutout(slug: string, filename: string) {
   const filePath = path.join(PRODUCTS_DIR, slug, filename);
@@ -66,12 +85,9 @@ async function uploadCutout(slug: string, filename: string) {
 }
 
 async function main() {
-  console.log("Uploading 2026 cutouts...");
+  console.log(`Uploading ${CUTOUT_2026.length} 2026 cutouts...`);
   for (const slug of CUTOUT_2026) {
     await uploadCutout(slug, "cutout-2026.png");
-  }
-  for (const slug of RENAMED_NEW_CUTOUTS) {
-    await uploadCutout(slug, "cutout.png");
   }
   console.log("Done.");
 }

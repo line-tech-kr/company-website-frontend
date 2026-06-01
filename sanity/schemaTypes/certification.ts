@@ -48,6 +48,15 @@ export const certification = defineType({
       options: { accept: ".pdf" },
     }),
     defineField({
+      name: "models",
+      title: "Applies to models",
+      type: "array",
+      of: [{ type: "string" }],
+      options: { layout: "tags" },
+      description:
+        "Leave empty for company-wide certs (ISO, INNOBIZ). For product-specific certs (e.g. CE DoC for MS3150VA, or Readout Box DoC shared by LTI-1000 + LTI-2000), list each model code so the cert surfaces on the product page.",
+    }),
+    defineField({
       name: "order",
       title: "Display order",
       type: "number",

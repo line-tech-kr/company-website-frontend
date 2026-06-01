@@ -53,6 +53,11 @@
 .lt-pdp-dl__type--neutral {
   color: var(--pd-muted);
 }
+.lt-pdp-dl__type--accent {
+  color: var(--lt-primary, #185686);
+  border-color: rgba(24, 86, 134, 0.35);
+  background: rgba(253, 188, 4, 0.08);
+}
 .lt-pdp-dl__label {
   font: 500 var(--lt-fs-md) var(--lt-sans);
   color: var(--pd-fg-strong);

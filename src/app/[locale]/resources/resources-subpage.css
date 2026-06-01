@@ -240,12 +240,24 @@
 
 /* ── Certifications grid ──────────────────────────────────────────────── */
 
+.dr-cert-group {
+  margin: 0 0 2.5rem;
+}
+
+.dr-cert-group__heading {
+  font: 500 var(--lt-fs-md) var(--lt-sans);
+  color: var(--pd-fg-strong);
+  margin: 0 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--pd-rule);
+}
+
 .dr-certs {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1rem;
   list-style: none;
-  margin: 0 0 2.5rem;
+  margin: 0;
   padding: 0;
 }
 

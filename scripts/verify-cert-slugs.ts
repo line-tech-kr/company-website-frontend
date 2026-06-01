@@ -5,11 +5,12 @@
  *
  *   pnpm tsx scripts/verify-cert-slugs.ts
  */
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { createClient } from "@sanity/client";
 import { LT_COMPANY } from "../src/lib/content/company";
 
 function loadEnv(path: string) {
+  if (!existsSync(path)) return;
   for (const line of readFileSync(path, "utf-8").split("\n")) {
     const m = line.match(/^([A-Z_][A-Z0-9_]*)=(.*)$/);
     if (m) process.env[m[1]] ??= m[2].trimEnd();
@@ -23,7 +24,7 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
 
 if (!projectId || !dataset) {
   console.error(
-    "Missing env vars. Need NEXT_PUBLIC_SANITY_PROJECT_ID, NEXT_PUBLIC_SANITY_DATASET in .env.local",
+    "Missing env vars. Need NEXT_PUBLIC_SANITY_PROJECT_ID and NEXT_PUBLIC_SANITY_DATASET in process.env or .env.local",
   );
   process.exit(1);
 }
