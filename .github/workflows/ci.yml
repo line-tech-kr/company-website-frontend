@@ -85,12 +85,15 @@ jobs:
 
       # NEXT_PUBLIC_* vars used in client components must be in .env files —
       # webpack inlines them at compile time, not from process.env.
+      # CAPTCHA_DEV_BYPASS=1 lets verifyTurnstile pass without a real
+      # TURNSTILE_SECRET_KEY in CI; without it the server fails closed.
       - name: Write .env.local for E2E
         run: |
           cat > .env.local <<'EOF'
           NEXT_PUBLIC_SANITY_PROJECT_ID=9ped5k0o
           NEXT_PUBLIC_SANITY_DATASET=production
           NEXT_PUBLIC_TURNSTILE_SITE_KEY=1x00000000000000000000AA
+          CAPTCHA_DEV_BYPASS=1
           EOF
 
       - name: Run E2E tests
