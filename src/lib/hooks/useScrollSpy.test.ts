@@ -1,7 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { renderHook } from "@testing-library/react";
 import { act } from "react";
-import { installIntersectionObserver, type IOHarness } from "@/test/helpers/intersectionObserver";
+import {
+  installIntersectionObserver,
+  type IOHarness,
+} from "@/test/helpers/intersectionObserver";
 import { useScrollSpy } from "./useScrollSpy";
 
 const SCROLL_HEIGHT = 5000;

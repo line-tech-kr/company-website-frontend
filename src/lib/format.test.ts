@@ -2,14 +2,12 @@ import { describe, expect, it } from "vitest";
 import { formatBytes, formatDate } from "./format";
 
 describe("formatBytes", () => {
-  it.each([
-    [null],
-    [undefined],
-    [0],
-    [-1],
-  ] as const)("renders an em dash for %p", (input) => {
-    expect(formatBytes(input)).toBe("—");
-  });
+  it.each([[null], [undefined], [0], [-1]] as const)(
+    "renders an em dash for %p",
+    (input) => {
+      expect(formatBytes(input)).toBe("—");
+    },
+  );
 
   it.each([
     [1, "1 B"],

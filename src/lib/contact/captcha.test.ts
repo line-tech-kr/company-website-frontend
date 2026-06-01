@@ -1,5 +1,9 @@
 import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
-import { restoreFetch, stubFetchJson, stubFetchReject } from "@/test/helpers/fetch";
+import {
+  restoreFetch,
+  stubFetchJson,
+  stubFetchReject,
+} from "@/test/helpers/fetch";
 import { verifyTurnstile } from "./captcha";
 
 describe("verifyTurnstile", () => {

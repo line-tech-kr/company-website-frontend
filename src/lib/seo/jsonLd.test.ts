@@ -21,7 +21,9 @@ describe("safeJsonLd", () => {
   });
 
   it("escapes U+2028 and U+2029 line separators", () => {
-    const value = { text: `line1${LINE_SEPARATOR}line2${PARAGRAPH_SEPARATOR}line3` };
+    const value = {
+      text: `line1${LINE_SEPARATOR}line2${PARAGRAPH_SEPARATOR}line3`,
+    };
     const out = safeJsonLd(value);
     expect(out).not.toContain(LINE_SEPARATOR);
     expect(out).not.toContain(PARAGRAPH_SEPARATOR);

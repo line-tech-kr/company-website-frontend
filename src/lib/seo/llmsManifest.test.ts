@@ -39,7 +39,9 @@ describe("buildLlmsManifest", () => {
     expect(md).toContain(
       `[TEST-1000](${siteUrl}/en/products/analogue/test-1000)`,
     );
-    expect(md).toContain(`[Spec JSON](${siteUrl}/products/test-1000/spec.json)`);
+    expect(md).toContain(
+      `[Spec JSON](${siteUrl}/products/test-1000/spec.json)`,
+    );
     expect(md).toContain(`[Spec sheet](${siteUrl}/products/test-1000/spec.md)`);
   });
 

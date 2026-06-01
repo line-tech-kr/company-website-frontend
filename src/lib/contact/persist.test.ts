@@ -1,5 +1,8 @@
 import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
-import { contactPayloadFixture, makeContactPayload } from "@/test/fixtures/contact";
+import {
+  contactPayloadFixture,
+  makeContactPayload,
+} from "@/test/fixtures/contact";
 
 const { createClientMock, createMock } = vi.hoisted(() => ({
   createClientMock: vi.fn(),
@@ -31,9 +34,9 @@ describe("persistContactSubmission", () => {
 
   it("throws when SANITY_WRITE_TOKEN is not set", async () => {
     vi.stubEnv("SANITY_WRITE_TOKEN", "");
-    await expect(persistContactSubmission(contactPayloadFixture)).rejects.toThrow(
-      "SANITY_WRITE_TOKEN is not set",
-    );
+    await expect(
+      persistContactSubmission(contactPayloadFixture),
+    ).rejects.toThrow("SANITY_WRITE_TOKEN is not set");
     expect(createMock).not.toHaveBeenCalled();
   });
 
@@ -82,8 +85,8 @@ describe("persistContactSubmission", () => {
     vi.stubEnv("SANITY_WRITE_TOKEN", "write-token");
     createMock.mockRejectedValueOnce(new Error("sanity write failed"));
 
-    await expect(persistContactSubmission(contactPayloadFixture)).rejects.toThrow(
-      "sanity write failed",
-    );
+    await expect(
+      persistContactSubmission(contactPayloadFixture),
+    ).rejects.toThrow("sanity write failed");
   });
 });

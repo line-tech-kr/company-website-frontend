@@ -53,7 +53,8 @@ export function installIntersectionObserver(): IOHarness {
         isIntersecting,
         target: document.getElementById(id) as Element,
       })) as unknown as IntersectionObserverEntry[];
-      for (const obs of observers) obs.callback(targets, obs as unknown as IntersectionObserver);
+      for (const obs of observers)
+        obs.callback(targets, obs as unknown as IntersectionObserver);
     },
   };
 }

@@ -53,10 +53,7 @@ export async function submitContact(
 
   let captchaOk: boolean;
   try {
-    captchaOk = await verifyTurnstile(
-      parsed.data["cf-turnstile-response"],
-      ip,
-    );
+    captchaOk = await verifyTurnstile(parsed.data["cf-turnstile-response"], ip);
   } catch (err) {
     console.error("contact_submission_captcha_failed", err);
     return { status: "error", errorKey: "server" };

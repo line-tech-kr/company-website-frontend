@@ -51,7 +51,11 @@ describe("locale-scoped metadata builders", () => {
     path: string;
   }> = [
     { name: "company", builder: buildCompanyMetadata, path: "company" },
-    { name: "products index", builder: buildProductsMetadata, path: "products" },
+    {
+      name: "products index",
+      builder: buildProductsMetadata,
+      path: "products",
+    },
     {
       name: "accessories",
       builder: buildAccessoriesMetadata,
@@ -98,7 +102,12 @@ describe("locale-scoped metadata builders", () => {
   });
 
   it("application detail metadata uses 라인테크 for Korean", () => {
-    const m = buildApplicationDetailMetadata("ko", "fuel-cell", "연료전지", "리드");
+    const m = buildApplicationDetailMetadata(
+      "ko",
+      "fuel-cell",
+      "연료전지",
+      "리드",
+    );
     expect(titleAbs(m)).toBe("연료전지 — 라인테크");
   });
 

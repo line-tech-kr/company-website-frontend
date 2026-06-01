@@ -115,6 +115,8 @@ describe("checkContactRateLimit", () => {
     limitMock.mockRejectedValueOnce(new Error("redis down"));
 
     const { checkContactRateLimit } = await import("./rate-limit");
-    await expect(checkContactRateLimit("1.2.3.4")).rejects.toThrow("redis down");
+    await expect(checkContactRateLimit("1.2.3.4")).rejects.toThrow(
+      "redis down",
+    );
   });
 });

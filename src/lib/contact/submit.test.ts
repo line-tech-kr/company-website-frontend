@@ -1,19 +1,14 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { mockNextHeaders } from "@/test/helpers/headers";
 
-const {
-  rateLimitMock,
-  captchaMock,
-  persistMock,
-  emailMock,
-  headersMock,
-} = vi.hoisted(() => ({
-  rateLimitMock: vi.fn(),
-  captchaMock: vi.fn(),
-  persistMock: vi.fn(),
-  emailMock: vi.fn(),
-  headersMock: vi.fn(),
-}));
+const { rateLimitMock, captchaMock, persistMock, emailMock, headersMock } =
+  vi.hoisted(() => ({
+    rateLimitMock: vi.fn(),
+    captchaMock: vi.fn(),
+    persistMock: vi.fn(),
+    emailMock: vi.fn(),
+    headersMock: vi.fn(),
+  }));
 
 vi.mock("next/headers", () => ({ headers: headersMock }));
 vi.mock("./rate-limit", () => ({ checkContactRateLimit: rateLimitMock }));
