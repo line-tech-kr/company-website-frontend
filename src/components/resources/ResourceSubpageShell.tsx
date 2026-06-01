@@ -1,12 +1,13 @@
 import type { ReactNode } from "react";
-import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
-
-type Crumb = { label: string; href?: string };
+import {
+  Breadcrumbs,
+  type BreadcrumbItem,
+} from "@/components/layout/Breadcrumbs/Breadcrumbs";
 
 type Props = {
   title: string;
   intro: string;
-  breadcrumbs: Crumb[];
+  breadcrumbs: BreadcrumbItem[];
   children: ReactNode;
 };
 

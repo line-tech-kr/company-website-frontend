@@ -4,9 +4,12 @@ import {
   buildJsonLdProperties,
   buildOverviewRows,
   buildSpecGroups,
-  getHeadlineRange,
 } from "./specShape";
-import { makeProduct, productFixture, rouProductFixture } from "@/test/fixtures/products";
+import {
+  makeProduct,
+  productFixture,
+  rouProductFixture,
+} from "@/test/fixtures/products";
 
 const labelers = {
   spec: (k: string) => `label:${k}`,
@@ -66,6 +69,7 @@ describe("buildOverviewRows", () => {
     ]);
     expect(rows[0].feature).toBe("Feature A");
     expect(rows[0].values).toContain("0–1000 sccm");
+    expect(rows[0].values).toContain("±1% F.S.");
   });
 
   it("drops trailing rows when the matching massFlow spec is absent", () => {
@@ -81,6 +85,16 @@ describe("buildOverviewRows", () => {
     expect(rows[2].values).toEqual([]);
   });
 
+  it("filters out rows whose feature label is empty", () => {
+    const rows = buildOverviewRows(productFixture, "en", ["A", "", "C"]);
+    expect(rows.map((r) => r.feature)).toEqual(["A", "C"]);
+  });
+
+  it("returns [] when a massFlow product has no headline range", () => {
+    const broken = makeProduct({ massFlowSpecs: undefined });
+    expect(buildOverviewRows(broken, "en", ["A", "B", "C"])).toEqual([]);
+  });
+
   it("maps ROU instrumentSpecs to feature/value rows", () => {
     const rows = buildOverviewRows(rouProductFixture, "en", []);
     expect(rows).toEqual([
@@ -92,13 +106,49 @@ describe("buildOverviewRows", () => {
 });
 
 describe("buildJsonLdProperties", () => {
-  it("emits PropertyValue rows for each massFlow spec present", () => {
+  it("emits PropertyValue rows for the fixture's massFlow specs", () => {
     const props = buildJsonLdProperties(productFixture);
     expect(props.find((p) => p.name === "Flow Range")?.value).toBe(
       "0–1000 sccm",
     );
     expect(props.find((p) => p.name === "Accuracy")?.value).toBe("±1% F.S.");
     expect(props.find((p) => p.name === "Max Pressure")).toBeUndefined();
+  });
+
+  it("emits every present spec in canonical order for a full MFC product", () => {
+    const full = makeProduct({
+      massFlowSpecs: {
+        flowRange: { display: "0–1000 sccm" },
+        pressureRange: { display: "0.1–6 barA" },
+        accuracy: { display: "±1% F.S." },
+        repeatability: { display: "±0.2% F.S." },
+        responseTime: { display: "<1s" },
+        ioSignal: { display: "0–5 VDC" },
+        supplyPower: { display: "±15 VDC" },
+        maxPressure: { display: "100 psi" },
+        tempRange: { display: "0–50 °C" },
+        leakRate: { display: "1e-9" },
+        controlRange: { display: "2–100% F.S." },
+      },
+    });
+    const names = buildJsonLdProperties(full).map((p) => p.name);
+    expect(names).toEqual([
+      "Flow Range",
+      "Pressure Range",
+      "Accuracy",
+      "Repeatability",
+      "Response Time",
+      "Max Pressure",
+      "I/O Signal",
+      "Supply Power",
+      "Temperature Range",
+      "Leak Rate",
+    ]);
+  });
+
+  it("returns [] when a massFlow product has no massFlowSpecs", () => {
+    const broken = makeProduct({ massFlowSpecs: undefined });
+    expect(buildJsonLdProperties(broken)).toEqual([]);
   });
 
   it("maps each instrumentSpec to a PropertyValue for ROU products", () => {
@@ -112,27 +162,6 @@ describe("buildJsonLdProperties", () => {
   });
 });
 
-describe("getHeadlineRange", () => {
-  it("prefers flowRange when present", () => {
-    expect(getHeadlineRange(productFixture)?.display).toBe("0–1000 sccm");
-  });
-
-  it("falls back to pressureRange when flowRange is absent", () => {
-    const epc = makeProduct({
-      massFlowSpecs: {
-        ...productFixture.massFlowSpecs!,
-        flowRange: undefined,
-        pressureRange: { display: "0.1–6 barA" },
-      },
-    });
-    expect(getHeadlineRange(epc)?.display).toBe("0.1–6 barA");
-  });
-
-  it("returns null for ROU products", () => {
-    expect(getHeadlineRange(rouProductFixture)).toBeNull();
-  });
-});
-
 describe("buildJsonLdDescription", () => {
   it("uses headline range + accuracy for massFlow products", () => {
     expect(buildJsonLdDescription(productFixture, "Test Controller")).toBe(
@@ -140,9 +169,28 @@ describe("buildJsonLdDescription", () => {
     );
   });
 
+  it("uses pressure-range wording when pressureRange is present", () => {
+    const epc = makeProduct({
+      function: "EPC",
+      massFlowSpecs: {
+        ...productFixture.massFlowSpecs!,
+        flowRange: undefined,
+        pressureRange: { display: "0.1–6 barA" },
+      },
+    });
+    expect(buildJsonLdDescription(epc, "Test EPC")).toBe(
+      "Test EPC — 0.1–6 barA pressure range, ±1% F.S. accuracy",
+    );
+  });
+
   it("returns plain productLabel for ROU products", () => {
     expect(buildJsonLdDescription(rouProductFixture, "Test Read-Out")).toBe(
       "Test Read-Out",
     );
+  });
+
+  it("returns plain productLabel when massFlow data is missing", () => {
+    const broken = makeProduct({ massFlowSpecs: undefined });
+    expect(buildJsonLdDescription(broken, "Broken")).toBe("Broken");
   });
 });

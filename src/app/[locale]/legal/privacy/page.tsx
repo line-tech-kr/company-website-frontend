@@ -3,7 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { LT_PRIVACY } from "@/lib/content/privacy";
 import { buildPrivacyMetadata } from "@/lib/seo";
-import { formatISODate } from "@/lib/i18n/dates";
+import { formatLongDate } from "@/lib/i18n/dates";
 import type { Locale } from "@/lib/content/home";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -30,7 +30,7 @@ export default async function PrivacyPage({ params }: Props) {
         <header style={{ marginBottom: 40 }}>
           <h1 style={{ marginBottom: 8 }}>{content.title}</h1>
           <p style={{ color: "var(--pd-muted)", fontSize: "0.875rem" }}>
-            {formatISODate(content.effectiveDate, locale)}
+            {formatLongDate(content.effectiveDate, locale)}
           </p>
         </header>
         {content.sections.map((section, i) => (

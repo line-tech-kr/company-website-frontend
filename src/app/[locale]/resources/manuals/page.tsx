@@ -1,10 +1,11 @@
 import { Fragment } from "react";
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { DocRow } from "@/components/resources/DocRow";
 import { ResourceSubpageShell } from "@/components/resources/ResourceSubpageShell";
-import { formatISODate } from "@/lib/i18n/dates";
+import { formatLongDate } from "@/lib/i18n/dates";
 import { sanityClient } from "@/sanity/client";
 import { allManualsQuery } from "@/sanity/queries";
 import type { Locale } from "@/lib/content/home";
@@ -12,15 +13,13 @@ import { buildResourcesMetadata } from "@/lib/seo";
 import {
   getResourceSubpageContext,
   resourceSubpageStaticParams,
+  SERIES_ORDER,
 } from "@/lib/pages/resourceSubpage";
 import "../resources-subpage.css";
 
 export const revalidate = 3600;
 
 type Props = { params: Promise<{ locale: string }> };
-
-type Series = "analogue" | "digital" | "specialized";
-const SERIES_ORDER: Series[] = ["analogue", "digital", "specialized"];
 
 type ManualItem = {
   _id: string;
@@ -45,8 +44,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ManualsPage({ params }: Props) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const [ctx, manuals] = await Promise.all([
-    getResourceSubpageContext(locale, "manuals"),
+    getResourceSubpageContext("manuals"),
     sanityClient.fetch<ManualItem[]>(allManualsQuery),
   ]);
   const { tRes, breadcrumbs, title, intro } = ctx;
@@ -68,7 +68,7 @@ export default async function ManualsPage({ params }: Props) {
       meta={[
         modelLabel(item),
         item.rev,
-        item.publishedAt && formatISODate(item.publishedAt, locale),
+        item.publishedAt && formatLongDate(item.publishedAt, locale),
       ]}
       action={
         item.fileUrl ? (

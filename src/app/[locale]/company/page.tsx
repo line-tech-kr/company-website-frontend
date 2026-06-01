@@ -72,8 +72,7 @@ export default async function CompanyPage({ params }: Props) {
     <SidebarShell
       breadcrumbs={breadcrumbs}
       sideNav={<CompanySideNav heading={c.navHeading} items={c.nav} />}
-      wrapperClassName="co"
-      mainClassName="co-main"
+      variant="company"
     >
       <Greeting c={c} />
       <History c={c} locale={locale} />

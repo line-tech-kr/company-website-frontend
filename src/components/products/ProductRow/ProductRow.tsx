@@ -40,20 +40,27 @@ export function ProductRow({
   const isCompact = variant === "compact";
   const href = `/products/${category}/${product.slug.current}`;
   const label = product.description?.[locale] ?? product.productLabel[locale];
-  const rangeSpec =
-    product.massFlowSpecs?.flowRange ?? product.massFlowSpecs?.pressureRange;
-  const range = rangeSpec ? localizeSpecValue(rangeSpec.display, locale) : "—";
-  const accuracy = product.massFlowSpecs
-    ? localizeSpecValue(product.massFlowSpecs.accuracy.display, locale)
-    : "—";
-  const response = product.massFlowSpecs?.responseTime
-    ? localizeSpecValue(product.massFlowSpecs.responseTime.display, locale)
-    : "—";
-  const fitting = fittingSummary(product.connections);
   const visibleTags = product.tags
     .filter((t) => VISIBLE_TAG_KINDS.has(t.kind))
     .slice(0, MAX_VISIBLE_TAGS);
   const router = useRouter();
+
+  let range = "";
+  let accuracy = "";
+  let response = "";
+  let fitting = "";
+  if (!isCompact) {
+    const rangeSpec =
+      product.massFlowSpecs?.flowRange ?? product.massFlowSpecs?.pressureRange;
+    range = rangeSpec ? localizeSpecValue(rangeSpec.display, locale) : "—";
+    accuracy = product.massFlowSpecs
+      ? localizeSpecValue(product.massFlowSpecs.accuracy.display, locale)
+      : "—";
+    response = product.massFlowSpecs?.responseTime
+      ? localizeSpecValue(product.massFlowSpecs.responseTime.display, locale)
+      : "—";
+    fitting = fittingSummary(product.connections);
+  }
 
   return (
     <tr

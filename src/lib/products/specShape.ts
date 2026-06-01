@@ -60,6 +60,25 @@ export const MASS_FLOW_SPEC_ORDER: ReadonlyArray<keyof MassFlowSpecs> = [
   "leakRate",
 ];
 
+// JSON-LD PropertyValue rows for the product detail page. Order matters
+// for schema.org consumers — keep flow/pressure first, end with
+// environment.
+const MASS_FLOW_JSONLD_KEYS: ReadonlyArray<{
+  key: keyof MassFlowSpecs;
+  name: string;
+}> = [
+  { key: "flowRange", name: "Flow Range" },
+  { key: "pressureRange", name: "Pressure Range" },
+  { key: "accuracy", name: "Accuracy" },
+  { key: "repeatability", name: "Repeatability" },
+  { key: "responseTime", name: "Response Time" },
+  { key: "maxPressure", name: "Max Pressure" },
+  { key: "ioSignal", name: "I/O Signal" },
+  { key: "supplyPower", name: "Supply Power" },
+  { key: "tempRange", name: "Temperature Range" },
+  { key: "leakRate", name: "Leak Rate" },
+];
+
 export type SpecLabelers = {
   spec: (key: keyof MassFlowSpecs) => string;
   group: (id: MassFlowGroupId) => string;
@@ -115,24 +134,25 @@ export function buildOverviewRows(
       values: [r.value],
     }));
   }
-  const loc = (s: string) => localizeSpecValue(s, locale);
   const m = product.massFlowSpecs;
   const headlineRange = m?.flowRange ?? m?.pressureRange;
+  // No mass-flow data at all → drop the section entirely rather than
+  // emitting feature labels with empty value arrays (which the original
+  // inline code crashed on; this is the cleanly-skipped equivalent).
+  if (!m || !headlineRange) return [];
+  const loc = (s: string) => localizeSpecValue(s, locale);
   const rows: OverviewRow[] = [
     {
       feature: features[0] ?? "",
-      values:
-        headlineRange && m
-          ? [loc(headlineRange.display), loc(m.accuracy.display)]
-          : [],
+      values: [loc(headlineRange.display), loc(m.accuracy.display)],
     },
     {
       feature: features[1] ?? "",
-      values: m?.responseTime ? [loc(m.responseTime.display)] : [],
+      values: m.responseTime ? [loc(m.responseTime.display)] : [],
     },
     {
       feature: features[2] ?? "",
-      values: m?.maxPressure ? [loc(m.maxPressure.display)] : [],
+      values: m.maxPressure ? [loc(m.maxPressure.display)] : [],
     },
   ];
   return rows.filter((r) => r.feature);
@@ -148,74 +168,12 @@ export function buildJsonLdProperties(product: Product): JsonLdProperty[] {
   }
   const m = product.massFlowSpecs;
   if (!m) return [];
-  const props: JsonLdProperty[] = [];
-  if (m.flowRange) {
-    props.push({
-      "@type": "PropertyValue",
-      name: "Flow Range",
-      value: m.flowRange.display,
-    });
-  }
-  if (m.pressureRange) {
-    props.push({
-      "@type": "PropertyValue",
-      name: "Pressure Range",
-      value: m.pressureRange.display,
-    });
-  }
-  props.push({
-    "@type": "PropertyValue",
-    name: "Accuracy",
-    value: m.accuracy.display,
+  return MASS_FLOW_JSONLD_KEYS.flatMap(({ key, name }) => {
+    const spec = m[key];
+    return spec
+      ? [{ "@type": "PropertyValue" as const, name, value: spec.display }]
+      : [];
   });
-  props.push({
-    "@type": "PropertyValue",
-    name: "Repeatability",
-    value: m.repeatability.display,
-  });
-  if (m.responseTime) {
-    props.push({
-      "@type": "PropertyValue",
-      name: "Response Time",
-      value: m.responseTime.display,
-    });
-  }
-  if (m.maxPressure) {
-    props.push({
-      "@type": "PropertyValue",
-      name: "Max Pressure",
-      value: m.maxPressure.display,
-    });
-  }
-  props.push({
-    "@type": "PropertyValue",
-    name: "I/O Signal",
-    value: m.ioSignal.display,
-  });
-  props.push({
-    "@type": "PropertyValue",
-    name: "Supply Power",
-    value: m.supplyPower.display,
-  });
-  props.push({
-    "@type": "PropertyValue",
-    name: "Temperature Range",
-    value: m.tempRange.display,
-  });
-  props.push({
-    "@type": "PropertyValue",
-    name: "Leak Rate",
-    value: m.leakRate.display,
-  });
-  return props;
-}
-
-export function getHeadlineRange(product: Product) {
-  return (
-    product.massFlowSpecs?.flowRange ??
-    product.massFlowSpecs?.pressureRange ??
-    null
-  );
 }
 
 export function buildJsonLdDescription(

@@ -41,8 +41,7 @@ export default async function AccessoriesPage({ params }: Props) {
     <SidebarShell
       breadcrumbs={breadcrumbs}
       sideNav={<AccessoriesSideNav heading={c.navHeading} items={c.nav} />}
-      wrapperClassName="acc"
-      mainClassName="acc-main"
+      variant="accessories"
     >
       <Hero c={c} />
       <ItemsSection
