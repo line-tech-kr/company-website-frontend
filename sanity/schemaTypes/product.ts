@@ -249,6 +249,20 @@ export const product = defineType({
           preview: { select: { title: "label", subtitle: "value" } },
         },
       ],
+      validation: (r) =>
+        r.custom((items?: Array<{ slot?: string | null }>) => {
+          if (!items) return true;
+          const seen = new Set<string>();
+          for (const item of items) {
+            const slot = item?.slot;
+            if (!slot) continue;
+            if (seen.has(slot)) {
+              return `Multiple instrumentSpec rows share slot "${slot}". Each readout column accepts only one row.`;
+            }
+            seen.add(slot);
+          }
+          return true;
+        }),
     }),
     defineField({
       name: "digitalCommunication",

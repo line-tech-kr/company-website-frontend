@@ -14,9 +14,15 @@ function loadEnv(p: string) {
   try {
     for (const l of readFileSync(p, "utf-8").split("\n")) {
       const m = l.match(/^([A-Z_][A-Z0-9_]*)=(.*)$/);
-      if (m) process.env[m[1]] ??= m[2].trimEnd();
+      if (m) {
+        const value = m[2].trimEnd().replace(/^['"]|['"]$/g, "");
+        process.env[m[1]] ??= value;
+      }
     }
-  } catch {}
+  } catch (err) {
+    // Missing .env.local is fine; surface anything else.
+    if ((err as NodeJS.ErrnoException).code !== "ENOENT") throw err;
+  }
 }
 loadEnv(".env.local");
 
@@ -44,7 +50,7 @@ const client = createClient({
 
 type Slot = "display" | "power" | "communication" | "connector";
 
-// Canonical English label → readout column slot. Keep keys lowercased for
+// Canonical English label → readout column slot. Keys are lowercased for
 // case-insensitive matching against existing Sanity data.
 const LABEL_TO_SLOT: Record<string, Slot> = {
   "display window": "display",
@@ -55,6 +61,24 @@ const LABEL_TO_SLOT: Record<string, Slot> = {
   "remote control": "connector",
   connector: "connector",
 };
+
+// Sanity-generated _keys are URL-safe nanoids. Anything else came from a
+// non-standard import path and we won't risk it in a query-path literal.
+const SAFE_KEY = /^[A-Za-z0-9_-]+$/;
+
+// Build the unmatched-warning keyword set from the map keys so adding a new
+// slot to LABEL_TO_SLOT automatically updates the warning heuristic.
+const SLOT_KEYWORDS = new Set(
+  Object.keys(LABEL_TO_SLOT).flatMap((k) => k.split(/\s+/)),
+);
+
+// Labels that share a slot keyword but legitimately aren't column candidates.
+// Suppresses noise on every ROU product. Update if a new label drifts in.
+const KNOWN_NON_SLOT_LABELS = new Set([
+  "output power",
+  "display repeatability",
+  "units of display",
+]);
 
 interface InstrumentSpec {
   _key: string;
@@ -67,6 +91,12 @@ interface RouProduct {
   _id: string;
   model: string;
   instrumentSpecs: InstrumentSpec[] | null;
+}
+
+interface PendingPatch {
+  key: string;
+  slot: Slot;
+  path: string;
 }
 
 async function main() {
@@ -82,10 +112,11 @@ async function main() {
   let patched = 0;
   let alreadyTagged = 0;
   let unmatched = 0;
+  let skippedBadKey = 0;
 
   for (const p of products) {
     const specs = p.instrumentSpecs ?? [];
-    const patch: Record<string, Slot> = {};
+    const pending: PendingPatch[] = [];
 
     for (const spec of specs) {
       if (spec.slot) {
@@ -93,21 +124,29 @@ async function main() {
         continue;
       }
       const slot = LABEL_TO_SLOT[spec.label.trim().toLowerCase()];
-      if (!slot) {
-        // Most rows legitimately don't map to a column slot (Output Signal,
-        // Setpoint, etc.). Only warn for labels that look like they should.
+      if (!slot) continue;
+      if (!spec._key || !SAFE_KEY.test(spec._key)) {
+        console.warn(
+          `  bad-key  ${p.model}  "${spec.label}" has _key=${JSON.stringify(spec._key)}; skipping`,
+        );
+        skippedBadKey++;
         continue;
       }
-      patch[`instrumentSpecs[_key=="${spec._key}"].slot`] = slot;
+      pending.push({
+        key: spec._key,
+        slot,
+        path: `instrumentSpecs[_key=="${spec._key}"].slot`,
+      });
     }
 
-    // Log labels that suggest a slot but didn't match a canonical key, in
-    // case prod data has drifted.
+    // Surface labels that look like they should map to a slot but don't.
     for (const spec of specs) {
       if (spec.slot) continue;
       const lower = spec.label.trim().toLowerCase();
       if (LABEL_TO_SLOT[lower]) continue;
-      if (/display|power|communication|connector|remote/.test(lower)) {
+      if (KNOWN_NON_SLOT_LABELS.has(lower)) continue;
+      const words = lower.split(/\s+/);
+      if (words.some((w) => SLOT_KEYWORDS.has(w))) {
         console.warn(
           `  unmatched candidate  ${p.model}  "${spec.label}" — add to LABEL_TO_SLOT if it should be a column`,
         );
@@ -115,37 +154,44 @@ async function main() {
       }
     }
 
-    const entries = Object.entries(patch);
-    if (entries.length === 0) {
+    if (pending.length === 0) {
       console.log(`  noop   ${p.model}  (already tagged or no matches)`);
       continue;
     }
 
-    const summary = entries
-      .map(([path, slot]) => `${path.split('"').slice(-2, -1)[0]?.slice(0, 8)}→${slot}`)
-      .join(", ");
+    const summary = pending.map((e) => `${e.key}→${e.slot}`).join(", ");
 
     if (!isApply) {
-      console.log(`  WOULD  ${p.model}  ${entries.length} slot(s)  ${summary}`);
-      patched += entries.length;
+      console.log(`  WOULD  ${p.model}  ${pending.length} slot(s)  ${summary}`);
+      patched += pending.length;
       continue;
     }
 
-    let txn = client.patch(p._id);
-    for (const [path, slot] of entries) {
-      txn = txn.set({ [path]: slot });
+    try {
+      const patchSet = Object.fromEntries(
+        pending.map((e) => [e.path, e.slot] as const),
+      );
+      await client.patch(p._id).set(patchSet).commit();
+      console.log(`  patch  ${p.model}  ${pending.length} slot(s)  ${summary}`);
+      patched += pending.length;
+    } catch (err) {
+      const e = err as Error & { response?: { statusCode?: number } };
+      console.error(
+        `  FAILED  ${p.model}  ${e.message} (status ${e.response?.statusCode ?? "?"})`,
+      );
+      throw err;
     }
-    await txn.commit();
-    console.log(`  patch  ${p.model}  ${entries.length} slot(s)`);
-    patched += entries.length;
   }
 
   console.log(
-    `\nDone. ${isApply ? "patched" : "would-patch"}=${patched}  alreadyTagged=${alreadyTagged}  unmatched=${unmatched}`,
+    `\nDone. ${isApply ? "patched" : "would-patch"}=${patched}  alreadyTagged=${alreadyTagged}  unmatched=${unmatched}  skippedBadKey=${skippedBadKey}`,
   );
 }
 
-main().catch((e) => {
-  console.error(e);
+main().catch((err) => {
+  const e = err as Error & { response?: { statusCode?: number } };
+  console.error(
+    `fatal: ${e.message} (status ${e.response?.statusCode ?? "?"})`,
+  );
   process.exit(1);
 });

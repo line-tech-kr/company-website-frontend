@@ -102,10 +102,10 @@ export function ReadoutRow({ product, imageSrc, category, locale }: Props) {
         {display}
       </td>
       <td className="lt-prod-row__cell lt-readout-row__cell--power">{power}</td>
-      <td className="lt-prod-row__cell lt-readout-row__cell--comm">
+      <td className="lt-prod-row__cell lt-readout-row__cell--communication">
         {communication}
       </td>
-      <td className="lt-prod-row__cell lt-readout-row__cell--conn">
+      <td className="lt-prod-row__cell lt-readout-row__cell--connector">
         {connector}
       </td>
     </tr>

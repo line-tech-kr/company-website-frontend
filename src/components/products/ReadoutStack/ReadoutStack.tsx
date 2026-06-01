@@ -32,11 +32,15 @@ export function ReadoutStack({
   emptyLabel,
   headers,
 }: Props) {
+  const titleId = `readout-stack-${category}`;
   return (
-    <section className="lt-prod-stack lt-readout-stack">
+    <section
+      className="lt-prod-stack lt-readout-stack"
+      aria-labelledby={titleId}
+    >
       <header className="lt-prod-stack__hd">
         <div className="lt-prod-stack__kicker">{subtitle}</div>
-        <h2 className="lt-prod-stack__title">
+        <h2 id={titleId} className="lt-prod-stack__title">
           {title}{" "}
           <span className="lt-prod-stack__count">{products.length}</span>
         </h2>
@@ -80,13 +84,13 @@ export function ReadoutStack({
               </th>
               <th
                 scope="col"
-                className="lt-prod-stack__head-cell lt-readout-stack__head-cell--comm"
+                className="lt-prod-stack__head-cell lt-readout-stack__head-cell--communication"
               >
                 {headers.communication}
               </th>
               <th
                 scope="col"
-                className="lt-prod-stack__head-cell lt-readout-stack__head-cell--conn"
+                className="lt-prod-stack__head-cell lt-readout-stack__head-cell--connector"
               >
                 {headers.connector}
               </th>

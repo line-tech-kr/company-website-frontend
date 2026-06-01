@@ -6,8 +6,8 @@
   .lt-readout-stack__table {
     grid-template-columns: 48px 88px 2fr 2.5fr 2fr;
   }
-  .lt-readout-stack__head-cell--comm,
-  .lt-readout-stack__head-cell--conn {
+  .lt-readout-stack__head-cell--communication,
+  .lt-readout-stack__head-cell--connector {
     display: none;
   }
 }

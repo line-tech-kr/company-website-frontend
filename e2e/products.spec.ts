@@ -67,13 +67,12 @@ test.describe("Specialized category — readout table", () => {
   }) => {
     await page.goto("/en/products/specialized");
 
-    // The instruments stack is the ReadoutStack — find it by its title.
-    const readout = page
-      .getByRole("region")
-      .filter({ has: page.getByRole("heading", { name: /Read-Out Units/i }) });
+    // ReadoutStack labels its <section> via aria-labelledby on the title heading,
+    // so it resolves as a named region — locate it by accessible name.
+    const readout = page.getByRole("region", { name: /Read-Out Units/i });
     await expect(readout).toBeVisible();
 
-    // Readout-specific column headers are present
+    // Readout-specific column headers are present.
     await expect(
       readout.getByRole("columnheader", { name: "Display" }),
     ).toBeVisible();
@@ -81,7 +80,7 @@ test.describe("Specialized category — readout table", () => {
       readout.getByRole("columnheader", { name: "Input power" }),
     ).toBeVisible();
 
-    // Flow-device column headers are absent from the readout table
+    // Flow-device column headers are absent from the readout table.
     await expect(
       readout.getByRole("columnheader", { name: "Flow range" }),
     ).toHaveCount(0);
@@ -89,14 +88,12 @@ test.describe("Specialized category — readout table", () => {
       readout.getByRole("columnheader", { name: "Accuracy" }),
     ).toHaveCount(0);
 
-    // LTI-2000 row shows the OLED display value, not an em-dash
-    const lti2000Row = readout.locator(".lt-prod-row").filter({
-      has: page.getByRole("link", { name: "LTI-2000" }),
-    });
+    // LTI-2000 row shows the OLED display value, not an em-dash.
+    const lti2000Row = readout.getByRole("row", { name: /LTI-2000/ });
     await expect(lti2000Row).toBeVisible();
-    await expect(
-      lti2000Row.locator(".lt-readout-row__cell--display"),
-    ).toContainText("OLED");
+    await expect(lti2000Row).toContainText("OLED");
+    // No em-dash should appear in this row — every column has data.
+    await expect(lti2000Row).not.toContainText("—");
   });
 });
 

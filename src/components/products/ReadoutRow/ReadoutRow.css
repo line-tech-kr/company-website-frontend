@@ -1,19 +1,19 @@
 .lt-readout-row__cell--display,
 .lt-readout-row__cell--power,
-.lt-readout-row__cell--comm,
-.lt-readout-row__cell--conn {
+.lt-readout-row__cell--communication,
+.lt-readout-row__cell--connector {
   font-family: var(--lt-mono);
   font-variant-numeric: tabular-nums;
   color: var(--pd-fg-strong);
   font-size: var(--lt-fs-sm);
 }
-.lt-readout-row__cell--conn {
+.lt-readout-row__cell--connector {
   color: var(--pd-muted);
 }
 
 @media (max-width: 1024px) {
-  .lt-readout-row__cell--comm,
-  .lt-readout-row__cell--conn {
+  .lt-readout-row__cell--communication,
+  .lt-readout-row__cell--connector {
     display: none;
   }
 }

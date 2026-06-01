@@ -60,7 +60,7 @@ describe("ReadoutStack", () => {
   });
 
   it("renders the empty state when products is empty", () => {
-    const { queryByRole, getByText } = render(
+    const { container, getByText } = render(
       <ReadoutStack
         title="Read-Out Units"
         subtitle="Instruments"
@@ -71,7 +71,8 @@ describe("ReadoutStack", () => {
         headers={headers}
       />,
     );
-    expect(queryByRole("table")).toBeNull();
+    expect(container.querySelector("tbody")).toBeNull();
+    expect(container.querySelector(".lt-prod-row")).toBeNull();
     expect(getByText("No products yet")).toBeTruthy();
   });
 });
