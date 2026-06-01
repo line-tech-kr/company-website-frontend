@@ -4721,7 +4721,8 @@
     "instrumentSpecs": [
       {
         "label": "Input Power",
-        "value": "220VAC (50–60 Hz)"
+        "value": "220VAC (50–60 Hz)",
+        "slot": "power"
       },
       {
         "label": "Output Power",
@@ -4729,7 +4730,8 @@
       },
       {
         "label": "Display Window",
-        "value": "256×64 Dot 6\" Wide OLED LCD"
+        "value": "256×64 Dot 6\" Wide OLED LCD",
+        "slot": "display"
       },
       {
         "label": "Display Repeatability",
@@ -4745,7 +4747,8 @@
       },
       {
         "label": "Remote Control",
-        "value": "D-SUB 9-pin (Male)"
+        "value": "D-SUB 9-pin (Male)",
+        "slot": "connector"
       },
       {
         "label": "Setpoint",
@@ -4765,7 +4768,8 @@
       },
       {
         "label": "Communication",
-        "value": "RS-232 (9600 Baud, 8-N-1), RS-485"
+        "value": "RS-232 (9600 Baud, 8-N-1), RS-485",
+        "slot": "communication"
       },
       {
         "label": "External Setpoint",
@@ -4820,7 +4824,8 @@
     "instrumentSpecs": [
       {
         "label": "Input Power",
-        "value": "220VAC (50–60 Hz)"
+        "value": "220VAC (50–60 Hz)",
+        "slot": "power"
       },
       {
         "label": "Output Power",
@@ -4828,7 +4833,8 @@
       },
       {
         "label": "Display Window",
-        "value": "4-Digit 7-Segment"
+        "value": "4-Digit 7-Segment",
+        "slot": "display"
       },
       {
         "label": "Display Repeatability",
@@ -4844,7 +4850,8 @@
       },
       {
         "label": "Remote Control",
-        "value": "D-SUB 9-pin (Male)"
+        "value": "D-SUB 9-pin (Male)",
+        "slot": "connector"
       },
       {
         "label": "Setpoint",
@@ -4864,7 +4871,8 @@
       },
       {
         "label": "Communication",
-        "value": "RS-232 (9600 Baud, 8-N-1)"
+        "value": "RS-232 (9600 Baud, 8-N-1)",
+        "slot": "communication"
       }
     ]
   }
