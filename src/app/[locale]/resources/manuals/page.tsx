@@ -1,16 +1,18 @@
 import { Fragment } from "react";
 import type { Metadata } from "next";
-import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { DocRow } from "@/components/resources/DocRow";
+import { ResourceSubpageShell } from "@/components/resources/ResourceSubpageShell";
 import { formatISODate } from "@/lib/i18n/dates";
 import { sanityClient } from "@/sanity/client";
 import { allManualsQuery } from "@/sanity/queries";
-import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
 import { buildResourcesMetadata } from "@/lib/seo";
+import {
+  getResourceSubpageContext,
+  resourceSubpageStaticParams,
+} from "@/lib/pages/resourceSubpage";
 import "../resources-subpage.css";
 
 export const revalidate = 3600;
@@ -34,9 +36,7 @@ function modelLabel(item: ManualItem): string | null {
   return item.models && item.models.length > 0 ? item.models.join(" / ") : null;
 }
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
+export const generateStaticParams = resourceSubpageStaticParams;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -45,20 +45,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ManualsPage({ params }: Props) {
   const { locale } = await params;
-  setRequestLocale(locale);
-
-  const [tCommon, tNav, tRes, manuals] = await Promise.all([
-    getTranslations("common"),
-    getTranslations("nav"),
-    getTranslations("resources"),
+  const [ctx, manuals] = await Promise.all([
+    getResourceSubpageContext(locale, "manuals"),
     sanityClient.fetch<ManualItem[]>(allManualsQuery),
   ]);
-
-  const breadcrumbs = [
-    { label: tCommon("home"), href: "/" },
-    { label: tNav("dataRoom"), href: "/resources" },
-    { label: tRes("manuals.title") },
-  ];
+  const { tRes, breadcrumbs, title, intro } = ctx;
 
   const grouped = SERIES_ORDER.reduce<Record<string, typeof manuals>>(
     (acc, s) => {
@@ -68,7 +59,6 @@ export default async function ManualsPage({ params }: Props) {
     },
     {},
   );
-
   const ungrouped = manuals.filter((m) => !m.series);
 
   const renderRow = (item: ManualItem) => (
@@ -98,14 +88,7 @@ export default async function ManualsPage({ params }: Props) {
   );
 
   return (
-    <main className="lt-wrap dr-sub">
-      <Breadcrumbs items={breadcrumbs} />
-
-      <header className="dr-sub__hero">
-        <h1 className="dr-sub__title">{tRes("manuals.title")}</h1>
-        <p className="dr-sub__intro">{tRes("manuals.intro")}</p>
-      </header>
-
+    <ResourceSubpageShell title={title} intro={intro} breadcrumbs={breadcrumbs}>
       {manuals.length === 0 ? (
         <EmptyState
           message={tRes("empty")}
@@ -127,6 +110,6 @@ export default async function ManualsPage({ params }: Props) {
           {ungrouped.map(renderRow)}
         </ul>
       )}
-    </main>
+    </ResourceSubpageShell>
   );
 }
