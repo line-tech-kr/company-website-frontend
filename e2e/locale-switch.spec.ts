@@ -1,6 +1,10 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Locale switching", () => {
+  // After #142 the middleware auto-detects locale from Accept-Language; without
+  // a ko locale on the context Playwright's default `en-US` would land on /en.
+  test.use({ locale: "ko-KR" });
+
   test("redirects / to default locale /ko", async ({ page }) => {
     await page.goto("/");
     await expect(page).toHaveURL(/\/ko/);
