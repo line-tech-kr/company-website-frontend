@@ -25,6 +25,8 @@ vi.mock("@upstash/redis", () => ({
 }));
 
 describe("checkContactRateLimit", () => {
+  let errSpy: ReturnType<typeof vi.spyOn>;
+
   beforeEach(() => {
     vi.resetModules();
     vi.unstubAllEnvs();
@@ -32,13 +34,16 @@ describe("checkContactRateLimit", () => {
     RatelimitMock.mockReset();
     redisFromEnvMock.mockClear();
     slidingWindowMock.mockClear();
+    errSpy = vi.spyOn(console, "error").mockImplementation(() => {});
   });
 
   afterEach(() => {
     vi.unstubAllEnvs();
+    errSpy.mockRestore();
   });
 
-  it("no-ops to true when Upstash env vars are missing", async () => {
+  it("no-ops to true when Upstash env vars are missing (non-prod)", async () => {
+    vi.stubEnv("NODE_ENV", "test");
     vi.stubEnv("UPSTASH_REDIS_REST_URL", "");
     vi.stubEnv("UPSTASH_REDIS_REST_TOKEN", "");
 
@@ -46,6 +51,19 @@ describe("checkContactRateLimit", () => {
     await expect(checkContactRateLimit("1.2.3.4")).resolves.toBe(true);
     expect(RatelimitMock).not.toHaveBeenCalled();
     expect(limitMock).not.toHaveBeenCalled();
+    expect(errSpy).not.toHaveBeenCalled();
+  });
+
+  it("warns loudly in production when env vars are missing", async () => {
+    vi.stubEnv("NODE_ENV", "production");
+    vi.stubEnv("UPSTASH_REDIS_REST_URL", "");
+    vi.stubEnv("UPSTASH_REDIS_REST_TOKEN", "");
+
+    const { checkContactRateLimit } = await import("./rate-limit");
+    await expect(checkContactRateLimit("1.2.3.4")).resolves.toBe(true);
+    expect(errSpy).toHaveBeenCalledWith(
+      expect.stringContaining("rate-limit disabled"),
+    );
   });
 
   it("returns true when the limiter allows the request", async () => {
@@ -77,7 +95,7 @@ describe("checkContactRateLimit", () => {
     await expect(checkContactRateLimit("1.2.3.4")).resolves.toBe(false);
   });
 
-  it("caches the limiter instance across calls", async () => {
+  it("reuses the limiter within a single import", async () => {
     vi.stubEnv("UPSTASH_REDIS_REST_URL", "https://upstash.example");
     vi.stubEnv("UPSTASH_REDIS_REST_TOKEN", "token");
     limitMock.mockResolvedValue({ success: true });
@@ -89,5 +107,14 @@ describe("checkContactRateLimit", () => {
     expect(RatelimitMock).toHaveBeenCalledTimes(1);
     expect(limitMock).toHaveBeenNthCalledWith(1, "1.2.3.4");
     expect(limitMock).toHaveBeenNthCalledWith(2, "5.6.7.8");
+  });
+
+  it("propagates errors from the limiter's limit() call", async () => {
+    vi.stubEnv("UPSTASH_REDIS_REST_URL", "https://upstash.example");
+    vi.stubEnv("UPSTASH_REDIS_REST_TOKEN", "token");
+    limitMock.mockRejectedValueOnce(new Error("redis down"));
+
+    const { checkContactRateLimit } = await import("./rate-limit");
+    await expect(checkContactRateLimit("1.2.3.4")).rejects.toThrow("redis down");
   });
 });

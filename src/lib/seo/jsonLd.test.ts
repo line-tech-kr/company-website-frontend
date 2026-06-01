@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { safeJsonLd } from "./jsonLd";
 
+const LINE_SEPARATOR = " ";
+const PARAGRAPH_SEPARATOR = " ";
+
 describe("safeJsonLd", () => {
   it("round-trips a plain object back through JSON.parse", () => {
     const value = { name: "Line Tech", year: 1997, active: true };
@@ -18,10 +21,10 @@ describe("safeJsonLd", () => {
   });
 
   it("escapes U+2028 and U+2029 line separators", () => {
-    const value = { text: `line1 line2 line3` };
+    const value = { text: `line1${LINE_SEPARATOR}line2${PARAGRAPH_SEPARATOR}line3` };
     const out = safeJsonLd(value);
-    expect(out).not.toContain(" ");
-    expect(out).not.toContain(" ");
+    expect(out).not.toContain(LINE_SEPARATOR);
+    expect(out).not.toContain(PARAGRAPH_SEPARATOR);
     expect(out).toContain("\\u2028");
     expect(out).toContain("\\u2029");
     expect(JSON.parse(out)).toEqual(value);

@@ -1,36 +1,38 @@
 import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
+import { restoreFetch, stubFetchJson, stubFetchReject } from "@/test/helpers/fetch";
 import { verifyTurnstile } from "./captcha";
 
 describe("verifyTurnstile", () => {
-  const originalFetch = globalThis.fetch;
+  let errSpy: ReturnType<typeof vi.spyOn>;
 
   beforeEach(() => {
     vi.unstubAllEnvs();
     vi.stubEnv("NODE_ENV", "test");
+    vi.stubEnv("CAPTCHA_DEV_BYPASS", "");
+    errSpy = vi.spyOn(console, "error").mockImplementation(() => {});
   });
 
   afterEach(() => {
-    globalThis.fetch = originalFetch;
+    restoreFetch();
     vi.unstubAllEnvs();
+    errSpy.mockRestore();
   });
 
-  it("returns true in non-production when secret is missing", async () => {
+  it("fails closed by default when the secret is missing", async () => {
     vi.stubEnv("TURNSTILE_SECRET_KEY", "");
-    await expect(verifyTurnstile("token")).resolves.toBe(true);
-  });
-
-  it("returns false in production when secret is missing", async () => {
-    vi.stubEnv("TURNSTILE_SECRET_KEY", "");
-    vi.stubEnv("NODE_ENV", "production");
     await expect(verifyTurnstile("token")).resolves.toBe(false);
+    expect(errSpy).toHaveBeenCalled();
+  });
+
+  it("allows an explicit CAPTCHA_DEV_BYPASS=1 opt-in when secret is missing", async () => {
+    vi.stubEnv("TURNSTILE_SECRET_KEY", "");
+    vi.stubEnv("CAPTCHA_DEV_BYPASS", "1");
+    await expect(verifyTurnstile("token")).resolves.toBe(true);
   });
 
   it("returns true when siteverify reports success", async () => {
     vi.stubEnv("TURNSTILE_SECRET_KEY", "secret");
-    const fetchMock = vi.fn().mockResolvedValue({
-      json: () => Promise.resolve({ success: true }),
-    });
-    globalThis.fetch = fetchMock as unknown as typeof fetch;
+    const fetchMock = stubFetchJson({ success: true });
 
     await expect(verifyTurnstile("good-token", "1.2.3.4")).resolves.toBe(true);
 
@@ -46,10 +48,7 @@ describe("verifyTurnstile", () => {
 
   it("omits remoteip when not provided", async () => {
     vi.stubEnv("TURNSTILE_SECRET_KEY", "secret");
-    const fetchMock = vi.fn().mockResolvedValue({
-      json: () => Promise.resolve({ success: true }),
-    });
-    globalThis.fetch = fetchMock as unknown as typeof fetch;
+    const fetchMock = stubFetchJson({ success: true });
 
     await verifyTurnstile("good-token");
     const body = (fetchMock.mock.calls[0][1] as { body: URLSearchParams }).body;
@@ -58,20 +57,16 @@ describe("verifyTurnstile", () => {
 
   it("returns false when siteverify reports failure", async () => {
     vi.stubEnv("TURNSTILE_SECRET_KEY", "secret");
-    globalThis.fetch = vi.fn().mockResolvedValue({
-      json: () =>
-        Promise.resolve({ success: false, "error-codes": ["invalid"] }),
-    }) as unknown as typeof fetch;
+    stubFetchJson({ success: false, "error-codes": ["invalid"] });
 
     await expect(verifyTurnstile("bad-token")).resolves.toBe(false);
   });
 
   it("returns false when fetch throws", async () => {
     vi.stubEnv("TURNSTILE_SECRET_KEY", "secret");
-    globalThis.fetch = vi
-      .fn()
-      .mockRejectedValue(new Error("network down")) as unknown as typeof fetch;
+    stubFetchReject(new Error("network down"));
 
     await expect(verifyTurnstile("token")).resolves.toBe(false);
+    expect(errSpy).toHaveBeenCalled();
   });
 });

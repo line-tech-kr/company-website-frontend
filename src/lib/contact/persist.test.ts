@@ -1,5 +1,5 @@
 import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
-import type { ContactFormPayload } from "./schema";
+import { contactPayloadFixture, makeContactPayload } from "@/test/fixtures/contact";
 
 const { createClientMock, createMock } = vi.hoisted(() => ({
   createClientMock: vi.fn(),
@@ -15,19 +15,7 @@ vi.mock("@sanity/client", () => ({
 
 import { persistContactSubmission } from "./persist";
 
-const fullPayload: ContactFormPayload = {
-  inquiryType: "support",
-  typeDetail: "M3030VA",
-  name: "홍길동",
-  email: "customer@example.com",
-  company: "테스트 회사",
-  phone: "+82 10-1234-5678",
-  subject: "기술 문의",
-  message: "안녕하세요.",
-  consent: "on",
-  website: "",
-  "cf-turnstile-response": "tok",
-};
+const ISO_8601 = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z$/;
 
 describe("persistContactSubmission", () => {
   beforeEach(() => {
@@ -43,7 +31,7 @@ describe("persistContactSubmission", () => {
 
   it("throws when SANITY_WRITE_TOKEN is not set", async () => {
     vi.stubEnv("SANITY_WRITE_TOKEN", "");
-    await expect(persistContactSubmission(fullPayload)).rejects.toThrow(
+    await expect(persistContactSubmission(contactPayloadFixture)).rejects.toThrow(
       "SANITY_WRITE_TOKEN is not set",
     );
     expect(createMock).not.toHaveBeenCalled();
@@ -51,7 +39,7 @@ describe("persistContactSubmission", () => {
 
   it("creates a contactSubmission with the full payload mapped", async () => {
     vi.stubEnv("SANITY_WRITE_TOKEN", "write-token");
-    await persistContactSubmission(fullPayload);
+    await persistContactSubmission(contactPayloadFixture);
 
     expect(createClientMock).toHaveBeenCalledWith(
       expect.objectContaining({ useCdn: false, token: "write-token" }),
@@ -67,23 +55,19 @@ describe("persistContactSubmission", () => {
       company: "테스트 회사",
       phone: "+82 10-1234-5678",
       subject: "기술 문의",
-      message: "안녕하세요.",
+      message: "안녕하세요. 제품 확인을 부탁드립니다.",
     });
-    expect(typeof doc.submittedAt).toBe("string");
-    expect(() => new Date(doc.submittedAt).toISOString()).not.toThrow();
+    expect(doc.submittedAt).toMatch(ISO_8601);
   });
 
   it("omits optional fields when absent", async () => {
     vi.stubEnv("SANITY_WRITE_TOKEN", "write-token");
-    const minimal: ContactFormPayload = {
-      inquiryType: "general",
-      name: "Anon",
-      email: "anon@example.com",
-      message: "Hi.",
-      consent: "on",
-      website: "",
-      "cf-turnstile-response": "tok",
-    };
+    const minimal = makeContactPayload({
+      typeDetail: undefined,
+      company: undefined,
+      phone: undefined,
+      subject: undefined,
+    });
 
     await persistContactSubmission(minimal);
 
@@ -98,7 +82,7 @@ describe("persistContactSubmission", () => {
     vi.stubEnv("SANITY_WRITE_TOKEN", "write-token");
     createMock.mockRejectedValueOnce(new Error("sanity write failed"));
 
-    await expect(persistContactSubmission(fullPayload)).rejects.toThrow(
+    await expect(persistContactSubmission(contactPayloadFixture)).rejects.toThrow(
       "sanity write failed",
     );
   });

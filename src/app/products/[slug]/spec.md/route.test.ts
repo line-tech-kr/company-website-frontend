@@ -1,4 +1,3 @@
-import "@/test/mocks/sanity";
 import { beforeEach, describe, expect, it } from "vitest";
 import { mockFetchSanity } from "@/test/mocks/sanity";
 import { GET } from "./route";

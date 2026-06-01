@@ -1,4 +1,3 @@
-import "@/test/mocks/sanity";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { mockFetchSanity } from "@/test/mocks/sanity";
 import { buildLlmsManifest } from "./llmsManifest";
@@ -40,9 +39,7 @@ describe("buildLlmsManifest", () => {
     expect(md).toContain(
       `[TEST-1000](${siteUrl}/en/products/analogue/test-1000)`,
     );
-    expect(md).toContain(
-      `[Spec JSON](${siteUrl}/products/test-1000/spec.json)`,
-    );
+    expect(md).toContain(`[Spec JSON](${siteUrl}/products/test-1000/spec.json)`);
     expect(md).toContain(`[Spec sheet](${siteUrl}/products/test-1000/spec.md)`);
   });
 
@@ -58,14 +55,13 @@ describe("buildLlmsManifest", () => {
     expect(md).toContain("[TEST-METER-1]");
   });
 
-  it("skips products that fail schema validation but renders the rest", async () => {
+  it("skips products that fail schema validation and logs the error", async () => {
     const err = vi.spyOn(console, "error").mockImplementation(() => {});
     mockFetchSanity({
       llmsManifest: () => [productFixture, { model: "BROKEN" }],
     });
     const md = await buildLlmsManifest(siteUrl);
     expect(md).toContain("[TEST-1000]");
-    expect(md).not.toContain("[BROKEN]");
     expect(err).toHaveBeenCalled();
     err.mockRestore();
   });

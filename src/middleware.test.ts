@@ -1,5 +1,5 @@
 // @vitest-environment node
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { NextRequest, NextResponse } from "next/server";
 
 const { intlImplMock } = vi.hoisted(() => ({ intlImplMock: vi.fn() }));
@@ -15,6 +15,8 @@ function makeReq(
   opts: { headers?: Record<string, string>; cookie?: string } = {},
 ) {
   const headers: Record<string, string> = { ...opts.headers };
+  // Set-Cookie isn't observable through NextRequest's cookies API on the
+  // request side; we hand-craft the Cookie header instead.
   if (opts.cookie) headers["cookie"] = opts.cookie;
   return new NextRequest(url, { headers });
 }
@@ -103,8 +105,13 @@ describe("detectLocale", () => {
 
 describe("middleware (default export)", () => {
   beforeEach(() => {
+    vi.unstubAllEnvs();
     intlImplMock.mockReset();
     intlImplMock.mockImplementation(() => NextResponse.next());
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
   });
 
   it("delegates to next-intl middleware when the path already has a known locale prefix", () => {
@@ -121,7 +128,29 @@ describe("middleware (default export)", () => {
       cookie: "NEXT_LOCALE=en",
     });
     const res = middleware(req);
-    expect(res.cookies.get("NEXT_LOCALE")?.value).toBe("zh");
+    const cookie = res.cookies.get("NEXT_LOCALE");
+    expect(cookie?.value).toBe("zh");
+    expect(cookie?.path).toBe("/");
+    expect(cookie?.sameSite).toBe("lax");
+    expect(cookie?.maxAge).toBe(365 * 24 * 60 * 60);
+  });
+
+  it("marks the cookie Secure under NODE_ENV=production", () => {
+    vi.stubEnv("NODE_ENV", "production");
+    const req = makeReq("http://localhost/zh/products", {
+      cookie: "NEXT_LOCALE=en",
+    });
+    const res = middleware(req);
+    expect(res.cookies.get("NEXT_LOCALE")?.secure).toBe(true);
+  });
+
+  it("does not mark the cookie Secure outside production", () => {
+    vi.stubEnv("NODE_ENV", "test");
+    const req = makeReq("http://localhost/zh/products", {
+      cookie: "NEXT_LOCALE=en",
+    });
+    const res = middleware(req);
+    expect(res.cookies.get("NEXT_LOCALE")?.secure).toBeFalsy();
   });
 
   it("does not overwrite the cookie when it already matches the URL locale", () => {
@@ -139,13 +168,19 @@ describe("middleware (default export)", () => {
     const res = middleware(req);
     expect(res.status).toBe(307);
     expect(res.headers.get("location")).toBe("http://localhost/en/products");
-    expect(res.cookies.get("NEXT_LOCALE")?.value).toBe("en");
+    const cookie = res.cookies.get("NEXT_LOCALE");
+    expect(cookie?.value).toBe("en");
+    expect(cookie?.path).toBe("/");
+    expect(cookie?.sameSite).toBe("lax");
     expect(intlImplMock).not.toHaveBeenCalled();
   });
 
-  it("delegates unknown 2-letter prefixes to next-intl for normalization", () => {
+  it("delegates unknown 2-letter prefixes to next-intl and skips the redirect/cookie", () => {
     const req = makeReq("http://localhost/xx/about");
-    middleware(req);
+    const res = middleware(req);
     expect(intlImplMock).toHaveBeenCalledWith(req);
+    // No redirect; no cookie set by our middleware.
+    expect(res.status).not.toBe(307);
+    expect(res.cookies.get("NEXT_LOCALE")).toBeUndefined();
   });
 });

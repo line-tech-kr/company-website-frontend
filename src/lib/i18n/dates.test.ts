@@ -30,7 +30,11 @@ describe("formatISODate", () => {
     ).toMatch(/May 2026/);
   });
 
-  it("throws RangeError when the input is unparseable", () => {
-    expect(() => formatISODate("not-a-date", "en")).toThrow(RangeError);
+  it("returns an empty string when the input is unparseable", () => {
+    expect(formatISODate("not-a-date", "en")).toBe("");
+  });
+
+  it("returns an empty string when the input is empty", () => {
+    expect(formatISODate("", "en")).toBe("");
   });
 });

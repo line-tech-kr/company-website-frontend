@@ -1,23 +1,10 @@
 import { describe, it, expect } from "vitest";
 import { contactFormSchema } from "./schema";
-
-const validPayload = {
-  inquiryType: "support",
-  typeDetail: "M3030VA",
-  name: "홍길동",
-  email: "customer@example.com",
-  company: "테스트 회사",
-  phone: "+82 10-1234-5678",
-  subject: "기술 문의",
-  message: "안녕하세요. 제품 확인을 부탁드립니다.",
-  consent: "on",
-  website: "",
-  "cf-turnstile-response": "test-token",
-};
+import { contactPayloadFixture, makeContactPayload } from "@/test/fixtures/contact";
 
 describe("contactFormSchema", () => {
   it("parses a fully populated payload", () => {
-    const result = contactFormSchema.safeParse(validPayload);
+    const result = contactFormSchema.safeParse(contactPayloadFixture);
     expect(result.success).toBe(true);
   });
 
@@ -35,50 +22,55 @@ describe("contactFormSchema", () => {
   });
 
   it.each([
-    ["inquiryType", { ...validPayload, inquiryType: "" }],
-    ["name", { ...validPayload, name: "" }],
-    ["email", { ...validPayload, email: "not-an-email" }],
-    ["message", { ...validPayload, message: "" }],
-    ["cf-turnstile-response", { ...validPayload, "cf-turnstile-response": "" }],
+    ["inquiryType", makeContactPayload({ inquiryType: "" })],
+    ["name", makeContactPayload({ name: "" })],
+    ["email", makeContactPayload({ email: "not-an-email" })],
+    ["message", makeContactPayload({ message: "" })],
+    ["cf-turnstile-response", makeContactPayload({ "cf-turnstile-response": "" })],
   ])("rejects payload with empty/invalid %s", (_field, payload) => {
     expect(contactFormSchema.safeParse(payload).success).toBe(false);
   });
 
   it("rejects missing consent (PIPA Art. 22)", () => {
-    const rest: Record<string, unknown> = { ...validPayload };
+    const rest: Record<string, unknown> = { ...contactPayloadFixture };
     delete rest.consent;
     expect(contactFormSchema.safeParse(rest).success).toBe(false);
   });
 
   it("rejects consent values other than 'on'", () => {
     expect(
-      contactFormSchema.safeParse({ ...validPayload, consent: "true" }).success,
+      contactFormSchema.safeParse({ ...contactPayloadFixture, consent: "true" })
+        .success,
     ).toBe(false);
   });
 
   it("rejects message over 5000 chars", () => {
-    const payload = { ...validPayload, message: "a".repeat(5001) };
-    expect(contactFormSchema.safeParse(payload).success).toBe(false);
+    expect(
+      contactFormSchema.safeParse(makeContactPayload({ message: "a".repeat(5001) })).success,
+    ).toBe(false);
   });
 
   it("rejects name over 120 chars", () => {
-    const payload = { ...validPayload, name: "a".repeat(121) };
-    expect(contactFormSchema.safeParse(payload).success).toBe(false);
+    expect(
+      contactFormSchema.safeParse(makeContactPayload({ name: "a".repeat(121) })).success,
+    ).toBe(false);
   });
 
   it("rejects email over 254 chars", () => {
     const local = "a".repeat(250);
-    const payload = { ...validPayload, email: `${local}@x.io` };
-    expect(contactFormSchema.safeParse(payload).success).toBe(false);
+    expect(
+      contactFormSchema.safeParse(makeContactPayload({ email: `${local}@x.io` })).success,
+    ).toBe(false);
   });
 
   it("rejects honeypot when website is non-empty", () => {
-    const payload = { ...validPayload, website: "trap" };
-    expect(contactFormSchema.safeParse(payload).success).toBe(false);
+    expect(
+      contactFormSchema.safeParse(makeContactPayload({ website: "trap" })).success,
+    ).toBe(false);
   });
 
   it("defaults website to empty string when omitted", () => {
-    const rest: Record<string, unknown> = { ...validPayload };
+    const rest: Record<string, unknown> = { ...contactPayloadFixture };
     delete rest.website;
     const result = contactFormSchema.safeParse(rest);
     expect(result.success).toBe(true);

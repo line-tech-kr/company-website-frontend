@@ -1,70 +1,34 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { renderHook } from "@testing-library/react";
 import { act } from "react";
+import { installIntersectionObserver, type IOHarness } from "@/test/helpers/intersectionObserver";
 import { useScrollSpy } from "./useScrollSpy";
 
-type Cb = (
-  entries: Array<{ isIntersecting: boolean; target: Element }>,
-) => void;
-
-let observers: Array<{
-  callback: Cb;
-  observed: Element[];
-  disconnect: () => void;
-}> = [];
-let observerCtor: ReturnType<typeof vi.fn>;
-
-function fireEntries(
-  entries: Array<{ id: string; isIntersecting: boolean }>,
-): void {
-  const targets = entries.map(({ id, isIntersecting }) => ({
-    isIntersecting,
-    target: document.getElementById(id) as Element,
-  }));
-  for (const obs of observers) obs.callback(targets);
-}
+const SCROLL_HEIGHT = 5000;
+const VIEWPORT = 800;
+// `useScrollSpy` treats the page as "near bottom" when
+// scrollY + VIEWPORT >= SCROLL_HEIGHT - bottomEdgeOffset (default 64).
+// 4300 + 800 = 5100 ≥ 5000 − 64.
+const NEAR_BOTTOM_SCROLL_Y = 4300;
 
 const originalScrollHeight = Object.getOwnPropertyDescriptor(
   document.documentElement,
   "scrollHeight",
 );
 
+let io: IOHarness;
+
 beforeEach(() => {
-  observers = [];
-  observerCtor = vi.fn().mockImplementation(function (
-    this: IntersectionObserver,
-    cb: Cb,
-  ) {
-    const observed: Element[] = [];
-    const record = {
-      callback: cb,
-      observed,
-      disconnect: vi.fn(() => {
-        const i = observers.indexOf(record);
-        if (i >= 0) observers.splice(i, 1);
-      }),
-    };
-    observers.push(record);
-    return {
-      observe: (el: Element) => observed.push(el),
-      unobserve: vi.fn(),
-      disconnect: record.disconnect,
-      takeRecords: () => [],
-      root: null,
-      rootMargin: "",
-      thresholds: [],
-    } as unknown as IntersectionObserver;
-  });
-  vi.stubGlobal("IntersectionObserver", observerCtor);
+  io = installIntersectionObserver();
 
   Object.defineProperty(document.documentElement, "scrollHeight", {
     configurable: true,
-    value: 5000,
+    value: SCROLL_HEIGHT,
   });
   window.scrollY = 0;
   Object.defineProperty(window, "innerHeight", {
     configurable: true,
-    value: 800,
+    value: VIEWPORT,
   });
 
   document.body.innerHTML = "";
@@ -76,7 +40,6 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  vi.unstubAllGlobals();
   if (originalScrollHeight) {
     Object.defineProperty(
       document.documentElement,
@@ -97,10 +60,27 @@ describe("useScrollSpy", () => {
     expect(result.current).toBe("");
   });
 
+  it("constructs the IntersectionObserver with the default rootMargin", () => {
+    renderHook(() => useScrollSpy(["a", "b", "c"]));
+    expect(io.ctor).toHaveBeenCalledTimes(1);
+    expect(io.ctor.mock.calls[0][1]).toEqual({
+      rootMargin: "-30% 0px -70% 0px",
+    });
+  });
+
+  it("uses a caller-supplied rootMargin", () => {
+    renderHook(() =>
+      useScrollSpy(["a", "b", "c"], { rootMargin: "-10% 0px -10% 0px" }),
+    );
+    expect(io.ctor.mock.calls[0][1]).toEqual({
+      rootMargin: "-10% 0px -10% 0px",
+    });
+  });
+
   it("updates to the id of the section that becomes intersecting", () => {
     const { result } = renderHook(() => useScrollSpy(["a", "b", "c"]));
     act(() => {
-      fireEntries([{ id: "b", isIntersecting: true }]);
+      io.fire([{ id: "b", isIntersecting: true }]);
     });
     expect(result.current).toBe("b");
   });
@@ -108,7 +88,7 @@ describe("useScrollSpy", () => {
   it("prefers earlier ids when multiple sections are intersecting", () => {
     const { result } = renderHook(() => useScrollSpy(["a", "b", "c"]));
     act(() => {
-      fireEntries([
+      io.fire([
         { id: "b", isIntersecting: true },
         { id: "c", isIntersecting: true },
       ]);
@@ -117,17 +97,17 @@ describe("useScrollSpy", () => {
   });
 
   it("does not update active when scrolled near the page bottom", () => {
-    window.scrollY = 4300; // 4300 + 800 = 5100 > 5000 - 64
+    window.scrollY = NEAR_BOTTOM_SCROLL_Y;
     const { result } = renderHook(() => useScrollSpy(["a", "b", "c"]));
     act(() => {
-      fireEntries([{ id: "b", isIntersecting: true }]);
+      io.fire([{ id: "b", isIntersecting: true }]);
     });
     expect(result.current).toBe("a");
   });
 
   it("snaps to the last id on the scroll handler at the bottom", () => {
     const { result } = renderHook(() => useScrollSpy(["a", "b", "c"]));
-    window.scrollY = 4300;
+    window.scrollY = NEAR_BOTTOM_SCROLL_Y;
     act(() => {
       window.dispatchEvent(new Event("scroll"));
     });
@@ -136,8 +116,8 @@ describe("useScrollSpy", () => {
 
   it("disconnects the observer on unmount", () => {
     const { unmount } = renderHook(() => useScrollSpy(["a", "b", "c"]));
-    expect(observers).toHaveLength(1);
-    const disconnect = observers[0].disconnect;
+    expect(io.observers).toHaveLength(1);
+    const disconnect = io.observers[0].disconnect;
     unmount();
     expect(disconnect).toHaveBeenCalled();
   });
