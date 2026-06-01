@@ -40,15 +40,24 @@ export async function submitContact(
 
   const ip = await getClientIp();
 
-  const rateOk = await checkContactRateLimit(ip);
+  let rateOk: boolean;
+  try {
+    rateOk = await checkContactRateLimit(ip);
+  } catch (err) {
+    console.error("contact_submission_rate_limit_failed", err);
+    return { status: "error", errorKey: "server" };
+  }
   if (!rateOk) {
     return { status: "error", errorKey: "rateLimited" };
   }
 
-  const captchaOk = await verifyTurnstile(
-    parsed.data["cf-turnstile-response"],
-    ip,
-  );
+  let captchaOk: boolean;
+  try {
+    captchaOk = await verifyTurnstile(parsed.data["cf-turnstile-response"], ip);
+  } catch (err) {
+    console.error("contact_submission_captcha_failed", err);
+    return { status: "error", errorKey: "server" };
+  }
   if (!captchaOk) {
     return { status: "error", errorKey: "captcha" };
   }

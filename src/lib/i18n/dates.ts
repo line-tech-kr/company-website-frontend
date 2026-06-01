@@ -16,5 +16,7 @@ export function formatISODate(
     day: "numeric",
   },
 ): string {
-  return new Intl.DateTimeFormat(locale, options).format(new Date(value));
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  return new Intl.DateTimeFormat(locale, options).format(date);
 }

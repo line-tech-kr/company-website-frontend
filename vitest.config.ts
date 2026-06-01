@@ -23,6 +23,13 @@ export default defineConfig({
         "src/sanity/**",
         "src/app/studio/**",
       ],
+      // Baseline floored to whole percent; raise (never lower) as coverage grows.
+      thresholds: {
+        statements: 41,
+        branches: 35,
+        functions: 31,
+        lines: 42,
+      },
     },
   },
 });

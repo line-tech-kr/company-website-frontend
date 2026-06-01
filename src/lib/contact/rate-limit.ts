@@ -4,10 +4,11 @@ import { Redis } from "@upstash/redis";
 /**
  * Sliding-window rate limit keyed by IP. Set UPSTASH_REDIS_REST_URL and
  * UPSTASH_REDIS_REST_TOKEN to activate; without them, the limiter no-ops
- * (returns success=true). This lets the form work locally without a Redis
- * instance, while still gating production submissions.
+ * (returns success=true). In production we log loudly when the env is
+ * missing so a misconfigured deploy is visible in monitoring.
  */
 let limiter: Ratelimit | null = null;
+let warnedMissingEnv = false;
 
 function getLimiter(): Ratelimit | null {
   if (limiter) return limiter;
@@ -15,6 +16,12 @@ function getLimiter(): Ratelimit | null {
     !process.env.UPSTASH_REDIS_REST_URL ||
     !process.env.UPSTASH_REDIS_REST_TOKEN
   ) {
+    if (process.env.NODE_ENV === "production" && !warnedMissingEnv) {
+      console.error(
+        "rate-limit disabled: UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN missing in production",
+      );
+      warnedMissingEnv = true;
+    }
     return null;
   }
   limiter = new Ratelimit({
