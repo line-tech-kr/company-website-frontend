@@ -23,6 +23,15 @@ export default defineConfig({
         "src/sanity/**",
         "src/app/studio/**",
       ],
+      // Ratchet baseline pinned by #204. Raise (don't lower) as #205 + future
+      // backfills land. Floored to the nearest whole percent so cosmetic drift
+      // doesn't fail CI.
+      thresholds: {
+        statements: 41,
+        branches: 34,
+        functions: 31,
+        lines: 41,
+      },
     },
   },
 });

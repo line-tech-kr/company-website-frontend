@@ -1,10 +1,14 @@
 // @vitest-environment node
-import { describe, it, expect, vi } from "vitest";
-import { NextRequest } from "next/server";
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import { NextRequest, NextResponse } from "next/server";
 
-vi.mock("next-intl/middleware", () => ({ default: vi.fn() }));
+const { intlImplMock } = vi.hoisted(() => ({ intlImplMock: vi.fn() }));
 
-import { detectLocale } from "./middleware";
+vi.mock("next-intl/middleware", () => ({
+  default: vi.fn(() => intlImplMock),
+}));
+
+import middleware, { detectLocale } from "./middleware";
 
 function makeReq(
   url = "http://localhost/",
@@ -94,5 +98,54 @@ describe("detectLocale", () => {
 
   it("falls back to ko with no headers at all", () => {
     expect(detectLocale(makeReq())).toBe("ko");
+  });
+});
+
+describe("middleware (default export)", () => {
+  beforeEach(() => {
+    intlImplMock.mockReset();
+    intlImplMock.mockImplementation(() => NextResponse.next());
+  });
+
+  it("delegates to next-intl middleware when the path already has a known locale prefix", () => {
+    const req = makeReq("http://localhost/en/products", {
+      cookie: "NEXT_LOCALE=en",
+    });
+    const res = middleware(req);
+    expect(intlImplMock).toHaveBeenCalledWith(req);
+    expect(res).toBeInstanceOf(NextResponse);
+  });
+
+  it("sets the locale cookie when the URL locale differs from the cookie", () => {
+    const req = makeReq("http://localhost/zh/products", {
+      cookie: "NEXT_LOCALE=en",
+    });
+    const res = middleware(req);
+    expect(res.cookies.get("NEXT_LOCALE")?.value).toBe("zh");
+  });
+
+  it("does not overwrite the cookie when it already matches the URL locale", () => {
+    const req = makeReq("http://localhost/en/products", {
+      cookie: "NEXT_LOCALE=en",
+    });
+    const res = middleware(req);
+    expect(res.cookies.get("NEXT_LOCALE")).toBeUndefined();
+  });
+
+  it("redirects to /{detectedLocale}{path} when no locale prefix is present", () => {
+    const req = makeReq("http://localhost/products", {
+      headers: { "accept-language": "en" },
+    });
+    const res = middleware(req);
+    expect(res.status).toBe(307);
+    expect(res.headers.get("location")).toBe("http://localhost/en/products");
+    expect(res.cookies.get("NEXT_LOCALE")?.value).toBe("en");
+    expect(intlImplMock).not.toHaveBeenCalled();
+  });
+
+  it("delegates unknown 2-letter prefixes to next-intl for normalization", () => {
+    const req = makeReq("http://localhost/xx/about");
+    middleware(req);
+    expect(intlImplMock).toHaveBeenCalledWith(req);
   });
 });
