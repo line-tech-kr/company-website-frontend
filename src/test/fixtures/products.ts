@@ -51,9 +51,27 @@ export const rouProductFixture: Product = {
   features: [{ ko: "특징 1", en: "Feature 1", zh: "特征 1", _key: "f1" }],
   connections: [],
   instrumentSpecs: [
-    { label: "Input Power", value: "220VAC (50–60 Hz)" },
+    {
+      label: "Input Power",
+      value: "220VAC (50–60 Hz)",
+      slot: "power",
+    },
     { label: "Output Signal", value: "0–5 Vdc or 4–20 mA" },
-    { label: "Communication", value: "RS-232, RS-485" },
+    {
+      label: "Display Window",
+      value: "256×64 OLED",
+      slot: "display",
+    },
+    {
+      label: "Communication",
+      value: "RS-232, RS-485",
+      slot: "communication",
+    },
+    {
+      label: "Remote Control",
+      value: "D-SUB 9-pin",
+      slot: "connector",
+    },
   ],
   datasheets: [],
   manuals: [],

@@ -117,7 +117,11 @@
       "range": "流量范围",
       "accuracy": "精度",
       "response": "响应",
-      "fitting": "接口"
+      "fitting": "接口",
+      "display": "显示",
+      "power": "输入电源",
+      "communication": "通信",
+      "connector": "连接器"
     },
     "emptyStack": "该类别下暂无产品。",
     "showcase": {

@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { CategoryHero } from "@/components/products/CategoryHero";
 import { CategoryShowcase } from "@/components/products/CategoryShowcase";
 import { ProductStack } from "@/components/products/ProductStack";
+import { ReadoutStack } from "@/components/products/ReadoutStack";
 import { sanityClient } from "@/sanity/client";
 import { fetchSanity } from "@/sanity/fetch";
 import { productsBySeriesQuery, categoryShowcaseQuery } from "@/sanity/queries";
@@ -99,6 +100,14 @@ export default async function CategoryPage({ params }: Props) {
     response: tProducts("table.response"),
     fitting: tProducts("table.fitting"),
   };
+  const readoutHeaders = {
+    model: tProducts("table.model"),
+    description: tProducts("table.description"),
+    display: tProducts("table.display"),
+    power: tProducts("table.power"),
+    communication: tProducts("table.communication"),
+    connector: tProducts("table.connector"),
+  };
   const emptyLabel = tProducts("emptyStack");
 
   return (
@@ -152,14 +161,14 @@ export default async function CategoryPage({ params }: Props) {
           headers={headers}
         />
         {instruments.length > 0 && (
-          <ProductStack
+          <ReadoutStack
             title={tProducts("stack.instruments.title")}
             subtitle={tProducts("stack.instruments.subtitle")}
             products={instruments}
             category={category}
             locale={locale}
             emptyLabel={emptyLabel}
-            headers={headers}
+            headers={readoutHeaders}
           />
         )}
       </main>

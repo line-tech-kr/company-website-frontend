@@ -58,8 +58,21 @@ const MassFlowSpecsSchema = z.object({
   }),
 });
 
+export const READOUT_SLOTS = [
+  "display",
+  "power",
+  "communication",
+  "connector",
+] as const;
+
+export type ReadoutSlot = (typeof READOUT_SLOTS)[number];
+
 const InstrumentSpecsSchema = z.array(
-  z.object({ label: z.string(), value: z.string() }),
+  z.object({
+    label: z.string(),
+    value: z.string(),
+    slot: z.enum(READOUT_SLOTS).nullable().optional(),
+  }),
 );
 
 const SanityImageRefSchema = z.object({

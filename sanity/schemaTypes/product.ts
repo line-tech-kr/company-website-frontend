@@ -215,7 +215,7 @@ export const product = defineType({
       name: "instrumentSpecs",
       title: "Instrument specs",
       description:
-        "For non-flow instruments (ROU). Each row: label + value string.",
+        "For non-flow instruments (ROU). Each row: label + value string. Set 'slot' to surface the row as a column in the readout listing table.",
       type: "array",
       of: [
         {
@@ -230,6 +230,20 @@ export const product = defineType({
               name: "value",
               type: "string",
               validation: (r) => r.required(),
+            }),
+            defineField({
+              name: "slot",
+              title: "Readout column slot",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Display", value: "display" },
+                  { title: "Input power", value: "power" },
+                  { title: "Communication", value: "communication" },
+                  { title: "Connector", value: "connector" },
+                ],
+                layout: "dropdown",
+              },
             }),
           ],
           preview: { select: { title: "label", subtitle: "value" } },
