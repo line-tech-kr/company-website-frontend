@@ -16,7 +16,7 @@ export function formatYearMonth(value: string, locale: string): string {
   }).format(date);
 }
 
-export function formatISODate(
+export function formatLongDate(
   value: string | null | undefined,
   locale: string,
   options: Intl.DateTimeFormatOptions = {
@@ -34,7 +34,7 @@ export function formatShortDate(
   value: string | null | undefined,
   locale: string,
 ): string {
-  return formatISODate(value, locale, {
+  return formatLongDate(value, locale, {
     year: "numeric",
     month: "short",
     day: "numeric",

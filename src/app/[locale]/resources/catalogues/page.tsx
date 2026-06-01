@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { DocRow } from "@/components/resources/DocRow";
 import { ResourceSubpageShell } from "@/components/resources/ResourceSubpageShell";
-import { formatISODate } from "@/lib/i18n/dates";
+import { formatLongDate } from "@/lib/i18n/dates";
 import { sanityClient } from "@/sanity/client";
 import { allCataloguesQuery } from "@/sanity/queries";
 import type { Locale } from "@/lib/content/home";
@@ -35,8 +36,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CataloguesPage({ params }: Props) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const [ctx, catalogues] = await Promise.all([
-    getResourceSubpageContext(locale, "catalogues"),
+    getResourceSubpageContext("catalogues"),
     sanityClient.fetch<CatalogueItem[]>(allCataloguesQuery),
   ]);
   const { tRes, breadcrumbs, title, intro } = ctx;
@@ -60,7 +62,7 @@ export default async function CataloguesPage({ params }: Props) {
                   tRes(
                     `seriesLabel.${item.series as "all" | "analogue" | "digital" | "specialized"}`,
                   ),
-                item.publishedAt && formatISODate(item.publishedAt, locale),
+                item.publishedAt && formatLongDate(item.publishedAt, locale),
               ]}
               action={
                 item.fileUrl ? (

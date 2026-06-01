@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { DocRow } from "@/components/resources/DocRow";
@@ -11,15 +12,13 @@ import { buildResourcesMetadata } from "@/lib/seo";
 import {
   getResourceSubpageContext,
   resourceSubpageStaticParams,
+  SERIES_ORDER,
 } from "@/lib/pages/resourceSubpage";
 import "../resources-subpage.css";
 
 export const revalidate = 3600;
 
 type Props = { params: Promise<{ locale: string }> };
-
-type Series = "analogue" | "digital" | "specialized";
-const SERIES_ORDER: Series[] = ["analogue", "digital", "specialized"];
 
 type DatasheetItem = {
   _id: string;
@@ -44,8 +43,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function DatasheetsPage({ params }: Props) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const [ctx, datasheets] = await Promise.all([
-    getResourceSubpageContext(locale, "datasheets"),
+    getResourceSubpageContext("datasheets"),
     sanityClient.fetch<DatasheetItem[]>(allDatasheetsQuery),
   ]);
   const { tRes, breadcrumbs, title, intro } = ctx;

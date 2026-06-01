@@ -4,27 +4,36 @@ import {
   type BreadcrumbItem,
 } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 
+export type SidebarShellVariant = "accessories" | "company";
+
+const VARIANT_CLASSES: Record<
+  SidebarShellVariant,
+  { wrapper: string; main: string }
+> = {
+  accessories: { wrapper: "acc", main: "acc-main" },
+  company: { wrapper: "co", main: "co-main" },
+};
+
 type Props = {
   breadcrumbs: BreadcrumbItem[];
   sideNav: ReactNode;
-  wrapperClassName: string;
-  mainClassName: string;
+  variant: SidebarShellVariant;
   children: ReactNode;
 };
 
 export function SidebarShell({
   breadcrumbs,
   sideNav,
-  wrapperClassName,
-  mainClassName,
+  variant,
   children,
 }: Props) {
+  const cls = VARIANT_CLASSES[variant];
   return (
     <main className="lt-wrap">
       <Breadcrumbs items={breadcrumbs} />
-      <div className={wrapperClassName}>
+      <div className={cls.wrapper}>
         {sideNav}
-        <div className={mainClassName}>{children}</div>
+        <div className={cls.main}>{children}</div>
       </div>
     </main>
   );

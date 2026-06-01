@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { ResourceSubpageShell } from "@/components/resources/ResourceSubpageShell";
@@ -44,8 +45,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function DrawingsPage({ params }: Props) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const [ctx, drawings] = await Promise.all([
-    getResourceSubpageContext(locale, "drawings"),
+    getResourceSubpageContext("drawings"),
     sanityClient.fetch<DrawingItem[]>(allDrawingsQuery),
   ]);
   const { tRes, breadcrumbs, title, intro } = ctx;

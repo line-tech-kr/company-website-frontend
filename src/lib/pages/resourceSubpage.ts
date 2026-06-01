@@ -1,4 +1,4 @@
-import { setRequestLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 
 export type ResourceSubpageKind =
@@ -7,9 +7,10 @@ export type ResourceSubpageKind =
   | "catalogues"
   | "drawings";
 
+export type Series = "analogue" | "digital" | "specialized";
+export const SERIES_ORDER: Series[] = ["analogue", "digital", "specialized"];
+
 export type ResourceSubpageContext = {
-  tCommon: Awaited<ReturnType<typeof getTranslations<"common">>>;
-  tNav: Awaited<ReturnType<typeof getTranslations<"nav">>>;
   tRes: Awaited<ReturnType<typeof getTranslations<"resources">>>;
   breadcrumbs: Array<{ label: string; href?: string }>;
   title: string;
@@ -17,18 +18,14 @@ export type ResourceSubpageContext = {
 };
 
 export async function getResourceSubpageContext(
-  locale: string,
   kind: ResourceSubpageKind,
 ): Promise<ResourceSubpageContext> {
-  setRequestLocale(locale);
   const [tCommon, tNav, tRes] = await Promise.all([
     getTranslations("common"),
     getTranslations("nav"),
     getTranslations("resources"),
   ]);
   return {
-    tCommon,
-    tNav,
     tRes,
     breadcrumbs: [
       { label: tCommon("home"), href: "/" },
