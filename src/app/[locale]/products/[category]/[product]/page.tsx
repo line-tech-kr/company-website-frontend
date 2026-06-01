@@ -62,6 +62,7 @@ const SPEC_GROUPS: Array<{
     num: "01",
     keys: [
       "flowRange",
+      "pressureRange",
       "responseTime",
       "accuracy",
       "repeatability",
@@ -183,8 +184,11 @@ export default async function ProductPage({ params }: Props) {
         }),
       }));
 
-  const primaryRange =
+  // EPCs have pressureRange in place of flowRange — pick whichever exists
+  // for the headline overview row.
+  const headlineRange =
     product.massFlowSpecs?.flowRange ?? product.massFlowSpecs?.pressureRange;
+
   const overviewRows = isROU
     ? (product.instrumentSpecs?.rows ?? []).slice(0, 3).map((r) => ({
         feature: r.label,
@@ -194,10 +198,8 @@ export default async function ProductPage({ params }: Props) {
         {
           feature: features[0] ?? "",
           values: [
-            primaryRange ? loc(primaryRange.display) : "",
-            product.massFlowSpecs
-              ? loc(product.massFlowSpecs.accuracy.display)
-              : "",
+            loc(headlineRange!.display),
+            loc(product.massFlowSpecs!.accuracy.display),
           ],
         },
         {
@@ -245,18 +247,6 @@ export default async function ProductPage({ params }: Props) {
         rev: m.rev ?? undefined,
         date: formatDate(m.publishedAt ?? m.updatedAt, locale),
       })),
-    ...product.certifications
-      .filter((c) => c.fileUrl)
-      .map<DownloadItem>((c) => {
-        const issuer = c.issuer?.[locale] ?? c.issuer?.en ?? null;
-        return {
-          label: issuer ? `${c.name} — ${issuer}` : c.name,
-          type: "CERT",
-          href: c.fileUrl ?? undefined,
-          size: formatBytes(c.size),
-          date: c.validThrough ?? "",
-        };
-      }),
     ...product.drawings.flatMap<DownloadItem>((d) => {
       const items: DownloadItem[] = [];
       if (d.pdfUrl) {
@@ -315,13 +305,24 @@ export default async function ProductPage({ params }: Props) {
         value: r.value,
       }))
     : [
-        {
-          "@type": "PropertyValue",
-          name: product.massFlowSpecs?.flowRange
-            ? "Flow Range"
-            : "Pressure Range",
-          value: primaryRange?.display ?? "",
-        },
+        ...(product.massFlowSpecs?.flowRange
+          ? [
+              {
+                "@type": "PropertyValue",
+                name: "Flow Range",
+                value: product.massFlowSpecs.flowRange.display,
+              },
+            ]
+          : []),
+        ...(product.massFlowSpecs?.pressureRange
+          ? [
+              {
+                "@type": "PropertyValue",
+                name: "Pressure Range",
+                value: product.massFlowSpecs.pressureRange.display,
+              },
+            ]
+          : []),
         {
           "@type": "PropertyValue",
           name: "Accuracy",
@@ -380,9 +381,7 @@ export default async function ProductPage({ params }: Props) {
     sku: product.model,
     description: isROU
       ? productLabel
-      : primaryRange
-        ? `${productLabel} — ${primaryRange.display} ${product.massFlowSpecs?.flowRange ? "flow range" : "pressure range"}, ${product.massFlowSpecs!.accuracy.display} accuracy`
-        : productLabel,
+      : `${productLabel} — ${headlineRange!.display} ${product.massFlowSpecs?.pressureRange ? "pressure range" : "flow range"}, ${product.massFlowSpecs!.accuracy.display} accuracy`,
     brand: {
       "@type": "Brand",
       name: "Line Tech",

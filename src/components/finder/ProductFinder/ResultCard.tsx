@@ -17,8 +17,7 @@ export function ResultCard({ match, locale, rankLabel }: Props) {
   const { product, fitScore } = match;
   const category = categoryForSeries(product.series);
   const href = `/products/${category}/${product.slug.current}`;
-  // findProducts only emits matches whose massFlowSpecs+flowRange are set,
-  // so the non-null assertions are safe here.
+  // findProducts only emits matches with flow-controller specs.
   const specs = product.massFlowSpecs!;
   const range = localizeSpecValue(specs.flowRange!.display, locale);
   const accuracy = localizeSpecValue(specs.accuracy.display, locale);

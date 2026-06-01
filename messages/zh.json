@@ -45,6 +45,7 @@
   "product": {
     "specs": {
       "flowRange": "流量范围",
+      "pressureRange": "压力范围",
       "responseTime": "响应时间",
       "accuracy": "精度",
       "repeatability": "重复性",
@@ -315,7 +316,8 @@
       "captcha": "验证失败，请重新完成验证。",
       "server": "无法发送您的消息。请直接通过邮件联系我们。"
     },
-    "success": "感谢您的留言，我们将在 2 个工作日内回复。",
+    "successTitle": "您的咨询已发送。",
+    "success": "Line Tech 负责人将通过您填写的邮箱回复。",
     "submitting": "发送中…",
     "slaHint": "我们通常在2个工作日内回复。"
   }

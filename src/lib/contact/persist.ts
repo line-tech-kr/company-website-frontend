@@ -1,9 +1,23 @@
-import { sanityWriteClient } from "@/sanity/writeClient";
+import { createClient } from "@sanity/client";
+import { apiVersion, dataset, projectId } from "@/sanity/env";
 import type { ContactFormPayload } from "./schema";
 
 export async function persistContactSubmission(
   data: ContactFormPayload,
 ): Promise<void> {
+  const token = process.env.SANITY_WRITE_TOKEN;
+  if (!token) {
+    throw new Error("SANITY_WRITE_TOKEN is not set");
+  }
+
+  const sanityWriteClient = createClient({
+    projectId,
+    dataset,
+    apiVersion,
+    useCdn: false,
+    token,
+  });
+
   await sanityWriteClient.create({
     _type: "contactSubmission",
     submittedAt: new Date().toISOString(),

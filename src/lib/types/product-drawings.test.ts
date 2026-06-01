@@ -12,6 +12,15 @@ const SANITY_BASE = {
 };
 
 describe("SanityProductSchema drawings (#174)", () => {
+  it("normalizes null connections for instruments without fluid fittings", () => {
+    const parsed = SanityProductSchema.parse({
+      ...SANITY_BASE,
+      connections: null,
+    });
+
+    expect(parsed.connections).toEqual([]);
+  });
+
   it("accepts drawings with models[], pdfUrl, pdfSize, and stpVariants[]", () => {
     const parsed = SanityProductSchema.parse({
       ...SANITY_BASE,

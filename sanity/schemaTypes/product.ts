@@ -118,6 +118,18 @@ export const product = defineType({
           ],
         }),
         defineField({
+          name: "pressureRange",
+          title: "Pressure range",
+          description: "Operating pressure range — for EPC products only.",
+          type: "object",
+          fields: [
+            displayField,
+            numberField("min"),
+            numberField("max"),
+            stringField("unit"),
+          ],
+        }),
+        defineField({
           name: "responseTime",
           type: "object",
           fields: [

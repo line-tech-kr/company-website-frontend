@@ -35,6 +35,9 @@ export function ContactForm({ form, defaults }: Props) {
   );
 
   const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
+  const turnstileRequired = process.env.NODE_ENV === "production";
+  const canSubmit =
+    consent && (!turnstileRequired || Boolean(turnstileSiteKey));
 
   const errorMessage =
     state.status === "error" && state.errorKey
@@ -43,8 +46,15 @@ export function ContactForm({ form, defaults }: Props) {
 
   if (state.status === "success") {
     return (
-      <div className="ct-form__success" role="status">
-        {t("success")}
+      <div className="ct-form__success" role="status" aria-live="polite">
+        <div className="ct-form__success-icon" aria-hidden>
+          ✓
+        </div>
+        <div>
+          <h3 className="ct-form__success-title">{t("successTitle")}</h3>
+          <p className="ct-form__success-body">{t("success")}</p>
+          <p className="ct-form__success-note">{t("slaHint")}</p>
+        </div>
       </div>
     );
   }
@@ -238,6 +248,13 @@ export function ContactForm({ form, defaults }: Props) {
 
       <div className="ct-form__captcha">
         <Turnstile siteKey={turnstileSiteKey} />
+        {!turnstileSiteKey && !turnstileRequired && (
+          <input
+            type="hidden"
+            name="cf-turnstile-response"
+            value="dev-preview"
+          />
+        )}
       </div>
 
       {errorMessage && (
@@ -251,11 +268,11 @@ export function ContactForm({ form, defaults }: Props) {
           variant="primary"
           size="lg"
           type="submit"
-          disabled={isPending || !turnstileSiteKey || !consent}
+          disabled={isPending || !canSubmit}
         >
           {isPending ? t("submitting") : form.submit}
         </Button>
-        {!turnstileSiteKey && (
+        {!turnstileSiteKey && turnstileRequired && (
           <p className="ct-form__help">{form.submitDisabledHelp}</p>
         )}
       </div>
