@@ -70,7 +70,7 @@
         "industriesLabel": "服务行业",
         "industriesSub": "1997 年起现场验证",
         "certificationsLabel": "认证",
-        "certificationsSub": "KGS · CE · ISO 9001"
+        "certificationsSub": "ISO 9001 · CE · IECEx"
       },
       "applications": {
         "label": "常见应用",
@@ -279,7 +279,9 @@
     },
     "certifications": {
       "title": "认证文件",
-      "intro": "莱因技术持有的质量管理及产品合规认证证书。"
+      "intro": "莱因技术持有的质量管理及产品合规认证证书。",
+      "companyWideHeading": "公司认证",
+      "productSpecificHeading": "产品合规文件"
     },
     "download": "下载",
     "comingSoon": "文件准备中",
@@ -297,7 +299,8 @@
     "certCard": {
       "issuer": "颁发机构",
       "scope": "认证范围",
-      "validThrough": "有效期至"
+      "validThrough": "有效期至",
+      "appliesTo": "适用型号"
     },
     "empty": "暂无可用文件，敬请期待。",
     "emptyStateCta": "联系我们",

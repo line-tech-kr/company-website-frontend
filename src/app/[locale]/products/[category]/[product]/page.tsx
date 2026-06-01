@@ -159,7 +159,7 @@ export default async function ProductPage({ params }: Props) {
           id: "instrument",
           num: "01",
           label: tPdp("tabs.specs"),
-          rows: (product.instrumentSpecs?.rows ?? []).map((r) => ({
+          rows: (product.instrumentSpecs ?? []).map((r) => ({
             key: r.label,
             label: r.label,
             value: r.value,
@@ -190,7 +190,7 @@ export default async function ProductPage({ params }: Props) {
     product.massFlowSpecs?.flowRange ?? product.massFlowSpecs?.pressureRange;
 
   const overviewRows = isROU
-    ? (product.instrumentSpecs?.rows ?? []).slice(0, 3).map((r) => ({
+    ? (product.instrumentSpecs ?? []).slice(0, 3).map((r) => ({
         feature: r.label,
         values: [r.value],
       }))
@@ -247,6 +247,18 @@ export default async function ProductPage({ params }: Props) {
         rev: m.rev ?? undefined,
         date: formatDate(m.publishedAt ?? m.updatedAt, locale),
       })),
+    ...product.certifications
+      .filter((c) => c.fileUrl)
+      .map<DownloadItem>((c) => {
+        const issuer = c.issuer?.[locale] ?? c.issuer?.en ?? null;
+        return {
+          label: issuer ? `${c.name} — ${issuer}` : c.name,
+          type: "CERT",
+          href: c.fileUrl ?? undefined,
+          size: formatBytes(c.size),
+          date: c.validThrough ?? "",
+        };
+      }),
     ...product.drawings.flatMap<DownloadItem>((d) => {
       const items: DownloadItem[] = [];
       if (d.pdfUrl) {
@@ -299,7 +311,7 @@ export default async function ProductPage({ params }: Props) {
   const productLabel = product.productLabel[locale];
 
   const additionalProperties = isROU
-    ? (product.instrumentSpecs?.rows ?? []).map((r) => ({
+    ? (product.instrumentSpecs ?? []).map((r) => ({
         "@type": "PropertyValue",
         name: r.label,
         value: r.value,

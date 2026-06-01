@@ -8,6 +8,7 @@ import { allCertificationsQuery } from "@/sanity/queries";
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
 import { buildResourcesMetadata } from "@/lib/seo";
+import { splitCerts } from "./splitCerts";
 import "../resources-subpage.css";
 
 export const revalidate = 3600;
@@ -24,6 +25,7 @@ type CertItem = {
   } | null;
   scope?: { ko?: string | null; en?: string | null; zh?: string | null } | null;
   validThrough?: string | null;
+  models?: string[] | null;
   fileUrl?: string | null;
 };
 
@@ -50,12 +52,64 @@ export default async function CertificationsPage({ params }: Props) {
   ]);
 
   const lang = locale as Locale;
+  const { companyWide, productSpecific } = splitCerts(certs);
 
   const breadcrumbs = [
     { label: tCommon("home"), href: "/" },
     { label: tNav("dataRoom"), href: "/resources" },
     { label: tRes("certifications.title") },
   ];
+
+  const renderCert = (cert: CertItem) => {
+    const issuer = cert.issuer?.[lang] ?? cert.issuer?.en ?? null;
+    const scope = cert.scope?.[lang] ?? cert.scope?.en ?? null;
+    const models = cert.models ?? [];
+    return (
+      <li key={cert._id} id={cert.slug ?? cert._id} className="dr-cert">
+        <h3 className="dr-cert__name">{cert.name}</h3>
+        <dl className="dr-cert__dl">
+          {issuer && (
+            <>
+              <dt className="dr-cert__dt">{tRes("certCard.issuer")}</dt>
+              <dd className="dr-cert__dd">{issuer}</dd>
+            </>
+          )}
+          {scope && (
+            <>
+              <dt className="dr-cert__dt">{tRes("certCard.scope")}</dt>
+              <dd className="dr-cert__dd">{scope}</dd>
+            </>
+          )}
+          {cert.validThrough && (
+            <>
+              <dt className="dr-cert__dt">{tRes("certCard.validThrough")}</dt>
+              <dd className="dr-cert__dd">{cert.validThrough}</dd>
+            </>
+          )}
+          {models.length > 0 && (
+            <>
+              <dt className="dr-cert__dt">{tRes("certCard.appliesTo")}</dt>
+              <dd className="dr-cert__dd">{models.join(", ")}</dd>
+            </>
+          )}
+        </dl>
+        <div className="dr-cert__footer">
+          {cert.fileUrl ? (
+            <a href={cert.fileUrl} download className="dr-list__btn">
+              {tRes("download")}
+            </a>
+          ) : (
+            <Link
+              href={`/contact?topic=request&file=${encodeURIComponent(cert.name)}`}
+              className="dr-list__btn dr-list__btn--request"
+            >
+              {tRes("requestFile")}
+            </Link>
+          )}
+        </div>
+      </li>
+    );
+  };
 
   return (
     <main className="lt-wrap dr-sub">
@@ -73,57 +127,28 @@ export default async function CertificationsPage({ params }: Props) {
           ctaLabel={tRes("emptyStateCta")}
         />
       ) : (
-        <ul className="dr-certs" role="list">
-          {certs.map((cert) => {
-            const issuer = cert.issuer?.[lang] ?? cert.issuer?.en ?? null;
-            const scope = cert.scope?.[lang] ?? cert.scope?.en ?? null;
-            return (
-              <li
-                key={cert._id}
-                id={cert.slug ?? undefined}
-                className="dr-cert"
-              >
-                <h2 className="dr-cert__name">{cert.name}</h2>
-                <dl className="dr-cert__dl">
-                  {issuer && (
-                    <>
-                      <dt className="dr-cert__dt">{tRes("certCard.issuer")}</dt>
-                      <dd className="dr-cert__dd">{issuer}</dd>
-                    </>
-                  )}
-                  {scope && (
-                    <>
-                      <dt className="dr-cert__dt">{tRes("certCard.scope")}</dt>
-                      <dd className="dr-cert__dd">{scope}</dd>
-                    </>
-                  )}
-                  {cert.validThrough && (
-                    <>
-                      <dt className="dr-cert__dt">
-                        {tRes("certCard.validThrough")}
-                      </dt>
-                      <dd className="dr-cert__dd">{cert.validThrough}</dd>
-                    </>
-                  )}
-                </dl>
-                <div className="dr-cert__footer">
-                  {cert.fileUrl ? (
-                    <a href={cert.fileUrl} download className="dr-list__btn">
-                      {tRes("download")}
-                    </a>
-                  ) : (
-                    <Link
-                      href={`/contact?topic=request&file=${encodeURIComponent(cert.name)}`}
-                      className="dr-list__btn dr-list__btn--request"
-                    >
-                      {tRes("requestFile")}
-                    </Link>
-                  )}
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+        <>
+          {companyWide.length > 0 && (
+            <section className="dr-cert-group">
+              <h2 className="dr-cert-group__heading">
+                {tRes("certifications.companyWideHeading")}
+              </h2>
+              <ul className="dr-certs" role="list">
+                {companyWide.map(renderCert)}
+              </ul>
+            </section>
+          )}
+          {productSpecific.length > 0 && (
+            <section className="dr-cert-group">
+              <h2 className="dr-cert-group__heading">
+                {tRes("certifications.productSpecificHeading")}
+              </h2>
+              <ul className="dr-certs" role="list">
+                {productSpecific.map(renderCert)}
+              </ul>
+            </section>
+          )}
+        </>
       )}
     </main>
   );

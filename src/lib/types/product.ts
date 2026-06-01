@@ -58,9 +58,9 @@ const MassFlowSpecsSchema = z.object({
   }),
 });
 
-const InstrumentSpecsSchema = z.object({
-  rows: z.array(z.object({ label: z.string(), value: z.string() })),
-});
+const InstrumentSpecsSchema = z.array(
+  z.object({ label: z.string(), value: z.string() }),
+);
 
 const SanityImageRefSchema = z.object({
   _ref: z.string(),
@@ -200,6 +200,34 @@ export const SanityProductSchema = z.object({
         pdfUrl: z.string().nullable().optional(),
         pdfSize: z.number().nullable().optional(),
         updatedAt: z.string().nullable().optional(),
+      }),
+    )
+    .default([]),
+  certifications: z
+    .array(
+      z.object({
+        _id: z.string(),
+        name: z.string(),
+        slug: z.string().nullable().optional(),
+        issuer: z
+          .object({
+            ko: z.string().nullable().optional(),
+            en: z.string().nullable().optional(),
+            zh: z.string().nullable().optional(),
+          })
+          .nullable()
+          .optional(),
+        scope: z
+          .object({
+            ko: z.string().nullable().optional(),
+            en: z.string().nullable().optional(),
+            zh: z.string().nullable().optional(),
+          })
+          .nullable()
+          .optional(),
+        validThrough: z.string().nullable().optional(),
+        fileUrl: z.string().nullable().optional(),
+        size: z.number().nullable().optional(),
       }),
     )
     .default([]),

@@ -70,7 +70,7 @@
         "industriesLabel": "적용 산업",
         "industriesSub": "1997년부터 현장 검증",
         "certificationsLabel": "인증",
-        "certificationsSub": "KGS · CE · ISO 9001"
+        "certificationsSub": "ISO 9001 · CE · IECEx"
       },
       "applications": {
         "label": "주요 적용 분야",
@@ -279,7 +279,9 @@
     },
     "certifications": {
       "title": "인증서",
-      "intro": "라인테크가 보유한 품질경영 및 제품 적합성 인증서입니다."
+      "intro": "라인테크가 보유한 품질경영 및 제품 적합성 인증서입니다.",
+      "companyWideHeading": "전사 인증",
+      "productSpecificHeading": "제품별 적합성"
     },
     "download": "다운로드",
     "comingSoon": "파일 준비 중",
@@ -297,7 +299,8 @@
     "certCard": {
       "issuer": "발급 기관",
       "scope": "인증 범위",
-      "validThrough": "유효 기간"
+      "validThrough": "유효 기간",
+      "appliesTo": "적용 모델"
     },
     "empty": "아직 등록된 파일이 없습니다. 곧 업데이트될 예정입니다.",
     "emptyStateCta": "문의하기",

@@ -179,7 +179,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           featured: {
             eyebrow: "신뢰",
             title: "인증서",
-            blurb: "ISO 9001 · CE · INNOBIZ · RoHS / REACH 외 9종.",
+            blurb: "ISO 9001 · CE · INNOBIZ · IECEx 외 11종.",
             href: "/company#certifications",
             cta: "전체 인증 보기",
           },
@@ -376,7 +376,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
             eyebrow: "Trust",
             title: "Certifications",
             blurb:
-              "ISO 9001, CE, INNOBIZ, RoHS / REACH and 9 more — everything procurement teams typically request.",
+              "ISO 9001, CE, INNOBIZ, IECEx and 11 more — everything procurement teams typically request.",
             href: "/company#certifications",
             cta: "View all certifications",
           },
@@ -565,7 +565,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
           featured: {
             eyebrow: "信赖",
             title: "资质认证",
-            blurb: "ISO 9001 · CE · INNOBIZ · RoHS / REACH 等认证文件。",
+            blurb: "ISO 9001 · CE · INNOBIZ · IECEx 等认证文件。",
             href: "/company#certifications",
             cta: "查看全部认证",
           },

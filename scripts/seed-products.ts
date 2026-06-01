@@ -43,11 +43,14 @@ function productToSeedFields(p: Product) {
     productLabel: localizedToArray(p.productLabel),
     ...(p.description ? { description: p.description } : {}),
     features: p.features.map((f, i) => ({ ...f, _key: `feature-${i}` })),
-    connections: p.connections.map((c, i) => ({ ...c, _key: `conn-${i}` })),
+    connections: (p.connections ?? []).map((c, i) => ({
+      ...c,
+      _key: `conn-${i}`,
+    })),
     ...(p.massFlowSpecs ? { massFlowSpecs: p.massFlowSpecs } : {}),
   };
   if (p.instrumentSpecs) {
-    fields.instrumentSpecs = p.instrumentSpecs.rows.map((r, i) => ({
+    fields.instrumentSpecs = p.instrumentSpecs.map((r, i) => ({
       ...r,
       _key: `spec-${i}`,
     }));

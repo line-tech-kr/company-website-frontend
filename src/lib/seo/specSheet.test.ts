@@ -44,7 +44,7 @@ describe("buildSpecJson", () => {
     expect(without.instrumentSpecs).toBeUndefined();
 
     const product = makeProduct({
-      instrumentSpecs: { rows: [{ label: "Display", value: "LCD" }] },
+      instrumentSpecs: [{ label: "Display", value: "LCD" }],
     });
     const withRows = buildSpecJson(product, siteUrl);
     expect(withRows.instrumentSpecs).toEqual([
@@ -92,7 +92,7 @@ describe("buildSpecMarkdown", () => {
 
   it("uses instrumentSpecs rows when present, instead of massFlowSpecs", () => {
     const product = makeProduct({
-      instrumentSpecs: { rows: [{ label: "Display", value: "LCD" }] },
+      instrumentSpecs: [{ label: "Display", value: "LCD" }],
     });
     const md = buildSpecMarkdown(product, siteUrl);
     expect(md).toContain("| Display | LCD |");

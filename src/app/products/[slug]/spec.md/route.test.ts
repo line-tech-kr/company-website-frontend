@@ -1,7 +1,11 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { mockFetchSanity } from "@/test/mocks/sanity";
 import { GET } from "./route";
-import { makeProduct, productFixture } from "@/test/fixtures/products";
+import {
+  makeProduct,
+  productFixture,
+  rouProductFixture,
+} from "@/test/fixtures/products";
 
 describe("GET /products/[slug]/spec.md", () => {
   beforeEach(() => {
@@ -47,5 +51,18 @@ describe("GET /products/[slug]/spec.md", () => {
     });
     const body = await res.text();
     expect(body).toContain("# OVERRIDE-9000 — Digital Mass Flow Meter");
+  });
+
+  it("renders instrumentSpecs rows for a ROU product", async () => {
+    mockFetchSanity({ specMd: () => rouProductFixture });
+    const res = await GET(new Request("http://test/products/rou-test"), {
+      params: Promise.resolve({ slug: "rou-test" }),
+    });
+    expect(res.status).toBe(200);
+    const body = await res.text();
+    expect(body).toContain("# ROU-TEST");
+    expect(body).toContain("| Input Power | 220VAC (50–60 Hz) |");
+    expect(body).toContain("| Communication | RS-232, RS-485 |");
+    expect(body).not.toContain("Flow range");
   });
 });
