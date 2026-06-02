@@ -44,6 +44,11 @@ export function ContactForm({ form, defaults }: Props) {
       ? t(`errors.${state.errorKey}`)
       : null;
 
+  const invalidFields = new Set(
+    state.status === "error" ? (state.fieldErrors ?? []) : [],
+  );
+  const fieldErrId = (name: string) => `ct-${name}-err`;
+
   if (state.status === "success") {
     return (
       <div className="ct-form__success" role="status" aria-live="polite">
@@ -93,7 +98,17 @@ export function ContactForm({ form, defaults }: Props) {
             required
             value={type}
             onChange={(e) => setType(e.target.value)}
-            className="ct-form__select"
+            className={
+              invalidFields.has("inquiryType")
+                ? "ct-form__select ct-form__select--invalid"
+                : "ct-form__select"
+            }
+            aria-invalid={invalidFields.has("inquiryType") || undefined}
+            aria-describedby={
+              invalidFields.has("inquiryType")
+                ? fieldErrId("inquiryType")
+                : undefined
+            }
           >
             <option value="" disabled>
               {form.placeholders.inquiryType}
@@ -104,6 +119,15 @@ export function ContactForm({ form, defaults }: Props) {
               </option>
             ))}
           </select>
+          {invalidFields.has("inquiryType") && (
+            <p
+              id={fieldErrId("inquiryType")}
+              className="ct-form__field-error"
+              role="alert"
+            >
+              {t("fieldErrors.inquiryType")}
+            </p>
+          )}
         </div>
 
         {extra && (
@@ -126,8 +150,27 @@ export function ContactForm({ form, defaults }: Props) {
               defaultValue={
                 type === defaults?.inquiryType ? defaults.extraField : undefined
               }
-              className="ct-form__input"
+              className={
+                invalidFields.has("typeDetail")
+                  ? "ct-form__input ct-form__input--invalid"
+                  : "ct-form__input"
+              }
+              aria-invalid={invalidFields.has("typeDetail") || undefined}
+              aria-describedby={
+                invalidFields.has("typeDetail")
+                  ? fieldErrId("typeDetail")
+                  : undefined
+              }
             />
+            {invalidFields.has("typeDetail") && (
+              <p
+                id={fieldErrId("typeDetail")}
+                className="ct-form__field-error"
+                role="alert"
+              >
+                {t("fieldErrors.typeDetail")}
+              </p>
+            )}
           </div>
         )}
 
@@ -145,8 +188,25 @@ export function ContactForm({ form, defaults }: Props) {
             autoComplete="name"
             required
             placeholder={form.placeholders.name}
-            className="ct-form__input"
+            className={
+              invalidFields.has("name")
+                ? "ct-form__input ct-form__input--invalid"
+                : "ct-form__input"
+            }
+            aria-invalid={invalidFields.has("name") || undefined}
+            aria-describedby={
+              invalidFields.has("name") ? fieldErrId("name") : undefined
+            }
           />
+          {invalidFields.has("name") && (
+            <p
+              id={fieldErrId("name")}
+              className="ct-form__field-error"
+              role="alert"
+            >
+              {t("fieldErrors.name")}
+            </p>
+          )}
         </div>
 
         <div className="ct-form__row">
@@ -163,8 +223,25 @@ export function ContactForm({ form, defaults }: Props) {
             autoComplete="email"
             required
             placeholder={form.placeholders.email}
-            className="ct-form__input"
+            className={
+              invalidFields.has("email")
+                ? "ct-form__input ct-form__input--invalid"
+                : "ct-form__input"
+            }
+            aria-invalid={invalidFields.has("email") || undefined}
+            aria-describedby={
+              invalidFields.has("email") ? fieldErrId("email") : undefined
+            }
           />
+          {invalidFields.has("email") && (
+            <p
+              id={fieldErrId("email")}
+              className="ct-form__field-error"
+              role="alert"
+            >
+              {t("fieldErrors.email")}
+            </p>
+          )}
         </div>
 
         <div className="ct-form__row">
@@ -223,8 +300,25 @@ export function ContactForm({ form, defaults }: Props) {
             rows={6}
             placeholder={form.placeholders.message}
             defaultValue={defaults?.message}
-            className="ct-form__textarea"
+            className={
+              invalidFields.has("message")
+                ? "ct-form__textarea ct-form__textarea--invalid"
+                : "ct-form__textarea"
+            }
+            aria-invalid={invalidFields.has("message") || undefined}
+            aria-describedby={
+              invalidFields.has("message") ? fieldErrId("message") : undefined
+            }
           />
+          {invalidFields.has("message") && (
+            <p
+              id={fieldErrId("message")}
+              className="ct-form__field-error"
+              role="alert"
+            >
+              {t("fieldErrors.message")}
+            </p>
+          )}
         </div>
       </div>
 
@@ -235,6 +329,10 @@ export function ContactForm({ form, defaults }: Props) {
             name="consent"
             checked={consent}
             onChange={(e) => setConsent(e.target.checked)}
+            aria-invalid={invalidFields.has("consent") || undefined}
+            aria-describedby={
+              invalidFields.has("consent") ? fieldErrId("consent") : undefined
+            }
           />
           <span>
             {form.consent.prefix}
@@ -244,6 +342,15 @@ export function ContactForm({ form, defaults }: Props) {
             {form.consent.suffix}
           </span>
         </label>
+        {invalidFields.has("consent") && (
+          <p
+            id={fieldErrId("consent")}
+            className="ct-form__field-error"
+            role="alert"
+          >
+            {t("fieldErrors.consent")}
+          </p>
+        )}
       </div>
 
       <div className="ct-form__captcha">

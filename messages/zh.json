@@ -315,10 +315,18 @@
   },
   "contactForm": {
     "errors": {
-      "invalid": "请检查标记的字段后重试。",
+      "invalid": "请检查下方标记的字段。",
       "rateLimited": "提交过于频繁，请稍后再试。",
       "captcha": "验证失败，请重新完成验证。",
       "server": "无法发送您的消息。请直接通过邮件联系我们。"
+    },
+    "fieldErrors": {
+      "inquiryType": "请选择咨询类型。",
+      "typeDetail": "请填写此项。",
+      "name": "请输入您的姓名。",
+      "email": "请输入有效的邮箱地址。",
+      "message": "请输入您的咨询内容。",
+      "consent": "请同意隐私政策后继续。"
     },
     "successTitle": "您的咨询已发送。",
     "success": "Line Tech 负责人将通过您填写的邮箱回复。",

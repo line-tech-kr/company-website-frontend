@@ -168,6 +168,24 @@
   border-color: var(--pd-primary);
   box-shadow: 0 0 0 3px rgba(24, 86, 134, 0.15);
 }
+.ct-form__input--invalid,
+.ct-form__textarea--invalid,
+.ct-form__select--invalid {
+  border-color: var(--lt-danger);
+  box-shadow: 0 0 0 3px rgba(161, 43, 43, 0.12);
+}
+.ct-form__input--invalid:focus,
+.ct-form__textarea--invalid:focus,
+.ct-form__select--invalid:focus {
+  border-color: var(--lt-danger);
+  box-shadow: 0 0 0 3px rgba(161, 43, 43, 0.2);
+}
+.ct-form__field-error {
+  margin: 4px 0 0;
+  font-size: var(--lt-fs-xs);
+  line-height: 1.4;
+  color: var(--lt-danger);
+}
 .ct-form__select {
   appearance: none;
   -webkit-appearance: none;

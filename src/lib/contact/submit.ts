@@ -10,6 +10,7 @@ import { sendContactEmail } from "./email";
 export type ContactFormState = {
   status: "idle" | "success" | "error";
   errorKey?: "invalid" | "rateLimited" | "captcha" | "server";
+  fieldErrors?: string[];
 };
 
 async function getClientIp(): Promise<string> {
@@ -35,7 +36,12 @@ export async function submitContact(
 
   const parsed = contactFormSchema.safeParse(raw);
   if (!parsed.success) {
-    return { status: "error", errorKey: "invalid" };
+    // Return only the names of failed fields, never zod's messages — schema.ts
+    // documents this constraint. Hide honeypot + captcha from the user-facing list.
+    const fieldErrors = Object.keys(parsed.error.flatten().fieldErrors).filter(
+      (k) => k !== "website" && k !== "cf-turnstile-response",
+    );
+    return { status: "error", errorKey: "invalid", fieldErrors };
   }
 
   const ip = await getClientIp();
