@@ -46,6 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function DrawingsPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const lang = locale as Locale;
 
   const [tCommon, tNav, tRes, drawings] = await Promise.all([
     getTranslations("common"),
@@ -91,11 +92,7 @@ export default async function DrawingsPage({ params }: Props) {
                 item.models && item.models.length > 0
                   ? item.models.join(" / ")
                   : "—";
-              const title = pickLocalized(
-                item.displayName,
-                locale as Locale,
-                item.title,
-              );
+              const title = pickLocalized(item.displayName, lang, item.title);
               const stpVariants = (item.stpVariants ?? []).filter(
                 (v): v is StpVariant & { url: string } => Boolean(v.url),
               );

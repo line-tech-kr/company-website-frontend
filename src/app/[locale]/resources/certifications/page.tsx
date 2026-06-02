@@ -98,7 +98,7 @@ export default async function CertificationsPage({ params }: Props) {
             </a>
           ) : (
             <Link
-              href={`/contact?topic=request&file=${encodeURIComponent(cert.name)}`}
+              href={`/contact?topic=request&file=${encodeURIComponent(displayName)}`}
               className="dr-list__btn dr-list__btn--request"
             >
               {tRes("requestFile")}

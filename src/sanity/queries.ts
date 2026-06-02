@@ -33,7 +33,7 @@ const localizedFull = (field: string) => `{
  * coalescing behaviour in `localized` would silently surface another
  * locale's value instead, defeating the fallback.
  */
-const localizedStrict = (field: string) => `{
+export const localizedStrict = (field: string) => `{
     "ko": ${field}[language == "ko"][0].value,
     "en": ${field}[language == "en"][0].value,
     "zh": ${field}[language == "zh"][0].value

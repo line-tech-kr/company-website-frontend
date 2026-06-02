@@ -47,6 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ManualsPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const lang = locale as Locale;
 
   const [tCommon, tNav, tRes, manuals] = await Promise.all([
     getTranslations("common"),
@@ -73,7 +74,7 @@ export default async function ManualsPage({ params }: Props) {
   const ungrouped = manuals.filter((m) => !m.series);
 
   const renderRow = (item: ManualItem) => {
-    const label = pickLocalized(item.displayName, locale as Locale, item.title);
+    const label = pickLocalized(item.displayName, lang, item.title);
     return (
       <DocRow
         key={item._id}

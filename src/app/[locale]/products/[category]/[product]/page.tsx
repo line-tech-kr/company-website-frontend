@@ -28,8 +28,7 @@ import {
   isCategorySlug,
   type CategorySlug,
 } from "@/lib/categories";
-import { routing } from "@/i18n/routing";
-import type { Locale } from "@/lib/content/home";
+import { routing, type Locale } from "@/i18n/routing";
 import { SanityProductSchema } from "@/lib/types/product";
 import type { MassFlowSpecs, Product } from "@/lib/types/product";
 import { buildProductMetadata, siteUrl } from "@/lib/seo";

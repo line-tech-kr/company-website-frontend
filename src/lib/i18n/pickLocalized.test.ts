@@ -27,6 +27,15 @@ describe("pickLocalized", () => {
     expect(pickLocalized({ ko: "   " }, "ko", "fallback")).toBe("fallback");
   });
 
+  it("treats the empty string as empty (Sanity Studio's blanked-field default)", () => {
+    expect(pickLocalized({ ko: "" }, "ko", "fallback")).toBe("fallback");
+  });
+
+  it("treats NBSP and mixed whitespace as empty (Word-paste edge case)", () => {
+    expect(pickLocalized({ ko: " " }, "ko", "fallback")).toBe("fallback");
+    expect(pickLocalized({ ko: "\t\n " }, "ko", "fallback")).toBe("fallback");
+  });
+
   it("trims surrounding whitespace from the returned value", () => {
     expect(pickLocalized({ ko: "  특허  " }, "ko", "fallback")).toBe("특허");
   });
