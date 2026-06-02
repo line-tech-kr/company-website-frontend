@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { CompanyShell } from "@/components/company/CompanyShell";
+import { SidebarShell } from "@/components/layout/SidebarShell";
+import { CompanySideNav } from "@/components/company/CompanySideNav";
 import { MarketsMap } from "@/components/company/MarketsMap";
+import "@/components/company/company-shell.css";
 import {
   LT_COMPANY,
   LT_MARKETS_DESTINATIONS,
@@ -67,13 +69,17 @@ export default async function CompanyPage({ params }: Props) {
   ];
 
   return (
-    <CompanyShell locale={locale} breadcrumbs={breadcrumbs}>
+    <SidebarShell
+      breadcrumbs={breadcrumbs}
+      sideNav={<CompanySideNav heading={c.navHeading} items={c.nav} />}
+      variant="company"
+    >
       <Greeting c={c} />
       <History c={c} locale={locale} />
       <Markets c={c} />
       <Certifications c={c} />
       <Location c={c} />
-    </CompanyShell>
+    </SidebarShell>
   );
 }
 

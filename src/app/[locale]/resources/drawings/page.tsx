@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
-import { setRequestLocale, getTranslations } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { EmptyState } from "@/components/shared/EmptyState";
+import { ResourceSubpageShell } from "@/components/resources/ResourceSubpageShell";
 import { sanityClient } from "@/sanity/client";
 import { allDrawingsQuery } from "@/sanity/queries";
-import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
 import { buildResourcesMetadata } from "@/lib/seo";
+import {
+  getResourceSubpageContext,
+  resourceSubpageStaticParams,
+} from "@/lib/pages/resourceSubpage";
 import "../resources-subpage.css";
 
 export const revalidate = 3600;
@@ -33,9 +36,7 @@ type DrawingItem = {
   pdfSize?: number | null;
 };
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
+export const generateStaticParams = resourceSubpageStaticParams;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -45,29 +46,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function DrawingsPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-
-  const [tCommon, tNav, tRes, drawings] = await Promise.all([
-    getTranslations("common"),
-    getTranslations("nav"),
-    getTranslations("resources"),
+  const [ctx, drawings] = await Promise.all([
+    getResourceSubpageContext("drawings"),
     sanityClient.fetch<DrawingItem[]>(allDrawingsQuery),
   ]);
-
-  const breadcrumbs = [
-    { label: tCommon("home"), href: "/" },
-    { label: tNav("dataRoom"), href: "/resources" },
-    { label: tRes("drawings.title") },
-  ];
+  const { tRes, breadcrumbs, title, intro } = ctx;
 
   return (
-    <main className="lt-wrap dr-sub">
-      <Breadcrumbs items={breadcrumbs} />
-
-      <header className="dr-sub__hero">
-        <h1 className="dr-sub__title">{tRes("drawings.title")}</h1>
-        <p className="dr-sub__intro">{tRes("drawings.intro")}</p>
-      </header>
-
+    <ResourceSubpageShell title={title} intro={intro} breadcrumbs={breadcrumbs}>
       {drawings.length === 0 ? (
         <EmptyState
           message={tRes("empty")}
@@ -171,6 +157,6 @@ export default async function DrawingsPage({ params }: Props) {
           </tbody>
         </table>
       )}
-    </main>
+    </ResourceSubpageShell>
   );
 }

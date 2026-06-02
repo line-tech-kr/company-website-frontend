@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { AccessoriesShell } from "@/components/accessories/AccessoriesShell";
+import { SidebarShell } from "@/components/layout/SidebarShell";
+import { AccessoriesSideNav } from "@/components/accessories/AccessoriesSideNav";
 import {
   LT_ACCESSORIES,
   type AccessoriesContent,
@@ -11,6 +12,7 @@ import {
 } from "@/lib/content/accessories";
 import type { Locale } from "@/lib/content/home";
 import { buildAccessoriesMetadata } from "@/lib/seo";
+import "@/components/accessories/accessories-shell.css";
 
 type Props = { params: Promise<{ locale: Locale }> };
 
@@ -36,7 +38,11 @@ export default async function AccessoriesPage({ params }: Props) {
   ];
 
   return (
-    <AccessoriesShell locale={locale} breadcrumbs={breadcrumbs}>
+    <SidebarShell
+      breadcrumbs={breadcrumbs}
+      sideNav={<AccessoriesSideNav heading={c.navHeading} items={c.nav} />}
+      variant="accessories"
+    >
       <Hero c={c} />
       <ItemsSection
         id="readouts"
@@ -49,7 +55,7 @@ export default async function AccessoriesPage({ params }: Props) {
         kickerLabelClass="acc-sechd__kicker"
       />
       <ContactSection c={c.contact} />
-    </AccessoriesShell>
+    </SidebarShell>
   );
 }
 

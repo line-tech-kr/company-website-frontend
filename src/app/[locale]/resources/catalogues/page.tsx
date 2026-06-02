@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
-import { setRequestLocale, getTranslations } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { DocRow } from "@/components/resources/DocRow";
-import { formatISODate } from "@/lib/i18n/dates";
+import { ResourceSubpageShell } from "@/components/resources/ResourceSubpageShell";
+import { formatLongDate } from "@/lib/i18n/dates";
 import { sanityClient } from "@/sanity/client";
 import { allCataloguesQuery } from "@/sanity/queries";
-import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
 import { buildResourcesMetadata } from "@/lib/seo";
+import {
+  getResourceSubpageContext,
+  resourceSubpageStaticParams,
+} from "@/lib/pages/resourceSubpage";
 import "../resources-subpage.css";
 
 export const revalidate = 3600;
@@ -24,9 +27,7 @@ type CatalogueItem = {
   fileUrl?: string | null;
 };
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
+export const generateStaticParams = resourceSubpageStaticParams;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -36,29 +37,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CataloguesPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-
-  const [tCommon, tNav, tRes, catalogues] = await Promise.all([
-    getTranslations("common"),
-    getTranslations("nav"),
-    getTranslations("resources"),
+  const [ctx, catalogues] = await Promise.all([
+    getResourceSubpageContext("catalogues"),
     sanityClient.fetch<CatalogueItem[]>(allCataloguesQuery),
   ]);
-
-  const breadcrumbs = [
-    { label: tCommon("home"), href: "/" },
-    { label: tNav("dataRoom"), href: "/resources" },
-    { label: tRes("catalogues.title") },
-  ];
+  const { tRes, breadcrumbs, title, intro } = ctx;
 
   return (
-    <main className="lt-wrap dr-sub">
-      <Breadcrumbs items={breadcrumbs} />
-
-      <header className="dr-sub__hero">
-        <h1 className="dr-sub__title">{tRes("catalogues.title")}</h1>
-        <p className="dr-sub__intro">{tRes("catalogues.intro")}</p>
-      </header>
-
+    <ResourceSubpageShell title={title} intro={intro} breadcrumbs={breadcrumbs}>
       {catalogues.length === 0 ? (
         <EmptyState
           message={tRes("empty")}
@@ -76,7 +62,7 @@ export default async function CataloguesPage({ params }: Props) {
                   tRes(
                     `seriesLabel.${item.series as "all" | "analogue" | "digital" | "specialized"}`,
                   ),
-                item.publishedAt && formatISODate(item.publishedAt, locale),
+                item.publishedAt && formatLongDate(item.publishedAt, locale),
               ]}
               action={
                 item.fileUrl ? (
@@ -96,6 +82,6 @@ export default async function CataloguesPage({ params }: Props) {
           ))}
         </ul>
       )}
-    </main>
+    </ResourceSubpageShell>
   );
 }

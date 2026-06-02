@@ -17,7 +17,8 @@ import {
   type DownloadItem,
 } from "@/components/products/DownloadsList";
 import { RequestDocs } from "@/components/products/RequestDocs";
-import { formatBytes, formatDate } from "@/lib/format";
+import { formatBytes } from "@/lib/format";
+import { formatShortDate } from "@/lib/i18n/dates";
 import { sanityClient, sanityBuildClient } from "@/sanity/client";
 import { urlFor } from "@/sanity/imageUrl";
 import { fetchSanity } from "@/sanity/fetch";
@@ -235,7 +236,7 @@ export default async function ProductPage({ params }: Props) {
         href: d.fileUrl ?? undefined,
         size: formatBytes(d.size),
         rev: d.rev ?? undefined,
-        date: formatDate(d.publishedAt ?? d.updatedAt, locale),
+        date: formatShortDate(d.publishedAt ?? d.updatedAt, locale),
       })),
     ...product.manuals
       .filter((m) => m.fileUrl)
@@ -245,7 +246,7 @@ export default async function ProductPage({ params }: Props) {
         href: m.fileUrl ?? undefined,
         size: formatBytes(m.size),
         rev: m.rev ?? undefined,
-        date: formatDate(m.publishedAt ?? m.updatedAt, locale),
+        date: formatShortDate(m.publishedAt ?? m.updatedAt, locale),
       })),
     ...product.certifications
       .filter((c) => c.fileUrl)
@@ -267,7 +268,7 @@ export default async function ProductPage({ params }: Props) {
           type: "PDF",
           href: d.pdfUrl,
           size: formatBytes(d.pdfSize),
-          date: formatDate(d.updatedAt, locale),
+          date: formatShortDate(d.updatedAt, locale),
         });
       }
       if (d.dwgUrl) {
@@ -276,7 +277,7 @@ export default async function ProductPage({ params }: Props) {
           type: "DWG",
           href: d.dwgUrl,
           size: formatBytes(d.dwgSize),
-          date: formatDate(d.updatedAt, locale),
+          date: formatShortDate(d.updatedAt, locale),
         });
       }
       for (const v of d.stpVariants ?? []) {
@@ -286,7 +287,7 @@ export default async function ProductPage({ params }: Props) {
           type: "STEP",
           href: v.url,
           size: formatBytes(v.size),
-          date: formatDate(d.updatedAt, locale),
+          date: formatShortDate(d.updatedAt, locale),
         });
       }
       return items;
