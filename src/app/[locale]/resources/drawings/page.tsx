@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
-import { setRequestLocale, getTranslations } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { EmptyState } from "@/components/shared/EmptyState";
+import { ResourceSubpageShell } from "@/components/resources/ResourceSubpageShell";
 import { sanityClient } from "@/sanity/client";
 import { allDrawingsQuery } from "@/sanity/queries";
-import { routing, type Locale } from "@/i18n/routing";
+import { type Locale } from "@/i18n/routing";
 import { buildResourcesMetadata } from "@/lib/seo";
+import {
+  getResourceSubpageContext,
+  resourceSubpageStaticParams,
+} from "@/lib/pages/resourceSubpage";
 import { pickLocalized, type LocalizedField } from "@/lib/i18n/pickLocalized";
 import "../resources-subpage.css";
 
@@ -34,9 +38,7 @@ type DrawingItem = {
   pdfSize?: number | null;
 };
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
+export const generateStaticParams = resourceSubpageStaticParams;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -47,29 +49,14 @@ export default async function DrawingsPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const lang = locale as Locale;
-
-  const [tCommon, tNav, tRes, drawings] = await Promise.all([
-    getTranslations("common"),
-    getTranslations("nav"),
-    getTranslations("resources"),
+  const [ctx, drawings] = await Promise.all([
+    getResourceSubpageContext("drawings"),
     sanityClient.fetch<DrawingItem[]>(allDrawingsQuery),
   ]);
-
-  const breadcrumbs = [
-    { label: tCommon("home"), href: "/" },
-    { label: tNav("dataRoom"), href: "/resources" },
-    { label: tRes("drawings.title") },
-  ];
+  const { tRes, breadcrumbs, title, intro } = ctx;
 
   return (
-    <main className="lt-wrap dr-sub">
-      <Breadcrumbs items={breadcrumbs} />
-
-      <header className="dr-sub__hero">
-        <h1 className="dr-sub__title">{tRes("drawings.title")}</h1>
-        <p className="dr-sub__intro">{tRes("drawings.intro")}</p>
-      </header>
-
+    <ResourceSubpageShell title={title} intro={intro} breadcrumbs={breadcrumbs}>
       {drawings.length === 0 ? (
         <EmptyState
           message={tRes("empty")}
@@ -92,7 +79,11 @@ export default async function DrawingsPage({ params }: Props) {
                 item.models && item.models.length > 0
                   ? item.models.join(" / ")
                   : "—";
-              const title = pickLocalized(item.displayName, lang, item.title);
+              const rowTitle = pickLocalized(
+                item.displayName,
+                lang,
+                item.title,
+              );
               const stpVariants = (item.stpVariants ?? []).filter(
                 (v): v is StpVariant & { url: string } => Boolean(v.url),
               );
@@ -102,7 +93,7 @@ export default async function DrawingsPage({ params }: Props) {
                 <tr key={item._id}>
                   <td>
                     <div className="dr-drawings__model">{modelLabel}</div>
-                    <div className="dr-drawings__series">{title}</div>
+                    <div className="dr-drawings__series">{rowTitle}</div>
                   </td>
                   <td>
                     {item.series && (
@@ -160,7 +151,7 @@ export default async function DrawingsPage({ params }: Props) {
                       ))}
                       {!hasFile && (
                         <Link
-                          href={`/contact?topic=request&file=${encodeURIComponent(title)}`}
+                          href={`/contact?topic=request&file=${encodeURIComponent(rowTitle)}`}
                           className="dr-list__btn dr-list__btn--request"
                         >
                           {tRes("requestFile")}
@@ -174,6 +165,6 @@ export default async function DrawingsPage({ params }: Props) {
           </tbody>
         </table>
       )}
-    </main>
+    </ResourceSubpageShell>
   );
 }

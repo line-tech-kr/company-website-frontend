@@ -1,0 +1,26 @@
+.lt-readout-stack__table {
+  grid-template-columns: 56px 96px 2fr 2.5fr 2fr 2fr 2fr;
+}
+
+@media (max-width: 1024px) {
+  .lt-readout-stack__table {
+    grid-template-columns: 48px 88px 2fr 2.5fr 2fr;
+  }
+  .lt-readout-stack__head-cell--communication,
+  .lt-readout-stack__head-cell--connector {
+    display: none;
+  }
+}
+@media (max-width: 640px) {
+  .lt-readout-stack__table {
+    grid-template-columns: 88px 2fr 2.5fr 2fr;
+  }
+}
+@media (max-width: 500px) {
+  .lt-readout-stack__table {
+    grid-template-columns: 72px 1fr 2fr;
+  }
+  .lt-readout-stack__head-cell--power {
+    display: none;
+  }
+}

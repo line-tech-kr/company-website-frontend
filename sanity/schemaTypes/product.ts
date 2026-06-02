@@ -215,7 +215,7 @@ export const product = defineType({
       name: "instrumentSpecs",
       title: "Instrument specs",
       description:
-        "For non-flow instruments (ROU). Each row: label + value string.",
+        "For non-flow instruments (ROU). Each row: label + value string. Set 'slot' to surface the row as a column in the readout listing table.",
       type: "array",
       of: [
         {
@@ -231,10 +231,38 @@ export const product = defineType({
               type: "string",
               validation: (r) => r.required(),
             }),
+            defineField({
+              name: "slot",
+              title: "Readout column slot",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Display", value: "display" },
+                  { title: "Input power", value: "power" },
+                  { title: "Communication", value: "communication" },
+                  { title: "Connector", value: "connector" },
+                ],
+                layout: "dropdown",
+              },
+            }),
           ],
           preview: { select: { title: "label", subtitle: "value" } },
         },
       ],
+      validation: (r) =>
+        r.custom((items?: Array<{ slot?: string | null }>) => {
+          if (!items) return true;
+          const seen = new Set<string>();
+          for (const item of items) {
+            const slot = item?.slot;
+            if (!slot) continue;
+            if (seen.has(slot)) {
+              return `Multiple instrumentSpec rows share slot "${slot}". Each readout column accepts only one row.`;
+            }
+            seen.add(slot);
+          }
+          return true;
+        }),
     }),
     defineField({
       name: "digitalCommunication",

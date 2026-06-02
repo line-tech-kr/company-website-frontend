@@ -3,6 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { LT_PRIVACY } from "@/lib/content/privacy";
 import { buildPrivacyMetadata } from "@/lib/seo";
+import { formatLongDate } from "@/lib/i18n/dates";
 import type { Locale } from "@/lib/content/home";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -14,15 +15,6 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   return buildPrivacyMetadata(locale as Locale);
-}
-
-function formatDate(dateStr: string, locale: string): string {
-  const date = new Date(dateStr + "T00:00:00");
-  return new Intl.DateTimeFormat(locale ?? "en", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  }).format(date);
 }
 
 export default async function PrivacyPage({ params }: Props) {
@@ -38,7 +30,7 @@ export default async function PrivacyPage({ params }: Props) {
         <header style={{ marginBottom: 40 }}>
           <h1 style={{ marginBottom: 8 }}>{content.title}</h1>
           <p style={{ color: "var(--pd-muted)", fontSize: "0.875rem" }}>
-            {formatDate(content.effectiveDate, locale)}
+            {formatLongDate(content.effectiveDate, locale)}
           </p>
         </header>
         {content.sections.map((section, i) => (

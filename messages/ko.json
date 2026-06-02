@@ -117,7 +117,11 @@
       "range": "유량 범위",
       "accuracy": "정확도",
       "response": "응답",
-      "fitting": "연결"
+      "fitting": "연결",
+      "display": "디스플레이",
+      "power": "입력 전원",
+      "communication": "통신",
+      "connector": "커넥터"
     },
     "emptyStack": "이 카테고리에는 아직 등록된 제품이 없습니다.",
     "showcase": {
