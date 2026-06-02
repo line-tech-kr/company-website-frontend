@@ -72,17 +72,48 @@ describe("submitContact", () => {
       initial,
       makeFormData({ website: "trapped" }),
     );
+    // No fieldErrors — honeypot trips must be indistinguishable from generic
+    // validation failures so bots can't tell they were caught.
     expect(result).toEqual({ status: "error", errorKey: "invalid" });
     expect(rateLimitMock).not.toHaveBeenCalled();
   });
 
-  it("returns invalid when zod parsing fails", async () => {
+  it("returns invalid with fieldErrors when zod parsing fails", async () => {
     const result = await submitContact(
       initial,
       makeFormData({ email: undefined }),
     );
-    expect(result).toEqual({ status: "error", errorKey: "invalid" });
+    expect(result.status).toBe("error");
+    expect(result.errorKey).toBe("invalid");
+    expect(result.fieldErrors).toEqual(["email"]);
     expect(rateLimitMock).not.toHaveBeenCalled();
+  });
+
+  it("returns fieldErrors for every failing visible field", async () => {
+    const result = await submitContact(
+      initial,
+      makeFormData({
+        name: undefined,
+        email: "not-an-email",
+        message: undefined,
+      }),
+    );
+    expect(result.status).toBe("error");
+    expect(result.errorKey).toBe("invalid");
+    expect(new Set(result.fieldErrors)).toEqual(
+      new Set(["name", "email", "message"]),
+    );
+  });
+
+  it("never exposes honeypot or turnstile in fieldErrors", async () => {
+    // Strip the turnstile token to force its zod failure, alongside a name failure.
+    const result = await submitContact(
+      initial,
+      makeFormData({ name: undefined, "cf-turnstile-response": undefined }),
+    );
+    expect(result.fieldErrors).toEqual(["name"]);
+    expect(result.fieldErrors).not.toContain("website");
+    expect(result.fieldErrors).not.toContain("cf-turnstile-response");
   });
 
   it("returns rateLimited when the limiter denies", async () => {

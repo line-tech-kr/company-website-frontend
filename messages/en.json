@@ -315,10 +315,18 @@
   },
   "contactForm": {
     "errors": {
-      "invalid": "Please check the highlighted fields and try again.",
+      "invalid": "Some fields need attention. Please review the inputs marked below.",
       "rateLimited": "Too many submissions. Please try again in a few minutes.",
       "captcha": "Verification failed. Please complete the challenge again.",
       "server": "We could not send your message. Please email us directly."
+    },
+    "fieldErrors": {
+      "inquiryType": "Please select an inquiry type.",
+      "typeDetail": "Please complete this field.",
+      "name": "Please enter your name.",
+      "email": "Please enter a valid email address.",
+      "message": "Please enter your message.",
+      "consent": "You must agree to the privacy policy to continue."
     },
     "successTitle": "Your inquiry was sent.",
     "success": "A Line Tech representative will reply to the email address you provided.",
