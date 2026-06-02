@@ -92,12 +92,13 @@ function requireFromAddress(): string {
   return from;
 }
 
-function recipientAddress(): string[] {
+function recipientAddresses(): string[] {
   const recipients = (process.env.CONTACT_FORM_TO ?? "")
     .split(",")
     .map((entry) => entry.trim())
-    .filter(Boolean);
-  return recipients.length > 0 ? recipients : [DEFAULT_TO];
+    .filter((entry) => entry.includes("@"));
+  const deduped = Array.from(new Set(recipients));
+  return deduped.length > 0 ? deduped : [DEFAULT_TO];
 }
 
 function buildHtml(data: ContactFormPayload): string {
@@ -179,7 +180,7 @@ export async function sendContactEmail(
   const resend = new Resend(apiKey);
   const { error } = await resend.emails.send({
     from: requireFromAddress(),
-    to: recipientAddress(),
+    to: recipientAddresses(),
     replyTo: data.email,
     subject: buildSubject(data),
     html: buildHtml(data),
