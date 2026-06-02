@@ -92,8 +92,12 @@ function requireFromAddress(): string {
   return from;
 }
 
-function recipientAddress(): string {
-  return process.env.CONTACT_FORM_TO?.trim() || DEFAULT_TO;
+function recipientAddress(): string[] {
+  const recipients = (process.env.CONTACT_FORM_TO ?? "")
+    .split(",")
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+  return recipients.length > 0 ? recipients : [DEFAULT_TO];
 }
 
 function buildHtml(data: ContactFormPayload): string {
