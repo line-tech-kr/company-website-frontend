@@ -36,6 +36,7 @@ import { buildProductMetadata, siteUrl } from "@/lib/seo";
 import { safeJsonLd } from "@/lib/seo/jsonLd";
 import { LT_APPLICATIONS } from "@/lib/content/applications";
 import { localizeSpecValue } from "@/lib/products/localizeSpecValue";
+import { pickLocalized } from "@/lib/i18n/pickLocalized";
 import "./product-detail.css";
 
 export const revalidate = 3600;
@@ -229,8 +230,11 @@ export default async function ProductPage({ params }: Props) {
     ...product.datasheets
       .filter((d) => d.fileUrl)
       .map<DownloadItem>((d) => ({
-        label:
+        label: pickLocalized(
+          d.displayName,
+          locale,
           d.title || tPdp("downloads.datasheetFor", { model: product.model }),
+        ),
         type: "PDF",
         href: d.fileUrl ?? undefined,
         size: formatBytes(d.size),
@@ -240,7 +244,11 @@ export default async function ProductPage({ params }: Props) {
     ...product.manuals
       .filter((m) => m.fileUrl)
       .map<DownloadItem>((m) => ({
-        label: m.title || tPdp("downloads.manualFor", { model: product.model }),
+        label: pickLocalized(
+          m.displayName,
+          locale,
+          m.title || tPdp("downloads.manualFor", { model: product.model }),
+        ),
         type: "PDF",
         href: m.fileUrl ?? undefined,
         size: formatBytes(m.size),
@@ -250,9 +258,10 @@ export default async function ProductPage({ params }: Props) {
     ...product.certifications
       .filter((c) => c.fileUrl)
       .map<DownloadItem>((c) => {
+        const certName = pickLocalized(c.displayName, locale, c.name);
         const issuer = c.issuer?.[locale] ?? c.issuer?.en ?? null;
         return {
-          label: issuer ? `${c.name} — ${issuer}` : c.name,
+          label: issuer ? `${certName} — ${issuer}` : certName,
           type: "CERT",
           href: c.fileUrl ?? undefined,
           size: formatBytes(c.size),
@@ -261,9 +270,10 @@ export default async function ProductPage({ params }: Props) {
       }),
     ...product.drawings.flatMap<DownloadItem>((d) => {
       const items: DownloadItem[] = [];
+      const drawingTitle = pickLocalized(d.displayName, locale, d.title);
       if (d.pdfUrl) {
         items.push({
-          label: d.title,
+          label: drawingTitle,
           type: "PDF",
           href: d.pdfUrl,
           size: formatBytes(d.pdfSize),
@@ -272,7 +282,7 @@ export default async function ProductPage({ params }: Props) {
       }
       if (d.dwgUrl) {
         items.push({
-          label: `${d.title} (DWG)`,
+          label: `${drawingTitle} (DWG)`,
           type: "DWG",
           href: d.dwgUrl,
           size: formatBytes(d.dwgSize),
@@ -282,7 +292,7 @@ export default async function ProductPage({ params }: Props) {
       for (const v of d.stpVariants ?? []) {
         if (!v.url) continue;
         items.push({
-          label: `${d.title} (STEP · ${v.fitting})`,
+          label: `${drawingTitle} (STEP · ${v.fitting})`,
           type: "STEP",
           href: v.url,
           size: formatBytes(v.size),

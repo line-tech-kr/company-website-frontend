@@ -9,7 +9,16 @@ export const manual = defineType({
       name: "title",
       title: "Title",
       type: "string",
+      description:
+        "Used as the fallback when no per-locale display name is set, and as the record name in the studio.",
       validation: (r) => r.required(),
+    }),
+    defineField({
+      name: "displayName",
+      title: "Display name (per locale)",
+      type: "internationalizedArrayString",
+      description:
+        "Optional. Per-locale label shown on manual cards (e.g. M2030 매뉴얼 / M2030 Manual / M2030 手册). Leave empty to fall back to `title`.",
     }),
     defineField({
       name: "models",

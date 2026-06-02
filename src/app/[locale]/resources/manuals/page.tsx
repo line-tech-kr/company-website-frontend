@@ -11,6 +11,7 @@ import { allManualsQuery } from "@/sanity/queries";
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
 import { buildResourcesMetadata } from "@/lib/seo";
+import { pickLocalized } from "@/lib/i18n/pickLocalized";
 import "../resources-subpage.css";
 
 export const revalidate = 3600;
@@ -23,6 +24,11 @@ const SERIES_ORDER: Series[] = ["analogue", "digital", "specialized"];
 type ManualItem = {
   _id: string;
   title: string;
+  displayName?: {
+    ko?: string | null;
+    en?: string | null;
+    zh?: string | null;
+  } | null;
   models?: string[] | null;
   series?: string | null;
   rev?: string | null;
@@ -71,31 +77,34 @@ export default async function ManualsPage({ params }: Props) {
 
   const ungrouped = manuals.filter((m) => !m.series);
 
-  const renderRow = (item: ManualItem) => (
-    <DocRow
-      key={item._id}
-      label={item.title}
-      meta={[
-        modelLabel(item),
-        item.rev,
-        item.publishedAt && formatISODate(item.publishedAt, locale),
-      ]}
-      action={
-        item.fileUrl ? (
-          <a href={item.fileUrl} download className="dr-list__btn">
-            {tRes("download")}
-          </a>
-        ) : (
-          <Link
-            href={`/contact?topic=request&file=${encodeURIComponent(item.title)}`}
-            className="dr-list__btn dr-list__btn--request"
-          >
-            {tRes("requestFile")}
-          </Link>
-        )
-      }
-    />
-  );
+  const renderRow = (item: ManualItem) => {
+    const label = pickLocalized(item.displayName, locale as Locale, item.title);
+    return (
+      <DocRow
+        key={item._id}
+        label={label}
+        meta={[
+          modelLabel(item),
+          item.rev,
+          item.publishedAt && formatISODate(item.publishedAt, locale),
+        ]}
+        action={
+          item.fileUrl ? (
+            <a href={item.fileUrl} download className="dr-list__btn">
+              {tRes("download")}
+            </a>
+          ) : (
+            <Link
+              href={`/contact?topic=request&file=${encodeURIComponent(label)}`}
+              className="dr-list__btn dr-list__btn--request"
+            >
+              {tRes("requestFile")}
+            </Link>
+          )
+        }
+      />
+    );
+  };
 
   return (
     <main className="lt-wrap dr-sub">

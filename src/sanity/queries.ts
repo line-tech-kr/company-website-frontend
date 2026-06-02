@@ -60,6 +60,7 @@ const PRODUCT_DETAIL_PROJECTION = `
     | order(coalesce(publishedAt, _updatedAt) desc) {
       _id,
       title,
+      "displayName": ${localized("displayName")},
       rev,
       publishedAt,
       "fileUrl": file.asset->url,
@@ -70,6 +71,7 @@ const PRODUCT_DETAIL_PROJECTION = `
     | order(coalesce(publishedAt, _updatedAt) desc) {
       _id,
       title,
+      "displayName": ${localized("displayName")},
       rev,
       publishedAt,
       "fileUrl": file.asset->url,
@@ -80,6 +82,7 @@ const PRODUCT_DETAIL_PROJECTION = `
     | order(_updatedAt desc) {
       _id,
       title,
+      "displayName": ${localized("displayName")},
       models,
       "dwgUrl": dwgFile.asset->url,
       "dwgSize": dwgFile.asset->size,
@@ -97,6 +100,7 @@ const PRODUCT_DETAIL_PROJECTION = `
     | order(coalesce(order, 99) asc) {
       _id,
       name,
+      "displayName": ${localized("displayName")},
       "slug": slug.current,
       "issuer": ${localized("issuer")},
       "scope": ${localized("scope")},
@@ -202,6 +206,7 @@ export const allManualsQuery = defineQuery(`
   ) {
     _id,
     title,
+    "displayName": ${localized("displayName")},
     models,
     series,
     rev,
@@ -218,6 +223,7 @@ export const allDatasheetsQuery = defineQuery(`
   ) {
     _id,
     title,
+    "displayName": ${localized("displayName")},
     models,
     series,
     rev,
@@ -234,6 +240,7 @@ export const allDrawingsQuery = defineQuery(`
   ) {
     _id,
     title,
+    "displayName": ${localized("displayName")},
     models,
     series,
     "dwgUrl": dwgFile.asset->url,
@@ -302,6 +309,7 @@ export const allCertificationsQuery = defineQuery(`
   *[_type == "certification"] | order(coalesce(order, 99) asc) {
     _id,
     name,
+    "displayName": ${localized("displayName")},
     "slug": slug.current,
     "issuer": ${localized("issuer")},
     "scope": ${localized("scope")},

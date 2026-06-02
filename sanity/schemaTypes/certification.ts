@@ -9,8 +9,16 @@ export const certification = defineType({
       name: "name",
       title: "Certificate name",
       type: "string",
-      description: "Short name, same across languages (e.g. ISO 9001, CE)",
+      description:
+        "Short, language-agnostic identifier (e.g. ISO 9001, CE). Used as the fallback when no per-locale display name is set, and as the indexable record name in the studio.",
       validation: (r) => r.required(),
+    }),
+    defineField({
+      name: "displayName",
+      title: "Display name (per locale)",
+      type: "internationalizedArrayString",
+      description:
+        "Optional. Per-locale name shown on cert cards (e.g. 특허 KR 10-2759236 / Patent KR 10-2759236 / 专利 KR 10-2759236). Leave empty for certs whose name is already the same in every language (ISO 9001, CE) — the `name` field is used as the fallback.",
     }),
     defineField({
       name: "slug",

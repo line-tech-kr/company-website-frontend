@@ -8,6 +8,7 @@ import { allDrawingsQuery } from "@/sanity/queries";
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
 import { buildResourcesMetadata } from "@/lib/seo";
+import { pickLocalized } from "@/lib/i18n/pickLocalized";
 import "../resources-subpage.css";
 
 export const revalidate = 3600;
@@ -24,6 +25,11 @@ type StpVariant = {
 type DrawingItem = {
   _id: string;
   title: string;
+  displayName?: {
+    ko?: string | null;
+    en?: string | null;
+    zh?: string | null;
+  } | null;
   models?: string[] | null;
   series?: string | null;
   dwgUrl?: string | null;
@@ -90,6 +96,11 @@ export default async function DrawingsPage({ params }: Props) {
                 item.models && item.models.length > 0
                   ? item.models.join(" / ")
                   : "—";
+              const title = pickLocalized(
+                item.displayName,
+                locale as Locale,
+                item.title,
+              );
               const stpVariants = (item.stpVariants ?? []).filter(
                 (v): v is StpVariant & { url: string } => Boolean(v.url),
               );
@@ -99,7 +110,7 @@ export default async function DrawingsPage({ params }: Props) {
                 <tr key={item._id}>
                   <td>
                     <div className="dr-drawings__model">{modelLabel}</div>
-                    <div className="dr-drawings__series">{item.title}</div>
+                    <div className="dr-drawings__series">{title}</div>
                   </td>
                   <td>
                     {item.series && (
@@ -157,7 +168,7 @@ export default async function DrawingsPage({ params }: Props) {
                       ))}
                       {!hasFile && (
                         <Link
-                          href={`/contact?topic=request&file=${encodeURIComponent(item.title)}`}
+                          href={`/contact?topic=request&file=${encodeURIComponent(title)}`}
                           className="dr-list__btn dr-list__btn--request"
                         >
                           {tRes("requestFile")}

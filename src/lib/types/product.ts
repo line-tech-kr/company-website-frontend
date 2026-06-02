@@ -88,6 +88,15 @@ export const SanityImageSchema = z.object({
     .optional(),
 });
 
+const LocalizedNullableSchema = z
+  .object({
+    ko: z.string().nullable().optional(),
+    en: z.string().nullable().optional(),
+    zh: z.string().nullable().optional(),
+  })
+  .nullable()
+  .optional();
+
 export const SanityProductSchema = z.object({
   model: z.string(),
   slug: z.object({ current: z.string() }),
@@ -157,6 +166,7 @@ export const SanityProductSchema = z.object({
       z.object({
         _id: z.string(),
         title: z.string(),
+        displayName: LocalizedNullableSchema,
         rev: z.string().nullable().optional(),
         publishedAt: z.string().nullable().optional(),
         fileUrl: z.string().nullable().optional(),
@@ -170,6 +180,7 @@ export const SanityProductSchema = z.object({
       z.object({
         _id: z.string(),
         title: z.string(),
+        displayName: LocalizedNullableSchema,
         rev: z.string().nullable().optional(),
         publishedAt: z.string().nullable().optional(),
         fileUrl: z.string().nullable().optional(),
@@ -183,6 +194,7 @@ export const SanityProductSchema = z.object({
       z.object({
         _id: z.string(),
         title: z.string(),
+        displayName: LocalizedNullableSchema,
         models: z.array(z.string()).nullable().optional(),
         dwgUrl: z.string().nullable().optional(),
         dwgSize: z.number().nullable().optional(),
@@ -208,6 +220,7 @@ export const SanityProductSchema = z.object({
       z.object({
         _id: z.string(),
         name: z.string(),
+        displayName: LocalizedNullableSchema,
         slug: z.string().nullable().optional(),
         issuer: z
           .object({

@@ -6,6 +6,8 @@ import { DocRow } from "@/components/resources/DocRow";
 import { sanityClient } from "@/sanity/client";
 import { allDatasheetsQuery } from "@/sanity/queries";
 import { routing } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
+import { pickLocalized } from "@/lib/i18n/pickLocalized";
 import "../resources-subpage.css";
 
 export const revalidate = 3600;
@@ -18,6 +20,11 @@ const SERIES_ORDER: Series[] = ["analogue", "digital", "specialized"];
 type DatasheetItem = {
   _id: string;
   title: string;
+  displayName?: {
+    ko?: string | null;
+    en?: string | null;
+    zh?: string | null;
+  } | null;
   models?: string[] | null;
   series?: string | null;
   rev?: string | null;
@@ -70,24 +77,27 @@ export default async function DatasheetsPage({ params }: Props) {
 
   const ungrouped = datasheets.filter((d) => !d.series);
 
-  const renderRow = (item: DatasheetItem) => (
-    <DocRow
-      key={item._id}
-      label={item.title}
-      meta={[modelLabel(item), item.rev, item.publishedAt]}
-      action={
-        item.fileUrl ? (
-          <a href={item.fileUrl} download className="dr-list__btn">
-            {tRes("download")}
-          </a>
-        ) : (
-          <span className="dr-list__btn dr-list__btn--disabled">
-            {tRes("comingSoon")}
-          </span>
-        )
-      }
-    />
-  );
+  const renderRow = (item: DatasheetItem) => {
+    const label = pickLocalized(item.displayName, locale as Locale, item.title);
+    return (
+      <DocRow
+        key={item._id}
+        label={label}
+        meta={[modelLabel(item), item.rev, item.publishedAt]}
+        action={
+          item.fileUrl ? (
+            <a href={item.fileUrl} download className="dr-list__btn">
+              {tRes("download")}
+            </a>
+          ) : (
+            <span className="dr-list__btn dr-list__btn--disabled">
+              {tRes("comingSoon")}
+            </span>
+          )
+        }
+      />
+    );
+  };
 
   return (
     <main className="lt-wrap dr-sub">
