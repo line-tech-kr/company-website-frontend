@@ -5,9 +5,8 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { DocRow } from "@/components/resources/DocRow";
 import { sanityClient } from "@/sanity/client";
 import { allDatasheetsQuery } from "@/sanity/queries";
-import { routing } from "@/i18n/routing";
-import type { Locale } from "@/i18n/routing";
-import { pickLocalized } from "@/lib/i18n/pickLocalized";
+import { routing, type Locale } from "@/i18n/routing";
+import { pickLocalized, type LocalizedField } from "@/lib/i18n/pickLocalized";
 import "../resources-subpage.css";
 
 export const revalidate = 3600;
@@ -20,11 +19,7 @@ const SERIES_ORDER: Series[] = ["analogue", "digital", "specialized"];
 type DatasheetItem = {
   _id: string;
   title: string;
-  displayName?: {
-    ko?: string | null;
-    en?: string | null;
-    zh?: string | null;
-  } | null;
+  displayName?: LocalizedField;
   models?: string[] | null;
   series?: string | null;
   rev?: string | null;

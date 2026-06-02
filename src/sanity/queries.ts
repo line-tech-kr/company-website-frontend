@@ -26,6 +26,19 @@ const localizedFull = (field: string) => `{
     "zh": coalesce(${field}[language == "zh"][0].value, ${field}[language == "en"][0].value, ${field}[language == "ko"][0].value)
   }`;
 
+/**
+ * Strict variant of `localized` that does NOT cross-fill empty slots. Use
+ * for editorial-override fields (e.g. `displayName`) where an empty slot
+ * means "fall back to the un-localized record field at render time" — the
+ * coalescing behaviour in `localized` would silently surface another
+ * locale's value instead, defeating the fallback.
+ */
+const localizedStrict = (field: string) => `{
+    "ko": ${field}[language == "ko"][0].value,
+    "en": ${field}[language == "en"][0].value,
+    "zh": ${field}[language == "zh"][0].value
+  }`;
+
 const PRODUCT_BASE_PROJECTION = `
   model,
   slug,
@@ -60,7 +73,7 @@ const PRODUCT_DETAIL_PROJECTION = `
     | order(coalesce(publishedAt, _updatedAt) desc) {
       _id,
       title,
-      "displayName": ${localized("displayName")},
+      "displayName": ${localizedStrict("displayName")},
       rev,
       publishedAt,
       "fileUrl": file.asset->url,
@@ -71,7 +84,7 @@ const PRODUCT_DETAIL_PROJECTION = `
     | order(coalesce(publishedAt, _updatedAt) desc) {
       _id,
       title,
-      "displayName": ${localized("displayName")},
+      "displayName": ${localizedStrict("displayName")},
       rev,
       publishedAt,
       "fileUrl": file.asset->url,
@@ -82,7 +95,7 @@ const PRODUCT_DETAIL_PROJECTION = `
     | order(_updatedAt desc) {
       _id,
       title,
-      "displayName": ${localized("displayName")},
+      "displayName": ${localizedStrict("displayName")},
       models,
       "dwgUrl": dwgFile.asset->url,
       "dwgSize": dwgFile.asset->size,
@@ -100,7 +113,7 @@ const PRODUCT_DETAIL_PROJECTION = `
     | order(coalesce(order, 99) asc) {
       _id,
       name,
-      "displayName": ${localized("displayName")},
+      "displayName": ${localizedStrict("displayName")},
       "slug": slug.current,
       "issuer": ${localized("issuer")},
       "scope": ${localized("scope")},
@@ -206,7 +219,7 @@ export const allManualsQuery = defineQuery(`
   ) {
     _id,
     title,
-    "displayName": ${localized("displayName")},
+    "displayName": ${localizedStrict("displayName")},
     models,
     series,
     rev,
@@ -223,7 +236,7 @@ export const allDatasheetsQuery = defineQuery(`
   ) {
     _id,
     title,
-    "displayName": ${localized("displayName")},
+    "displayName": ${localizedStrict("displayName")},
     models,
     series,
     rev,
@@ -240,7 +253,7 @@ export const allDrawingsQuery = defineQuery(`
   ) {
     _id,
     title,
-    "displayName": ${localized("displayName")},
+    "displayName": ${localizedStrict("displayName")},
     models,
     series,
     "dwgUrl": dwgFile.asset->url,
@@ -309,7 +322,7 @@ export const allCertificationsQuery = defineQuery(`
   *[_type == "certification"] | order(coalesce(order, 99) asc) {
     _id,
     name,
-    "displayName": ${localized("displayName")},
+    "displayName": ${localizedStrict("displayName")},
     "slug": slug.current,
     "issuer": ${localized("issuer")},
     "scope": ${localized("scope")},

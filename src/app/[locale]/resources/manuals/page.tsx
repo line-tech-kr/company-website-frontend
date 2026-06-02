@@ -8,10 +8,9 @@ import { DocRow } from "@/components/resources/DocRow";
 import { formatISODate } from "@/lib/i18n/dates";
 import { sanityClient } from "@/sanity/client";
 import { allManualsQuery } from "@/sanity/queries";
-import { routing } from "@/i18n/routing";
-import type { Locale } from "@/lib/content/home";
+import { routing, type Locale } from "@/i18n/routing";
 import { buildResourcesMetadata } from "@/lib/seo";
-import { pickLocalized } from "@/lib/i18n/pickLocalized";
+import { pickLocalized, type LocalizedField } from "@/lib/i18n/pickLocalized";
 import "../resources-subpage.css";
 
 export const revalidate = 3600;
@@ -24,11 +23,7 @@ const SERIES_ORDER: Series[] = ["analogue", "digital", "specialized"];
 type ManualItem = {
   _id: string;
   title: string;
-  displayName?: {
-    ko?: string | null;
-    en?: string | null;
-    zh?: string | null;
-  } | null;
+  displayName?: LocalizedField;
   models?: string[] | null;
   series?: string | null;
   rev?: string | null;

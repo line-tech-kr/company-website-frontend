@@ -5,10 +5,9 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { sanityClient } from "@/sanity/client";
 import { allCertificationsQuery } from "@/sanity/queries";
-import { routing } from "@/i18n/routing";
-import type { Locale } from "@/lib/content/home";
+import { routing, type Locale } from "@/i18n/routing";
 import { buildResourcesMetadata } from "@/lib/seo";
-import { pickLocalized } from "@/lib/i18n/pickLocalized";
+import { pickLocalized, type LocalizedField } from "@/lib/i18n/pickLocalized";
 import { splitCerts } from "./splitCerts";
 import "../resources-subpage.css";
 
@@ -17,19 +16,11 @@ export const revalidate = 3600;
 type CertItem = {
   _id: string;
   name: string;
-  displayName?: {
-    ko?: string | null;
-    en?: string | null;
-    zh?: string | null;
-  } | null;
+  displayName?: LocalizedField;
   /** Stable URL slug from Sanity. Used as the anchor target for /company deep-links. */
   slug: string | null;
-  issuer?: {
-    ko?: string | null;
-    en?: string | null;
-    zh?: string | null;
-  } | null;
-  scope?: { ko?: string | null; en?: string | null; zh?: string | null } | null;
+  issuer?: LocalizedField;
+  scope?: LocalizedField;
   validThrough?: string | null;
   models?: string[] | null;
   fileUrl?: string | null;
