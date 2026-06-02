@@ -7,13 +7,14 @@ import { DocRow } from "@/components/resources/DocRow";
 import { ResourceSubpageShell } from "@/components/resources/ResourceSubpageShell";
 import { sanityClient } from "@/sanity/client";
 import { allDatasheetsQuery } from "@/sanity/queries";
-import type { Locale } from "@/lib/content/home";
+import { type Locale } from "@/i18n/routing";
 import { buildResourcesMetadata } from "@/lib/seo";
 import {
   getResourceSubpageContext,
   resourceSubpageStaticParams,
   SERIES_ORDER,
 } from "@/lib/pages/resourceSubpage";
+import { pickLocalized, type LocalizedField } from "@/lib/i18n/pickLocalized";
 import "../resources-subpage.css";
 
 export const revalidate = 3600;
@@ -23,6 +24,7 @@ type Props = { params: Promise<{ locale: string }> };
 type DatasheetItem = {
   _id: string;
   title: string;
+  displayName?: LocalizedField;
   models?: string[] | null;
   series?: string | null;
   rev?: string | null;
@@ -44,6 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function DatasheetsPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const lang = locale as Locale;
   const [ctx, datasheets] = await Promise.all([
     getResourceSubpageContext("datasheets"),
     sanityClient.fetch<DatasheetItem[]>(allDatasheetsQuery),
@@ -60,27 +63,30 @@ export default async function DatasheetsPage({ params }: Props) {
   );
   const ungrouped = datasheets.filter((d) => !d.series);
 
-  const renderRow = (item: DatasheetItem) => (
-    <DocRow
-      key={item._id}
-      label={item.title}
-      meta={[modelLabel(item), item.rev, item.publishedAt]}
-      action={
-        item.fileUrl ? (
-          <a href={item.fileUrl} download className="dr-list__btn">
-            {tRes("download")}
-          </a>
-        ) : (
-          <Link
-            href={`/contact?topic=request&file=${encodeURIComponent(item.title)}`}
-            className="dr-list__btn dr-list__btn--request"
-          >
-            {tRes("requestFile")}
-          </Link>
-        )
-      }
-    />
-  );
+  const renderRow = (item: DatasheetItem) => {
+    const label = pickLocalized(item.displayName, lang, item.title);
+    return (
+      <DocRow
+        key={item._id}
+        label={label}
+        meta={[modelLabel(item), item.rev, item.publishedAt]}
+        action={
+          item.fileUrl ? (
+            <a href={item.fileUrl} download className="dr-list__btn">
+              {tRes("download")}
+            </a>
+          ) : (
+            <Link
+              href={`/contact?topic=request&file=${encodeURIComponent(label)}`}
+              className="dr-list__btn dr-list__btn--request"
+            >
+              {tRes("requestFile")}
+            </Link>
+          )
+        }
+      />
+    );
+  };
 
   return (
     <ResourceSubpageShell title={title} intro={intro} breadcrumbs={breadcrumbs}>

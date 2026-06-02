@@ -5,9 +5,9 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { sanityClient } from "@/sanity/client";
 import { allCertificationsQuery } from "@/sanity/queries";
-import { routing } from "@/i18n/routing";
-import type { Locale } from "@/lib/content/home";
+import { routing, type Locale } from "@/i18n/routing";
 import { buildResourcesMetadata } from "@/lib/seo";
+import { pickLocalized, type LocalizedField } from "@/lib/i18n/pickLocalized";
 import { splitCerts } from "./splitCerts";
 import "../resources-subpage.css";
 
@@ -16,14 +16,11 @@ export const revalidate = 3600;
 type CertItem = {
   _id: string;
   name: string;
+  displayName?: LocalizedField;
   /** Stable URL slug from Sanity. Used as the anchor target for /company deep-links. */
   slug: string | null;
-  issuer?: {
-    ko?: string | null;
-    en?: string | null;
-    zh?: string | null;
-  } | null;
-  scope?: { ko?: string | null; en?: string | null; zh?: string | null } | null;
+  issuer?: LocalizedField;
+  scope?: LocalizedField;
   validThrough?: string | null;
   models?: string[] | null;
   fileUrl?: string | null;
@@ -64,9 +61,10 @@ export default async function CertificationsPage({ params }: Props) {
     const issuer = cert.issuer?.[lang] ?? cert.issuer?.en ?? null;
     const scope = cert.scope?.[lang] ?? cert.scope?.en ?? null;
     const models = cert.models ?? [];
+    const displayName = pickLocalized(cert.displayName, lang, cert.name);
     return (
       <li key={cert._id} id={cert.slug ?? cert._id} className="dr-cert">
-        <h3 className="dr-cert__name">{cert.name}</h3>
+        <h3 className="dr-cert__name">{displayName}</h3>
         <dl className="dr-cert__dl">
           {issuer && (
             <>
@@ -100,7 +98,7 @@ export default async function CertificationsPage({ params }: Props) {
             </a>
           ) : (
             <Link
-              href={`/contact?topic=request&file=${encodeURIComponent(cert.name)}`}
+              href={`/contact?topic=request&file=${encodeURIComponent(displayName)}`}
               className="dr-list__btn dr-list__btn--request"
             >
               {tRes("requestFile")}

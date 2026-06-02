@@ -8,13 +8,14 @@ import { ResourceSubpageShell } from "@/components/resources/ResourceSubpageShel
 import { formatLongDate } from "@/lib/i18n/dates";
 import { sanityClient } from "@/sanity/client";
 import { allManualsQuery } from "@/sanity/queries";
-import type { Locale } from "@/lib/content/home";
+import { type Locale } from "@/i18n/routing";
 import { buildResourcesMetadata } from "@/lib/seo";
 import {
   getResourceSubpageContext,
   resourceSubpageStaticParams,
   SERIES_ORDER,
 } from "@/lib/pages/resourceSubpage";
+import { pickLocalized, type LocalizedField } from "@/lib/i18n/pickLocalized";
 import "../resources-subpage.css";
 
 export const revalidate = 3600;
@@ -24,6 +25,7 @@ type Props = { params: Promise<{ locale: string }> };
 type ManualItem = {
   _id: string;
   title: string;
+  displayName?: LocalizedField;
   models?: string[] | null;
   series?: string | null;
   rev?: string | null;
@@ -45,6 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ManualsPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const lang = locale as Locale;
   const [ctx, manuals] = await Promise.all([
     getResourceSubpageContext("manuals"),
     sanityClient.fetch<ManualItem[]>(allManualsQuery),
@@ -61,31 +64,34 @@ export default async function ManualsPage({ params }: Props) {
   );
   const ungrouped = manuals.filter((m) => !m.series);
 
-  const renderRow = (item: ManualItem) => (
-    <DocRow
-      key={item._id}
-      label={item.title}
-      meta={[
-        modelLabel(item),
-        item.rev,
-        item.publishedAt && formatLongDate(item.publishedAt, locale),
-      ]}
-      action={
-        item.fileUrl ? (
-          <a href={item.fileUrl} download className="dr-list__btn">
-            {tRes("download")}
-          </a>
-        ) : (
-          <Link
-            href={`/contact?topic=request&file=${encodeURIComponent(item.title)}`}
-            className="dr-list__btn dr-list__btn--request"
-          >
-            {tRes("requestFile")}
-          </Link>
-        )
-      }
-    />
-  );
+  const renderRow = (item: ManualItem) => {
+    const label = pickLocalized(item.displayName, lang, item.title);
+    return (
+      <DocRow
+        key={item._id}
+        label={label}
+        meta={[
+          modelLabel(item),
+          item.rev,
+          item.publishedAt && formatLongDate(item.publishedAt, locale),
+        ]}
+        action={
+          item.fileUrl ? (
+            <a href={item.fileUrl} download className="dr-list__btn">
+              {tRes("download")}
+            </a>
+          ) : (
+            <Link
+              href={`/contact?topic=request&file=${encodeURIComponent(label)}`}
+              className="dr-list__btn dr-list__btn--request"
+            >
+              {tRes("requestFile")}
+            </Link>
+          )
+        }
+      />
+    );
+  };
 
   return (
     <ResourceSubpageShell title={title} intro={intro} breadcrumbs={breadcrumbs}>

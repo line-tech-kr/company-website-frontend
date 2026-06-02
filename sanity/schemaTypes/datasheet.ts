@@ -9,7 +9,16 @@ export const datasheet = defineType({
       name: "title",
       title: "Title",
       type: "string",
+      description:
+        "Used as the fallback when no per-locale display name is set, and as the record name in the studio.",
       validation: (r) => r.required(),
+    }),
+    defineField({
+      name: "displayName",
+      title: "Display name (per locale)",
+      type: "internationalizedArrayString",
+      description:
+        "Optional. Per-locale label shown on datasheet cards (e.g. M2030 데이터시트 / M2030 Datasheet / M2030 数据表). Leave empty to fall back to `title`.",
     }),
     defineField({
       name: "models",

@@ -5,12 +5,13 @@ import { EmptyState } from "@/components/shared/EmptyState";
 import { ResourceSubpageShell } from "@/components/resources/ResourceSubpageShell";
 import { sanityClient } from "@/sanity/client";
 import { allDrawingsQuery } from "@/sanity/queries";
-import type { Locale } from "@/lib/content/home";
+import { type Locale } from "@/i18n/routing";
 import { buildResourcesMetadata } from "@/lib/seo";
 import {
   getResourceSubpageContext,
   resourceSubpageStaticParams,
 } from "@/lib/pages/resourceSubpage";
+import { pickLocalized, type LocalizedField } from "@/lib/i18n/pickLocalized";
 import "../resources-subpage.css";
 
 export const revalidate = 3600;
@@ -27,6 +28,7 @@ type StpVariant = {
 type DrawingItem = {
   _id: string;
   title: string;
+  displayName?: LocalizedField;
   models?: string[] | null;
   series?: string | null;
   dwgUrl?: string | null;
@@ -46,6 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function DrawingsPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const lang = locale as Locale;
   const [ctx, drawings] = await Promise.all([
     getResourceSubpageContext("drawings"),
     sanityClient.fetch<DrawingItem[]>(allDrawingsQuery),
@@ -76,6 +79,11 @@ export default async function DrawingsPage({ params }: Props) {
                 item.models && item.models.length > 0
                   ? item.models.join(" / ")
                   : "—";
+              const rowTitle = pickLocalized(
+                item.displayName,
+                lang,
+                item.title,
+              );
               const stpVariants = (item.stpVariants ?? []).filter(
                 (v): v is StpVariant & { url: string } => Boolean(v.url),
               );
@@ -85,7 +93,7 @@ export default async function DrawingsPage({ params }: Props) {
                 <tr key={item._id}>
                   <td>
                     <div className="dr-drawings__model">{modelLabel}</div>
-                    <div className="dr-drawings__series">{item.title}</div>
+                    <div className="dr-drawings__series">{rowTitle}</div>
                   </td>
                   <td>
                     {item.series && (
@@ -143,7 +151,7 @@ export default async function DrawingsPage({ params }: Props) {
                       ))}
                       {!hasFile && (
                         <Link
-                          href={`/contact?topic=request&file=${encodeURIComponent(item.title)}`}
+                          href={`/contact?topic=request&file=${encodeURIComponent(rowTitle)}`}
                           className="dr-list__btn dr-list__btn--request"
                         >
                           {tRes("requestFile")}
