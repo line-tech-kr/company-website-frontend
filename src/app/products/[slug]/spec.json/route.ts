@@ -10,9 +10,6 @@ export function generateStaticParams() {
   return specRouteStaticParams("json");
 }
 
-export function GET(
-  req: Request,
-  ctx: { params: Promise<{ slug: string }> },
-) {
+export function GET(req: Request, ctx: { params: Promise<{ slug: string }> }) {
   return specRouteGET("json", req, ctx);
 }
