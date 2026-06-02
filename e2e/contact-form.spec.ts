@@ -82,10 +82,18 @@ test.describe("Contact form", () => {
     await page.locator('input[name="consent"]').check();
     await page.getByRole("button", { name: /send inquiry/i }).click();
 
+    // Global summary message — new copy after retiring the "highlighted" lie.
     await expect(
       page.getByRole("alert").filter({
-        hasText: /check the highlighted fields/i,
+        hasText: /some fields need attention|review the inputs marked below/i,
       }),
     ).toBeVisible({ timeout: 10_000 });
+
+    // Per-field highlighting — locks in the actual UX promised by the summary.
+    // Email is required, was left blank, must be marked invalid.
+    await expect(page.locator("#ct-email")).toHaveAttribute(
+      "aria-invalid",
+      "true",
+    );
   });
 });
