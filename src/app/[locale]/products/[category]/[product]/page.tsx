@@ -227,20 +227,6 @@ export default async function ProductPage({ params }: Props) {
     : null;
 
   const downloadItems: DownloadItem[] = [
-    ...product.datasheets
-      .filter((d) => d.fileUrl)
-      .map<DownloadItem>((d) => ({
-        label: pickLocalized(
-          d.displayName,
-          locale,
-          d.title || tPdp("downloads.datasheetFor", { model: product.model }),
-        ),
-        type: "PDF",
-        href: d.fileUrl ?? undefined,
-        size: formatBytes(d.size),
-        rev: d.rev ?? undefined,
-        date: formatShortDate(d.publishedAt ?? d.updatedAt, locale),
-      })),
     ...product.manuals
       .filter((m) => m.fileUrl)
       .map<DownloadItem>((m) => ({

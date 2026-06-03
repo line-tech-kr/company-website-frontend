@@ -10,7 +10,7 @@ type Props = {
 };
 
 /**
- * One row in the data-room list views (catalogues / manuals / datasheets).
+ * One row in the data-room list views (catalogues / manuals / drawings).
  * Layout: `[PDF badge] [label + meta] [action]`. CSS lives in
  * resources-subpage.css and is shared by every consumer.
  */

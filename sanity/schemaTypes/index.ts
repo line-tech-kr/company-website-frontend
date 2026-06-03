@@ -5,7 +5,6 @@ import { contactSubmission } from "./contactSubmission";
 import { catalogue } from "./catalogue";
 import { manual } from "./manual";
 import { drawing } from "./drawing";
-import { datasheet } from "./datasheet";
 import { certification } from "./certification";
 import { faqGroup } from "./faq";
 import { application } from "./application";
@@ -18,7 +17,6 @@ export const schemaTypes = [
   catalogue,
   manual,
   drawing,
-  datasheet,
   certification,
   faqGroup,
   application,

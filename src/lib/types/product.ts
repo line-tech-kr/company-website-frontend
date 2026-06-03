@@ -174,20 +174,6 @@ export const SanityProductSchema = z.object({
   cutout: SanityImageSchema.nullable().optional(),
   connectorType: z.string().nullable().optional(),
   dimensionDrawing: SanityImageSchema.nullable().optional(),
-  datasheets: z
-    .array(
-      z.object({
-        _id: z.string(),
-        title: z.string(),
-        displayName: LocalizedNullableSchema,
-        rev: z.string().nullable().optional(),
-        publishedAt: z.string().nullable().optional(),
-        fileUrl: z.string().nullable().optional(),
-        size: z.number().nullable().optional(),
-        updatedAt: z.string().nullable().optional(),
-      }),
-    )
-    .default([]),
   manuals: z
     .array(
       z.object({

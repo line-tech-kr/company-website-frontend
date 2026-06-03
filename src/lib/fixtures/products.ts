@@ -5,7 +5,6 @@ const products = data as unknown as Product[];
 
 export const ALL_PRODUCTS: Product[] = products.map((p) => ({
   ...p,
-  datasheets: p.datasheets ?? [],
   manuals: p.manuals ?? [],
   drawings: p.drawings ?? [],
   certifications: p.certifications ?? [],

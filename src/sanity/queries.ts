@@ -69,17 +69,6 @@ const PRODUCT_DETAIL_PROJECTION = `
   connectorType,
   images,
   dimensionDrawing,
-  "datasheets": *[_type == "datasheet" && archived != true && ^.model in coalesce(models, [])]
-    | order(coalesce(publishedAt, _updatedAt) desc) {
-      _id,
-      title,
-      "displayName": ${localizedStrict("displayName")},
-      rev,
-      publishedAt,
-      "fileUrl": file.asset->url,
-      "size": file.asset->size,
-      "updatedAt": _updatedAt
-    },
   "manuals": *[_type == "manual" && archived != true && ^.model in coalesce(models, [])]
     | order(coalesce(publishedAt, _updatedAt) desc) {
       _id,
@@ -228,23 +217,6 @@ export const allManualsQuery = defineQuery(`
   }
 `);
 
-export const allDatasheetsQuery = defineQuery(`
-  *[_type == "datasheet" && archived != true]
-  | order(
-    select(series == "analogue" => 0, series == "digital" => 1, 2),
-    models[0] asc
-  ) {
-    _id,
-    title,
-    "displayName": ${localizedStrict("displayName")},
-    models,
-    series,
-    rev,
-    publishedAt,
-    "fileUrl": file.asset->url
-  }
-`);
-
 export const allDrawingsQuery = defineQuery(`
   *[_type == "drawing" && archived != true]
   | order(
@@ -311,7 +283,6 @@ export const applicationSlugsQuery = defineQuery(`
 export const resourceCountsQuery = defineQuery(`
   {
     "catalogues": count(*[_type == "catalogue"]),
-    "datasheets": count(*[_type == "datasheet" && archived != true]),
     "manuals": count(*[_type == "manual" && archived != true]),
     "drawings": count(*[_type == "drawing" && archived != true]),
     "certifications": count(*[_type == "certification"])
