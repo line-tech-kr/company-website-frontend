@@ -4319,7 +4319,20 @@
         "zh": "紧凑型连接结构"
       }
     ],
-    "connections": [],
+    "connections": [
+      {
+        "type": "1/2\" SW",
+        "length": "208.5 mm"
+      },
+      {
+        "type": "3/4\" SW",
+        "length": "208.5 mm"
+      },
+      {
+        "type": "1\" SW",
+        "length": "217.2 mm"
+      }
+    ],
     "manuals": [],
     "drawings": [],
     "connectorType": "9-Pin D-Connector",
@@ -4374,8 +4387,8 @@
         "comparator": "lt"
       },
       "maxPressure": {
-        "display": "<30 bar",
-        "value": 30,
+        "display": "<13 bar",
+        "value": 13,
         "unit": "bar",
         "comparator": "lt"
       }

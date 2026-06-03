@@ -15,7 +15,7 @@ export interface SanityEnv {
 export interface PatchMutation {
   patch: {
     id: string;
-    set?: Record<string, string | number | boolean | null>;
+    set?: Record<string, unknown>;
     unset?: string[];
   };
 }

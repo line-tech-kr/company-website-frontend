@@ -6,6 +6,9 @@
  *   3. DO400  — series  analogue  →  specialized
  *   4. High-flow models (22 slugs)  — maxPressure.display  →  "inquiry"
  *      (numeric value/unit/comparator unset, since "inquiry" is not a number)
+ *   5. DO400  — connections (3 SW fittings) + maxPressure  <30 bar → <13 bar
+ *      (source: 2026 final catalogue PDF p.34; the markdown source in
+ *      company-docs-private still lacks the connection table)
  *
  * Mirrors the corrections already applied to src/lib/fixtures/products.json.
  *
@@ -91,6 +94,22 @@ const PATCHES: Patch[] = [
       "massFlowSpecs.maxPressure.comparator",
     ],
   })),
+
+  // 5. DO400 connections + corrected maxPressure (PDF p.34)
+  {
+    id: "product-do400",
+    set: {
+      connections: [
+        { _key: "conn-0", type: '1/2" SW', length: "208.5 mm" },
+        { _key: "conn-1", type: '3/4" SW', length: "208.5 mm" },
+        { _key: "conn-2", type: '1" SW', length: "217.2 mm" },
+      ],
+      "massFlowSpecs.maxPressure.display": "<13 bar",
+      "massFlowSpecs.maxPressure.value": 13,
+      "massFlowSpecs.maxPressure.unit": "bar",
+      "massFlowSpecs.maxPressure.comparator": "lt",
+    },
+  },
 ];
 
 function printPlan(apply: boolean) {
