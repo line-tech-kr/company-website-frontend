@@ -180,6 +180,16 @@ export const categoryShowcaseQuery = defineQuery(`
       "image": product->images[0],
       "cutout": product->cutout,
     },
+    "lepc": lepc[]{
+      caption,
+      "model": product->model,
+      "slug": product->slug.current,
+      "function": product->function,
+      "flowRange": coalesce(product->massFlowSpecs.flowRange.display, product->massFlowSpecs.pressureRange.display),
+      "accuracy": product->massFlowSpecs.accuracy.display,
+      "image": product->images[0],
+      "cutout": product->cutout,
+    },
   }
 `);
 

@@ -1,0 +1,26 @@
+.lt-epc-stack__table {
+  grid-template-columns: 56px 96px 2fr 2fr 2fr 1.5fr 2fr;
+}
+
+@media (max-width: 1024px) {
+  .lt-epc-stack__table {
+    grid-template-columns: 48px 88px 2fr 2fr 2fr;
+  }
+  .lt-epc-stack__head-cell--max-pressure,
+  .lt-epc-stack__head-cell--fitting {
+    display: none;
+  }
+}
+@media (max-width: 640px) {
+  .lt-epc-stack__table {
+    grid-template-columns: 88px 2fr 2fr 2fr;
+  }
+}
+@media (max-width: 500px) {
+  .lt-epc-stack__table {
+    grid-template-columns: 72px 1fr 2fr;
+  }
+  .lt-epc-stack__head-cell--accuracy {
+    display: none;
+  }
+}

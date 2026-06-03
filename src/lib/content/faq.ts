@@ -84,7 +84,7 @@ export const LT_FAQ: Record<Locale, FaqContent> = {
           {
             id: "series-overview",
             q: "What are the main product families and how do I choose?",
-            a: "Line Tech produces four product families. M/MS (Analogue) — proven controllers and meters covering 0.01–5,000 slpm for general industrial process work. MD (Digital) — RS-485 communication, 8-point linearization for ±0.25% F.S. accuracy, and sub-second response, recommended for PLC/PC integration. EX/LEPC (Specialized) — EX is explosion-proof (Ex ec IIC T4 Gc, IP 65) for hazardous environments; LEPC is a low-pressure (0.1–6 bar) MFC delivering ±0.5% F.S. accuracy. DO400 (Special-order) — custom-spec controllers for unique requirements. All standard series cover both MFC and MFM; LEPC and DO400 are MFC-only.",
+            a: "Line Tech produces five product families. M/MS (Analogue) — proven controllers and meters covering 0.01–5,000 slpm for general industrial process work. MD (Digital) — RS-485 communication, 8-point linearization for ±0.25% F.S. accuracy, and sub-second response, recommended for PLC/PC integration. EX (Specialized) — explosion-proof (Ex ec IIC T4 Gc, IP 65) controllers and meters for hazardous environments. LEPC (Pressure) — electronic pressure controller for 0.1–6 barA low-pressure applications, ±0.5% F.S. accuracy. DO400 (Special-order) — custom-spec controllers for unique requirements. All standard series cover both MFC and MFM; LEPC and DO400 are MFC-only.",
           },
           {
             id: "m-vs-ms",
@@ -255,7 +255,7 @@ export const LT_FAQ: Record<Locale, FaqContent> = {
           {
             id: "series-overview",
             q: "주요 제품군은 무엇이며, 어떻게 선택하나요?",
-            a: "라인테크는 네 가지 주요 제품군을 제공합니다. M/MS(아날로그) — 0.01~5,000 slpm 범위의 검증된 MFC·MFM, 일반 산업 공정에 적합합니다. MD(디지털) — RS-485 통신, 8포인트 선형화로 ±0.25% F.S. 정확도, 1초 미만 응답으로 PLC·PC 연동에 권장됩니다. EX·LEPC(특수) — EX는 Ex ec IIC T4 Gc·IP 65의 방폭 사양으로 위험 환경에 사용하며, LEPC는 0.1~6 bar 저압 환경에 ±0.5% F.S. 정확도의 MFC를 제공합니다. DO400(특수 주문) — 맞춤 사양 컨트롤러. 모든 표준 시리즈는 MFC와 MFM을 모두 제공하며, LEPC와 DO400은 MFC 전용입니다.",
+            a: "라인테크는 다섯 가지 주요 제품군을 제공합니다. M/MS(아날로그) — 0.01~5,000 slpm 범위의 검증된 MFC·MFM, 일반 산업 공정에 적합합니다. MD(디지털) — RS-485 통신, 8포인트 선형화로 ±0.25% F.S. 정확도, 1초 미만 응답으로 PLC·PC 연동에 권장됩니다. EX(특수) — Ex ec IIC T4 Gc·IP 65 방폭 사양의 MFC·MFM, 위험 환경 공정용입니다. LEPC(압력) — 0.1~6 barA 저압 환경 전용 전자식 압력 제어기, ±0.5% F.S. 정확도. DO400(특수 주문) — 맞춤 사양 컨트롤러. 모든 표준 시리즈는 MFC와 MFM을 모두 제공하며, LEPC와 DO400은 MFC 전용입니다.",
           },
           {
             id: "m-vs-ms",
@@ -426,7 +426,7 @@ export const LT_FAQ: Record<Locale, FaqContent> = {
           {
             id: "series-overview",
             q: "莱因有哪些主要产品系列，该如何选择？",
-            a: "莱因提供四大产品系列。M/MS（模拟系列）——覆盖 0.01~5,000 slpm 的成熟 MFC 与 MFM，适用于一般工业工艺。MD（数字系列）——RS-485 通信，8 点线性化达 ±0.25% F.S. 精度，亚秒级响应，推荐用于 PLC/PC 集成。EX/LEPC（特殊系列）——EX 为防爆型（Ex ec IIC T4 Gc，IP 65），适用于危险环境；LEPC 为 0.1~6 bar 低压 MFC，精度 ±0.5% F.S.。DO400（特殊订货）——针对特殊应用的定制规格控制器。所有标准系列均提供 MFC 与 MFM 形式；LEPC 与 DO400 仅提供 MFC 形式。",
+            a: "莱因提供五大产品系列。M/MS（模拟系列）——覆盖 0.01~5,000 slpm 的成熟 MFC 与 MFM，适用于一般工业工艺。MD（数字系列）——RS-485 通信，8 点线性化达 ±0.25% F.S. 精度，亚秒级响应，推荐用于 PLC/PC 集成。EX（特殊系列）——防爆型（Ex ec IIC T4 Gc，IP 65）MFC 与 MFM，适用于危险环境。LEPC（压力系列）——面向 0.1~6 barA 低压应用的电子式压力控制器，精度 ±0.5% F.S。DO400（特殊订货）——针对特殊应用的定制规格控制器。所有标准系列均提供 MFC 与 MFM 形式；LEPC 与 DO400 仅提供 MFC 形式。",
           },
           {
             id: "m-vs-ms",

@@ -39,7 +39,8 @@
     "categories": {
       "analogue": "Analogue series",
       "digital": "Digital series",
-      "specialized": "Specialized series"
+      "specialized": "Specialized series",
+      "lepc": "LEPC pressure controller"
     }
   },
   "product": {
@@ -94,7 +95,11 @@
       },
       "specialized": {
         "title": "Specialized series",
-        "lede": "Explosion-proof (EX) and low-pressure precision control (LEPC) variants for demanding environments."
+        "lede": "Explosion-proof (EX) variants for hazardous and demanding environments."
+      },
+      "lepc": {
+        "title": "LEPC pressure controller",
+        "lede": "Electronic Pressure Controller for low-pressure applications between 0.1 and 6 barA, with ±0.5% F.S. accuracy."
       }
     },
     "stack": {
@@ -109,15 +114,21 @@
       "instruments": {
         "title": "Read-Out Units",
         "subtitle": "Instruments"
+      },
+      "pressureControllers": {
+        "title": "Electronic Pressure Controllers · EPC",
+        "subtitle": "Pressure controllers"
       }
     },
     "table": {
       "model": "Model",
       "description": "Features",
       "range": "Flow range",
+      "pressureRange": "Pressure range",
       "accuracy": "Accuracy",
       "response": "Response",
       "fitting": "Fitting",
+      "maxPressure": "Max pressure",
       "display": "Display",
       "power": "Input power",
       "communication": "Communication",
@@ -165,7 +176,8 @@
       "any": "Any",
       "analogue": "Analogue",
       "digital": "Digital",
-      "specialized": "Specialized"
+      "specialized": "Specialized",
+      "lepc": "LEPC"
     },
     "results": {
       "prompt": "Enter a flow rate above to see matches.",

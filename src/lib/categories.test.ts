@@ -7,8 +7,13 @@ import {
 } from "./categories";
 
 describe("CATEGORY_SLUGS", () => {
-  it("lists the three brand category slugs in display order", () => {
-    expect(CATEGORY_SLUGS).toEqual(["analogue", "digital", "specialized"]);
+  it("lists the brand category slugs in display order", () => {
+    expect(CATEGORY_SLUGS).toEqual([
+      "analogue",
+      "digital",
+      "specialized",
+      "lepc",
+    ]);
   });
 
   it("each slug has a code and matching series in CATEGORIES", () => {
@@ -20,7 +25,7 @@ describe("CATEGORY_SLUGS", () => {
 });
 
 describe("isCategorySlug", () => {
-  it.each(["analogue", "digital", "specialized"])(
+  it.each(["analogue", "digital", "specialized", "lepc"])(
     "accepts %s as a category slug",
     (slug) => {
       expect(isCategorySlug(slug)).toBe(true);
@@ -40,6 +45,7 @@ describe("categoryForSeries", () => {
     ["analogue", "analogue"],
     ["digital", "digital"],
     ["specialized", "specialized"],
+    ["lepc", "lepc"],
   ] as const)("maps series %s to category %s", (series, expected) => {
     expect(categoryForSeries(series)).toBe(expected);
   });

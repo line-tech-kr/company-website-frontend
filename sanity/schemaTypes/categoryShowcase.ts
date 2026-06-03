@@ -90,6 +90,34 @@ export const categoryShowcase = defineType({
         }),
       ],
     }),
+    defineField({
+      name: "lepc",
+      title: "LEPC pressure controller",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({
+              name: "product",
+              title: "Product",
+              type: "reference",
+              to: [{ type: "product" }],
+              validation: (r) => r.required(),
+            }),
+            defineField({
+              name: "caption",
+              title: "Caption",
+              type: "string",
+              description: "Short highlight shown on the slide.",
+            }),
+          ],
+          preview: {
+            select: { title: "product.model", subtitle: "caption" },
+          },
+        }),
+      ],
+    }),
   ],
   preview: {
     prepare: () => ({ title: "Category Showcases" }),

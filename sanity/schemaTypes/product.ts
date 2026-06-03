@@ -37,7 +37,7 @@ export const product = defineType({
     defineField({
       name: "series",
       type: "string",
-      options: { list: ["analogue", "digital", "specialized"] },
+      options: { list: ["analogue", "digital", "specialized", "lepc"] },
     }),
     defineField({
       name: "function",

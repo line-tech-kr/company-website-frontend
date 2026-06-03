@@ -113,7 +113,7 @@ const LocalizedNullableSchema = z
 export const SanityProductSchema = z.object({
   model: z.string(),
   slug: z.object({ current: z.string() }),
-  series: z.enum(["analogue", "digital", "specialized"]),
+  series: z.enum(["analogue", "digital", "specialized", "lepc"]),
   function: z.enum(["MFC", "MFM", "EPC", "ROU"]),
   productLabel: z.object({
     ko: z.string(),

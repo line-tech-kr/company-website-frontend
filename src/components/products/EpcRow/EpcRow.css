@@ -1,0 +1,24 @@
+.lt-epc-row__cell--pressure,
+.lt-epc-row__cell--accuracy,
+.lt-epc-row__cell--max-pressure,
+.lt-epc-row__cell--fitting {
+  font-family: var(--lt-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--pd-fg-strong);
+  font-size: var(--lt-fs-sm);
+}
+.lt-epc-row__cell--fitting {
+  color: var(--pd-muted);
+}
+
+@media (max-width: 1024px) {
+  .lt-epc-row__cell--max-pressure,
+  .lt-epc-row__cell--fitting {
+    display: none;
+  }
+}
+@media (max-width: 500px) {
+  .lt-epc-row__cell--accuracy {
+    display: none;
+  }
+}

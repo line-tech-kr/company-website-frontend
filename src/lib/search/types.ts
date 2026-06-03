@@ -3,8 +3,8 @@ export type SearchEntry = {
   type: "product" | "category" | "page";
   title: string;
   model: string;
-  productType?: "mfc" | "mfm";
-  signal?: "digital" | "analogue" | "specialized";
+  productType?: "mfc" | "mfm" | "epc" | "rou";
+  signal?: "digital" | "analogue" | "specialized" | "lepc";
   url: string;
   breadcrumb: string;
 };

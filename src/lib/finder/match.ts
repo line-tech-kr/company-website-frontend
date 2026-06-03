@@ -7,7 +7,12 @@ import {
 } from "./gas-factors";
 
 export type FinderFunction = "MFC" | "MFM" | "EPC" | "any";
-export type FinderSeries = "analogue" | "digital" | "specialized" | "any";
+export type FinderSeries =
+  | "analogue"
+  | "digital"
+  | "specialized"
+  | "lepc"
+  | "any";
 export type FinderUnit = "slpm" | "sccm";
 
 export type FinderInput = {
@@ -92,6 +97,24 @@ export function findProducts(
   }
   const n2EquivalentSlpm = toN2Equivalent(flowSlpm, gas);
 
+  // EPC products use pressureRange, not flowRange — the flow input is
+  // meaningless here. Surface every EPC product matching the series filter.
+  if (input.function === "EPC") {
+    const matches: FinderMatch[] = [];
+    for (const product of products) {
+      if (product.function !== "EPC") continue;
+      if (!seriesMatches(product, input.series)) continue;
+      matches.push({ product, n2EquivalentSlpm, fitScore: 1 });
+    }
+    matches.sort((a, b) => a.product.model.localeCompare(b.product.model));
+    return {
+      matches,
+      n2EquivalentSlpm,
+      gas,
+      warning: gas.category === "specialty" ? "specialty-gas" : undefined,
+    };
+  }
+
   const matches: FinderMatch[] = [];
   for (const product of products) {
     if (!functionMatches(product, input.function)) continue;
@@ -105,11 +128,12 @@ export function findProducts(
     matches.push({ product, n2EquivalentSlpm, fitScore: score });
   }
 
-  // Sort: fit score (desc) → series (analogue, digital, specialized) → model.
+  // Sort: fit score (desc) → series (analogue, digital, specialized, lepc) → model.
   const SERIES_RANK: Record<NonNullable<Product["series"]>, number> = {
     analogue: 0,
     digital: 1,
     specialized: 2,
+    lepc: 3,
   };
   matches.sort((a, b) => {
     if (b.fitScore !== a.fitScore) return b.fitScore - a.fitScore;

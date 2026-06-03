@@ -1,6 +1,11 @@
 import type { Product } from "./types/product";
 
-export const CATEGORY_SLUGS = ["analogue", "digital", "specialized"] as const;
+export const CATEGORY_SLUGS = [
+  "analogue",
+  "digital",
+  "specialized",
+  "lepc",
+] as const;
 
 export type CategorySlug = (typeof CATEGORY_SLUGS)[number];
 
@@ -10,13 +15,15 @@ export const CATEGORIES: Record<
 > = {
   analogue: { code: "M·MS", series: "analogue" },
   digital: { code: "MD", series: "digital" },
-  specialized: { code: "EX·LEPC", series: "specialized" },
+  specialized: { code: "EX", series: "specialized" },
+  lepc: { code: "LEPC", series: "lepc" },
 };
 
 const SERIES_TO_CATEGORY: Record<Product["series"], CategorySlug> = {
   analogue: "analogue",
   digital: "digital",
   specialized: "specialized",
+  lepc: "lepc",
 };
 
 export function isCategorySlug(s: string): s is CategorySlug {

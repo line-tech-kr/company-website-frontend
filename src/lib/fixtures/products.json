@@ -4168,7 +4168,7 @@
     "slug": {
       "current": "lepc"
     },
-    "series": "specialized",
+    "series": "lepc",
     "function": "EPC",
     "productLabel": {
       "en": "Electronic Pressure Controller",
@@ -4264,6 +4264,11 @@
         "display": "+15 or +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
+      },
+      "maxPressure": {
+        "display": "50 bar",
+        "value": 50,
+        "unit": "bar"
       },
       "tempRange": {
         "display": "0–50 °C",

@@ -51,6 +51,7 @@ function makeProductWithImage(
 const ANALOGUE_FLAGSHIP = makeProductWithImage("M3030VA", "analogue");
 const DIGITAL_FLAGSHIP = makeProductWithImage("MD800C", "digital");
 const SPECIALIZED_FLAGSHIP = makeProductWithImage("EX1000C", "specialized");
+const LEPC_FLAGSHIP = makeProductWithImage("LEPC", "lepc");
 
 const ALL_PRODUCTS: Product[] = [
   makeProduct({ model: "M3010VA", series: "analogue" }),
@@ -59,6 +60,7 @@ const ALL_PRODUCTS: Product[] = [
   DIGITAL_FLAGSHIP,
   makeProduct({ model: "EX70C", series: "specialized" }),
   SPECIALIZED_FLAGSHIP,
+  LEPC_FLAGSHIP,
 ];
 
 describe("FLAGSHIP_MODEL", () => {
@@ -74,6 +76,7 @@ describe("pickFlagship", () => {
     expect(pickFlagship(ALL_PRODUCTS, "analogue")?.model).toBe("M3030VA");
     expect(pickFlagship(ALL_PRODUCTS, "digital")?.model).toBe("MD800C");
     expect(pickFlagship(ALL_PRODUCTS, "specialized")?.model).toBe("EX1000C");
+    expect(pickFlagship(ALL_PRODUCTS, "lepc")?.model).toBe("LEPC");
   });
 
   it("falls back when the pinned model is not in the product list", () => {

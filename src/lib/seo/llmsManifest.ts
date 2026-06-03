@@ -6,7 +6,7 @@ import { categoryForSeries } from "@/lib/categories";
 import type { Product } from "@/lib/types/product";
 
 const CATEGORY_META: Record<
-  "analogue" | "digital" | "specialized",
+  "analogue" | "digital" | "specialized" | "lepc",
   { heading: string; code: string; description: string }
 > = {
   analogue: {
@@ -22,10 +22,16 @@ const CATEGORY_META: Record<
       "When you need ±0.25% FS accuracy, 8-point linearization, or RS-485 / Modbus RTU for bus integration. Sub-second response. Preferred for semiconductor process lines.",
   },
   specialized: {
-    heading: "Specialized series (EX / LEPC)",
-    code: "EX·LEPC",
+    heading: "Specialized series (EX)",
+    code: "EX",
     description:
-      "Hazardous locations (EX, ATEX-certified explosion-proof) and low-pressure precision control (LEPC, 0.1–6 bar). Choose when standard variants don't fit the environment.",
+      "Hazardous locations — ATEX-certified explosion-proof MFCs and MFMs (Ex ec IIC T4 Gc, IP 65). Choose when the process environment requires ATEX-rated equipment.",
+  },
+  lepc: {
+    heading: "LEPC pressure controller",
+    code: "LEPC",
+    description:
+      "Low-pressure Electronic Pressure Controller for 0.1–6 barA operating range with ±0.5% F.S. accuracy. Purpose-built for vacuum-adjacent and analytical instrumentation lines.",
   },
 };
 
@@ -91,6 +97,7 @@ export async function buildLlmsManifest(siteUrl: string): Promise<string> {
     analogue: [],
     digital: [],
     specialized: [],
+    lepc: [],
   };
   for (const p of products) byCategory[p.series].push(p);
 
@@ -111,7 +118,12 @@ export async function buildLlmsManifest(siteUrl: string): Promise<string> {
     "",
   ];
 
-  for (const series of ["analogue", "digital", "specialized"] as const) {
+  for (const series of [
+    "analogue",
+    "digital",
+    "specialized",
+    "lepc",
+  ] as const) {
     const list = byCategory[series];
     if (list.length === 0) continue;
     const meta = CATEGORY_META[series];

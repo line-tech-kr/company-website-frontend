@@ -8,7 +8,7 @@ export type ApplicationEntry = {
   lede: string;
   body: string[];
   recommendedSeries: string[];
-  relatedCategories: Array<"analogue" | "digital" | "specialized">;
+  relatedCategories: Array<"analogue" | "digital" | "specialized" | "lepc">;
 };
 
 export type ApplicationsContent = {

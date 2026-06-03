@@ -6,6 +6,7 @@ import { CategoryHero } from "@/components/products/CategoryHero";
 import { CategoryShowcase } from "@/components/products/CategoryShowcase";
 import { ProductStack } from "@/components/products/ProductStack";
 import { ReadoutStack } from "@/components/products/ReadoutStack";
+import { EpcStack } from "@/components/products/EpcStack";
 import { sanityClient } from "@/sanity/client";
 import { fetchSanity } from "@/sanity/fetch";
 import { productsBySeriesQuery, categoryShowcaseQuery } from "@/sanity/queries";
@@ -78,13 +79,10 @@ export default async function CategoryPage({ params }: Props) {
     getTranslations("products"),
   ]);
 
-  // EPC (Electronic Pressure Controller — currently only LEPC) joins the
-  // flow controllers in the Controllers stack. Catalog convention.
-  const controllers = products.filter(
-    (p) => p.function === "MFC" || p.function === "EPC",
-  );
+  const controllers = products.filter((p) => p.function === "MFC");
   const meters = products.filter((p) => p.function === "MFM");
   const instruments = products.filter((p) => p.function === "ROU");
+  const pressureControllers = products.filter((p) => p.function === "EPC");
 
   const breadcrumbs = [
     { label: tCommon("home"), href: "/" },
@@ -107,6 +105,14 @@ export default async function CategoryPage({ params }: Props) {
     power: tProducts("table.power"),
     communication: tProducts("table.communication"),
     connector: tProducts("table.connector"),
+  };
+  const epcHeaders = {
+    model: tProducts("table.model"),
+    description: tProducts("table.description"),
+    pressureRange: tProducts("table.pressureRange"),
+    accuracy: tProducts("table.accuracy"),
+    maxPressure: tProducts("table.maxPressure"),
+    fitting: tProducts("table.fitting"),
   };
   const emptyLabel = tProducts("emptyStack");
 
@@ -142,24 +148,39 @@ export default async function CategoryPage({ params }: Props) {
             lede={tProducts(`categories.${category}.lede`)}
           />
         )}
-        <ProductStack
-          title={tProducts("stack.controllers.title")}
-          subtitle={tProducts("stack.controllers.subtitle")}
-          products={controllers}
-          category={category}
-          locale={locale}
-          emptyLabel={emptyLabel}
-          headers={headers}
-        />
-        <ProductStack
-          title={tProducts("stack.meters.title")}
-          subtitle={tProducts("stack.meters.subtitle")}
-          products={meters}
-          category={category}
-          locale={locale}
-          emptyLabel={emptyLabel}
-          headers={headers}
-        />
+        {controllers.length > 0 && (
+          <ProductStack
+            title={tProducts("stack.controllers.title")}
+            subtitle={tProducts("stack.controllers.subtitle")}
+            products={controllers}
+            category={category}
+            locale={locale}
+            emptyLabel={emptyLabel}
+            headers={headers}
+          />
+        )}
+        {meters.length > 0 && (
+          <ProductStack
+            title={tProducts("stack.meters.title")}
+            subtitle={tProducts("stack.meters.subtitle")}
+            products={meters}
+            category={category}
+            locale={locale}
+            emptyLabel={emptyLabel}
+            headers={headers}
+          />
+        )}
+        {pressureControllers.length > 0 && (
+          <EpcStack
+            title={tProducts("stack.pressureControllers.title")}
+            subtitle={tProducts("stack.pressureControllers.subtitle")}
+            products={pressureControllers}
+            category={category}
+            locale={locale}
+            emptyLabel={emptyLabel}
+            headers={epcHeaders}
+          />
+        )}
         {instruments.length > 0 && (
           <ReadoutStack
             title={tProducts("stack.instruments.title")}
