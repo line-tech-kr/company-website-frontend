@@ -316,7 +316,16 @@
       "name": "Please enter your name.",
       "email": "Please enter a valid email address.",
       "message": "Please enter your message.",
-      "consent": "You must agree to the privacy policy to continue."
+      "consent": "You must agree to the privacy policy to continue.",
+      "gas": "Please specify the gas.",
+      "gasMode": "Please choose pure or mixture.",
+      "gasComponents": "Please list at least two gases with percentages that add up to 100.",
+      "flowValue": "Please enter a positive flow rate.",
+      "flowUnit": "Please choose a flow unit.",
+      "pressureValue": "Please enter a positive pressure.",
+      "pressureUnit": "Please choose a pressure unit.",
+      "fittingType": "Please choose a fitting type.",
+      "fittingSize": "Please enter the fitting size."
     },
     "successTitle": "Your inquiry was sent.",
     "success": "A Line Tech representative will reply to the email address you provided.",

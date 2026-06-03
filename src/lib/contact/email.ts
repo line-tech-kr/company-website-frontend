@@ -1,16 +1,37 @@
 import { Resend } from "resend";
-import type { ContactFormPayload } from "./schema";
+import { formatGasSummary, type ContactFormPayload } from "./schema";
 
 const DEFAULT_TO = "linetech@line-tech.co.kr";
 
 const INQUIRY_LABELS: Record<string, string> = {
-  sales: "영업·견적",
+  quote: "견적 요청",
+  sales: "영업 문의",
   support: "기술 지원",
   "doc-request": "자료 요청",
   partnership: "협력·파트너십",
   general: "일반 문의",
   "site-visit": "현장 방문 지원",
 };
+
+function formatFlow(data: ContactFormPayload): string | null {
+  if (!data.flowValue) return null;
+  return data.flowUnit ? `${data.flowValue} ${data.flowUnit}` : data.flowValue;
+}
+
+function formatPressure(data: ContactFormPayload): string | null {
+  if (!data.pressureValue) return null;
+  return data.pressureUnit
+    ? `${data.pressureValue} ${data.pressureUnit}`
+    : data.pressureValue;
+}
+
+function formatFitting(data: ContactFormPayload): string | null {
+  if (!data.fittingType && !data.fittingSize) return null;
+  const parts = [data.fittingType, data.fittingSize].filter((s): s is string =>
+    Boolean(s && s.trim()),
+  );
+  return parts.length > 0 ? parts.join(" · ") : null;
+}
 
 function escapeHtml(s: string): string {
   return s
@@ -59,6 +80,20 @@ function buildReplyLinks(data: ContactFormPayload): {
 }
 
 function buildText(data: ContactFormPayload): string {
+  const gasSummary =
+    data.inquiryType === "quote" ? formatGasSummary(data) : null;
+  const quoteLines =
+    data.inquiryType === "quote"
+      ? [
+          "",
+          "공정 조건:",
+          ...(gasSummary ? [`- 가스: ${gasSummary}`] : []),
+          ...(formatFlow(data) ? [`- 유량: ${formatFlow(data)}`] : []),
+          ...(formatPressure(data) ? [`- 압력: ${formatPressure(data)}`] : []),
+          ...(formatFitting(data) ? [`- 피팅: ${formatFitting(data)}`] : []),
+        ]
+      : [];
+
   const lines = [
     "라인테크 웹사이트 문의가 접수되었습니다.",
     "",
@@ -68,6 +103,7 @@ function buildText(data: ContactFormPayload): string {
     ...(data.company ? [`회사명: ${data.company}`] : []),
     ...(data.phone ? [`연락처: ${data.phone}`] : []),
     ...(data.subject ? [`제목: ${data.subject}`] : []),
+    ...quoteLines,
     "",
     "문의 내용:",
     data.message,
@@ -131,10 +167,20 @@ function buildHtml(data: ContactFormPayload): string {
       : []),
   ].join("");
 
+  const isQuote = data.inquiryType === "quote";
+  const gasText = isQuote ? formatGasSummary(data) : null;
+  const flowText = formatFlow(data);
+  const pressureText = formatPressure(data);
+  const fittingText = formatFitting(data);
+
   const rows = [
     row("문의 유형", escapeHtml(formatInquiryType(data))),
     ...(data.company ? [row("회사명", escapeHtml(data.company))] : []),
     ...(data.subject ? [row("제목", escapeHtml(data.subject))] : []),
+    ...(isQuote && gasText ? [row("가스", escapeHtml(gasText))] : []),
+    ...(isQuote && flowText ? [row("유량", escapeHtml(flowText))] : []),
+    ...(isQuote && pressureText ? [row("압력", escapeHtml(pressureText))] : []),
+    ...(isQuote && fittingText ? [row("피팅", escapeHtml(fittingText))] : []),
   ].join("");
 
   const secondaryLinkStyle =

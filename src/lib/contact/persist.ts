@@ -29,5 +29,14 @@ export async function persistContactSubmission(
     phone: data.phone ?? undefined,
     subject: data.subject ?? undefined,
     message: data.message,
+    gasMode: data.gasMode ?? undefined,
+    gas: data.gas ?? undefined,
+    gasComponents: data.gasComponents ?? undefined,
+    flowValue: data.flowValue ?? undefined,
+    flowUnit: data.flowUnit ?? undefined,
+    pressureValue: data.pressureValue ?? undefined,
+    pressureUnit: data.pressureUnit ?? undefined,
+    fittingType: data.fittingType ?? undefined,
+    fittingSize: data.fittingSize ?? undefined,
   });
 }
