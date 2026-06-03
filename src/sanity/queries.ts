@@ -133,7 +133,7 @@ export const productByModelQuery = defineQuery(`
 export const productSlugsQuery = defineQuery(`
   *[_type == "product" && defined(slug.current)]{
     "slug": slug.current,
-    series
+    "series": select(series == "lepc" => "specialized", series)
   }
 `);
 

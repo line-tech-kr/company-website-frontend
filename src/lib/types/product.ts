@@ -113,7 +113,11 @@ const LocalizedNullableSchema = z
 export const SanityProductSchema = z.object({
   model: z.string(),
   slug: z.object({ current: z.string() }),
-  series: z.enum(["analogue", "digital", "specialized"]),
+  // Sanity emits `lepc` for the LEPC product; coalesce to `specialized` so
+  // the rest of the codebase keeps a 3-value Series union.
+  series: z
+    .enum(["analogue", "digital", "specialized", "lepc"])
+    .transform((s) => (s === "lepc" ? ("specialized" as const) : s)),
   function: z.enum(["MFC", "MFM", "EPC", "ROU"]),
   productLabel: z.object({
     ko: z.string(),
