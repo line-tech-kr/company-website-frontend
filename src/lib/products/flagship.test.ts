@@ -99,6 +99,16 @@ describe("pickFlagship", () => {
     const products = ALL_PRODUCTS.filter((p) => p.series !== "specialized");
     expect(pickFlagship(products, "specialized")).toBeUndefined();
   });
+
+  it("excludes MFM meters from the fallback", () => {
+    const products: Product[] = [
+      makeProduct({ model: "MS3010MA", series: "analogue", function: "MFM" }),
+      makeProduct({ model: "M3010VA", series: "analogue" }),
+    ];
+    const result = pickFlagship(products, "analogue");
+    expect(result?.model).toBe("M3010VA");
+    expect(result?.function).not.toBe("MFM");
+  });
 });
 
 describe("flagshipImageUrl", () => {

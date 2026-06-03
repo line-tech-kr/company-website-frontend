@@ -31,7 +31,7 @@ const FEATURED: Record<string, { model: string; caption: string }[]> = {
   analogue: [
     { model: "M3030VA", caption: "±0.5% F.S. accuracy" },
     { model: "MS3700VA", caption: "5–3,000 sccm flow range" },
-    { model: "M2030VA", caption: "Sub-200 ms response time" },
+    { model: "MS3800VA", caption: "2,500–5,000 slpm high-flow control" },
   ],
   digital: [
     { model: "MD30C", caption: "8-point linearization, RS-485 / Modbus RTU" },
@@ -47,6 +47,10 @@ const FEATURED: Record<string, { model: string; caption: string }[]> = {
       model: "LEPC",
       caption:
         "Electronic pressure controller with OLED display and RS-485 / Modbus",
+    },
+    {
+      model: "DO400",
+      caption: "New for 2026 — ≤1 s response, 100–400 slpm",
     },
   ],
 };
