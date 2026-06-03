@@ -61,7 +61,7 @@
   "products": {
     "list": {
       "title": "产品",
-      "lede": "涵盖模拟、数字和专用系列的质量流量控制器（MFC）和质量流量计（MFM）。",
+      "lede": "涵盖模拟、数字、专用与 LEPC 系列的质量流量控制器（MFC）、质量流量计（MFM）与低压电子式压力控制器（EPC）。",
       "cardCount": "{count} 款型号",
       "stats": {
         "modelsLabel": "目录型号",

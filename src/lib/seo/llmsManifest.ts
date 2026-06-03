@@ -2,11 +2,11 @@ import { sanityClient } from "@/sanity/client";
 import { fetchSanity } from "@/sanity/fetch";
 import { allProductsQuery } from "@/sanity/queries";
 import { SanityProductSchema } from "@/lib/types/product";
-import { categoryForSeries } from "@/lib/categories";
+import { categoryForSeries, type CategorySlug } from "@/lib/categories";
 import type { Product } from "@/lib/types/product";
 
 const CATEGORY_META: Record<
-  "analogue" | "digital" | "specialized" | "lepc",
+  CategorySlug,
   { heading: string; code: string; description: string }
 > = {
   analogue: {

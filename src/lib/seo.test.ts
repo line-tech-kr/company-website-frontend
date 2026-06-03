@@ -139,21 +139,21 @@ describe("buildProductMetadata", () => {
     delete specs.flowRange;
     const product = {
       ...productFixture,
-      series: "specialized" as const,
+      series: "lepc" as const,
       function: "EPC" as const,
       massFlowSpecs: {
         ...(specs as NonNullable<typeof productFixture.massFlowSpecs>),
         pressureRange: {
-          display: "0–10 bar",
-          min: 0,
-          max: 10,
-          unit: "bar",
+          display: "0.1–6 barA",
+          min: 0.1,
+          max: 6,
+          unit: "barA",
         },
       },
     };
-    const m = buildProductMetadata("en", product, "specialized");
+    const m = buildProductMetadata("en", product, "lepc");
     expect(m.description).toMatch(/pressure range/);
     expect(m.description).not.toMatch(/flow range/);
-    expect(m.description).toMatch(/high-pressure/);
+    expect(m.description).toMatch(/low-pressure/);
   });
 });

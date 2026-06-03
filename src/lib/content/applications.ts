@@ -1,3 +1,4 @@
+import type { CategorySlug } from "@/lib/categories";
 import type { Locale } from "./home";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -8,7 +9,7 @@ export type ApplicationEntry = {
   lede: string;
   body: string[];
   recommendedSeries: string[];
-  relatedCategories: Array<"analogue" | "digital" | "specialized" | "lepc">;
+  relatedCategories: CategorySlug[];
 };
 
 export type ApplicationsContent = {
@@ -57,7 +58,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
           "Line Tech supplies both MFC and MFM variants, making it straightforward to build measurement-only monitoring loops alongside controlled feed lines in the same system.",
         ],
         recommendedSeries: ["M / MS", "LEPC"],
-        relatedCategories: ["analogue", "specialized"],
+        relatedCategories: ["analogue", "lepc"],
       },
       {
         slug: "biotech-pharmaceutical",
@@ -105,7 +106,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
           "For low-pressure analytical and vacuum-adjacent rigs operating below the standard 10 bar minimum, the LEPC controller provides accurate flow regulation down to 0.1 bar — particularly useful in spectroscopy, GC inlet, and benchtop reactor work.",
         ],
         recommendedSeries: ["MD", "LEPC"],
-        relatedCategories: ["specialized", "digital"],
+        relatedCategories: ["lepc", "digital"],
       },
       {
         slug: "metals-processing",
@@ -214,7 +215,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
           "라인테크는 MFC와 MFM을 모두 제공하므로, 같은 시스템 안에서 제어 공급 라인과 측정 전용 모니터링 루프를 간편하게 구성할 수 있습니다.",
         ],
         recommendedSeries: ["M / MS", "LEPC"],
-        relatedCategories: ["analogue", "specialized"],
+        relatedCategories: ["analogue", "lepc"],
       },
       {
         slug: "biotech-pharmaceutical",
@@ -262,7 +263,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
           "표준 최저 압력 10 bar에 미치지 못하는 저압 분석 또는 진공 인접 실험에서는 LEPC 컨트롤러가 0.1 bar까지 정밀한 유량 제어를 제공합니다 — 분광, GC 인렛, 벤치 반응기 실험에 특히 유용합니다.",
         ],
         recommendedSeries: ["MD", "LEPC"],
-        relatedCategories: ["specialized", "digital"],
+        relatedCategories: ["lepc", "digital"],
       },
       {
         slug: "metals-processing",
@@ -371,7 +372,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
           "莱因同时提供 MFC 和 MFM 两种形式，便于在同一系统中同时构建受控供气管线和纯测量监控回路。",
         ],
         recommendedSeries: ["M / MS", "LEPC"],
-        relatedCategories: ["analogue", "specialized"],
+        relatedCategories: ["analogue", "lepc"],
       },
       {
         slug: "biotech-pharmaceutical",
@@ -419,7 +420,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
           "对于低于标准 10 bar 最低压力的低压分析或真空相邻实验台，LEPC 控制器可在低至 0.1 bar 的压力下提供精确的流量调节——在光谱学、GC 进样口和台式反应器工作中尤为实用。",
         ],
         recommendedSeries: ["MD", "LEPC"],
-        relatedCategories: ["specialized", "digital"],
+        relatedCategories: ["lepc", "digital"],
       },
       {
         slug: "metals-processing",

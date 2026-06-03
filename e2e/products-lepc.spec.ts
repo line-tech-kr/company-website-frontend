@@ -31,4 +31,9 @@ test.describe("LEPC category", () => {
       0,
     );
   });
+
+  test("unknown category slug returns 404", async ({ page }) => {
+    const res = await page.goto("/en/products/does-not-exist");
+    expect(res?.status()).toBe(404);
+  });
 });

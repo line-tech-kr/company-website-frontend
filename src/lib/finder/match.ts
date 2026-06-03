@@ -92,28 +92,30 @@ export function findProducts(
 ): FinderResult {
   const gas = getGasFactor(input.gasId);
   const flowSlpm = toSlpm(input.flow, input.unit);
-  if (!gas) {
-    return { matches: [], n2EquivalentSlpm: flowSlpm };
-  }
-  const n2EquivalentSlpm = toN2Equivalent(flowSlpm, gas);
 
-  // EPC products use pressureRange, not flowRange — the flow input is
-  // meaningless here. Surface every EPC product matching the series filter.
+  // EPC products use pressureRange, not flowRange, and the gas factor is only
+  // used for flow conversion. Surface every EPC match regardless of gas/flow.
   if (input.function === "EPC") {
     const matches: FinderMatch[] = [];
     for (const product of products) {
       if (product.function !== "EPC") continue;
       if (!seriesMatches(product, input.series)) continue;
-      matches.push({ product, n2EquivalentSlpm, fitScore: 1 });
+      matches.push({ product, n2EquivalentSlpm: flowSlpm, fitScore: 1 });
     }
     matches.sort((a, b) => a.product.model.localeCompare(b.product.model));
     return {
       matches,
-      n2EquivalentSlpm,
-      gas,
-      warning: gas.category === "specialty" ? "specialty-gas" : undefined,
+      n2EquivalentSlpm: flowSlpm,
+      gas: gas ?? undefined,
+      warning:
+        gas?.category === "specialty" ? ("specialty-gas" as const) : undefined,
     };
   }
+
+  if (!gas) {
+    return { matches: [], n2EquivalentSlpm: flowSlpm };
+  }
+  const n2EquivalentSlpm = toN2Equivalent(flowSlpm, gas);
 
   const matches: FinderMatch[] = [];
   for (const product of products) {

@@ -9,6 +9,7 @@ const LOCKED_CATEGORY_CODES = [
   "analogue",
   "digital",
   "specialized",
+  "lepc",
   "accessories",
 ] as const;
 
@@ -20,7 +21,7 @@ describe("LT_SHELL invariants", () => {
     }
   });
 
-  it("locks the 4-category products taxonomy across locales", () => {
+  it("locks the products taxonomy across locales", () => {
     for (const locale of LOCALES) {
       const codes = LT_SHELL[locale].productsCategories.map((c) => c.code);
       expect(codes).toEqual([...LOCKED_CATEGORY_CODES]);

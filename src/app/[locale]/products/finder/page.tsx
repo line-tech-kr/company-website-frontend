@@ -40,6 +40,7 @@ const SERIES: ReadonlySet<FinderSeries> = new Set([
   "analogue",
   "digital",
   "specialized",
+  "lepc",
 ]);
 const UNITS: ReadonlySet<FinderUnit> = new Set(["slpm", "sccm"]);
 

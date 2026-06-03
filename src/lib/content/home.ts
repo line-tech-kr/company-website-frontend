@@ -76,7 +76,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
     ],
     series: {
       kicker: "01 — 제품 시리즈",
-      title: "네 가지 계열, 하나의 기준",
+      title: "다섯 가지 계열, 하나의 기준",
       sub: "공정 조건, 예산, 가스 종류에 따라 선택 가능한 풀 라인업.",
       items: [
         {
@@ -104,6 +104,14 @@ export const LT_HOME: Record<Locale, HomeContent> = {
           count: "4 모델",
           range: "0.01 – 1,000 SLPM",
           href: "/products/specialized",
+        },
+        {
+          code: "LEPC",
+          name: "저압 전자식 압력 제어기",
+          desc: "0.1–6 barA 저압 영역 전용. ±0.5 % F.S. 정확도.",
+          count: "1 모델",
+          range: "0.1 – 6 barA",
+          href: "/products/lepc",
         },
         {
           code: "LTI",
@@ -197,8 +205,8 @@ export const LT_HOME: Record<Locale, HomeContent> = {
     ],
     series: {
       kicker: "01 — Product series",
-      title: "Four series, one standard.",
-      sub: "A full catalog spanning analog, digital, specialized, and accessories.",
+      title: "Five series, one standard.",
+      sub: "A full catalog spanning analog, digital, specialized, low-pressure EPC, and accessories.",
       items: [
         {
           code: "M / MS",
@@ -225,6 +233,14 @@ export const LT_HOME: Record<Locale, HomeContent> = {
           count: "4 models",
           range: "0.01 – 1,000 slpm",
           href: "/products/specialized",
+        },
+        {
+          code: "LEPC",
+          name: "Low-pressure EPC",
+          desc: "Electronic pressure controller for 0.1–6 barA, ±0.5 % F.S. accuracy.",
+          count: "1 model",
+          range: "0.1 – 6 barA",
+          href: "/products/lepc",
         },
         {
           code: "LTI",
@@ -326,8 +342,8 @@ export const LT_HOME: Record<Locale, HomeContent> = {
     ],
     series: {
       kicker: "01 — 产品系列",
-      title: "四个系列,一个标准。",
-      sub: "覆盖模拟、数字、特种与配件四大类型的完整型谱。",
+      title: "五个系列,一个标准。",
+      sub: "覆盖模拟、数字、特种、低压 EPC 与配件五大类型的完整型谱。",
       items: [
         {
           code: "M / MS",
@@ -354,6 +370,14 @@ export const LT_HOME: Record<Locale, HomeContent> = {
           count: "4 款",
           range: "0.01 – 1,000 SLPM",
           href: "/products/specialized",
+        },
+        {
+          code: "LEPC",
+          name: "低压电子式压力控制器",
+          desc: "0.1–6 barA 低压专用,±0.5 % F.S. 精度。",
+          count: "1 款",
+          range: "0.1 – 6 barA",
+          href: "/products/lepc",
         },
         {
           code: "LTI",

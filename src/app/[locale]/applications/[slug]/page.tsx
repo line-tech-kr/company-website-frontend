@@ -73,6 +73,7 @@ const CATEGORY_HREFS: Record<string, string> = {
   analogue: "/products/analogue",
   digital: "/products/digital",
   specialized: "/products/specialized",
+  lepc: "/products/lepc",
 };
 
 export default async function ApplicationDetailPage({ params }: Props) {
@@ -146,8 +147,8 @@ export default async function ApplicationDetailPage({ params }: Props) {
                       {app.recommendedSeries
                         .filter((s) => {
                           if (cat === "digital") return s === "MD";
-                          if (cat === "specialized")
-                            return ["EX", "LEPC"].includes(s);
+                          if (cat === "specialized") return s === "EX";
+                          if (cat === "lepc") return s === "LEPC";
                           return s === "M / MS";
                         })
                         .join(" / ") || app.recommendedSeries[0]}
