@@ -7,10 +7,11 @@ import { Link } from "@/i18n/navigation";
 import { Turnstile } from "@/components/forms/Turnstile";
 import { submitContact, type ContactFormState } from "@/lib/contact/submit";
 import type { ContactFormCopy, InquiryTypeId } from "@/lib/content/contact";
+import { QuoteFields } from "./QuoteFields";
 
 type ContactFormDefaults = {
   inquiryType: InquiryTypeId;
-  extraField: string;
+  extraField?: string;
   subject: string;
   message: string;
 };
@@ -172,6 +173,15 @@ export function ContactForm({ form, defaults }: Props) {
               </p>
             )}
           </div>
+        )}
+
+        {type === "quote" && (
+          <QuoteFields
+            form={form.quoteFields}
+            requiredLabel={form.required}
+            invalidFields={invalidFields}
+            fieldErrId={fieldErrId}
+          />
         )}
 
         <div className="ct-form__row">

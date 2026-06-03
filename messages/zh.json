@@ -316,7 +316,16 @@
       "name": "请输入您的姓名。",
       "email": "请输入有效的邮箱地址。",
       "message": "请输入您的咨询内容。",
-      "consent": "请同意隐私政策后继续。"
+      "consent": "请同意隐私政策后继续。",
+      "gas": "请填写气体种类。",
+      "gasMode": "请选择纯气或混合气。",
+      "gasComponents": "请列出至少两种气体，比例合计需为 100%。",
+      "flowValue": "请输入大于零的流量数值。",
+      "flowUnit": "请选择流量单位。",
+      "pressureValue": "请输入大于零的压力数值。",
+      "pressureUnit": "请选择压力单位。",
+      "fittingType": "请选择接头类型。",
+      "fittingSize": "请填写接头规格。"
     },
     "successTitle": "您的咨询已发送。",
     "success": "Line Tech 负责人将通过您填写的邮箱回复。",

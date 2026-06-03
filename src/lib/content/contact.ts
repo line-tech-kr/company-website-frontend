@@ -8,12 +8,52 @@
 import type { Locale } from "./home";
 
 export type InquiryTypeId =
+  | "quote"
   | "sales"
   | "support"
   | "doc-request"
   | "partnership"
   | "general"
   | "site-visit";
+
+export type QuoteUnit<V extends string = string> = {
+  value: V;
+  label: string;
+};
+
+export type QuoteFieldsCopy = {
+  heading: string;
+  helper: string;
+  gas: {
+    label: string;
+    placeholder: string;
+    suggestions: string[];
+    pureLabel: string;
+    mixtureLabel: string;
+    componentLabel: string;
+    percentLabel: string;
+    addComponentLabel: string;
+    removeComponentLabel: string;
+    totalLabel: string;
+  };
+  flow: {
+    label: string;
+    valuePlaceholder: string;
+    units: QuoteUnit[];
+  };
+  pressure: {
+    label: string;
+    valuePlaceholder: string;
+    units: QuoteUnit[];
+  };
+  fitting: {
+    typeLabel: string;
+    typePlaceholder: string;
+    sizeLabel: string;
+    sizePlaceholder: string;
+    types: QuoteUnit[];
+  };
+};
 
 export type ContactFormCopy = {
   heading: string;
@@ -49,6 +89,12 @@ export type ContactFormCopy = {
       required: boolean;
     };
   }[];
+  /**
+   * Structured process-condition fields revealed only when `quote` is the
+   * selected inquiry type. All four are required at submit time; sales
+   * needs gas + flow + pressure + fitting to price an MFC/MFM.
+   */
+  quoteFields: QuoteFieldsCopy;
   required: string;
   submit: string;
   submitDisabledHelp: string;
@@ -146,9 +192,10 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
           "어떤 도움이 필요하신지 자세히 적어주세요. 제품 문의라면 가스 종류·유량 범위 등 공정 조건을 함께 알려주시면 더 빠르게 안내드릴 수 있습니다.",
       },
       inquiryTypeOptions: [
+        { id: "quote", label: "견적 요청" },
         {
           id: "sales",
-          label: "영업·견적",
+          label: "영업 문의",
           extraField: {
             label: "관심 제품·모델",
             placeholder: "예: M3030VA, MD2030, 또는 카테고리",
@@ -193,6 +240,70 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
           },
         },
       ],
+      quoteFields: {
+        heading: "공정 조건",
+        helper: "정확한 견적을 위해 아래 네 가지 정보를 함께 알려주세요.",
+        gas: {
+          label: "가스",
+          placeholder: "예: N2, Ar",
+          suggestions: [
+            "N2",
+            "Ar",
+            "He",
+            "O2",
+            "H2",
+            "CO2",
+            "CH4",
+            "NH3",
+            "SiH4",
+            "SF6",
+            "Cl2",
+            "HCl",
+            "N2O",
+            "CF4",
+          ],
+          pureLabel: "단일 가스",
+          mixtureLabel: "혼합 가스",
+          componentLabel: "가스",
+          percentLabel: "비율 (%)",
+          addComponentLabel: "구성 추가",
+          removeComponentLabel: "제거",
+          totalLabel: "합계",
+        },
+        flow: {
+          label: "유량",
+          valuePlaceholder: "예: 500",
+          units: [
+            { value: "sccm", label: "sccm" },
+            { value: "slm", label: "slm" },
+            { value: "sml", label: "sml" },
+            { value: "scfh", label: "scfh" },
+          ],
+        },
+        pressure: {
+          label: "압력",
+          valuePlaceholder: "예: 2",
+          units: [
+            { value: "bar", label: "bar" },
+            { value: "psi", label: "psi" },
+            { value: "kPa", label: "kPa" },
+            { value: "MPa", label: "MPa" },
+          ],
+        },
+        fitting: {
+          typeLabel: "피팅 타입",
+          typePlaceholder: "선택",
+          sizeLabel: "피팅 사이즈",
+          sizePlaceholder: '예: 1/4", 6mm',
+          types: [
+            { value: "VCR", label: "VCR" },
+            { value: "Swagelok", label: "Swagelok" },
+            { value: "NPT", label: "NPT" },
+            { value: "Rc", label: "Rc" },
+            { value: "Other", label: "기타" },
+          ],
+        },
+      },
       required: "필수",
       submit: "문의 보내기",
       submitDisabledHelp:
@@ -203,8 +314,9 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
         suffix: "을 확인하였으며 개인정보 수집·이용에 동의합니다. (필수)",
       },
       productInquiry: {
-        subject: "기술 자료 요청: {model}",
-        message: "{model} 관련 기술 자료(매뉴얼, 도면 등)를 요청드립니다.",
+        subject: "{model} 견적 문의",
+        message:
+          "{model}에 대한 견적을 요청드립니다. 아래에 공정 조건을 입력해 주세요.",
       },
     },
     distributors: {
@@ -276,9 +388,10 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
           "Tell us how we can help. For product inquiries, sharing gas type, flow range, and timeline helps us route you faster.",
       },
       inquiryTypeOptions: [
+        { id: "quote", label: "Request a quote" },
         {
           id: "sales",
-          label: "Sales / quote",
+          label: "Sales inquiry",
           extraField: {
             label: "Product or model of interest",
             placeholder: "e.g. M3030VA, MD2030, or a category",
@@ -323,6 +436,71 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
           },
         },
       ],
+      quoteFields: {
+        heading: "Process conditions",
+        helper:
+          "Share the four details below so we can price your MFC/MFM accurately.",
+        gas: {
+          label: "Gas",
+          placeholder: "e.g. N2, Ar",
+          suggestions: [
+            "N2",
+            "Ar",
+            "He",
+            "O2",
+            "H2",
+            "CO2",
+            "CH4",
+            "NH3",
+            "SiH4",
+            "SF6",
+            "Cl2",
+            "HCl",
+            "N2O",
+            "CF4",
+          ],
+          pureLabel: "Pure gas",
+          mixtureLabel: "Mixture",
+          componentLabel: "Gas",
+          percentLabel: "Percent (%)",
+          addComponentLabel: "Add component",
+          removeComponentLabel: "Remove",
+          totalLabel: "Total",
+        },
+        flow: {
+          label: "Flow rate",
+          valuePlaceholder: "e.g. 500",
+          units: [
+            { value: "sccm", label: "sccm" },
+            { value: "slm", label: "slm" },
+            { value: "sml", label: "sml" },
+            { value: "scfh", label: "scfh" },
+          ],
+        },
+        pressure: {
+          label: "Pressure",
+          valuePlaceholder: "e.g. 2",
+          units: [
+            { value: "bar", label: "bar" },
+            { value: "psi", label: "psi" },
+            { value: "kPa", label: "kPa" },
+            { value: "MPa", label: "MPa" },
+          ],
+        },
+        fitting: {
+          typeLabel: "Fitting type",
+          typePlaceholder: "Select",
+          sizeLabel: "Fitting size",
+          sizePlaceholder: 'e.g. 1/4", 6mm',
+          types: [
+            { value: "VCR", label: "VCR" },
+            { value: "Swagelok", label: "Swagelok" },
+            { value: "NPT", label: "NPT" },
+            { value: "Rc", label: "Rc" },
+            { value: "Other", label: "Other" },
+          ],
+        },
+      },
       required: "Required",
       submit: "Send inquiry",
       submitDisabledHelp:
@@ -334,9 +512,9 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
           " and consent to the collection and use of my personal information. (Required)",
       },
       productInquiry: {
-        subject: "Document request: {model}",
+        subject: "Quote request: {model}",
         message:
-          "I'd like to request technical documents (manual, drawing, etc.) for the {model}.",
+          "I'd like to request a quote for the {model}. Process conditions are filled in below.",
       },
     },
     distributors: {
@@ -412,9 +590,10 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
           "请说明您的需求。如为产品咨询，请一并提供气体种类与流量范围，我们将更快为您对接。",
       },
       inquiryTypeOptions: [
+        { id: "quote", label: "报价申请" },
         {
           id: "sales",
-          label: "销售·报价",
+          label: "销售咨询",
           extraField: {
             label: "关注产品或型号",
             placeholder: "例如：M3030VA、MD2030 或某一类别",
@@ -459,6 +638,70 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
           },
         },
       ],
+      quoteFields: {
+        heading: "工艺条件",
+        helper: "请提供以下四项信息，便于我们准确报价。",
+        gas: {
+          label: "气体",
+          placeholder: "例如：N2、Ar",
+          suggestions: [
+            "N2",
+            "Ar",
+            "He",
+            "O2",
+            "H2",
+            "CO2",
+            "CH4",
+            "NH3",
+            "SiH4",
+            "SF6",
+            "Cl2",
+            "HCl",
+            "N2O",
+            "CF4",
+          ],
+          pureLabel: "纯气",
+          mixtureLabel: "混合气",
+          componentLabel: "气体",
+          percentLabel: "比例 (%)",
+          addComponentLabel: "添加组分",
+          removeComponentLabel: "移除",
+          totalLabel: "合计",
+        },
+        flow: {
+          label: "流量",
+          valuePlaceholder: "例如：500",
+          units: [
+            { value: "sccm", label: "sccm" },
+            { value: "slm", label: "slm" },
+            { value: "sml", label: "sml" },
+            { value: "scfh", label: "scfh" },
+          ],
+        },
+        pressure: {
+          label: "压力",
+          valuePlaceholder: "例如：2",
+          units: [
+            { value: "bar", label: "bar" },
+            { value: "psi", label: "psi" },
+            { value: "kPa", label: "kPa" },
+            { value: "MPa", label: "MPa" },
+          ],
+        },
+        fitting: {
+          typeLabel: "接头类型",
+          typePlaceholder: "选择",
+          sizeLabel: "接头规格",
+          sizePlaceholder: '例如：1/4"、6mm',
+          types: [
+            { value: "VCR", label: "VCR" },
+            { value: "Swagelok", label: "Swagelok" },
+            { value: "NPT", label: "NPT" },
+            { value: "Rc", label: "Rc" },
+            { value: "Other", label: "其他" },
+          ],
+        },
+      },
       required: "必填",
       submit: "发送咨询",
       submitDisabledHelp:
@@ -469,8 +712,8 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
         suffix: "并同意收集和使用我的个人信息。（必填）",
       },
       productInquiry: {
-        subject: "技术资料请求：{model}",
-        message: "我想索取 {model} 的技术文件（使用手册、图纸等）。",
+        subject: "{model} 报价咨询",
+        message: "我想申请 {model} 的报价，工艺条件已在下方填写。",
       },
     },
     distributors: {

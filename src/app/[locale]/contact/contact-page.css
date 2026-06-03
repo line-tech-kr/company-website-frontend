@@ -223,6 +223,151 @@
   color: var(--pd-muted);
 }
 
+/* ─── Quote-only section ──────────────────────────────────────────── */
+.ct-form__quote {
+  grid-column: 1 / -1;
+  /* fieldset default min-width: min-content causes overflow in CSS Grid */
+  min-width: 0;
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 16px;
+  background: var(--pd-surface-2);
+  border: 1px solid var(--pd-border);
+  border-radius: var(--pd-r-md);
+}
+.ct-form__quote-heading {
+  /* override legend default rendering so it flows as a heading */
+  padding: 0;
+  margin: 0;
+  font: 500 var(--lt-fs-sm) / 1.2 var(--lt-sans);
+  letter-spacing: 0.04em;
+  color: var(--pd-fg-strong);
+  text-transform: uppercase;
+}
+.ct-form__quote-helper {
+  margin: 0;
+  font-size: var(--lt-fs-xs);
+  line-height: 1.45;
+  color: var(--pd-muted);
+}
+.ct-form__quote-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 600px) {
+  .ct-form__quote-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.ct-form__quote-row--full {
+  grid-column: 1 / -1;
+}
+.ct-form__pair {
+  display: grid;
+  grid-template-columns: 1fr 130px;
+  gap: 8px;
+}
+
+.ct-form__gas-mode {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 2px 0 8px;
+}
+.ct-form__gas-mode-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--lt-fs-sm);
+  color: var(--pd-fg);
+  cursor: pointer;
+}
+.ct-form__gas-components {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.ct-form__gas-component {
+  display: grid;
+  grid-template-columns: 1fr 120px 36px;
+  gap: 8px;
+  align-items: center;
+}
+.ct-form__gas-percent {
+  position: relative;
+}
+.ct-form__gas-percent .ct-form__input {
+  padding-right: 28px;
+}
+.ct-form__gas-percent-suffix {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--lt-fs-xs);
+  color: var(--pd-muted);
+  pointer-events: none;
+}
+.ct-form__gas-remove {
+  appearance: none;
+  border: 1px solid var(--pd-border-strong);
+  background: var(--pd-surface);
+  border-radius: var(--pd-r-md);
+  width: 36px;
+  height: 36px;
+  color: var(--pd-muted);
+  cursor: pointer;
+  font-size: var(--lt-fs-md);
+  transition:
+    border-color 120ms ease,
+    color 120ms ease;
+}
+.ct-form__gas-remove:hover:not(:disabled) {
+  border-color: var(--lt-danger);
+  color: var(--lt-danger);
+}
+.ct-form__gas-remove:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.ct-form__gas-mixture-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+.ct-form__gas-add {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 4px 0;
+  font-size: var(--lt-fs-sm);
+  color: var(--pd-primary);
+  font-weight: 500;
+  cursor: pointer;
+}
+.ct-form__gas-add:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.ct-form__gas-total {
+  font-size: var(--lt-fs-xs);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.ct-form__gas-total--ok {
+  color: var(--lt-success);
+}
+.ct-form__gas-total--bad {
+  color: var(--pd-muted);
+}
+
 .ct-form__consent {
   margin-top: 20px;
 }
