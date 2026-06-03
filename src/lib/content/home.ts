@@ -51,7 +51,12 @@ export type HomeContent = {
     kicker: string;
     title: string;
     sub: string;
-    items: { name: string; scope: string }[];
+    items: {
+      name: string;
+      scope: string;
+      category: "quality" | "compliance" | "innovation" | "partnership";
+      slug?: string;
+    }[];
     viewAll: string;
   };
   contact: { title: string; sub: string; primary: string; secondary: string };
@@ -171,11 +176,36 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       title: "검증된 국제 인증",
       sub: "ISO 9001, CE 인증을 포함한 국제 기준을 충족합니다.",
       items: [
-        { name: "ISO 9001", scope: "품질경영시스템" },
-        { name: "CE", scope: "EU 안전·전자파 적합성" },
-        { name: "INNOBIZ 인증", scope: "기술혁신형 중소기업" },
-        { name: "IECEx", scope: "방폭 국제 인증" },
-        { name: "KAIST 공동 R&D", scope: "산학 협력" },
+        {
+          name: "ISO 9001",
+          scope: "품질경영시스템",
+          category: "quality",
+          slug: "iso-9001",
+        },
+        {
+          name: "CE",
+          scope: "EU 안전·전자파 적합성",
+          category: "compliance",
+          slug: "ce",
+        },
+        {
+          name: "INNOBIZ 인증",
+          scope: "기술혁신형 중소기업",
+          category: "innovation",
+          slug: "innobiz",
+        },
+        {
+          name: "IECEx",
+          scope: "방폭 국제 인증",
+          category: "compliance",
+          slug: "iecex-kscp-21-0022x",
+        },
+        {
+          name: "기업부설연구소",
+          scope: "정부 인정 R&D 센터",
+          category: "partnership",
+          slug: "corporate-rnd-center",
+        },
       ],
       viewAll: "전체 인증 보기",
     },
@@ -308,11 +338,36 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       title: "International certifications.",
       sub: "Certified to international quality, safety, and compliance standards.",
       items: [
-        { name: "ISO 9001", scope: "Quality management system" },
-        { name: "CE", scope: "EU safety & EMC compliance" },
-        { name: "INNOBIZ", scope: "Korean tech-innovation SME" },
-        { name: "IECEx", scope: "International explosion-protection" },
-        { name: "KAIST R&D", scope: "Research collaboration" },
+        {
+          name: "ISO 9001",
+          scope: "Quality management system",
+          category: "quality",
+          slug: "iso-9001",
+        },
+        {
+          name: "CE",
+          scope: "EU safety & EMC compliance",
+          category: "compliance",
+          slug: "ce",
+        },
+        {
+          name: "INNOBIZ",
+          scope: "Korean tech-innovation SME",
+          category: "innovation",
+          slug: "innobiz",
+        },
+        {
+          name: "IECEx",
+          scope: "International explosion-protection",
+          category: "compliance",
+          slug: "iecex-kscp-21-0022x",
+        },
+        {
+          name: "Corporate R&D Center",
+          scope: "Government-recognized R&D",
+          category: "partnership",
+          slug: "corporate-rnd-center",
+        },
       ],
       viewAll: "View all certifications",
     },
@@ -433,11 +488,36 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       title: "经验证的国际认证",
       sub: "满足 ISO 9001、CE 等国际认证标准。",
       items: [
-        { name: "ISO 9001", scope: "质量管理体系" },
-        { name: "CE", scope: "欧盟安全与电磁兼容性" },
-        { name: "INNOBIZ", scope: "韩国技术革新型中小企业" },
-        { name: "IECEx", scope: "国际防爆认证" },
-        { name: "KAIST 联合研发", scope: "产学研合作" },
+        {
+          name: "ISO 9001",
+          scope: "质量管理体系",
+          category: "quality",
+          slug: "iso-9001",
+        },
+        {
+          name: "CE",
+          scope: "欧盟安全与电磁兼容性",
+          category: "compliance",
+          slug: "ce",
+        },
+        {
+          name: "INNOBIZ",
+          scope: "韩国技术革新型中小企业",
+          category: "innovation",
+          slug: "innobiz",
+        },
+        {
+          name: "IECEx",
+          scope: "国际防爆认证",
+          category: "compliance",
+          slug: "iecex-kscp-21-0022x",
+        },
+        {
+          name: "企业附设研究所",
+          scope: "政府认证 R&D 中心",
+          category: "partnership",
+          slug: "corporate-rnd-center",
+        },
       ],
       viewAll: "查看全部认证",
     },

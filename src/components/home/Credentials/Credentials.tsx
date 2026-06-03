@@ -1,6 +1,7 @@
 import { Link } from "@/i18n/navigation";
 import { SectionHead } from "../SectionHead";
 import type { HomeContent } from "@/lib/content/home";
+import { CredentialIcon } from "./CredentialIcon";
 import "./Credentials.css";
 
 type Props = { h: HomeContent };
@@ -15,15 +16,31 @@ export function Credentials({ h }: Props) {
         sub={credentials.sub}
       />
       <ul className="ho-credentials">
-        {credentials.items.map((it) => (
-          <li key={it.name} className="ho-credentials__item">
-            <span className="ho-credentials__dot" aria-hidden="true" />
-            <div className="ho-credentials__text">
-              <span className="ho-credentials__name">{it.name}</span>
-              <span className="ho-credentials__scope">{it.scope}</span>
-            </div>
-          </li>
-        ))}
+        {credentials.items.map((it) => {
+          const inner = (
+            <>
+              <CredentialIcon category={it.category} />
+              <div className="ho-credentials__text">
+                <span className="ho-credentials__name">{it.name}</span>
+                <span className="ho-credentials__scope">{it.scope}</span>
+              </div>
+            </>
+          );
+          return (
+            <li key={it.name} className="ho-credentials__item">
+              {it.slug ? (
+                <Link
+                  href={`/resources/certifications#${it.slug}`}
+                  className="ho-credentials__card ho-credentials__card--link"
+                >
+                  {inner}
+                </Link>
+              ) : (
+                <div className="ho-credentials__card">{inner}</div>
+              )}
+            </li>
+          );
+        })}
       </ul>
       <div className="ho-credentials__cta">
         <Link href="/resources/certifications" className="ho-credentials__link">
