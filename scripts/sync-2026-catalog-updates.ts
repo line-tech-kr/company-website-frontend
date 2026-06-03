@@ -124,6 +124,9 @@ async function step3_featureDo400InShowcases() {
     caption: DO400_CAPTION,
   });
 
+  // One atomic .set() over all three arrays — partial mid-run aborts can't
+  // leave the showcases doc with DO400 added to some categories but not others.
+  const updates: Record<string, unknown> = {};
   for (const cat of ["analogue", "digital", "specialized"] as const) {
     const current = doc[cat] ?? [];
     const already = current.some(
@@ -137,12 +140,10 @@ async function step3_featureDo400InShowcases() {
     log(
       `patch  category-showcases.${cat} += DO400 (${current.length} → ${next.length} entries)`,
     );
-    if (isApply) {
-      await client
-        .patch("category-showcases")
-        .set({ [cat]: next })
-        .commit();
-    }
+    updates[cat] = next;
+  }
+  if (isApply && Object.keys(updates).length > 0) {
+    await client.patch("category-showcases").set(updates).commit();
   }
 }
 

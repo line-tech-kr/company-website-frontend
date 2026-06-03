@@ -264,7 +264,6 @@ const APPLICATION_PROJECTION = `
     "slug": slug.current,
     model,
     series,
-    "function": function,
     "productLabel": ${localized("productLabel")},
     description,
     "flowRange": coalesce(massFlowSpecs.flowRange.display, massFlowSpecs.pressureRange.display),

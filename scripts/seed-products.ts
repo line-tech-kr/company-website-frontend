@@ -39,6 +39,9 @@ function productToSeedFields(p: Product) {
     model: p.model,
     slug: p.slug,
     series: p.series,
+    ...(p.crossListedSeries?.length
+      ? { crossListedSeries: p.crossListedSeries }
+      : {}),
     function: p.function,
     productLabel: localizedToArray(p.productLabel),
     ...(p.description ? { description: p.description } : {}),

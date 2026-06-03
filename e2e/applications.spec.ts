@@ -35,4 +35,26 @@ test.describe("Applications detail page", () => {
     await page.waitForURL(/\/en\/applications\/semiconductor/);
     await expect(page.locator("h1.ap-detail__title")).toBeVisible();
   });
+
+  test("fuel-cells page surfaces the DO400 featured block", async ({
+    page,
+  }) => {
+    await page.goto("/en/applications/fuel-cells");
+
+    const featured = page.locator(".ap-featured");
+    await expect(featured).toBeVisible();
+    await expect(featured).toContainText("DO400");
+    await expect(featured.locator(".ap-featured__why-heading")).toBeVisible();
+    await expect(featured.locator("a.ap-featured__cta")).toHaveAttribute(
+      "href",
+      /\/products\/specialized\/do400$/,
+    );
+  });
+
+  test("applications without a featured slug do not render the featured block", async ({
+    page,
+  }) => {
+    await page.goto("/en/applications/semiconductor");
+    await expect(page.locator(".ap-featured")).toHaveCount(0);
+  });
 });

@@ -27,7 +27,6 @@ type SanityFeaturedProduct = {
   slug: string;
   model: string;
   series: "analogue" | "digital" | "specialized";
-  function: string;
   productLabel?: Record<string, string> | null;
   description?: Record<string, string> | null;
   flowRange?: string | null;
