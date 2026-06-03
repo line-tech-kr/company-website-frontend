@@ -50,7 +50,7 @@ const FEATURED: Record<string, { model: string; caption: string }[]> = {
     },
     {
       model: "DO400",
-      caption: "New for 2026 — ≤1 s response, 100–400 slpm",
+      caption: "≤1 s response, 100–400 slpm",
     },
   ],
 };
