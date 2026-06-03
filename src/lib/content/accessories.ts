@@ -2,12 +2,12 @@
  * Line Tech — /products/accessories page content (single-scroller × 3 locales).
  *
  * Sections:
- *  - #readouts                LTI-200, LTI-1000
+ *  - #readouts                LTI-1000, LTI-2000
  *  - #pressure-accessories    FC-050S, PR-030
  *  - #contact                 footer CTA
  *
  * Source: ~/Dev/linetech/company-docs-private/docs/product-catalog-2020-en.md
- *         (sections 7 LTI-200 / LTI-1000 / FC-050S / PR-030, lines 994–1068).
+ *         (sections 7 LTI-1000 / FC-050S / PR-030, lines 994–1068).
  *
  * Stage 1: EN populated from catalog. KO/ZH stubs placed inline with
  * TODO(translation) markers — Stage 2 fills in the localized copy.
@@ -21,7 +21,7 @@ export type AccessorySectionId =
   | "pressure-accessories"
   | "contact";
 
-export type AccessoryItemId = "lti-200" | "lti-1000" | "fc-050s" | "pr-030";
+export type AccessoryItemId = "lti-1000" | "lti-2000" | "fc-050s" | "pr-030";
 
 export type AccessorySpecRow = {
   label: string;
@@ -105,11 +105,15 @@ export type AccessoriesContent = {
 
 // ─── Shared (locale-independent) ────────────────────────────────────────────
 
-/** LTI items use a shared neutral placeholder until real product photos exist. */
-const LTI_PLACEHOLDER_IMAGE = {
-  src: "/products/lti/placeholder.svg",
-  width: 320,
-  height: 200,
+const LTI_1000_IMAGE = {
+  src: "/products/lti-1000/cutout-2026.png",
+  width: 600,
+  height: 400,
+} as const;
+const LTI_2000_IMAGE = {
+  src: "/products/lti-2000/cutout-2026.png",
+  width: 600,
+  height: 239,
 } as const;
 const FC_050S_IMAGE = {
   src: "/products/fc-050s/product-1.gif",
@@ -134,8 +138,8 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
         href: "#readouts",
         label: "Readouts",
         children: [
-          { id: "lti-200", href: "#lti-200", label: "LTI-200" },
           { id: "lti-1000", href: "#lti-1000", label: "LTI-1000" },
+          { id: "lti-2000", href: "#lti-2000", label: "LTI-2000" },
         ],
       },
       {
@@ -157,35 +161,9 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
     },
     readouts: {
       kicker: "01 — Readouts",
-      title: "Panel-mount displays for live flow signals.",
-      sub: "Both LTI units accept the 0–5 V output of any Line Tech MFC or MFM and display flow on a 4-digit 7-segment window. Choose by form factor: compact panel face (LTI-200) or rackable unit with PC software (LTI-1000).",
+      title: "Rack-mount displays for live flow signals.",
+      sub: "Both LTI units accept the 0–5 V output of any Line Tech MFC or MFM and surface flow on a panel-mount display. LTI-1000 is a multi-channel rack readout with companion PC software for 1U / 2U / 4U installations; LTI-2000 is a single-panel controller with a 6-inch OLED, dual RS-232/485, and a relay-contact output.",
       items: [
-        {
-          id: "lti-200",
-          model: "LTI-200",
-          title: "Readout Box",
-          blurb:
-            "Compact panel-mount readout. 4-digit 7-segment display, 0–5 Vdc setpoint input, six-button front face for flow on/off, scrolling, and menu navigation.",
-          image: {
-            ...LTI_PLACEHOLDER_IMAGE,
-            alt: "Generic placeholder for LTI-200 panel readout",
-            placeholder: true,
-          },
-          specsHeading: "Specifications",
-          specs: [
-            { label: "Input Power", value: "15 Vdc – 24 Vdc" },
-            { label: "Output Power", value: "+15 Vdc @ 500 mA" },
-            { label: "Display Window", value: "4-digit 7-segment" },
-            { label: "Display Repeatability", value: "≤ ±1.0 % of Full Scale" },
-            { label: "Output Signal", value: "0 – 5 Vdc" },
-            { label: "Units of Display", value: "SCCM, SLM, %" },
-            { label: "Setpoint", value: "0 – 5 Vdc for full scale" },
-            { label: "Flow On/Off", value: "TTL input signal" },
-            { label: "Flow Out Signal", value: "0 – 5 Vdc" },
-            { label: "Communication", value: "RS-485 (option)" },
-            { label: "Case Dimensions", value: "104 × 38 mm" },
-          ],
-        },
         {
           id: "lti-1000",
           model: "LTI-1000",
@@ -193,9 +171,8 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           blurb:
             "Rackable readout box with D-SUB remote control, optional 4–20 mA output, and an RS-232 link to companion PC software. Handles up to 8 channels in 1U / 2U / 4U arrangements.",
           image: {
-            ...LTI_PLACEHOLDER_IMAGE,
-            alt: "Generic placeholder for LTI-1000 rackable readout",
-            placeholder: true,
+            ...LTI_1000_IMAGE,
+            alt: "LTI-1000 multi-channel readout in 1U, 2U, and 4U rack-mount configurations",
           },
           specsHeading: "Specifications",
           specs: [
@@ -218,6 +195,40 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
             { label: "Communication", value: "RS-232 (9600 baud, 8-N-1)" },
             { label: "Dimensions", value: "147.82 × 250 × 88 mm" },
             { label: "Channels", value: "Up to 8 (Ch 1–8) via PC software" },
+          ],
+        },
+        {
+          id: "lti-2000",
+          model: "LTI-2000",
+          title: "Flow & Pressure Controller",
+          blurb:
+            "Panel-mount control unit with a 6-inch OLED display, dual RS-232/RS-485 communication, and a relay-contact output. AC-powered, drives an MFC/MFM with set-point and live read-out from a single panel.",
+          image: {
+            ...LTI_2000_IMAGE,
+            alt: "LTI-2000 panel-mount controller with OLED display and keypad",
+          },
+          specsHeading: "Specifications",
+          specs: [
+            { label: "Input Power", value: "220 VAC (50–60 Hz)" },
+            { label: "Output Power", value: "+15 / +24 Vdc @ 500 mA" },
+            {
+              label: "Display Window",
+              value: "6-inch OLED LCD (256 × 64 dots)",
+            },
+            { label: "Display Repeatability", value: "≤ ±1.0 % of Full Scale" },
+            { label: "Output Signal", value: "0 – 5 Vdc / 4 – 20 mA" },
+            { label: "Units of Display", value: "SCCM, SLPM, %" },
+            { label: "Remote Control", value: "D-SUB 9-pin (male)" },
+            { label: "Setpoint", value: "0 – 5 Vdc for full scale" },
+            { label: "Flow On/Off", value: "TTL input signal" },
+            {
+              label: "Relay Contact Rate",
+              value: "1 relay (max 24 Vdc @ 1 A)",
+            },
+            {
+              label: "Communication",
+              value: "RS-232 (9600 baud, 8-N-1) + RS-485",
+            },
           ],
         },
       ],
@@ -300,8 +311,8 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
         href: "#readouts",
         label: "표시기",
         children: [
-          { id: "lti-200", href: "#lti-200", label: "LTI-200" },
           { id: "lti-1000", href: "#lti-1000", label: "LTI-1000" },
+          { id: "lti-2000", href: "#lti-2000", label: "LTI-2000" },
         ],
       },
       {
@@ -323,36 +334,9 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
     },
     readouts: {
       kicker: "01 — 표시기",
-      title: "실시간 유량 신호를 표시하는\n패널 장착형 디스플레이.",
-      sub: "두 LTI 모델 모두 라인테크 MFC 또는 MFM의 0–5 V 출력을 입력으로 받아 4자리 7-세그먼트 디스플레이에 유량을 표시합니다. 형태에 따라 선택하십시오 — 소형 패널 일체형(LTI-200) 또는 PC 소프트웨어를 지원하는 랙 마운트형(LTI-1000).",
+      title: "실시간 유량 신호를 표시하는\n랙 마운트형 디스플레이.",
+      sub: "두 LTI 모델 모두 라인테크 MFC 또는 MFM의 0–5 V 출력을 입력으로 받아 패널 장착형 디스플레이에 유량을 표시합니다. LTI-1000은 1U / 2U / 4U 구성에서 전용 PC 소프트웨어로 다채널을 처리하는 랙 마운트형 표시기이며, LTI-2000은 6인치 OLED, RS-232 / RS-485 이중 통신, 릴레이 접점 출력을 갖춘 단일 패널 제어기입니다.",
       items: [
-        {
-          id: "lti-200",
-          model: "LTI-200",
-          title: "표시기 박스",
-          blurb:
-            "소형 패널 장착형 표시기. 4자리 7-세그먼트 디스플레이, 0–5 Vdc 설정값 입력, 유량 ON/OFF · 스크롤 · 메뉴 조작을 위한 전면 6버튼 구성.",
-          image: {
-            ...LTI_PLACEHOLDER_IMAGE,
-            alt: "LTI-200 표시기 자리표시 이미지",
-            placeholder: true,
-          },
-          specsHeading: "사양",
-          specs: [
-            { label: "입력 전원", value: "15 Vdc – 24 Vdc" },
-            { label: "출력 전원", value: "+15 Vdc @ 500 mA" },
-            { label: "표시창", value: "4자리 7-세그먼트" },
-            // TODO(translation): "Display Repeatability" — confirm "표시 반복 정밀도"
-            { label: "표시 반복 정밀도", value: "≤ ±1.0 % of Full Scale" },
-            { label: "출력 신호", value: "0 – 5 Vdc" },
-            { label: "표시 단위", value: "SCCM, SLM, %" },
-            { label: "설정값 (Set-Point)", value: "0 – 5 Vdc for full scale" },
-            { label: "유량 ON/OFF", value: "TTL input signal" },
-            { label: "유량 출력 신호", value: "0 – 5 Vdc" },
-            { label: "통신", value: "RS-485 (옵션)" },
-            { label: "케이스 외형 치수", value: "104 × 38 mm" },
-          ],
-        },
         {
           id: "lti-1000",
           model: "LTI-1000",
@@ -360,9 +344,8 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           blurb:
             "랙 마운트형 표시기 박스. D-SUB 원격 제어, 4–20 mA 출력 옵션, 전용 PC 소프트웨어 연결용 RS-232 통신 지원. 1U / 2U / 4U 구성으로 최대 8채널까지 처리합니다.",
           image: {
-            ...LTI_PLACEHOLDER_IMAGE,
-            alt: "LTI-1000 표시기 자리표시 이미지",
-            placeholder: true,
+            ...LTI_1000_IMAGE,
+            alt: "LTI-1000 다채널 표시기 — 1U · 2U · 4U 랙 마운트 구성",
           },
           specsHeading: "사양",
           specs: [
@@ -386,6 +369,34 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
               label: "채널 수",
               value: "최대 8채널 (Ch 1–8), PC 소프트웨어 경유",
             },
+          ],
+        },
+        {
+          id: "lti-2000",
+          model: "LTI-2000",
+          title: "유량 · 압력 제어기",
+          blurb:
+            "6인치 OLED 디스플레이, RS-232 / RS-485 이중 통신, 릴레이 접점 출력을 갖춘 패널 장착형 제어 유닛. AC 전원으로 동작하며, 단일 패널에서 MFC 또는 MFM에 설정값을 전달하고 실시간 유량을 표시합니다.",
+          image: {
+            ...LTI_2000_IMAGE,
+            alt: "LTI-2000 OLED 디스플레이와 키패드를 갖춘 패널 제어기",
+          },
+          specsHeading: "사양",
+          specs: [
+            { label: "입력 전원", value: "220 VAC (50–60 Hz)" },
+            { label: "출력 전원", value: "+15 / +24 Vdc @ 500 mA" },
+            {
+              label: "표시창",
+              value: "6인치 OLED LCD (256 × 64 도트)",
+            },
+            { label: "표시 반복 정밀도", value: "≤ ±1.0 % of Full Scale" },
+            { label: "출력 신호", value: "0 – 5 Vdc / 4 – 20 mA" },
+            { label: "표시 단위", value: "SCCM, SLPM, %" },
+            { label: "원격 제어", value: "D-SUB 9-pin (male)" },
+            { label: "설정값 (Set-Point)", value: "0 – 5 Vdc for full scale" },
+            { label: "유량 ON/OFF", value: "TTL input signal" },
+            { label: "릴레이 접점 정격", value: "1 relay (max 24 Vdc @ 1 A)" },
+            { label: "통신", value: "RS-232 (9600 baud, 8-N-1) + RS-485" },
           ],
         },
       ],
@@ -469,8 +480,8 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
         href: "#readouts",
         label: "显示器",
         children: [
-          { id: "lti-200", href: "#lti-200", label: "LTI-200" },
           { id: "lti-1000", href: "#lti-1000", label: "LTI-1000" },
+          { id: "lti-2000", href: "#lti-2000", label: "LTI-2000" },
         ],
       },
       {
@@ -492,36 +503,9 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
     },
     readouts: {
       kicker: "01 — 显示器",
-      title: "面板安装式实时流量信号显示器。",
-      sub: "两款 LTI 设备均可接收任一 Line Tech MFC 或 MFM 的 0–5 V 输出信号，在 4 位 7 段数码管上显示流量。请按外形选择 — 紧凑型面板一体式（LTI-200）或带 PC 软件的机架式（LTI-1000）。",
+      title: "机架式实时流量信号显示器。",
+      sub: "两款 LTI 设备均可接收任一 Line Tech MFC 或 MFM 的 0–5 V 输出信号，在面板式显示器上显示流量。LTI-1000 是带 PC 软件的多通道机架式显示器，可在 1U / 2U / 4U 配置中运行；LTI-2000 是带 6 英寸 OLED、RS-232 / RS-485 双通信和继电器触点输出的单面板控制器。",
       items: [
-        {
-          id: "lti-200",
-          model: "LTI-200",
-          title: "显示器箱",
-          blurb:
-            "紧凑型面板安装式显示器。4 位 7 段数码管显示，0–5 Vdc 设定值输入，前面板 6 按键支持流量启停、滚动与菜单操作。",
-          image: {
-            ...LTI_PLACEHOLDER_IMAGE,
-            alt: "LTI-200 显示器占位图",
-            placeholder: true,
-          },
-          specsHeading: "规格",
-          specs: [
-            { label: "输入电源", value: "15 Vdc – 24 Vdc" },
-            { label: "输出电源", value: "+15 Vdc @ 500 mA" },
-            { label: "显示窗口", value: "4 位 7 段数码管" },
-            // TODO(translation): "Display Repeatability" — confirm "显示重复精度"
-            { label: "显示重复精度", value: "≤ ±1.0 % of Full Scale" },
-            { label: "输出信号", value: "0 – 5 Vdc" },
-            { label: "显示单位", value: "SCCM, SLM, %" },
-            { label: "设定值 (Set-Point)", value: "0 – 5 Vdc for full scale" },
-            { label: "流量启停", value: "TTL input signal" },
-            { label: "流量输出信号", value: "0 – 5 Vdc" },
-            { label: "通信", value: "RS-485 (可选)" },
-            { label: "外壳尺寸", value: "104 × 38 mm" },
-          ],
-        },
         {
           id: "lti-1000",
           model: "LTI-1000",
@@ -529,9 +513,8 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           blurb:
             "机架式显示器箱。支持 D-SUB 远程控制、可选 4–20 mA 输出，以及通过 RS-232 与配套 PC 软件通信。1U / 2U / 4U 机架结构，最多支持 8 通道。",
           image: {
-            ...LTI_PLACEHOLDER_IMAGE,
-            alt: "LTI-1000 显示器占位图",
-            placeholder: true,
+            ...LTI_1000_IMAGE,
+            alt: "LTI-1000 多通道显示器 — 1U / 2U / 4U 机架式配置",
           },
           specsHeading: "规格",
           specs: [
@@ -552,6 +535,34 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
             { label: "通信", value: "RS-232 (9600 baud, 8-N-1)" },
             { label: "外形尺寸", value: "147.82 × 250 × 88 mm" },
             { label: "通道数", value: "最多 8 通道 (Ch 1–8)，经 PC 软件" },
+          ],
+        },
+        {
+          id: "lti-2000",
+          model: "LTI-2000",
+          title: "流量与压力控制器",
+          blurb:
+            "面板安装式控制单元，带 6 英寸 OLED 显示屏、RS-232 / RS-485 双通信和继电器触点输出。AC 供电，可在单一面板上向 MFC 或 MFM 传递设定值并实时显示流量。",
+          image: {
+            ...LTI_2000_IMAGE,
+            alt: "LTI-2000 带 OLED 显示屏与按键的面板控制器",
+          },
+          specsHeading: "规格",
+          specs: [
+            { label: "输入电源", value: "220 VAC (50–60 Hz)" },
+            { label: "输出电源", value: "+15 / +24 Vdc @ 500 mA" },
+            {
+              label: "显示窗口",
+              value: "6 英寸 OLED LCD (256 × 64 点)",
+            },
+            { label: "显示重复精度", value: "≤ ±1.0 % of Full Scale" },
+            { label: "输出信号", value: "0 – 5 Vdc / 4 – 20 mA" },
+            { label: "显示单位", value: "SCCM, SLPM, %" },
+            { label: "远程控制", value: "D-SUB 9-pin (公头)" },
+            { label: "设定值 (Set-Point)", value: "0 – 5 Vdc for full scale" },
+            { label: "流量启停", value: "TTL input signal" },
+            { label: "继电器触点参数", value: "1 relay (max 24 Vdc @ 1 A)" },
+            { label: "通信", value: "RS-232 (9600 baud, 8-N-1) + RS-485" },
           ],
         },
       ],
