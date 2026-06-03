@@ -63,17 +63,39 @@ describe("sendContactEmail", () => {
     expect(email.html).toContain("mailto:customer@example.com?");
     expect(email.html).toContain("tel:+821012345678");
     expect(email.text).toContain("문의 내용:");
+    expect(email.text).toContain("이 메일에 그대로 답장하면");
 
     expect(email.html).toContain("답장 받는 분 — 홍길동");
     const html: string = email.html;
     const contactBlockIdx = html.indexOf("답장 받는 분");
     const inquiryTypeRowIdx = html.indexOf("문의 유형");
+    const emailInBlockIdx = html.indexOf("customer@example.com");
     expect(contactBlockIdx).toBeGreaterThan(-1);
-    expect(inquiryTypeRowIdx).toBeGreaterThan(contactBlockIdx);
+    expect(emailInBlockIdx).toBeGreaterThan(contactBlockIdx);
+    expect(inquiryTypeRowIdx).toBeGreaterThan(emailInBlockIdx);
 
     expect(html).not.toMatch(/Gmail로 답장하기/);
     expect(html).toContain("Gmail로 답장");
     expect(html).toContain("또는");
+  });
+
+  it("renders the contact block without a phone line when phone is absent", async () => {
+    const { phone: _phone, ...rest } = payload;
+    await sendContactEmail(rest);
+
+    const email = sendMock.mock.calls[0]![0];
+    const html: string = email.html;
+
+    expect(html).toContain("답장 받는 분 — 홍길동");
+    expect(html).toContain("customer@example.com");
+    expect(html).not.toContain("연락처");
+    expect(html).not.toContain("tel:");
+    expect(html).not.toContain("전화하기");
+
+    expect(html).toContain("Gmail로 답장");
+    expect(html).toContain("메일 앱으로 답장");
+
+    expect(email.text).not.toContain("연락처:");
   });
 
   it("splits CONTACT_FORM_TO on commas and trims whitespace", async () => {
