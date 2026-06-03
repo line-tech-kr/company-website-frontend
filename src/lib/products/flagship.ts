@@ -16,16 +16,17 @@ export function pickFlagship(
   products: Product[],
   slug: CategorySlug,
 ): Product | undefined {
+  const candidates = products.filter((p) => p.function !== "MFM");
   const preferred = FLAGSHIP_MODEL[slug];
   if (preferred) {
-    const match = products.find(
+    const match = candidates.find(
       (p) =>
         categoryForSeries(p.series) === slug &&
         p.model.toLowerCase() === preferred.toLowerCase(),
     );
     if (match) return match;
   }
-  return products.find((p) => categoryForSeries(p.series) === slug);
+  return candidates.find((p) => categoryForSeries(p.series) === slug);
 }
 
 export function flagshipImageUrl(flagship: Product): string {

@@ -83,16 +83,6 @@ describe("useCarousel", () => {
     expect(result.current.active).toBe(0);
   });
 
-  it("does not advance while paused", () => {
-    const { result } = renderHook(() =>
-      useCarousel(3, { intervalMs: 1000, paused: true }),
-    );
-    act(() => {
-      vi.advanceTimersByTime(5000);
-    });
-    expect(result.current.active).toBe(0);
-  });
-
   it("does not advance when prefers-reduced-motion is set", () => {
     prefersReducedMotion = true;
     const { result } = renderHook(() => useCarousel(3, { intervalMs: 1000 }));

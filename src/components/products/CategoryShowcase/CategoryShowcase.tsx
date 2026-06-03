@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCarousel } from "@/lib/hooks/useCarousel";
@@ -35,7 +34,7 @@ type Props = {
   heroLede: string;
 };
 
-const INTERVAL_MS = 4500;
+const INTERVAL_MS = 4000;
 
 export function CategoryShowcase({
   products,
@@ -54,10 +53,8 @@ export function CategoryShowcase({
   heroCode,
   heroLede,
 }: Props) {
-  const [hovered, setHovered] = useState(false);
   const { active, setActive } = useCarousel(products.length, {
     intervalMs: INTERVAL_MS,
-    paused: hovered,
   });
 
   const selectSlide = (i: number) => setActive(i);
@@ -68,8 +65,6 @@ export function CategoryShowcase({
       role="region"
       aria-roledescription="carousel"
       aria-label={slidesAriaLabel}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
     >
       <span
         className="lt-showcase__bracket lt-showcase__bracket--tl"

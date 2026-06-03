@@ -13,20 +13,14 @@ const getRMServerSnapshot = () => false;
 
 type Options = {
   intervalMs: number;
-  /** Caller-provided pause flag (e.g. hover/focus inside the carousel). */
-  paused?: boolean;
 };
 
 /**
  * Auto-advancing index hook for carousels. Skips ticks when:
  *   - length <= 1
  *   - the user has prefers-reduced-motion set
- *   - `paused` is true (hover, focus, etc. — caller decides)
  */
-export function useCarousel(
-  length: number,
-  { intervalMs, paused = false }: Options,
-) {
+export function useCarousel(length: number, { intervalMs }: Options) {
   const [active, setActive] = useState(0);
   const reducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
@@ -35,12 +29,12 @@ export function useCarousel(
   );
 
   useEffect(() => {
-    if (length <= 1 || reducedMotion || paused) return;
+    if (length <= 1 || reducedMotion) return;
     const id = window.setInterval(() => {
       setActive((n) => (n + 1) % length);
     }, intervalMs);
     return () => window.clearInterval(id);
-  }, [length, intervalMs, paused, reducedMotion]);
+  }, [length, intervalMs, reducedMotion]);
 
   return { active, setActive };
 }

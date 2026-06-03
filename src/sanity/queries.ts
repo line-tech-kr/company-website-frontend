@@ -150,7 +150,7 @@ export const productSlugsQuery = defineQuery(`
 
 export const categoryShowcaseQuery = defineQuery(`
   *[_type == "categoryShowcase" && _id == "category-showcases"][0]{
-    "analogue": analogue[]{
+    "analogue": analogue[product->function != "MFM"]{
       caption,
       "model": product->model,
       "slug": product->slug.current,
@@ -160,7 +160,7 @@ export const categoryShowcaseQuery = defineQuery(`
       "image": product->images[0],
       "cutout": product->cutout,
     },
-    "digital": digital[]{
+    "digital": digital[product->function != "MFM"]{
       caption,
       "model": product->model,
       "slug": product->slug.current,
@@ -170,7 +170,7 @@ export const categoryShowcaseQuery = defineQuery(`
       "image": product->images[0],
       "cutout": product->cutout,
     },
-    "specialized": specialized[]{
+    "specialized": specialized[product->function != "MFM"]{
       caption,
       "model": product->model,
       "slug": product->slug.current,
