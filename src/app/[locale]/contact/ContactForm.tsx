@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useState, useTransition, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { Link } from "@/i18n/navigation";
@@ -30,10 +30,19 @@ export function ContactForm({ form, defaults }: Props) {
   const extra = selected?.extraField;
 
   const t = useTranslations("contactForm");
-  const [state, formAction, isPending] = useActionState(
-    submitContact,
-    INITIAL_STATE,
-  );
+  // Manual submit (not <form action>) so React 19 doesn't auto-reset the form
+  // after the action runs — preserves typed values when validation fails.
+  const [state, setState] = useState<ContactFormState>(INITIAL_STATE);
+  const [isPending, startTransition] = useTransition();
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    startTransition(async () => {
+      const result = await submitContact(state, formData);
+      setState(result);
+    });
+  };
 
   const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
   const turnstileRequired = process.env.NODE_ENV === "production";
@@ -66,7 +75,7 @@ export function ContactForm({ form, defaults }: Props) {
   }
 
   return (
-    <form action={formAction} noValidate>
+    <form onSubmit={handleSubmit} noValidate>
       {/* Honeypot — visually hidden, ignored by users, populated by bots.
           The submit handler rejects any submission with a non-empty value. */}
       <div

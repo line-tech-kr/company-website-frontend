@@ -251,4 +251,34 @@ test.describe("Contact form", () => {
       "true",
     );
   });
+
+  test("preserves typed inputs after a failed submission", async ({ page }) => {
+    // Regression guard for #251: React 19's <form action> auto-resets the form
+    // after every submit, wiping user input. Switching to onSubmit must keep
+    // every filled value in place when validation fails.
+    await page.locator("#ct-inquiry-type").selectOption("general");
+    await page.locator("#ct-name").fill("Preserved Tester");
+    await page.locator("#ct-company").fill("Acme Corp");
+    await page.locator("#ct-phone").fill("+82-10-0000-0000");
+    await page
+      .locator("#ct-message")
+      .fill("Values must survive a failed submit.");
+    // Leave email blank — schema rejects, server action returns errorKey "invalid".
+    await page.locator('input[name="consent"]').check();
+    await page.getByRole("button", { name: /send inquiry/i }).click();
+
+    await expect(page.locator("#ct-email")).toHaveAttribute(
+      "aria-invalid",
+      "true",
+      { timeout: 10_000 },
+    );
+
+    await expect(page.locator("#ct-inquiry-type")).toHaveValue("general");
+    await expect(page.locator("#ct-name")).toHaveValue("Preserved Tester");
+    await expect(page.locator("#ct-company")).toHaveValue("Acme Corp");
+    await expect(page.locator("#ct-phone")).toHaveValue("+82-10-0000-0000");
+    await expect(page.locator("#ct-message")).toHaveValue(
+      "Values must survive a failed submit.",
+    );
+  });
 });
