@@ -179,10 +179,7 @@ export function QuoteFields({
                         aria-label={`${form.gas.percentLabel} ${idx + 1}`}
                         className="ct-form__input"
                       />
-                      <span
-                        className="ct-form__gas-percent-suffix"
-                        aria-hidden
-                      >
+                      <span className="ct-form__gas-percent-suffix" aria-hidden>
                         %
                       </span>
                     </div>
@@ -215,8 +212,7 @@ export function QuoteFields({
                   aria-live="polite"
                   data-testid="ct-gas-total"
                 >
-                  {form.gas.totalLabel}:{" "}
-                  {Number(componentTotal.toFixed(4))}%
+                  {form.gas.totalLabel}: {Number(componentTotal.toFixed(4))}%
                 </span>
               </div>
               {invalidFields.has("gasComponents") && (

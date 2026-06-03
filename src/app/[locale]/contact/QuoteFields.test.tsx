@@ -110,9 +110,7 @@ describe("QuoteFields", () => {
 
     // Removing one drops back to two, and the remaining buttons re-disable.
     fireEvent.click(removes[2]);
-    expect(document.querySelectorAll(".ct-form__gas-component").length).toBe(
-      2,
-    );
+    expect(document.querySelectorAll(".ct-form__gas-component").length).toBe(2);
     screen
       .getAllByRole("button", { name: "Remove" })
       .forEach((btn) => expect(btn).toBeDisabled());
@@ -126,18 +124,16 @@ describe("QuoteFields", () => {
     const row1 = components[0] as HTMLElement;
     const row2 = components[1] as HTMLElement;
 
-    fireEvent.change(
-      within(row1).getByLabelText("Gas 1") as HTMLInputElement,
-      { target: { value: "SiH4" } },
-    );
+    fireEvent.change(within(row1).getByLabelText("Gas 1") as HTMLInputElement, {
+      target: { value: "SiH4" },
+    });
     fireEvent.change(
       within(row1).getByLabelText("Percent 1") as HTMLInputElement,
       { target: { value: "5" } },
     );
-    fireEvent.change(
-      within(row2).getByLabelText("Gas 2") as HTMLInputElement,
-      { target: { value: "N2" } },
-    );
+    fireEvent.change(within(row2).getByLabelText("Gas 2") as HTMLInputElement, {
+      target: { value: "N2" },
+    });
     fireEvent.change(
       within(row2).getByLabelText("Percent 2") as HTMLInputElement,
       { target: { value: "95" } },

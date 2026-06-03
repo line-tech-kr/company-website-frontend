@@ -1,9 +1,5 @@
 import { describe, it, expect } from "vitest";
-import {
-  contactFormSchema,
-  formatGasSummary,
-  formatPercent,
-} from "./schema";
+import { contactFormSchema, formatGasSummary, formatPercent } from "./schema";
 import {
   contactPayloadFixture,
   makeContactPayload,
@@ -212,9 +208,7 @@ describe("contactFormSchema", () => {
       const result = contactFormSchema.safeParse(payload);
       expect(result.success).toBe(true);
       if (result.success) {
-        expect(formatGasSummary(result.data)).toBe(
-          "0.001% SiH4 + 99.999% N2",
-        );
+        expect(formatGasSummary(result.data)).toBe("0.001% SiH4 + 99.999% N2");
       }
     });
 

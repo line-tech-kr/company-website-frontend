@@ -242,8 +242,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       ],
       quoteFields: {
         heading: "공정 조건",
-        helper:
-          "정확한 견적을 위해 아래 네 가지 정보를 함께 알려주세요.",
+        helper: "정확한 견적을 위해 아래 네 가지 정보를 함께 알려주세요.",
         gas: {
           label: "가스",
           placeholder: "예: N2, Ar",

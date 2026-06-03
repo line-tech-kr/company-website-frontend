@@ -9,13 +9,7 @@ import { z } from "zod";
 
 export const FLOW_UNITS = ["sccm", "slm", "sml", "scfh"] as const;
 export const PRESSURE_UNITS = ["bar", "psi", "kPa", "MPa"] as const;
-export const FITTING_TYPES = [
-  "VCR",
-  "Swagelok",
-  "NPT",
-  "Rc",
-  "Other",
-] as const;
+export const FITTING_TYPES = ["VCR", "Swagelok", "NPT", "Rc", "Other"] as const;
 
 export type FlowUnit = (typeof FLOW_UNITS)[number];
 export type PressureUnit = (typeof PRESSURE_UNITS)[number];
@@ -163,7 +157,11 @@ export const contactFormSchema = z
               invalid = true;
               break;
             }
-            if (!Number.isFinite(c.percent) || c.percent <= 0 || c.percent > 100) {
+            if (
+              !Number.isFinite(c.percent) ||
+              c.percent <= 0 ||
+              c.percent > 100
+            ) {
               invalid = true;
               break;
             }
