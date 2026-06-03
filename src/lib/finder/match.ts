@@ -88,8 +88,7 @@ function fitScoreForRange(
     return { score: 0, position: "in" };
   if (value > max && !approxEqual(value, max))
     return { score: 0, position: "in" };
-  if (approxEqual(value, min))
-    return { score: 0.3, position: "bottom-edge" };
+  if (approxEqual(value, min)) return { score: 0.3, position: "bottom-edge" };
   if (approxEqual(value, max)) return { score: 0.5, position: "top-edge" };
   const pct = (value - min) / (max - min);
   if (pct >= 0.25 && pct <= 0.75) return { score: 1, position: "in" };
