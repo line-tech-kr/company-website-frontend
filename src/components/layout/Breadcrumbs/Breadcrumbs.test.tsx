@@ -26,6 +26,12 @@ vi.mock("@/i18n/navigation", () => ({
 
 import { Breadcrumbs, type BreadcrumbItem } from "./Breadcrumbs";
 
+const FULL_CRUMBS: BreadcrumbItem[] = [
+  { label: "Home", href: "/" },
+  { label: "Products", href: "/products" },
+  { label: "M3030VA" },
+];
+
 async function renderAsync(items: BreadcrumbItem[]) {
   const tree = await Breadcrumbs({ items });
   return render(tree);
@@ -39,11 +45,7 @@ function readJsonLd(container: HTMLElement) {
 
 describe("Breadcrumbs", () => {
   it("renders the last item as plain text with aria-current=page", async () => {
-    const { container } = await renderAsync([
-      { label: "Home", href: "/" },
-      { label: "Products", href: "/products" },
-      { label: "M3030VA" },
-    ]);
+    const { container } = await renderAsync(FULL_CRUMBS);
 
     const items = container.querySelectorAll(".lt-breadcrumbs__item");
     expect(items).toHaveLength(3);
@@ -54,11 +56,7 @@ describe("Breadcrumbs", () => {
   });
 
   it("renders earlier items with hrefs as Link anchors", async () => {
-    const { container } = await renderAsync([
-      { label: "Home", href: "/" },
-      { label: "Products", href: "/products" },
-      { label: "M3030VA" },
-    ]);
+    const { container } = await renderAsync(FULL_CRUMBS);
 
     const links = container.querySelectorAll(".lt-breadcrumbs__link");
     expect(links).toHaveLength(2);
@@ -77,12 +75,19 @@ describe("Breadcrumbs", () => {
     expect(items[0].textContent).toBe("Catalogue");
   });
 
+  it("renders the last item as plain text even when it has an href", async () => {
+    // Guards the `!isLast` half of `item.href && !isLast` — a regression that
+    // dropped the isLast check would still render the last crumb as a link.
+    const { container } = await renderAsync([{ label: "Detail", href: "/x" }]);
+
+    expect(container.querySelector(".lt-breadcrumbs__link")).toBeNull();
+    const current = container.querySelector(".lt-breadcrumbs__item--current");
+    expect(current).not.toBeNull();
+    expect(current?.textContent).toBe("Detail");
+  });
+
   it("emits a BreadcrumbList JsonLD with one ListItem per crumb", async () => {
-    const { container } = await renderAsync([
-      { label: "Home", href: "/" },
-      { label: "Products", href: "/products" },
-      { label: "M3030VA" },
-    ]);
+    const { container } = await renderAsync(FULL_CRUMBS);
 
     const ld = readJsonLd(container);
     expect(ld["@context"]).toBe("https://schema.org");

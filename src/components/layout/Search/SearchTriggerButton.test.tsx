@@ -13,13 +13,13 @@ vi.mock("../Header/HeaderShell", () => ({
 
 import { SearchTriggerButton } from "./SearchTriggerButton";
 
-beforeEach(() => {
-  searchCtx.searchOpen = false;
-  searchCtx.setSearchOpen.mockReset();
-  searchCtx.registerSearchTrigger.mockReset();
-});
-
 describe("SearchTriggerButton", () => {
+  beforeEach(() => {
+    searchCtx.searchOpen = false;
+    searchCtx.setSearchOpen.mockReset();
+    searchCtx.registerSearchTrigger.mockReset();
+  });
+
   it("reflects the closed search state via aria-expanded", () => {
     const { getByRole } = render(<SearchTriggerButton label="Open search" />);
     const btn = getByRole("button", { name: "Open search" });

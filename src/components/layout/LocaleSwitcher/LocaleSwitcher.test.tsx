@@ -16,17 +16,21 @@ vi.mock("@/i18n/navigation", () => ({
 
 import { LocaleSwitcher } from "./LocaleSwitcher";
 
-beforeEach(() => {
-  currentLocale = "en";
-  routerReplace.mockReset();
-  // window.location.search is read directly; jsdom defaults to "".
+function setLocationSearch(qs: string) {
   Object.defineProperty(window, "location", {
-    value: { search: "?ref=home&page=2" },
+    value: { search: qs },
+    configurable: true,
     writable: true,
   });
-});
+}
 
 describe("LocaleSwitcher", () => {
+  beforeEach(() => {
+    currentLocale = "en";
+    routerReplace.mockReset();
+    setLocationSearch("?ref=home&page=2");
+  });
+
   it("renders one button per configured locale", () => {
     const { container } = render(<LocaleSwitcher />);
     const buttons = container.querySelectorAll("button");
@@ -54,6 +58,19 @@ describe("LocaleSwitcher", () => {
     expect(routerReplace).toHaveBeenCalledTimes(1);
     expect(routerReplace).toHaveBeenCalledWith(
       { pathname: "/products/analogue", query: { ref: "home", page: "2" } },
+      { locale: "ko" },
+    );
+  });
+
+  it("passes an empty query object when there is no current query string", () => {
+    setLocationSearch("");
+    const { container } = render(<LocaleSwitcher />);
+    const koButton = container.querySelector(
+      'button[lang="ko"]',
+    ) as HTMLButtonElement;
+    fireEvent.click(koButton);
+    expect(routerReplace).toHaveBeenCalledWith(
+      { pathname: "/products/analogue", query: {} },
       { locale: "ko" },
     );
   });

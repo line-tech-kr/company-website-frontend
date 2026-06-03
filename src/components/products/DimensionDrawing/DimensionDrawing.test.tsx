@@ -11,7 +11,7 @@ const CALLOUTS: Callout[] = [
 ];
 
 function renderDrawing() {
-  return render(
+  const utils = render(
     <DimensionDrawing
       kicker="Dimensions"
       heading="Outline"
@@ -23,12 +23,16 @@ function renderDrawing() {
       calloutsAriaLabel="Callouts"
     />,
   );
+  const rows =
+    utils.container.querySelectorAll<HTMLElement>(".lt-pdp-dim__row");
+  const cdots =
+    utils.container.querySelectorAll<SVGGElement>(".lt-pdp-dim__cdot");
+  return { ...utils, rows, cdots };
 }
 
 describe("DimensionDrawing", () => {
   it("renders one row per callout", () => {
-    const { container } = renderDrawing();
-    const rows = container.querySelectorAll(".lt-pdp-dim__row");
+    const { rows } = renderDrawing();
     expect(rows).toHaveLength(5);
   });
 
@@ -38,40 +42,43 @@ describe("DimensionDrawing", () => {
   });
 
   it("mouseEnter on a callout row adds is-active to that row only", () => {
-    const { container } = renderDrawing();
-    const rows = container.querySelectorAll(".lt-pdp-dim__row");
-    const rowB = rows[1] as HTMLElement;
-
-    fireEvent.mouseEnter(rowB);
-    expect(rowB).toHaveClass("is-active");
-
-    const active = container.querySelectorAll(".lt-pdp-dim__row.is-active");
-    expect(active).toHaveLength(1);
+    const { container, rows } = renderDrawing();
+    fireEvent.mouseEnter(rows[1]);
+    expect(rows[1]).toHaveClass("is-active");
+    expect(
+      container.querySelectorAll(".lt-pdp-dim__row.is-active"),
+    ).toHaveLength(1);
   });
 
   it("mouseLeave clears the active state", () => {
-    const { container } = renderDrawing();
-    const rows = container.querySelectorAll(".lt-pdp-dim__row");
-    const rowB = rows[1] as HTMLElement;
-
-    fireEvent.mouseEnter(rowB);
-    expect(rowB).toHaveClass("is-active");
-
-    fireEvent.mouseLeave(rowB);
-    expect(rowB).not.toHaveClass("is-active");
+    const { rows } = renderDrawing();
+    fireEvent.mouseEnter(rows[1]);
+    expect(rows[1]).toHaveClass("is-active");
+    fireEvent.mouseLeave(rows[1]);
+    expect(rows[1]).not.toHaveClass("is-active");
   });
 
   it("hovering a different row transfers the active class", () => {
-    const { container } = renderDrawing();
-    const rows = container.querySelectorAll(".lt-pdp-dim__row");
-    const rowA = rows[0] as HTMLElement;
-    const rowC = rows[2] as HTMLElement;
+    const { rows } = renderDrawing();
+    fireEvent.mouseEnter(rows[0]);
+    expect(rows[0]).toHaveClass("is-active");
 
-    fireEvent.mouseEnter(rowA);
-    expect(rowA).toHaveClass("is-active");
+    fireEvent.mouseEnter(rows[2]);
+    expect(rows[2]).toHaveClass("is-active");
+    expect(rows[0]).not.toHaveClass("is-active");
+  });
 
-    fireEvent.mouseEnter(rowC);
-    expect(rowC).toHaveClass("is-active");
-    expect(rowA).not.toHaveClass("is-active");
+  it("hovering an SVG callout dot activates the matching legend row", () => {
+    // The SVG callout dots and the legend rows share `hover` state via the
+    // setH callback factory in the parent. Hovering callout B in the SVG
+    // should highlight the B row in the legend.
+    const { rows, cdots } = renderDrawing();
+    expect(cdots).toHaveLength(5);
+
+    fireEvent.mouseEnter(cdots[1]);
+    expect(rows[1]).toHaveClass("is-active");
+
+    fireEvent.mouseLeave(cdots[1]);
+    expect(rows[1]).not.toHaveClass("is-active");
   });
 });

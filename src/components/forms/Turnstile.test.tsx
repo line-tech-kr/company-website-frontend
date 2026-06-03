@@ -2,8 +2,7 @@ import React from "react";
 import { describe, it, expect, vi } from "vitest";
 import { render } from "@testing-library/react";
 
-// RTL's `getByTestId` ignores <script> nodes by default, so the mock renders a
-// <div> carrying the props through for assertion.
+// Renders as a <div> so RTL queries can find it — getByTestId skips <script>.
 vi.mock("next/script", () => ({
   default: (props: Record<string, unknown>) =>
     React.createElement("div", { ...props, "data-testid": "next-script" }),
