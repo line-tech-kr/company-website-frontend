@@ -64,34 +64,38 @@ export function toN2Equivalent(flowSlpm: number, gas: GasFactor): number {
   return flowSlpm * (reference.factor / gas.factor);
 }
 
-type FitPosition = "in" | "top-edge" | "bottom-seam";
+type FitPosition = "in" | "top-edge" | "bottom-edge";
 
-/**
- * Score a value against a flow range and report its position. The position
- * lets the caller suppress bottom-seam hits (V === product's lower bound)
- * when another product in the same scope covers V more squarely — see
- * `findProducts`.
- *
- *   value === max → top-edge 0.5  (operating at full scale — preferred at a seam)
- *   value === min → bottom-seam 0.3 (sensor noise floor — suppress if competing)
- *   pct 25–75%    → sweet 1.0
- *   pct 10–90%    → okay 0.7
- *   pct > 90%     → top-edge 0.5
- *   pct < 10%     → bottom 0.3
- */
+// Boundary comparisons use a small relative epsilon so K-factor float drift
+// (e.g. a non-N₂ gas conversion landing at 1500.0000000000002 instead of
+// 1500.0) doesn't bypass seam handling or fall just outside an in-range check.
+const SEAM_EPSILON = 1e-9;
+function approxEqual(value: number, boundary: number): boolean {
+  return (
+    Math.abs(value - boundary) <= SEAM_EPSILON * Math.max(1, Math.abs(boundary))
+  );
+}
+
+// Reports position so `findProducts` can suppress bottom-edge losers when
+// another product covers V more squarely within the same (function, series).
 function fitScoreForRange(
   value: number,
   min: number,
   max: number,
 ): { score: number; position: FitPosition } {
   if (max <= min) return { score: 0, position: "in" };
-  if (value < min || value > max) return { score: 0, position: "in" };
-  if (value === min) return { score: 0.3, position: "bottom-seam" };
-  if (value === max) return { score: 0.5, position: "top-edge" };
+  if (value < min && !approxEqual(value, min))
+    return { score: 0, position: "in" };
+  if (value > max && !approxEqual(value, max))
+    return { score: 0, position: "in" };
+  if (approxEqual(value, min))
+    return { score: 0.3, position: "bottom-edge" };
+  if (approxEqual(value, max)) return { score: 0.5, position: "top-edge" };
   const pct = (value - min) / (max - min);
   if (pct >= 0.25 && pct <= 0.75) return { score: 1, position: "in" };
   if (pct >= 0.1 && pct <= 0.9) return { score: 0.7, position: "in" };
   if (pct > 0.9) return { score: 0.5, position: "top-edge" };
+  // pct < 0.1 — interior, not a seam loser (only at-min triggers that).
   return { score: 0.3, position: "in" };
 }
 
@@ -110,11 +114,6 @@ function seriesMatches(
 ): boolean {
   if (!target || target === "any") return true;
   return product.series === target;
-}
-
-type ScopeKey = `${string}|${string}`;
-function scopeKey(p: Product): ScopeKey {
-  return `${p.function}|${p.series}`;
 }
 
 export function findProducts(
@@ -149,7 +148,7 @@ export function findProducts(
   const n2EquivalentSlpm = toN2Equivalent(flowSlpm, gas);
 
   const normalMatches: FinderMatch[] = [];
-  const bottomSeam: FinderMatch[] = [];
+  const bottomEdgeMatches: FinderMatch[] = [];
 
   for (const product of products) {
     if (!functionMatches(product, input.function)) continue;
@@ -167,20 +166,19 @@ export function findProducts(
       n2EquivalentSlpm,
       fitScore: fit.score,
     };
-    if (fit.position === "bottom-seam") bottomSeam.push(match);
+    if (fit.position === "bottom-edge") bottomEdgeMatches.push(match);
     else normalMatches.push(match);
   }
 
-  // A bottom-seam hit (V at exactly this product's lower bound) is dropped
-  // when another normal match in the same (function, series) scope already
-  // covers V — overlapping ranges are deliberate, but the product where V
-  // sits at the top of its range should win the seam. Cross-series twins
-  // (e.g. analogue + digital with the same range) stay as intentional
-  // cross-sells.
-  const normalScopes = new Set(normalMatches.map((m) => scopeKey(m.product)));
+  // Drop bottom-edge hits when another match in the same (function, series)
+  // already covers V — keep cross-series twins as intentional cross-sells.
+  const normalScopes = new Set(
+    normalMatches.map((m) => `${m.product.function}|${m.product.series}`),
+  );
   const matches: FinderMatch[] = [...normalMatches];
-  for (const m of bottomSeam) {
-    if (!normalScopes.has(scopeKey(m.product))) matches.push(m);
+  for (const m of bottomEdgeMatches) {
+    const key = `${m.product.function}|${m.product.series}`;
+    if (!normalScopes.has(key)) matches.push(m);
   }
 
   // Sort: fit score (desc) → series (analogue, digital, specialized, lepc) → model.
