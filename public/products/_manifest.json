@@ -74,30 +74,6 @@
       ]
     },
     {
-      "model": "MS3400VA",
-      "slug": "ms3400va",
-      "category": "analogue-mfc",
-      "boTable": "02_01_e",
-      "wrId": 13,
-      "images": [
-        {
-          "path": "/products/ms3400va/product-1.jpg",
-          "source": "https://line-tech.co.kr/data/file/02_01_e/3543863211_lqRIHEP8_c5a035e55bd4ea9905886f10198f8916021f6c8e.jpg",
-          "kind": "product"
-        },
-        {
-          "path": "/products/ms3400va/product-2.jpg",
-          "source": "https://line-tech.co.kr/data/file/02_01_e/3543863211_9f3DsW2z_e0e13792eaea4fdc5dba23f9b418c3fd0b419888.jpg",
-          "kind": "product"
-        },
-        {
-          "path": "/products/ms3400va/editor-1.jpg",
-          "source": "https://line-tech.co.kr/data/editor/2502/97d4894ee7166ddedb8dd3748e815901_1740444658_2279.jpg",
-          "kind": "editor"
-        }
-      ]
-    },
-    {
       "model": "MS3150VA",
       "slug": "ms3150va",
       "category": "analogue-mfc",
@@ -237,30 +213,6 @@
         {
           "path": "/products/ms2500va/editor-1.jpg",
           "source": "https://line-tech.co.kr/data/editor/2502/97d4894ee7166ddedb8dd3748e815901_1740446321_3853.jpg",
-          "kind": "editor"
-        }
-      ]
-    },
-    {
-      "model": "MS2400VA",
-      "slug": "ms2400va",
-      "category": "analogue-mfm",
-      "boTable": "02_02_e",
-      "wrId": 12,
-      "images": [
-        {
-          "path": "/products/ms2400va/product-1.jpg",
-          "source": "https://line-tech.co.kr/data/file/02_02_e/3543863211_lZ1x37E4_958c7fe632db338760ee29d098cef572126a3da7.jpg",
-          "kind": "product"
-        },
-        {
-          "path": "/products/ms2400va/product-2.jpg",
-          "source": "https://line-tech.co.kr/data/file/02_02_e/3543863211_g5bFQAjL_a9527a73369e3c033aaf8155b6cc37aec821707d.jpg",
-          "kind": "product"
-        },
-        {
-          "path": "/products/ms2400va/editor-1.jpg",
-          "source": "https://line-tech.co.kr/data/editor/2502/97d4894ee7166ddedb8dd3748e815901_1740446240_1699.jpg",
           "kind": "editor"
         }
       ]

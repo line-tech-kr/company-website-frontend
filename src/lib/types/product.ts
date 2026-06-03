@@ -118,6 +118,13 @@ export const SanityProductSchema = z.object({
   series: z
     .enum(["analogue", "digital", "specialized", "lepc"])
     .transform((s) => (s === "lepc" ? ("specialized" as const) : s)),
+  // Extra series listings this product surfaces in, in addition to its primary
+  // `series`. Used for cross-disciplinary products (e.g. DO400 ships analogue
+  // 0–5 V and digital RS-485, and we want it in both listings).
+  crossListedSeries: z
+    .array(z.enum(["analogue", "digital", "specialized"]))
+    .nullable()
+    .optional(),
   function: z.enum(["MFC", "MFM", "EPC", "ROU"]),
   productLabel: z.object({
     ko: z.string(),

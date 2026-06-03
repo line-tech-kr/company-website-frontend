@@ -402,137 +402,6 @@
     }
   },
   {
-    "model": "MS3400VA",
-    "slug": {
-      "current": "ms3400va"
-    },
-    "series": "analogue",
-    "function": "MFC",
-    "productLabel": {
-      "en": "Mass Flow Controller",
-      "ko": "질량 유량 제어기 (MFC)",
-      "zh": "质量流量控制器 (MFC)"
-    },
-    "tags": [],
-    "features": [
-      {
-        "en": "Accurate at Low Flow",
-        "ko": "저유량에서도 정밀한 측정",
-        "zh": "低流量下精准测量"
-      },
-      {
-        "en": "Fast Response",
-        "ko": "빠른 응답 속도",
-        "zh": "快速响应"
-      },
-      {
-        "en": "Wide Pressure Range Compatibility",
-        "ko": "넓은 압력 범위 대응",
-        "zh": "宽压力范围适用"
-      },
-      {
-        "en": "Excellent Linearity",
-        "ko": "우수한 선형성",
-        "zh": "优异的线性度"
-      },
-      {
-        "en": "Long-Term Stability",
-        "ko": "장기 안정성",
-        "zh": "长期稳定性"
-      },
-      {
-        "en": "High Corrosion Resistance",
-        "ko": "강한 내부식성",
-        "zh": "高耐腐蚀性"
-      },
-      {
-        "en": "Highly Stable Removable Sensor",
-        "ko": "고안정 분리형 센서",
-        "zh": "高稳定可拆卸式传感器"
-      },
-      {
-        "en": "Compact Connection",
-        "ko": "컴팩트한 연결부",
-        "zh": "紧凑型连接结构"
-      }
-    ],
-    "connections": [
-      {
-        "type": "3/8\" SWG",
-        "length": "196.7 mm"
-      },
-      {
-        "type": "1/2\" SWG",
-        "length": "202.4 mm"
-      },
-      {
-        "type": "3/4\" SWG",
-        "length": "210.6 mm"
-      },
-      {
-        "type": "1/2\" VCR",
-        "length": "197.5 mm"
-      }
-    ],
-    "manuals": [],
-    "drawings": [],
-    "connectorType": "9-Pin D-Connector",
-    "massFlowSpecs": {
-      "flowRange": {
-        "display": "100–300 slpm",
-        "min": 100,
-        "max": 300,
-        "unit": "slpm",
-        "referenceGas": "N2"
-      },
-      "accuracy": {
-        "display": "±2% of FS",
-        "value": 2,
-        "unit": "%FS"
-      },
-      "repeatability": {
-        "display": "±0.25% of FS",
-        "value": 0.25,
-        "unit": "%FS"
-      },
-      "ioSignal": {
-        "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
-      },
-      "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
-        "currentMA": 350
-      },
-      "tempRange": {
-        "display": "0–50 °C",
-        "min": 0,
-        "max": 50,
-        "unit": "°C"
-      },
-      "leakRate": {
-        "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
-        "unit": "atm·cc/sec"
-      },
-      "controlRange": {
-        "display": "3–100%",
-        "min": 3,
-        "max": 100,
-        "unit": "%"
-      },
-      "responseTime": {
-        "display": "<2 seconds",
-        "value": 2,
-        "unit": "s",
-        "comparator": "lt"
-      },
-      "maxPressure": {
-        "display": "inquiry"
-      }
-    }
-  },
-  {
     "model": "MS3500VA",
     "slug": {
       "current": "ms3500va"
@@ -606,8 +475,8 @@
     "connectorType": "9-Pin D-Connector",
     "massFlowSpecs": {
       "flowRange": {
-        "display": "300–1000 slpm",
-        "min": 300,
+        "display": "100–1000 slpm",
+        "min": 100,
         "max": 1000,
         "unit": "slpm",
         "referenceGas": "N2"
@@ -1416,131 +1285,6 @@
     }
   },
   {
-    "model": "MS2400VA",
-    "slug": {
-      "current": "ms2400va"
-    },
-    "series": "analogue",
-    "function": "MFM",
-    "productLabel": {
-      "en": "Mass Flow Meter",
-      "ko": "질량 유량 측정기 (MFM)",
-      "zh": "质量流量计 (MFM)"
-    },
-    "tags": [],
-    "features": [
-      {
-        "en": "Accurate at Low Flow",
-        "ko": "저유량에서도 정밀한 측정",
-        "zh": "低流量下精准测量"
-      },
-      {
-        "en": "Fast Response",
-        "ko": "빠른 응답 속도",
-        "zh": "快速响应"
-      },
-      {
-        "en": "Wide Pressure Range Compatibility",
-        "ko": "넓은 압력 범위 대응",
-        "zh": "宽压力范围适用"
-      },
-      {
-        "en": "Excellent Linearity",
-        "ko": "우수한 선형성",
-        "zh": "优异的线性度"
-      },
-      {
-        "en": "Long-Term Stability",
-        "ko": "장기 안정성",
-        "zh": "长期稳定性"
-      },
-      {
-        "en": "High Corrosion Resistance",
-        "ko": "강한 내부식성",
-        "zh": "高耐腐蚀性"
-      },
-      {
-        "en": "Highly Stable Removable Sensor",
-        "ko": "고안정 분리형 센서",
-        "zh": "高稳定可拆卸式传感器"
-      },
-      {
-        "en": "Compact Connection",
-        "ko": "컴팩트한 연결부",
-        "zh": "紧凑型连接结构"
-      }
-    ],
-    "connections": [
-      {
-        "type": "3/8\" SWG",
-        "length": "152.8 mm"
-      },
-      {
-        "type": "1/2\" SWG",
-        "length": "158.4 mm"
-      },
-      {
-        "type": "3/4\" SWG",
-        "length": "166.6 mm"
-      },
-      {
-        "type": "1/2\" VCR",
-        "length": "152.5 mm"
-      }
-    ],
-    "manuals": [],
-    "drawings": [],
-    "connectorType": "9-Pin D-Connector",
-    "massFlowSpecs": {
-      "flowRange": {
-        "display": "100–300 slpm",
-        "min": 100,
-        "max": 300,
-        "unit": "slpm",
-        "referenceGas": "N2"
-      },
-      "accuracy": {
-        "display": "±2% of FS",
-        "value": 2,
-        "unit": "%FS"
-      },
-      "repeatability": {
-        "display": "±0.25% of FS",
-        "value": 0.25,
-        "unit": "%FS"
-      },
-      "ioSignal": {
-        "display": "0–5 Vdc or 4–20 mA",
-        "outputs": ["0-5Vdc", "4-20mA"]
-      },
-      "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
-        "voltages": [15, 24],
-        "currentMA": 350
-      },
-      "tempRange": {
-        "display": "0–50 °C",
-        "min": 0,
-        "max": 50,
-        "unit": "°C"
-      },
-      "leakRate": {
-        "display": "1×10⁻⁹ atm·cc/sec",
-        "value": 1e-9,
-        "unit": "atm·cc/sec"
-      },
-      "controlRange": {
-        "display": "3–100%",
-        "min": 3,
-        "max": 100,
-        "unit": "%"
-      },
-      "maxPressure": {
-        "display": "inquiry"
-      }
-    }
-  },
-  {
     "model": "MS2500VA",
     "slug": {
       "current": "ms2500va"
@@ -1614,8 +1358,8 @@
     "connectorType": "9-Pin D-Connector",
     "massFlowSpecs": {
       "flowRange": {
-        "display": "300–1000 slpm",
-        "min": 300,
+        "display": "100–1000 slpm",
+        "min": 100,
         "max": 1000,
         "unit": "slpm",
         "referenceGas": "N2"
@@ -4520,6 +4264,7 @@
       "current": "do400"
     },
     "series": "specialized",
+    "crossListedSeries": ["analogue", "digital"],
     "function": "MFC",
     "productLabel": {
       "en": "Mass Flow Controller",
