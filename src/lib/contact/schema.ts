@@ -257,7 +257,11 @@ export function formatGasSummary(data: ContactFormPayload): string | null {
   return null;
 }
 
-function formatPercent(n: number): string {
+export function formatPercent(n: number): string {
   if (!Number.isFinite(n)) return String(n);
-  return Number.isInteger(n) ? String(n) : n.toFixed(2).replace(/\.?0+$/, "");
+  if (Number.isInteger(n)) return String(n);
+  // Don't truncate to 2dp — that silently collapses 0.001 → "0", which a
+  // sub-1% trace dopant would render as 0% in the sales email. `String(n)`
+  // preserves whatever precision the customer typed.
+  return String(n);
 }

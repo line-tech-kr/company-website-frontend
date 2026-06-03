@@ -149,6 +149,16 @@ test.describe("Contact form", () => {
       .fill("Automated E2E mixture test — please ignore.");
     await page.locator('input[name="consent"]').check();
 
+    // Lock in the mixture wire format — without this, a regression that
+    // drops the JSON or flips the mode flag would produce the same final
+    // outcome as the pure-mode test (server error without RESEND_API_KEY).
+    await expect(page.locator('input[name="gasMode"]')).toHaveValue(
+      "mixture",
+    );
+    await expect(page.locator('input[name="gasComponents"]')).toHaveValue(
+      '[{"gas":"SiH4","percent":5},{"gas":"N2","percent":95}]',
+    );
+
     await expect(
       page.locator('input[name="cf-turnstile-response"]'),
     ).toHaveValue(/.+/, { timeout: 15_000 });
@@ -169,6 +179,27 @@ test.describe("Contact form", () => {
         }),
       ).toBeVisible({ timeout: 15_000 });
     }
+  });
+
+  test("product CTA prefills the contact form in quote mode", async ({
+    page,
+  }) => {
+    // Bypass the default beforeEach `/en/contact` nav and arrive via the
+    // product-page CTA equivalent: ?product=<model>.
+    await page.goto("/en/contact?product=M3030VA");
+
+    await expect(page.locator("#ct-inquiry-type")).toHaveValue("quote");
+    await expect(page.locator("#ct-subject")).toHaveValue(
+      /Quote request: M3030VA/,
+    );
+    await expect(page.locator("#ct-message")).toHaveValue(
+      /M3030VA/,
+    );
+    // Process conditions block must be rendered as a result of the prefill.
+    await expect(page.locator("#ct-gas")).toBeVisible();
+    await expect(page.locator("#ct-flow-value")).toBeVisible();
+    await expect(page.locator("#ct-pressure-value")).toBeVisible();
+    await expect(page.locator("#ct-fitting-type")).toBeVisible();
   });
 
   test("flags missing quote fields when submitted blank", async ({ page }) => {

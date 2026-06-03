@@ -1,5 +1,9 @@
 import { describe, it, expect } from "vitest";
-import { contactFormSchema, formatGasSummary } from "./schema";
+import {
+  contactFormSchema,
+  formatGasSummary,
+  formatPercent,
+} from "./schema";
 import {
   contactPayloadFixture,
   makeContactPayload,
@@ -183,6 +187,34 @@ describe("contactFormSchema", () => {
       expect(mix.success).toBe(true);
       if (mix.success) {
         expect(formatGasSummary(mix.data)).toBe("5% SiH4 + 95% N2");
+      }
+    });
+
+    it.each([
+      [5, "5"],
+      [100, "100"],
+      [5.5, "5.5"],
+      [33.333, "33.333"],
+      [0.001, "0.001"],
+      [99.999, "99.999"],
+    ])("formats percent %s as %s", (input, expected) => {
+      expect(formatPercent(input)).toBe(expected);
+    });
+
+    it("preserves trace dopant precision in gas summary", () => {
+      const payload = {
+        ...quoteMixturePayloadFixture,
+        gasComponents: JSON.stringify([
+          { gas: "SiH4", percent: 0.001 },
+          { gas: "N2", percent: 99.999 },
+        ]),
+      };
+      const result = contactFormSchema.safeParse(payload);
+      expect(result.success).toBe(true);
+      if (result.success) {
+        expect(formatGasSummary(result.data)).toBe(
+          "0.001% SiH4 + 99.999% N2",
+        );
       }
     });
 
