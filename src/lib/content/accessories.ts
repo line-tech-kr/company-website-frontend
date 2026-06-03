@@ -105,11 +105,16 @@ export type AccessoriesContent = {
 
 // ─── Shared (locale-independent) ────────────────────────────────────────────
 
-/** LTI items use a shared neutral placeholder until real product photos exist. */
+/** LTI-200 still uses a shared neutral placeholder until a real product photo lands. */
 const LTI_PLACEHOLDER_IMAGE = {
   src: "/products/lti/placeholder.svg",
   width: 320,
   height: 200,
+} as const;
+const LTI_1000_IMAGE = {
+  src: "/products/lti-1000/cutout-2026.png",
+  width: 600,
+  height: 400,
 } as const;
 const FC_050S_IMAGE = {
   src: "/products/fc-050s/product-1.gif",
@@ -193,9 +198,8 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           blurb:
             "Rackable readout box with D-SUB remote control, optional 4–20 mA output, and an RS-232 link to companion PC software. Handles up to 8 channels in 1U / 2U / 4U arrangements.",
           image: {
-            ...LTI_PLACEHOLDER_IMAGE,
-            alt: "Generic placeholder for LTI-1000 rackable readout",
-            placeholder: true,
+            ...LTI_1000_IMAGE,
+            alt: "LTI-1000 multi-channel readout in 1U, 2U, and 4U rack-mount configurations",
           },
           specsHeading: "Specifications",
           specs: [
@@ -360,9 +364,8 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           blurb:
             "랙 마운트형 표시기 박스. D-SUB 원격 제어, 4–20 mA 출력 옵션, 전용 PC 소프트웨어 연결용 RS-232 통신 지원. 1U / 2U / 4U 구성으로 최대 8채널까지 처리합니다.",
           image: {
-            ...LTI_PLACEHOLDER_IMAGE,
-            alt: "LTI-1000 표시기 자리표시 이미지",
-            placeholder: true,
+            ...LTI_1000_IMAGE,
+            alt: "LTI-1000 다채널 표시기 — 1U · 2U · 4U 랙 마운트 구성",
           },
           specsHeading: "사양",
           specs: [
@@ -529,9 +532,8 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           blurb:
             "机架式显示器箱。支持 D-SUB 远程控制、可选 4–20 mA 输出，以及通过 RS-232 与配套 PC 软件通信。1U / 2U / 4U 机架结构，最多支持 8 通道。",
           image: {
-            ...LTI_PLACEHOLDER_IMAGE,
-            alt: "LTI-1000 显示器占位图",
-            placeholder: true,
+            ...LTI_1000_IMAGE,
+            alt: "LTI-1000 多通道显示器 — 1U / 2U / 4U 机架式配置",
           },
           specsHeading: "规格",
           specs: [
