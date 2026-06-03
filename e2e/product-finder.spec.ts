@@ -79,4 +79,19 @@ test.describe("Product finder", () => {
     await expect(resultCards.first()).toBeVisible({ timeout: 5000 });
     await expect(resultCards.filter({ hasText: "LEPC" })).toHaveCount(1);
   });
+
+  test("seam tiebreak: at V=1500 only the top-of-range product appears", async ({
+    page,
+  }) => {
+    // Anchors on the analogue MFC seam at 1500 slpm: today that's MS3600VA
+    // (max=1500) winning over MS3700VA (min=1500). If those SKUs are renamed
+    // or retired, re-anchor this test to whichever pair owns the 1500 slpm
+    // seam in the analogue MFC line.
+    await page.goto(
+      "/en/products/finder?fn=MFC&series=analogue&gas=nitrogen&flow=1500&unit=slpm",
+    );
+    const results = page.locator(".lt-finder__result");
+    await expect(results).toHaveCount(1, { timeout: 5000 });
+    await expect(results.first()).toContainText("MS3600VA");
+  });
 });

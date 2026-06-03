@@ -64,13 +64,42 @@ export function toN2Equivalent(flowSlpm: number, gas: GasFactor): number {
   return flowSlpm * (reference.factor / gas.factor);
 }
 
-export function fitScore(value: number, min: number, max: number): number {
-  if (value < min || value > max) return 0;
-  if (max <= min) return 0;
+type FitPosition = "in" | "top-edge" | "bottom-edge";
+
+// Boundary comparisons use a small relative epsilon so K-factor float drift
+// (e.g. a non-N₂ gas conversion landing at 1500.0000000000002 instead of
+// 1500.0) doesn't bypass seam handling or fall just outside an in-range check.
+const SEAM_EPSILON = 1e-9;
+function approxEqual(value: number, boundary: number): boolean {
+  return (
+    Math.abs(value - boundary) <= SEAM_EPSILON * Math.max(1, Math.abs(boundary))
+  );
+}
+
+// Reports position so `findProducts` can suppress bottom-edge losers when
+// another product covers V more squarely within the same (function, series).
+function fitScoreForRange(
+  value: number,
+  min: number,
+  max: number,
+): { score: number; position: FitPosition } {
+  if (max <= min) return { score: 0, position: "in" };
+  if (value < min && !approxEqual(value, min))
+    return { score: 0, position: "in" };
+  if (value > max && !approxEqual(value, max))
+    return { score: 0, position: "in" };
+  if (approxEqual(value, min)) return { score: 0.3, position: "bottom-edge" };
+  if (approxEqual(value, max)) return { score: 0.5, position: "top-edge" };
   const pct = (value - min) / (max - min);
-  if (pct >= 0.25 && pct <= 0.75) return 1;
-  if (pct >= 0.1 && pct <= 0.9) return 0.7;
-  return 0.4;
+  if (pct >= 0.25 && pct <= 0.75) return { score: 1, position: "in" };
+  if (pct >= 0.1 && pct <= 0.9) return { score: 0.7, position: "in" };
+  if (pct > 0.9) return { score: 0.5, position: "top-edge" };
+  // pct < 0.1 — interior, not a seam loser (only at-min triggers that).
+  return { score: 0.3, position: "in" };
+}
+
+export function fitScore(value: number, min: number, max: number): number {
+  return fitScoreForRange(value, min, max).score;
 }
 
 function functionMatches(product: Product, target: FinderFunction): boolean {
@@ -117,7 +146,9 @@ export function findProducts(
   }
   const n2EquivalentSlpm = toN2Equivalent(flowSlpm, gas);
 
-  const matches: FinderMatch[] = [];
+  const normalMatches: FinderMatch[] = [];
+  const bottomEdgeMatches: FinderMatch[] = [];
+
   for (const product of products) {
     if (!functionMatches(product, input.function)) continue;
     if (!seriesMatches(product, input.series)) continue;
@@ -125,9 +156,28 @@ export function findProducts(
     const range = product.massFlowSpecs.flowRange;
     if (!range) continue;
     if (range.min == null || range.max == null) continue;
-    const score = fitScore(n2EquivalentSlpm, range.min, range.max);
-    if (score === 0) continue;
-    matches.push({ product, n2EquivalentSlpm, fitScore: score });
+
+    const fit = fitScoreForRange(n2EquivalentSlpm, range.min, range.max);
+    if (fit.score === 0) continue;
+
+    const match: FinderMatch = {
+      product,
+      n2EquivalentSlpm,
+      fitScore: fit.score,
+    };
+    if (fit.position === "bottom-edge") bottomEdgeMatches.push(match);
+    else normalMatches.push(match);
+  }
+
+  // Drop bottom-edge hits when another match in the same (function, series)
+  // already covers V — keep cross-series twins as intentional cross-sells.
+  const normalScopes = new Set(
+    normalMatches.map((m) => `${m.product.function}|${m.product.series}`),
+  );
+  const matches: FinderMatch[] = [...normalMatches];
+  for (const m of bottomEdgeMatches) {
+    const key = `${m.product.function}|${m.product.series}`;
+    if (!normalScopes.has(key)) matches.push(m);
   }
 
   // Sort: fit score (desc) → series (analogue, digital, specialized, lepc) → model.

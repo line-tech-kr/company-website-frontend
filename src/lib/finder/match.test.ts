@@ -56,9 +56,16 @@ describe("fitScore", () => {
     expect(fitScore(10, 0, 100)).toBe(0.7);
   });
 
-  it("returns 0.4 for edge-of-range", () => {
-    expect(fitScore(95, 0, 100)).toBe(0.4);
-    expect(fitScore(5, 0, 100)).toBe(0.4);
+  it("returns 0.5 for top-edge (above 90% of range or at max)", () => {
+    expect(fitScore(91, 0, 100)).toBe(0.5);
+    expect(fitScore(95, 0, 100)).toBe(0.5);
+    expect(fitScore(100, 0, 100)).toBe(0.5);
+  });
+
+  it("returns 0.3 for bottom-edge (below 10% of range or at min)", () => {
+    expect(fitScore(0, 0, 100)).toBe(0.3);
+    expect(fitScore(5, 0, 100)).toBe(0.3);
+    expect(fitScore(9, 0, 100)).toBe(0.3);
   });
 
   it("returns 0 when out of range entirely", () => {
@@ -268,5 +275,148 @@ describe("findProducts", () => {
       });
       expect(result.matches.map((m) => m.product.model)).not.toContain("LEPC");
     });
+  });
+});
+
+describe("seam handling", () => {
+  it("at V === max of LOW (== min of HIGH), only LOW surfaces with top-edge score", () => {
+    const adjacent: Product[] = [
+      withRange("LOW", 1000, 1500, { series: "analogue", function: "MFC" }),
+      withRange("HIGH", 1500, 2500, { series: "analogue", function: "MFC" }),
+    ];
+    const result = findProducts(adjacent, {
+      function: "MFC",
+      gasId: "nitrogen",
+      flow: 1500,
+      unit: "slpm",
+    });
+    expect(result.matches.map((m) => m.product.model)).toEqual(["LOW"]);
+    expect(result.matches[0].fitScore).toBe(0.5);
+  });
+
+  it("value just above min at a seam is not suppressed", () => {
+    const adjacent: Product[] = [
+      withRange("LOW", 1000, 1500, { series: "analogue", function: "MFC" }),
+      withRange("HIGH", 1500, 2500, { series: "analogue", function: "MFC" }),
+    ];
+    const result = findProducts(adjacent, {
+      function: "MFC",
+      gasId: "nitrogen",
+      flow: 1500.001,
+      unit: "slpm",
+    });
+    expect(result.matches.map((m) => m.product.model)).toEqual(["HIGH"]);
+    expect(result.matches[0].fitScore).toBe(0.3);
+  });
+
+  it("sole bottom-edge match (no competitor in scope) still surfaces", () => {
+    const sole: Product[] = [
+      withRange("SOLO", 100, 500, { series: "analogue", function: "MFC" }),
+    ];
+    const result = findProducts(sole, {
+      function: "MFC",
+      gasId: "nitrogen",
+      flow: 100,
+      unit: "slpm",
+    });
+    expect(result.matches.map((m) => m.product.model)).toEqual(["SOLO"]);
+    expect(result.matches[0].fitScore).toBe(0.3);
+  });
+
+  it("suppresses only within (function, series) scope — digital twin still surfaces", () => {
+    const mixed: Product[] = [
+      withRange("ALOW", 1000, 1500, { series: "analogue", function: "MFC" }),
+      withRange("AHIGH", 1500, 2500, { series: "analogue", function: "MFC" }),
+      withRange("DHIGH", 1500, 2500, { series: "digital", function: "MFC" }),
+    ];
+    const result = findProducts(mixed, {
+      function: "MFC",
+      gasId: "nitrogen",
+      flow: 1500,
+      unit: "slpm",
+    });
+    const models = result.matches.map((m) => m.product.model);
+    expect(models).toContain("ALOW");
+    expect(models).toContain("DHIGH");
+    expect(models).not.toContain("AHIGH");
+  });
+
+  it("cross-function under fn=any: MFC top-edge does not suppress MFM bottom-edge in same series", () => {
+    // Under `function: "any"`, an MFC at V=max and an MFM at V=min are in
+    // separate scopes (MFC|analogue vs MFM|analogue) and both surface as a
+    // deliberate cross-sell across function families.
+    const mixed: Product[] = [
+      withRange("MFC-LOW", 1000, 1500, {
+        series: "analogue",
+        function: "MFC",
+      }),
+      withRange("MFM-HIGH", 1500, 2500, {
+        series: "analogue",
+        function: "MFM",
+      }),
+    ];
+    const result = findProducts(mixed, {
+      function: "any",
+      gasId: "nitrogen",
+      flow: 1500,
+      unit: "slpm",
+    });
+    const models = result.matches.map((m) => m.product.model);
+    expect(models).toContain("MFC-LOW");
+    expect(models).toContain("MFM-HIGH");
+  });
+
+  it("identical-range twins at V === max — both surface as top-edge", () => {
+    const twins: Product[] = [
+      withRange("TWIN-A", 1000, 2000, { series: "analogue", function: "MFC" }),
+      withRange("TWIN-B", 1000, 2000, { series: "analogue", function: "MFC" }),
+    ];
+    const result = findProducts(twins, {
+      function: "MFC",
+      gasId: "nitrogen",
+      flow: 2000,
+      unit: "slpm",
+    });
+    expect(result.matches.map((m) => m.product.model)).toEqual([
+      "TWIN-A",
+      "TWIN-B",
+    ]);
+    expect(result.matches.every((m) => m.fitScore === 0.5)).toBe(true);
+  });
+
+  it("identical-range twins at V === min — no normal match in scope, fallback keeps both", () => {
+    const twins: Product[] = [
+      withRange("TWIN-A", 1000, 2000, { series: "analogue", function: "MFC" }),
+      withRange("TWIN-B", 1000, 2000, { series: "analogue", function: "MFC" }),
+    ];
+    const result = findProducts(twins, {
+      function: "MFC",
+      gasId: "nitrogen",
+      flow: 1000,
+      unit: "slpm",
+    });
+    expect(result.matches.map((m) => m.product.model)).toEqual([
+      "TWIN-A",
+      "TWIN-B",
+    ]);
+    expect(result.matches.every((m) => m.fitScore === 0.3)).toBe(true);
+  });
+
+  it("tolerates float drift at a seam (e.g. K-factor conversion landing at 1500 + ε)", () => {
+    // Without epsilon-tolerant comparison, value > 1500 would drop LOW from
+    // the in-range set entirely and HIGH would score 0.3 with position "in"
+    // instead of "bottom-edge" — the suppression would silently fail.
+    const adjacent: Product[] = [
+      withRange("LOW", 1000, 1500, { series: "analogue", function: "MFC" }),
+      withRange("HIGH", 1500, 2500, { series: "analogue", function: "MFC" }),
+    ];
+    const result = findProducts(adjacent, {
+      function: "MFC",
+      gasId: "nitrogen",
+      flow: 1500 + 1e-10,
+      unit: "slpm",
+    });
+    expect(result.matches.map((m) => m.product.model)).toEqual(["LOW"]);
+    expect(result.matches[0].fitScore).toBe(0.5);
   });
 });
