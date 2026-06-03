@@ -1,6 +1,6 @@
 import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { createClient } from "@sanity/client";
-import { categoryForSeries } from "../src/lib/categories";
+import { categoryForSeries, type CategorySlug } from "../src/lib/categories";
 import type { Product } from "../src/lib/types/product";
 import { allProductsQuery } from "../src/sanity/queries";
 import type { SearchEntry } from "../src/lib/search/types";
@@ -21,13 +21,11 @@ loadEnv(".env.local");
 const LOCALES = ["ko", "en", "zh"] as const;
 type Locale = (typeof LOCALES)[number];
 
-const CATEGORY_LABELS: Record<
-  "analogue" | "digital" | "specialized",
-  Record<Locale, string>
-> = {
+const CATEGORY_LABELS: Record<CategorySlug, Record<Locale, string>> = {
   analogue: { ko: "아날로그", en: "Analogue", zh: "模拟" },
   digital: { ko: "디지털", en: "Digital", zh: "数字" },
   specialized: { ko: "특수", en: "Specialized", zh: "特殊" },
+  lepc: { ko: "LEPC 압력", en: "LEPC pressure", zh: "LEPC 压力" },
 };
 
 function productToEntries(p: Product): Record<Locale, SearchEntry> | null {
@@ -37,7 +35,9 @@ function productToEntries(p: Product): Record<Locale, SearchEntry> | null {
     return null;
   }
   const url = `/products/${category}/${p.slug.current}`;
-  const productType = p.function.toLowerCase() as "mfc" | "mfm";
+  const productType = p.function.toLowerCase() as Lowercase<
+    Product["function"]
+  >;
   const signal = p.series;
   const catLabel = CATEGORY_LABELS[category];
 
@@ -111,6 +111,15 @@ const STATIC_ENTRIES: Record<Locale, SearchEntry[]> = {
       signal: "specialized",
       url: "/products/specialized",
       breadcrumb: "제품 › 특수",
+    },
+    {
+      id: "cat-lepc",
+      type: "category",
+      title: "LEPC 저압 전자식 압력 제어기",
+      model: "",
+      signal: "lepc",
+      url: "/products/lepc",
+      breadcrumb: "제품 › LEPC 압력",
     },
     {
       id: "page-company",
@@ -190,6 +199,15 @@ const STATIC_ENTRIES: Record<Locale, SearchEntry[]> = {
       breadcrumb: "Products › Specialized",
     },
     {
+      id: "cat-lepc",
+      type: "category",
+      title: "LEPC Low-pressure Electronic Pressure Controllers",
+      model: "",
+      signal: "lepc",
+      url: "/products/lepc",
+      breadcrumb: "Products › LEPC pressure",
+    },
+    {
       id: "page-company",
       type: "page",
       title: "About Line Tech",
@@ -265,6 +283,15 @@ const STATIC_ENTRIES: Record<Locale, SearchEntry[]> = {
       signal: "specialized",
       url: "/products/specialized",
       breadcrumb: "产品 › 特殊",
+    },
+    {
+      id: "cat-lepc",
+      type: "category",
+      title: "LEPC 低压电子式压力控制器",
+      model: "",
+      signal: "lepc",
+      url: "/products/lepc",
+      breadcrumb: "产品 › LEPC 压力",
     },
     {
       id: "page-company",

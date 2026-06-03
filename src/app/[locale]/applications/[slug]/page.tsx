@@ -8,6 +8,7 @@ import {
   type FeaturedApplicationProductInput,
 } from "@/components/applications/FeaturedApplicationProduct";
 import { LT_APPLICATIONS } from "@/lib/content/applications";
+import type { Product } from "@/lib/types/product";
 import { productBySlug } from "@/lib/fixtures/products";
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
@@ -26,7 +27,7 @@ type Props = { params: Promise<{ locale: Locale; slug: string }> };
 type SanityFeaturedProduct = {
   slug: string;
   model: string;
-  series: "analogue" | "digital" | "specialized";
+  series: Product["series"];
   productLabel?: Record<string, string> | null;
   description?: Record<string, string> | null;
   flowRange?: string | null;
@@ -91,6 +92,7 @@ const CATEGORY_HREFS: Record<string, string> = {
   analogue: "/products/analogue",
   digital: "/products/digital",
   specialized: "/products/specialized",
+  lepc: "/products/lepc",
 };
 
 function resolveFeaturedProduct({
@@ -223,8 +225,8 @@ export default async function ApplicationDetailPage({ params }: Props) {
                       {app.recommendedSeries
                         .filter((s) => {
                           if (cat === "digital") return s === "MD";
-                          if (cat === "specialized")
-                            return ["EX", "LEPC"].includes(s);
+                          if (cat === "specialized") return s === "EX";
+                          if (cat === "lepc") return s === "LEPC";
                           return s === "M / MS";
                         })
                         .join(" / ") || app.recommendedSeries[0]}

@@ -113,16 +113,12 @@ const LocalizedNullableSchema = z
 export const SanityProductSchema = z.object({
   model: z.string(),
   slug: z.object({ current: z.string() }),
-  // Sanity emits `lepc` for the LEPC product; coalesce to `specialized` so
-  // the rest of the codebase keeps a 3-value Series union.
-  series: z
-    .enum(["analogue", "digital", "specialized", "lepc"])
-    .transform((s) => (s === "lepc" ? ("specialized" as const) : s)),
+  series: z.enum(["analogue", "digital", "specialized", "lepc"]),
   // Extra series listings this product surfaces in, in addition to its primary
   // `series`. Used for cross-disciplinary products (e.g. DO400 ships analogue
   // 0–5 V and digital RS-485, and we want it in both listings).
   crossListedSeries: z
-    .array(z.enum(["analogue", "digital", "specialized"]))
+    .array(z.enum(["analogue", "digital", "specialized", "lepc"]))
     .nullable()
     .optional(),
   function: z.enum(["MFC", "MFM", "EPC", "ROU"]),

@@ -7,6 +7,7 @@ const ORDER: readonly FinderSeries[] = [
   "analogue",
   "digital",
   "specialized",
+  "lepc",
 ] as const;
 
 type Props = {

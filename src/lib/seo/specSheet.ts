@@ -37,6 +37,7 @@ const SERIES_LABELS: Record<Product["series"], string> = {
   analogue: "Analogue",
   digital: "Digital",
   specialized: "Specialized",
+  lepc: "LEPC",
 };
 
 const FUNCTION_LABELS: Record<

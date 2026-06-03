@@ -32,6 +32,7 @@ const CARD_ACCENT: Record<CategorySlug | "accessories", SlideAccent> = {
   analogue: "blue",
   digital: "steel",
   specialized: "gold",
+  lepc: "neutral",
   accessories: "neutral",
 };
 
@@ -43,7 +44,7 @@ const APPLICATION_STRIP_SLUGS = [
   "research-development",
 ] as const;
 
-const SERIES_COUNT = 4;
+const SERIES_COUNT = 5;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;

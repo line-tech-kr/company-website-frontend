@@ -218,4 +218,55 @@ describe("findProducts", () => {
     });
     expect(result.matches.map((m) => m.product.model)).toEqual(["MD150M"]);
   });
+
+  describe("EPC products (no flowRange)", () => {
+    const lepc = makeProduct({
+      model: "LEPC",
+      slug: { current: "lepc" },
+      series: "lepc",
+      function: "EPC",
+      massFlowSpecs: {
+        ...makeProduct().massFlowSpecs!,
+        flowRange: undefined,
+        pressureRange: {
+          display: "0.1–6 barA",
+          min: 0.1,
+          max: 6,
+          unit: "barA",
+        },
+      },
+    });
+    const productsWithEpc = [...products, lepc];
+
+    it("returns LEPC when function is EPC, regardless of flow", () => {
+      const result = findProducts(productsWithEpc, {
+        function: "EPC",
+        gasId: "nitrogen",
+        flow: 0,
+        unit: "slpm",
+      });
+      expect(result.matches.map((m) => m.product.model)).toEqual(["LEPC"]);
+      expect(result.matches[0].fitScore).toBe(1);
+    });
+
+    it("excludes LEPC when function is MFC", () => {
+      const result = findProducts(productsWithEpc, {
+        function: "MFC",
+        gasId: "nitrogen",
+        flow: 200,
+        unit: "slpm",
+      });
+      expect(result.matches.map((m) => m.product.model)).not.toContain("LEPC");
+    });
+
+    it("excludes LEPC when function is 'any' (no flowRange to match)", () => {
+      const result = findProducts(productsWithEpc, {
+        function: "any",
+        gasId: "nitrogen",
+        flow: 200,
+        unit: "slpm",
+      });
+      expect(result.matches.map((m) => m.product.model)).not.toContain("LEPC");
+    });
+  });
 });

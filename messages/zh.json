@@ -39,7 +39,8 @@
     "categories": {
       "analogue": "模拟系列",
       "digital": "数字系列",
-      "specialized": "特殊系列"
+      "specialized": "特殊系列",
+      "lepc": "LEPC 压力控制器"
     }
   },
   "product": {
@@ -60,7 +61,7 @@
   "products": {
     "list": {
       "title": "产品",
-      "lede": "涵盖模拟、数字和专用系列的质量流量控制器（MFC）和质量流量计（MFM）。",
+      "lede": "涵盖模拟、数字、专用与 LEPC 系列的质量流量控制器（MFC）、质量流量计（MFM）与低压电子式压力控制器（EPC）。",
       "cardCount": "{count} 款型号",
       "stats": {
         "modelsLabel": "目录型号",
@@ -94,7 +95,11 @@
       },
       "specialized": {
         "title": "特殊系列",
-        "lede": "防爆（EX）与低压精密控制（LEPC）等针对苛刻环境的特殊型号产品线。"
+        "lede": "针对危险与苛刻环境的防爆（EX）型号产品线。"
+      },
+      "lepc": {
+        "title": "LEPC 压力控制器",
+        "lede": "面向 0.1~6 barA 低压应用的电子式压力控制器（EPC），精度 ±0.5% F.S。"
       }
     },
     "stack": {
@@ -109,15 +114,21 @@
       "instruments": {
         "title": "读数单元",
         "subtitle": "仪表设备"
+      },
+      "pressureControllers": {
+        "title": "电子式压力控制器 · EPC",
+        "subtitle": "压力控制器"
       }
     },
     "table": {
       "model": "型号",
       "description": "特点",
       "range": "流量范围",
+      "pressureRange": "压力范围",
       "accuracy": "精度",
       "response": "响应",
       "fitting": "接口",
+      "maxPressure": "最大压力",
       "display": "显示",
       "power": "输入电源",
       "communication": "通信",
@@ -165,7 +176,8 @@
       "any": "全部",
       "analogue": "模拟",
       "digital": "数字",
-      "specialized": "特殊型"
+      "specialized": "特殊型",
+      "lepc": "LEPC"
     },
     "results": {
       "prompt": "请输入流量后查看匹配产品。",

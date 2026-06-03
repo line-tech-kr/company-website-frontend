@@ -3,9 +3,9 @@
  *
  * Conventions:
  *  - One typed object per locale, same shape as `LT_HOME` in `./home.ts`.
- *  - Products mega-menu reads `productsCategories` (4 function categories:
- *    analogue / digital / specialized / accessories). The homepage series
- *    cards mirror these same 4 categories; hrefs live on each SeriesItem.
+ *  - Products mega-menu reads `productsCategories` (analogue / digital /
+ *    specialized / lepc / accessories). The homepage series cards mirror
+ *    the same categories; hrefs live on each SeriesItem.
  *  - Consumed by: Header (#6), Footer (#4), MegaMenu (#7). Keep labels here,
  *    layout decisions in the components.
  */
@@ -84,15 +84,15 @@ export type ShellFooter = {
 };
 
 /**
- * One of the product categories surfaced in the mega-menu. Three are
- * series-based (Analogue / Digital / Specialized) and resolve to dynamic
- * `/products/[category]` routes; the fourth is `accessories`, which has its
- * own static page at `/products/accessories` (panel readouts + pressure
- * accessories that don't fit the series taxonomy).
+ * One of the product categories surfaced in the mega-menu. Four are
+ * series-based (Analogue / Digital / Specialized / LEPC) and resolve to
+ * dynamic `/products/[category]` routes; `accessories` has its own static
+ * page at `/products/accessories` (panel readouts + pressure accessories
+ * that don't fit the series taxonomy).
  * Slug is locale-independent; label/desc are localized.
  */
 export type ProductsCategory = {
-  /** Stable slug: "analogue" | "digital" | "specialized" | "accessories". */
+  /** Stable slug: "analogue" | "digital" | "specialized" | "lepc" | "accessories". */
   code: string;
   label: string;
   desc: string;
@@ -132,7 +132,7 @@ export type ShellContent = {
   nav: ShellNavItem[];
   /** Top-right "Quote" button label in the header. Mailto target is shared. */
   quoteLabel: string;
-  /** Product mega-menu categories — 3 series + 1 accessories entry. */
+  /** Product mega-menu categories — 4 series + 1 accessories entry. */
   productsCategories: ProductsCategory[];
   /** Header search panel copy (#8). */
   search: ShellSearch;
@@ -277,6 +277,12 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         label: "특수 시리즈",
         desc: "방폭 · 디스플레이 일체형 등 특수 사양",
         href: "/products/specialized",
+      },
+      {
+        code: "lepc",
+        label: "LEPC 압력 제어기",
+        desc: "0.1–6 barA 저압 영역 전용 EPC",
+        href: "/products/lepc",
       },
       {
         code: "accessories",
@@ -473,6 +479,12 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         href: "/products/specialized",
       },
       {
+        code: "lepc",
+        label: "LEPC pressure controller",
+        desc: "Low-pressure EPC for 0.1–6 barA operating range",
+        href: "/products/lepc",
+      },
+      {
         code: "accessories",
         label: "Accessories",
         desc: "Panel readouts, high-pressure regulators, shock protectors",
@@ -653,6 +665,12 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         label: "特殊系列",
         desc: "防爆、集成显示等特殊型号",
         href: "/products/specialized",
+      },
+      {
+        code: "lepc",
+        label: "LEPC 压力控制器",
+        desc: "0.1–6 barA 低压专用 EPC",
+        href: "/products/lepc",
       },
       {
         code: "accessories",

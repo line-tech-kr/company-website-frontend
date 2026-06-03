@@ -10,6 +10,7 @@ export const FLAGSHIP_MODEL: Partial<Record<CategorySlug, string>> = {
   analogue: "M3030VA",
   digital: "MD800C",
   specialized: "EX1000C",
+  lepc: "LEPC",
 };
 
 export function pickFlagship(

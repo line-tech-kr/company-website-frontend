@@ -66,4 +66,17 @@ test.describe("Product finder", () => {
       page.getByText(/verify seal material with sales/i),
     ).toBeVisible({ timeout: 5000 });
   });
+
+  test("EPC function returns LEPC without requiring a flow value", async ({
+    page,
+  }) => {
+    await page.goto("/en/products/finder?fn=EPC");
+    // FlowInput is hidden when EPC is selected.
+    await expect(
+      page.getByRole("group", { name: "Target flow rate" }),
+    ).toBeHidden();
+    const resultCards = page.locator(".lt-finder__result");
+    await expect(resultCards.first()).toBeVisible({ timeout: 5000 });
+    await expect(resultCards.filter({ hasText: "LEPC" })).toHaveCount(1);
+  });
 });

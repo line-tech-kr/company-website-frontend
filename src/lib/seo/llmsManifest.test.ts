@@ -29,6 +29,7 @@ describe("buildLlmsManifest", () => {
     expect(md).not.toContain("Analogue series");
     expect(md).not.toContain("Digital series");
     expect(md).not.toContain("Specialized series");
+    expect(md).not.toContain("LEPC pressure controller");
   });
 
   it("renders the Analogue series with MFC entries and locale-prefixed URLs", async () => {

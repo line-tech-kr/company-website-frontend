@@ -1,10 +1,12 @@
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
+import { categoryForSeries } from "@/lib/categories";
+import type { Product } from "@/lib/types/product";
 
 export type FeaturedApplicationProductInput = {
   slug: string;
   model: string;
-  series: "analogue" | "digital" | "specialized";
+  series: Product["series"];
   productLabel?: string | null;
   description?: string | null;
   flowRange?: string | null;
@@ -29,7 +31,7 @@ export function FeaturedApplicationProduct({
   flowRangeLabel,
   viewProductLabel,
 }: Props) {
-  const detailHref = `/products/${product.series}/${product.slug}`;
+  const detailHref = `/products/${categoryForSeries(product.series)}/${product.slug}`;
   const body = whyCaption ?? product.description ?? null;
 
   return (

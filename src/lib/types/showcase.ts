@@ -16,6 +16,7 @@ export const CategoryShowcaseSchema = z.object({
   analogue: z.array(ShowcaseEntrySchema).nullable(),
   digital: z.array(ShowcaseEntrySchema).nullable(),
   specialized: z.array(ShowcaseEntrySchema).nullable(),
+  lepc: z.array(ShowcaseEntrySchema).nullable(),
 });
 
 export type ShowcaseEntry = z.infer<typeof ShowcaseEntrySchema>;

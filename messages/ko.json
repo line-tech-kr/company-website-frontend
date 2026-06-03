@@ -39,7 +39,8 @@
     "categories": {
       "analogue": "아날로그 시리즈",
       "digital": "디지털 시리즈",
-      "specialized": "특수 시리즈"
+      "specialized": "특수 시리즈",
+      "lepc": "LEPC 압력 제어기"
     }
   },
   "product": {
@@ -60,7 +61,7 @@
   "products": {
     "list": {
       "title": "제품",
-      "lede": "아날로그·디지털·특수 시리즈로 구성된 매스플로우 컨트롤러(MFC)와 매스플로우 미터(MFM).",
+      "lede": "아날로그·디지털·특수·LEPC 시리즈로 구성된 매스플로우 컨트롤러(MFC), 매스플로우 미터(MFM), 저압 전자식 압력 제어기(EPC).",
       "cardCount": "{count}개 모델",
       "stats": {
         "modelsLabel": "카탈로그 모델",
@@ -94,7 +95,11 @@
       },
       "specialized": {
         "title": "특수 시리즈",
-        "lede": "방폭(EX) 및 저압 정밀 제어(LEPC) 등 까다로운 환경을 위한 특수 사양 라인업."
+        "lede": "위험 환경 및 가혹한 조건을 위한 방폭(EX) 사양 라인업."
+      },
+      "lepc": {
+        "title": "LEPC 압력 제어기",
+        "lede": "0.1~6 barA 저압 환경 전용 전자식 압력 제어기(EPC). ±0.5% F.S. 정확도."
       }
     },
     "stack": {
@@ -109,15 +114,21 @@
       "instruments": {
         "title": "리드아웃 유닛",
         "subtitle": "계측 장치"
+      },
+      "pressureControllers": {
+        "title": "전자식 압력 제어기 · EPC",
+        "subtitle": "압력 제어기"
       }
     },
     "table": {
       "model": "모델",
       "description": "특징",
       "range": "유량 범위",
+      "pressureRange": "압력 범위",
       "accuracy": "정확도",
       "response": "응답",
       "fitting": "연결",
+      "maxPressure": "최대 압력",
       "display": "디스플레이",
       "power": "입력 전원",
       "communication": "통신",
@@ -165,7 +176,8 @@
       "any": "전체",
       "analogue": "아날로그",
       "digital": "디지털",
-      "specialized": "특수 사양"
+      "specialized": "특수 사양",
+      "lepc": "LEPC"
     },
     "results": {
       "prompt": "유량을 입력하시면 일치하는 제품이 표시됩니다.",

@@ -133,7 +133,7 @@ export const productByModelQuery = defineQuery(`
 export const productSlugsQuery = defineQuery(`
   *[_type == "product" && defined(slug.current)]{
     "slug": slug.current,
-    "series": select(series == "lepc" => "specialized", series)
+    series
   }
 `);
 
@@ -160,6 +160,16 @@ export const categoryShowcaseQuery = defineQuery(`
       "cutout": product->cutout,
     },
     "specialized": specialized[product->function != "MFM"]{
+      caption,
+      "model": product->model,
+      "slug": product->slug.current,
+      "function": product->function,
+      "flowRange": coalesce(product->massFlowSpecs.flowRange.display, product->massFlowSpecs.pressureRange.display),
+      "accuracy": product->massFlowSpecs.accuracy.display,
+      "image": product->images[0],
+      "cutout": product->cutout,
+    },
+    "lepc": lepc[]{
       caption,
       "model": product->model,
       "slug": product->slug.current,

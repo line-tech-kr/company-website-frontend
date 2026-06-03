@@ -64,13 +64,17 @@ export function ProductFinder({ products, locale, initial }: Props) {
   }, [fn, gasId, flow, unit, series, pathname, router]);
 
   const result = useMemo(() => {
-    if (flow === "" || !Number.isFinite(flow) || (flow as number) <= 0) {
+    const flowProvided =
+      flow !== "" && Number.isFinite(flow) && (flow as number) > 0;
+    // EPC products use pressureRange, not flowRange — surface them without
+    // requiring a flow value.
+    if (fn !== "EPC" && !flowProvided) {
       return null;
     }
     return findProducts(products, {
       function: fn,
       gasId,
-      flow: flow as number,
+      flow: flowProvided ? (flow as number) : 0,
       unit,
       series,
     });
@@ -87,6 +91,7 @@ export function ProductFinder({ products, locale, initial }: Props) {
     analogue: t("series.analogue"),
     digital: t("series.digital"),
     specialized: t("series.specialized"),
+    lepc: t("series.lepc"),
   };
   const unitLabels = { slpm: t("flow.unit.slpm"), sccm: t("flow.unit.sccm") };
   const gasLabels = {
@@ -123,13 +128,15 @@ export function ProductFinder({ products, locale, initial }: Props) {
           legend={t("series.label")}
         />
         <GasSelect value={gasId} onChange={setGasId} labels={gasLabels} />
-        <FlowInput
-          flow={flow}
-          unit={unit}
-          onFlowChange={setFlow}
-          onUnitChange={setUnit}
-          labels={{ legend: t("flow.label"), unit: unitLabels }}
-        />
+        {fn !== "EPC" && (
+          <FlowInput
+            flow={flow}
+            unit={unit}
+            onFlowChange={setFlow}
+            onUnitChange={setUnit}
+            labels={{ legend: t("flow.label"), unit: unitLabels }}
+          />
+        )}
       </form>
 
       <div className="lt-finder__results" aria-live="polite">
@@ -141,7 +148,7 @@ export function ProductFinder({ products, locale, initial }: Props) {
               <h2 className="lt-finder__results-title">
                 {t("results.heading", { count: result.matches.length })}
               </h2>
-              {result.gas && result.gas.id !== DEFAULT_GAS && (
+              {fn !== "EPC" && result.gas && result.gas.id !== DEFAULT_GAS && (
                 <p className="lt-finder__converted">
                   {t("convertedNote", {
                     n2: result.n2EquivalentSlpm.toLocaleString(locale, {

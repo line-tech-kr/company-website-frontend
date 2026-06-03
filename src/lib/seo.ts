@@ -136,17 +136,34 @@ const CATEGORY_SEO: Record<CategorySlug, Record<Locale, PageSeo>> = {
     ko: {
       title: "특수 사양 MFC·MFM — 라인테크",
       description:
-        "고압·저유량·부식성 가스 등 극한 환경을 위한 매스플로우 컨트롤러(MFC)·미터(MFM). 라인테크 EX·LEPC 특수 시리즈와 맞춤형 사양 설계.",
+        "고압·부식성 가스 등 극한 환경을 위한 매스플로우 컨트롤러(MFC)·미터(MFM). 라인테크 EX 방폭 특수 시리즈와 맞춤형 사양 설계.",
     },
     en: {
       title: "Specialized MFC & MFM — Line Tech",
       description:
-        "Mass Flow Controllers and Meters for extreme conditions — high pressure, low flow, corrosive gases. Line Tech EX·LEPC specialized series with custom-spec design.",
+        "Mass Flow Controllers and Meters for extreme conditions — high pressure, corrosive gases, hazardous areas. Line Tech EX explosion-proof specialized series with custom-spec design.",
     },
     zh: {
       title: "特殊规格MFC与MFM — Line Tech",
       description:
-        "适用于高压、低流量、腐蚀性气体等极端环境的质量流量控制器与流量计。莱因科技EX·LEPC特殊系列，支持定制化规格设计。",
+        "适用于高压、腐蚀性气体与危险环境的质量流量控制器与流量计。莱因科技 EX 防爆特殊系列，支持定制化规格设计。",
+    },
+  },
+  lepc: {
+    ko: {
+      title: "LEPC 압력 제어기 — 라인테크",
+      description:
+        "0.1~6 barA 저압 환경 전용 전자식 압력 제어기(EPC). ±0.5 % F.S. 정확도로 진공 인접 라인·분석 계측 라인 등 저압 공정에 적합한 라인테크 LEPC.",
+    },
+    en: {
+      title: "LEPC Electronic Pressure Controller — Line Tech",
+      description:
+        "Low-pressure Electronic Pressure Controller for 0.1–6 barA operating range with ±0.5 % F.S. accuracy. Line Tech LEPC — purpose-built for vacuum-adjacent and analytical instrumentation lines.",
+    },
+    zh: {
+      title: "LEPC 电子式压力控制器 — Line Tech",
+      description:
+        "面向 0.1~6 barA 低压范围的电子式压力控制器，精度 ±0.5 % F.S。莱因科技 LEPC，专为真空相邻管线与分析仪器气路设计。",
     },
   },
 };
@@ -166,6 +183,11 @@ const SERIES_APPLICATION: Record<Product["series"], Record<Locale, string>> = {
     ko: "고압·부식성 가스 특수 공정에 적합",
     en: "suited for high-pressure and corrosive gas processes",
     zh: "适用于高压及腐蚀性气体特殊工艺",
+  },
+  lepc: {
+    ko: "저압·진공 인접 공정에 적합",
+    en: "suited for low-pressure and vacuum-adjacent processes",
+    zh: "适用于低压与真空相邻工艺",
   },
 };
 
