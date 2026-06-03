@@ -51,6 +51,10 @@ Pipeline (intermediate scripts at `.work/scripts/`, gitignored):
 - **Carry-over from 2020 unchanged:** FC-050S, PR-030 (xlsx marks "그대로사용")
 - **Schema change pending:** `connectorType` field added to `product` (Phase 2)
 
+### Post-handoff lineup updates
+
+- **2026-06-03 (#231):** MS2400VA + MS3400VA retired; MS2500VA + MS3500VA `massFlowSpecs.flowRange` widened to **100–1000 slpm** to absorb the retired 100–300 band.
+
 ## Parallel work (separate PRs / agents)
 
 | Issue | Status | Output |

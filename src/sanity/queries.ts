@@ -119,7 +119,7 @@ export const productBySlugQuery = defineQuery(`
 `);
 
 export const productsBySeriesQuery = defineQuery(`
-  *[_type == "product" && series == $series] | order(function asc, model asc){
+  *[_type == "product" && (series == $series || $series in coalesce(crossListedSeries, []))] | order(function asc, model asc){
     ${PRODUCT_LIST_PROJECTION}
   }
 `);
@@ -259,7 +259,17 @@ const APPLICATION_PROJECTION = `
   "lede": ${localized("lede")},
   "body": ${localized("body")},
   recommendedSeries,
-  relatedCategories
+  relatedCategories,
+  "featuredProduct": featuredProduct->{
+    "slug": slug.current,
+    model,
+    series,
+    "productLabel": ${localized("productLabel")},
+    description,
+    "flowRange": coalesce(massFlowSpecs.flowRange.display, massFlowSpecs.pressureRange.display),
+    "image": images[0],
+    cutout
+  }
 `;
 
 export const allApplicationsQuery = defineQuery(`

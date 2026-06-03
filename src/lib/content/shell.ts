@@ -275,7 +275,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
       {
         code: "specialized",
         label: "특수 시리즈",
-        desc: "방폭 · 디스플레이 일체형 · MEMS 등 특수 사양",
+        desc: "방폭 · 디스플레이 일체형 등 특수 사양",
         href: "/products/specialized",
       },
       {
@@ -469,7 +469,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
       {
         code: "specialized",
         label: "Specialized series",
-        desc: "Explosion-proof, integrated display, MEMS variants",
+        desc: "Explosion-proof and integrated-display variants",
         href: "/products/specialized",
       },
       {
@@ -651,7 +651,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
       {
         code: "specialized",
         label: "特殊系列",
-        desc: "防爆、集成显示、MEMS 等特殊型号",
+        desc: "防爆、集成显示等特殊型号",
         href: "/products/specialized",
       },
       {

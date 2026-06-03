@@ -14,16 +14,15 @@ const client = createClient({
 });
 
 const ALL_2026_SLUGS = [
-  // Existing 13 (already had cutout-2026.png, just retightened)
+  // Existing 13 (already had cutout-2026.png, just retightened) — MS2400VA + MS3400VA
+  // retired post-handoff (2026-06-03); their 2500/3500 siblings now cover 100–1000 slpm.
   "m2030va",
   "m3030va",
-  "ms2400va",
   "ms2500va",
   "ms2600va",
   "ms2700va",
   "ms2800va",
   "ms3150va",
-  "ms3400va",
   "ms3500va",
   "ms3600va",
   "ms3700va",
