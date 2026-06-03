@@ -209,7 +209,7 @@
       "heading": "Outline dimensions",
       "sub": "Units in millimeters. Dimensions shown are for the 1/4\" VCR fitting variant.",
       "caption": "Flow direction left → right. Model name engraved on the top face.",
-      "note": "Drawing is for reference only. Refer to the datasheet for the official outline.",
+      "note": "Figure is for reference only. Refer to the official CAD drawing for confirmed dimensions.",
       "callouts": {
         "A": "W · overall width",
         "B": "H · overall height",
@@ -223,12 +223,11 @@
       "sub": "Latest revisions only. Request historical files via the contact form.",
       "download": "Download",
       "done": "Done",
-      "datasheetFor": "{model} datasheet",
       "manualFor": "{model} user manual"
     },
     "requestDocs": {
       "kicker": "Documentation",
-      "heading": "Need datasheets, manuals, or CAD drawings?",
+      "heading": "Need manuals or CAD drawings?",
       "body": "Technical documents are available on request. Send us the model and your application, and we'll respond within one business day.",
       "cta": "Request technical documents"
     }
@@ -249,11 +248,6 @@
         "desc": "AutoCAD (.dwg) and STEP (.stp) files",
         "count": "{count} models"
       },
-      "datasheets": {
-        "title": "Datasheets",
-        "desc": "Per-model specification sheets",
-        "count": "{count} documents"
-      },
       "manuals": {
         "title": "Manuals",
         "desc": "Per-model user guides",
@@ -272,10 +266,6 @@
     "drawings": {
       "title": "CAD Drawings",
       "intro": "Outline drawings for each model in AutoCAD (.dwg) and STEP (.stp) formats."
-    },
-    "datasheets": {
-      "title": "Datasheets",
-      "intro": "Specification sheets for every model. Download the latest revision or request a specific configuration."
     },
     "manuals": {
       "title": "Manuals",

@@ -1,11 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 
-export type ResourceSubpageKind =
-  | "datasheets"
-  | "manuals"
-  | "catalogues"
-  | "drawings";
+export type ResourceSubpageKind = "manuals" | "catalogues" | "drawings";
 
 export type Series = "analogue" | "digital" | "specialized";
 export const SERIES_ORDER: Series[] = ["analogue", "digital", "specialized"];

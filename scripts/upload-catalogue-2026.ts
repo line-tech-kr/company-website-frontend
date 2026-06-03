@@ -4,6 +4,11 @@
  * Uploads 2026 catalogue/manual/datasheet PDFs to Sanity.
  * Additive only — never overwrites existing docs.
  *
+ * Status: frozen — historical record of the 2026 upload. The `datasheet`
+ * branch is dead (the schema was retired in #239) and would write orphan
+ * documents if rerun. Kept intact for provenance; if you need to re-upload
+ * catalogues/manuals, strip the datasheet path first.
+ *
  * Usage:
  *   pnpm tsx scripts/upload-catalogue-2026.ts             # real upload
  *   pnpm tsx scripts/upload-catalogue-2026.ts --dry-run   # log only, no writes

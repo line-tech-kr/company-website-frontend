@@ -204,8 +204,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       },
       productInquiry: {
         subject: "기술 자료 요청: {model}",
-        message:
-          "{model} 관련 기술 자료(데이터시트, 매뉴얼 등)를 요청드립니다.",
+        message: "{model} 관련 기술 자료(매뉴얼, 도면 등)를 요청드립니다.",
       },
     },
     distributors: {
@@ -337,7 +336,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       productInquiry: {
         subject: "Document request: {model}",
         message:
-          "I'd like to request technical documents (datasheet, manual, etc.) for the {model}.",
+          "I'd like to request technical documents (manual, drawing, etc.) for the {model}.",
       },
     },
     distributors: {
@@ -471,7 +470,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       },
       productInquiry: {
         subject: "技术资料请求：{model}",
-        message: "我想索取 {model} 的技术文件（数据表、手册等）。",
+        message: "我想索取 {model} 的技术文件（使用手册、图纸等）。",
       },
     },
     distributors: {

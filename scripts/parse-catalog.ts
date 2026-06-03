@@ -822,7 +822,6 @@ function buildProduct(
     tags: [],
     features: featuresFor(section.model).map(localize),
     connections,
-    datasheets: [],
     manuals: [],
     drawings: [],
     certifications: [],
