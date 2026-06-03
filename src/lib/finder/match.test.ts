@@ -56,9 +56,14 @@ describe("fitScore", () => {
     expect(fitScore(10, 0, 100)).toBe(0.7);
   });
 
-  it("returns 0.4 for edge-of-range", () => {
-    expect(fitScore(95, 0, 100)).toBe(0.4);
-    expect(fitScore(5, 0, 100)).toBe(0.4);
+  it("returns 0.5 for top-edge (above 90% of range or at max)", () => {
+    expect(fitScore(95, 0, 100)).toBe(0.5);
+    expect(fitScore(100, 0, 100)).toBe(0.5);
+  });
+
+  it("returns 0.3 for bottom-edge (below 10% of range or at min)", () => {
+    expect(fitScore(5, 0, 100)).toBe(0.3);
+    expect(fitScore(0, 0, 100)).toBe(0.3);
   });
 
   it("returns 0 when out of range entirely", () => {
@@ -268,5 +273,69 @@ describe("findProducts", () => {
       });
       expect(result.matches.map((m) => m.product.model)).not.toContain("LEPC");
     });
+  });
+});
+
+describe("seam handling", () => {
+  it("at V === max of LOW (== min of HIGH), only LOW surfaces with top-edge score", () => {
+    const adjacent: Product[] = [
+      withRange("LOW", 1000, 1500, { series: "analogue", function: "MFC" }),
+      withRange("HIGH", 1500, 2500, { series: "analogue", function: "MFC" }),
+    ];
+    const result = findProducts(adjacent, {
+      function: "MFC",
+      gasId: "nitrogen",
+      flow: 1500,
+      unit: "slpm",
+    });
+    expect(result.matches.map((m) => m.product.model)).toEqual(["LOW"]);
+    expect(result.matches[0].fitScore).toBe(0.5);
+  });
+
+  it("value just above min at a seam is NOT suppressed (only exact V === min triggers seam handling)", () => {
+    const adjacent: Product[] = [
+      withRange("LOW", 1000, 1500, { series: "analogue", function: "MFC" }),
+      withRange("HIGH", 1500, 2500, { series: "analogue", function: "MFC" }),
+    ];
+    const result = findProducts(adjacent, {
+      function: "MFC",
+      gasId: "nitrogen",
+      flow: 1500.001,
+      unit: "slpm",
+    });
+    expect(result.matches.map((m) => m.product.model)).toEqual(["HIGH"]);
+    expect(result.matches[0].fitScore).toBe(0.3);
+  });
+
+  it("at V === min of a sole-match product (no competitor), the product still surfaces with bottom-edge score", () => {
+    const sole: Product[] = [
+      withRange("SOLO", 100, 500, { series: "analogue", function: "MFC" }),
+    ];
+    const result = findProducts(sole, {
+      function: "MFC",
+      gasId: "nitrogen",
+      flow: 100,
+      unit: "slpm",
+    });
+    expect(result.matches.map((m) => m.product.model)).toEqual(["SOLO"]);
+    expect(result.matches[0].fitScore).toBe(0.3);
+  });
+
+  it("suppresses only within (function, series) scope — analogue seam suppresses, digital twin still surfaces", () => {
+    const mixed: Product[] = [
+      withRange("ALOW", 1000, 1500, { series: "analogue", function: "MFC" }),
+      withRange("AHIGH", 1500, 2500, { series: "analogue", function: "MFC" }),
+      withRange("DHIGH", 1500, 2500, { series: "digital", function: "MFC" }),
+    ];
+    const result = findProducts(mixed, {
+      function: "MFC",
+      gasId: "nitrogen",
+      flow: 1500,
+      unit: "slpm",
+    });
+    const models = result.matches.map((m) => m.product.model);
+    expect(models).toContain("ALOW");
+    expect(models).toContain("DHIGH");
+    expect(models).not.toContain("AHIGH");
   });
 });

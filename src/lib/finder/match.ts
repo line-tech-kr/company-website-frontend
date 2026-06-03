@@ -64,13 +64,39 @@ export function toN2Equivalent(flowSlpm: number, gas: GasFactor): number {
   return flowSlpm * (reference.factor / gas.factor);
 }
 
-export function fitScore(value: number, min: number, max: number): number {
-  if (value < min || value > max) return 0;
-  if (max <= min) return 0;
+type FitPosition = "in" | "top-edge" | "bottom-seam";
+
+/**
+ * Score a value against a flow range and report its position. The position
+ * lets the caller suppress bottom-seam hits (V === product's lower bound)
+ * when another product in the same scope covers V more squarely — see
+ * `findProducts`.
+ *
+ *   value === max → top-edge 0.5  (operating at full scale — preferred at a seam)
+ *   value === min → bottom-seam 0.3 (sensor noise floor — suppress if competing)
+ *   pct 25–75%    → sweet 1.0
+ *   pct 10–90%    → okay 0.7
+ *   pct > 90%     → top-edge 0.5
+ *   pct < 10%     → bottom 0.3
+ */
+function fitScoreForRange(
+  value: number,
+  min: number,
+  max: number,
+): { score: number; position: FitPosition } {
+  if (max <= min) return { score: 0, position: "in" };
+  if (value < min || value > max) return { score: 0, position: "in" };
+  if (value === min) return { score: 0.3, position: "bottom-seam" };
+  if (value === max) return { score: 0.5, position: "top-edge" };
   const pct = (value - min) / (max - min);
-  if (pct >= 0.25 && pct <= 0.75) return 1;
-  if (pct >= 0.1 && pct <= 0.9) return 0.7;
-  return 0.4;
+  if (pct >= 0.25 && pct <= 0.75) return { score: 1, position: "in" };
+  if (pct >= 0.1 && pct <= 0.9) return { score: 0.7, position: "in" };
+  if (pct > 0.9) return { score: 0.5, position: "top-edge" };
+  return { score: 0.3, position: "in" };
+}
+
+export function fitScore(value: number, min: number, max: number): number {
+  return fitScoreForRange(value, min, max).score;
 }
 
 function functionMatches(product: Product, target: FinderFunction): boolean {
@@ -84,6 +110,11 @@ function seriesMatches(
 ): boolean {
   if (!target || target === "any") return true;
   return product.series === target;
+}
+
+type ScopeKey = `${string}|${string}`;
+function scopeKey(p: Product): ScopeKey {
+  return `${p.function}|${p.series}`;
 }
 
 export function findProducts(
@@ -117,7 +148,9 @@ export function findProducts(
   }
   const n2EquivalentSlpm = toN2Equivalent(flowSlpm, gas);
 
-  const matches: FinderMatch[] = [];
+  const normalMatches: FinderMatch[] = [];
+  const bottomSeam: FinderMatch[] = [];
+
   for (const product of products) {
     if (!functionMatches(product, input.function)) continue;
     if (!seriesMatches(product, input.series)) continue;
@@ -125,9 +158,29 @@ export function findProducts(
     const range = product.massFlowSpecs.flowRange;
     if (!range) continue;
     if (range.min == null || range.max == null) continue;
-    const score = fitScore(n2EquivalentSlpm, range.min, range.max);
-    if (score === 0) continue;
-    matches.push({ product, n2EquivalentSlpm, fitScore: score });
+
+    const fit = fitScoreForRange(n2EquivalentSlpm, range.min, range.max);
+    if (fit.score === 0) continue;
+
+    const match: FinderMatch = {
+      product,
+      n2EquivalentSlpm,
+      fitScore: fit.score,
+    };
+    if (fit.position === "bottom-seam") bottomSeam.push(match);
+    else normalMatches.push(match);
+  }
+
+  // A bottom-seam hit (V at exactly this product's lower bound) is dropped
+  // when another normal match in the same (function, series) scope already
+  // covers V — overlapping ranges are deliberate, but the product where V
+  // sits at the top of its range should win the seam. Cross-series twins
+  // (e.g. analogue + digital with the same range) stay as intentional
+  // cross-sells.
+  const normalScopes = new Set(normalMatches.map((m) => scopeKey(m.product)));
+  const matches: FinderMatch[] = [...normalMatches];
+  for (const m of bottomSeam) {
+    if (!normalScopes.has(scopeKey(m.product))) matches.push(m);
   }
 
   // Sort: fit score (desc) → series (analogue, digital, specialized, lepc) → model.
