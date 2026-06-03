@@ -72,7 +72,7 @@ function buildText(data: ContactFormPayload): string {
     "문의 내용:",
     data.message,
     "",
-    "Gmail 답장 버튼, 메일 앱 답장 버튼, 또는 이 메일의 기본 답장 기능으로 문의자에게 회신할 수 있습니다.",
+    "이 메일에 그대로 답장하면 문의자에게 회신됩니다. (Gmail·메일 앱 답장 링크도 본문 하단에 있습니다.)",
   ];
 
   return lines.join("\n");
@@ -108,6 +108,7 @@ function buildHtml(data: ContactFormPayload): string {
       <td style="padding:8px 0;color:#0f172a;font-size:14px;vertical-align:top">${value}</td>
     </tr>`;
 
+  const safeName = escapeHtml(data.name);
   const safeEmail = escapeHtml(data.email);
   const safePhone = data.phone ? escapeHtml(data.phone) : "";
   const replyLinks = buildReplyLinks(data);
@@ -115,21 +116,36 @@ function buildHtml(data: ContactFormPayload): string {
     ? `tel:${data.phone.replace(/[^\d+]/g, "")}`
     : null;
 
-  const rows = [
-    row("문의 유형", escapeHtml(formatInquiryType(data))),
-    row("성함", escapeHtml(data.name)),
-    row("이메일", `<a href="mailto:${safeEmail}">${safeEmail}</a>`),
-    ...(data.company ? [row("회사명", escapeHtml(data.company))] : []),
+  const contactLineStyle =
+    "margin:0;font-size:18px;line-height:1.45;color:#0f172a;font-weight:600;word-break:break-all";
+  const contactRows = [
+    `<p style="${contactLineStyle}"><span style="display:inline-block;min-width:64px;color:#475569;font-size:13px;font-weight:600;vertical-align:middle;margin-right:8px">이메일</span><a href="mailto:${safeEmail}" style="color:#0b4f81;text-decoration:none">${safeEmail}</a></p>`,
     ...(data.phone
       ? [
-          row(
-            "연락처",
-            phoneHref ? `<a href="${phoneHref}">${safePhone}</a>` : safePhone,
-          ),
+          `<p style="${contactLineStyle};margin-top:6px"><span style="display:inline-block;min-width:64px;color:#475569;font-size:13px;font-weight:600;vertical-align:middle;margin-right:8px">연락처</span>${
+            phoneHref
+              ? `<a href="${phoneHref}" style="color:#0b4f81;text-decoration:none">${safePhone}</a>`
+              : safePhone
+          }</p>`,
         ]
       : []),
+  ].join("");
+
+  const rows = [
+    row("문의 유형", escapeHtml(formatInquiryType(data))),
+    ...(data.company ? [row("회사명", escapeHtml(data.company))] : []),
     ...(data.subject ? [row("제목", escapeHtml(data.subject))] : []),
   ].join("");
+
+  const secondaryLinkStyle =
+    "color:#0b4f81;text-decoration:underline;font-size:13px";
+  const secondaryParts = [
+    `<a href="${escapeHtml(replyLinks.gmailHref)}" style="${secondaryLinkStyle}">Gmail로 답장</a>`,
+    `<a href="${escapeHtml(replyLinks.mailtoHref)}" style="${secondaryLinkStyle}">메일 앱으로 답장</a>`,
+    ...(phoneHref
+      ? [`<a href="${phoneHref}" style="${secondaryLinkStyle}">전화하기</a>`]
+      : []),
+  ].join(' <span style="color:#cbd5e1">·</span> ');
 
   return `
 <div style="margin:0;background:#f6f8fb;padding:24px;font-family:Arial,Helvetica,sans-serif;color:#0f172a">
@@ -140,19 +156,14 @@ function buildHtml(data: ContactFormPayload): string {
     </div>
 
     <div style="padding:22px 24px 8px">
-      <p style="margin:0 0 18px;color:#475569;font-size:14px;line-height:1.6">
-        Gmail 버튼을 누르면 문의자 이메일이 수신자로 입력된 작성 화면이 열립니다. 이 메일에 바로 답장해도 문의자에게 회신됩니다.
-      </p>
-
-      <div style="margin:0 0 22px">
-        <a href="${escapeHtml(replyLinks.gmailHref)}" style="display:inline-block;background:#0b4f81;color:#ffffff;text-decoration:none;font-weight:700;border-radius:6px;padding:11px 16px;margin:0 8px 8px 0">${escapeHtml(data.name)}님께 Gmail로 답장하기</a>
-        <a href="${escapeHtml(replyLinks.mailtoHref)}" style="display:inline-block;background:#eef5fb;color:#0b4f81;text-decoration:none;font-weight:700;border-radius:6px;padding:11px 16px;margin:0 8px 8px 0">메일 앱으로 답장하기</a>
-        ${
-          phoneHref
-            ? `<a href="${phoneHref}" style="display:inline-block;background:#eef5fb;color:#0b4f81;text-decoration:none;font-weight:700;border-radius:6px;padding:11px 16px;margin:0 0 8px">${safePhone} 전화하기</a>`
-            : ""
-        }
+      <div style="margin:0 0 18px;background:#f1f6fb;border:1px solid #dbe7f3;border-radius:8px;padding:16px 18px">
+        <p style="margin:0 0 10px;color:#475569;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase">답장 받는 분 — ${safeName}</p>
+        ${contactRows}
       </div>
+
+      <p style="margin:0 0 18px;color:#475569;font-size:14px;line-height:1.6">
+        이 메일에 그대로 답장하면 위 문의자에게 회신됩니다.
+      </p>
 
       <table style="border-collapse:collapse;width:100%;margin:0 0 22px">${rows}</table>
 
@@ -160,6 +171,10 @@ function buildHtml(data: ContactFormPayload): string {
         <h2 style="margin:0 0 10px;font-size:15px;color:#0f172a">문의 내용</h2>
         <div style="white-space:pre-wrap;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:16px;color:#0f172a;font-size:15px;line-height:1.7">${escapeHtml(data.message)}</div>
       </div>
+
+      <p style="margin:18px 0 0;color:#64748b;font-size:13px;line-height:1.6">
+        또는 ${secondaryParts}
+      </p>
     </div>
 
     <div style="padding:16px 24px 22px;color:#64748b;font-size:12px;line-height:1.5">
