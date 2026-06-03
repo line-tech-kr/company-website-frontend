@@ -47,7 +47,7 @@ describe("sendContactEmail", () => {
     expect(sendMock).not.toHaveBeenCalled();
   });
 
-  it("sends Korean content with Gmail, mail-app, and phone actions", async () => {
+  it("promotes the inquirer contact block and demotes Gmail/mail-app/phone to secondary links", async () => {
     await sendContactEmail(payload);
 
     expect(sendMock).toHaveBeenCalledOnce();
@@ -63,6 +63,17 @@ describe("sendContactEmail", () => {
     expect(email.html).toContain("mailto:customer@example.com?");
     expect(email.html).toContain("tel:+821012345678");
     expect(email.text).toContain("문의 내용:");
+
+    expect(email.html).toContain("답장 받는 분 — 홍길동");
+    const html: string = email.html;
+    const contactBlockIdx = html.indexOf("답장 받는 분");
+    const inquiryTypeRowIdx = html.indexOf("문의 유형");
+    expect(contactBlockIdx).toBeGreaterThan(-1);
+    expect(inquiryTypeRowIdx).toBeGreaterThan(contactBlockIdx);
+
+    expect(html).not.toMatch(/Gmail로 답장하기/);
+    expect(html).toContain("Gmail로 답장");
+    expect(html).toContain("또는");
   });
 
   it("splits CONTACT_FORM_TO on commas and trims whitespace", async () => {
