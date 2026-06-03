@@ -10,6 +10,10 @@ export type ApplicationEntry = {
   body: string[];
   recommendedSeries: string[];
   relatedCategories: CategorySlug[];
+  /** Optional product slug to spotlight at the top of the page. */
+  featuredProductSlug?: string;
+  /** Application-specific "why we're featuring this" copy. 1–3 sentences. */
+  featuredProductCaption?: string;
 };
 
 export type ApplicationsContent = {
@@ -20,6 +24,10 @@ export type ApplicationsContent = {
   contactCta: string;
   contactBtn: string;
   contactCtaHref: string;
+  featuredKicker: string;
+  featuredWhyHeading: string;
+  featuredFlowRangeLabel: string;
+  featuredViewProduct: string;
   applications: ApplicationEntry[];
 };
 
@@ -35,6 +43,10 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
     contactCta: "Discuss your application",
     contactBtn: "Get in touch",
     contactCtaHref: "/contact",
+    featuredKicker: "Spotlight",
+    featuredWhyHeading: "Why this one",
+    featuredFlowRangeLabel: "Flow range",
+    featuredViewProduct: "View product →",
     applications: [
       {
         slug: "semiconductor",
@@ -59,6 +71,9 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
         ],
         recommendedSeries: ["M / MS", "LEPC"],
         relatedCategories: ["analogue", "lepc"],
+        featuredProductSlug: "do400",
+        featuredProductCaption:
+          "Purpose-built for PEM and SOFC stack-level H₂ and O₂ feeds — delivers the stoichiometric ratios these cells require without over-pressuring the membrane. The matched MFM variant handles the monitoring side of the same loop on the same calibration.",
       },
       {
         slug: "biotech-pharmaceutical",
@@ -110,12 +125,12 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       },
       {
         slug: "metals-processing",
-        title: "Metals processing",
-        lede: "Furnace atmospheres decide everything in metals processing — the wrong nitrogen-to-hydrogen ratio gives you surface defects, decarburization, or under-hardened parts. MFCs on each gas line keep the ratio constant across the entire heat-treat cycle.",
+        title: "Materials development",
+        lede: "Advanced materials work — novel alloys, technical ceramics, additive-manufacturing powders, advanced composites — lives or dies on the gas atmosphere inside the chamber. MFCs on each precursor and shielding line hold the ratios constant across the entire process window so the resulting microstructure, density, and surface chemistry come out on spec.",
         body: [
-          "Heat treatment processes in metals manufacturing use precisely controlled gas atmospheres — typically nitrogen, hydrogen, ammonia, or endothermic gas mixtures — to achieve specific surface chemistry and mechanical properties. An incorrect gas ratio can result in surface defects, decarburization, or improper case hardening.",
-          "The M/MS Analogue series, with flow ranges extending to 5,000 slpm, covers the high-volume purge and atmosphere flows typical of continuous furnace lines. The instruments' wide operating pressure tolerance (up to 90 bar) accommodates the varying supply pressures found across industrial gas distribution systems.",
-          "For processes involving flammable atmospheres such as hydrogen or cracked ammonia, the EX series provides the ATEX-compliant protection required in those zones.",
+          "Materials R&D — alloy formulation, ceramic sintering, carbide and nitride synthesis, advanced composite curing, and metal additive manufacturing — depends on precisely controlled gas atmospheres to drive the intended phase, density, and surface chemistry. Atmospheric oxygen ingress, an off-ratio reducing gas, or drift in carrier flow translates directly into porosity, oxidation, or phase contamination of the part.",
+          "The M/MS Analogue series, with flow ranges extending to 5,000 slpm, covers the high-volume inert purge and shielding gas flows typical of sintering furnaces, hot isostatic press systems, and powder-bed fusion chambers. Wide operating pressure tolerance (up to 90 bar) accommodates the supply-pressure variance found across industrial gas distribution systems.",
+          "For processes where the atmosphere itself is reactive — hydrogen reduction, ammonia cracking for nitriding research, hydrocarbon-doped carburizing — the EX series provides the ATEX-compliant protection the zone requires.",
         ],
         recommendedSeries: ["M / MS", "EX"],
         relatedCategories: ["analogue", "specialized"],
@@ -192,6 +207,10 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
     contactCta: "프로세스에 맞는 MFC를 찾고 계신가요?",
     contactBtn: "문의하기",
     contactCtaHref: "/contact",
+    featuredKicker: "추천 제품",
+    featuredWhyHeading: "이 제품을 추천하는 이유",
+    featuredFlowRangeLabel: "유량 범위",
+    featuredViewProduct: "제품 보기 →",
     applications: [
       {
         slug: "semiconductor",
@@ -216,6 +235,9 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
         ],
         recommendedSeries: ["M / MS", "LEPC"],
         relatedCategories: ["analogue", "lepc"],
+        featuredProductSlug: "do400",
+        featuredProductCaption:
+          "PEM·SOFC 스택 수준의 수소·산소 공급을 위해 설계되어, 막 손상 없이 셀이 요구하는 화학양론적 비율을 정확히 전달합니다. 동일 교정 기반의 MFM 변형 제품이 같은 루프의 모니터링 측을 함께 담당합니다.",
       },
       {
         slug: "biotech-pharmaceutical",
@@ -267,12 +289,12 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       },
       {
         slug: "metals-processing",
-        title: "금속 가공",
-        lede: "소둔, 침탄 및 소결 용광로는 일관된 야금 결과를 얻기 위해 제어된 보호·반응 가스 분위기에 의존합니다.",
+        title: "소재 개발",
+        lede: "신합금, 첨단 세라믹, 적층 제조용 분말, 첨단 복합소재 등 신소재 개발은 챔버 내 가스 분위기의 정확성에 의해 결과가 결정됩니다. 각 전구체·차폐 라인의 MFC가 공정 전 구간에 걸쳐 가스 비율을 일정하게 유지해, 목표한 미세조직·밀도·표면 화학을 그대로 구현할 수 있게 합니다.",
         body: [
-          "금속 제조의 열처리 공정은 특정 표면 화학과 기계적 특성을 달성하기 위해 정밀하게 제어된 가스 분위기(일반적으로 질소, 수소, 암모니아, 또는 흡열 가스 혼합물)를 사용합니다. 가스 비율이 잘못되면 표면 결함, 탈탄, 또는 불균일한 케이스 경화가 발생할 수 있습니다.",
-          "M/MS 아날로그 시리즈는 최대 5,000 slpm의 유량 범위로 연속 용광로 라인의 대용량 퍼지 및 분위기 가스 흐름을 커버합니다. 넓은 동작 압력 허용 범위(최대 90 bar)는 산업용 가스 배관 시스템의 다양한 공급 압력에 적응합니다.",
-          "수소나 분해 암모니아와 같은 가연성 분위기를 수반하는 공정의 경우, EX 시리즈가 해당 구역에 필요한 ATEX 규격 보호를 제공합니다.",
+          "합금 설계, 세라믹 소결, 탄·질화물 합성, 첨단 복합소재 경화, 금속 적층 제조 등 소재 R&D는 의도한 상(phase), 밀도, 표면 화학을 얻기 위해 정밀하게 제어된 가스 분위기에 의존합니다. 미량의 산소 유입, 환원 가스 비율의 어긋남, 캐리어 유량의 드리프트는 곧 기공 발생, 산화, 상 오염으로 이어집니다.",
+          "M/MS 아날로그 시리즈는 최대 5,000 slpm의 유량 범위로 소결로, 열간 등방압 가압(HIP) 장비, 분말 베드 융합 챔버의 대용량 불활성 퍼지 및 차폐 가스 흐름을 커버합니다. 넓은 동작 압력 허용 범위(최대 90 bar)는 산업용 가스 배관 시스템의 다양한 공급 압력에 대응합니다.",
+          "수소 환원, 질화 연구용 분해 암모니아, 침탄용 탄화수소 혼합 등 분위기 자체가 반응성을 띠는 공정에서는 EX 시리즈가 해당 구역에 필요한 ATEX 규격 보호를 제공합니다.",
         ],
         recommendedSeries: ["M / MS", "EX"],
         relatedCategories: ["analogue", "specialized"],
@@ -349,6 +371,10 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
     contactCta: "咨询您的应用",
     contactBtn: "立即咨询",
     contactCtaHref: "/contact",
+    featuredKicker: "重点产品",
+    featuredWhyHeading: "为什么是这款",
+    featuredFlowRangeLabel: "流量范围",
+    featuredViewProduct: "查看产品 →",
     applications: [
       {
         slug: "semiconductor",
@@ -373,6 +399,9 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
         ],
         recommendedSeries: ["M / MS", "LEPC"],
         relatedCategories: ["analogue", "lepc"],
+        featuredProductSlug: "do400",
+        featuredProductCaption:
+          "专为 PEM 与 SOFC 电堆级氢气、氧气供给而设计——在不令膜过压的前提下，精准实现这些电池所需的化学计量比。同一校准下的 MFM 变型可同步承担该回路的监控侧。",
       },
       {
         slug: "biotech-pharmaceutical",
@@ -424,12 +453,12 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
       },
       {
         slug: "metals-processing",
-        title: "金属加工",
-        lede: "退火、渗碳和烧结炉依靠受控的保护性和反应性气体气氛来获得一致的冶金结果。",
+        title: "材料开发",
+        lede: "新合金、技术陶瓷、增材制造粉末、先进复合材料等新材料开发的成败，取决于腔体内气体氛围的精度。每条前驱体和保护气管线上的 MFC 在整个工艺窗口内保持气体比例稳定，使所得微观结构、密度和表面化学严格符合目标。",
         body: [
-          "金属制造中的热处理工艺使用精确控制的气体气氛——通常为氮气、氢气、氨气或吸热气体混合物——来实现特定的表面化学成分和力学性能。气体比例不当会导致表面缺陷、脱碳或不均匀的渗碳硬化。",
-          "M/MS 模拟系列流量范围延伸至 5,000 slpm，可覆盖连续炉生产线上典型的大流量吹扫和气氛气体流量。宽工作压力容差（最高 90 bar）可适应工业气体配送系统中不同的供气压力。",
-          "对于涉及氢气或裂解氨等可燃气氛的工艺，EX 系列提供这些区域所需的 ATEX 合规防护。",
+          "材料研发——合金配方、陶瓷烧结、碳化物/氮化物合成、先进复合材料固化、金属增材制造——依赖精确控制的气体氛围以驱动预期的相、密度和表面化学。微量氧侵入、还原性气体比例偏移或载气流量漂移都会直接导致孔隙、氧化或相污染。",
+          "M/MS 模拟系列流量范围延伸至 5,000 slpm，可覆盖烧结炉、热等静压（HIP）设备及粉末床熔融腔体的大流量惰性吹扫与保护气流量。宽工作压力容差（最高 90 bar）可适应工业气体配送系统中不同的供气压力。",
+          "对于氛围本身具有反应性的工艺——氢还原、用于氮化研究的裂解氨、用于渗碳的烃类掺杂——EX 系列提供该区域所需的 ATEX 合规防护。",
         ],
         recommendedSeries: ["M / MS", "EX"],
         relatedCategories: ["analogue", "specialized"],

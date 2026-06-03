@@ -69,17 +69,6 @@ const PRODUCT_DETAIL_PROJECTION = `
   connectorType,
   images,
   dimensionDrawing,
-  "datasheets": *[_type == "datasheet" && archived != true && ^.model in coalesce(models, [])]
-    | order(coalesce(publishedAt, _updatedAt) desc) {
-      _id,
-      title,
-      "displayName": ${localizedStrict("displayName")},
-      rev,
-      publishedAt,
-      "fileUrl": file.asset->url,
-      "size": file.asset->size,
-      "updatedAt": _updatedAt
-    },
   "manuals": *[_type == "manual" && archived != true && ^.model in coalesce(models, [])]
     | order(coalesce(publishedAt, _updatedAt) desc) {
       _id,
@@ -130,7 +119,7 @@ export const productBySlugQuery = defineQuery(`
 `);
 
 export const productsBySeriesQuery = defineQuery(`
-  *[_type == "product" && series == $series] | order(function asc, model asc){
+  *[_type == "product" && (series == $series || $series in coalesce(crossListedSeries, []))] | order(function asc, model asc){
     ${PRODUCT_LIST_PROJECTION}
   }
 `);
@@ -150,7 +139,7 @@ export const productSlugsQuery = defineQuery(`
 
 export const categoryShowcaseQuery = defineQuery(`
   *[_type == "categoryShowcase" && _id == "category-showcases"][0]{
-    "analogue": analogue[]{
+    "analogue": analogue[product->function != "MFM"]{
       caption,
       "model": product->model,
       "slug": product->slug.current,
@@ -160,7 +149,7 @@ export const categoryShowcaseQuery = defineQuery(`
       "image": product->images[0],
       "cutout": product->cutout,
     },
-    "digital": digital[]{
+    "digital": digital[product->function != "MFM"]{
       caption,
       "model": product->model,
       "slug": product->slug.current,
@@ -170,7 +159,7 @@ export const categoryShowcaseQuery = defineQuery(`
       "image": product->images[0],
       "cutout": product->cutout,
     },
-    "specialized": specialized[]{
+    "specialized": specialized[product->function != "MFM"]{
       caption,
       "model": product->model,
       "slug": product->slug.current,
@@ -238,23 +227,6 @@ export const allManualsQuery = defineQuery(`
   }
 `);
 
-export const allDatasheetsQuery = defineQuery(`
-  *[_type == "datasheet" && archived != true]
-  | order(
-    select(series == "analogue" => 0, series == "digital" => 1, 2),
-    models[0] asc
-  ) {
-    _id,
-    title,
-    "displayName": ${localizedStrict("displayName")},
-    models,
-    series,
-    rev,
-    publishedAt,
-    "fileUrl": file.asset->url
-  }
-`);
-
 export const allDrawingsQuery = defineQuery(`
   *[_type == "drawing" && archived != true]
   | order(
@@ -297,7 +269,17 @@ const APPLICATION_PROJECTION = `
   "lede": ${localized("lede")},
   "body": ${localized("body")},
   recommendedSeries,
-  relatedCategories
+  relatedCategories,
+  "featuredProduct": featuredProduct->{
+    "slug": slug.current,
+    model,
+    series,
+    "productLabel": ${localized("productLabel")},
+    description,
+    "flowRange": coalesce(massFlowSpecs.flowRange.display, massFlowSpecs.pressureRange.display),
+    "image": images[0],
+    cutout
+  }
 `;
 
 export const allApplicationsQuery = defineQuery(`
@@ -321,7 +303,6 @@ export const applicationSlugsQuery = defineQuery(`
 export const resourceCountsQuery = defineQuery(`
   {
     "catalogues": count(*[_type == "catalogue"]),
-    "datasheets": count(*[_type == "datasheet" && archived != true]),
     "manuals": count(*[_type == "manual" && archived != true]),
     "drawings": count(*[_type == "drawing" && archived != true]),
     "certifications": count(*[_type == "certification"])

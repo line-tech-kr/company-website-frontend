@@ -221,7 +221,7 @@
       "heading": "외형 치수",
       "sub": "단위: mm · 1/4\" VCR 피팅 기준",
       "caption": "유량 방향은 좌→우, 상단 면에 모델명 각인.",
-      "note": "도면은 참고용입니다. 정식 도면은 데이터시트를 참조하십시오.",
+      "note": "도면은 참고용입니다. 확정 치수는 공식 도면을 참조하십시오.",
       "callouts": {
         "A": "W · 전폭",
         "B": "H · 전고",
@@ -235,12 +235,11 @@
       "sub": "최신본만 게시됩니다. 이력 자료는 문의 폼으로 요청해 주십시오.",
       "download": "다운로드",
       "done": "완료",
-      "datasheetFor": "{model} 데이터시트",
       "manualFor": "{model} 사용자 매뉴얼"
     },
     "requestDocs": {
       "kicker": "자료",
-      "heading": "데이터시트, 매뉴얼, CAD 도면이 필요하신가요?",
+      "heading": "매뉴얼이나 CAD 도면이 필요하신가요?",
       "body": "기술 자료는 요청 시 발송해 드립니다. 모델명과 사용 분야를 알려주시면 영업일 1일 이내에 회신드립니다.",
       "cta": "기술 자료 요청"
     }
@@ -261,11 +260,6 @@
         "desc": "AutoCAD (.dwg) 및 STEP (.stp) 파일",
         "count": "{count}개 도면"
       },
-      "datasheets": {
-        "title": "데이터시트",
-        "desc": "모델별 사양서",
-        "count": "{count}개 문서"
-      },
       "manuals": {
         "title": "매뉴얼",
         "desc": "모델별 사용자 가이드",
@@ -284,10 +278,6 @@
     "drawings": {
       "title": "CAD 도면",
       "intro": "모델별 외형 도면을 AutoCAD (.dwg) 및 STEP (.stp) 형식으로 제공합니다."
-    },
-    "datasheets": {
-      "title": "데이터시트",
-      "intro": "모델별 사양서를 내려받거나 필요한 구성을 문의해 주세요. 항상 최신 개정판을 제공해 드립니다."
     },
     "manuals": {
       "title": "매뉴얼",

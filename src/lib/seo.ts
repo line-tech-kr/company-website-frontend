@@ -395,7 +395,6 @@ export function buildApplicationDetailMetadata(
 type ResourceSection =
   | "hub"
   | "catalogues"
-  | "datasheets"
   | "drawings"
   | "manuals"
   | "certifications";
@@ -448,22 +447,6 @@ const RESOURCES_SEO: Record<ResourceSection, Record<Locale, PageSeo>> = {
         "提供各型号外形图，支持 AutoCAD (.dwg) 和 STEP (.stp) 格式下载。",
     },
   },
-  datasheets: {
-    ko: {
-      title: "데이터시트 — 라인테크",
-      description:
-        "모델별 사양서를 내려받거나 필요한 구성을 문의해 주세요. 항상 최신 개정판을 제공해 드립니다.",
-    },
-    en: {
-      title: "Datasheets — Line Tech",
-      description:
-        "Specification sheets for every model. Download the latest revision or request a specific configuration.",
-    },
-    zh: {
-      title: "数据手册 — Line Tech",
-      description: "各型号产品的规格说明书。下载最新版本或申请特定配置。",
-    },
-  },
   manuals: {
     ko: {
       title: "매뉴얼 — 라인테크",
@@ -499,7 +482,6 @@ const RESOURCES_SEO: Record<ResourceSection, Record<Locale, PageSeo>> = {
 const RESOURCES_PATHS: Record<ResourceSection, string> = {
   hub: "resources",
   catalogues: "resources/catalogues",
-  datasheets: "resources/datasheets",
   drawings: "resources/drawings",
   manuals: "resources/manuals",
   certifications: "resources/certifications",

@@ -228,11 +228,6 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               desc: "AutoCAD (.dwg · .stp)",
             },
             {
-              href: "/resources/datasheets",
-              label: "데이터시트",
-              desc: "모델별 사양서",
-            },
-            {
               href: "/resources/manuals",
               label: "매뉴얼",
               desc: "모델별 사용 설명서",
@@ -280,7 +275,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
       {
         code: "specialized",
         label: "특수 시리즈",
-        desc: "방폭 · 디스플레이 일체형 · MEMS 등 특수 사양",
+        desc: "방폭 · 디스플레이 일체형 등 특수 사양",
         href: "/products/specialized",
       },
       {
@@ -432,11 +427,6 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               desc: "AutoCAD (.dwg · .stp)",
             },
             {
-              href: "/resources/datasheets",
-              label: "Datasheets",
-              desc: "Per-model specification sheets",
-            },
-            {
               href: "/resources/manuals",
               label: "Manuals",
               desc: "Per-model user guides",
@@ -485,7 +475,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
       {
         code: "specialized",
         label: "Specialized series",
-        desc: "Explosion-proof, integrated display, MEMS variants",
+        desc: "Explosion-proof and integrated-display variants",
         href: "/products/specialized",
       },
       {
@@ -626,11 +616,6 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
               desc: "AutoCAD (.dwg · .stp)",
             },
             {
-              href: "/resources/datasheets",
-              label: "数据手册",
-              desc: "各型号规格说明书",
-            },
-            {
               href: "/resources/manuals",
               label: "使用手册",
               desc: "按型号分类的说明书",
@@ -678,7 +663,7 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
       {
         code: "specialized",
         label: "特殊系列",
-        desc: "防爆、集成显示、MEMS 等特殊型号",
+        desc: "防爆、集成显示等特殊型号",
         href: "/products/specialized",
       },
       {

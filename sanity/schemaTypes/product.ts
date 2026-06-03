@@ -40,6 +40,25 @@ export const product = defineType({
       options: { list: ["analogue", "digital", "specialized", "lepc"] },
     }),
     defineField({
+      name: "crossListedSeries",
+      title: "Also listed under",
+      type: "array",
+      description:
+        "Extra series listings this product surfaces in, in addition to its primary `series`. Use for cross-disciplinary products (e.g. DO400).",
+      of: [
+        {
+          type: "string",
+          options: {
+            list: [
+              { title: "Analogue", value: "analogue" },
+              { title: "Digital", value: "digital" },
+              { title: "Specialized", value: "specialized" },
+            ],
+          },
+        },
+      ],
+    }),
+    defineField({
       name: "function",
       type: "string",
       options: { list: ["MFC", "MFM", "EPC", "ROU"] },

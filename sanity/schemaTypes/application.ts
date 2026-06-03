@@ -66,5 +66,13 @@ export const application = defineType({
         },
       ],
     }),
+    defineField({
+      name: "featuredProduct",
+      title: "Featured product",
+      type: "reference",
+      to: [{ type: "product" }],
+      description:
+        "Optional product to spotlight at the top of this application page. Use when a single model was purpose-built for this application (e.g. DO400 for fuel cells).",
+    }),
   ],
 });

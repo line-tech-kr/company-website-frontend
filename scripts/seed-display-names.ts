@@ -1,3 +1,14 @@
+/**
+ * seed-display-names.ts
+ *
+ * One-shot seeder that backfilled per-locale `displayName` fields on existing
+ * data-room documents.
+ *
+ * Status: frozen — historical record. The `datasheet` `DocKind` is a no-op
+ * after #239 retired the schema (queries against `_type == "datasheet"` will
+ * return zero rows). Kept intact for provenance and as a template if the
+ * pattern is needed for a new doc type later.
+ */
 import { readFileSync } from "node:fs";
 import { createClient } from "@sanity/client";
 import {

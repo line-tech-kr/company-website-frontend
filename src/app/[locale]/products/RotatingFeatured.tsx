@@ -38,11 +38,9 @@ type Props = {
 export function RotatingFeatured({
   slides,
   slidesLabel,
-  intervalMs = 5500,
+  intervalMs = 4000,
 }: Props) {
   const [active, setActive] = useState(0);
-  const [mouseInside, setMouseInside] = useState(false);
-  const [focusInside, setFocusInside] = useState(false);
   const touchStartX = useRef<number | null>(null);
   const reducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
@@ -52,23 +50,18 @@ export function RotatingFeatured({
 
   useEffect(() => {
     if (slides.length <= 1 || reducedMotion) return;
-    if (mouseInside || focusInside) return;
     if (typeof window === "undefined") return;
     const id = window.setInterval(() => {
       setActive((n) => (n + 1) % slides.length);
     }, intervalMs);
     return () => window.clearInterval(id);
-  }, [mouseInside, focusInside, reducedMotion, slides.length, intervalMs]);
+  }, [reducedMotion, slides.length, intervalMs]);
 
   if (slides.length === 0) return null;
 
   return (
     <div
       className="lt-products-side__rot"
-      onMouseEnter={() => setMouseInside(true)}
-      onMouseLeave={() => setMouseInside(false)}
-      onFocusCapture={() => setFocusInside(true)}
-      onBlurCapture={() => setFocusInside(false)}
       onTouchStart={(e) => {
         touchStartX.current = e.touches[0].clientX;
       }}

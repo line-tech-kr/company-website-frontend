@@ -18,6 +18,7 @@ export const categoryShowcase = defineType({
               title: "Product",
               type: "reference",
               to: [{ type: "product" }],
+              options: { filter: 'function != "MFM"' },
               validation: (r) => r.required(),
             }),
             defineField({
@@ -47,6 +48,7 @@ export const categoryShowcase = defineType({
               title: "Product",
               type: "reference",
               to: [{ type: "product" }],
+              options: { filter: 'function != "MFM"' },
               validation: (r) => r.required(),
             }),
             defineField({
@@ -75,6 +77,7 @@ export const categoryShowcase = defineType({
               title: "Product",
               type: "reference",
               to: [{ type: "product" }],
+              options: { filter: 'function != "MFM"' },
               validation: (r) => r.required(),
             }),
             defineField({

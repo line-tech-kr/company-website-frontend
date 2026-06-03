@@ -25,7 +25,6 @@ const STATIC_ROUTES: StaticRoute[] = [
   { path: "resources", priority: 0.5, changeFrequency: "monthly" },
   { path: "resources/catalogues", priority: 0.4, changeFrequency: "monthly" },
   { path: "resources/drawings", priority: 0.4, changeFrequency: "monthly" },
-  { path: "resources/datasheets", priority: 0.4, changeFrequency: "monthly" },
   { path: "resources/manuals", priority: 0.4, changeFrequency: "monthly" },
   {
     path: "resources/certifications",

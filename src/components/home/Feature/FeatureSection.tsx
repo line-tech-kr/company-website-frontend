@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { useCarousel } from "@/lib/hooks/useCarousel";
 import { Button } from "@/components/ui/Button";
@@ -74,7 +73,7 @@ const SLIDE_SPECS: Record<string, SlideSpec> = {
   },
 };
 
-const INTERVAL_MS = 5500;
+const INTERVAL_MS = 4000;
 
 export function FeatureSection({
   kicker,
@@ -83,11 +82,8 @@ export function FeatureSection({
   slides,
   cutoutByModel,
 }: Props) {
-  const [mouseInside, setMouseInside] = useState(false);
-  const [focusInside, setFocusInside] = useState(false);
   const { active, setActive } = useCarousel(slides.length, {
     intervalMs: INTERVAL_MS,
-    paused: mouseInside || focusInside,
   });
 
   const current = slides[active];
@@ -95,13 +91,7 @@ export function FeatureSection({
   if (!spec) return null;
 
   return (
-    <section
-      className="ho-sec ho-feature"
-      onMouseEnter={() => setMouseInside(true)}
-      onMouseLeave={() => setMouseInside(false)}
-      onFocusCapture={() => setFocusInside(true)}
-      onBlurCapture={() => setFocusInside(false)}
-    >
+    <section className="ho-sec ho-feature">
       <div>
         <div className="ho-feature__kicker">{kicker}</div>
         <h2 className="ho-feature__title">{current.model}</h2>
