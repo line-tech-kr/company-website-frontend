@@ -9,7 +9,10 @@
  *   1. #231 — patch MS2500VA + MS3500VA flowRange to 100–1000 slpm.
  *   2. #233 — set crossListedSeries on DO400 to ["analogue", "digital"].
  *   3. #233 — append DO400 entry to all three category-showcases arrays.
- *   4. #231 — delete product-ms2400va and product-ms3400va.
+ *   4. data drift — realign product-lepc.series to "specialized" (was "lepc",
+ *      which is not a valid category and was breaking generateStaticParams
+ *      for /[locale]/products/[category]/[product]).
+ *   5. #231 — delete product-ms2400va and product-ms3400va.
  *
  * #238 (applications rename + fuel-cells featuredProduct) is handled entirely
  * by the static content in src/lib/content/applications.ts — no Sanity
@@ -147,9 +150,31 @@ async function step3_featureDo400InShowcases() {
   }
 }
 
-// ─── Step 4 — delete retired MS2400 / MS3400 ─────────────────────────────────
+// ─── Step 4 — realign LEPC series ────────────────────────────────────────────
 
-async function step4_deleteRetiredMsProducts() {
+async function step4_fixLepcSeries() {
+  const current = await client.fetch<{ series?: string } | null>(
+    `*[_id == "product-lepc"][0]{ series }`,
+  );
+  if (!current) {
+    console.error("  ERROR  product-lepc not found — skipping series realign");
+    return;
+  }
+  if (current.series === "specialized") {
+    log(`skip   product-lepc.series already "specialized"`);
+    return;
+  }
+  log(
+    `patch  product-lepc.series: "${current.series ?? "<unset>"}" → "specialized"`,
+  );
+  if (isApply) {
+    await client.patch("product-lepc").set({ series: "specialized" }).commit();
+  }
+}
+
+// ─── Step 5 — delete retired MS2400 / MS3400 ─────────────────────────────────
+
+async function step5_deleteRetiredMsProducts() {
   for (const id of ["product-ms2400va", "product-ms3400va"]) {
     log(`delete ${id}`);
     if (isApply) {
@@ -172,8 +197,10 @@ async function main() {
   await step2_crossListDo400();
   console.log("\nStep 3 — feature DO400 in all 3 category-showcases");
   await step3_featureDo400InShowcases();
-  console.log("\nStep 4 — delete retired MS2400 / MS3400");
-  await step4_deleteRetiredMsProducts();
+  console.log("\nStep 4 — realign product-lepc.series to specialized");
+  await step4_fixLepcSeries();
+  console.log("\nStep 5 — delete retired MS2400 / MS3400");
+  await step5_deleteRetiredMsProducts();
   console.log(
     `\nDone. ${isApply ? "Applied to Sanity." : "Dry-run only. Re-run with --apply to write."}\n`,
   );
