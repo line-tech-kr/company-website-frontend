@@ -225,7 +225,10 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
               label: "Relay Contact Rate",
               value: "1 relay (max 24 Vdc @ 1 A)",
             },
-            { label: "Communication", value: "RS-232 (9600 baud, 8-N-1) + RS-485" },
+            {
+              label: "Communication",
+              value: "RS-232 (9600 baud, 8-N-1) + RS-485",
+            },
           ],
         },
       ],
