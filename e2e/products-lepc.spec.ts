@@ -27,9 +27,9 @@ test.describe("LEPC category", () => {
   test("/products/specialized no longer lists LEPC", async ({ page }) => {
     await page.goto("/en/products/specialized");
     // LEPC has moved to its own category, so it must not appear here.
-    await expect(page.locator(".lt-prod-row__codelink", { hasText: /^LEPC$/ })).toHaveCount(
-      0,
-    );
+    await expect(
+      page.locator(".lt-prod-row__codelink", { hasText: /^LEPC$/ }),
+    ).toHaveCount(0);
   });
 
   test("unknown category slug returns 404", async ({ page }) => {

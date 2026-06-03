@@ -40,7 +40,7 @@ const lepcFixture = makeProduct({
   slug: { current: "lepc" },
   series: "lepc",
   function: "EPC",
-  connections: [{ type: "1/4\" VCR", length: "60mm", _key: "c1" }],
+  connections: [{ type: '1/4" VCR', length: "60mm", _key: "c1" }],
   massFlowSpecs: {
     ...makeProduct().massFlowSpecs!,
     flowRange: undefined,

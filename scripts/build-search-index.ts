@@ -35,7 +35,9 @@ function productToEntries(p: Product): Record<Locale, SearchEntry> | null {
     return null;
   }
   const url = `/products/${category}/${p.slug.current}`;
-  const productType = p.function.toLowerCase() as Lowercase<Product["function"]>;
+  const productType = p.function.toLowerCase() as Lowercase<
+    Product["function"]
+  >;
   const signal = p.series;
   const catLabel = CATEGORY_LABELS[category];
 

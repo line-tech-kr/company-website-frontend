@@ -109,9 +109,7 @@ export function EpcRow({ product, imageSrc, category, locale }: Props) {
       <td className="lt-prod-row__cell lt-epc-row__cell--max-pressure">
         {maxPressure}
       </td>
-      <td className="lt-prod-row__cell lt-epc-row__cell--fitting">
-        {fitting}
-      </td>
+      <td className="lt-prod-row__cell lt-epc-row__cell--fitting">{fitting}</td>
     </tr>
   );
 }

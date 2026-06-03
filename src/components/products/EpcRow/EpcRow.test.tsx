@@ -27,12 +27,7 @@ function renderRow(product: Product) {
   return render(
     <table>
       <tbody>
-        <EpcRow
-          product={product}
-          imageSrc={null}
-          category="lepc"
-          locale="en"
-        />
+        <EpcRow product={product} imageSrc={null} category="lepc" locale="en" />
       </tbody>
     </table>,
   );
@@ -43,7 +38,7 @@ const baseEpc = makeProduct({
   slug: { current: "lepc" },
   series: "lepc",
   function: "EPC",
-  connections: [{ type: "1/4\" VCR", length: "60mm", _key: "c1" }],
+  connections: [{ type: '1/4" VCR', length: "60mm", _key: "c1" }],
   massFlowSpecs: {
     ...makeProduct().massFlowSpecs!,
     flowRange: undefined,

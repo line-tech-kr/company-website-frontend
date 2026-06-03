@@ -148,17 +148,15 @@ export function ProductFinder({ products, locale, initial }: Props) {
               <h2 className="lt-finder__results-title">
                 {t("results.heading", { count: result.matches.length })}
               </h2>
-              {fn !== "EPC" &&
-                result.gas &&
-                result.gas.id !== DEFAULT_GAS && (
-                  <p className="lt-finder__converted">
-                    {t("convertedNote", {
-                      n2: result.n2EquivalentSlpm.toLocaleString(locale, {
-                        maximumFractionDigits: 3,
-                      }),
-                    })}
-                  </p>
-                )}
+              {fn !== "EPC" && result.gas && result.gas.id !== DEFAULT_GAS && (
+                <p className="lt-finder__converted">
+                  {t("convertedNote", {
+                    n2: result.n2EquivalentSlpm.toLocaleString(locale, {
+                      maximumFractionDigits: 3,
+                    }),
+                  })}
+                </p>
+              )}
             </header>
 
             {result.warning === "specialty-gas" && (
