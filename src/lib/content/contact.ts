@@ -315,8 +315,9 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
         suffix: "을 확인하였으며 개인정보 수집·이용에 동의합니다. (필수)",
       },
       productInquiry: {
-        subject: "기술 자료 요청: {model}",
-        message: "{model} 관련 기술 자료(매뉴얼, 도면 등)를 요청드립니다.",
+        subject: "{model} 견적 문의",
+        message:
+          "{model}에 대한 견적을 요청드립니다. 아래에 공정 조건을 입력해 주세요.",
       },
     },
     distributors: {
@@ -512,9 +513,9 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
           " and consent to the collection and use of my personal information. (Required)",
       },
       productInquiry: {
-        subject: "Document request: {model}",
+        subject: "Quote request: {model}",
         message:
-          "I'd like to request technical documents (manual, drawing, etc.) for the {model}.",
+          "I'd like to request a quote for the {model}. Process conditions are filled in below.",
       },
     },
     distributors: {
@@ -712,8 +713,8 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
         suffix: "并同意收集和使用我的个人信息。（必填）",
       },
       productInquiry: {
-        subject: "技术资料请求：{model}",
-        message: "我想索取 {model} 的技术文件（使用手册、图纸等）。",
+        subject: "{model} 报价咨询",
+        message: "我想申请 {model} 的报价，工艺条件已在下方填写。",
       },
     },
     distributors: {

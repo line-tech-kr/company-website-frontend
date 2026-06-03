@@ -10,7 +10,7 @@ import type { ContactFormCopy, InquiryTypeId } from "@/lib/content/contact";
 
 type ContactFormDefaults = {
   inquiryType: InquiryTypeId;
-  extraField: string;
+  extraField?: string;
   subject: string;
   message: string;
 };
