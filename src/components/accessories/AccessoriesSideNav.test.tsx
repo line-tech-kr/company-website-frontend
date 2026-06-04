@@ -13,7 +13,7 @@ const NAV: AccessoriesNavNode[] = [
     label: "Read-out units",
     href: "#readouts",
     children: [
-      { id: "lti-200", label: "LTI-200", href: "#lti-200" },
+      { id: "lti-2000", label: "LTI-200", href: "#lti-2000" },
       { id: "lti-1000", label: "LTI-1000", href: "#lti-1000" },
     ],
   },
@@ -24,7 +24,12 @@ const NAV: AccessoriesNavNode[] = [
   },
 ];
 
-const SECTION_IDS = ["readouts", "lti-200", "lti-1000", "pressure-accessories"];
+const SECTION_IDS = [
+  "readouts",
+  "lti-2000",
+  "lti-1000",
+  "pressure-accessories",
+];
 
 function stageSectionTargets() {
   for (const id of SECTION_IDS) {
@@ -84,7 +89,7 @@ describe("AccessoriesSideNav", () => {
     const { container } = renderNav();
 
     act(() => {
-      io.fire([{ id: "lti-200", isIntersecting: true }]);
+      io.fire([{ id: "lti-2000", isIntersecting: true }]);
     });
 
     const sublinks = container.querySelectorAll(".acc-nav__sublink");
@@ -118,7 +123,7 @@ describe("AccessoriesSideNav", () => {
 
     act(() => {
       io.fire([
-        { id: "lti-200", isIntersecting: true },
+        { id: "lti-2000", isIntersecting: true },
         { id: "readouts", isIntersecting: true },
       ]);
     });

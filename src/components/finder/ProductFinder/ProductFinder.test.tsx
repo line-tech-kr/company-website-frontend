@@ -74,7 +74,7 @@ describe("<ProductFinder />", () => {
 
   it("computes matches once a flow rate is entered", () => {
     render(<ProductFinder products={PRODUCTS} locale="en" />);
-    const flowInput = screen.getByRole("spinbutton");
+    const flowInput = screen.getAllByRole("spinbutton")[0];
     fireEvent.change(flowInput, { target: { value: "200" } });
     expect(screen.getByText(/results\.heading:/)).toBeInTheDocument();
     expect(screen.getByText("M3030VA")).toBeInTheDocument();
@@ -83,7 +83,7 @@ describe("<ProductFinder />", () => {
 
   it("respects the function filter chips", () => {
     render(<ProductFinder products={PRODUCTS} locale="en" />);
-    fireEvent.change(screen.getByRole("spinbutton"), {
+    fireEvent.change(screen.getAllByRole("spinbutton")[0], {
       target: { value: "200" },
     });
     // Only "MFC" — no MFM/EPC products in our fixture, but function chip should still work
@@ -93,7 +93,7 @@ describe("<ProductFinder />", () => {
 
   it("filters out products outside the requested range", () => {
     render(<ProductFinder products={PRODUCTS} locale="en" />);
-    fireEvent.change(screen.getByRole("spinbutton"), {
+    fireEvent.change(screen.getAllByRole("spinbutton")[0], {
       target: { value: "10000" },
     });
     expect(screen.getByText("results.empty")).toBeInTheDocument();
@@ -101,7 +101,7 @@ describe("<ProductFinder />", () => {
 
   it("syncs state to the URL via router.replace", () => {
     render(<ProductFinder products={PRODUCTS} locale="en" />);
-    fireEvent.change(screen.getByRole("spinbutton"), {
+    fireEvent.change(screen.getAllByRole("spinbutton")[0], {
       target: { value: "250" },
     });
     expect(replace).toHaveBeenCalled();
@@ -177,9 +177,108 @@ describe("<ProductFinder />", () => {
     fireEvent.keyDown(combo, { key: "ArrowDown" });
     fireEvent.keyDown(combo, { key: "Enter" });
     // First pinned gas after Nitrogen (default) is Oxygen — but ArrowDown from index 0 lands on index 1 = Oxygen
-    fireEvent.change(screen.getByRole("spinbutton"), {
+    fireEvent.change(screen.getAllByRole("spinbutton")[0], {
       target: { value: "100" },
     });
     expect(screen.getByDisplayValue(/O₂/)).toBeInTheDocument();
+  });
+
+  describe("pressure input", () => {
+    const lowPressureMfc = withRange("MFC-LOW", 0.01, 300, {
+      series: "analogue",
+      function: "MFC",
+      massFlowSpecs: {
+        ...makeProduct().massFlowSpecs!,
+        flowRange: {
+          display: "0.01-300 slpm",
+          min: 0.01,
+          max: 300,
+          unit: "slpm",
+        },
+        maxPressure: {
+          display: "<3 bar",
+          value: 3,
+          unit: "bar",
+          comparator: "lt",
+        },
+      },
+    });
+    const highPressureMfc = withRange("MFC-HIGH", 0.01, 300, {
+      series: "analogue",
+      function: "MFC",
+      massFlowSpecs: {
+        ...makeProduct().massFlowSpecs!,
+        flowRange: {
+          display: "0.01-300 slpm",
+          min: 0.01,
+          max: 300,
+          unit: "slpm",
+        },
+        maxPressure: {
+          display: "<10 bar",
+          value: 10,
+          unit: "bar",
+          comparator: "lt",
+        },
+      },
+    });
+    const PRESSURE_PRODUCTS: Product[] = [lowPressureMfc, highPressureMfc];
+
+    it("syncs the pressure value to the URL as ?p", () => {
+      render(<ProductFinder products={PRESSURE_PRODUCTS} locale="en" />);
+      const [flow, pressure] = screen.getAllByRole("spinbutton");
+      fireEvent.change(flow, { target: { value: "100" } });
+      fireEvent.change(pressure, { target: { value: "2" } });
+      const lastCall = replace.mock.calls.at(-1)![0];
+      expect(lastCall.query.p).toBe("2");
+    });
+
+    it("appends ?pu when the unit differs from bar default", () => {
+      render(<ProductFinder products={PRESSURE_PRODUCTS} locale="en" />);
+      const [flow, pressure] = screen.getAllByRole("spinbutton");
+      fireEvent.change(flow, { target: { value: "100" } });
+      fireEvent.change(pressure, { target: { value: "200" } });
+      const unitSelects = screen.getAllByRole("combobox");
+      // The first combobox is the gas combobox; the unit <select>s come after.
+      // Pressure unit is the last <select> on the form.
+      const selects = unitSelects.filter((el) => el.tagName === "SELECT");
+      fireEvent.change(selects[selects.length - 1], {
+        target: { value: "kPa" },
+      });
+      const lastCall = replace.mock.calls.at(-1)![0];
+      expect(lastCall.query.p).toBe("200");
+      expect(lastCall.query.pu).toBe("kPa");
+    });
+
+    it("filters matches by maxPressure when a pressure is entered", () => {
+      render(<ProductFinder products={PRESSURE_PRODUCTS} locale="en" />);
+      const [flow, pressure] = screen.getAllByRole("spinbutton");
+      // Without pressure: both MFCs surface.
+      fireEvent.change(flow, { target: { value: "100" } });
+      expect(screen.getByText("MFC-LOW")).toBeInTheDocument();
+      expect(screen.getByText("MFC-HIGH")).toBeInTheDocument();
+      // With pressure 5 bar: MFC-LOW (max 3 bar) drops out.
+      fireEvent.change(pressure, { target: { value: "5" } });
+      expect(screen.queryByText("MFC-LOW")).not.toBeInTheDocument();
+      expect(screen.getByText("MFC-HIGH")).toBeInTheDocument();
+    });
+
+    it("pre-fills pressure value + unit from initial props", () => {
+      render(
+        <ProductFinder
+          products={PRESSURE_PRODUCTS}
+          locale="en"
+          initial={{
+            flow: 100,
+            unit: "slpm",
+            pressure: 200,
+            pressureUnit: "kPa",
+          }}
+        />,
+      );
+      // 200 kPa = 2 bar → MFC-LOW (max 3 bar) should still match.
+      expect(screen.getByText("MFC-LOW")).toBeInTheDocument();
+      expect(screen.getByDisplayValue("200")).toBeInTheDocument();
+    });
   });
 });

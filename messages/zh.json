@@ -162,7 +162,15 @@
       "placeholder": "按名称或化学式搜索…",
       "commonLabel": "常用气体",
       "allLabel": "全部气体",
-      "empty": "未找到匹配的气体"
+      "empty": "未找到匹配的气体",
+      "modeLabel": "气体模式",
+      "modePure": "单一气体",
+      "modeMixture": "混合气体",
+      "mixtureLegend": "组分",
+      "percentAria": "组分百分比",
+      "addComponent": "添加组分",
+      "removeComponent": "移除组分",
+      "totalLabel": "合计"
     },
     "flow": {
       "label": "目标流量",
@@ -170,6 +178,10 @@
         "slpm": "slpm",
         "sccm": "sccm"
       }
+    },
+    "pressure": {
+      "label": "工作压力 (可选)",
+      "placeholder": "如: 2"
     },
     "series": {
       "label": "系列",
@@ -188,7 +200,8 @@
       "rankGood": "适合",
       "rankEdge": "范围边缘"
     },
-    "convertedNote": "≈ {n2} slpm N₂ 等效流量"
+    "convertedNote": "≈ {n2} slpm N₂ 等效流量",
+    "convertedNoteMix": "{mix} ≈ {n2} slpm（N₂ 等效）"
   },
   "pdp": {
     "tabs": {

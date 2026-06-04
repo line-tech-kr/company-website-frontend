@@ -162,7 +162,15 @@
       "placeholder": "가스명 또는 화학식으로 검색…",
       "commonLabel": "자주 사용되는 가스",
       "allLabel": "전체 가스",
-      "empty": "일치하는 가스가 없습니다"
+      "empty": "일치하는 가스가 없습니다",
+      "modeLabel": "가스 모드",
+      "modePure": "단일 가스",
+      "modeMixture": "혼합 가스",
+      "mixtureLegend": "구성 가스",
+      "percentAria": "성분 비율",
+      "addComponent": "성분 추가",
+      "removeComponent": "성분 제거",
+      "totalLabel": "합계"
     },
     "flow": {
       "label": "목표 유량",
@@ -170,6 +178,10 @@
         "slpm": "slpm",
         "sccm": "sccm"
       }
+    },
+    "pressure": {
+      "label": "작동 압력 (선택)",
+      "placeholder": "예: 2"
     },
     "series": {
       "label": "시리즈",
@@ -188,7 +200,8 @@
       "rankGood": "적합",
       "rankEdge": "유량 범위 끝단"
     },
-    "convertedNote": "≈ {n2} slpm N₂ 환산"
+    "convertedNote": "≈ {n2} slpm N₂ 환산",
+    "convertedNoteMix": "{mix} ≈ {n2} slpm (N₂ 환산)"
   },
   "pdp": {
     "tabs": {

@@ -162,7 +162,15 @@
       "placeholder": "Search by name or formula…",
       "commonLabel": "Common",
       "allLabel": "All gases",
-      "empty": "No gases match"
+      "empty": "No gases match",
+      "modeLabel": "Gas mode",
+      "modePure": "Pure gas",
+      "modeMixture": "Mixture",
+      "mixtureLegend": "Gas components",
+      "percentAria": "Component percent",
+      "addComponent": "Add component",
+      "removeComponent": "Remove component",
+      "totalLabel": "Total"
     },
     "flow": {
       "label": "Target flow rate",
@@ -170,6 +178,10 @@
         "slpm": "slpm",
         "sccm": "sccm"
       }
+    },
+    "pressure": {
+      "label": "Operating pressure (optional)",
+      "placeholder": "e.g. 2"
     },
     "series": {
       "label": "Series",
@@ -188,7 +200,8 @@
       "rankGood": "Good fit",
       "rankEdge": "Edge of range"
     },
-    "convertedNote": "≈ {n2} slpm N₂-equivalent"
+    "convertedNote": "≈ {n2} slpm N₂-equivalent",
+    "convertedNoteMix": "{mix} ≈ {n2} slpm N₂-equivalent"
   },
   "pdp": {
     "tabs": {

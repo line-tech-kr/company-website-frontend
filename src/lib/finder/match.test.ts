@@ -276,6 +276,165 @@ describe("findProducts", () => {
       expect(result.matches.map((m) => m.product.model)).not.toContain("LEPC");
     });
   });
+
+  describe("custom gas mixture", () => {
+    it("uses the supplied K-factor instead of looking up gasId", () => {
+      // 5% SiH₄ + 95% N₂ harmonic-mean K ≈ 0.9709 → 100 slpm @ K=0.9709
+      // converts to ~103 slpm N₂-equivalent.
+      const result = findProducts(products, {
+        function: "MFC",
+        gasId: "nitrogen",
+        flow: 100,
+        unit: "slpm",
+        mixture: { factor: 0.9709, specialty: true },
+      });
+      expect(result.n2EquivalentSlpm).toBeCloseTo(103, 0);
+      expect(result.warning).toBe("specialty-gas");
+      // gas record is suppressed when matching via mixture.
+      expect(result.gas).toBeUndefined();
+    });
+
+    it("flags non-specialty mixtures correctly", () => {
+      const result = findProducts(products, {
+        function: "MFC",
+        gasId: "nitrogen",
+        flow: 100,
+        unit: "slpm",
+        mixture: { factor: 1.3398, specialty: false },
+      });
+      expect(result.warning).toBeUndefined();
+    });
+
+    it("returns empty matches when the mixture factor is zero", () => {
+      const result = findProducts(products, {
+        function: "MFC",
+        gasId: "nitrogen",
+        flow: 100,
+        unit: "slpm",
+        mixture: { factor: 0, specialty: false },
+      });
+      expect(result.matches).toEqual([]);
+      expect(result.n2EquivalentSlpm).toBe(0);
+    });
+  });
+
+  describe("operating pressure filter", () => {
+    const lepc = makeProduct({
+      model: "LEPC",
+      slug: { current: "lepc" },
+      series: "lepc",
+      function: "EPC",
+      massFlowSpecs: {
+        ...makeProduct().massFlowSpecs!,
+        flowRange: undefined,
+        pressureRange: {
+          display: "0.1–6 barA",
+          min: 0.1,
+          max: 6,
+          unit: "barA",
+        },
+      },
+    });
+    const mfcWithMax = withRange("M2030VA-CAP", 0.01, 30, {
+      series: "analogue",
+      function: "MFC",
+      massFlowSpecs: {
+        ...makeProduct().massFlowSpecs!,
+        flowRange: {
+          display: "0.01–30 slpm",
+          min: 0.01,
+          max: 30,
+          unit: "slpm",
+        },
+        maxPressure: {
+          display: "<3 bar",
+          value: 3,
+          unit: "bar",
+          comparator: "lt",
+        },
+      },
+    });
+    const mfcHighMax = withRange("M2030VA-HIGH", 0.01, 30, {
+      series: "analogue",
+      function: "MFC",
+      massFlowSpecs: {
+        ...makeProduct().massFlowSpecs!,
+        flowRange: {
+          display: "0.01–30 slpm",
+          min: 0.01,
+          max: 30,
+          unit: "slpm",
+        },
+        maxPressure: {
+          display: "<10 bar",
+          value: 10,
+          unit: "bar",
+          comparator: "lt",
+        },
+      },
+    });
+
+    it("EPC: matches when pressure falls inside pressureRange", () => {
+      const result = findProducts([lepc], {
+        function: "EPC",
+        gasId: "nitrogen",
+        flow: 0,
+        unit: "slpm",
+        pressureBar: 2,
+      });
+      expect(result.matches.map((m) => m.product.model)).toEqual(["LEPC"]);
+    });
+
+    it("EPC: filters out when pressure outside pressureRange", () => {
+      const result = findProducts([lepc], {
+        function: "EPC",
+        gasId: "nitrogen",
+        flow: 0,
+        unit: "slpm",
+        pressureBar: 50,
+      });
+      expect(result.matches).toEqual([]);
+    });
+
+    it("MFC: matches when pressure ≤ maxPressure", () => {
+      const result = findProducts([mfcWithMax, mfcHighMax], {
+        function: "MFC",
+        gasId: "nitrogen",
+        flow: 10,
+        unit: "slpm",
+        pressureBar: 2,
+      });
+      expect(result.matches.map((m) => m.product.model).sort()).toEqual([
+        "M2030VA-CAP",
+        "M2030VA-HIGH",
+      ]);
+    });
+
+    it("MFC: filters out when pressure > maxPressure", () => {
+      const result = findProducts([mfcWithMax, mfcHighMax], {
+        function: "MFC",
+        gasId: "nitrogen",
+        flow: 10,
+        unit: "slpm",
+        pressureBar: 5,
+      });
+      expect(result.matches.map((m) => m.product.model)).toEqual([
+        "M2030VA-HIGH",
+      ]);
+    });
+
+    it("no pressure filter when pressureBar undefined", () => {
+      const result = findProducts([mfcWithMax], {
+        function: "MFC",
+        gasId: "nitrogen",
+        flow: 10,
+        unit: "slpm",
+      });
+      expect(result.matches.map((m) => m.product.model)).toEqual([
+        "M2030VA-CAP",
+      ]);
+    });
+  });
 });
 
 describe("seam handling", () => {

@@ -5,6 +5,7 @@ import {
   getGasFactor,
   type GasFactor,
 } from "./gas-factors";
+import { catalogValueToBar } from "./pressure";
 
 export type FinderFunction = "MFC" | "MFM" | "EPC" | "any";
 export type FinderSeries =
@@ -21,6 +22,23 @@ export type FinderInput = {
   flow: number;
   unit: FinderUnit;
   series?: FinderSeries;
+  /**
+   * When set, overrides the K-factor that would otherwise be resolved from
+   * `gasId`. Used for custom gas mixtures: callers compute the harmonic-mean
+   * factor (see `mixture.ts`) and pass it through here. `gasId` becomes a
+   * label/back-compat token only when this is provided.
+   */
+  mixture?: {
+    factor: number;
+    specialty: boolean;
+  };
+  /**
+   * Operating pressure the user will run at, normalized to bar.
+   * EPC: must fall inside the product's `pressureRange`.
+   * MFC/MFM: must be ≤ the product's `maxPressure` value.
+   * When undefined, pressure is not used to filter.
+   */
+  pressureBar?: number;
 };
 
 export type FinderMatch = {
@@ -123,15 +141,35 @@ export function findProducts(
   const flowSlpm = toSlpm(input.flow, input.unit);
 
   // EPC products use pressureRange, not flowRange, and the gas factor is only
-  // used for flow conversion. Surface every EPC match regardless of gas/flow.
+  // used for flow conversion. Filter by user pressure when provided.
   if (input.function === "EPC") {
     const matches: FinderMatch[] = [];
     for (const product of products) {
       if (product.function !== "EPC") continue;
       if (!seriesMatches(product, input.series)) continue;
-      matches.push({ product, n2EquivalentSlpm: flowSlpm, fitScore: 1 });
+      let score = 1;
+      if (input.pressureBar != null) {
+        const range = product.massFlowSpecs?.pressureRange;
+        if (
+          !range ||
+          range.min == null ||
+          range.max == null ||
+          !product.massFlowSpecs
+        ) {
+          continue;
+        }
+        const minBar = catalogValueToBar(range.min, range.unit);
+        const maxBar = catalogValueToBar(range.max, range.unit);
+        if (minBar == null || maxBar == null) continue;
+        score = fitScore(input.pressureBar, minBar, maxBar);
+        if (score === 0) continue;
+      }
+      matches.push({ product, n2EquivalentSlpm: flowSlpm, fitScore: score });
     }
-    matches.sort((a, b) => a.product.model.localeCompare(b.product.model));
+    matches.sort((a, b) => {
+      if (b.fitScore !== a.fitScore) return b.fitScore - a.fitScore;
+      return a.product.model.localeCompare(b.product.model);
+    });
     return {
       matches,
       n2EquivalentSlpm: flowSlpm,
@@ -141,10 +179,23 @@ export function findProducts(
     };
   }
 
-  if (!gas) {
-    return { matches: [], n2EquivalentSlpm: flowSlpm };
+  // Mixture overrides the K-factor lookup. The caller pre-computed the
+  // harmonic-mean factor for the blend; we apply it like a normal gas.
+  let effectiveFactor: number;
+  let mixtureSpecialty = false;
+  if (input.mixture) {
+    effectiveFactor = input.mixture.factor;
+    mixtureSpecialty = input.mixture.specialty;
+  } else {
+    if (!gas) {
+      return { matches: [], n2EquivalentSlpm: flowSlpm };
+    }
+    effectiveFactor = gas.factor;
   }
-  const n2EquivalentSlpm = toN2Equivalent(flowSlpm, gas);
+  const reference = getGasFactor(REFERENCE_GAS_ID);
+  if (!reference) throw new Error("Reference gas (N₂) missing from gas table");
+  const n2EquivalentSlpm =
+    effectiveFactor > 0 ? flowSlpm * (reference.factor / effectiveFactor) : 0;
 
   const normalMatches: FinderMatch[] = [];
   const bottomEdgeMatches: FinderMatch[] = [];
@@ -159,6 +210,13 @@ export function findProducts(
 
     const fit = fitScoreForRange(n2EquivalentSlpm, range.min, range.max);
     if (fit.score === 0) continue;
+
+    if (input.pressureBar != null) {
+      const max = product.massFlowSpecs.maxPressure;
+      if (max?.value == null) continue;
+      const maxBar = catalogValueToBar(max.value, max.unit);
+      if (maxBar == null || input.pressureBar > maxBar) continue;
+    }
 
     const match: FinderMatch = {
       product,
@@ -198,8 +256,11 @@ export function findProducts(
   return {
     matches,
     n2EquivalentSlpm,
-    gas,
-    warning: gas.category === "specialty" ? "specialty-gas" : undefined,
+    gas: input.mixture ? undefined : gas,
+    warning:
+      mixtureSpecialty || gas?.category === "specialty"
+        ? "specialty-gas"
+        : undefined,
   };
 }
 
