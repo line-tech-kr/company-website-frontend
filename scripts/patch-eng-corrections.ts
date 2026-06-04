@@ -3,7 +3,10 @@
  *
  *   1. EX70C / EX70M  — flow range  0.01–70 slpm  →  0.01–100 slpm
  *   2. MS2150VA / MS3150VA  — flow range  0.01–100 slpm  →  30–100 slpm
- *   3. DO400  — series  analogue  →  specialized
+ *   3. DO400  — series analogue → specialized, plus connections (3 SW
+ *      fittings) and maxPressure <30 bar → <13 bar (source: 2026 final
+ *      catalogue PDF p.34; the markdown in company-docs-private still
+ *      lacks the connection table)
  *   4. High-flow models (22 slugs)  — maxPressure.display  →  "inquiry"
  *      (numeric value/unit/comparator unset, since "inquiry" is not a number)
  *
@@ -78,8 +81,22 @@ const PATCHES: Patch[] = [
   { id: "product-ms2150va", set: FLOW_30_TO_100 },
   { id: "product-ms3150va", set: FLOW_30_TO_100 },
 
-  // 3. DO400 series
-  { id: "product-do400", set: { series: "specialized" } },
+  // 3. DO400 — series + connections + corrected maxPressure (PDF p.34)
+  {
+    id: "product-do400",
+    set: {
+      series: "specialized",
+      connections: [
+        { _key: "conn-0", type: '1/2" SW', length: "208.5 mm" },
+        { _key: "conn-1", type: '3/4" SW', length: "208.5 mm" },
+        { _key: "conn-2", type: '1" SW', length: "217.2 mm" },
+      ],
+      "massFlowSpecs.maxPressure.display": "<13 bar",
+      "massFlowSpecs.maxPressure.value": 13,
+      "massFlowSpecs.maxPressure.unit": "bar",
+      "massFlowSpecs.maxPressure.comparator": "lt",
+    },
+  },
 
   // 4. "inquiry" maxPressure for high-flow models
   ...INQUIRY_SLUGS.map<Patch>((slug) => ({

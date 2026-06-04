@@ -15,7 +15,9 @@ export interface SanityEnv {
 export interface PatchMutation {
   patch: {
     id: string;
-    set?: Record<string, string | number | boolean | null>;
+    // `unknown` because set values include arrays and objects
+    // (e.g. `connections: [{ _key, type, length }, …]`), not just primitives.
+    set?: Record<string, unknown>;
     unset?: string[];
   };
 }

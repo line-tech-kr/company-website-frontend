@@ -848,19 +848,20 @@ function buildProduct(
 
 // --- Validation ---
 
-function validate(p: Product): void {
+export function validate(p: Product): void {
   if (!p.model) throw new Error("Missing model");
   if (!p.slug.current) throw new Error(`${p.model}: missing slug`);
   if (!["analogue", "digital", "specialized"].includes(p.series))
     throw new Error(`${p.model}: bad series "${p.series}"`);
   if (!["MFC", "MFM", "EPC", "ROU"].includes(p.function))
     throw new Error(`${p.model}: bad function "${p.function}"`);
-  // DO400 and ROU instruments have no fluid connection table in the catalog.
-  if (
-    (p.connections?.length ?? 0) === 0 &&
-    p.function !== "ROU" &&
-    p.model !== "DO400"
-  )
+  // ROU instruments have no fluid connection table in the catalog.
+  // DO400's connections + corrected maxPressure are hand-applied via
+  // scripts/patch-eng-corrections.ts + products.json until the markdown
+  // source in company-docs-private adds the connection table (PDF p.34).
+  // Once it does, drop the DO400 entry from patch-eng-corrections.ts and
+  // let the parser populate the field naturally.
+  if ((p.connections?.length ?? 0) === 0 && p.function !== "ROU")
     throw new Error(`${p.model}: no connections parsed`);
 
   if (p.function === "ROU") {
