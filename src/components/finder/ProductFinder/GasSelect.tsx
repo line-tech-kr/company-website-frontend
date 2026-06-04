@@ -17,6 +17,8 @@ type Props = {
     all: string;
     empty: string;
   };
+  /** When true, render just the combobox (no fieldset/legend) — caller owns the label. */
+  hideLabel?: boolean;
 };
 
 function gasMatches(gas: GasFactor, normalizedQuery: string): boolean {
@@ -28,7 +30,12 @@ function renderLabel(gas: GasFactor): string {
   return `${gas.formula} — ${gas.names.en}`;
 }
 
-export function GasSelect({ value, onChange, labels }: Props) {
+export function GasSelect({
+  value,
+  onChange,
+  labels,
+  hideLabel = false,
+}: Props) {
   const id = useId();
   const wrapRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -111,116 +118,118 @@ export function GasSelect({ value, onChange, labels }: Props) {
 
   const listboxId = `${id}-listbox`;
 
+  const body = (
+    <div ref={wrapRef} className="lt-finder__combo">
+      <input
+        ref={inputRef}
+        type="text"
+        role="combobox"
+        aria-expanded={open}
+        aria-controls={listboxId}
+        aria-autocomplete="list"
+        aria-activedescendant={
+          open && flatOptions[activeIndex]
+            ? `${id}-opt-${activeIndex}`
+            : undefined
+        }
+        className="lt-finder__combo-input"
+        placeholder={labels.placeholder}
+        value={inputDisplay}
+        onChange={(e) => {
+          setQuery(e.target.value);
+          setActiveIndex(0);
+          if (!open) setOpen(true);
+        }}
+        onFocus={() => setOpen(true)}
+        onKeyDown={onKeyDown}
+      />
+      {open && (
+        <ul
+          id={listboxId}
+          ref={listRef}
+          role="listbox"
+          aria-labelledby={`${id}-label`}
+          className="lt-finder__combo-list"
+        >
+          {flatOptions.length === 0 ? (
+            <li className="lt-finder__combo-empty" role="presentation">
+              {labels.empty}
+            </li>
+          ) : (
+            <>
+              {pinned.length > 0 && (
+                <li className="lt-finder__combo-heading" role="presentation">
+                  {labels.common}
+                </li>
+              )}
+              {pinned.map((g, i) => {
+                const idx = i;
+                const isActive = idx === activeIndex;
+                return (
+                  <li
+                    key={g.id}
+                    id={`${id}-opt-${idx}`}
+                    role="option"
+                    aria-selected={isActive}
+                    data-finder-option-index={idx}
+                    className={`lt-finder__combo-opt${isActive ? " lt-finder__combo-opt--active" : ""}`}
+                    onPointerDown={(e) => {
+                      e.preventDefault();
+                      commit(g);
+                    }}
+                    onPointerEnter={() => setActiveIndex(idx)}
+                  >
+                    <span className="lt-finder__combo-formula">
+                      {g.formula}
+                    </span>
+                    <span className="lt-finder__combo-name">{g.names.en}</span>
+                  </li>
+                );
+              })}
+              {rest.length > 0 && (
+                <li className="lt-finder__combo-heading" role="presentation">
+                  {labels.all}
+                </li>
+              )}
+              {rest.map((g, i) => {
+                const idx = pinned.length + i;
+                const isActive = idx === activeIndex;
+                return (
+                  <li
+                    key={g.id}
+                    id={`${id}-opt-${idx}`}
+                    role="option"
+                    aria-selected={isActive}
+                    data-finder-option-index={idx}
+                    className={`lt-finder__combo-opt${isActive ? " lt-finder__combo-opt--active" : ""}`}
+                    onPointerDown={(e) => {
+                      e.preventDefault();
+                      commit(g);
+                    }}
+                    onPointerEnter={() => setActiveIndex(idx)}
+                  >
+                    <span className="lt-finder__combo-formula">
+                      {g.formula}
+                    </span>
+                    <span className="lt-finder__combo-name">{g.names.en}</span>
+                  </li>
+                );
+              })}
+            </>
+          )}
+        </ul>
+      )}
+    </div>
+  );
+
+  if (hideLabel) return body;
+
   return (
     <fieldset className="lt-finder__group">
       <legend id={`${id}-label`} className="lt-finder__label">
         {labels.legend}
       </legend>
-      <div ref={wrapRef} className="lt-finder__combo">
-        <input
-          ref={inputRef}
-          type="text"
-          role="combobox"
-          aria-expanded={open}
-          aria-controls={listboxId}
-          aria-autocomplete="list"
-          aria-activedescendant={
-            open && flatOptions[activeIndex]
-              ? `${id}-opt-${activeIndex}`
-              : undefined
-          }
-          className="lt-finder__combo-input"
-          placeholder={labels.placeholder}
-          value={inputDisplay}
-          onChange={(e) => {
-            setQuery(e.target.value);
-            setActiveIndex(0);
-            if (!open) setOpen(true);
-          }}
-          onFocus={() => setOpen(true)}
-          onKeyDown={onKeyDown}
-        />
-        {open && (
-          <ul
-            id={listboxId}
-            ref={listRef}
-            role="listbox"
-            aria-labelledby={`${id}-label`}
-            className="lt-finder__combo-list"
-          >
-            {flatOptions.length === 0 ? (
-              <li className="lt-finder__combo-empty" role="presentation">
-                {labels.empty}
-              </li>
-            ) : (
-              <>
-                {pinned.length > 0 && (
-                  <li className="lt-finder__combo-heading" role="presentation">
-                    {labels.common}
-                  </li>
-                )}
-                {pinned.map((g, i) => {
-                  const idx = i;
-                  const isActive = idx === activeIndex;
-                  return (
-                    <li
-                      key={g.id}
-                      id={`${id}-opt-${idx}`}
-                      role="option"
-                      aria-selected={isActive}
-                      data-finder-option-index={idx}
-                      className={`lt-finder__combo-opt${isActive ? " lt-finder__combo-opt--active" : ""}`}
-                      onPointerDown={(e) => {
-                        e.preventDefault();
-                        commit(g);
-                      }}
-                      onPointerEnter={() => setActiveIndex(idx)}
-                    >
-                      <span className="lt-finder__combo-formula">
-                        {g.formula}
-                      </span>
-                      <span className="lt-finder__combo-name">
-                        {g.names.en}
-                      </span>
-                    </li>
-                  );
-                })}
-                {rest.length > 0 && (
-                  <li className="lt-finder__combo-heading" role="presentation">
-                    {labels.all}
-                  </li>
-                )}
-                {rest.map((g, i) => {
-                  const idx = pinned.length + i;
-                  const isActive = idx === activeIndex;
-                  return (
-                    <li
-                      key={g.id}
-                      id={`${id}-opt-${idx}`}
-                      role="option"
-                      aria-selected={isActive}
-                      data-finder-option-index={idx}
-                      className={`lt-finder__combo-opt${isActive ? " lt-finder__combo-opt--active" : ""}`}
-                      onPointerDown={(e) => {
-                        e.preventDefault();
-                        commit(g);
-                      }}
-                      onPointerEnter={() => setActiveIndex(idx)}
-                    >
-                      <span className="lt-finder__combo-formula">
-                        {g.formula}
-                      </span>
-                      <span className="lt-finder__combo-name">
-                        {g.names.en}
-                      </span>
-                    </li>
-                  );
-                })}
-              </>
-            )}
-          </ul>
-        )}
-      </div>
+      {body}
     </fieldset>
   );
 }

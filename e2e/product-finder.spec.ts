@@ -25,7 +25,10 @@ test.describe("Product finder", () => {
     ).toBeVisible();
 
     // Default gas is Nitrogen — leave it. Enter 250 slpm.
-    await page.getByRole("spinbutton").fill("250");
+    await page
+      .getByRole("group", { name: "Target flow rate" })
+      .getByRole("spinbutton")
+      .fill("250");
 
     // Wait for at least one result card to appear.
     const resultCards = page.locator(".lt-finder__result");
@@ -42,7 +45,11 @@ test.describe("Product finder", () => {
     await page.goto(
       "/en/products/finder?fn=MFC&gas=nitrogen&flow=250&unit=slpm",
     );
-    await expect(page.getByRole("spinbutton")).toHaveValue("250");
+    await expect(
+      page
+        .getByRole("group", { name: "Target flow rate" })
+        .getByRole("spinbutton"),
+    ).toHaveValue("250");
     await expect(page.locator(".lt-finder__result").first()).toBeVisible({
       timeout: 5000,
     });
@@ -52,7 +59,10 @@ test.describe("Product finder", () => {
     page,
   }) => {
     await page.goto("/en/products/finder");
-    await page.getByRole("spinbutton").fill("99999999");
+    await page
+      .getByRole("group", { name: "Target flow rate" })
+      .getByRole("spinbutton")
+      .fill("99999999");
     await expect(
       page.getByText(/no products fit those requirements/i),
     ).toBeVisible({ timeout: 5000 });
@@ -93,5 +103,70 @@ test.describe("Product finder", () => {
     const results = page.locator(".lt-finder__result");
     await expect(results).toHaveCount(1, { timeout: 5000 });
     await expect(results.first()).toContainText("MS3600VA");
+  });
+
+  test("mixture mode: switch toggle, enter components, see results", async ({
+    page,
+  }) => {
+    await page.goto("/en/products/finder");
+
+    // Switch to Mixture mode.
+    await page.getByRole("radio", { name: "Mixture" }).click();
+    await expect(page.locator(".lt-mix__rows")).toBeVisible();
+
+    // Two seed rows render and the × button is hidden at the minimum row count.
+    const rows = page.locator(".lt-mix__row");
+    await expect(rows).toHaveCount(2);
+    await expect(
+      page.getByRole("button", { name: "Remove component" }),
+    ).toHaveCount(0);
+
+    // Set 95/5 N₂/SiH₄ via the two percent inputs.
+    const percentInputs = page.locator(".lt-mix__row-percent input");
+    await percentInputs.nth(0).fill("95");
+    await percentInputs.nth(1).fill("5");
+    await expect(page.locator('.lt-mix__total[data-state="ok"]')).toBeVisible();
+
+    // Enter a flow and confirm at least one result appears.
+    await page
+      .getByRole("group", { name: "Target flow rate" })
+      .getByRole("spinbutton")
+      .fill("100");
+    await expect(page.locator(".lt-finder__result").first()).toBeVisible({
+      timeout: 5000,
+    });
+  });
+
+  test("mixture URL params pre-fill the mixture editor", async ({ page }) => {
+    await page.goto(
+      "/en/products/finder?fn=MFC&gasMix=silane:5,nitrogen:95&flow=100&unit=slpm",
+    );
+    await expect(
+      page.getByRole("radio", { name: "Mixture", checked: true }),
+    ).toBeVisible();
+    const percentInputs = page.locator(".lt-mix__row-percent input");
+    await expect(percentInputs.nth(0)).toHaveValue("5");
+    await expect(percentInputs.nth(1)).toHaveValue("95");
+    await expect(page.locator(".lt-finder__result").first()).toBeVisible({
+      timeout: 5000,
+    });
+  });
+
+  test("pressure filter narrows matches (LEPC drops out beyond its range)", async ({
+    page,
+  }) => {
+    // Brittleness note: anchors on LEPC's published `pressureRange`
+    // (0.1–6 barA today). A Sanity content edit that widens that range will
+    // break this test with no code change — re-anchor to whichever EPC owns
+    // a narrow range below 50 bar at that point.
+    await page.goto("/en/products/finder?fn=EPC&p=2&pu=bar");
+    await expect(
+      page.locator(".lt-finder__result").filter({ hasText: "LEPC" }),
+    ).toHaveCount(1);
+
+    await page.goto("/en/products/finder?fn=EPC&p=50&pu=bar");
+    await expect(
+      page.locator(".lt-finder__result").filter({ hasText: "LEPC" }),
+    ).toHaveCount(0);
   });
 });
