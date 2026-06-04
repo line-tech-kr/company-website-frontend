@@ -1,7 +1,13 @@
+import { Fragment } from "react";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { categoryForSeries } from "@/lib/categories";
 import type { Product } from "@/lib/types/product";
+
+export type FeaturedApplicationProductSpec = {
+  label: string;
+  value: string;
+};
 
 export type FeaturedApplicationProductInput = {
   slug: string;
@@ -9,7 +15,7 @@ export type FeaturedApplicationProductInput = {
   series: Product["series"];
   productLabel?: string | null;
   description?: string | null;
-  flowRange?: string | null;
+  specs?: ReadonlyArray<FeaturedApplicationProductSpec>;
   imageUrl: string | null;
 };
 
@@ -19,7 +25,6 @@ type Props = {
   whyCaption: string | null;
   kickerLabel: string;
   whyHeadingLabel: string;
-  flowRangeLabel: string;
   viewProductLabel: string;
 };
 
@@ -28,11 +33,11 @@ export function FeaturedApplicationProduct({
   whyCaption,
   kickerLabel,
   whyHeadingLabel,
-  flowRangeLabel,
   viewProductLabel,
 }: Props) {
   const detailHref = `/products/${categoryForSeries(product.series)}/${product.slug}`;
   const body = whyCaption ?? product.description ?? null;
+  const specs = product.specs ?? [];
 
   return (
     <section className="ap-featured" aria-labelledby="ap-featured-title">
@@ -65,10 +70,14 @@ export function FeaturedApplicationProduct({
             <p className="ap-featured__desc">{body}</p>
           </div>
         ) : null}
-        {product.flowRange ? (
+        {specs.length > 0 ? (
           <dl className="ap-featured__spec">
-            <dt>{flowRangeLabel}</dt>
-            <dd>{product.flowRange}</dd>
+            {specs.map((s, i) => (
+              <Fragment key={i}>
+                <dt>{s.label}</dt>
+                <dd>{s.value}</dd>
+              </Fragment>
+            ))}
           </dl>
         ) : null}
         <Link href={detailHref} className="ap-featured__cta">

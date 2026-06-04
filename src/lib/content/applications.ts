@@ -1,4 +1,5 @@
 import type { CategorySlug } from "@/lib/categories";
+import type { MassFlowSpecs } from "@/lib/types/product";
 import type { Locale } from "./home";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -14,6 +15,11 @@ export type ApplicationEntry = {
   featuredProductSlug?: string;
   /** Application-specific "why we're featuring this" copy. 1–3 sentences. */
   featuredProductCaption?: string;
+  /**
+   * Which `massFlowSpecs` keys to surface as `<dt>/<dd>` rows on the spotlight.
+   * Keep to ≤3 — more crowds the "Why this one" copy. Defaults to `["flowRange"]`.
+   */
+  featuredSpecKeys?: ReadonlyArray<keyof MassFlowSpecs>;
 };
 
 export type ApplicationsContent = {
@@ -26,7 +32,6 @@ export type ApplicationsContent = {
   contactCtaHref: string;
   featuredKicker: string;
   featuredWhyHeading: string;
-  featuredFlowRangeLabel: string;
   featuredViewProduct: string;
   applications: ApplicationEntry[];
 };
@@ -45,7 +50,6 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
     contactCtaHref: "/contact",
     featuredKicker: "Spotlight",
     featuredWhyHeading: "Why this one",
-    featuredFlowRangeLabel: "Flow range",
     featuredViewProduct: "View product →",
     applications: [
       {
@@ -74,6 +78,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
         featuredProductSlug: "do400",
         featuredProductCaption:
           "Purpose-built for PEM and SOFC stack-level H₂ and O₂ feeds — delivers the stoichiometric ratios these cells require without over-pressuring the membrane. The matched MFM variant handles the monitoring side of the same loop on the same calibration.",
+        featuredSpecKeys: ["flowRange", "maxPressure"],
       },
       {
         slug: "biotech-pharmaceutical",
@@ -209,7 +214,6 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
     contactCtaHref: "/contact",
     featuredKicker: "추천 제품",
     featuredWhyHeading: "이 제품을 추천하는 이유",
-    featuredFlowRangeLabel: "유량 범위",
     featuredViewProduct: "제품 보기 →",
     applications: [
       {
@@ -238,6 +242,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
         featuredProductSlug: "do400",
         featuredProductCaption:
           "PEM·SOFC 스택 수준의 수소·산소 공급을 위해 설계되어, 막 손상 없이 셀이 요구하는 화학양론적 비율을 정확히 전달합니다. 동일 교정 기반의 MFM 변형 제품이 같은 루프의 모니터링 측을 함께 담당합니다.",
+        featuredSpecKeys: ["flowRange", "maxPressure"],
       },
       {
         slug: "biotech-pharmaceutical",
@@ -373,7 +378,6 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
     contactCtaHref: "/contact",
     featuredKicker: "重点产品",
     featuredWhyHeading: "为什么是这款",
-    featuredFlowRangeLabel: "流量范围",
     featuredViewProduct: "查看产品 →",
     applications: [
       {
@@ -402,6 +406,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
         featuredProductSlug: "do400",
         featuredProductCaption:
           "专为 PEM 与 SOFC 电堆级氢气、氧气供给而设计——在不令膜过压的前提下，精准实现这些电池所需的化学计量比。同一校准下的 MFM 变型可同步承担该回路的监控侧。",
+        featuredSpecKeys: ["flowRange", "maxPressure"],
       },
       {
         slug: "biotech-pharmaceutical",

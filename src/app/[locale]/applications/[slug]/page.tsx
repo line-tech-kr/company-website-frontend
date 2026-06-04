@@ -6,9 +6,10 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import {
   FeaturedApplicationProduct,
   type FeaturedApplicationProductInput,
+  type FeaturedApplicationProductSpec,
 } from "@/components/applications/FeaturedApplicationProduct";
 import { LT_APPLICATIONS } from "@/lib/content/applications";
-import type { Product } from "@/lib/types/product";
+import type { MassFlowSpecs, Product } from "@/lib/types/product";
 import { productBySlug } from "@/lib/fixtures/products";
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/content/home";
@@ -95,24 +96,40 @@ const CATEGORY_HREFS: Record<string, string> = {
   lepc: "/products/lepc",
 };
 
+const DEFAULT_FEATURED_SPEC_KEYS: ReadonlyArray<keyof MassFlowSpecs> = [
+  "flowRange",
+];
+
 function resolveFeaturedProduct({
   sanity,
   staticSlug,
   locale,
+  specKeys,
+  getSpecLabel,
 }: {
   sanity: SanityFeaturedProduct | null;
   staticSlug: string | undefined;
   locale: Locale;
+  specKeys: ReadonlyArray<keyof MassFlowSpecs>;
+  getSpecLabel: (key: keyof MassFlowSpecs) => string;
 }): FeaturedApplicationProductInput | null {
   if (sanity) {
     const cutoutOrImage = sanity.cutout ?? sanity.image ?? null;
+    // The Sanity featured-product schema only carries `flowRange` today;
+    // any other requested key is skipped silently until the schema is extended.
+    const specs: FeaturedApplicationProductSpec[] = [];
+    for (const key of specKeys) {
+      if (key === "flowRange" && sanity.flowRange) {
+        specs.push({ label: getSpecLabel(key), value: sanity.flowRange });
+      }
+    }
     return {
       slug: sanity.slug,
       model: sanity.model,
       series: sanity.series,
       productLabel: sanity.productLabel?.[locale] ?? null,
       description: sanity.description?.[locale] ?? null,
-      flowRange: sanity.flowRange ?? null,
+      specs,
       imageUrl: cutoutOrImage?.asset
         ? urlFor(cutoutOrImage).width(960).url()
         : null,
@@ -123,13 +140,20 @@ function resolveFeaturedProduct({
   const fixture = productBySlug(staticSlug);
   if (!fixture) return null;
 
+  const massFlowSpecs = fixture.massFlowSpecs;
+  const specs: FeaturedApplicationProductSpec[] = [];
+  for (const key of specKeys) {
+    const value = massFlowSpecs?.[key]?.display;
+    if (value) specs.push({ label: getSpecLabel(key), value });
+  }
+
   return {
     slug: fixture.slug.current,
     model: fixture.model,
     series: fixture.series,
     productLabel: fixture.productLabel[locale] ?? null,
     description: fixture.description?.[locale] ?? null,
-    flowRange: fixture.massFlowSpecs?.flowRange?.display ?? null,
+    specs,
     imageUrl: `/products/${fixture.slug.current}/cutout-2026.png`,
   };
 }
@@ -138,10 +162,11 @@ export default async function ApplicationDetailPage({ params }: Props) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
 
-  const [tCommon, tNav, tCategory] = await Promise.all([
+  const [tCommon, tNav, tCategory, tSpecs] = await Promise.all([
     getTranslations("common"),
     getTranslations("nav"),
     getTranslations("breadcrumbs.categories"),
+    getTranslations("product.specs"),
   ]);
 
   const c = LT_APPLICATIONS[locale];
@@ -174,6 +199,8 @@ export default async function ApplicationDetailPage({ params }: Props) {
     sanity: rawApp?.featuredProduct ?? null,
     staticSlug: staticEntry?.featuredProductSlug,
     locale,
+    specKeys: staticEntry?.featuredSpecKeys ?? DEFAULT_FEATURED_SPEC_KEYS,
+    getSpecLabel: (key) => tSpecs(key),
   });
 
   const featuredCaption = staticEntry?.featuredProductCaption ?? null;
@@ -200,7 +227,6 @@ export default async function ApplicationDetailPage({ params }: Props) {
               kickerLabel={c.featuredKicker}
               whyHeadingLabel={c.featuredWhyHeading}
               viewProductLabel={c.featuredViewProduct}
-              flowRangeLabel={c.featuredFlowRangeLabel}
             />
           ) : null}
           <div className="ap-detail__body">
