@@ -21,4 +21,15 @@ describe("products.json fixture", () => {
     const slugs = ALL_PRODUCTS.map((p) => p.slug.current);
     expect(new Set(slugs).size).toBe(slugs.length);
   });
+
+  it("DO400 carries the catalogue-corrected fittings + max pressure", () => {
+    // Pins the 2026-06-03 correction from PDF p.34: three SW fittings and
+    // <13 bar max pressure. A silent revert (parser regen wiping the
+    // hand-applied fix) would be caught here.
+    const do400 = ALL_PRODUCTS.find((p) => p.model === "DO400");
+    expect(do400, "DO400 missing from fixture").toBeDefined();
+    expect(do400!.connections.length).toBeGreaterThanOrEqual(1);
+    expect(do400!.massFlowSpecs?.maxPressure?.value).toBe(13);
+    expect(do400!.massFlowSpecs?.maxPressure?.display).toBe("<13 bar");
+  });
 });
