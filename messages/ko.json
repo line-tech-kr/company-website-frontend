@@ -181,7 +181,8 @@
     },
     "pressure": {
       "label": "작동 압력 (선택)",
-      "placeholder": "예: 2"
+      "placeholder": "예: 2",
+      "unitAria": "압력 단위"
     },
     "series": {
       "label": "시리즈",

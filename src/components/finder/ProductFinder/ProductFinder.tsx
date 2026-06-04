@@ -14,9 +14,11 @@ import {
 import {
   computeMixtureFactor,
   formatMixtureLabel,
+  isMixturePercentValid,
   type GasComponent,
 } from "@/lib/finder/mixture";
 import { toBar, type PressureUnit } from "@/lib/finder/pressure";
+import type { GasMode, ProductFinderInitial } from "@/lib/finder/types";
 import { FunctionPicker } from "./FunctionPicker";
 import { GasSelect } from "./GasSelect";
 import { FlowInput } from "./FlowInput";
@@ -26,19 +28,7 @@ import { ResultCard } from "./ResultCard";
 import { MixtureEditor, defaultMixtureComponents } from "./MixtureEditor";
 import "./ProductFinder.css";
 
-export type GasMode = "pure" | "mixture";
-
-export type ProductFinderInitial = {
-  fn?: FinderFunction;
-  gas?: string;
-  flow?: number;
-  unit?: FinderUnit;
-  series?: FinderSeries;
-  gasMode?: GasMode;
-  components?: GasComponent[];
-  pressure?: number;
-  pressureUnit?: PressureUnit;
-};
+export type { GasMode, ProductFinderInitial };
 
 type Props = {
   products: readonly Product[];
@@ -81,6 +71,11 @@ export function ProductFinder({ products, locale, initial }: Props) {
     initial?.pressureUnit ?? DEFAULT_PRESSURE_UNIT,
   );
 
+  // K-factor matching is meaningless for an EPC product (which controls
+  // pressure, not flow). Force pure mode the moment the user picks EPC so the
+  // Mixture editor doesn't render stale state that the matcher would ignore.
+  const effectiveGasMode: GasMode = fn === "EPC" ? "pure" : gasMode;
+
   // Sync state to URL whenever the form changes.
   useEffect(() => {
     const query: Record<string, string> = {};
@@ -88,7 +83,7 @@ export function ProductFinder({ products, locale, initial }: Props) {
     if (series !== DEFAULT_SERIES) query.series = series;
     if (flow !== "" && Number.isFinite(flow)) query.flow = String(flow);
     if (unit !== DEFAULT_UNIT) query.unit = unit;
-    if (gasMode === "mixture") {
+    if (effectiveGasMode === "mixture") {
       const encoded = components
         .filter((c) => c.gasId.trim() !== "" && c.percent > 0)
         .map((c) => `${c.gasId}:${c.percent}`)
@@ -109,7 +104,7 @@ export function ProductFinder({ products, locale, initial }: Props) {
   }, [
     fn,
     gasId,
-    gasMode,
+    effectiveGasMode,
     components,
     flow,
     unit,
@@ -120,18 +115,23 @@ export function ProductFinder({ products, locale, initial }: Props) {
     router,
   ]);
 
+  // Only feed `findProducts` a mixture when (a) we're in mixture mode, (b) the
+  // math resolves, and (c) the user's percentages actually sum to ~100. Off-100
+  // sums would produce a numerically wrong K-factor and silently surface bad
+  // matches; gating here forces the UI's "Total" indicator to drive results.
   const mixture = useMemo(() => {
-    if (gasMode !== "mixture") return null;
+    if (effectiveGasMode !== "mixture") return null;
     const result = computeMixtureFactor(components);
     if (!result || "missingGas" in result) return null;
+    if (!isMixturePercentValid(result.totalPercent)) return null;
     return result;
-  }, [gasMode, components]);
+  }, [effectiveGasMode, components]);
 
   const result = useMemo(() => {
     const flowProvided =
       flow !== "" && Number.isFinite(flow) && (flow as number) > 0;
     if (fn !== "EPC" && !flowProvided) return null;
-    if (gasMode === "mixture" && !mixture) return null;
+    if (effectiveGasMode === "mixture" && !mixture) return null;
     const pressureProvided =
       pressure !== "" && Number.isFinite(pressure) && (pressure as number) > 0;
     return findProducts(products, {
@@ -157,7 +157,7 @@ export function ProductFinder({ products, locale, initial }: Props) {
     flow,
     unit,
     series,
-    gasMode,
+    effectiveGasMode,
     mixture,
     pressure,
     pressureUnit,
@@ -202,6 +202,21 @@ export function ProductFinder({ products, locale, initial }: Props) {
     return t("results.rankEdge");
   };
 
+  let convertedLine: string | null = null;
+  if (result && fn !== "EPC") {
+    const n2 = result.n2EquivalentSlpm.toLocaleString(locale, {
+      maximumFractionDigits: 3,
+    });
+    if (effectiveGasMode === "mixture" && mixture) {
+      convertedLine = t("convertedNoteMix", {
+        mix: formatMixtureLabel(components),
+        n2,
+      });
+    } else if (result.gas && result.gas.id !== DEFAULT_GAS) {
+      convertedLine = t("convertedNote", { n2 });
+    }
+  }
+
   return (
     <section className="lt-finder">
       <form
@@ -223,33 +238,35 @@ export function ProductFinder({ products, locale, initial }: Props) {
         />
         <fieldset className="lt-finder__group lt-finder__group--full">
           <legend className="lt-finder__label">{t("gas.label")}</legend>
-          <div
-            className="lt-finder__gas-mode"
-            role="radiogroup"
-            aria-label={t("gas.modeLabel")}
-          >
-            <label className="lt-finder__gas-mode-option">
-              <input
-                type="radio"
-                name={`${modeId}-mode`}
-                value="pure"
-                checked={gasMode === "pure"}
-                onChange={() => setGasMode("pure")}
-              />
-              <span>{t("gas.modePure")}</span>
-            </label>
-            <label className="lt-finder__gas-mode-option">
-              <input
-                type="radio"
-                name={`${modeId}-mode`}
-                value="mixture"
-                checked={gasMode === "mixture"}
-                onChange={() => setGasMode("mixture")}
-              />
-              <span>{t("gas.modeMixture")}</span>
-            </label>
-          </div>
-          {gasMode === "pure" ? (
+          {fn !== "EPC" && (
+            <div
+              className="lt-finder__gas-mode"
+              role="radiogroup"
+              aria-label={t("gas.modeLabel")}
+            >
+              <label className="lt-finder__gas-mode-option">
+                <input
+                  type="radio"
+                  name={`${modeId}-mode`}
+                  value="pure"
+                  checked={gasMode === "pure"}
+                  onChange={() => setGasMode("pure")}
+                />
+                <span>{t("gas.modePure")}</span>
+              </label>
+              <label className="lt-finder__gas-mode-option">
+                <input
+                  type="radio"
+                  name={`${modeId}-mode`}
+                  value="mixture"
+                  checked={gasMode === "mixture"}
+                  onChange={() => setGasMode("mixture")}
+                />
+                <span>{t("gas.modeMixture")}</span>
+              </label>
+            </div>
+          )}
+          {effectiveGasMode === "pure" ? (
             <GasSelect
               value={gasId}
               onChange={setGasId}
@@ -274,13 +291,14 @@ export function ProductFinder({ products, locale, initial }: Props) {
           />
         )}
         <PressureInput
-          value={pressure}
+          pressure={pressure}
           unit={pressureUnit}
-          onValueChange={setPressure}
+          onPressureChange={setPressure}
           onUnitChange={setPressureUnit}
           labels={{
             legend: t("pressure.label"),
             placeholder: t("pressure.placeholder"),
+            unitAria: t("pressure.unitAria"),
           }}
         />
       </form>
@@ -294,28 +312,9 @@ export function ProductFinder({ products, locale, initial }: Props) {
               <h2 className="lt-finder__results-title">
                 {t("results.heading", { count: result.matches.length })}
               </h2>
-              {fn !== "EPC" &&
-                (gasMode === "mixture"
-                  ? mixture && (
-                      <p className="lt-finder__converted">
-                        {t("convertedNoteMix", {
-                          mix: formatMixtureLabel(components),
-                          n2: result.n2EquivalentSlpm.toLocaleString(locale, {
-                            maximumFractionDigits: 3,
-                          }),
-                        })}
-                      </p>
-                    )
-                  : result.gas &&
-                    result.gas.id !== DEFAULT_GAS && (
-                      <p className="lt-finder__converted">
-                        {t("convertedNote", {
-                          n2: result.n2EquivalentSlpm.toLocaleString(locale, {
-                            maximumFractionDigits: 3,
-                          }),
-                        })}
-                      </p>
-                    ))}
+              {convertedLine && (
+                <p className="lt-finder__converted">{convertedLine}</p>
+              )}
             </header>
 
             {result.warning === "specialty-gas" && (

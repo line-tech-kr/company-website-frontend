@@ -20,7 +20,7 @@ export function FlowInput({
   return (
     <fieldset className="lt-finder__group">
       <legend className="lt-finder__label">{labels.legend}</legend>
-      <div className="lt-finder__flow">
+      <div className="lt-finder__input-row">
         <input
           type="number"
           inputMode="decimal"

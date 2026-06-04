@@ -13,7 +13,7 @@ const NAV: AccessoriesNavNode[] = [
     label: "Read-out units",
     href: "#readouts",
     children: [
-      { id: "lti-2000", label: "LTI-200", href: "#lti-2000" },
+      { id: "lti-2000", label: "LTI-2000", href: "#lti-2000" },
       { id: "lti-1000", label: "LTI-1000", href: "#lti-1000" },
     ],
   },

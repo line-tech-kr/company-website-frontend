@@ -24,7 +24,7 @@ type Props = {
 
 const DEFAULT_GAS = "nitrogen";
 
-/** Two empty seed rows — the QuoteFields convention. */
+/** Seed with two empty rows so users see this is a multi-component editor. */
 export function defaultMixtureComponents(): GasComponent[] {
   return [
     { gasId: DEFAULT_GAS, percent: 0 },
@@ -83,6 +83,9 @@ export function MixtureEditor({ components, onChange, labels }: Props) {
                 max={100}
                 step="any"
                 className="lt-finder__num"
+                // A 0% component contributes nothing to the mixture, so we
+                // surface 0 as an empty field with a "0" placeholder — clearer
+                // than displaying a literal "0" the user has to delete.
                 value={component.percent === 0 ? "" : component.percent}
                 placeholder="0"
                 onChange={(e) =>
@@ -115,6 +118,7 @@ export function MixtureEditor({ components, onChange, labels }: Props) {
           className={`lt-mix__total ${totalValid ? "lt-mix__total--ok" : "lt-mix__total--bad"}`}
           role="status"
           aria-live="polite"
+          data-state={totalValid ? "ok" : "bad"}
         >
           {labels.totalLabel}: {formatTotal(totalPercent)}%
         </span>

@@ -121,6 +121,37 @@ describe("computeMixtureFactor", () => {
     expect(off.totalPercent).toBe(90);
     expect(isMixturePercentValid(off.totalPercent)).toBe(false);
   });
+
+  it("treats NaN percent as a blank row (filtered out of the math)", () => {
+    const result = computeMixtureFactor([
+      { gasId: "silane", percent: Number.NaN },
+      { gasId: "nitrogen", percent: 95 },
+    ]);
+    const r = asResult(result);
+    // NaN row dropped; only N₂ at 95% survives. UI flags totalPercent ≠ 100.
+    expect(r.totalPercent).toBe(95);
+    expect(Number.isFinite(r.factor)).toBe(true);
+    expect(r.factor).toBeGreaterThan(0);
+  });
+
+  it("treats negative percent as a blank row", () => {
+    const result = computeMixtureFactor([
+      { gasId: "silane", percent: -5 },
+      { gasId: "nitrogen", percent: 100 },
+    ]);
+    const r = asResult(result);
+    expect(r.totalPercent).toBe(100);
+  });
+
+  it("returns null when all rows have NaN/Infinity/zero percent", () => {
+    expect(
+      computeMixtureFactor([
+        { gasId: "silane", percent: Number.NaN },
+        { gasId: "nitrogen", percent: Number.POSITIVE_INFINITY },
+        { gasId: "argon", percent: 0 },
+      ]),
+    ).toBeNull();
+  });
 });
 
 describe("formatMixtureLabel", () => {

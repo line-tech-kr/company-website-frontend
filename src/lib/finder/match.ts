@@ -125,6 +125,39 @@ function functionMatches(product: Product, target: FinderFunction): boolean {
   return product.function === target;
 }
 
+/**
+ * Does the user pressure fall inside the product's operating pressureRange?
+ * Returns the fitScore (0..1) when in range, or null when the range itself is
+ * unusable (missing bounds). Unit normalization failure returns a neutral 0.7
+ * — we don't want an authoring typo in `unit` to silently disappear a product.
+ */
+function pressureRangeFit(
+  range: NonNullable<NonNullable<Product["massFlowSpecs"]>["pressureRange"]>,
+  pressureBar: number,
+): number | null {
+  if (range.min == null || range.max == null) return null;
+  const minBar = catalogValueToBar(range.min, range.unit);
+  const maxBar = catalogValueToBar(range.max, range.unit);
+  if (minBar == null || maxBar == null) return 0.7;
+  return fitScore(pressureBar, minBar, maxBar);
+}
+
+/**
+ * Does the user pressure stay within the product's `maxPressure` rating?
+ * Honours the catalogue's `comparator` field: `"lt"` means strict `<` (e.g.
+ * "<3 bar"), anything else is treated as `≤`. Unit normalization failure
+ * passes (same rationale as `pressureRangeFit`).
+ */
+function pressureWithinMax(
+  max: NonNullable<NonNullable<Product["massFlowSpecs"]>["maxPressure"]>,
+  pressureBar: number,
+): boolean {
+  if (max.value == null) return false;
+  const maxBar = catalogValueToBar(max.value, max.unit);
+  if (maxBar == null) return true;
+  return max.comparator === "lt" ? pressureBar < maxBar : pressureBar <= maxBar;
+}
+
 function seriesMatches(
   product: Product,
   target: FinderSeries | undefined,
@@ -150,19 +183,10 @@ export function findProducts(
       let score = 1;
       if (input.pressureBar != null) {
         const range = product.massFlowSpecs?.pressureRange;
-        if (
-          !range ||
-          range.min == null ||
-          range.max == null ||
-          !product.massFlowSpecs
-        ) {
-          continue;
-        }
-        const minBar = catalogValueToBar(range.min, range.unit);
-        const maxBar = catalogValueToBar(range.max, range.unit);
-        if (minBar == null || maxBar == null) continue;
-        score = fitScore(input.pressureBar, minBar, maxBar);
-        if (score === 0) continue;
+        if (!range) continue;
+        const fit = pressureRangeFit(range, input.pressureBar);
+        if (fit == null || fit === 0) continue;
+        score = fit;
       }
       matches.push({ product, n2EquivalentSlpm: flowSlpm, fitScore: score });
     }
@@ -179,8 +203,8 @@ export function findProducts(
     };
   }
 
-  // Mixture overrides the K-factor lookup. The caller pre-computed the
-  // harmonic-mean factor for the blend; we apply it like a normal gas.
+  // Pure and mixture share the same downstream ranking; mixture just provides
+  // a pre-computed effectiveFactor instead of looking up a single-gas record.
   let effectiveFactor: number;
   let mixtureSpecialty = false;
   if (input.mixture) {
@@ -213,9 +237,7 @@ export function findProducts(
 
     if (input.pressureBar != null) {
       const max = product.massFlowSpecs.maxPressure;
-      if (max?.value == null) continue;
-      const maxBar = catalogValueToBar(max.value, max.unit);
-      if (maxBar == null || input.pressureBar > maxBar) continue;
+      if (!max || !pressureWithinMax(max, input.pressureBar)) continue;
     }
 
     const match: FinderMatch = {

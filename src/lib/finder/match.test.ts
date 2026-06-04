@@ -434,6 +434,76 @@ describe("findProducts", () => {
         "M2030VA-CAP",
       ]);
     });
+
+    it("MFC: honours 'lt' comparator (pressure equal to maxPressure rejected)", () => {
+      // mfcWithMax has maxPressure {value: 3, comparator: "lt"} — "<3 bar".
+      // A user running at exactly 3.0 bar must be rejected.
+      const result = findProducts([mfcWithMax, mfcHighMax], {
+        function: "MFC",
+        gasId: "nitrogen",
+        flow: 10,
+        unit: "slpm",
+        pressureBar: 3,
+      });
+      expect(result.matches.map((m) => m.product.model)).toEqual([
+        "M2030VA-HIGH",
+      ]);
+    });
+
+    it("MFC: treats unknown maxPressure unit as a pass (don't disappear products)", () => {
+      const mfcUnknownUnit = withRange("MFC-UNK", 0.01, 30, {
+        series: "analogue",
+        function: "MFC",
+        massFlowSpecs: {
+          ...makeProduct().massFlowSpecs!,
+          flowRange: {
+            display: "0.01–30 slpm",
+            min: 0.01,
+            max: 30,
+            unit: "slpm",
+          },
+          maxPressure: {
+            display: "?",
+            value: 1,
+            unit: "atm",
+            comparator: "lt",
+          },
+        },
+      });
+      const result = findProducts([mfcUnknownUnit], {
+        function: "MFC",
+        gasId: "nitrogen",
+        flow: 10,
+        unit: "slpm",
+        pressureBar: 999,
+      });
+      expect(result.matches.map((m) => m.product.model)).toEqual(["MFC-UNK"]);
+    });
+
+    it("EPC: assigns neutral fit when pressureRange unit can't be normalized", () => {
+      const lepcWeird = makeProduct({
+        model: "LEPC-WEIRD",
+        slug: { current: "lepc-weird" },
+        series: "lepc",
+        function: "EPC",
+        massFlowSpecs: {
+          ...makeProduct().massFlowSpecs!,
+          flowRange: undefined,
+          pressureRange: { display: "?", min: 0.1, max: 6, unit: "atm" },
+        },
+      });
+      const result = findProducts([lepcWeird], {
+        function: "EPC",
+        gasId: "nitrogen",
+        flow: 0,
+        unit: "slpm",
+        pressureBar: 2,
+      });
+      expect(result.matches.map((m) => m.product.model)).toEqual([
+        "LEPC-WEIRD",
+      ]);
+      expect(result.matches[0].fitScore).toBeCloseTo(0.7, 6);
+    });
   });
 });
 

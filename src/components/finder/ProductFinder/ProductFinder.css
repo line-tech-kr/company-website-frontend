@@ -168,8 +168,8 @@
   font-size: 13px;
 }
 
-/* Flow input ----------------------------------------------------- */
-.lt-finder__flow {
+/* Numeric input + unit selector (Flow, Pressure) ----------------- */
+.lt-finder__input-row {
   display: grid;
   grid-template-columns: 1fr 110px;
   gap: 8px;
@@ -376,8 +376,8 @@
     color 0.15s;
 }
 .lt-mix__row-remove:hover:not(:disabled) {
-  border-color: var(--lt-danger-500, #d8513b);
-  color: var(--lt-danger-500, #d8513b);
+  border-color: var(--lt-danger);
+  color: var(--lt-danger);
 }
 .lt-mix__row-remove:disabled {
   opacity: 0.4;
@@ -400,7 +400,7 @@
   padding: 4px 0;
   font-size: 14px;
   font-weight: 600;
-  color: var(--lt-primary-600, var(--lt-neutral-700));
+  color: var(--lt-primary-600);
   cursor: pointer;
 }
 .lt-mix__add:hover {
@@ -415,7 +415,7 @@
   font-variant-numeric: tabular-nums;
 }
 .lt-mix__total--ok {
-  color: var(--lt-success-600, #1f7a3a);
+  color: var(--lt-success);
 }
 .lt-mix__total--bad {
   color: var(--lt-neutral-500);

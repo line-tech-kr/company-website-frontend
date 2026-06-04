@@ -125,7 +125,7 @@ test.describe("Product finder", () => {
     const percentInputs = page.locator(".lt-mix__row-percent input");
     await percentInputs.nth(0).fill("95");
     await percentInputs.nth(1).fill("5");
-    await expect(page.locator(".lt-mix__total--ok")).toBeVisible();
+    await expect(page.locator('.lt-mix__total[data-state="ok"]')).toBeVisible();
 
     // Enter a flow and confirm at least one result appears.
     await page
@@ -155,7 +155,10 @@ test.describe("Product finder", () => {
   test("pressure filter narrows matches (LEPC drops out beyond its range)", async ({
     page,
   }) => {
-    // 0.1–6 barA: 2 bar is in range, 50 bar is not.
+    // Brittleness note: anchors on LEPC's published `pressureRange`
+    // (0.1–6 barA today). A Sanity content edit that widens that range will
+    // break this test with no code change — re-anchor to whichever EPC owns
+    // a narrow range below 50 bar at that point.
     await page.goto("/en/products/finder?fn=EPC&p=2&pu=bar");
     await expect(
       page.locator(".lt-finder__result").filter({ hasText: "LEPC" }),

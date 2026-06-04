@@ -30,4 +30,12 @@ describe("catalogValueToBar", () => {
   it("defaults to bar when unit is missing", () => {
     expect(catalogValueToBar(3, undefined)).toBe(3);
   });
+
+  it("returns null when value is NaN", () => {
+    expect(catalogValueToBar(Number.NaN, "bar")).toBeNull();
+  });
+
+  it("returns null when value is Infinity", () => {
+    expect(catalogValueToBar(Number.POSITIVE_INFINITY, "bar")).toBeNull();
+  });
 });

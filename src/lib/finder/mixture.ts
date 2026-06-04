@@ -42,7 +42,7 @@ export function computeMixtureFactor(
   components: readonly GasComponent[],
 ): MixtureResult | MixtureError | null {
   const usable = components.filter(
-    (c) => c.gasId.trim() !== "" && c.percent > 0,
+    (c) => c.gasId.trim() !== "" && Number.isFinite(c.percent) && c.percent > 0,
   );
   if (usable.length === 0) return null;
 
@@ -86,7 +86,7 @@ export function formatMixtureLabel(
   components: readonly GasComponent[],
 ): string {
   const usable = components.filter(
-    (c) => c.gasId.trim() !== "" && c.percent > 0,
+    (c) => c.gasId.trim() !== "" && Number.isFinite(c.percent) && c.percent > 0,
   );
   return usable
     .map((c) => {

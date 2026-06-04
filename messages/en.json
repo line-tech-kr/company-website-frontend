@@ -181,7 +181,8 @@
     },
     "pressure": {
       "label": "Operating pressure (optional)",
-      "placeholder": "e.g. 2"
+      "placeholder": "e.g. 2",
+      "unitAria": "Pressure unit"
     },
     "series": {
       "label": "Series",

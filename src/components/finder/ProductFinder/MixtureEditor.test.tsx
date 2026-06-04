@@ -84,23 +84,43 @@ describe("<MixtureEditor />", () => {
     expect(get()).toHaveLength(2);
   });
 
-  it("flags the total as ok when components sum to 100", () => {
+  it("marks the total data-state=ok when components sum to 100", () => {
     setup([
       { gasId: "nitrogen", percent: 95 },
       { gasId: "silane", percent: 5 },
     ]);
     const total = screen.getByRole("status");
-    expect(total.className).toContain("lt-mix__total--ok");
-    expect(total.textContent).toMatch(/100/);
+    expect(total).toHaveAttribute("data-state", "ok");
+    expect(total).toHaveTextContent(/100/);
   });
 
-  it("flags the total as bad when components do not sum to 100", () => {
+  it("marks the total data-state=bad when components do not sum to 100", () => {
     setup([
       { gasId: "nitrogen", percent: 80 },
       { gasId: "silane", percent: 5 },
     ]);
     const total = screen.getByRole("status");
-    expect(total.className).toContain("lt-mix__total--bad");
-    expect(total.textContent).toMatch(/85/);
+    expect(total).toHaveAttribute("data-state", "bad");
+    expect(total).toHaveTextContent(/85/);
+  });
+
+  it("gives each percent input a distinct row-numbered aria-label", () => {
+    setup();
+    expect(screen.getByLabelText("Component percent 1")).toBeInTheDocument();
+    expect(screen.getByLabelText("Component percent 2")).toBeInTheDocument();
+  });
+
+  it("hides the % glyph from assistive tech (aria-hidden)", () => {
+    const { container } = render(
+      <MixtureEditor
+        components={defaultMixtureComponents()}
+        onChange={vi.fn()}
+        labels={LABELS}
+      />,
+    );
+    const glyphs = container.querySelectorAll('[aria-hidden="true"]');
+    // One per row: the visual "%" glyph next to each number input.
+    expect(glyphs.length).toBeGreaterThanOrEqual(2);
+    for (const g of glyphs) expect(g.textContent).toBe("%");
   });
 });

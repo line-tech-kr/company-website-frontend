@@ -181,7 +181,8 @@
     },
     "pressure": {
       "label": "工作压力 (可选)",
-      "placeholder": "如: 2"
+      "placeholder": "如: 2",
+      "unitAria": "压力单位"
     },
     "series": {
       "label": "系列",
