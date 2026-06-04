@@ -13,14 +13,13 @@ const baseProduct: FeaturedApplicationProductInput = {
   series: "specialized",
   productLabel: "Dissolved O₂ analyzer",
   description: "Fallback product description.",
-  flowRange: "0–1000 sccm",
+  specs: [{ label: "Flow range", value: "0–1000 sccm" }],
   imageUrl: "/products/do400/cutout-2026.png",
 };
 
 const labels = {
   kickerLabel: "Featured",
   whyHeadingLabel: "Why this one",
-  flowRangeLabel: "Flow range",
   viewProductLabel: "View product",
 };
 
@@ -42,6 +41,31 @@ describe("FeaturedApplicationProduct", () => {
     expect(getByText("Purpose-built for fuel cells.")).toBeInTheDocument();
     expect(getByText("Flow range")).toBeInTheDocument();
     expect(getByText("0–1000 sccm")).toBeInTheDocument();
+  });
+
+  it("renders every spec row in order when multiple are provided", () => {
+    const { container } = render(
+      <FeaturedApplicationProduct
+        product={{
+          ...baseProduct,
+          specs: [
+            { label: "Flow range", value: "100–400 slpm" },
+            { label: "Max pressure", value: "<30 bar" },
+          ],
+        }}
+        whyCaption="x"
+        {...labels}
+      />,
+    );
+
+    const dts = Array.from(
+      container.querySelectorAll(".ap-featured__spec dt"),
+    ).map((n) => n.textContent);
+    const dds = Array.from(
+      container.querySelectorAll(".ap-featured__spec dd"),
+    ).map((n) => n.textContent);
+    expect(dts).toEqual(["Flow range", "Max pressure"]);
+    expect(dds).toEqual(["100–400 slpm", "<30 bar"]);
   });
 
   it("omits the image link when imageUrl is null", () => {
@@ -69,15 +93,25 @@ describe("FeaturedApplicationProduct", () => {
     expect(getByText("Fallback product description.")).toBeInTheDocument();
   });
 
-  it("omits the spec block when flowRange is null", () => {
+  it("omits the spec block when specs is empty", () => {
     const { container } = render(
       <FeaturedApplicationProduct
-        product={{ ...baseProduct, flowRange: null }}
+        product={{ ...baseProduct, specs: [] }}
         whyCaption="x"
         {...labels}
       />,
     );
+    expect(container.querySelector(".ap-featured__spec")).toBeNull();
+  });
 
+  it("omits the spec block when specs is undefined", () => {
+    const { container } = render(
+      <FeaturedApplicationProduct
+        product={{ ...baseProduct, specs: undefined }}
+        whyCaption="x"
+        {...labels}
+      />,
+    );
     expect(container.querySelector(".ap-featured__spec")).toBeNull();
   });
 
