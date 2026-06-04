@@ -44,7 +44,7 @@ describe("FeaturedApplicationProduct", () => {
   });
 
   it("renders every spec row in order when multiple are provided", () => {
-    const { container, getByText } = render(
+    const { container } = render(
       <FeaturedApplicationProduct
         product={{
           ...baseProduct,
@@ -58,15 +58,14 @@ describe("FeaturedApplicationProduct", () => {
       />,
     );
 
-    expect(getByText("Flow range")).toBeInTheDocument();
-    expect(getByText("100–400 slpm")).toBeInTheDocument();
-    expect(getByText("Max pressure")).toBeInTheDocument();
-    expect(getByText("<30 bar")).toBeInTheDocument();
-
     const dts = Array.from(
       container.querySelectorAll(".ap-featured__spec dt"),
     ).map((n) => n.textContent);
+    const dds = Array.from(
+      container.querySelectorAll(".ap-featured__spec dd"),
+    ).map((n) => n.textContent);
     expect(dts).toEqual(["Flow range", "Max pressure"]);
+    expect(dds).toEqual(["100–400 slpm", "<30 bar"]);
   });
 
   it("omits the image link when imageUrl is null", () => {
@@ -94,24 +93,26 @@ describe("FeaturedApplicationProduct", () => {
     expect(getByText("Fallback product description.")).toBeInTheDocument();
   });
 
-  it("omits the spec block when specs is empty or missing", () => {
-    const empty = render(
+  it("omits the spec block when specs is empty", () => {
+    const { container } = render(
       <FeaturedApplicationProduct
         product={{ ...baseProduct, specs: [] }}
         whyCaption="x"
         {...labels}
       />,
     );
-    expect(empty.container.querySelector(".ap-featured__spec")).toBeNull();
+    expect(container.querySelector(".ap-featured__spec")).toBeNull();
+  });
 
-    const undef = render(
+  it("omits the spec block when specs is undefined", () => {
+    const { container } = render(
       <FeaturedApplicationProduct
         product={{ ...baseProduct, specs: undefined }}
         whyCaption="x"
         {...labels}
       />,
     );
-    expect(undef.container.querySelector(".ap-featured__spec")).toBeNull();
+    expect(container.querySelector(".ap-featured__spec")).toBeNull();
   });
 
   it("CTA href composes /products/{series}/{slug}", () => {

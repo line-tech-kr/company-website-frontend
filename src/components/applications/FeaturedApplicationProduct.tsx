@@ -72,10 +72,10 @@ export function FeaturedApplicationProduct({
         ) : null}
         {specs.length > 0 ? (
           <dl className="ap-featured__spec">
-            {specs.map((s, i) => (
+            {specs.map((spec, i) => (
               <Fragment key={i}>
-                <dt>{s.label}</dt>
-                <dd>{s.value}</dd>
+                <dt>{spec.label}</dt>
+                <dd>{spec.value}</dd>
               </Fragment>
             ))}
           </dl>

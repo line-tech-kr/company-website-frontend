@@ -49,6 +49,11 @@ test.describe("Applications detail page", () => {
       "href",
       /\/products\/specialized\/do400$/,
     );
+
+    const specLabels = featured.locator(".ap-featured__spec dt");
+    const specValues = featured.locator(".ap-featured__spec dd");
+    await expect(specLabels).toHaveText(["Flow range", "Max pressure"]);
+    await expect(specValues).toHaveText(["100–400 slpm", "<30 bar"]);
   });
 
   test("applications without a featured slug do not render the featured block", async ({
