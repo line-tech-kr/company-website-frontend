@@ -24,6 +24,10 @@ export type QuoteUnit<V extends string = string> = {
 export type QuoteFieldsCopy = {
   heading: string;
   helper: string;
+  model: {
+    label: string;
+    placeholder: string;
+  };
   gas: {
     label: string;
     placeholder: string;
@@ -242,7 +246,11 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       ],
       quoteFields: {
         heading: "공정 조건",
-        helper: "정확한 견적을 위해 아래 네 가지 정보를 함께 알려주세요.",
+        helper: "정확한 견적을 위해 아래 정보를 함께 알려주세요.",
+        model: {
+          label: "모델명",
+          placeholder: "예: M3030VA",
+        },
         gas: {
           label: "가스",
           placeholder: "예: N2, Ar",
@@ -316,7 +324,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       productInquiry: {
         subject: "{model} 견적 문의",
         message:
-          "{model}에 대한 견적을 요청드립니다. 아래에 공정 조건을 입력해 주세요.",
+          "{model}에 대한 견적을 요청드립니다. 공정 조건은 양식에 함께 입력했습니다.",
       },
     },
     distributors: {
@@ -439,7 +447,11 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       quoteFields: {
         heading: "Process conditions",
         helper:
-          "Share the four details below so we can price your MFC/MFM accurately.",
+          "Share the details below so we can price your MFC/MFM accurately.",
+        model: {
+          label: "Model",
+          placeholder: "e.g. M3030VA",
+        },
         gas: {
           label: "Gas",
           placeholder: "e.g. N2, Ar",
@@ -514,7 +526,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       productInquiry: {
         subject: "Quote request: {model}",
         message:
-          "I'd like to request a quote for the {model}. Process conditions are filled in below.",
+          "I'd like to request a quote for the {model}. Process conditions are included in this form.",
       },
     },
     distributors: {
@@ -640,7 +652,11 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       ],
       quoteFields: {
         heading: "工艺条件",
-        helper: "请提供以下四项信息，便于我们准确报价。",
+        helper: "请提供以下信息，便于我们准确报价。",
+        model: {
+          label: "型号",
+          placeholder: "例如：M3030VA",
+        },
         gas: {
           label: "气体",
           placeholder: "例如：N2、Ar",
@@ -713,7 +729,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       },
       productInquiry: {
         subject: "{model} 报价咨询",
-        message: "我想申请 {model} 的报价，工艺条件已在下方填写。",
+        message: "我想申请 {model} 的报价，工艺条件已在表单中填写。",
       },
     },
     distributors: {

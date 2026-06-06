@@ -12,6 +12,7 @@ import { QuoteFields } from "./QuoteFields";
 type ContactFormDefaults = {
   inquiryType: InquiryTypeId;
   extraField?: string;
+  model?: string;
   subject: string;
   message: string;
 };
@@ -190,6 +191,7 @@ export function ContactForm({ form, defaults }: Props) {
             requiredLabel={form.required}
             invalidFields={invalidFields}
             fieldErrId={fieldErrId}
+            defaultModel={defaults?.model}
           />
         )}
 

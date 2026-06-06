@@ -87,6 +87,7 @@ function buildText(data: ContactFormPayload): string {
       ? [
           "",
           "공정 조건:",
+          ...(data.model ? [`- 모델: ${data.model}`] : []),
           ...(gasSummary ? [`- 가스: ${gasSummary}`] : []),
           ...(formatFlow(data) ? [`- 유량: ${formatFlow(data)}`] : []),
           ...(formatPressure(data) ? [`- 압력: ${formatPressure(data)}`] : []),
@@ -177,6 +178,7 @@ function buildHtml(data: ContactFormPayload): string {
     row("문의 유형", escapeHtml(formatInquiryType(data))),
     ...(data.company ? [row("회사명", escapeHtml(data.company))] : []),
     ...(data.subject ? [row("제목", escapeHtml(data.subject))] : []),
+    ...(isQuote && data.model ? [row("모델", escapeHtml(data.model))] : []),
     ...(isQuote && gasText ? [row("가스", escapeHtml(gasText))] : []),
     ...(isQuote && flowText ? [row("유량", escapeHtml(flowText))] : []),
     ...(isQuote && pressureText ? [row("압력", escapeHtml(pressureText))] : []),
