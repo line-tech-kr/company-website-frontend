@@ -76,7 +76,7 @@ describe("MobileNav", () => {
       ).toBeInTheDocument();
     });
     expect(container.querySelector(".lt-locale")).toBeInTheDocument();
-    const quote = within(container).getByText("Quote").closest("a");
+    const quote = within(container).getByRole("link", { name: "Quote" });
     expect(quote).toHaveAttribute("href", "/contact");
   });
 
