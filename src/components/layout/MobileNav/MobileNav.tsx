@@ -4,11 +4,7 @@ import { useEffect, useId, useRef, useState, type RefObject } from "react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { Button } from "@/components/ui/Button";
-import {
-  LT_SHELL,
-  getProductsCategories,
-  type ShellNavItem,
-} from "@/lib/content/shell";
+import { getProductsCategories, type ShellNavItem } from "@/lib/content/shell";
 import type { Locale } from "@/lib/content/home";
 import { useDialogPanel } from "@/lib/hooks/useDialogPanel";
 import { LocaleSwitcher } from "../LocaleSwitcher/LocaleSwitcher";
@@ -114,12 +110,7 @@ export function MobileNav({
 
           <div className="pd-mnav__footer">
             <LocaleSwitcher />
-            <Button
-              variant="primary"
-              size="md"
-              href={`mailto:${LT_SHELL[locale].footer.contact.email}`}
-              plain
-            >
+            <Button variant="primary" size="md" href="/contact">
               {quoteLabel}
             </Button>
           </div>

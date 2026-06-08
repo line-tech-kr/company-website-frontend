@@ -44,12 +44,7 @@ export function Header({ locale }: Props) {
           <SearchTriggerButton label={shell.search.openLabel} />
           <span className="pd-top__divider" aria-hidden="true" />
           <LocaleSwitcher />
-          <Button
-            variant="primary"
-            size="md"
-            href={`mailto:${shell.footer.contact.email}`}
-            plain
-          >
+          <Button variant="primary" size="md" href="/contact">
             {shell.quoteLabel}
           </Button>
           <MobileNavTrigger

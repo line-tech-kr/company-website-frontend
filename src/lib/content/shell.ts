@@ -130,7 +130,7 @@ export type ShellMobileNav = {
 
 export type ShellContent = {
   nav: ShellNavItem[];
-  /** Top-right "Quote" button label in the header. Mailto target is shared. */
+  /** Top-right "Quote" button label in the header. Routes to /contact. */
   quoteLabel: string;
   /** Product mega-menu categories — 4 series + 1 accessories entry. */
   productsCategories: ProductsCategory[];
