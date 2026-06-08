@@ -156,6 +156,61 @@ describe("sendContactEmail", () => {
     expect(email.to).toEqual(["valid@example.com", "another@example.com"]);
   });
 
+  it("includes the model in the quote details when supplied", async () => {
+    const quote: ContactFormPayload = {
+      inquiryType: "quote",
+      name: "Buyer",
+      email: "buyer@example.com",
+      message: "Quote please.",
+      model: "M3030VA",
+      gasMode: "pure",
+      gas: "N2",
+      flowValue: "500",
+      flowUnit: "sccm",
+      pressureValue: "2",
+      pressureUnit: "bar",
+      fittingType: "VCR",
+      fittingSize: '1/4"',
+      consent: "on",
+      website: "",
+      "cf-turnstile-response": "tok",
+    };
+
+    await sendContactEmail(quote);
+
+    const email = sendMock.mock.calls[0]![0];
+    expect(email.html).toContain("모델");
+    expect(email.html).toContain("M3030VA");
+    expect(email.text).toContain("- 모델: M3030VA");
+  });
+
+  it("omits the model row from the quote details when not supplied", async () => {
+    const quote: ContactFormPayload = {
+      inquiryType: "quote",
+      name: "Buyer",
+      email: "buyer@example.com",
+      message: "Quote please.",
+      gasMode: "pure",
+      gas: "N2",
+      flowValue: "500",
+      flowUnit: "sccm",
+      pressureValue: "2",
+      pressureUnit: "bar",
+      fittingType: "VCR",
+      fittingSize: '1/4"',
+      consent: "on",
+      website: "",
+      "cf-turnstile-response": "tok",
+    };
+
+    await sendContactEmail(quote);
+
+    const email = sendMock.mock.calls[0]![0];
+    expect(email.text).not.toContain("- 모델:");
+    // The HTML quote-details table should not include a 모델 row.
+    expect(email.html).not.toMatch(/>모델</);
+  });
+
   it("falls back to the default when all entries are malformed", async () => {
     vi.stubEnv("CONTACT_FORM_TO", "nope, also-nope");
 

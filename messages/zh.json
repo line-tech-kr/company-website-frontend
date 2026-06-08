@@ -351,7 +351,8 @@
       "pressureValue": "请输入大于零的压力数值。",
       "pressureUnit": "请选择压力单位。",
       "fittingType": "请选择接头类型。",
-      "fittingSize": "请填写接头规格。"
+      "fittingSize": "请填写接头规格。",
+      "model": "请填写型号。"
     },
     "successTitle": "您的咨询已发送。",
     "success": "Line Tech 负责人将通过您填写的邮箱回复。",

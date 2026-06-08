@@ -191,11 +191,36 @@ test.describe("Contact form", () => {
       /Quote request: M3030VA/,
     );
     await expect(page.locator("#ct-message")).toHaveValue(/M3030VA/);
+    // The prefilled message must not claim conditions are "below" — they
+    // render above the message textarea, not below.
+    await expect(page.locator("#ct-message")).not.toHaveValue(/below/i);
     // Process conditions block must be rendered as a result of the prefill.
+    await expect(page.locator("#ct-quote-model")).toHaveValue("M3030VA");
     await expect(page.locator("#ct-gas")).toBeVisible();
     await expect(page.locator("#ct-flow-value")).toBeVisible();
     await expect(page.locator("#ct-pressure-value")).toBeVisible();
     await expect(page.locator("#ct-fitting-type")).toBeVisible();
+  });
+
+  test("prefilled message in ko/zh drops directional 'below' wording", async ({
+    page,
+  }) => {
+    await page.goto("/ko/contact?product=M3030VA");
+    await expect(page.locator("#ct-message")).not.toHaveValue(/아래/);
+    await expect(page.locator("#ct-quote-model")).toHaveValue("M3030VA");
+
+    await page.goto("/zh/contact?product=M3030VA");
+    await expect(page.locator("#ct-message")).not.toHaveValue(/下方/);
+    await expect(page.locator("#ct-quote-model")).toHaveValue("M3030VA");
+  });
+
+  test("Model input is always visible when Quote is selected, blank without prefill", async ({
+    page,
+  }) => {
+    await page.locator("#ct-inquiry-type").selectOption("quote");
+    const model = page.locator("#ct-quote-model");
+    await expect(model).toBeVisible();
+    await expect(model).toHaveValue("");
   });
 
   test("flags missing quote fields when submitted blank", async ({ page }) => {

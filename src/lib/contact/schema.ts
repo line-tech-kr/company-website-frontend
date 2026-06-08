@@ -64,6 +64,7 @@ export const contactFormSchema = z
   .object({
     inquiryType: z.string().min(1).max(64),
     typeDetail: z.string().max(200).optional(),
+    model: z.string().max(120).optional(),
     name: z.string().min(1).max(120),
     email: z.string().email().max(254),
     company: z.string().max(200).optional(),

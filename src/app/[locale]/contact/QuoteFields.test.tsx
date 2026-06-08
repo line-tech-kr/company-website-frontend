@@ -10,6 +10,10 @@ vi.mock("next-intl", () => ({
 const form: ContactFormCopy["quoteFields"] = {
   heading: "Process conditions",
   helper: "Fill in.",
+  model: {
+    label: "Model",
+    placeholder: "e.g. M3030VA",
+  },
   gas: {
     label: "Gas",
     placeholder: "e.g. N2",
@@ -50,7 +54,10 @@ const form: ContactFormCopy["quoteFields"] = {
   },
 };
 
-function renderQuote(invalid: ReadonlySet<string> = new Set()) {
+function renderQuote(
+  invalid: ReadonlySet<string> = new Set(),
+  defaultModel?: string,
+) {
   return render(
     <form>
       <QuoteFields
@@ -58,12 +65,36 @@ function renderQuote(invalid: ReadonlySet<string> = new Set()) {
         requiredLabel="Required"
         invalidFields={invalid}
         fieldErrId={(name) => `ct-${name}-err`}
+        defaultModel={defaultModel}
       />
     </form>,
   );
 }
 
 describe("QuoteFields", () => {
+  it("renders an empty Model input when no defaultModel is supplied", () => {
+    renderQuote();
+    const model = screen.getByLabelText("Model") as HTMLInputElement;
+    expect(model.name).toBe("model");
+    expect(model.value).toBe("");
+  });
+
+  it("prefills the Model input from defaultModel", () => {
+    renderQuote(new Set(), "M3030VA");
+    const model = screen.getByLabelText("Model") as HTMLInputElement;
+    expect(model.value).toBe("M3030VA");
+  });
+
+  it("surfaces the model field error when the schema rejects", () => {
+    renderQuote(new Set(["model"]));
+    const model = screen.getByLabelText("Model");
+    const errId = model.getAttribute("aria-describedby");
+    expect(errId).toBeTruthy();
+    expect(document.getElementById(errId!)).toHaveTextContent(
+      "fieldErrors.model",
+    );
+  });
+
   it("starts in pure mode with a single gas input", () => {
     renderQuote();
     expect(screen.getByLabelText(/Pure gas/)).toBeChecked();

@@ -12,6 +12,7 @@ type Props = {
   requiredLabel: string;
   invalidFields: ReadonlySet<string>;
   fieldErrId: (name: string) => string;
+  defaultModel?: string;
 };
 
 function serializeComponents(components: GasComponentDraft[]): string {
@@ -28,6 +29,7 @@ export function QuoteFields({
   requiredLabel,
   invalidFields,
   fieldErrId,
+  defaultModel,
 }: Props) {
   const t = useTranslations("contactForm");
   // useRef counter survives mode toggles but resets per mount, so HMR can't
@@ -79,6 +81,36 @@ export function QuoteFields({
       <legend className="ct-form__quote-heading">{form.heading}</legend>
       <p className="ct-form__quote-helper">{form.helper}</p>
       <div className="ct-form__quote-grid">
+        <div className="ct-form__row ct-form__quote-row--full">
+          <label htmlFor="ct-quote-model" className="ct-form__label">
+            {form.model.label}
+          </label>
+          <input
+            id="ct-quote-model"
+            name="model"
+            type="text"
+            defaultValue={defaultModel}
+            placeholder={form.model.placeholder}
+            className={
+              invalidFields.has("model")
+                ? "ct-form__input ct-form__input--invalid"
+                : "ct-form__input"
+            }
+            aria-invalid={invalidFields.has("model") || undefined}
+            aria-describedby={
+              invalidFields.has("model") ? fieldErrId("model") : undefined
+            }
+          />
+          {invalidFields.has("model") && (
+            <p
+              id={fieldErrId("model")}
+              className="ct-form__field-error"
+              role="alert"
+            >
+              {t("fieldErrors.model")}
+            </p>
+          )}
+        </div>
         <div className="ct-form__row ct-form__quote-row--full">
           <span className="ct-form__label">
             {form.gas.label}

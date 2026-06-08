@@ -2,6 +2,7 @@ import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
 import {
   contactPayloadFixture,
   makeContactPayload,
+  makeQuotePayload,
 } from "@/test/fixtures/contact";
 
 const { createClientMock, createMock } = vi.hoisted(() => ({
@@ -79,6 +80,15 @@ describe("persistContactSubmission", () => {
     expect(doc.company).toBeUndefined();
     expect(doc.phone).toBeUndefined();
     expect(doc.subject).toBeUndefined();
+    expect(doc.model).toBeUndefined();
+  });
+
+  it("persists the model on quote submissions", async () => {
+    vi.stubEnv("SANITY_WRITE_TOKEN", "write-token");
+    await persistContactSubmission(makeQuotePayload({ model: "M3030VA" }));
+
+    const doc = createMock.mock.calls[0][0];
+    expect(doc.model).toBe("M3030VA");
   });
 
   it("propagates errors from the Sanity client", async () => {

@@ -351,7 +351,8 @@
       "pressureValue": "압력을 0보다 큰 숫자로 입력해 주세요.",
       "pressureUnit": "압력 단위를 선택해 주세요.",
       "fittingType": "피팅 타입을 선택해 주세요.",
-      "fittingSize": "피팅 사이즈를 입력해 주세요."
+      "fittingSize": "피팅 사이즈를 입력해 주세요.",
+      "model": "모델명을 입력해 주세요."
     },
     "successTitle": "문의가 정상적으로 전송되었습니다.",
     "success": "입력하신 이메일 주소로 담당자가 회신드릴 예정입니다.",

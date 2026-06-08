@@ -23,6 +23,7 @@ export async function persistContactSubmission(
     submittedAt: new Date().toISOString(),
     inquiryType: data.inquiryType,
     typeDetail: data.typeDetail ?? undefined,
+    model: data.model ?? undefined,
     name: data.name,
     email: data.email,
     company: data.company ?? undefined,

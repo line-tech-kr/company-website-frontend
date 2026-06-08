@@ -240,6 +240,24 @@ describe("contactFormSchema", () => {
       expect(result.success).toBe(false);
     });
 
+    it("accepts an optional model string on a quote payload", () => {
+      const result = contactFormSchema.safeParse(
+        makeQuotePayload({ model: "M3030VA" }),
+      );
+      expect(result.success).toBe(true);
+      if (result.success) expect(result.data.model).toBe("M3030VA");
+    });
+
+    it("rejects a model longer than 120 chars", () => {
+      const result = contactFormSchema.safeParse(
+        makeQuotePayload({ model: "x".repeat(121) }),
+      );
+      expect(result.success).toBe(false);
+      if (!result.success) {
+        expect(result.error.flatten().fieldErrors.model).toBeDefined();
+      }
+    });
+
     it("does not require quote fields for non-quote inquiries", () => {
       const result = contactFormSchema.safeParse({
         inquiryType: "general",

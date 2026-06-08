@@ -58,6 +58,7 @@ export default async function ContactPage({ params, searchParams }: Props) {
   const defaults = product
     ? {
         inquiryType: "quote" as const,
+        model: product.model,
         subject: form.productInquiry.subject.replaceAll(
           "{model}",
           product.model,
