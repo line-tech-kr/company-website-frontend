@@ -22,12 +22,6 @@ export const contactSubmission = defineType({
       type: "string",
     }),
     defineField({
-      name: "model",
-      title: "Model",
-      type: "string",
-      description: "Quote requests — product model the inquiry is about.",
-    }),
-    defineField({
       name: "name",
       title: "Name",
       type: "string",
@@ -56,6 +50,12 @@ export const contactSubmission = defineType({
       name: "message",
       title: "Message",
       type: "text",
+    }),
+    defineField({
+      name: "model",
+      title: "Model",
+      type: "string",
+      description: "Quote requests only — product model the inquiry is about.",
     }),
     defineField({
       name: "gasMode",

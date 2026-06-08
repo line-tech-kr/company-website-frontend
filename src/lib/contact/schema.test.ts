@@ -253,6 +253,9 @@ describe("contactFormSchema", () => {
         makeQuotePayload({ model: "x".repeat(121) }),
       );
       expect(result.success).toBe(false);
+      if (!result.success) {
+        expect(result.error.flatten().fieldErrors.model).toBeDefined();
+      }
     });
 
     it("does not require quote fields for non-quote inquiries", () => {

@@ -323,8 +323,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       },
       productInquiry: {
         subject: "{model} 견적 문의",
-        message:
-          "{model}에 대한 견적을 요청드립니다. 공정 조건은 양식에 함께 입력했습니다.",
+        message: "{model}에 대한 견적을 요청드립니다.",
       },
     },
     distributors: {
@@ -525,8 +524,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       },
       productInquiry: {
         subject: "Quote request: {model}",
-        message:
-          "I'd like to request a quote for the {model}. Process conditions are included in this form.",
+        message: "I'd like to request a quote for the {model}.",
       },
     },
     distributors: {
@@ -729,7 +727,7 @@ export const LT_CONTACT: Record<Locale, ContactContent> = {
       },
       productInquiry: {
         subject: "{model} 报价咨询",
-        message: "我想申请 {model} 的报价，工艺条件已在表单中填写。",
+        message: "我想申请 {model} 的报价。",
       },
     },
     distributors: {

@@ -202,6 +202,18 @@ test.describe("Contact form", () => {
     await expect(page.locator("#ct-fitting-type")).toBeVisible();
   });
 
+  test("prefilled message in ko/zh drops directional 'below' wording", async ({
+    page,
+  }) => {
+    await page.goto("/ko/contact?product=M3030VA");
+    await expect(page.locator("#ct-message")).not.toHaveValue(/아래/);
+    await expect(page.locator("#ct-quote-model")).toHaveValue("M3030VA");
+
+    await page.goto("/zh/contact?product=M3030VA");
+    await expect(page.locator("#ct-message")).not.toHaveValue(/下方/);
+    await expect(page.locator("#ct-quote-model")).toHaveValue("M3030VA");
+  });
+
   test("Model input is always visible when Quote is selected, blank without prefill", async ({
     page,
   }) => {

@@ -74,21 +74,25 @@ function renderQuote(
 describe("QuoteFields", () => {
   it("renders an empty Model input when no defaultModel is supplied", () => {
     renderQuote();
-    const model = document.getElementById("ct-quote-model") as HTMLInputElement;
-    expect(model).not.toBeNull();
+    const model = screen.getByLabelText("Model") as HTMLInputElement;
     expect(model.name).toBe("model");
     expect(model.value).toBe("");
   });
 
   it("prefills the Model input from defaultModel", () => {
     renderQuote(new Set(), "M3030VA");
-    const model = document.getElementById("ct-quote-model") as HTMLInputElement;
+    const model = screen.getByLabelText("Model") as HTMLInputElement;
     expect(model.value).toBe("M3030VA");
   });
 
   it("surfaces the model field error when the schema rejects", () => {
     renderQuote(new Set(["model"]));
-    expect(screen.getByRole("alert")).toHaveTextContent("fieldErrors.model");
+    const model = screen.getByLabelText("Model");
+    const errId = model.getAttribute("aria-describedby");
+    expect(errId).toBeTruthy();
+    expect(document.getElementById(errId!)).toHaveTextContent(
+      "fieldErrors.model",
+    );
   });
 
   it("starts in pure mode with a single gas input", () => {
