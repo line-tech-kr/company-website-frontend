@@ -76,7 +76,8 @@ describe("MobileNav", () => {
       ).toBeInTheDocument();
     });
     expect(container.querySelector(".lt-locale")).toBeInTheDocument();
-    expect(within(container).getByText("Quote")).toBeInTheDocument();
+    const quote = within(container).getByText("Quote").closest("a");
+    expect(quote).toHaveAttribute("href", "/contact");
   });
 
   it("menu items render as accordion triggers, contact renders as a link", () => {
