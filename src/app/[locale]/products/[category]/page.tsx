@@ -85,10 +85,16 @@ export default async function CategoryPage({ params }: Props) {
       sensitivity: "base",
     });
 
-  const controllers = products.filter((p) => p.function === "MFC").sort(byModel);
+  const controllers = products
+    .filter((p) => p.function === "MFC")
+    .sort(byModel);
   const meters = products.filter((p) => p.function === "MFM").sort(byModel);
-  const instruments = products.filter((p) => p.function === "ROU").sort(byModel);
-  const pressureControllers = products.filter((p) => p.function === "EPC").sort(byModel);
+  const instruments = products
+    .filter((p) => p.function === "ROU")
+    .sort(byModel);
+  const pressureControllers = products
+    .filter((p) => p.function === "EPC")
+    .sort(byModel);
 
   const breadcrumbs = [
     { label: tCommon("home"), href: "/" },
