@@ -159,7 +159,7 @@ export const categoryShowcaseQuery = defineQuery(`
       "image": product->images[0],
       "cutout": product->cutout,
     },
-    "specialized": specialized[product->function != "MFM"]{
+    "explosion-proof": specialized[product->function != "MFM"]{
       caption,
       "model": product->model,
       "slug": product->slug.current,

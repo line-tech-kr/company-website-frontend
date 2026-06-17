@@ -36,7 +36,7 @@ const SPEC_ORDER: Array<keyof MassFlowSpecs> = [
 const SERIES_LABELS: Record<Product["series"], string> = {
   analogue: "Analogue",
   digital: "Digital",
-  specialized: "Specialized",
+  specialized: "Explosion-proof",
   lepc: "LEPC",
 };
 

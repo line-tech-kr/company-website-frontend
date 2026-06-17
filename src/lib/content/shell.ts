@@ -4,7 +4,7 @@
  * Conventions:
  *  - One typed object per locale, same shape as `LT_HOME` in `./home.ts`.
  *  - Products mega-menu reads `productsCategories` (analogue / digital /
- *    specialized / lepc / accessories). The homepage series cards mirror
+ *    explosion-proof / lepc / accessories). The homepage series cards mirror
  *    the same categories; hrefs live on each SeriesItem.
  *  - Consumed by: Header (#6), Footer (#4), MegaMenu (#7). Keep labels here,
  *    layout decisions in the components.
@@ -92,7 +92,7 @@ export type ShellFooter = {
  * Slug is locale-independent; label/desc are localized.
  */
 export type ProductsCategory = {
-  /** Stable slug: "analogue" | "digital" | "specialized" | "lepc" | "accessories". */
+  /** Stable slug: "analogue" | "digital" | "explosion-proof" | "lepc" | "accessories". */
   code: string;
   label: string;
   desc: string;
@@ -273,10 +273,10 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         href: "/products/digital",
       },
       {
-        code: "specialized",
-        label: "특수 시리즈",
-        desc: "방폭 · 디스플레이 일체형 등 특수 사양",
-        href: "/products/specialized",
+        code: "explosion-proof",
+        label: "방폭 시리즈",
+        desc: "위험·가혹 환경용 방폭(EX) MFC · MFM",
+        href: "/products/explosion-proof",
       },
       {
         code: "lepc",
@@ -473,10 +473,10 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         href: "/products/digital",
       },
       {
-        code: "specialized",
-        label: "Specialized series",
-        desc: "Explosion-proof and integrated-display variants",
-        href: "/products/specialized",
+        code: "explosion-proof",
+        label: "Explosion-proof series",
+        desc: "Explosion-proof (EX) MFC · MFM for hazardous areas",
+        href: "/products/explosion-proof",
       },
       {
         code: "lepc",
@@ -661,10 +661,10 @@ export const LT_SHELL: Record<Locale, ShellContent> = {
         href: "/products/digital",
       },
       {
-        code: "specialized",
-        label: "特殊系列",
-        desc: "防爆、集成显示等特殊型号",
-        href: "/products/specialized",
+        code: "explosion-proof",
+        label: "防爆系列",
+        desc: "用于危险环境的防爆(EX) MFC · MFM",
+        href: "/products/explosion-proof",
       },
       {
         code: "lepc",

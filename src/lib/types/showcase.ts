@@ -15,7 +15,7 @@ const ShowcaseEntrySchema = z.object({
 export const CategoryShowcaseSchema = z.object({
   analogue: z.array(ShowcaseEntrySchema).nullable(),
   digital: z.array(ShowcaseEntrySchema).nullable(),
-  specialized: z.array(ShowcaseEntrySchema).nullable(),
+  "explosion-proof": z.array(ShowcaseEntrySchema).nullable(),
   lepc: z.array(ShowcaseEntrySchema).nullable(),
 });
 

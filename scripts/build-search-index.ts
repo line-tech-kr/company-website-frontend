@@ -24,7 +24,7 @@ type Locale = (typeof LOCALES)[number];
 const CATEGORY_LABELS: Record<CategorySlug, Record<Locale, string>> = {
   analogue: { ko: "아날로그", en: "Analogue", zh: "模拟" },
   digital: { ko: "디지털", en: "Digital", zh: "数字" },
-  specialized: { ko: "특수", en: "Specialized", zh: "特殊" },
+  "explosion-proof": { ko: "방폭", en: "Explosion-proof", zh: "防爆" },
   lepc: { ko: "LEPC 압력", en: "LEPC pressure", zh: "LEPC 压力" },
 };
 
@@ -38,7 +38,7 @@ function productToEntries(p: Product): Record<Locale, SearchEntry> | null {
   const productType = p.function.toLowerCase() as Lowercase<
     Product["function"]
   >;
-  const signal = p.series;
+  const signal = category;
   const catLabel = CATEGORY_LABELS[category];
 
   return {
@@ -106,11 +106,11 @@ const STATIC_ENTRIES: Record<Locale, SearchEntry[]> = {
     {
       id: "cat-specialized",
       type: "category",
-      title: "특수 사양 유량계",
+      title: "방폭 유량계",
       model: "",
-      signal: "specialized",
-      url: "/products/specialized",
-      breadcrumb: "제품 › 특수",
+      signal: "explosion-proof",
+      url: "/products/explosion-proof",
+      breadcrumb: "제품 › 방폭",
     },
     {
       id: "cat-lepc",
@@ -192,11 +192,11 @@ const STATIC_ENTRIES: Record<Locale, SearchEntry[]> = {
     {
       id: "cat-specialized",
       type: "category",
-      title: "Specialized Flow Controllers",
+      title: "Explosion-proof Flow Controllers",
       model: "",
-      signal: "specialized",
-      url: "/products/specialized",
-      breadcrumb: "Products › Specialized",
+      signal: "explosion-proof",
+      url: "/products/explosion-proof",
+      breadcrumb: "Products › Explosion-proof",
     },
     {
       id: "cat-lepc",
@@ -278,11 +278,11 @@ const STATIC_ENTRIES: Record<Locale, SearchEntry[]> = {
     {
       id: "cat-specialized",
       type: "category",
-      title: "特殊规格流量控制器",
+      title: "防爆流量控制器",
       model: "",
-      signal: "specialized",
-      url: "/products/specialized",
-      breadcrumb: "产品 › 特殊",
+      signal: "explosion-proof",
+      url: "/products/explosion-proof",
+      breadcrumb: "产品 › 防爆",
     },
     {
       id: "cat-lepc",

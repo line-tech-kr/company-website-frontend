@@ -132,21 +132,21 @@ const CATEGORY_SEO: Record<CategorySlug, Record<Locale, PageSeo>> = {
         "支持RS-485通信的数字质量流量控制器与流量计。莱因科技MD系列，专为半导体与研究领域精密控制及数据记录优化。",
     },
   },
-  specialized: {
+  "explosion-proof": {
     ko: {
-      title: "특수 사양 MFC·MFM — 라인테크",
+      title: "방폭 MFC·MFM — 라인테크",
       description:
-        "고압·부식성 가스 등 극한 환경을 위한 매스플로우 컨트롤러(MFC)·미터(MFM). 라인테크 EX 방폭 특수 시리즈와 맞춤형 사양 설계.",
+        "고압·부식성 가스 등 극한 환경을 위한 매스플로우 컨트롤러(MFC)·미터(MFM). 라인테크 EX 방폭 시리즈와 맞춤형 사양 설계.",
     },
     en: {
-      title: "Specialized MFC & MFM — Line Tech",
+      title: "Explosion-proof MFC & MFM — Line Tech",
       description:
-        "Mass Flow Controllers and Meters for extreme conditions — high pressure, corrosive gases, hazardous areas. Line Tech EX explosion-proof specialized series with custom-spec design.",
+        "Mass Flow Controllers and Meters for extreme conditions — high pressure, corrosive gases, hazardous areas. Line Tech EX explosion-proof series with custom-spec design.",
     },
     zh: {
-      title: "特殊规格MFC与MFM — Line Tech",
+      title: "防爆MFC与MFM — Line Tech",
       description:
-        "适用于高压、腐蚀性气体与危险环境的质量流量控制器与流量计。莱因科技 EX 防爆特殊系列，支持定制化规格设计。",
+        "适用于高压、腐蚀性气体与危险环境的质量流量控制器与流量计。莱因科技 EX 防爆系列，支持定制化规格设计。",
     },
   },
   lepc: {

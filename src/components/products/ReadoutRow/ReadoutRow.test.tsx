@@ -32,7 +32,7 @@ function renderRow(product = rouProductFixture) {
         <ReadoutRow
           product={product}
           imageSrc={null}
-          category="specialized"
+          category="explosion-proof"
           locale="en"
         />
       </tbody>
@@ -111,7 +111,9 @@ describe("ReadoutRow", () => {
         ".lt-readout-row__cell--display",
       ) as HTMLElement;
       fireEvent.click(cell);
-      expect(pushSpy).toHaveBeenCalledWith("/products/specialized/rou-test");
+      expect(pushSpy).toHaveBeenCalledWith(
+        "/products/explosion-proof/rou-test",
+      );
     });
 
     it("does not navigate when a modifier key is held", () => {
@@ -141,7 +143,7 @@ describe("ReadoutRow", () => {
       expect(pushSpy).toHaveBeenCalledTimes(2);
       expect(pushSpy).toHaveBeenNthCalledWith(
         1,
-        "/products/specialized/rou-test",
+        "/products/explosion-proof/rou-test",
       );
     });
   });

@@ -31,7 +31,7 @@ type Props = { params: Promise<{ locale: string }> };
 const CARD_ACCENT: Record<CategorySlug | "accessories", SlideAccent> = {
   analogue: "blue",
   digital: "steel",
-  specialized: "gold",
+  "explosion-proof": "gold",
   lepc: "neutral",
   accessories: "neutral",
 };

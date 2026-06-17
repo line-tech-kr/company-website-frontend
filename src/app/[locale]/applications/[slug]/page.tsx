@@ -79,7 +79,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const CATEGORY_HREFS: Record<string, string> = {
   analogue: "/products/analogue",
   digital: "/products/digital",
-  specialized: "/products/specialized",
+  "explosion-proof": "/products/explosion-proof",
   lepc: "/products/lepc",
 };
 
@@ -176,7 +176,7 @@ export default async function ApplicationDetailPage({ params }: Props) {
                       {app.recommendedSeries
                         .filter((s) => {
                           if (cat === "digital") return s === "MD";
-                          if (cat === "specialized") return s === "EX";
+                          if (cat === "explosion-proof") return s === "EX";
                           if (cat === "lepc") return s === "LEPC";
                           return s === "M / MS";
                         })

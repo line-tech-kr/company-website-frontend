@@ -3,7 +3,7 @@ import type { Product } from "./types/product";
 export const CATEGORY_SLUGS = [
   "analogue",
   "digital",
-  "specialized",
+  "explosion-proof",
   "lepc",
 ] as const;
 
@@ -15,14 +15,16 @@ export const CATEGORIES: Record<
 > = {
   analogue: { code: "M·MS", series: "analogue" },
   digital: { code: "MD", series: "digital" },
-  specialized: { code: "EX", series: "specialized" },
+  "explosion-proof": { code: "EX", series: "specialized" },
   lepc: { code: "LEPC", series: "lepc" },
 };
 
+// Note: the Sanity `series` value stays "specialized" (no CMS migration); only
+// the URL-facing CategorySlug is "explosion-proof". This map bridges the two.
 const SERIES_TO_CATEGORY: Record<Product["series"], CategorySlug> = {
   analogue: "analogue",
   digital: "digital",
-  specialized: "specialized",
+  specialized: "explosion-proof",
   lepc: "lepc",
 };
 
