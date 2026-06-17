@@ -42,14 +42,28 @@ const securityHeaders = [
 // retired entirely fall back to the category index page so old bookmarks
 // and search-index entries stay reachable.
 const SLUG_REDIRECTS = [
-  { from: "specialized/ex070c", to: "specialized/ex70c" },
-  { from: "specialized/ex070m", to: "specialized/ex70m" },
+  // 특수 → 방폭 (specialized → explosion-proof) category rename. The product
+  // slugs are unchanged; only the category path moves. Bare category index and
+  // each EX product redirect to the new slug.
+  { from: "specialized", to: "explosion-proof" },
+  { from: "specialized/ex70c", to: "explosion-proof/ex70c" },
+  { from: "specialized/ex70m", to: "explosion-proof/ex70m" },
+  { from: "specialized/ex1000c", to: "explosion-proof/ex1000c" },
+  { from: "specialized/ex1000m", to: "explosion-proof/ex1000m" },
+  // Read-out units moved out of the series to the accessories page.
+  { from: "specialized/lti-1000", to: "accessories" },
+  { from: "specialized/lti-2000", to: "accessories" },
+  // 2020 → 2026 catalogue resync. Renamed SKUs go to their new slug; SKUs
+  // retired entirely fall back to the (renamed) category index page so old
+  // bookmarks and search-index entries stay reachable.
+  { from: "specialized/ex070c", to: "explosion-proof/ex70c" },
+  { from: "specialized/ex070m", to: "explosion-proof/ex70m" },
   { from: "digital/md100c", to: "digital/md150c" },
   { from: "digital/md100m", to: "digital/md150m" },
-  { from: "specialized/ld030c", to: "specialized" },
-  { from: "specialized/ld030m", to: "specialized" },
-  { from: "specialized/lm030c", to: "specialized" },
-  { from: "specialized/lm030m", to: "specialized" },
+  { from: "specialized/ld030c", to: "explosion-proof" },
+  { from: "specialized/ld030m", to: "explosion-proof" },
+  { from: "specialized/lm030c", to: "explosion-proof" },
+  { from: "specialized/lm030m", to: "explosion-proof" },
   { from: "analogue/m2100va", to: "analogue" },
   { from: "analogue/m3100va", to: "analogue" },
   { from: "analogue/m2200va", to: "analogue" },
