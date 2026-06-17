@@ -47,7 +47,7 @@ test.describe("Applications detail page", () => {
     await expect(featured.locator(".ap-featured__why-heading")).toBeVisible();
     await expect(featured.locator("a.ap-featured__cta")).toHaveAttribute(
       "href",
-      /\/products\/specialized\/do400$/,
+      /\/products\/analogue\/do400$/,
     );
 
     const specLabels = featured.locator(".ap-featured__spec dt");

@@ -36,7 +36,6 @@ const FEATURED: Record<string, { model: string; caption: string }[]> = {
   digital: [
     { model: "MD30C", caption: "8-point linearization, RS-485 / Modbus RTU" },
     { model: "MD150C", caption: "±0.25% F.S. accuracy" },
-    { model: "MD400C", caption: "High-flow digital mass flow control" },
   ],
   specialized: [
     {
@@ -47,10 +46,6 @@ const FEATURED: Record<string, { model: string; caption: string }[]> = {
       model: "LEPC",
       caption:
         "Electronic pressure controller with OLED display and RS-485 / Modbus",
-    },
-    {
-      model: "DO400",
-      caption: "≤1 s response, 100–400 slpm",
     },
   ],
 };

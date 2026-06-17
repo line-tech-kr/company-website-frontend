@@ -94,11 +94,11 @@ async function step1_widenMsFlowRanges() {
 // ─── Step 2 — DO400 crossListedSeries ────────────────────────────────────────
 
 async function step2_crossListDo400() {
-  log(`patch  product-do400.crossListedSeries = ["analogue", "digital"]`);
+  log(`patch  product-do400.crossListedSeries = ["digital"]`);
   if (isApply) {
     await client
       .patch("product-do400")
-      .set({ crossListedSeries: ["analogue", "digital"] })
+      .set({ crossListedSeries: ["digital"] })
       .commit();
   }
 }
@@ -132,7 +132,7 @@ async function step3_featureDo400InShowcases() {
   // One atomic .set() over all three arrays — partial mid-run aborts can't
   // leave the showcases doc with DO400 added to some categories but not others.
   const updates: Record<string, unknown> = {};
-  for (const cat of ["analogue", "digital", "specialized"] as const) {
+  for (const cat of ["analogue", "digital"] as const) {
     const current = doc[cat] ?? [];
     const already = current.some(
       (e) => e._key === "DO400" || e.product?._ref === "product-do400",

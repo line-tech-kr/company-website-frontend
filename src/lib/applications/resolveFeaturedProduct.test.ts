@@ -18,7 +18,7 @@ vi.mock("@/lib/fixtures/products", () => ({
       return {
         slug: { current: "do400" },
         model: "DO400",
-        series: "specialized",
+        series: "analogue",
         productLabel: {
           en: "Mass Flow Controller",
           ko: "MFC-ko",

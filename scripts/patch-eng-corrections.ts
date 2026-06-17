@@ -79,7 +79,7 @@ const PATCHES: Patch[] = [
   { id: "product-ms3150va", set: FLOW_30_TO_100 },
 
   // 3. DO400 series
-  { id: "product-do400", set: { series: "specialized" } },
+  { id: "product-do400", set: { series: "analogue" } },
 
   // 4. "inquiry" maxPressure for high-flow models
   ...INQUIRY_SLUGS.map<Patch>((slug) => ({
