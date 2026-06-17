@@ -39,7 +39,7 @@
     "categories": {
       "analogue": "아날로그 시리즈",
       "digital": "디지털 시리즈",
-      "specialized": "특수 시리즈",
+      "explosion-proof": "방폭 시리즈",
       "lepc": "LEPC 압력 제어기"
     }
   },
@@ -61,7 +61,7 @@
   "products": {
     "list": {
       "title": "제품",
-      "lede": "아날로그·디지털·특수·LEPC 시리즈로 구성된 매스플로우 컨트롤러(MFC), 매스플로우 미터(MFM), 저압 전자식 압력 제어기(EPC).",
+      "lede": "아날로그·디지털·방폭·LEPC 시리즈로 구성된 매스플로우 컨트롤러(MFC), 매스플로우 미터(MFM), 저압 전자식 압력 제어기(EPC).",
       "cardCount": "{count}개 모델",
       "stats": {
         "modelsLabel": "카탈로그 모델",
@@ -93,8 +93,8 @@
         "title": "디지털 시리즈",
         "lede": "8점 선형화. ±0.25 % F.S. 정확도. 1초 미만 응답. RS-485 · Modbus RTU."
       },
-      "specialized": {
-        "title": "특수 시리즈",
+      "explosion-proof": {
+        "title": "방폭 시리즈",
         "lede": "위험 환경 및 가혹한 조건을 위한 방폭(EX) 사양 라인업."
       },
       "lepc": {
@@ -189,7 +189,7 @@
       "any": "전체",
       "analogue": "아날로그",
       "digital": "디지털",
-      "specialized": "특수 사양",
+      "specialized": "방폭 사양",
       "lepc": "LEPC"
     },
     "results": {
@@ -309,7 +309,7 @@
       "all": "전 시리즈",
       "analogue": "아날로그",
       "digital": "디지털",
-      "specialized": "특수"
+      "specialized": "방폭"
     },
     "drawingsTable": {
       "model": "모델",

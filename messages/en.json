@@ -39,7 +39,7 @@
     "categories": {
       "analogue": "Analogue series",
       "digital": "Digital series",
-      "specialized": "Specialized series",
+      "explosion-proof": "Explosion-proof series",
       "lepc": "LEPC pressure controller"
     }
   },
@@ -61,7 +61,7 @@
   "products": {
     "list": {
       "title": "Products",
-      "lede": "Every Line Tech instrument in one place — Mass Flow Controllers, Mass Flow Meters, low-pressure EPC, and accessories across analogue, digital, specialized, and LEPC lines.",
+      "lede": "Every Line Tech instrument in one place — Mass Flow Controllers, Mass Flow Meters, low-pressure EPC, and accessories across analogue, digital, explosion-proof, and LEPC lines.",
       "cardCount": "{count} models",
       "stats": {
         "modelsLabel": "Models in catalog",
@@ -93,8 +93,8 @@
         "title": "Digital series",
         "lede": "8-point linearization. ±0.25% F.S. accuracy. Sub-second response. RS-485 / Modbus RTU."
       },
-      "specialized": {
-        "title": "Specialized series",
+      "explosion-proof": {
+        "title": "Explosion-proof series",
         "lede": "Explosion-proof (EX) variants for hazardous and demanding environments."
       },
       "lepc": {
@@ -189,7 +189,7 @@
       "any": "Any",
       "analogue": "Analogue",
       "digital": "Digital",
-      "specialized": "Specialized",
+      "specialized": "Explosion-proof",
       "lepc": "LEPC"
     },
     "results": {
@@ -309,7 +309,7 @@
       "all": "All series",
       "analogue": "Analogue",
       "digital": "Digital",
-      "specialized": "Specialized"
+      "specialized": "Explosion-proof"
     },
     "drawingsTable": {
       "model": "Model",
