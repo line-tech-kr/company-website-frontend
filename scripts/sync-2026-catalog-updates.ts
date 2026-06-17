@@ -7,9 +7,13 @@
  *
  * Sequence (deletes last so a mid-run abort leaves dataset recoverable):
  *   1. #231 — patch MS2500VA + MS3500VA flowRange to 100–1000 slpm.
- *   2. #233 — set crossListedSeries on DO400 to ["analogue", "digital"].
- *   3. #233 — append DO400 entry to all three category-showcases arrays.
+ *   2. #233 — set crossListedSeries on DO400 to ["digital"].
+ *   3. #233 — append DO400 entry to the analogue + digital category-showcases.
  *   4. #231 — delete product-ms2400va and product-ms3400va.
+ *
+ * NOTE: steps 2–3 were narrowed by #269 — DO400's primary series moved to
+ * "analogue", so it is no longer cross-listed under or featured in
+ * "specialized". scripts/retire-skus-269.ts owns that migration.
  *
  * NOTE: an earlier revision included a step that realigned
  * `product-lepc.series` back to "specialized". That step is removed:

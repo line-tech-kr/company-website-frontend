@@ -32,10 +32,18 @@ const FEATURED: Record<string, { model: string; caption: string }[]> = {
     { model: "M3030VA", caption: "±0.5% F.S. accuracy" },
     { model: "MS3700VA", caption: "5–3,000 sccm flow range" },
     { model: "MS3800VA", caption: "2,500–5,000 slpm high-flow control" },
+    {
+      model: "DO400",
+      caption: "Purpose-built for fuel cell applications — RS-485 / Modbus",
+    },
   ],
   digital: [
     { model: "MD30C", caption: "8-point linearization, RS-485 / Modbus RTU" },
     { model: "MD150C", caption: "±0.25% F.S. accuracy" },
+    {
+      model: "DO400",
+      caption: "Purpose-built for fuel cell applications — RS-485 / Modbus",
+    },
   ],
   specialized: [
     {

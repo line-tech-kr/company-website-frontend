@@ -5,13 +5,15 @@
  *   pnpm tsx scripts/retire-skus-269.ts            # dry-run
  *   pnpm tsx scripts/retire-skus-269.ts --apply    # write to Sanity
  *
- * Steps:
- *   1. Delete product-m2200va, product-md400c, product-md400m.
- *   2. Patch product-do400: series → "analogue", crossListedSeries → ["digital"].
- *   3. Patch category-showcases: remove DO400 from the "specialized" array.
+ * Steps (showcase refs cleared first so the deletes don't hit referential
+ * integrity errors):
+ *   1. Patch category-showcases: drop retired-SKU refs from every array and
+ *      drop DO400 from the "specialized" array.
+ *   2. Delete product-m2200va, product-md400c, product-md400m.
+ *   3. Patch product-do400: series → "analogue", crossListedSeries → ["digital"].
  *
- * Idempotent: deletions warn if already gone; patch on DO400 is safe to re-run.
- * Take a `sanity dataset export` backup before running with --apply.
+ * Idempotent: deletions warn if already gone; showcase + DO400 patches are
+ * safe to re-run. Take a `sanity dataset export` backup before --apply.
  */
 import { readFileSync } from "node:fs";
 import { createClient } from "@sanity/client";
@@ -23,34 +25,49 @@ function loadEnv(p: string) {
       if (m) process.env[m[1]] ??= m[2].trimEnd();
     }
   } catch {
-    // fine in CI / Vercel
+    // .env.local optional — injected directly in CI / Vercel
   }
 }
-
 loadEnv(".env.local");
 
+const isApply = process.argv.includes("--apply");
+
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
+const token = process.env.SANITY_WRITE_TOKEN;
+
+if (!projectId || !dataset) {
+  console.error(
+    "Missing NEXT_PUBLIC_SANITY_PROJECT_ID / NEXT_PUBLIC_SANITY_DATASET",
+  );
+  process.exit(1);
+}
+if (isApply && !token) {
+  console.error("--apply requires SANITY_WRITE_TOKEN");
+  process.exit(1);
+}
+
 const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production",
-  token: process.env.SANITY_WRITE_TOKEN,
+  projectId,
+  dataset,
+  token,
   apiVersion: "2024-01-01",
   useCdn: false,
 });
 
-const isApply = process.argv.includes("--apply");
+const RETIRED_IDS = ["product-m2200va", "product-md400c", "product-md400m"];
 
 function log(msg: string) {
   console.log(`  ${msg}`);
 }
 
-// ─── Step 0 — remove retired SKUs from category-showcases ────────────────────
+// ─── Step 1 — clear category-showcase references ─────────────────────────────
+// Strips the retired SKUs from every showcase array and DO400 from the
+// "specialized" array, in one fetch + one patch. Must run before the deletes:
+// Sanity refuses to delete a doc that is still referenced.
 
-async function step0_purgeRetiredFromShowcases() {
-  const RETIRED_IDS = new Set([
-    "product-m2200va",
-    "product-md400c",
-    "product-md400m",
-  ]);
+async function step1_clearShowcaseRefs() {
+  const retired = new Set(RETIRED_IDS);
   const doc = await client.fetch<{
     analogue?: Array<{ _key: string; product?: { _ref: string } }>;
     digital?: Array<{ _key: string; product?: { _ref: string } }>;
@@ -65,23 +82,37 @@ async function step0_purgeRetiredFromShowcases() {
   const updates: Record<string, unknown> = {};
   for (const cat of ["analogue", "digital", "specialized"] as const) {
     const current = doc[cat] ?? [];
-    const next = current.filter((e) => !RETIRED_IDS.has(e.product?._ref ?? ""));
+    const next = current.filter((e) => {
+      const ref = e.product?._ref ?? "";
+      if (retired.has(ref)) return false;
+      // DO400 only leaves the specialized array; it stays in analogue/digital.
+      if (
+        cat === "specialized" &&
+        (e._key === "DO400" || ref === "product-do400")
+      )
+        return false;
+      return true;
+    });
     if (next.length < current.length) {
       log(
-        `patch  category-showcases.${cat}: remove retired refs (${current.length} → ${next.length})`,
+        `patch  category-showcases.${cat}: ${current.length} → ${next.length} entries`,
       );
       updates[cat] = next;
     }
   }
-  if (isApply && Object.keys(updates).length > 0) {
+  if (Object.keys(updates).length === 0) {
+    log(`skip   category-showcases: nothing to remove`);
+    return;
+  }
+  if (isApply) {
     await client.patch("category-showcases").set(updates).commit();
   }
 }
 
-// ─── Step 1 — delete retired SKUs ────────────────────────────────────────────
+// ─── Step 2 — delete retired SKUs ────────────────────────────────────────────
 
-async function step1_deleteRetiredSkus() {
-  for (const id of ["product-m2200va", "product-md400c", "product-md400m"]) {
+async function step2_deleteRetiredSkus() {
+  for (const id of RETIRED_IDS) {
     log(`delete ${id}`);
     if (isApply) {
       try {
@@ -93,9 +124,9 @@ async function step1_deleteRetiredSkus() {
   }
 }
 
-// ─── Step 2 — move DO400 to analogue series ───────────────────────────────────
+// ─── Step 3 — move DO400 to analogue series ──────────────────────────────────
 
-async function step2_moveDo400ToAnalogue() {
+async function step3_moveDo400ToAnalogue() {
   log(
     `patch  product-do400: series → "analogue", crossListedSeries → ["digital"]`,
   );
@@ -107,45 +138,14 @@ async function step2_moveDo400ToAnalogue() {
   }
 }
 
-// ─── Step 3 — remove DO400 from specialized showcase ─────────────────────────
-
-async function step3_removeDo400FromSpecializedShowcase() {
-  const doc = await client.fetch<{
-    specialized?: Array<{ _key: string; product?: { _ref: string } }>;
-  } | null>(`*[_id == "category-showcases"][0]{ specialized }`);
-  if (!doc) {
-    log(`skip   category-showcases doc not found`);
-    return;
-  }
-  const current = doc.specialized ?? [];
-  const next = current.filter(
-    (e) => e._key !== "DO400" && e.product?._ref !== "product-do400",
-  );
-  if (next.length === current.length) {
-    log(`skip   category-showcases.specialized: DO400 not present`);
-    return;
-  }
-  log(
-    `patch  category-showcases.specialized: remove DO400 (${current.length} → ${next.length} entries)`,
-  );
-  if (isApply) {
-    await client
-      .patch("category-showcases")
-      .set({ specialized: next })
-      .commit();
-  }
-}
-
 async function main() {
   console.log(`\nretire-skus-269  [${isApply ? "APPLY" : "DRY RUN"}]\n`);
-  console.log("Step 0 — purge retired SKUs from category-showcases");
-  await step0_purgeRetiredFromShowcases();
-  console.log("\nStep 1 — delete M2200VA, MD400C, MD400M");
-  await step1_deleteRetiredSkus();
-  console.log("\nStep 2 — move DO400 to analogue series");
-  await step2_moveDo400ToAnalogue();
-  console.log("\nStep 3 — remove DO400 from specialized showcase");
-  await step3_removeDo400FromSpecializedShowcase();
+  console.log("Step 1 — clear category-showcase references");
+  await step1_clearShowcaseRefs();
+  console.log("\nStep 2 — delete M2200VA, MD400C, MD400M");
+  await step2_deleteRetiredSkus();
+  console.log("\nStep 3 — move DO400 to analogue series");
+  await step3_moveDo400ToAnalogue();
   console.log(
     `\nDone. ${isApply ? "Applied to Sanity." : "Dry-run only. Re-run with --apply to write."}\n`,
   );
