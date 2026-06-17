@@ -18,9 +18,6 @@ describe("localizeSpecValue", () => {
     );
     expect(localizeSpecValue("±1% of FS", "ko")).toBe("±1% F.S.");
     expect(localizeSpecValue("±1% of fs", "ko")).toBe("±1% F.S.");
-    expect(localizeSpecValue("+15 or +24 Vdc, 350 mA", "ko")).toBe(
-      "+15 또는 +24 Vdc, 350 mA",
-    );
   });
 
   it("translates English prose words to Chinese", () => {

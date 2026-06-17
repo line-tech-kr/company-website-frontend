@@ -391,18 +391,18 @@ function parseIoSignal(raw: string): IoSignal {
   return { display, outputs };
 }
 
-function parseSupplyPower(raw: string): SupplyPower {
+export function parseSupplyPower(raw: string): SupplyPower {
   // examples: "+15 ~ 24", "+15 ~ +24 Vdc", "+15 or +24 Vdc, 350 mA",
   // "+15Vdc ~ +26Vdc , 350㎃" (DO400 — units interleaved between voltages)
   const voltageMatches = raw.match(
-    /[+]?(\d+)\s*(?:Vdc)?\s*[~or]+\s*[+]?(\d+)/i,
+    /[+]?(\d+)\s*(?:Vdc)?\s*(?:~|or)\s*[+]?(\d+)/i,
   );
   if (!voltageMatches) throw new Error(`Cannot parse supply power: "${raw}"`);
   const v1 = parseInt(voltageMatches[1], 10);
   const v2 = parseInt(voltageMatches[2], 10);
   const currentMA = 350; // catalog standard for all M/MS/MD/EX/LEPC/DO
   return {
-    display: `+${v1} or +${v2} Vdc, ${currentMA} mA`,
+    display: `+${v1} ~ +${v2} Vdc, ${currentMA} mA`,
     voltages: [v1, v2],
     currentMA,
   };
