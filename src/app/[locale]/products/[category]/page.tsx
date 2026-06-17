@@ -80,7 +80,10 @@ export default async function CategoryPage({ params }: Props) {
   ]);
 
   const byModel = (a: { model: string }, b: { model: string }) =>
-    a.model.localeCompare(b.model, undefined, { numeric: true, sensitivity: "base" });
+    a.model.localeCompare(b.model, undefined, {
+      numeric: true,
+      sensitivity: "base",
+    });
 
   const controllers = products.filter((p) => p.function === "MFC").sort(byModel);
   const meters = products.filter((p) => p.function === "MFM").sort(byModel);
