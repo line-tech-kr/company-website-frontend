@@ -79,10 +79,22 @@ export default async function CategoryPage({ params }: Props) {
     getTranslations("products"),
   ]);
 
-  const controllers = products.filter((p) => p.function === "MFC");
-  const meters = products.filter((p) => p.function === "MFM");
-  const instruments = products.filter((p) => p.function === "ROU");
-  const pressureControllers = products.filter((p) => p.function === "EPC");
+  const byModel = (a: { model: string }, b: { model: string }) =>
+    a.model.localeCompare(b.model, undefined, {
+      numeric: true,
+      sensitivity: "base",
+    });
+
+  const controllers = products
+    .filter((p) => p.function === "MFC")
+    .sort(byModel);
+  const meters = products.filter((p) => p.function === "MFM").sort(byModel);
+  const instruments = products
+    .filter((p) => p.function === "ROU")
+    .sort(byModel);
+  const pressureControllers = products
+    .filter((p) => p.function === "EPC")
+    .sort(byModel);
 
   const breadcrumbs = [
     { label: tCommon("home"), href: "/" },
