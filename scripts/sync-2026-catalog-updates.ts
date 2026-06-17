@@ -7,9 +7,13 @@
  *
  * Sequence (deletes last so a mid-run abort leaves dataset recoverable):
  *   1. #231 — patch MS2500VA + MS3500VA flowRange to 100–1000 slpm.
- *   2. #233 — set crossListedSeries on DO400 to ["analogue", "digital"].
- *   3. #233 — append DO400 entry to all three category-showcases arrays.
+ *   2. #233 — set crossListedSeries on DO400 to ["digital"].
+ *   3. #233 — append DO400 entry to the analogue + digital category-showcases.
  *   4. #231 — delete product-ms2400va and product-ms3400va.
+ *
+ * NOTE: steps 2–3 were narrowed by #269 — DO400's primary series moved to
+ * "analogue", so it is no longer cross-listed under or featured in
+ * "specialized". scripts/retire-skus-269.ts owns that migration.
  *
  * NOTE: an earlier revision included a step that realigned
  * `product-lepc.series` back to "specialized". That step is removed:
@@ -94,11 +98,11 @@ async function step1_widenMsFlowRanges() {
 // ─── Step 2 — DO400 crossListedSeries ────────────────────────────────────────
 
 async function step2_crossListDo400() {
-  log(`patch  product-do400.crossListedSeries = ["analogue", "digital"]`);
+  log(`patch  product-do400.crossListedSeries = ["digital"]`);
   if (isApply) {
     await client
       .patch("product-do400")
-      .set({ crossListedSeries: ["analogue", "digital"] })
+      .set({ crossListedSeries: ["digital"] })
       .commit();
   }
 }
@@ -132,7 +136,7 @@ async function step3_featureDo400InShowcases() {
   // One atomic .set() over all three arrays — partial mid-run aborts can't
   // leave the showcases doc with DO400 added to some categories but not others.
   const updates: Record<string, unknown> = {};
-  for (const cat of ["analogue", "digital", "specialized"] as const) {
+  for (const cat of ["analogue", "digital"] as const) {
     const current = doc[cat] ?? [];
     const already = current.some(
       (e) => e._key === "DO400" || e.product?._ref === "product-do400",

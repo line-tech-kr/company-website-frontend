@@ -10,7 +10,7 @@ import {
 const baseProduct: FeaturedApplicationProductInput = {
   slug: "do400",
   model: "DO400",
-  series: "specialized",
+  series: "analogue",
   productLabel: "Dissolved O₂ analyzer",
   description: "Fallback product description.",
   specs: [{ label: "Flow range", value: "0–1000 sccm" }],
@@ -128,6 +128,6 @@ describe("FeaturedApplicationProduct", () => {
       "a.ap-featured__cta",
     ) as HTMLAnchorElement;
     expect(cta).not.toBeNull();
-    expect(cta.getAttribute("href")).toBe("/products/specialized/do400");
+    expect(cta.getAttribute("href")).toBe("/products/analogue/do400");
   });
 });

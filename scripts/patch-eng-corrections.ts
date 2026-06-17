@@ -3,7 +3,8 @@
  *
  *   1. EX70C / EX70M  — flow range  0.01–70 slpm  →  0.01–100 slpm
  *   2. MS2150VA / MS3150VA  — flow range  0.01–100 slpm  →  30–100 slpm
- *   3. DO400  — series  analogue  →  specialized
+ *   3. DO400  — series  →  analogue  (originally set "specialized" on
+ *      2026-05-30; reverted by #269, which made analogue its primary series)
  *   4. High-flow models (22 slugs)  — maxPressure.display  →  "inquiry"
  *      (numeric value/unit/comparator unset, since "inquiry" is not a number)
  *
@@ -79,7 +80,7 @@ const PATCHES: Patch[] = [
   { id: "product-ms3150va", set: FLOW_30_TO_100 },
 
   // 3. DO400 series
-  { id: "product-do400", set: { series: "specialized" } },
+  { id: "product-do400", set: { series: "analogue" } },
 
   // 4. "inquiry" maxPressure for high-flow models
   ...INQUIRY_SLUGS.map<Patch>((slug) => ({

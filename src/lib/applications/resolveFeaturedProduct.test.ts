@@ -18,7 +18,7 @@ vi.mock("@/lib/fixtures/products", () => ({
       return {
         slug: { current: "do400" },
         model: "DO400",
-        series: "specialized",
+        series: "analogue",
         productLabel: {
           en: "Mass Flow Controller",
           ko: "MFC-ko",
@@ -158,7 +158,7 @@ describe("resolveFeaturedProduct", () => {
     const sanity: SanityFeaturedProduct = {
       slug: "do400",
       model: "DO400",
-      series: "specialized",
+      series: "analogue",
       productLabel: { en: "MFC", ko: "ko", zh: "zh" },
       description: { en: "d", ko: "k", zh: "z" },
       flowRange: "100–400 slpm",
@@ -174,6 +174,7 @@ describe("resolveFeaturedProduct", () => {
     expect(r?.specs).toEqual([
       { label: "lbl:flowRange", value: "100–400 slpm" },
     ]);
+    expect(r?.series).toBe("analogue");
     expect(r?.imageUrl).toBe("https://cdn/x.png");
   });
 

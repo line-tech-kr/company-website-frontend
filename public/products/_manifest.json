@@ -242,30 +242,6 @@
       ]
     },
     {
-      "model": "M2200VA",
-      "slug": "m2200va",
-      "category": "analogue-mfm",
-      "boTable": "02_02_e",
-      "wrId": 14,
-      "images": [
-        {
-          "path": "/products/m2200va/product-1.jpg",
-          "source": "https://line-tech.co.kr/data/file/02_02_e/3543863211_hJ8LRQn0_5b602bd64c1a49c53159e46b33095325cd9b2edf.jpg",
-          "kind": "product"
-        },
-        {
-          "path": "/products/m2200va/product-2.jpg",
-          "source": "https://line-tech.co.kr/data/file/02_02_e/3543863211_WfqnOrFT_d439d3c64f28c1e69fe975726a9197a82eabe5c7.jpg",
-          "kind": "product"
-        },
-        {
-          "path": "/products/m2200va/editor-1.jpg",
-          "source": "https://line-tech.co.kr/data/editor/2502/97d4894ee7166ddedb8dd3748e815901_1740446059_4602.jpg",
-          "kind": "editor"
-        }
-      ]
-    },
-    {
       "model": "MS2150VA",
       "slug": "ms2150va",
       "category": "analogue-mfm",
@@ -410,30 +386,6 @@
       ]
     },
     {
-      "model": "MD400C",
-      "slug": "md400c",
-      "category": "digital-mfc",
-      "boTable": "02_03_e",
-      "wrId": 5,
-      "images": [
-        {
-          "path": "/products/md400c/product-1.jpg",
-          "source": "https://line-tech.co.kr/data/file/02_03_e/3543863211_LShmBWeJ_8b3e9ad89d7cefa30d214321c395a1063e2cfc32.jpg",
-          "kind": "product"
-        },
-        {
-          "path": "/products/md400c/product-2.jpg",
-          "source": "https://line-tech.co.kr/data/file/02_03_e/3543863211_fyDm2h69_af056124ad87eb69a90bd2e76dd4d4951ef492ac.jpg",
-          "kind": "product"
-        },
-        {
-          "path": "/products/md400c/editor-1.jpg",
-          "source": "https://line-tech.co.kr/data/editor/2101/6c6493ad98045f5ce9beacb6900e06e4_1610530831_5408.jpg",
-          "kind": "editor"
-        }
-      ]
-    },
-    {
       "model": "MD800C",
       "slug": "md800c",
       "category": "digital-mfc",
@@ -549,30 +501,6 @@
         {
           "path": "/products/md500m/editor-1.jpg",
           "source": "https://line-tech.co.kr/data/editor/2101/6c6493ad98045f5ce9beacb6900e06e4_1610533991_1347.jpg",
-          "kind": "editor"
-        }
-      ]
-    },
-    {
-      "model": "MD400M",
-      "slug": "md400m",
-      "category": "digital-mfm",
-      "boTable": "02_04_e",
-      "wrId": 3,
-      "images": [
-        {
-          "path": "/products/md400m/product-1.jpg",
-          "source": "https://line-tech.co.kr/data/file/02_04_e/3543863211_PjulRifE_87418057213946bf8b13a8e18644bb6e13517647.jpg",
-          "kind": "product"
-        },
-        {
-          "path": "/products/md400m/product-2.jpg",
-          "source": "https://line-tech.co.kr/data/file/02_04_e/3543863211_k1QlH3za_708de5bfa3401f9e4999bb2733b13d25a48626ea.jpg",
-          "kind": "product"
-        },
-        {
-          "path": "/products/md400m/editor-1.jpg",
-          "source": "https://line-tech.co.kr/data/editor/2101/6c6493ad98045f5ce9beacb6900e06e4_1610533862_5106.jpg",
           "kind": "editor"
         }
       ]

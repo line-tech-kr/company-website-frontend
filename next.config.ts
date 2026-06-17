@@ -52,6 +52,10 @@ const SLUG_REDIRECTS = [
   { from: "specialized/lm030m", to: "specialized" },
   { from: "analogue/m2100va", to: "analogue" },
   { from: "analogue/m3100va", to: "analogue" },
+  { from: "analogue/m2200va", to: "analogue" },
+  { from: "digital/md400c", to: "digital" },
+  { from: "digital/md400m", to: "digital" },
+  { from: "specialized/do400", to: "analogue/do400" },
 ];
 
 const nextConfig: NextConfig = {

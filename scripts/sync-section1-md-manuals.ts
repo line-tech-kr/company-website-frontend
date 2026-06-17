@@ -60,8 +60,6 @@ interface ManualEntry {
 const ENTRIES: ManualEntry[] = [
   { model: "MD30C", title: "MD30C Manual", filename: "MD30 series.pdf" },
   { model: "MD30M", title: "MD30M Manual", filename: "MD30M series.pdf" },
-  { model: "MD400C", title: "MD400C Manual", filename: "MD400C.pdf" },
-  { model: "MD400M", title: "MD400M Manual", filename: "MD400M.pdf" },
   { model: "MD500C", title: "MD500C Manual", filename: "MD500C.pdf" },
   { model: "MD500M", title: "MD500M Manual", filename: "MD500M.pdf" },
   { model: "MD600C", title: "MD600C Manual", filename: "MD600C.pdf" },
