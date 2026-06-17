@@ -402,7 +402,7 @@ function parseSupplyPower(raw: string): SupplyPower {
   const v2 = parseInt(voltageMatches[2], 10);
   const currentMA = 350; // catalog standard for all M/MS/MD/EX/LEPC/DO
   return {
-    display: `+${v1} or +${v2} Vdc, ${currentMA} mA`,
+    display: `+${v1} ~ +${v2} Vdc, ${currentMA} mA`,
     voltages: [v1, v2],
     currentMA,
   };

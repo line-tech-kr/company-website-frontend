@@ -98,7 +98,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -232,7 +232,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -366,7 +366,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -496,7 +496,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -623,7 +623,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -746,7 +746,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -869,7 +869,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -1000,7 +1000,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -1128,7 +1128,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -1255,7 +1255,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -1379,7 +1379,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -1500,7 +1500,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -1617,7 +1617,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -1734,7 +1734,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -1858,7 +1858,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -1998,7 +1998,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -2138,7 +2138,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -2271,7 +2271,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -2404,7 +2404,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -2533,7 +2533,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -2662,7 +2662,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -2799,7 +2799,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -2933,7 +2933,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -3067,7 +3067,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -3194,7 +3194,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -3321,7 +3321,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -3444,7 +3444,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -3567,7 +3567,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -3702,7 +3702,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -3840,7 +3840,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -3972,7 +3972,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -4102,7 +4102,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -4234,7 +4234,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
@@ -4346,7 +4346,7 @@
         "outputs": ["0-5Vdc", "4-20mA"]
       },
       "supplyPower": {
-        "display": "+15 or +24 Vdc, 350 mA",
+        "display": "+15 ~ +24 Vdc, 350 mA",
         "voltages": [15, 24],
         "currentMA": 350
       },
