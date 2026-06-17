@@ -209,14 +209,17 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           },
           specsHeading: "Specifications",
           specs: [
-            { label: "Input Power", value: "220 VAC (50–60 Hz)" },
-            { label: "Output Power", value: "+15 / +24 Vdc @ 500 mA" },
+            { label: "Input Power", value: "110–220 VAC" },
+            {
+              label: "Output Power",
+              value: "+15 Vdc @ 500 mA (option +24 VDC)",
+            },
             {
               label: "Display Window",
               value: "6-inch OLED LCD (256 × 64 dots)",
             },
             { label: "Display Repeatability", value: "≤ ±1.0 % of Full Scale" },
-            { label: "Output Signal", value: "0 – 5 Vdc / 4 – 20 mA" },
+            { label: "Output Signal", value: "0 – 5 Vdc (option 4 – 20 mA)" },
             { label: "Units of Display", value: "SCCM, SLPM, %" },
             { label: "Remote Control", value: "D-SUB 9-pin (male)" },
             { label: "Setpoint", value: "0 – 5 Vdc for full scale" },
@@ -383,14 +386,17 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           },
           specsHeading: "사양",
           specs: [
-            { label: "입력 전원", value: "220 VAC (50–60 Hz)" },
-            { label: "출력 전원", value: "+15 / +24 Vdc @ 500 mA" },
+            { label: "입력 전원", value: "110–220 VAC" },
+            {
+              label: "출력 전원",
+              value: "+15 Vdc @ 500 mA (옵션 +24 VDC)",
+            },
             {
               label: "표시창",
               value: "6인치 OLED LCD (256 × 64 도트)",
             },
             { label: "표시 반복 정밀도", value: "≤ ±1.0 % of Full Scale" },
-            { label: "출력 신호", value: "0 – 5 Vdc / 4 – 20 mA" },
+            { label: "출력 신호", value: "0 – 5 Vdc (옵션 4 – 20 mA)" },
             { label: "표시 단위", value: "SCCM, SLPM, %" },
             { label: "원격 제어", value: "D-SUB 9-pin (male)" },
             { label: "설정값 (Set-Point)", value: "0 – 5 Vdc for full scale" },
@@ -549,14 +555,17 @@ export const LT_ACCESSORIES: Record<Locale, AccessoriesContent> = {
           },
           specsHeading: "规格",
           specs: [
-            { label: "输入电源", value: "220 VAC (50–60 Hz)" },
-            { label: "输出电源", value: "+15 / +24 Vdc @ 500 mA" },
+            { label: "输入电源", value: "110–220 VAC" },
+            {
+              label: "输出电源",
+              value: "+15 Vdc @ 500 mA (可选 +24 VDC)",
+            },
             {
               label: "显示窗口",
               value: "6 英寸 OLED LCD (256 × 64 点)",
             },
             { label: "显示重复精度", value: "≤ ±1.0 % of Full Scale" },
-            { label: "输出信号", value: "0 – 5 Vdc / 4 – 20 mA" },
+            { label: "输出信号", value: "0 – 5 Vdc (可选 4 – 20 mA)" },
             { label: "显示单位", value: "SCCM, SLPM, %" },
             { label: "远程控制", value: "D-SUB 9-pin (公头)" },
             { label: "设定值 (Set-Point)", value: "0 – 5 Vdc for full scale" },
