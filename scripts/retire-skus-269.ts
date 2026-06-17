@@ -32,7 +32,7 @@ loadEnv(".env.local");
 const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production",
-  token: process.env.SANITY_API_TOKEN,
+  token: process.env.SANITY_WRITE_TOKEN,
   apiVersion: "2024-01-01",
   useCdn: false,
 });
@@ -41,6 +41,41 @@ const isApply = process.argv.includes("--apply");
 
 function log(msg: string) {
   console.log(`  ${msg}`);
+}
+
+// ─── Step 0 — remove retired SKUs from category-showcases ────────────────────
+
+async function step0_purgeRetiredFromShowcases() {
+  const RETIRED_IDS = new Set([
+    "product-m2200va",
+    "product-md400c",
+    "product-md400m",
+  ]);
+  const doc = await client.fetch<{
+    analogue?: Array<{ _key: string; product?: { _ref: string } }>;
+    digital?: Array<{ _key: string; product?: { _ref: string } }>;
+    specialized?: Array<{ _key: string; product?: { _ref: string } }>;
+  } | null>(
+    `*[_id == "category-showcases"][0]{ analogue, digital, specialized }`,
+  );
+  if (!doc) {
+    log(`skip   category-showcases doc not found`);
+    return;
+  }
+  const updates: Record<string, unknown> = {};
+  for (const cat of ["analogue", "digital", "specialized"] as const) {
+    const current = doc[cat] ?? [];
+    const next = current.filter((e) => !RETIRED_IDS.has(e.product?._ref ?? ""));
+    if (next.length < current.length) {
+      log(
+        `patch  category-showcases.${cat}: remove retired refs (${current.length} → ${next.length})`,
+      );
+      updates[cat] = next;
+    }
+  }
+  if (isApply && Object.keys(updates).length > 0) {
+    await client.patch("category-showcases").set(updates).commit();
+  }
 }
 
 // ─── Step 1 — delete retired SKUs ────────────────────────────────────────────
@@ -103,7 +138,9 @@ async function step3_removeDo400FromSpecializedShowcase() {
 
 async function main() {
   console.log(`\nretire-skus-269  [${isApply ? "APPLY" : "DRY RUN"}]\n`);
-  console.log("Step 1 — delete M2200VA, MD400C, MD400M");
+  console.log("Step 0 — purge retired SKUs from category-showcases");
+  await step0_purgeRetiredFromShowcases();
+  console.log("\nStep 1 — delete M2200VA, MD400C, MD400M");
   await step1_deleteRetiredSkus();
   console.log("\nStep 2 — move DO400 to analogue series");
   await step2_moveDo400ToAnalogue();
