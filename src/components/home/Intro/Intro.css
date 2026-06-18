@@ -1,7 +1,7 @@
 /* Line Tech — Home Intro (top banner). */
 .ho-intro {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
   gap: 60px;
   align-items: center;
   padding: 72px 0 96px;
@@ -48,7 +48,7 @@
   position: relative;
   aspect-ratio: 16 / 9;
   width: 100%;
-  max-width: 560px;
+  max-width: 600px;
   margin-inline-start: auto;
   background: var(--pd-surface);
   border: 1px solid var(--pd-border);
