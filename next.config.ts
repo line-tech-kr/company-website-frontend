@@ -53,9 +53,8 @@ const SLUG_REDIRECTS = [
   // Read-out units moved out of the series to the accessories page.
   { from: "specialized/lti-1000", to: "accessories" },
   { from: "specialized/lti-2000", to: "accessories" },
-  // 2020 → 2026 catalogue resync. Renamed SKUs go to their new slug; SKUs
-  // retired entirely fall back to the (renamed) category index page so old
-  // bookmarks and search-index entries stay reachable.
+  // Legacy 2020 SKU slugs (zero-padded / retired) → new slug under the renamed
+  // category, or the category index when fully retired.
   { from: "specialized/ex070c", to: "explosion-proof/ex70c" },
   { from: "specialized/ex070m", to: "explosion-proof/ex70m" },
   { from: "digital/md100c", to: "digital/md150c" },

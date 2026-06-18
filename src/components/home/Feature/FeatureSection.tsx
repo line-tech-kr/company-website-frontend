@@ -60,6 +60,7 @@ const SLIDE_SPECS: Record<string, SlideSpec> = {
   },
   EX1000: {
     category: "explosion-proof",
+    // Display model dropped the C suffix (#9); the Sanity slug keeps it.
     slug: "ex1000c",
     fn: "MFC",
     gas: "N₂",

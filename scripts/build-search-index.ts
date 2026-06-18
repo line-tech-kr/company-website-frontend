@@ -104,7 +104,7 @@ const STATIC_ENTRIES: Record<Locale, SearchEntry[]> = {
       breadcrumb: "제품 › 디지털",
     },
     {
-      id: "cat-specialized",
+      id: "cat-explosion-proof",
       type: "category",
       title: "방폭 유량계",
       model: "",
@@ -190,7 +190,7 @@ const STATIC_ENTRIES: Record<Locale, SearchEntry[]> = {
       breadcrumb: "Products › Digital",
     },
     {
-      id: "cat-specialized",
+      id: "cat-explosion-proof",
       type: "category",
       title: "Explosion-proof Flow Controllers",
       model: "",
@@ -276,7 +276,7 @@ const STATIC_ENTRIES: Record<Locale, SearchEntry[]> = {
       breadcrumb: "产品 › 数字",
     },
     {
-      id: "cat-specialized",
+      id: "cat-explosion-proof",
       type: "category",
       title: "防爆流量控制器",
       model: "",

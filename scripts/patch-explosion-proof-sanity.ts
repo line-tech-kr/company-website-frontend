@@ -28,6 +28,12 @@ if (!projectId || !dataset || !token) {
 }
 
 const commit = process.argv.includes("--commit");
+if (commit && dataset === "production" && !process.argv.includes("--yes-production")) {
+  console.error(
+    "Refusing to --commit against the production dataset without --yes-production.",
+  );
+  process.exit(1);
+}
 const client = createClient({
   projectId,
   dataset,

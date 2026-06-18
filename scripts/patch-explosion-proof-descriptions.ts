@@ -11,15 +11,29 @@ import { loadEnv } from "./lib/load-env";
 
 loadEnv(".env.local");
 
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
+const token = process.env.SANITY_WRITE_TOKEN;
+if (!projectId || !dataset || !token) {
+  console.error("Missing Sanity env (project id / dataset / SANITY_WRITE_TOKEN).");
+  process.exit(1);
+}
+
+const commit = process.argv.includes("--commit");
+if (commit && dataset === "production" && !process.argv.includes("--yes-production")) {
+  console.error(
+    "Refusing to --commit against the production dataset without --yes-production.",
+  );
+  process.exit(1);
+}
+
 const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
-  token: process.env.SANITY_WRITE_TOKEN,
+  projectId,
+  dataset,
+  token,
   apiVersion: "2026-01-01",
   useCdn: false,
 });
-
-const commit = process.argv.includes("--commit");
 
 // slug → [oldModelToken, newModel]
 const DOCS: Record<string, [string, string]> = {
