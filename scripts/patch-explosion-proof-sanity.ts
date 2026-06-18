@@ -23,12 +23,18 @@ const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
 const token = process.env.SANITY_WRITE_TOKEN;
 if (!projectId || !dataset || !token) {
-  console.error("Missing Sanity env (project id / dataset / SANITY_WRITE_TOKEN).");
+  console.error(
+    "Missing Sanity env (project id / dataset / SANITY_WRITE_TOKEN).",
+  );
   process.exit(1);
 }
 
 const commit = process.argv.includes("--commit");
-if (commit && dataset === "production" && !process.argv.includes("--yes-production")) {
+if (
+  commit &&
+  dataset === "production" &&
+  !process.argv.includes("--yes-production")
+) {
   console.error(
     "Refusing to --commit against the production dataset without --yes-production.",
   );
@@ -71,7 +77,9 @@ async function main() {
       console.log(`  SKIP   ${id}: not published (already unpublished?)`);
       continue;
     }
-    console.log(`  unpub  ${id} (${doc.model}) → drafts.${id}, delete published`);
+    console.log(
+      `  unpub  ${id} (${doc.model}) → drafts.${id}, delete published`,
+    );
     if (commit) {
       const { _rev, ...rest } = doc;
       void _rev;
@@ -80,7 +88,9 @@ async function main() {
     }
   }
 
-  console.log(commit ? "\nDone (committed)." : "\nDry run — pass --commit to write.");
+  console.log(
+    commit ? "\nDone (committed)." : "\nDry run — pass --commit to write.",
+  );
 }
 
 main().catch((err) => {

@@ -15,12 +15,18 @@ const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
 const token = process.env.SANITY_WRITE_TOKEN;
 if (!projectId || !dataset || !token) {
-  console.error("Missing Sanity env (project id / dataset / SANITY_WRITE_TOKEN).");
+  console.error(
+    "Missing Sanity env (project id / dataset / SANITY_WRITE_TOKEN).",
+  );
   process.exit(1);
 }
 
 const commit = process.argv.includes("--commit");
-if (commit && dataset === "production" && !process.argv.includes("--yes-production")) {
+if (
+  commit &&
+  dataset === "production" &&
+  !process.argv.includes("--yes-production")
+) {
   console.error(
     "Refusing to --commit against the production dataset without --yes-production.",
   );
@@ -62,21 +68,28 @@ async function main() {
         // Normalize the KO topic particle to 은: "…0" (EX1000/EX70) ends in an
         // ㅇ batchim, so 은 is correct. The C-variant prose used 는 (C=씨).
         updated = cur
-          .split(`${oldTok}는`).join(`${newTok}은`)
-          .split(`${oldTok}은`).join(`${newTok}은`)
-          .split(oldTok).join(newTok);
+          .split(`${oldTok}는`)
+          .join(`${newTok}은`)
+          .split(`${oldTok}은`)
+          .join(`${newTok}은`)
+          .split(oldTok)
+          .join(newTok);
       } else {
         updated = cur.split(oldTok).join(newTok);
       }
       next[`description.${lang}`] = updated;
       if (updated !== cur) {
         changed = true;
-        console.log(`  ${id}.${lang}: "${cur.slice(0, 30)}…" → "${updated.slice(0, 30)}…"`);
+        console.log(
+          `  ${id}.${lang}: "${cur.slice(0, 30)}…" → "${updated.slice(0, 30)}…"`,
+        );
       }
     }
     if (changed && commit) await client.patch(id).set(next).commit();
   }
-  console.log(commit ? "\nDone (committed)." : "\nDry run — pass --commit to write.");
+  console.log(
+    commit ? "\nDone (committed)." : "\nDry run — pass --commit to write.",
+  );
 }
 
 main().catch((e) => {
