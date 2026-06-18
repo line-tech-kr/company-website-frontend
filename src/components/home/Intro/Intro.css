@@ -1,7 +1,7 @@
 /* Line Tech — Home Intro (top banner). */
 .ho-intro {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
   gap: 60px;
   align-items: center;
   padding: 72px 0 96px;
@@ -43,12 +43,12 @@
   flex-wrap: wrap;
 }
 
-/* Intro visual (schematic diagram) */
+/* Intro visual (promo teaser frame) */
 .ho-intro__visual {
   position: relative;
-  aspect-ratio: 1/1;
+  aspect-ratio: 16 / 9;
   width: 100%;
-  max-width: 560px;
+  max-width: 600px;
   margin-inline-start: auto;
   background: var(--pd-surface);
   border: 1px solid var(--pd-border);
@@ -56,28 +56,13 @@
   overflow: hidden;
   color: var(--pd-fg);
 }
-.ho-intro__grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(var(--pd-rule) 1px, transparent 1px),
-    linear-gradient(90deg, var(--pd-rule) 1px, transparent 1px);
-  background-size: 40px 40px;
-  mask-image: radial-gradient(ellipse at center, black 65%, transparent 100%);
-  -webkit-mask-image: radial-gradient(
-    ellipse at center,
-    black 65%,
-    transparent 100%
-  );
-}
-.ho-intro__svg {
+.ho-intro__media {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-}
-.ho-svg__val {
-  font-variant-numeric: tabular-nums;
+  object-fit: cover;
+  display: block;
 }
 
 :lang(ko) .ho-intro__kicker,
