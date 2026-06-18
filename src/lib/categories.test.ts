@@ -11,21 +11,23 @@ describe("CATEGORY_SLUGS", () => {
     expect(CATEGORY_SLUGS).toEqual([
       "analogue",
       "digital",
-      "specialized",
+      "explosion-proof",
       "lepc",
     ]);
   });
 
-  it("each slug has a code and matching series in CATEGORIES", () => {
+  it("each slug round-trips through its series and has a code", () => {
+    // The URL slug and Sanity series value are decoupled (explosion-proof ↔
+    // series "specialized"), so assert round-trip equality, not identity.
     for (const slug of CATEGORY_SLUGS) {
-      expect(CATEGORIES[slug].series).toBe(slug);
+      expect(categoryForSeries(CATEGORIES[slug].series)).toBe(slug);
       expect(typeof CATEGORIES[slug].code).toBe("string");
     }
   });
 });
 
 describe("isCategorySlug", () => {
-  it.each(["analogue", "digital", "specialized", "lepc"])(
+  it.each(["analogue", "digital", "explosion-proof", "lepc"])(
     "accepts %s as a category slug",
     (slug) => {
       expect(isCategorySlug(slug)).toBe(true);
@@ -44,7 +46,7 @@ describe("categoryForSeries", () => {
   it.each([
     ["analogue", "analogue"],
     ["digital", "digital"],
-    ["specialized", "specialized"],
+    ["specialized", "explosion-proof"],
     ["lepc", "lepc"],
   ] as const)("maps series %s to category %s", (series, expected) => {
     expect(categoryForSeries(series)).toBe(expected);

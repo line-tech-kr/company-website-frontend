@@ -21,8 +21,8 @@ const CATEGORY_META: Record<
     description:
       "When you need ±0.25% FS accuracy, 8-point linearization, or RS-485 / Modbus RTU for bus integration. Sub-second response. Preferred for semiconductor process lines.",
   },
-  specialized: {
-    heading: "Specialized series (EX)",
+  "explosion-proof": {
+    heading: "Explosion-proof series (EX)",
     code: "EX",
     description:
       "Hazardous locations — ATEX-certified explosion-proof MFCs and MFMs (Ex ec IIC T4 Gc, IP 65). Choose when the process environment requires ATEX-rated equipment.",
@@ -126,7 +126,7 @@ export async function buildLlmsManifest(siteUrl: string): Promise<string> {
   ] as const) {
     const list = byCategory[series];
     if (list.length === 0) continue;
-    const meta = CATEGORY_META[series];
+    const meta = CATEGORY_META[categoryForSeries(series)];
     lines.push(`### ${meta.heading}`, "");
     lines.push(meta.description, "");
 

@@ -102,7 +102,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
           "Seal material selection is critical in chemical service: Kalrez for most corrosive halide gases, Teflon for the most aggressive oxidizers. Line Tech's gas-conversion Appendix covers over 100 process gases with seal recommendations.",
         ],
         recommendedSeries: ["EX", "M / MS"],
-        relatedCategories: ["specialized", "analogue"],
+        relatedCategories: ["explosion-proof", "analogue"],
       },
       {
         slug: "precision-gas-blending",
@@ -138,7 +138,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
           "For processes where the atmosphere itself is reactive — hydrogen reduction, ammonia cracking for nitriding research, hydrocarbon-doped carburizing — the EX series provides the ATEX-compliant protection the zone requires.",
         ],
         recommendedSeries: ["M / MS", "EX"],
-        relatedCategories: ["analogue", "specialized"],
+        relatedCategories: ["analogue", "explosion-proof"],
       },
       {
         slug: "led-lighting",
@@ -186,7 +186,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
           "Line Tech's wide product range — from 0.01 sccm to 5,000 slpm — covers both the fine dopant injection lines and the high-volume carrier and purge flows in a single instrument family.",
         ],
         recommendedSeries: ["M / MS", "EX"],
-        relatedCategories: ["analogue", "specialized"],
+        relatedCategories: ["analogue", "explosion-proof"],
       },
       {
         slug: "leak-detection",
@@ -266,7 +266,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
           "화학 서비스에서는 실링 재질 선택이 매우 중요합니다. 대부분의 부식성 할라이드 가스에는 Kalrez, 가장 강한 산화제에는 Teflon을 사용하십시오. 라인테크의 가스 변환 부록에는 100가지 이상의 공정 가스에 대한 실링 권장 사항이 수록되어 있습니다.",
         ],
         recommendedSeries: ["EX", "M / MS"],
-        relatedCategories: ["specialized", "analogue"],
+        relatedCategories: ["explosion-proof", "analogue"],
       },
       {
         slug: "precision-gas-blending",
@@ -302,7 +302,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
           "수소 환원, 질화 연구용 분해 암모니아, 침탄용 탄화수소 혼합 등 분위기 자체가 반응성을 띠는 공정에서는 EX 시리즈가 해당 구역에 필요한 ATEX 규격 보호를 제공합니다.",
         ],
         recommendedSeries: ["M / MS", "EX"],
-        relatedCategories: ["analogue", "specialized"],
+        relatedCategories: ["analogue", "explosion-proof"],
       },
       {
         slug: "led-lighting",
@@ -350,7 +350,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
           "라인테크의 광범위한 제품 라인(0.01 sccm~5,000 slpm)은 미세 도펀트 분사 라인과 대용량 캐리어·퍼지 가스 흐름을 단일 제품군으로 모두 커버합니다.",
         ],
         recommendedSeries: ["M / MS", "EX"],
-        relatedCategories: ["analogue", "specialized"],
+        relatedCategories: ["analogue", "explosion-proof"],
       },
       {
         slug: "leak-detection",
@@ -430,7 +430,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
           "化工应用中密封材料的选择至关重要：大多数腐蚀性卤化物气体选用 Kalrez，腐蚀性最强的氧化剂选用 Teflon。莱因气体换算附录涵盖 100 余种工艺气体的密封推荐。",
         ],
         recommendedSeries: ["EX", "M / MS"],
-        relatedCategories: ["specialized", "analogue"],
+        relatedCategories: ["explosion-proof", "analogue"],
       },
       {
         slug: "precision-gas-blending",
@@ -466,7 +466,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
           "对于氛围本身具有反应性的工艺——氢还原、用于氮化研究的裂解氨、用于渗碳的烃类掺杂——EX 系列提供该区域所需的 ATEX 合规防护。",
         ],
         recommendedSeries: ["M / MS", "EX"],
-        relatedCategories: ["analogue", "specialized"],
+        relatedCategories: ["analogue", "explosion-proof"],
       },
       {
         slug: "led-lighting",
@@ -514,7 +514,7 @@ export const LT_APPLICATIONS: Record<Locale, ApplicationsContent> = {
           "莱因的宽广产品范围（0.01 sccm 至 5,000 slpm）以单一产品系列同时覆盖精细掺杂剂注入管线和大流量载气及吹扫气体流量。",
         ],
         recommendedSeries: ["M / MS", "EX"],
-        relatedCategories: ["analogue", "specialized"],
+        relatedCategories: ["analogue", "explosion-proof"],
       },
       {
         slug: "leak-detection",

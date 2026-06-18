@@ -1,25 +1,22 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("LTI-2000 read-out unit detail", () => {
+// LTI read-out units moved out of the series to the static Accessories page
+// (#270 item #8). The old /products/specialized/lti-2000 detail URL now
+// redirects to /products/accessories, where the unit is listed.
+test.describe("LTI-2000 read-out unit (moved to Accessories)", () => {
   for (const locale of ["en", "ko", "zh"] as const) {
-    test(`renders Specifications with instrumentSpecs rows (${locale})`, async ({
+    test(`old detail URL redirects to Accessories and shows LTI-2000 (${locale})`, async ({
       page,
     }) => {
       await page.goto(`/${locale}/products/specialized/lti-2000`);
+      await expect(page).toHaveURL(
+        new RegExp(`/${locale}/products/accessories`),
+      );
 
-      const specs = page.locator("#specs");
-      await expect(specs).toBeVisible();
-
-      const rows = specs.locator(".lt-pdp-spec__row");
-      await expect(rows.first()).toBeVisible();
-      expect(await rows.count()).toBeGreaterThanOrEqual(10);
-
-      await expect(
-        specs.getByText("Input Power", { exact: true }),
-      ).toBeVisible();
-      await expect(
-        specs.getByText('256×64 Dot 6" Wide OLED LCD'),
-      ).toBeVisible();
+      const item = page.locator("#lti-2000");
+      await expect(item).toBeVisible();
+      await expect(item.locator(".acc-item__model")).toHaveText("LTI-2000");
+      await expect(item.locator(".acc-specs tr").first()).toBeVisible();
     });
   }
 

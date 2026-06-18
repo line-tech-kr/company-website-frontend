@@ -65,7 +65,7 @@ function pressureSpin(): HTMLElement {
 const PRODUCTS: Product[] = [
   withRange("M3030VA", 0.01, 300, { series: "analogue", function: "MFC" }),
   withRange("M3200VA", 100, 300, { series: "analogue", function: "MFC" }),
-  withRange("EX1000C", 70, 1000, { series: "specialized", function: "MFC" }),
+  withRange("EX1000", 70, 1000, { series: "specialized", function: "MFC" }),
 ];
 
 beforeEach(() => {

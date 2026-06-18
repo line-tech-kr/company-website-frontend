@@ -15,7 +15,7 @@ const BULLET_LABELS = {
 const SLIDES = [
   { model: "M3030VA", sub: "Analogue MFC" },
   { model: "MD800C", sub: "Digital MFC" },
-  { model: "EX1000C", sub: "Specialized MFC" },
+  { model: "EX1000", sub: "Specialized MFC" },
 ];
 
 const CUTOUT_M3030VA = "https://cdn.sanity.io/m3030va.jpg";

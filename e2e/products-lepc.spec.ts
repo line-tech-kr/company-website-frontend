@@ -24,8 +24,8 @@ test.describe("LEPC category", () => {
     await expect(lepcRow).toContainText("50 bar");
   });
 
-  test("/products/specialized no longer lists LEPC", async ({ page }) => {
-    await page.goto("/en/products/specialized");
+  test("/products/explosion-proof no longer lists LEPC", async ({ page }) => {
+    await page.goto("/en/products/explosion-proof");
     // LEPC has moved to its own category, so it must not appear here.
     await expect(
       page.locator(".lt-prod-row__codelink", { hasText: /^LEPC$/ }),

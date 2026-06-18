@@ -104,11 +104,11 @@ export const LT_HOME: Record<Locale, HomeContent> = {
         },
         {
           code: "EX",
-          name: "특수 시리즈",
+          name: "방폭 시리즈",
           desc: "방폭 사양 등 위험 환경 대응 특수 제품군.",
           count: "4 모델",
           range: "0.01 – 1,000 SLPM",
-          href: "/products/specialized",
+          href: "/products/explosion-proof",
         },
         {
           code: "LEPC",
@@ -166,7 +166,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
           sub: "디지털 8점 보정 방식의 대유량 질량유량제어기, 2500–5000 slpm.",
         },
         {
-          model: "EX1000C",
+          model: "EX1000",
           sub: "위험 지역용 방폭 질량유량제어기, 70–1000 slpm.",
         },
       ],
@@ -236,7 +236,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
     series: {
       kicker: "01 — Product series",
       title: "Five series, one standard.",
-      sub: "A full catalog spanning analog, digital, specialized, low-pressure EPC, and accessories.",
+      sub: "A full catalog spanning analog, digital, explosion-proof, low-pressure EPC, and accessories.",
       items: [
         {
           code: "M / MS",
@@ -258,11 +258,11 @@ export const LT_HOME: Record<Locale, HomeContent> = {
         },
         {
           code: "EX",
-          name: "Specialized Series",
+          name: "Explosion-proof Series",
           desc: "Explosion-proof variants for hazardous-environment process lines.",
           count: "4 models",
           range: "0.01 – 1,000 slpm",
-          href: "/products/specialized",
+          href: "/products/explosion-proof",
         },
         {
           code: "LEPC",
@@ -328,7 +328,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
           sub: "Digital high-flow mass flow controller with 8-point calibration, 2500–5000 slpm.",
         },
         {
-          model: "EX1000C",
+          model: "EX1000",
           sub: "Explosion-proof mass flow controller for hazardous-environment applications, 70–1000 slpm.",
         },
       ],
@@ -420,11 +420,11 @@ export const LT_HOME: Record<Locale, HomeContent> = {
         },
         {
           code: "EX",
-          name: "特种系列",
+          name: "防爆系列",
           desc: "面向危险环境的防爆型号产品线。",
           count: "4 款",
           range: "0.01 – 1,000 SLPM",
-          href: "/products/specialized",
+          href: "/products/explosion-proof",
         },
         {
           code: "LEPC",
@@ -478,7 +478,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
           sub: "数字式大流量质量流量控制器，8 点校准，2500–5000 slpm。",
         },
         {
-          model: "EX1000C",
+          model: "EX1000",
           sub: "用于危险场所的防爆质量流量控制器，70–1000 slpm。",
         },
       ],

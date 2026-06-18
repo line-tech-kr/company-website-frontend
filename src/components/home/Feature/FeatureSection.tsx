@@ -23,7 +23,7 @@ type Props = {
 };
 
 type SlideSpec = {
-  category: "analogue" | "digital" | "specialized";
+  category: "analogue" | "digital" | "explosion-proof";
   slug: string;
   fn: "MFC";
   gas: string;
@@ -58,8 +58,9 @@ const SLIDE_SPECS: Record<string, SlideSpec> = {
       io: "0–5 Vdc / 4–20 mA",
     },
   },
-  EX1000C: {
-    category: "specialized",
+  EX1000: {
+    category: "explosion-proof",
+    // Display model dropped the C suffix (#9); the Sanity slug keeps it.
     slug: "ex1000c",
     fn: "MFC",
     gas: "N₂",

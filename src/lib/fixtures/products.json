@@ -3205,7 +3205,7 @@
     }
   },
   {
-    "model": "EX1000C",
+    "model": "EX1000",
     "slug": {
       "current": "ex1000c"
     },
@@ -3339,7 +3339,7 @@
     }
   },
   {
-    "model": "EX70C",
+    "model": "EX70",
     "slug": {
       "current": "ex70c"
     },
@@ -3605,7 +3605,7 @@
     }
   },
   {
-    "model": "EX1000M",
+    "model": "EX1000",
     "slug": {
       "current": "ex1000m"
     },
@@ -3733,7 +3733,7 @@
     }
   },
   {
-    "model": "EX70M",
+    "model": "EX70",
     "slug": {
       "current": "ex70m"
     },
@@ -3991,205 +3991,5 @@
       "stopBits": 1,
       "parity": "None"
     }
-  },
-  {
-    "model": "LTI-2000",
-    "slug": {
-      "current": "lti-2000"
-    },
-    "series": "specialized",
-    "function": "ROU",
-    "productLabel": {
-      "en": "Read-Out Unit",
-      "ko": "리드아웃 유닛",
-      "zh": "读数单元"
-    },
-    "tags": [],
-    "features": [
-      {
-        "en": "OLED Display",
-        "ko": "OLED 디스플레이 내장",
-        "zh": "内置 OLED 显示屏"
-      },
-      {
-        "en": "RS-232 / RS-485 Dual Communication",
-        "ko": "RS-232 / RS-485 이중 통신",
-        "zh": "RS-232 / RS-485 双通信"
-      },
-      {
-        "en": "External Setpoint Control",
-        "ko": "외부 설정값 제어",
-        "zh": "外部设定点控制"
-      },
-      {
-        "en": "Multiple Display Units",
-        "ko": "다중 표시 단위 지원 (SCCM, SLPM, %)",
-        "zh": "多单位显示 (SCCM, SLPM, %)"
-      },
-      {
-        "en": "Relay Contact Output",
-        "ko": "릴레이 접점 출력",
-        "zh": "继电器触点输出"
-      }
-    ],
-    "connections": [],
-    "manuals": [],
-    "drawings": [],
-    "instrumentSpecs": [
-      {
-        "label": "Input Power",
-        "value": "220VAC (50–60 Hz)",
-        "slot": "power"
-      },
-      {
-        "label": "Output Power",
-        "value": "+15 or +24 Vdc @ 500 mA"
-      },
-      {
-        "label": "Display Window",
-        "value": "256×64 Dot 6\" Wide OLED LCD",
-        "slot": "display"
-      },
-      {
-        "label": "Display Repeatability",
-        "value": "≤±1.0% of Full Scale"
-      },
-      {
-        "label": "Output Signal",
-        "value": "0–5 Vdc or 4–20 mA"
-      },
-      {
-        "label": "Units of Display",
-        "value": "SCCM, SLPM, %"
-      },
-      {
-        "label": "Remote Control",
-        "value": "D-SUB 9-pin (Male)",
-        "slot": "connector"
-      },
-      {
-        "label": "Setpoint",
-        "value": "0–5 Vdc for Full Scale"
-      },
-      {
-        "label": "Flow ON/OFF",
-        "value": "Input Signal (TTL)"
-      },
-      {
-        "label": "Flow Out Signal",
-        "value": "0–5 Vdc or 4–20 mA"
-      },
-      {
-        "label": "Relay Contact Rate",
-        "value": "1 Relay (Max 24 Vdc @ 1A)"
-      },
-      {
-        "label": "Communication",
-        "value": "RS-232 (9600 Baud, 8-N-1), RS-485",
-        "slot": "communication"
-      },
-      {
-        "label": "External Setpoint",
-        "value": "Analogue In/Out 0–5 Vdc"
-      }
-    ]
-  },
-  {
-    "model": "LTI-1000",
-    "slug": {
-      "current": "lti-1000"
-    },
-    "series": "specialized",
-    "function": "ROU",
-    "productLabel": {
-      "en": "Read-Out Unit",
-      "ko": "리드아웃 유닛",
-      "zh": "读数单元"
-    },
-    "tags": [],
-    "features": [
-      {
-        "en": "4-Digit 7-Segment Display",
-        "ko": "4자리 7-세그먼트 디스플레이",
-        "zh": "4 位 7 段显示屏"
-      },
-      {
-        "en": "RS-232 Communication",
-        "ko": "RS-232 통신",
-        "zh": "RS-232 通信"
-      },
-      {
-        "en": "Multiple Display Units",
-        "ko": "다중 표시 단위 지원 (SCCM, SLPM, %)",
-        "zh": "多单位显示 (SCCM, SLPM, %)"
-      },
-      {
-        "en": "Relay Contact Output",
-        "ko": "릴레이 접점 출력",
-        "zh": "继电器触点输出"
-      },
-      {
-        "en": "External Setpoint Input",
-        "ko": "외부 설정값 입력",
-        "zh": "外部设定点输入"
-      }
-    ],
-    "connections": [],
-    "manuals": [],
-    "drawings": [],
-    "instrumentSpecs": [
-      {
-        "label": "Input Power",
-        "value": "220VAC (50–60 Hz)",
-        "slot": "power"
-      },
-      {
-        "label": "Output Power",
-        "value": "+15 or +24 Vdc @ 500 mA"
-      },
-      {
-        "label": "Display Window",
-        "value": "4-Digit 7-Segment",
-        "slot": "display"
-      },
-      {
-        "label": "Display Repeatability",
-        "value": "≤±1.0% of Full Scale"
-      },
-      {
-        "label": "Output Signal",
-        "value": "0–5 Vdc or 4–20 mA"
-      },
-      {
-        "label": "Units of Display",
-        "value": "SCCM, SLPM, %"
-      },
-      {
-        "label": "Remote Control",
-        "value": "D-SUB 9-pin (Male)",
-        "slot": "connector"
-      },
-      {
-        "label": "Setpoint",
-        "value": "0–5 Vdc for Full Scale"
-      },
-      {
-        "label": "Flow ON/OFF",
-        "value": "Input Signal (TTL)"
-      },
-      {
-        "label": "Flow Out Signal",
-        "value": "0–5 Vdc or 4–20 mA"
-      },
-      {
-        "label": "Relay Contact Rate",
-        "value": "1 Relay (Max 24 Vdc @ 1A)"
-      },
-      {
-        "label": "Communication",
-        "value": "RS-232 (9600 Baud, 8-N-1)",
-        "slot": "communication"
-      }
-    ]
   }
 ]

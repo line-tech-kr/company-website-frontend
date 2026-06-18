@@ -8,7 +8,7 @@ const LOCALES = routing.locales as readonly Locale[];
 const LOCKED_CATEGORY_CODES = [
   "analogue",
   "digital",
-  "specialized",
+  "explosion-proof",
   "lepc",
   "accessories",
 ] as const;

@@ -50,7 +50,7 @@ function makeProductWithImage(
 
 const ANALOGUE_FLAGSHIP = makeProductWithImage("M3030VA", "analogue");
 const DIGITAL_FLAGSHIP = makeProductWithImage("MD800C", "digital");
-const SPECIALIZED_FLAGSHIP = makeProductWithImage("EX1000C", "specialized");
+const SPECIALIZED_FLAGSHIP = makeProductWithImage("EX1000", "specialized");
 const LEPC_FLAGSHIP = makeProductWithImage("LEPC", "lepc");
 
 const ALL_PRODUCTS: Product[] = [
@@ -58,7 +58,7 @@ const ALL_PRODUCTS: Product[] = [
   ANALOGUE_FLAGSHIP,
   makeProduct({ model: "MD150C", series: "digital" }),
   DIGITAL_FLAGSHIP,
-  makeProduct({ model: "EX70C", series: "specialized" }),
+  makeProduct({ model: "EX70", series: "specialized" }),
   SPECIALIZED_FLAGSHIP,
   LEPC_FLAGSHIP,
 ];
@@ -75,7 +75,7 @@ describe("pickFlagship", () => {
   it("returns the pinned model when present", () => {
     expect(pickFlagship(ALL_PRODUCTS, "analogue")?.model).toBe("M3030VA");
     expect(pickFlagship(ALL_PRODUCTS, "digital")?.model).toBe("MD800C");
-    expect(pickFlagship(ALL_PRODUCTS, "specialized")?.model).toBe("EX1000C");
+    expect(pickFlagship(ALL_PRODUCTS, "explosion-proof")?.model).toBe("EX1000");
     expect(pickFlagship(ALL_PRODUCTS, "lepc")?.model).toBe("LEPC");
   });
 
@@ -100,7 +100,7 @@ describe("pickFlagship", () => {
 
   it("returns undefined when the category has no products", () => {
     const products = ALL_PRODUCTS.filter((p) => p.series !== "specialized");
-    expect(pickFlagship(products, "specialized")).toBeUndefined();
+    expect(pickFlagship(products, "explosion-proof")).toBeUndefined();
   });
 
   it("excludes MFM meters from the fallback", () => {
@@ -176,7 +176,7 @@ describe("flagshipCutoutUrl", () => {
 
   it("returns the placeholder for null/undefined cutouts", () => {
     expect(flagshipCutoutUrl("MD800C", null)).toBe(FLAGSHIP_IMAGE_PLACEHOLDER);
-    expect(flagshipCutoutUrl("EX1000C", undefined)).toBe(
+    expect(flagshipCutoutUrl("EX1000", undefined)).toBe(
       FLAGSHIP_IMAGE_PLACEHOLDER,
     );
   });

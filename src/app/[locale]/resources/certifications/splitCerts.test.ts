@@ -33,7 +33,7 @@ describe("splitCerts", () => {
   it("preserves order within each bucket", () => {
     const input = [
       cert("a"),
-      cert("b", ["EX70C"]),
+      cert("b", ["EX70"]),
       cert("c"),
       cert("d", ["LTI-1000", "LTI-2000"]),
       cert("e", []),

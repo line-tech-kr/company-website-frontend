@@ -52,13 +52,13 @@ describe("buildSpecJson", () => {
     ]);
   });
 
-  it("maps EPC series to the specialized category", () => {
+  it("maps EPC series to the explosion-proof category", () => {
     const product: Product = makeProduct({
       series: "specialized",
       function: "EPC",
     });
     const payload = buildSpecJson(product, siteUrl);
-    expect(payload.canonicalUrl).toContain("/products/specialized/");
+    expect(payload.canonicalUrl).toContain("/products/explosion-proof/");
   });
 });
 

@@ -79,7 +79,7 @@ describe("findProducts", () => {
     withRange("M2030VA", 0.01, 30, { series: "analogue", function: "MFC" }),
     withRange("M3030VA", 0.01, 300, { series: "analogue", function: "MFC" }),
     withRange("M3200VA", 100, 300, { series: "analogue", function: "MFC" }),
-    withRange("EX1000C", 70, 1000, { series: "specialized", function: "MFC" }),
+    withRange("EX1000", 70, 1000, { series: "specialized", function: "MFC" }),
     withRange("M3500VA", 1500, 2500, { series: "analogue", function: "MFC" }),
     withRange("MD150M", 100, 500, { series: "digital", function: "MFM" }),
   ];
@@ -94,7 +94,7 @@ describe("findProducts", () => {
     expect(result.n2EquivalentSlpm).toBe(200);
     const models = result.matches.map((m) => m.product.model);
     expect(models).toContain("M3200VA");
-    expect(models).toContain("EX1000C");
+    expect(models).toContain("EX1000");
     expect(models).not.toContain("M3500VA"); // out of range
     expect(models).not.toContain("M2030VA"); // out of range
     expect(models).not.toContain("MD150M"); // wrong function
@@ -109,10 +109,10 @@ describe("findProducts", () => {
     });
     // M3200VA: 200 in [100,300] = 50% → 1.0 (sweet spot)
     // M3030VA: 200 in [0.01,300] = ~67% → 1.0 (sweet spot)
-    // EX1000C: 200 in [70,1000] = 14% → 0.7
+    // EX1000: 200 in [70,1000] = 14% → 0.7
     expect(result.matches[0].fitScore).toBe(1);
     const lastEx = result.matches.findIndex(
-      (m) => m.product.model === "EX1000C",
+      (m) => m.product.model === "EX1000",
     );
     expect(result.matches[lastEx].fitScore).toBe(0.7);
   });
@@ -125,7 +125,7 @@ describe("findProducts", () => {
       unit: "slpm",
       series: "specialized",
     });
-    expect(result.matches.map((m) => m.product.model)).toEqual(["EX1000C"]);
+    expect(result.matches.map((m) => m.product.model)).toEqual(["EX1000"]);
   });
 
   it("converts sccm to slpm before matching", () => {
