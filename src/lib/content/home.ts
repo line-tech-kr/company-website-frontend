@@ -32,6 +32,7 @@ export type HomeContent = {
     ctaPrimary: string;
     ctaSecondary: string;
     badge: string;
+    videoLabel: string;
   };
   stats: Stat[];
   series: { kicker: string; title: string; sub: string; items: SeriesItem[] };
@@ -72,6 +73,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       ctaPrimary: "맞춤 제품 찾기",
       ctaSecondary: "전체 제품 보기",
       badge: "KAIST 공동연구 기반 · 국내 최초",
+      videoLabel: "라인텍 MFC 제품 소개 영상",
     },
     stats: [
       { k: "1997", l: "설립 연도", sub: "대전광역시 유성구" },
@@ -226,6 +228,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       ctaPrimary: "Find your controller",
       ctaSecondary: "Browse all products",
       badge: "ISO 9001 · CE · IECEx",
+      videoLabel: "Line Tech MFC product overview video",
     },
     stats: [
       { k: "1997", l: "Founded", sub: "Daejeon, Korea" },
@@ -388,6 +391,7 @@ export const LT_HOME: Record<Locale, HomeContent> = {
       ctaPrimary: "查找适合的型号",
       ctaSecondary: "浏览全部产品",
       badge: "基于 KAIST 合作研究 · 韩国首家",
+      videoLabel: "Line Tech 质量流量控制器产品介绍视频",
     },
     stats: [
       { k: "1997", l: "成立年份", sub: "韩国大田" },

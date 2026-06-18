@@ -17,6 +17,7 @@ const cspDirectives = [
   `script-src 'self' 'unsafe-inline'${isDevBuild ? " 'unsafe-eval'" : ""} https://va.vercel-scripts.com https://challenges.cloudflare.com`,
   "style-src 'self' 'unsafe-inline'",
   `img-src 'self' data: blob: ${SANITY_CDN}`,
+  `media-src 'self' ${SANITY_CDN}`,
   "font-src 'self' data:",
   `connect-src 'self' ${SANITY_CDN} https://*.sanity.io https://vitals.vercel-insights.com`,
   "frame-src https://challenges.cloudflare.com https://www.google.com/maps/",

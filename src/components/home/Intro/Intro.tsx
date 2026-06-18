@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/Button";
 import { Chip } from "@/components/ui/Chip";
 import { Glyph } from "@/components/ui/Glyph";
 import type { HomeContent } from "@/lib/content/home";
-import { IntroVisual } from "./IntroVisual";
+import { IntroVideo } from "./IntroVideo";
 import "./Intro.css";
 
 type Props = { h: HomeContent };
@@ -41,7 +41,7 @@ export function Intro({ h }: Props) {
           {h.intro.badge}
         </Chip>
       </div>
-      <IntroVisual />
+      <IntroVideo label={h.intro.videoLabel} />
     </section>
   );
 }
