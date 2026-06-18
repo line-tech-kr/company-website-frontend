@@ -1,16 +1,24 @@
+/**
+ * upload-promo-video.ts
+ *
+ * One-off: uploads the homepage promo video as a Sanity file asset and prints
+ * its CDN URL. Paste that URL into PROMO_VIDEO_URL in
+ * src/components/home/Intro/IntroVideo.tsx.
+ *
+ * Usage:
+ *   pnpm tsx scripts/upload-promo-video.ts --source /path/to/promo.mp4
+ */
+
 import { readFileSync, createReadStream, existsSync, statSync } from "node:fs";
 import path from "node:path";
 import { createClient } from "@sanity/client";
-
-// One-off: uploads the homepage promo video as a Sanity file asset and prints
-// its CDN URL. Paste that URL into PROMO_VIDEO_URL in IntroVideo.tsx.
-//   npx tsx scripts/upload-promo-video.ts --source /path/to/promo.mp4
 
 function loadEnv(filePath: string) {
   try {
     for (const line of readFileSync(filePath, "utf-8").split("\n")) {
       const m = line.match(/^([A-Z_][A-Z0-9_]*)=(.*)$/);
-      if (m) process.env[m[1]] ??= m[2].trimEnd();
+      // Trim whitespace and any surrounding quotes.
+      if (m) process.env[m[1]] ??= m[2].trim().replace(/^["']|["']$/g, "");
     }
   } catch {
     // .env.local may not exist in CI
@@ -45,6 +53,19 @@ if (!existsSync(source)) {
   process.exit(1);
 }
 
+const CONTENT_TYPES: Record<string, string> = {
+  ".mp4": "video/mp4",
+  ".webm": "video/webm",
+  ".mov": "video/quicktime",
+};
+const contentType = CONTENT_TYPES[path.extname(source).toLowerCase()];
+if (!contentType) {
+  console.error(
+    `Unsupported video type "${path.extname(source)}". Use .mp4, .webm, or .mov.`,
+  );
+  process.exit(1);
+}
+
 const client = createClient({
   projectId,
   dataset,
@@ -55,10 +76,12 @@ const client = createClient({
 
 async function main() {
   const sizeMb = (statSync(source).size / 1024 / 1024).toFixed(1);
-  console.log(`Uploading ${path.basename(source)} (${sizeMb} MB) to ${projectId}/${dataset}...`);
+  console.log(
+    `Uploading ${path.basename(source)} (${sizeMb} MB) to ${projectId}/${dataset}...`,
+  );
   const asset = await client.assets.upload("file", createReadStream(source), {
     filename: path.basename(source),
-    contentType: "video/mp4",
+    contentType,
   });
   console.log(`\nDone. Asset _id: ${asset._id}`);
   console.log(`URL: ${asset.url}`);

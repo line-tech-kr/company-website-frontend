@@ -1,5 +1,7 @@
 // Homepage hero promo. Poster + native controls; the 3-min clip (hosted on the
 // Sanity CDN) downloads only when the visitor presses play (preload="none").
+// Stable Sanity file-asset URL — if the asset is ever re-uploaded, regenerate
+// this with `pnpm tsx scripts/upload-promo-video.ts` and update the value here.
 const PROMO_VIDEO_URL =
   "https://cdn.sanity.io/files/9ped5k0o/production/3c6108e21d69631b747c5ef5819e8ec79128f50c.mp4";
 const POSTER_SRC = "/home/promo-poster.jpg";

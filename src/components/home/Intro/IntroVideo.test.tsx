@@ -14,6 +14,7 @@ describe("IntroVideo", () => {
     expect(video).toHaveAttribute("preload", "none");
     expect(video).toHaveAttribute("poster", "/home/promo-poster.jpg");
     expect(video).toHaveAttribute("aria-label", LABEL);
+    expect(video).toHaveAttribute("playsinline");
     expect(video?.getAttribute("src")).toMatch(
       /^https:\/\/cdn\.sanity\.io\/files\/.+\.mp4$/,
     );
