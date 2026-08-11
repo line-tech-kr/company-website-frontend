@@ -279,6 +279,11 @@
         "desc": "Per-model user guides",
         "count": "{count} documents"
       },
+      "software": {
+        "title": "Software",
+        "desc": "Companion PC software installers",
+        "count": "{count} downloads"
+      },
       "certifications": {
         "title": "Certifications",
         "desc": "Quality and conformity documents",
@@ -296,6 +301,10 @@
     "manuals": {
       "title": "Manuals",
       "intro": "User guides and installation manuals for each product model."
+    },
+    "software": {
+      "title": "Software",
+      "intro": "Companion PC software for Line Tech products, packaged as zip archives."
     },
     "certifications": {
       "title": "Certifications",
