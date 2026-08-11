@@ -7,6 +7,8 @@ type Props = {
   meta?: Array<string | null | undefined>;
   /** Action element — typically a download `<a>` or a request `<Link>`/badge. */
   action: ReactNode;
+  /** File-type badge text. Defaults to "PDF". */
+  badge?: string;
 };
 
 /**
@@ -14,11 +16,11 @@ type Props = {
  * Layout: `[PDF badge] [label + meta] [action]`. CSS lives in
  * resources-subpage.css and is shared by every consumer.
  */
-export function DocRow({ label, meta, action }: Props) {
+export function DocRow({ label, meta, action, badge = "PDF" }: Props) {
   const parts = (meta ?? []).filter((p): p is string => Boolean(p));
   return (
     <li className="dr-list__row">
-      <span className="dr-list__badge dr-list__badge--pdf">PDF</span>
+      <span className="dr-list__badge dr-list__badge--pdf">{badge}</span>
       <div>
         <div className="dr-list__label">{label}</div>
         {parts.length > 0 && (

@@ -279,6 +279,11 @@
         "desc": "各型号用户指南",
         "count": "{count}个文件"
       },
+      "software": {
+        "title": "软件下载",
+        "desc": "产品配套 PC 软件安装包",
+        "count": "{count}个文件"
+      },
       "certifications": {
         "title": "认证文件",
         "desc": "质量与合规认证文件",
@@ -296,6 +301,10 @@
     "manuals": {
       "title": "使用手册",
       "intro": "各产品型号的用户指南与安装手册。"
+    },
+    "software": {
+      "title": "软件下载",
+      "intro": "莱因技术产品的配套 PC 软件，以 zip 压缩包提供。"
     },
     "certifications": {
       "title": "认证文件",

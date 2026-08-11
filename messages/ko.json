@@ -279,6 +279,11 @@
         "desc": "모델별 사용자 가이드",
         "count": "{count}개 문서"
       },
+      "software": {
+        "title": "소프트웨어",
+        "desc": "제품 지원 PC 소프트웨어",
+        "count": "{count}개 파일"
+      },
       "certifications": {
         "title": "인증서",
         "desc": "품질 및 적합성 인증 문서",
@@ -296,6 +301,10 @@
     "manuals": {
       "title": "매뉴얼",
       "intro": "각 제품 모델의 사용자 가이드 및 설치 매뉴얼입니다."
+    },
+    "software": {
+      "title": "소프트웨어",
+      "intro": "라인테크 제품 지원 PC 소프트웨어를 zip 파일로 제공합니다."
     },
     "certifications": {
       "title": "인증서",

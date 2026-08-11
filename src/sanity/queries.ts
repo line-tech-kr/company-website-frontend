@@ -251,6 +251,18 @@ export const allDrawingsQuery = defineQuery(`
   }
 `);
 
+export const allSoftwareQuery = defineQuery(`
+  *[_type == "software"] | order(coalesce(order, 99) asc) {
+    _id,
+    title,
+    "displayName": ${localizedStrict("displayName")},
+    version,
+    models,
+    publishedAt,
+    "fileUrl": file.asset->url
+  }
+`);
+
 export const allFaqGroupsQuery = defineQuery(`
   *[_type == "faqGroup"] | order(coalesce(order, 99) asc) {
     "id": id.current,
@@ -305,6 +317,7 @@ export const resourceCountsQuery = defineQuery(`
     "catalogues": count(*[_type == "catalogue"]),
     "manuals": count(*[_type == "manual" && archived != true]),
     "drawings": count(*[_type == "drawing" && archived != true]),
+    "software": count(*[_type == "software"]),
     "certifications": count(*[_type == "certification"])
   }
 `);

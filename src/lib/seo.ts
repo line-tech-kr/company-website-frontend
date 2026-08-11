@@ -397,6 +397,7 @@ type ResourceSection =
   | "catalogues"
   | "drawings"
   | "manuals"
+  | "software"
   | "certifications";
 
 const RESOURCES_SEO: Record<ResourceSection, Record<Locale, PageSeo>> = {
@@ -462,6 +463,20 @@ const RESOURCES_SEO: Record<ResourceSection, Record<Locale, PageSeo>> = {
       description: "各产品型号的用户指南与安装手册。",
     },
   },
+  software: {
+    ko: {
+      title: "소프트웨어 — 라인테크",
+      description: "제품 지원 PC 소프트웨어를 다운로드하실 수 있습니다.",
+    },
+    en: {
+      title: "Software — Line Tech",
+      description: "Companion PC software downloads for Line Tech products.",
+    },
+    zh: {
+      title: "软件下载 — Line Tech",
+      description: "下载莱因技术产品的配套 PC 软件。",
+    },
+  },
   certifications: {
     ko: {
       title: "인증서 — 라인테크",
@@ -484,6 +499,7 @@ const RESOURCES_PATHS: Record<ResourceSection, string> = {
   catalogues: "resources/catalogues",
   drawings: "resources/drawings",
   manuals: "resources/manuals",
+  software: "resources/software",
   certifications: "resources/certifications",
 };
 

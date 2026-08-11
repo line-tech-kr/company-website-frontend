@@ -26,6 +26,7 @@ const CARDS = [
   { key: "catalogues", href: "/resources/catalogues" },
   { key: "drawings", href: "/resources/drawings" },
   { key: "manuals", href: "/resources/manuals" },
+  { key: "software", href: "/resources/software" },
   { key: "certifications", href: "/resources/certifications" },
 ] as const;
 
