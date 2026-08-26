@@ -73,3 +73,6 @@ public/search/
 # Catalogue resync working dir (CP949 source unzip + intermediate text/image extracts)
 /.work/
 .work/
+
+# private client files
+/line-tech-files/
